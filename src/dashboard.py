@@ -505,11 +505,13 @@ def serve(host: str = "127.0.0.1", port: int = 8000,
 # The page is deliberately a single self-contained string: no build step, no
 # node_modules, no CDN. An editor clones the repo and it works offline.
 #
-# The layout is a non-linear editor because that's what this pipeline already
-# is: a beat is a clip, and each stage is a track over those clips. Making that
-# literal means someone who has used Premiere or CapCut can read the state of a
-# video at a glance — which clips exist, which are missing a presenter, which
-# QC flagged — instead of learning our stage names first.
+# The default view is the pipeline itself, numbered, because most people opening
+# this have never touched the CLI and do not know our stage names. Each step is
+# described by what it produces in plain words, and stays disabled with a stated
+# reason until the stages it depends on have run — so the order cannot be got
+# wrong by clicking. The non-linear editor is one tab away for anyone who wants
+# to edit individual beats: a beat is a clip, and each stage is a track over
+# those clips.
 INDEX_HTML = r"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -523,89 +525,118 @@ INDEX_HTML = r"""<!doctype html>
   --clip-avatar:#2f6b52; --clip-audio:#3a4a63;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font:13px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;
+body{font:13px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;
      background:var(--bg);color:var(--txt);height:100vh;overflow:hidden}
-button{font:inherit;cursor:pointer;border:0;border-radius:5px;
-       background:var(--panel2);color:var(--txt);padding:6px 11px}
+button{font:inherit;cursor:pointer;border:0;border-radius:6px;
+       background:var(--panel2);color:var(--txt);padding:7px 12px}
 button:hover:not(:disabled){background:#2a3242}
-button:disabled{opacity:.4;cursor:not-allowed}
-button.primary{background:var(--accent);color:#fff}
+button:disabled{opacity:.35;cursor:not-allowed}
+button.primary{background:var(--accent);color:#fff;font-weight:600}
 button.primary:hover:not(:disabled){background:#6d9bf5}
 button.danger{background:var(--bad);color:#fff}
+button.big{padding:11px 20px;font-size:14px}
 input,textarea,select{font:inherit;background:var(--track);color:var(--txt);
-  border:1px solid var(--line);border-radius:5px;padding:7px 9px;width:100%}
+  border:1px solid var(--line);border-radius:6px;padding:8px 10px;width:100%}
 textarea{resize:vertical;font-family:inherit}
 .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
 .dim{color:var(--dim)}
 .row{display:flex;gap:8px;align-items:center}
 .hide{display:none!important}
 
-/* ---------- app shell: monitor row on top, timeline below ---------- */
 #app{display:grid;height:100vh;
-     grid-template-rows:46px minmax(0,1fr) auto;
-     grid-template-columns:230px minmax(0,1fr) 300px;
-     grid-template-areas:"top top top" "bins monitor inspect" "tl tl tl"}
+     grid-template-rows:52px minmax(0,1fr) auto;
+     grid-template-columns:250px minmax(0,1fr);
+     grid-template-areas:"top top" "bins main" "drawer drawer"}
 
 /* ---------- toolbar ---------- */
-#top{grid-area:top;display:flex;align-items:center;gap:14px;padding:0 14px;
+#top{grid-area:top;display:flex;align-items:center;gap:14px;padding:0 16px;
      background:var(--panel);border-bottom:1px solid var(--line)}
-#top h1{font-size:14px;font-weight:600;white-space:nowrap}
-#top .sep{width:1px;height:22px;background:var(--line)}
-#stages{display:flex;gap:5px;flex-wrap:nowrap;overflow:auto}
-#stages button{font-size:12px;padding:5px 9px;white-space:nowrap}
-.badge{font-size:11px;padding:2px 7px;border-radius:99px;border:1px solid var(--line)}
-.badge.done{color:var(--ok);border-color:var(--ok)}
-.badge.failed{color:var(--bad);border-color:var(--bad)}
-.badge.running{color:var(--accent);border-color:var(--accent)}
-.badge.pending,.badge.skipped{color:var(--dim)}
+#top h1{font-size:15px;font-weight:600;white-space:nowrap}
+#top .sep{width:1px;height:24px;background:var(--line)}
+#tabs{display:flex;gap:4px}
+#tabs button{font-size:12.5px;padding:6px 14px;background:transparent;color:var(--dim)}
+#tabs button.on{background:var(--panel2);color:var(--txt);font-weight:600}
 
 /* ---------- left bin ---------- */
 #bins{grid-area:bins;background:var(--panel);border-right:1px solid var(--line);
-      overflow:auto;padding:10px}
+      overflow:auto;padding:12px}
 .binhead{font-size:11px;text-transform:uppercase;letter-spacing:.07em;
-         color:var(--dim);margin:14px 0 7px}
+         color:var(--dim);margin:16px 0 8px}
 .binhead:first-child{margin-top:0}
-.item{padding:7px 9px;border-radius:5px;cursor:pointer;font-size:12.5px}
+.item{padding:8px 10px;border-radius:6px;cursor:pointer;font-size:12.5px}
 .item:hover{background:var(--panel2)}
 .item.sel{background:var(--panel2);box-shadow:inset 2px 0 0 var(--accent)}
-.item small{display:block;color:var(--dim);font-size:11px}
+.item small{display:block;color:var(--dim);font-size:11px;margin-top:2px}
 
-/* ---------- monitor ---------- */
-#monitor{grid-area:monitor;display:flex;flex-direction:column;
-         background:#07090d;min-width:0;overflow:hidden}
-#screen{flex:1;display:flex;align-items:center;justify-content:center;
-        padding:14px;min-height:0}
-#screen video,#screen img{max-width:100%;max-height:100%;border-radius:6px;
-        background:#000;box-shadow:0 6px 26px #0009}
-#placeholder{color:var(--dim);text-align:center;max-width:420px}
-#placeholder h2{font-size:15px;margin-bottom:8px;color:var(--txt)}
-#transport{display:flex;align-items:center;gap:12px;padding:8px 14px;
+/* ---------- main ---------- */
+#main{grid-area:main;overflow:auto;min-width:0}
+.view{display:none;height:100%}
+.view.on{display:block}
+
+/* ---------- flow view ---------- */
+#flowwrap{max-width:900px;margin:0 auto;padding:22px 24px 40px}
+#hero{background:linear-gradient(135deg,#1a2740,#151922);
+      border:1px solid #2c3d5e;border-radius:12px;padding:20px 22px;margin-bottom:10px}
+#hero .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.09em;
+           color:var(--accent);font-weight:700;margin-bottom:7px}
+#hero h2{font-size:20px;margin-bottom:6px}
+#hero p{color:var(--dim);margin-bottom:15px;max-width:60ch}
+#progress{display:flex;gap:5px;margin:16px 0 20px}
+.pbar{flex:1;height:5px;border-radius:99px;background:var(--panel2)}
+.pbar.done{background:var(--ok)}
+.pbar.now{background:var(--accent)}
+.pbar.fail{background:var(--bad)}
+
+.step{display:grid;grid-template-columns:38px 1fr auto;gap:14px;
+      background:var(--panel);border:1px solid var(--line);border-radius:10px;
+      padding:15px 17px;margin-bottom:9px;align-items:start}
+.step.next{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.step.locked{opacity:.55}
+.num{width:30px;height:30px;border-radius:50%;background:var(--panel2);
+     display:flex;align-items:center;justify-content:center;font-weight:700;
+     font-size:13px;color:var(--dim)}
+.num.done{background:var(--ok);color:#06281a}
+.num.now{background:var(--accent);color:#fff}
+.num.fail{background:var(--bad);color:#fff}
+.step h3{font-size:14px;margin-bottom:3px}
+.step .what{color:var(--dim);font-size:12.5px;max-width:64ch}
+.step .meta{margin-top:7px;font-size:11.5px}
+.opt{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;
+     color:var(--dim);border:1px solid var(--line);border-radius:99px;
+     padding:1px 7px;margin-left:7px;vertical-align:2px}
+.note{margin-top:8px;font-size:12px;border-radius:6px;padding:7px 10px}
+.note.block{background:#2a1c1e;color:#f3a2a5}
+.note.warn{background:#2c2418;color:#f0c48a}
+.note.ok{background:#14261f;color:#8fe3bd}
+.sideact{display:flex;flex-direction:column;gap:6px;align-items:stretch;min-width:120px}
+
+#dropzone{border:1.5px dashed var(--line);border-radius:8px;text-align:center;
+          padding:16px;color:var(--dim);margin-top:10px;font-size:12.5px;cursor:pointer}
+#dropzone.hot{border-color:var(--accent);color:var(--txt)}
+#avatarlist{margin-top:8px;display:flex;flex-wrap:wrap;gap:5px}
+
+/* ---------- video view ---------- */
+#videowrap{height:100%;display:flex;flex-direction:column;background:#07090d}
+#screen{flex:1;display:flex;align-items:center;justify-content:center;padding:16px;min-height:0}
+#screen video{max-width:100%;max-height:100%;border-radius:8px;background:#000;
+              box-shadow:0 6px 26px #0009}
+#placeholder{color:var(--dim);text-align:center;max-width:440px}
+#placeholder h2{font-size:16px;margin-bottom:8px;color:var(--txt)}
+#transport{display:flex;align-items:center;gap:12px;padding:9px 16px;
            background:var(--panel);border-top:1px solid var(--line)}
 #tc{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--dim)}
 
-/* ---------- inspector ---------- */
-#inspect{grid-area:inspect;background:var(--panel);border-left:1px solid var(--line);
-         overflow:auto;padding:12px}
-#inspect h3{font-size:12px;text-transform:uppercase;letter-spacing:.07em;
-            color:var(--dim);margin-bottom:10px}
-.field{margin-bottom:11px}
-.field label{display:block;font-size:11px;color:var(--dim);margin-bottom:4px}
-.pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;
-      background:var(--panel2);color:var(--dim);margin:0 4px 4px 0}
-
-/* ---------- timeline ---------- */
-#tl{grid-area:tl;background:var(--panel);border-top:1px solid var(--line);
-    display:flex;flex-direction:column;max-height:52vh}
-#tlbar{display:flex;align-items:center;gap:10px;padding:6px 12px;
-       border-bottom:1px solid var(--line)}
-#tlscroll{overflow:auto;flex:1;max-height:230px}
+/* ---------- timeline view ---------- */
+#tlview{display:grid;grid-template-columns:minmax(0,1fr) 300px;height:100%}
+#tlleft{display:flex;flex-direction:column;min-width:0;overflow:hidden}
+#tlbar{display:flex;align-items:center;gap:10px;padding:8px 14px;
+       border-bottom:1px solid var(--line);background:var(--panel)}
+#tlscroll{overflow:auto;flex:1}
 #tlinner{position:relative;min-width:100%}
-.ruler{height:22px;position:relative;border-bottom:1px solid var(--line);
-       background:var(--track)}
+.ruler{height:22px;position:relative;border-bottom:1px solid var(--line);background:var(--track)}
 .tick{position:absolute;top:0;height:100%;border-left:1px solid var(--line);
       padding-left:4px;font-size:10px;color:var(--dim);line-height:22px}
-.track{position:relative;height:46px;border-bottom:1px solid var(--line);
-       background:var(--track)}
+.track{position:relative;height:46px;border-bottom:1px solid var(--line);background:var(--track)}
 .track.audio{height:34px}
 .tname{position:sticky;left:0;z-index:3;width:88px;height:100%;float:left;
        background:var(--panel);border-right:1px solid var(--line);
@@ -624,84 +655,102 @@ textarea{resize:vertical;font-family:inherit}
 .clip.bad{box-shadow:inset 0 -3px 0 var(--bad)}
 .clip.warn{box-shadow:inset 0 -3px 0 var(--warn)}
 .clip.okmark{box-shadow:inset 0 -3px 0 var(--ok)}
-.cue{position:absolute;top:8px;width:2px;height:18px;background:var(--accent2);
-     border-radius:1px}
+.cue{position:absolute;top:8px;width:2px;height:18px;background:var(--accent2);border-radius:1px}
 .cue::after{content:'';position:absolute;top:-4px;left:-2px;width:6px;height:6px;
      border-radius:50%;background:var(--accent2)}
 #playhead{position:absolute;top:0;bottom:0;width:2px;background:var(--bad);
      z-index:4;pointer-events:none;left:88px}
+#inspect{background:var(--panel);border-left:1px solid var(--line);overflow:auto;padding:14px}
+#inspect h3{font-size:12px;text-transform:uppercase;letter-spacing:.07em;
+            color:var(--dim);margin-bottom:10px}
+.field{margin-bottom:11px}
+.field label{display:block;font-size:11px;color:var(--dim);margin-bottom:4px}
+.pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;
+      background:var(--panel2);color:var(--dim);margin:0 4px 4px 0}
 
-/* ---------- console ---------- */
-#console{border-top:1px solid var(--line);background:#080a0f;height:150px;
-         overflow:auto;padding:9px 12px;white-space:pre-wrap;
-         font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:#c6d0e0}
-#conbar{display:flex;align-items:center;gap:10px;padding:5px 12px;
-        background:var(--panel);border-top:1px solid var(--line);font-size:11px}
+/* ---------- console drawer ---------- */
+#drawer{grid-area:drawer;background:var(--panel);border-top:1px solid var(--line)}
+#conbar{display:flex;align-items:center;gap:10px;padding:6px 14px;font-size:11.5px}
+#console{background:#080a0f;height:190px;overflow:auto;padding:10px 14px;
+         white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;
+         font-size:11.5px;color:#c6d0e0;border-top:1px solid var(--line)}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block;background:var(--dim)}
+.dot.run{background:var(--accent);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.3}}
 </style></head><body>
 
 <div id="app">
   <div id="top">
     <h1>🎬 Video Editor</h1>
     <div class="sep"></div>
-    <div id="stages"></div>
+    <div id="tabs">
+      <button class="on" data-tab="flow" onclick="showTab('flow')">Steps</button>
+      <button data-tab="timeline" onclick="showTab('timeline')">Timeline</button>
+      <button data-tab="video" onclick="showTab('video')">Video</button>
+    </div>
     <div class="sep"></div>
+    <span class="dot" id="jobdot"></span>
+    <span id="jobstate" class="dim" style="font-size:12px"></span>
     <button id="stopBtn" class="danger hide" onclick="stopJob()">■ Stop</button>
-    <span id="jobstate" class="dim"></span>
     <div style="flex:1"></div>
     <span id="health" class="dim" style="font-size:11px"></span>
   </div>
 
   <div id="bins">
-    <div class="binhead">Videos</div>
+    <div class="binhead">Your videos</div>
     <div id="projlist"></div>
-    <div class="row" style="margin-top:9px">
-      <input id="newTopic" placeholder="New video topic…" style="font-size:12px">
-    </div>
+    <div class="binhead">Start a new one</div>
+    <input id="newTopic" placeholder="e.g. Millikan oil drop" style="font-size:12px">
     <div class="row" style="margin-top:6px">
       <select id="newLang" style="font-size:12px">
         <option value="hinglish">Hinglish</option>
         <option value="english">English</option>
       </select>
-      <button class="primary" onclick="createProject()">+</button>
+      <button class="primary" onclick="createProject()">Create</button>
     </div>
-    <div class="binhead">Presenter clips</div>
-    <div id="avatarbin" class="dim" style="font-size:12px">—</div>
-    <div id="drop" class="item" style="border:1.5px dashed var(--line);
-         text-align:center;padding:14px;margin-top:8px;color:var(--dim)">
-      drop HeyGen clips here
-    </div>
+    <p class="dim" style="font-size:11.5px;margin-top:9px">
+      Type a topic and press Create. Then just follow the numbered steps.</p>
   </div>
 
-  <div id="monitor">
-    <div id="screen">
-      <div id="placeholder">
-        <h2>No video selected</h2>
-        <p>Pick one on the left, or type a topic to start a new one.</p>
+  <div id="main">
+    <div class="view on" id="view-flow"><div id="flowwrap">
+      <div id="hero"></div>
+      <div id="progress"></div>
+      <div id="steps"></div>
+    </div></div>
+
+    <div class="view" id="view-timeline"><div id="tlview">
+      <div id="tlleft">
+        <div id="tlbar">
+          <strong style="font-size:12px">Timeline</strong>
+          <span class="dim" id="tlinfo"></span>
+          <div style="flex:1"></div>
+          <span class="dim" style="font-size:11px">zoom</span>
+          <input type="range" id="zoom" min="6" max="90" value="26" style="width:130px">
+        </div>
+        <div id="tlscroll"><div id="tlinner"></div></div>
       </div>
-    </div>
-    <div id="transport">
-      <button onclick="playPause()" id="playBtn">▶</button>
-      <span id="tc">00:00 / 00:00</span>
-      <div style="flex:1"></div>
-      <span class="dim" id="srcLabel"></span>
-      <button id="dlBtn" class="hide" onclick="downloadCut()">⤓ Download</button>
-    </div>
+      <div id="inspect"><h3>Inspector</h3>
+        <p class="dim">Click any clip in the timeline to edit what it says.</p></div>
+    </div></div>
+
+    <div class="view" id="view-video"><div id="videowrap">
+      <div id="screen"><div id="placeholder">
+        <h2>No video selected</h2><p>Pick one on the left, or create a new one.</p>
+      </div></div>
+      <div id="transport">
+        <button onclick="playPause()" id="playBtn">▶</button>
+        <span id="tc">00:00 / 00:00</span>
+        <div style="flex:1"></div>
+        <span class="dim" id="srcLabel"></span>
+        <button id="dlBtn" class="hide" onclick="downloadCut()">⤓ Download</button>
+      </div>
+    </div></div>
   </div>
 
-  <div id="inspect"><h3>Inspector</h3>
-    <p class="dim">Select a clip in the timeline to edit that beat.</p></div>
-
-  <div id="tl">
-    <div id="tlbar">
-      <strong style="font-size:12px">Timeline</strong>
-      <span class="dim" id="tlinfo"></span>
-      <div style="flex:1"></div>
-      <span class="dim" style="font-size:11px">zoom</span>
-      <input type="range" id="zoom" min="6" max="90" value="26" style="width:130px">
-    </div>
-    <div id="tlscroll"><div id="tlinner"></div></div>
+  <div id="drawer">
     <div id="conbar">
-      <strong>Console</strong><span class="dim" id="conhint">idle</span>
+      <strong>Activity log</strong><span class="dim" id="conhint">idle</span>
       <div style="flex:1"></div>
       <button onclick="toggleConsole()" id="conToggle" style="font-size:11px">show</button>
     </div>
@@ -710,12 +759,35 @@ textarea{resize:vertical;font-family:inherit}
 </div>
 
 <script>
-const STAGES = [
-  ['script','Write script'], ['narrate','Narration'], ['background','Render'],
-  ['briefs','Avatar briefs'], ['avatar','Load clips'], ['qc','Check'],
-  ['composite','Composite'], ['build','▶ Build all']
+/* Each step is one pipeline stage, described in what it does for the user
+   rather than what it is called internally. `needs` gates the button so a
+   newcomer cannot run things out of order; `warn` still allows it. */
+const FLOW = [
+  {key:'script', n:1, name:'Write the script',
+   what:'Drafts the narration, the beats and any equations from your topic. Read it after and fix the wording.',
+   makes:'script.md'},
+  {key:'narrate', n:2, name:'Record the narration',
+   what:'Speaks every line out loud with ElevenLabs. This also decides how long each beat lasts, so everything after follows its timing.',
+   makes:'one audio file per beat'},
+  {key:'background', n:3, name:'Render the animation',
+   what:'Draws the maths with Manim and paints the flat green area where the presenter will stand. This is the slow step.',
+   makes:'the background video'},
+  {key:'briefs', n:4, name:'List the presenter clips you need', optional:true,
+   what:'Writes out exactly which presenter clips to record or generate, and what each should say.',
+   makes:'a briefs file'},
+  {key:'avatar', n:5, name:'Add the presenter clips',
+   what:'Fetches clips from HeyGen, or picks up the green-screen clips you drop in below.',
+   makes:'presenter clips'},
+  {key:'qc', n:6, name:'Check the quality', optional:true,
+   what:'Looks at real rendered frames for cut-off equations, broken maths, typos, or content straying into the presenter area.',
+   makes:'a QC report'},
+  {key:'composite', n:7, name:'Make the final video',
+   what:'Removes the green screen from the presenter and lays them over the animation, then adds the narration.',
+   makes:'the final video'},
 ];
-let current=null, tl=null, sel=null, es=null, job=null, pps=26, projects=[];
+
+let current=null, proj=null, tl=null, sel=null, es=null, job=null, pps=26,
+    projects=[], avatars=[], tab='flow';
 
 const $ = id => document.getElementById(id);
 const esc = s => (s==null?'':String(s)).replace(/[&<>"]/g,
@@ -730,13 +802,22 @@ async function api(path, opts){
   return body;
 }
 
+function showTab(t){
+  tab = t;
+  document.querySelectorAll('#tabs button').forEach(b=>
+    b.classList.toggle('on', b.dataset.tab===t));
+  document.querySelectorAll('.view').forEach(v=>
+    v.classList.toggle('on', v.id==='view-'+t));
+  if(t==='timeline') drawTimeline();
+}
+
 /* ---------------- projects ---------------- */
 async function loadProjects(){
   projects = await api('/projects');
   $('projlist').innerHTML = projects.map(p=>`
     <div class="item ${p.slug===current?'sel':''}" onclick="openProject('${p.slug}')">
-      ${esc(p.title)}<small>${p.has_final?'final cut':p.has_background?'background only':'not rendered'}</small>
-    </div>`).join('') || '<p class="dim" style="font-size:12px">No videos yet.</p>';
+      ${esc(p.title)}<small>${p.has_final?'✅ finished':p.has_background?'animation done':'not started'}</small>
+    </div>`).join('') || '<p class="dim" style="font-size:12px">None yet — create one below.</p>';
 }
 
 async function createProject(){
@@ -753,41 +834,124 @@ async function createProject(){
 async function openProject(slug){
   current = slug; sel = null;
   await loadProjects();
-  const p = await api('/projects/'+slug);
-  renderStages(p.state.stages||{});
-  $('avatarbin').innerHTML = p.avatars.length
-    ? p.avatars.map(a=>`<div class="item mono" style="font-size:11.5px">${esc(a)}</div>`).join('')
-    : '<span class="dim" style="font-size:12px">none yet</span>';
-  loadMonitor(p);
+  proj = await api('/projects/'+slug);
+  avatars = proj.avatars || [];
+  renderFlow();
+  loadMonitor(proj);
   await loadTimeline();
-  wireDrop();
   const j = await api('/projects/'+slug+'/job');
   if(j.job && !j.done){ job=j.job; setRunning(j.stage); attach(j.job,0); }
   else setRunning(null);
 }
 
-function renderStages(st){
-  $('stages').innerHTML = STAGES.map(([k,label])=>{
-    const s = (st[k==='briefs'?'avatar':k]||{}).status||'pending';
-    return `<button data-stage="${k}" onclick="run('${k}')"
-      class="${k==='build'?'primary':''}" title="${s}">${label}</button>`;
+/* ---------------- the flow ---------------- */
+function statusOf(key){
+  const st = (proj && proj.state && proj.state.stages) || {};
+  if(key==='briefs') return (st.avatar||{}).briefs ? 'done' : 'pending';
+  return (st[key]||{}).status || 'pending';
+}
+
+function blockedReason(step){
+  if(!proj) return 'Pick or create a video first';
+  if(step.key!=='script' && statusOf('script')!=='done')
+    return 'Do step 1 first — everything reads the script.';
+  if((step.key==='qc'||step.key==='composite') && statusOf('background')!=='done')
+    return 'Do step 3 first — there are no rendered frames yet.';
+  if(step.key==='composite' && !avatars.length)
+    return 'Do step 5 first — there is no presenter to lay on top.';
+  return null;
+}
+
+function warnFor(step){
+  if(step.key==='background' && statusOf('narrate')!=='done')
+    return 'Tip: do step 2 first. The narration decides how long each beat is, so rendering before it may need a re-render.';
+  return null;
+}
+
+function renderFlow(){
+  if(!proj){
+    $('hero').innerHTML = `<div class="lbl">Start here</div>
+      <h2>No video open</h2>
+      <p>Pick one from the left, or type a topic and press Create. Then work down the numbered steps — each one tells you what it does and when it is ready.</p>`;
+    $('progress').innerHTML=''; $('steps').innerHTML=''; return;
+  }
+
+  const done = FLOW.filter(s=>statusOf(s.key)==='done').length;
+  const next = FLOW.find(s=>statusOf(s.key)!=='done' && !s.optional && !blockedReason(s));
+  const anyFail = FLOW.find(s=>statusOf(s.key)==='failed');
+
+  $('progress').innerHTML = FLOW.map(s=>{
+    const st = statusOf(s.key);
+    const cls = st==='done'?'done':st==='failed'?'fail':(next&&next.key===s.key)?'now':'';
+    return `<div class="pbar ${cls}" title="${esc(s.name)}"></div>`;
   }).join('');
+
+  if(!next){
+    $('hero').innerHTML = `<div class="lbl">All done</div>
+      <h2>🎉 ${esc(proj.title)} is finished</h2>
+      <p>Every step is complete. Open the <b>Video</b> tab to watch it, or download it from there.</p>
+      <button class="primary big" onclick="showTab('video')">Watch the video</button>`;
+  } else {
+    $('hero').innerHTML = `<div class="lbl">Next step · ${done} of ${FLOW.length} done</div>
+      <h2>${next.n}. ${esc(next.name)}</h2>
+      <p>${esc(next.what)}</p>
+      <div class="row">
+        <button class="primary big" onclick="run('${next.key}')">▶ Run this step</button>
+        <button onclick="run('build')" title="Runs every remaining step back to back">Do everything for me</button>
+      </div>
+      ${anyFail?`<div class="note block" style="margin-top:12px">Step ${anyFail.n} failed. Open the activity log at the bottom to see why.</div>`:''}`;
+  }
+
+  $('steps').innerHTML = FLOW.map(s=>{
+    const st = statusOf(s.key);
+    const block = blockedReason(s), warn = warnFor(s);
+    const isNext = next && next.key===s.key;
+    const numCls = st==='done'?'done':st==='failed'?'fail':isNext?'now':'';
+    const label = {done:'Done',failed:'Failed',running:'Running…',pending:'Not started'}[st]||st;
+    const extra = s.key==='avatar' ? `
+      <div id="dropzone" onclick="document.getElementById('avfile').click()">
+        Drop your green-screen presenter clips here, or click to choose files
+      </div>
+      <input type="file" id="avfile" multiple accept="video/*" class="hide" onchange="uploadFiles(this.files)">
+      <div id="avatarlist">${avatars.length
+        ? avatars.map(a=>`<span class="pill mono">${esc(a)}</span>`).join('')
+        : '<span class="dim" style="font-size:12px">No clips added yet.</span>'}</div>` : '';
+
+    return `<div class="step ${isNext?'next':''} ${block?'locked':''}">
+      <div class="num ${numCls}">${st==='done'?'✓':s.n}</div>
+      <div>
+        <h3>${esc(s.name)}${s.optional?'<span class="opt">optional</span>':''}</h3>
+        <div class="what">${esc(s.what)}</div>
+        <div class="meta dim">Produces: ${esc(s.makes)} · <b>${label}</b></div>
+        ${block?`<div class="note block">🔒 ${esc(block)}</div>`:''}
+        ${!block&&warn?`<div class="note warn">${esc(warn)}</div>`:''}
+        ${extra}
+      </div>
+      <div class="sideact">
+        <button class="${isNext?'primary':''}" ${block?'disabled':''}
+                onclick="run('${s.key}')">${st==='done'?'Run again':'Run'}</button>
+        ${s.key==='qc'&&st==='done'?`<button onclick="showTab('timeline')">See findings</button>`:''}
+        ${s.key==='composite'&&st==='done'?`<button onclick="showTab('video')">Watch</button>`:''}
+      </div>
+    </div>`;
+  }).join('');
+
+  if(current) wireDrop();
 }
 
 /* ---------------- monitor ---------------- */
 function loadMonitor(p){
   const which = p.has_final ? 'final' : p.has_background ? 'background' : null;
   $('srcLabel').textContent = which==='final' ? 'final cut (with presenter)'
-                            : which==='background' ? 'background only' : '';
+                            : which==='background' ? 'animation only (no presenter yet)' : '';
   $('dlBtn').classList.toggle('hide', !which);
   if(!which){
     $('screen').innerHTML = `<div id="placeholder"><h2>${esc(p.title)}</h2>
-      <p class="dim">Nothing rendered yet. Run <b>Render</b> to build the animation,
-      or click a clip below to edit what it says.</p></div>`;
+      <p class="dim">Nothing rendered yet. Go to the <b>Steps</b> tab and run step 3.</p></div>`;
     return;
   }
   $('screen').innerHTML =
-    `<video id="vid" src="/api/projects/${p.slug}/video/${which}"></video>`;
+    `<video id="vid" controls src="/api/projects/${p.slug}/video/${which}"></video>`;
   const v = $('vid');
   v.addEventListener('timeupdate', ()=>{ movePlayhead(v.currentTime);
     $('tc').textContent = `${fmt(v.currentTime)} / ${fmt(v.duration||0)}`; });
@@ -809,11 +973,11 @@ async function loadTimeline(){
 }
 
 function drawTimeline(){
-  const inner = $('tlinner');
+  const inner = $('tlinner'); if(!inner) return;
   if(!tl || tl.error || !tl.clips.length){
     inner.innerHTML = `<p class="dim" style="padding:16px">${
       tl && tl.error ? 'Script problem: '+esc(tl.error)
-                     : 'No beats yet — write a script first.'}</p>`;
+                     : 'No beats yet — run step 1 to write a script.'}</p>`;
     $('tlinfo').textContent=''; return;
   }
   const W = Math.max(tl.duration*pps, 200);
@@ -888,7 +1052,7 @@ function showInspector(c){
 
   $('inspect').innerHTML = `
     <h3>Clip ${c.index} · ${c.kind}</h3>
-    <div class="field"><label>Spoken line (this is read aloud — no symbols)</label>
+    <div class="field"><label>Spoken line (read aloud — words only, no symbols)</label>
       <textarea id="f_narration" rows="4">${esc(c.narration)}</textarea></div>
     <div class="field"><label>Animation direction</label>
       <textarea id="f_note" rows="3">${esc(c.note)}</textarea></div>
@@ -931,9 +1095,11 @@ async function saveClip(i){
 
 /* ---------------- jobs ---------------- */
 function setRunning(stage){
-  document.querySelectorAll('#stages button').forEach(b=>b.disabled=!!stage);
+  document.querySelectorAll('.step button, #hero button').forEach(b=>b.disabled=!!stage);
   $('stopBtn').classList.toggle('hide', !stage);
-  $('jobstate').textContent = stage ? `running ${stage}…` : '';
+  $('jobdot').classList.toggle('run', !!stage);
+  const nice = (FLOW.find(s=>s.key===stage)||{}).name || stage;
+  $('jobstate').textContent = stage ? `Running: ${nice}…` : '';
   $('conhint').textContent = stage ? 'running '+stage : 'idle';
 }
 function attach(id, since){
@@ -947,16 +1113,16 @@ function attach(id, since){
   };
 }
 async function run(stage){
+  if(!current){ alert('Create or pick a video first.'); return; }
   const con = $('console');
-  con.textContent=''; con.classList.remove('hide');   // watching a job is the
-  $('conToggle').textContent='hide';                   // one time you want this
-  
+  con.textContent=''; con.classList.remove('hide');
+  $('conToggle').textContent='hide';
   try{
     const r = await api(`/projects/${current}/run/${stage}`,{method:'POST'});
-    if(!r.started) $('console').textContent =
+    if(!r.started) con.textContent =
       `${r.stage} is already running — showing that job instead.\n`;
     setRunning(r.stage); attach(r.job,0);
-  }catch(e){ $('console').textContent = 'could not start: '+e.message; }
+  }catch(e){ con.textContent = 'could not start: '+e.message; }
 }
 async function stopJob(){ if(job) await api(`/jobs/${job}/stop`,{method:'POST'}); }
 function toggleConsole(){
@@ -965,26 +1131,29 @@ function toggleConsole(){
 }
 
 /* ---------------- uploads ---------------- */
+async function uploadFiles(files){
+  if(!files || !files.length || !current) return;
+  const d=$('dropzone'); const fd=new FormData();
+  for(const f of files) fd.append('files',f);
+  if(d) d.textContent='uploading…';
+  await fetch(`/api/projects/${current}/avatar`,{method:'POST',body:fd});
+  openProject(current);
+}
 function wireDrop(){
-  const d=$('drop'); if(!d) return;
+  const d=$('dropzone'); if(!d || d.dataset.wired) return;
+  d.dataset.wired='1';
   ['dragenter','dragover'].forEach(ev=>d.addEventListener(ev,e=>{
-    e.preventDefault(); d.style.borderColor='var(--accent)';}));
+    e.preventDefault(); d.classList.add('hot');}));
   ['dragleave','drop'].forEach(ev=>d.addEventListener(ev,e=>{
-    e.preventDefault(); d.style.borderColor='var(--line)';}));
-  d.addEventListener('drop', async e=>{
-    const fd=new FormData();
-    for(const f of e.dataTransfer.files) fd.append('files',f);
-    d.textContent='uploading…';
-    await fetch(`/api/projects/${current}/avatar`,{method:'POST',body:fd});
-    d.textContent='drop HeyGen clips here';
-    openProject(current);
-  });
+    e.preventDefault(); d.classList.remove('hot');}));
+  d.addEventListener('drop', e=>{ e.preventDefault(); uploadFiles(e.dataTransfer.files); });
 }
 
 /* ---------------- init ---------------- */
 $('zoom').addEventListener('input', e=>{ pps=+e.target.value; drawTimeline(); });
 api('/health').then(h=>{ $('health').textContent =
   `${h.backend} · ffmpeg ${h.ffmpeg?'ok':'MISSING'}`; });
+renderFlow();
 loadProjects();
 </script></body></html>
 """
