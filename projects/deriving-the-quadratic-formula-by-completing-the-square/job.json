@@ -1,0 +1,91 @@
+{
+  "slug": "deriving-the-quadratic-formula-by-completing-the-square",
+  "title": "Deriving the quadratic formula by completing the square",
+  "created_at": "2026-08-10T14:35:44",
+  "stages": {
+    "script": {
+      "status": "done",
+      "updated_at": "2026-08-10T15:13:04",
+      "path": "/private/tmp/claude-501/-Users-indian-projects-manim-video-solution-generator/36a9378e-60c5-4338-b240-035dff219877/scratchpad/projects/deriving-the-quadratic-formula-by-completing-the-square/script.md"
+    },
+    "narration": {
+      "status": "failed",
+      "updated_at": "2026-08-10T16:04:00",
+      "reason": "--no-audio",
+      "error": "No module named 'elevenlabs'"
+    },
+    "background": {
+      "status": "running",
+      "updated_at": "2026-08-10T16:08:39"
+    },
+    "avatar": {
+      "status": "pending",
+      "updated_at": "2026-08-10T16:08:38",
+      "briefs": "projects/deriving-the-quadratic-formula-by-completing-the-square/avatar/briefs/manifest.json"
+    },
+    "composite": {
+      "status": "pending"
+    },
+    "qc": {
+      "status": "pending"
+    }
+  },
+  "config": {
+    "topic": "Deriving the quadratic formula by completing the square",
+    "language": "hinglish",
+    "orientation": "landscape",
+    "theme": "midnight",
+    "chroma": "right_half",
+    "voice": "George"
+  },
+  "timing": {
+    "0": {
+      "duration": 6.4,
+      "audio": null
+    },
+    "1": {
+      "duration": 7.6,
+      "audio": null
+    },
+    "2": {
+      "duration": 8.0,
+      "audio": null
+    },
+    "3": {
+      "duration": 7.6,
+      "audio": null
+    },
+    "4": {
+      "duration": 6.0,
+      "audio": null
+    },
+    "5": {
+      "duration": 6.0,
+      "audio": null
+    },
+    "6": {
+      "duration": 8.0,
+      "audio": null
+    },
+    "7": {
+      "duration": 6.8,
+      "audio": null
+    },
+    "8": {
+      "duration": 7.2,
+      "audio": null
+    },
+    "9": {
+      "duration": 8.0,
+      "audio": null
+    },
+    "10": {
+      "duration": 6.8,
+      "audio": null
+    },
+    "11": {
+      "duration": 7.6,
+      "audio": null
+    }
+  }
+}

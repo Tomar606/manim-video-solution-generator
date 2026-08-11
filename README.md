@@ -1,241 +1,291 @@
-# AI-Powered Video Solution Generator
+# AI educational video pipeline
 
-Automatically generate educational physics/math videos with synchronized Manim animations and AI voiceover.
-
-## Overview
-
-This POC system takes a physics or math question as input and automatically generates a 60-120 second educational video with:
-- Step-by-step animated solutions using Manim
-- Natural AI voiceover explaining each step
-- Perfect synchronization between visuals and narration
-
-## Architecture
+Turn a topic into a finished explainer: a written script, Manim animations,
+multi-voice narration, automatic sound effects, real photographs, an answer
+card, and a chroma-keyed presenter composited on top.
 
 ```
-Input: Text question
-    ↓
-[1] Solution Generation (GPT-5)
-    ↓
-[2] Voiceover Script Generation (GPT-5)
-    ↓
-[3] TTS Audio Generation (OpenAI TTS)
-    ↓
-[4] Manim Animation Code Generation (GPT-5)
-    ↓
-[5] Manim Video Rendering
-    ↓
-[6] Audio-Video Synchronization (FFmpeg)
-    ↓
-Output: Final MP4 video
+topic ──► script.md ──► narration ──► animation ──► QC ──► composite ──► final.mp4
+          (Claude)     (ElevenLabs)   (Manim +      (Claude   (ffmpeg
+                                       Claude)      vision)   chromakey)
+                                                                  ▲
+                                          presenter clips ────────┘
+                                          (HeyGen — dropped in or fetched)
 ```
 
-## Tech Stack
+Everything for one video lives in `projects/<slug>/`. Every stage reads and
+writes that folder, so stages are re-runnable, resumable, and drivable from the
+CLI, the browser dashboard, or Claude Code — all three call the same code.
 
-- **Python 3.11**
-- **OpenAI API** (GPT-5 for generation, TTS-1-HD for voiceover)
-- **Manim Community Edition** (mathematical animations)
-- **FFmpeg** (video/audio processing)
-- **Docker** (containerized environment)
-- **Pydantic** (data validation)
+---
 
-## Quick Start
+## Setup
 
-### Prerequisites
+You need **ffmpeg**, **LaTeX**, and **Python 3.10–3.12** (Manim 0.18 doesn't
+build on 3.13+). Two ways to get there.
 
-1. Docker and Docker Compose installed
-2. OpenAI API key
-
-### Setup
-
-1. Clone the repository and navigate to it:
-```bash
-cd manim-video
-```
-
-2. Create `.env` file with your OpenAI API key:
-```bash
-cp .env.example .env
-# Edit .env and add your OpenAI API key
-```
-
-3. Build the Docker container:
-```bash
-docker-compose build
-```
-
-### Running the Generator
-
-Generate a video from the default physics question:
-```bash
-docker-compose run --rm manim-video-generator python main.py
-```
-
-The final video will be saved in `output/final/`
-
-### Customizing the Question
-
-Edit `main.py` and modify the `question` variable (around line 130):
-
-```python
-question = """
-Your physics or math question here...
-"""
-```
-
-Then run the generator again.
-
-## Project Structure
-
-```
-manim-video/
-├── src/
-│   ├── models.py              # Pydantic data models
-│   ├── solution_generator.py  # GPT-5 solution generation
-│   ├── script_generator.py    # Voiceover script generation
-│   ├── tts_generator.py       # OpenAI TTS integration
-│   ├── manim_generator.py     # Manim code generation
-│   └── video_synchronizer.py  # FFmpeg audio/video sync
-├── examples/
-│   └── sample_manim.py        # Template for Manim code
-├── output/
-│   ├── solutions/             # Generated solution JSON
-│   ├── scripts/               # Voiceover scripts
-│   ├── audio/                 # TTS audio files
-│   ├── manim_code/            # Generated Manim code
-│   ├── videos/                # Rendered animations (no audio)
-│   └── final/                 # Final synchronized videos
-├── main.py                    # Main orchestrator
-├── Dockerfile                 # Docker configuration
-├── docker-compose.yml         # Docker Compose setup
-└── requirements.txt           # Python dependencies
-```
-
-## Example Questions
-
-### Rolling Ball (Rotational Motion)
-```
-A solid sphere of mass 2 kg and radius 0.5 m rolls without slipping down
-an inclined plane that makes an angle of 30° with the horizontal.
-The sphere starts from rest at a height of 3 m above the ground.
-Find the linear velocity of the sphere when it reaches the bottom of the incline.
-```
-
-### Projectile Motion
-```
-A ball is thrown horizontally from a cliff 45m high with initial velocity
-20 m/s. Find: (a) time to hit the ground, (b) horizontal distance traveled,
-(c) final velocity magnitude and direction.
-```
-
-### Simple Harmonic Motion
-```
-A mass of 0.5 kg is attached to a spring with spring constant k = 200 N/m.
-If the mass is displaced 0.1 m from equilibrium and released, find the
-period of oscillation and maximum velocity.
-```
-
-## How It Works
-
-### Step 1: Solution Generation
-GPT-5 analyzes the question and breaks it down into 4-7 clear steps, each optimized for video explanation (8-15 seconds per step).
-
-### Step 2: Script Generation
-GPT-5 creates a natural, conversational voiceover script with precise timestamps matching each solution step.
-
-### Step 3: TTS Generation
-OpenAI's TTS-1-HD model (voice: "nova") generates high-quality audio narration from the script.
-
-### Step 4: Manim Code Generation
-GPT-5 generates complete Manim Community Edition code that creates animations synchronized with the solution steps.
-
-### Step 5: Manim Rendering
-The generated code is executed to render a high-quality (1080p60) video with mathematical animations.
-
-### Step 6: Synchronization
-FFmpeg combines the Manim video with the TTS audio, ensuring perfect synchronization.
-
-## Output
-
-Each run generates:
-- **Final video** (`output/final/final_TIMESTAMP.mp4`) - The complete educational video
-- **Solution JSON** (`output/solutions/solution_TIMESTAMP.json`) - Structured solution data
-- **Script JSON** (`output/scripts/script_TIMESTAMP.json`) - Voiceover script with timestamps
-- **Manim code** (`output/manim_code/animation_TIMESTAMP.py`) - Generated animation code
-- **Intermediate files** - Raw video and audio before synchronization
-
-## Cost Estimation
-
-Per 90-second video:
-- GPT-5 calls (~6000 tokens output): ~$0.20
-- TTS-1-HD (~500 characters): ~$0.02
-- **Total: ~$0.22 per video**
-
-## Development
-
-### Running Without Docker
-
-If you prefer to run locally without Docker:
+### Native — faster renders
 
 ```bash
-# Install system dependencies (macOS)
-brew install ffmpeg
+# macOS / Linux
+./bin/bootstrap.sh
 
-# Install LaTeX (for Manim)
-brew install --cask mactex
-
-# Create virtual environment
-python3 -m venv venv
-source venv/bin/activate
-
-# Install Python dependencies
-pip install -r requirements.txt
-
-# Run
-python main.py
+# Windows (PowerShell, from the repo root)
+powershell -ExecutionPolicy Bypass -File .\bin\bootstrap.ps1
 ```
 
-### Testing Manim Code
+The script checks what's missing, prints the exact install command for your OS,
+creates `.venv`, installs dependencies, copies `.env.example` to `.env`, and
+builds the sound-effect library. Run it with `--check` to only report.
 
-To test the sample Manim animation:
+### Docker — nothing to install but Docker
 
 ```bash
-# Inside the container
-docker-compose run --rm manim-video-generator manim -pql examples/sample_manim.py PhysicsSolution
-
-# Or locally
-manim -pql examples/sample_manim.py PhysicsSolution
+docker compose build
+docker compose run --rm app python video.py doctor
 ```
 
-## Troubleshooting
+The image carries ffmpeg, LaTeX and Manim, so renders are identical on every
+machine. Slower to start, ~4 GB.
 
-### Timing Mismatch
-If the video and audio have significantly different durations (>5 seconds), the system will warn you. This usually means the Manim code generation needs adjustment. The system will still produce output using the shortest duration.
+### Credentials
 
-### Manim Rendering Fails
-Check `output/manim_code/animation_TIMESTAMP.py` for syntax errors. The system validates Python syntax but can't catch all Manim-specific errors.
+Copy `.env.example` to `.env` (bootstrap does this) and fill in:
 
-### FFmpeg Errors
-Ensure FFmpeg is properly installed in the Docker container. The Dockerfile includes FFmpeg installation.
+- **ElevenLabs** — `ELEVENLABS_API_KEY`, required for narration.
+- **Claude** — two options:
+  - *Subscription (default).* `npm install -g @anthropic-ai/claude-code`, then
+    run `claude` once to log in. No API key, billed to your Claude plan.
+  - *API key.* Set `ANTHROPIC_API_KEY`. Needed for unattended runs (CI, Docker),
+    where there's no CLI login.
+- **HeyGen** — optional. Without a key you use the manual clip workflow below.
 
-## Future Enhancements
+Check everything with:
 
-- [ ] Add intro/outro sequences with branding
-- [ ] Improve Manim code generation with better prompting
-- [ ] Add retry logic for failed generations
-- [ ] Create web UI (Streamlit/Gradio)
-- [ ] Batch processing for multiple questions
-- [ ] Quality scoring and automatic validation
-- [ ] Support for chemistry, biology, and other subjects
-- [ ] Multi-language support
-- [ ] Custom voice selection
+```bash
+./bin/video doctor
+```
 
-## License
+---
 
-MIT License - feel free to use and modify for your projects.
+## Making a video
 
-## Credits
+### The browser dashboard (easiest)
 
-Built with:
-- [OpenAI API](https://platform.openai.com/)
-- [Manim Community Edition](https://www.manim.community/)
-- [FFmpeg](https://ffmpeg.org/)
+```bash
+./bin/video dashboard          # opens http://localhost:8000
+```
+
+Create a video, edit the script in the page, run each stage with live logs,
+drag-and-drop the HeyGen clips, read the QC report with its frames, then preview
+and download the result. No terminal after the first command.
+
+It binds to localhost only. It's an unauthenticated file-editing UI — don't
+expose it beyond a machine you trust.
+
+### The command line
+
+```bash
+./bin/video new "Deriving the quadratic formula"   # project + first-draft script
+# → read projects/deriving-the-quadratic-formula/script.md and fix the wording
+./bin/video build deriving-the-quadratic-formula   # everything, in order
+```
+
+Or one stage at a time:
+
+| Command | What it does |
+|---|---|
+| `video new "<topic>"` | Create the project and draft a script |
+| `video script <slug>` | Re-draft the script (`--force` to overwrite) |
+| `video narrate <slug>` | Synthesize narration — **this sets all the timing** |
+| `video background <slug>` | Animate, render, assemble the Manim side |
+| `video avatar <slug> --briefs` | Write per-segment briefs for HeyGen |
+| `video avatar <slug>` | Ingest dropped clips (or fetch them via the API) |
+| `video qc <slug>` | Claude reviews the rendered frames |
+| `video composite <slug>` | Key the presenter over the animation |
+| `video status` | Where every project stands |
+
+Narration runs first because segment lengths come from the measured audio, and
+every later stage is timed against it.
+
+### Claude Code
+
+`/make-video`, `/write-script` and `/video-qc` skills in `.claude/skills/` drive
+the same commands conversationally, with the failure modes documented.
+
+---
+
+## The presenter
+
+The animation and the presenter meet through the **chroma zone**. A script that
+reserves space:
+
+```yaml
+chroma: right_half
+avatar:
+  placement: auto      # the reserved zone *is* the presenter's box
+  timing: audio        # narration is the clock (default)
+```
+
+renders with that half painted flat green and all content kept out of it. At
+composite time the presenter is keyed, despilled, feathered and fitted into
+exactly that box, standing on its bottom edge.
+
+**Without a HeyGen key** (today):
+
+```bash
+./bin/video avatar <slug> --briefs
+```
+
+writes `projects/<slug>/avatar/briefs/` — a manifest plus a text brief per
+segment with the exact line, its target length, and the narration `.wav` to
+upload as the avatar's voice track (that's what makes the lip-sync land). Save
+each clip as `segment_000.mp4`, `segment_001.mp4` … in
+`projects/<slug>/avatar/`, then run `video avatar <slug>` to ingest and validate
+them, and `video composite <slug>`.
+
+**With a key**, set `HEYGEN_API_KEY` and `HEYGEN_AVATAR_ID` and the same
+`avatar` stage generates and downloads the clips instead. Nothing else changes.
+
+> The HeyGen client is written but unverified — we have no key yet. It fails
+> loudly with the raw API response rather than guessing, so the first real run
+> will show exactly what to adjust.
+
+---
+
+## Writing scripts that sound spoken
+
+The narration is read aloud by a synthetic voice and lip-synced to a presenter,
+so the bar isn't "good writing", it's "would a teacher say this out loud". Three
+pieces enforce that.
+
+**The voice comes from your own scripts.** Put approved scripts in
+`style/samples/` and the recurring lines in `style/variations.yaml` — how a video
+opens, how it moves between steps, how the answer lands. The writer matches the
+samples' rhythm and picks a *different* approved phrasing each time a moment
+recurs, which is what stops ten videos sounding identical.
+
+```bash
+video style --init        # create style/ with a template
+video style               # what's currently loaded
+```
+
+**Every draft is scored.** `src/script_eval.py` checks the mechanical tells that
+make narration sound synthetic — and they're all things a listener notices:
+
+| Check | Why it matters |
+|---|---|
+| digits, `=`, `^`, `%`, LaTeX | the voice can't pronounce them — "do", not "2" |
+| Devanagari | our voices expect Hinglish in Latin script |
+| repeated openers | three beats starting the same way is *the* machine-written tell |
+| uniform line length | real speech mixes short and long; flat lengths sound flat |
+| "furthermore", "firstly", "as we can see" | written register, not speech |
+| "as shown", "in the figure" | narration is heard — it can't point at anything |
+| over 32 words | can't be said in one breath |
+
+**Failures go back for another pass.** Same loop as the renderer: draft →
+evaluate → hand back the specific defects → redraft, until it scores clean.
+
+```bash
+video script <slug>            # draft, score, and fix
+video eval <slug>              # score an existing script
+video eval <slug> --judge      # + a model's read against your samples
+```
+
+Script writing is the one stage that can run on a different provider:
+
+```bash
+SCRIPT_LLM=openai              # in .env — Manim codegen and QC stay on Claude
+video script <slug> --provider openai
+```
+
+## Photos and the answer card
+
+Put an image on any beat:
+
+```markdown
+[narrator]
+Yeh actual apparatus hai jo Millikan ne use kiya.
+![Millikan's apparatus](assets/apparatus.png){full,kenburns}
+```
+
+Layouts: `full` | `side` | `inset`. Effects: `kenburns` | `static` | `frame` |
+`noframe`. Paths resolve against the script's folder, the project's `assets/`,
+an absolute path, or an `https://` URL (downloaded and cached once).
+
+The closing answer image is frontmatter:
+
+```yaml
+answer_image: assets/answer.png
+answer_narration: Toh yeh raha final answer.
+answer_caption: Charge of an electron
+```
+
+It becomes a real final beat, so it gets narration, timing, QC and compositing
+like everything else. Photo-only beats render from a fixed template rather than
+generated code — deterministic, so they look identical in every video.
+
+---
+
+## Sound
+
+Scenes score themselves. A scene calls `self.cue("whoosh")` just before an
+animation; the render stays silent, the cue is written to a sidecar file, and at
+assembly every cue is offset onto the final timeline and mixed under the
+narration. The templates cue themselves, and the animator prompt asks Claude to
+cue its own key moments.
+
+The seven default effects (`pop`, `ding`, `whoosh`, `click`, `write`, `reveal`,
+`impact`) are synthesized locally with ffmpeg — no downloads, no licensing, and
+identical everywhere. Drop your own `assets/sfx/<name>.wav` to override one, or
+rebuild with `video sfx --force`. Disable per-render with `--no-sfx`.
+
+---
+
+## Layout
+
+```
+projects/<slug>/
+  job.json         stage state and timing — the contract between stages
+  script.md        the source of truth; edit this to change the video
+  assets/          photos this video uses
+  avatar/          presenter clips (segment_000.mp4 …)
+    briefs/        what to generate for each segment
+  audio/           narration, one clip per beat
+  manim_code/      generated scenes (+ .cues.json sound cues)
+  media/           raw Manim renders
+  work/            conformed clips, concatenated tracks
+  qc/              sampled frames + review report
+  final/           background.mp4 and the composited final cut
+```
+
+| Module | Role |
+|---|---|
+| `video.py` | the CLI — every stage |
+| `src/project.py` | project folders and stage state |
+| `src/script_parser.py` | script format → `VideoScript` |
+| `src/script_writer.py` | topic → first-draft script |
+| `src/tts_elevenlabs.py` | narration and measured timing |
+| `src/scene_codegen.py` | Claude codegen + render-repair loop |
+| `src/scene_templates.py` | fixed scenes for photo/answer beats |
+| `src/manim_helpers.py` | injected scaffolding: theme, chroma, photos, cues |
+| `src/sfx.py` | sound library + cue mixing |
+| `src/avatar.py` | briefs, manual drop, HeyGen provider |
+| `src/composite.py` | chromakey + despill + placement |
+| `src/qc.py` | Claude vision review |
+| `src/assemble.py` | conform → concat → mix → mux |
+| `src/dashboard.py` | the browser UI |
+| `src/llm.py` | Claude access (CLI or API backend) |
+
+---
+
+## Notes
+
+- **Don't hand-edit build output** (`manim_code/`, `work/`, `media/`,
+  `final/`) — it's regenerated. Change `script.md` and re-render.
+- **`--no-audio`** estimates timing from word count and skips TTS, so you can
+  validate the render path without spending ElevenLabs credit.
+- **`--continue-on-error`** drops segments that won't render instead of aborting,
+  which is usually what you want when reviewing a first pass.
+- **`--scenes-dir`** renders hand-written scenes instead of calling Claude — see
+  `scenes/quadratic_formula/` for a worked set.

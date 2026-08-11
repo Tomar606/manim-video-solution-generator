@@ -1,7 +1,8 @@
 FROM python:3.11-slim
 
-# Install system dependencies for Manim and FFmpeg
-RUN apt-get update && apt-get install -y \
+# Manim needs a C toolchain, cairo/pango, ffmpeg and a LaTeX distribution.
+# texlive-* is the bulk of the image; it's what typesets the equations.
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     gcc \
     g++ \
@@ -11,25 +12,35 @@ RUN apt-get update && apt-get install -y \
     libpango1.0-dev \
     python3-dev \
     texlive \
+    texlive-latex-base \
+    texlive-latex-recommended \
     texlive-latex-extra \
+    texlive-fonts-recommended \
     texlive-fonts-extra \
     texlive-science \
+    dvisvgm \
     && rm -rf /var/lib/apt/lists/*
 
-# Set working directory
 WORKDIR /app
 
-# Copy requirements first for better caching
+# Requirements first so dependency layers cache across code changes.
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
 COPY . .
 
-# Create output directories
-RUN mkdir -p output/solutions output/manim_code output/scripts output/videos output/audio output/final
+# Project folders are created on demand, but seed them so a bind-mounted
+# host directory starts with the right shape.
+RUN mkdir -p projects assets/sfx
 
-# Set environment variable for Manim
-ENV MANIMGL_CACHE_DIR=/tmp/manim_cache
+ENV MANIMGL_CACHE_DIR=/tmp/manim_cache \
+    PYTHONUNBUFFERED=1
 
-CMD ["python", "main.py"]
+# Synthesize the sound-effect library at build time so the first render has it.
+RUN python video.py sfx || true
+
+EXPOSE 8000
+
+# Everything runs through one entrypoint:
+#   docker compose run --rm app python video.py build <project>
+CMD ["python", "video.py", "--help"]

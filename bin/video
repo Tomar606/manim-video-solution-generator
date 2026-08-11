@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# Run the pipeline, wherever it happens to be installed.
+#
+# Picks the first runtime that works, so the same command line is correct on a
+# laptop with a venv and on a machine that only has Docker:
+#   1. the project venv (.venv)      — fastest, created by bin/bootstrap.sh
+#   2. Docker Compose                — if the venv can't render
+#   3. whatever python3 is on PATH   — last resort
+#
+#   ./bin/video dashboard
+#   ./bin/video new "Deriving the quadratic formula"
+#   ./bin/video build quadratic-formula
+#
+# Force one runtime with VIDEO_RUNTIME=venv|docker|system.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+RUNTIME="${VIDEO_RUNTIME:-auto}"
+
+venv_ok() { [[ -x .venv/bin/python ]] && .venv/bin/python -c "import manim" 2>/dev/null; }
+docker_ok() { command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; }
+
+case "$RUNTIME" in
+  venv)   exec .venv/bin/python video.py "$@" ;;
+  system) exec python3 video.py "$@" ;;
+  docker) exec docker compose run --rm --service-ports app python video.py "$@" ;;
+esac
+
+if venv_ok; then
+  exec .venv/bin/python video.py "$@"
+elif [[ -x .venv/bin/python ]] && [[ "${1:-}" =~ ^(new|script|status|doctor|dashboard|avatar|sfx)$ ]]; then
+  # These stages don't need Manim, so a venv without it is still fine.
+  exec .venv/bin/python video.py "$@"
+elif docker_ok; then
+  echo "→ running in Docker (no local Manim)" >&2
+  exec docker compose run --rm --service-ports app python video.py "$@"
+else
+  echo "No runtime found. Set one up first:" >&2
+  echo "  ./bin/bootstrap.sh        # native" >&2
+  echo "  docker compose build      # or Docker" >&2
+  exit 1
+fi

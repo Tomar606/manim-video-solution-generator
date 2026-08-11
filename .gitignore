@@ -1,17 +1,36 @@
 # Environment
 .env
 venv/
+.venv/
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 .Python
 
-# Output files
+# Build output. Everything under projects/ is regenerated from script.md, so
+# only the script and the assets an author supplied are worth committing.
 output/
+projects/*/audio/
+projects/*/manim_code/
+projects/*/media/
+projects/*/work/
+projects/*/final/
+projects/*/qc/
+projects/*/avatar/*.mp4
+projects/*/avatar/*.mov
+projects/*/avatar/*.webm
+projects/*/assets/_cache/
+media/
+
+# Sound effects are synthesized locally (video sfx) — deterministic, so there's
+# nothing to gain from committing the binaries.
+assets/sfx/
+
 *.mp4
 *.mp3
 *.wav
+!projects/*/assets/**
 
 # IDE
 .vscode/
@@ -25,3 +44,4 @@ Thumbs.db
 
 # Logs
 *.log
+projects/*/avatar/briefs/

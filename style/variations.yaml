@@ -1,0 +1,37 @@
+# Approved phrasings for the presenter.
+#
+# Each key is a moment that recurs in every video; each list is the alternatives
+# the team has approved for it. The writer picks a different one each time a slot
+# comes round, so ten videos don't all open the same way.
+#
+# mode: inspiration  -> match the tone, reuse when it fits (default)
+# mode: verbatim     -> use these exact lines at the matching moments
+mode: inspiration
+
+# Optional free-text guidance appended to the house style notes.
+notes: |
+  Speak to a student who is trying, not to a class. Technical terms stay in
+  English; everything joining them is Hindi.
+
+opener:
+  - Chalo, aaj ek interesting sawaal se shuru karte hain.
+  - Aaj hum ek aisa concept dekhenge jo exam mein bar bar aata hai.
+
+hook:
+  - Yeh sawaal dekhne mein simple lagta hai, par ismein ek twist hai.
+
+transition:
+  - Theek hai, ab aage badhte hain.
+  - Ab isko thoda aur simplify karte hain.
+
+emphasis:
+  - Yeh wala step sabse important hai, dhyaan se dekhna.
+
+question:
+  - Ab socho, agar yeh value badal jaaye toh kya hoga?
+
+answer:
+  - Toh hamara final answer yeh raha.
+
+closing:
+  - Bas itna hi. Agli video mein milte hain.

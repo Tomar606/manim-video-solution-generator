@@ -1,4 +1,21 @@
-openai>=1.59.0
-manim==0.18.1
-pydantic==2.10.3
-python-dotenv==1.0.1
+# AI educational video pipeline
+#
+# Claude access is optional at the package level: the default backend shells out
+# to the Claude Code CLI (billed to a Claude subscription), which needs no
+# Python dependency. The `anthropic` SDK is only used by the API-key backend.
+
+# --- core pipeline ---------------------------------------------------------
+manim==0.18.1            # mathematical animation (needs ffmpeg + LaTeX)
+elevenlabs>=1.0.0        # multi-voice narration
+pydantic>=2.10.0         # structured LLM outputs (QC reviews, script checks)
+python-dotenv>=1.0.1
+pyyaml>=6.0              # script frontmatter
+
+# --- dashboard (video dashboard) -------------------------------------------
+fastapi>=0.115.0
+uvicorn>=0.30.0
+python-multipart>=0.0.9  # avatar/asset uploads
+
+# --- models ----------------------------------------------------------------
+anthropic>=0.69.0        # only needed for LLM_BACKEND=api (ANTHROPIC_API_KEY)
+openai>=1.59.0           # script writing when SCRIPT_LLM=openai

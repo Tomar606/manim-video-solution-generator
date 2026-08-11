@@ -1,0 +1,64 @@
+{
+  "slug": "millikan-oil-drop-experiment",
+  "title": "Millikan oil drop experiment",
+  "created_at": "2026-08-10T14:24:43",
+  "stages": {
+    "script": {
+      "status": "done",
+      "updated_at": "2026-08-10T16:09:14",
+      "path": "projects/millikan-oil-drop-experiment/script.md"
+    },
+    "narration": {
+      "status": "failed",
+      "updated_at": "2026-08-10T16:08:29",
+      "reason": "--no-audio",
+      "error": "No module named 'elevenlabs'"
+    },
+    "background": {
+      "status": "pending"
+    },
+    "avatar": {
+      "status": "pending",
+      "updated_at": "2026-08-10T16:08:36",
+      "briefs": "projects/millikan-oil-drop-experiment/avatar/briefs/manifest.json",
+      "provider": "manual",
+      "matched": 2,
+      "missing": [
+        2,
+        3
+      ]
+    },
+    "composite": {
+      "status": "pending"
+    },
+    "qc": {
+      "status": "pending"
+    }
+  },
+  "config": {
+    "topic": "Millikan oil drop experiment",
+    "language": "hinglish",
+    "orientation": "landscape",
+    "theme": "midnight",
+    "chroma": "right_half",
+    "voice": "George"
+  },
+  "timing": {
+    "0": {
+      "duration": 4.0,
+      "audio": null
+    },
+    "1": {
+      "duration": 2.5,
+      "audio": null
+    },
+    "2": {
+      "duration": 2.5,
+      "audio": null
+    },
+    "3": {
+      "duration": 2.5,
+      "audio": null
+    }
+  }
+}

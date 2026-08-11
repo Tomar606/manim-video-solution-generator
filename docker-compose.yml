@@ -1,12 +1,30 @@
 services:
-  manim-video-generator:
+  app:
     build: .
-    container_name: ai-video-solution
+    image: ai-video-pipeline
     volumes:
-      - ./output:/app/output
+      # Bind-mount the project so edits to src/, scripts/ and projects/ are
+      # picked up WITHOUT rebuilding. Python deps live in site-packages
+      # (outside /app), so overlaying /app with the host tree is safe.
+      - .:/app
+      # Named volume keeps Manim's partial-render cache warm across runs.
+      - manim-cache:/tmp/manim_cache
     env_file:
       - .env
     environment:
       - PYTHONUNBUFFERED=1
+      # The container has no Claude CLI login, so use the API key backend here.
+      # Override to "cli" only if you mount a logged-in ~/.claude into the image.
+      - LLM_BACKEND=${LLM_BACKEND:-api}
+    ports:
+      # For `video dashboard` — visit http://localhost:8000
+      - "8000:8000"
     stdin_open: true
     tty: true
+
+    # Default: show the CLI help. Real work is run explicitly, e.g.
+    #   docker compose run --rm app python video.py build my-project
+    command: ["python", "video.py", "--help"]
+
+volumes:
+  manim-cache:

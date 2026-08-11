@@ -31,3 +31,11 @@ README.md
 
 # Logs
 *.log
+
+# Local venvs and per-video output — the compose bind-mount makes these visible
+# at runtime anyway, and shipping rendered media into the build context makes
+# every rebuild slower for no benefit.
+.venv/
+projects/
+media/
+assets/sfx/
