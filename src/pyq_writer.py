@@ -332,6 +332,31 @@ def draft(q: Question, *, provider: str | None = None,
 
 
 # --------------------------------------------------------------------------- #
+# The header that goes on every delivered document                             #
+# --------------------------------------------------------------------------- #
+def doc_header(q: Question) -> str:
+    """Title block for the reviewable document.
+
+    The **whole question** goes at the top, verbatim from the sheet. A reviewer
+    has to be able to check the script against what was actually asked without
+    opening the sheet in another tab — and the count the question asks for
+    ("तीन कारक", "दो अनुप्रयोग") is the thing most likely to be under-delivered.
+    """
+    years = ", ".join(str(y) for y in q.years) if q.years else "—"
+    return "\n".join([
+        f"प्रश्न क्रमांक: {q.qid}  |  अध्याय {q.chapter_no} — {q.chapter}",
+        f"श्रेणी: {q.category}  |  वर्ष: {years}",
+        "MP Board कक्षा 12 (हिन्दी माध्यम)",
+        "",
+        "पूरा प्रश्न:",
+        f"  {q.text}",
+        "",
+        "=" * 60,
+        "",
+    ])
+
+
+# --------------------------------------------------------------------------- #
 # Down-convert to the pipeline's script format                                 #
 # --------------------------------------------------------------------------- #
 def to_pipeline_script(text: str, *, chroma_band: float = 0.60) -> str:

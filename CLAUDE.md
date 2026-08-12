@@ -4,6 +4,26 @@ Read this before changing anything. It records *why* the pipeline is shaped the
 way it is — the constraints that aren't visible from the code, and the decisions
 that look arbitrary until you know what they're avoiding.
 
+> **New here? Read [`PIPELINE.md`](PIPELINE.md) first.** It is the operational
+> walkthrough: what to run, what the outputs mean, and the mistakes already made
+> and fixed. This file explains *why*; that one explains *how*.
+
+## Two tracks, one repo
+
+The **reels track** is what most of this file describes: a topic string becomes
+a landscape Hinglish video with Manim animation and a keyed presenter.
+
+The **PYQ track** is the current focus and is documented in `PIPELINE.md`: one
+row of an MP Board question sheet becomes a portrait Hindi script
+(`src/pyq_writer.py`), reviewed as a Google Doc, then rendered either by Manim
+or via a Gemini/Veo prompt pack. It shares `src/llm.py`, `src/style.py` and the
+render/composite stages; it does **not** share the script format.
+
+The routing decision between Manim and Veo is not cosmetic — see
+"Route: Manim or Veo" in `PIPELINE.md`. Roughly two thirds of the PYQ scripts
+written so far are equation and graph work, which Veo is actively bad at and
+Manim renders correctly by construction.
+
 ## What this produces
 
 An educational video: a written script → Manim animations → ElevenLabs narration
@@ -76,6 +96,22 @@ login and the host has no Manim, but the repair loop needs both. So
 - **macOS: `pip install manim` needs `pkg-config`** or pycairo fails to build,
   even with cairo installed.
 - **Manim 0.18 needs Python 3.10–3.12.**
+- **Hindi and formulas render by different paths and cannot be mixed.** Poppins
+  (in `assets/fonts/`) covers Devanagari completely but has no Greek letters,
+  no sub/superscripts and no arrows; LaTeX has all of those and no Devanagari.
+  So Hindi goes through `Text()`, formulae through `MathTex()`, and Devanagari
+  must never be glued inside a symbol (`E°सेल`). Getting this wrong gives tofu
+  boxes one way and a LaTeX failure the other.
+- **Never write "logo", "watermark", "badge" or "wordmark" into a generation
+  prompt — not even as a negative.** Naming a thing is a signal to draw it; a
+  block that said "logo" five times while asking for empty corners produced a
+  logo in both corners. See `.claude/skills/video-prompt/references/bug-ledger.md`.
+- **A bare `complete()` resolves to the Claude CLI**, so `SCRIPT_LLM` is
+  ignored unless a caller passes `provider=` explicitly.
+- **Model-written prompts break caches.** `src/frames.py` keys its image cache
+  on the prompt, but the prompt itself is generated, so it differs every run and
+  never hits. Prompts are cached in `frames/prompts.json` — seed it before any
+  re-run or you pay for the same frame twice.
 
 ## Layout
 
@@ -83,6 +119,7 @@ login and the host has no Manim, but the repair loop needs both. So
 video.py              CLI — every stage
 src/project.py        projects/<slug>/ + stage state (job.json)
 src/script_parser.py  script format -> VideoScript
+src/pyq_writer.py     question sheet -> verified Hindi PYQ script
 src/script_edit.py    write a single beat back to script.md losslessly
 src/script_writer.py  topic -> draft, with the voice repair loop
 src/script_eval.py    "does this sound spoken" checks
@@ -98,6 +135,8 @@ src/qc.py             Claude vision review of rendered frames
 src/assemble.py       conform -> concat -> mix -> mux
 src/dashboard.py      the browser editor (single self-contained page)
 ```
+
+See also `PIPELINE.md` for the operational flow.
 
 `projects/<slug>/` holds one video. Everything except `script.md` and `assets/`
 is regenerated.

@@ -1,30 +1,40 @@
-# ACCURACY BRIEF — संक्षारण (Corrosion), MP Board Class 12
+**ACCURACY BRIEF — संक्षारण (Corrosion), MP Board Class 12**
 
-## Beat 1 — Definition
-- **Rust colour**: reddish-brown / orange-brown, dull and flaky — never bright red, never smooth. Rust is porous and powdery; it flakes off exposing fresh metal (this is *why* iron corrodes fully, unlike aluminium).
-- **Clean iron** = grey with metallic sheen, not silver-white, not blue-grey.
-- **The word equation on screen** must read धातु + वायुमण्डलीय गैसें + नमी → संक्षारण. All three inputs must be visible. Do not show iron + water only; do not show iron + oxygen only. Moisture must be present as droplets/humidity, not a submerged beaker.
-- Rust forms **on the surface, spreading outward from patches**, not uniformly from the first frame.
-- Chemically rust is hydrated iron(III) oxide, Fe₂O₃·xH₂O. If a formula is shown, use that. Never FeO, never Fe₃O₄ (that is black, not brown).
+**Beat 1 — general**
+Chemistry-lab framing only. Board name "एमपी बोर्ड" and "कक्षा 12वीं" spelled in Devanagari, no digits spoken.
 
-## Beat 2 — Three factors
-- Exactly **three** factors, in script order: (1) धातु की प्रकृति (2) अशुद्धियाँ (3) वातावरण. Three icons, three labels — not four, not a wheel of many.
-- "More reactive → corrodes faster": if a reactivity comparison appears, order is **Zn more reactive than Fe, Fe more reactive than Cu**. Copper corrodes to a **green** patina, not brown — only use copper if you colour it green.
-- **Impurities**: draw as small dark specks *inside* the metal block, not dirt sitting on top.
+**Beat 2 — definition / rust**
+- Rust on iron is **reddish-brown to orange-brown, flaky, powdery** — not smooth red, not black.
+- Rust is **hydrated iron(III) oxide, Fe₂O₃·xH₂O**. If a formula appears on screen, use that. Never write "FeO" or plain "Fe₂O₃".
+- Iron/steel before rusting is **grey-silver with dull metallic sheen** — not chrome-mirror, not yellow.
+- The word equation must show **three inputs**: धातु (iron) + वायुमण्डलीय गैसें (O₂) + नमी (H₂O). Dropping water is the single most common error — dry iron in dry air does not rust; the syllabus is explicit.
+- Rust grows **outward from the surface in patches**, and **flakes off**, exposing fresh metal below. Do not draw a uniform protective film (that is aluminium's behaviour, not iron's).
+- Copper corrosion, if shown as contrast, is **green** (basic copper carbonate); silver tarnish is **black** (Ag₂S). Do not colour iron rust green or silver tarnish brown.
 
-## Beat 3 — Three preventions
-- **रोधिका (barrier)**: an unbroken continuous layer over iron. Paint/grease/oil — a coat with a gap defeats the point; if showing failure, show the gap deliberately.
-- **समर्पित बचाव / गैल्वेनीकरण**: zinc coating on iron. **Zinc is the one that corrodes and is consumed; iron underneath stays intact.** The commonest error is animating the iron rusting under zinc. Zinc appears bluish-grey, often with a spangled/crystalline pattern.
-- **Order matters**: coat applied → zinc slowly sacrificed → iron preserved.
-- **विद्युत् प्लेटिंग**: Zn, Ni or Cr only (as scripted). Metal object = **cathode**, connected to the **negative** terminal; coating metal = anode. Show it in an electrolyte bath with a battery. Chromium plating is mirror-bright silver; nickel is warm silvery.
+**Beat 3 — three factors, in this order**
+1. धातु की प्रकृति — show a reactivity comparison; **more reactive = corrodes faster**. If a series appears: K, Na, Ca, Mg, Al, Zn, Fe, Pb, Cu, Ag, Au — Zn **above** Fe, Cu and Ag **below** Fe. Never put Fe above Zn.
+2. अशुद्धियाँ — impure metal corrodes **faster**; show impure sample more rusted than pure. Not the reverse.
+3. वातावरण — air, moisture, gases. Coastal/humid = more corrosion.
+Count is **exactly three**, numbered १, २, ३ on screen.
 
-## MUST NEVER APPEAR
-Rusting shown on **gold, silver, aluminium foil or steel already labelled "stainless"**; rust inside a **dry sealed jar**; rust forming **underwater with no air**; galvanised iron drawn as **paint-like** rather than metallic; the plating object wired to the positive terminal.
+**Beat 4 — three preventions, in this order**
+1. रोधिका (barrier) — paint/grease/oil as a **continuous unbroken covering layer over** the iron. A gap in the layer means rust starts there.
+2. समर्पित/त्यागी बचाव — coating metal must be **more reactive than iron**, and it **corrodes first and is consumed**, iron stays intact. Galvanisation = **zinc on iron**. Zinc layer is **dull bluish-grey/matte with spangle pattern**, not shiny gold. Never show tin or copper here — those are less reactive and would worsen rusting if scratched.
+3. विद्युत् प्लेटिंग — zinc, nickel or chromium. If a cell is drawn: **object to be plated is the cathode (negative terminal)**, plating metal is the anode, both in an electrolyte of that metal's salt. Reversing the electrodes is a frequent slip. Chromium plating = **bright mirror-silver**; nickel = **warm silvery, slightly yellowish**.
 
-## COMMON ERRORS TO AVOID
-1. Iron rusting *through* the zinc layer in galvanisation.
-2. Rust drawn bright red or as a smooth glossy skin.
-3. Object as anode in electroplating (reversed cell).
-4. Only water shown causing rust — air/oxygen omitted.
-5. Copper drawn corroding brown instead of green.
-6. Four or five factors/remedies instead of the scripted three.
+Layer order in any cross-section: **base metal at the bottom, coating on top, environment above** — three stacked bands, never coating drawn beneath the iron.
+
+**Beat 5 — answer card**
+Must contain, in the same order as spoken: definition → three factors → three preventions. Screenshot prompt implies static, fully legible text; nothing animating out.
+
+**COMMON ERRORS TO AVOID**
+- Rust shown as bright red or as a smooth even coat.
+- Water/moisture omitted from the rusting equation.
+- Zinc drawn as shiny golden, or galvanised sheet drawn mirror-bright.
+- Tin-coating shown as an example of sacrificial protection.
+- Electroplating cell with the object as anode.
+- Green patina used for iron rust.
+- Four or two items where the script says three.
+- Rust drawn as a protective sealed layer that stops further corrosion.
+- English "Corrosion" as the on-screen heading when narration says संक्षारण.
+- Any digit or symbol rendered in a spoken line.
