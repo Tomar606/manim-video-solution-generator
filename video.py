@@ -194,6 +194,23 @@ def cmd_eval(args) -> int:
     return 0 if report.ok else 3
 
 
+def cmd_spend(args) -> int:
+    """What the paid keys have cost so far."""
+    from src import usage
+
+    data = usage.summary(since_days=args.days, project=args.project or "")
+    print(usage.format_summary(data))
+    if args.detail:
+        print("\n  recent calls")
+        for row in usage.entries(since_days=args.days,
+                                 project=args.project or "")[-args.detail:]:
+            cost = row.get("cost_usd")
+            amount = f"${cost:.4f}" if cost is not None else "  ?  "
+            print(f"    {row['ts']}  {amount}  {row['model']:<18} "
+                  f"{row.get('stage') or '—':<12} {row.get('project') or ''}")
+    return 0
+
+
 def cmd_style(args) -> int:
     """Show (or scaffold) the voice reference the writer learns from."""
     from src import style as style_mod
@@ -656,6 +673,13 @@ def build_parser() -> argparse.ArgumentParser:
                    help="Create style/ with a template to fill in")
     p.set_defaults(func=cmd_style)
 
+    p = sub.add_parser("spend", help="What the paid API keys have cost")
+    p.add_argument("--days", type=int, help="Only the last N days")
+    p.add_argument("--project", help="Only this video")
+    p.add_argument("--detail", type=int, nargs="?", const=20, default=0,
+                   help="Also list the last N individual calls")
+    p.set_defaults(func=cmd_spend)
+
     # narrate ---------------------------------------------------------------
     p = sub.add_parser("narrate", help="Synthesize narration and fix timing")
     p.add_argument("project")
@@ -740,6 +764,14 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main() -> int:
     args = build_parser().parse_args()
+    # Tag every paid call with the stage and video that caused it, so `spend`
+    # can answer "what did this video cost" rather than just a running total.
+    try:
+        from src import usage
+        usage.set_context(stage=getattr(args, "command", "") or "",
+                          project=getattr(args, "project", "") or "")
+    except Exception:  # noqa: BLE001 - accounting must never block a run
+        pass
     try:
         return args.func(args)
     except KeyboardInterrupt:

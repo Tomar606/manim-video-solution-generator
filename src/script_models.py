@@ -72,6 +72,9 @@ class VideoScript:
     segments: list[DialogueSegment]
     source_path: str | None = None
     fps: int = 30
+    # Which script the narration is written in: hinglish (Latin) | hindi
+    # (Devanagari) | english. Drives which voice checks apply.
+    language: str = "hinglish"
     avatar: AvatarConfig = field(default_factory=AvatarConfig)
 
     @property

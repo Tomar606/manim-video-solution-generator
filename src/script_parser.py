@@ -362,6 +362,7 @@ def build_script(fm: dict, segments: list[DialogueSegment],
 
     title = str(fm.get("title") or "Untitled").strip()
     fps = int(fm.get("fps") or 30)
+    language = str(fm.get("language") or "hinglish").strip().lower()
     return VideoScript(
         title=title,
         orientation=orientation,
@@ -371,6 +372,7 @@ def build_script(fm: dict, segments: list[DialogueSegment],
         segments=segments,
         source_path=source_path,
         fps=fps,
+        language=language,
         avatar=avatar,
     )
 

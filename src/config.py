@@ -142,6 +142,43 @@ class ChromaZone:
 
 
 @dataclass(frozen=True)
+class LogoConfig:
+    """The brand logo, patched back on during compositing.
+
+    The background we upload to the video model already carries the Arivihan
+    logo — but a generated clip redraws that region, so what comes back has a
+    smeared or replaced mark. Rather than fight the model, the logo is stamped
+    on again in post, at the position it occupies on the background.
+
+    It sits between the animation and the presenter: background → logo →
+    avatar. On top of the background so it covers whatever the model produced
+    there, under the avatar so the presenter is never occluded by it.
+    """
+
+    path: str = ""
+    # Normalized position of the logo's own top-left corner, in frame units.
+    # Defaults to the bottom-right, slightly above the bottom edge — that's
+    # where the video model stamps its own mark, and nothing useful is ever
+    # composed there, so covering it costs nothing.
+    position: tuple[float, float] = (0.62, 0.86)
+    # Width as a fraction of frame width; height follows the aspect ratio.
+    width: float = 0.30
+    opacity: float = 1.0
+    # Covers whatever the generator drew underneath — usually wanted, since the
+    # point is to hide a mangled mark rather than sit next to it.
+    patch_background: bool = True
+    # Solid patch colour sampled from the background; empty means no patch.
+    patch_color: str = ""
+    # Generous by default: the mark underneath must be fully covered, and the
+    # area is dead space anyway.
+    patch_pad: float = 0.02     # extra margin around the logo, in frame units
+
+    @property
+    def enabled(self) -> bool:
+        return bool(self.path)
+
+
+@dataclass(frozen=True)
 class AvatarConfig:
     """Where the (chroma-keyed) presenter sits over the animation, and how
     aggressively the green is removed.

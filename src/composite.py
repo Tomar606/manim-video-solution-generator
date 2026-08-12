@@ -26,7 +26,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from src import media
-from src.config import AvatarConfig
+from src.config import AvatarConfig, LogoConfig
 from src.script_models import DialogueSegment, VideoScript
 
 
@@ -87,17 +87,71 @@ def build_filter(cfg: AvatarConfig, box: tuple[float, float, float, float],
     return chain
 
 
+def build_logo_filter(logo: LogoConfig, width: int, height: int,
+                      *, input_index: int, base_label: str,
+                      out_label: str) -> str:
+    """Stamp the logo onto ``base_label``, optionally patching over what's there.
+
+    Two steps, because covering is the point: an opaque patch first (to hide the
+    generator's mangled mark), then the real logo on top of it.
+    """
+    lw = logo.width * width
+    lx, ly = logo.position[0] * width, logo.position[1] * height
+    pad = logo.patch_pad * width
+
+    chain = []
+    current = base_label
+    if logo.patch_background and logo.patch_color:
+        # drawbox with t=fill paints a solid rectangle over the damaged region.
+        chain.append(
+            f"[{current}]drawbox=x={lx - pad:.0f}:y={ly - pad:.0f}:"
+            f"w={lw + 2 * pad:.0f}:h={lw + 2 * pad:.0f}:"
+            f"color={logo.patch_color}@1.0:t=fill[patched]"
+        )
+        current = "patched"
+
+    alpha = (f",format=rgba,colorchannelmixer=aa={logo.opacity:.2f}"
+             if logo.opacity < 1.0 else "")
+    chain.append(
+        f"[{input_index}:v]scale={lw:.0f}:-1{alpha}[logo]"
+    )
+    chain.append(
+        f"[{current}][logo]overlay=x={lx:.0f}:y={ly:.0f}:"
+        f"eval=init:format=auto[{out_label}]"
+    )
+    return ";".join(chain)
+
+
 def composite_clip(background: str, avatar: str, out_path: str, *,
                    cfg: AvatarConfig, box, width: int, height: int,
-                   fps: int, duration: float, feather: float = 1.0) -> str:
-    """Key one avatar clip over one background clip."""
+                   fps: int, duration: float, feather: float = 1.0,
+                   logo: LogoConfig | None = None) -> str:
+    """Key one avatar clip over one background clip.
+
+    Layer order, bottom to top: background → logo → presenter. The logo goes on
+    before the avatar so the presenter is never covered by branding.
+    """
     Path(out_path).parent.mkdir(parents=True, exist_ok=True)
+
+    inputs = ["-i", background, "-i", avatar]
+    avatar_filter = build_filter(cfg, box, width, height, duration,
+                                 feather=feather)
+
+    if logo is not None and logo.enabled and Path(logo.path).exists():
+        # The logo is stamped on the background BEFORE the avatar is keyed over
+        # it, so the presenter always sits on top of the brand mark.
+        inputs += ["-i", str(logo.path)]
+        base = build_logo_filter(logo, width, height, input_index=2,
+                                 base_label="0:v", out_label="bg")
+        avatar_filter = avatar_filter.replace("[0:v][fg]", "[bg][fg]")
+        filter_complex = f"{base};{avatar_filter}"
+    else:
+        filter_complex = avatar_filter
+
     media._run([
         "ffmpeg", "-y",
-        "-i", background,
-        "-i", avatar,
-        "-filter_complex", build_filter(cfg, box, width, height, duration,
-                                        feather=feather),
+        *inputs,
+        "-filter_complex", filter_complex,
         "-map", "[out]",
         "-t", f"{duration:.3f}", "-r", str(fps), "-fps_mode", "cfr",
         "-c:v", "libx264", "-preset", "medium", "-crf", "18",
@@ -110,7 +164,8 @@ def composite_clip(background: str, avatar: str, out_path: str, *,
 def composite_segments(script: VideoScript,
                        segments: list[DialogueSegment],
                        work_dir: str, out_path: str,
-                       *, feather: float = 1.0) -> str:
+                       *, feather: float = 1.0,
+                       logo: LogoConfig | None = None) -> str:
     """Composite every segment that has an avatar clip, then concatenate.
 
     Segments without a clip pass through untouched, so a half-finished avatar
@@ -140,7 +195,8 @@ def composite_segments(script: VideoScript,
         out_clip = work / f"composited_{seg.index:03d}.mp4"
         composite_clip(str(base), seg.avatar_path, str(out_clip),
                        cfg=cfg, box=box, width=width, height=height,
-                       fps=settings.fps, duration=duration, feather=feather)
+                       fps=settings.fps, duration=duration, feather=feather,
+                       logo=logo)
         pieces.append(str(out_clip))
         keyed += 1
         print(f"   keyed avatar onto segment {seg.index}")
@@ -155,11 +211,13 @@ def composite_segments(script: VideoScript,
 def composite_video(script: VideoScript, segments: list[DialogueSegment],
                     work_dir: str, final_path: str,
                     *, audio_path: str | None = None,
-                    feather: float = 1.0) -> str:
+                    feather: float = 1.0,
+                    logo: LogoConfig | None = None) -> str:
     """Full composite pass: key, concatenate, and re-attach the narration."""
     work = Path(work_dir)
     video_track = str(work / "composited_track.mp4")
-    composite_segments(script, segments, work_dir, video_track, feather=feather)
+    composite_segments(script, segments, work_dir, video_track, feather=feather,
+                       logo=logo)
 
     Path(final_path).parent.mkdir(parents=True, exist_ok=True)
     if audio_path is None:

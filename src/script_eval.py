@@ -146,10 +146,18 @@ def _phrase_hits(text: str, phrases: list[str]) -> list[str]:
     return [p for p in phrases if p in low]
 
 
-def evaluate(script: VideoScript) -> Report:
-    """Run every mechanical check over a script's spoken lines."""
+def evaluate(script: VideoScript, *, language: str | None = None) -> Report:
+    """Run every mechanical check over a script's spoken lines.
+
+    ``language`` decides which script the voice expects. Our Hinglish videos are
+    written in Latin so the multilingual voice reads them as Hindi-with-English;
+    our pure-Hindi videos are written in Devanagari and are perfectly correct.
+    Flagging one as the other is how a working production script gets rejected.
+    """
     report = Report()
     add = report.findings.append
+    language = (language or getattr(script, "language", None) or "hinglish").lower()
+    expects_latin = language in ("hinglish", "english")
 
     spoken = [(s.index, s.narration.strip()) for s in script.segments
               if s.narration.strip()]
@@ -166,10 +174,11 @@ def evaluate(script: VideoScript) -> Report:
         lengths.append(len(words))
 
         # --- things the voice physically cannot say --------------------------
-        if DEVANAGARI.search(line):
+        if expects_latin and DEVANAGARI.search(line):
             add(Finding(index, "fail", "devanagari",
-                        "Contains Devanagari; the voice expects Hinglish in "
-                        "Latin script. Transliterate it."))
+                        f"Contains Devanagari, but this script is marked "
+                        f"'{language}' — the voice expects Latin script. "
+                        f"Transliterate it, or set language: hindi."))
         if MATH_RESIDUE.search(line):
             found = MATH_RESIDUE.search(line).group(0)
             add(Finding(index, "fail", "math-in-speech",
@@ -199,11 +208,16 @@ def evaluate(script: VideoScript) -> Report:
                         f"{hit!r} adds length without meaning."))
 
         # --- breath ----------------------------------------------------------
-        if len(words) > MAX_WORDS:
-            add(Finding(index, "warn", "too-long",
-                        f"{len(words)} words — too long to say in one breath. "
-                        f"Split it or cut it to about {MAX_WORDS}."))
-        elif len(words) < MIN_WORDS:
+        # Measured per sentence, not per beat. A beat can legitimately be a
+        # whole scene's narration (a document-derived clip often is); what a
+        # presenter can't do is deliver one unbroken 50-word sentence.
+        sentences = [s for s in re.split(r"(?<=[.!?।])\s+", line) if s.strip()]
+        longest = max((len(_words(s)) for s in sentences), default=len(words))
+        if longest > MAX_WORDS:
+            add(Finding(index, "warn", "long-sentence",
+                        f"Longest sentence is {longest} words — too long to say "
+                        f"in one breath. Break it with a full stop."))
+        if len(words) < MIN_WORDS:
             add(Finding(index, "warn", "too-short",
                         f"Only {len(words)} words; sounds clipped when spoken."))
 

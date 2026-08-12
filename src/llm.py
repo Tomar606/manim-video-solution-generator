@@ -36,6 +36,29 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+_env_loaded = False
+
+
+def _ensure_env() -> None:
+    """Load .env once, whatever imported us.
+
+    This runs at import time, *before* the defaults below are read: they are
+    module-level `os.getenv` calls, so a later load would be too late and
+    OPENAI_MODEL from .env would be silently ignored.
+    """
+    global _env_loaded
+    if _env_loaded:
+        return
+    _env_loaded = True
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except ModuleNotFoundError:
+        pass
+
+
+_ensure_env()
+
 # Claude Opus 5. Adaptive thinking is on by default on this model; depth is
 # controlled with output_config.effort rather than a token budget.
 DEFAULT_MODEL = os.getenv("CLAUDE_MODEL", "claude-opus-5")
@@ -65,10 +88,12 @@ class LLMError(RuntimeError):
 # Backend selection                                                            #
 # --------------------------------------------------------------------------- #
 def cli_available() -> bool:
+    _ensure_env()
     return shutil.which("claude") is not None
 
 
 def api_available() -> bool:
+    _ensure_env()
     if not os.getenv("ANTHROPIC_API_KEY"):
         return False
     try:
@@ -79,6 +104,7 @@ def api_available() -> bool:
 
 
 def openai_available() -> bool:
+    _ensure_env()
     if not os.getenv("OPENAI_API_KEY"):
         return False
     try:
@@ -280,9 +306,14 @@ class Conversation:
             "content": prompt if not images else content,
         })
 
+        from src import usage
+
         client = _openai_client()
         model = self.model if self.model.startswith("gpt") or "/" in self.model \
             else DEFAULT_OPENAI_MODEL
+
+        # Checked before the call: a cap you notice afterwards isn't a cap.
+        usage.check_budget()
         try:
             response = client.chat.completions.create(
                 model=model,
@@ -294,6 +325,9 @@ class Conversation:
             ) from exc
         except openai.APIConnectionError as exc:
             raise LLMError(f"Could not reach OpenAI: {exc}") from exc
+
+        if getattr(response, "usage", None):
+            usage.record_text(model, response.usage)
 
         choice = response.choices[0]
         text = (choice.message.content or "").strip()
@@ -424,6 +458,7 @@ _oai_client = None
 def _api_client():
     global _client
     if _client is None:
+        _ensure_env()
         import anthropic
         _client = anthropic.Anthropic()
     return _client
@@ -432,6 +467,7 @@ def _api_client():
 def _openai_client():
     global _oai_client
     if _oai_client is None:
+        _ensure_env()
         import openai
         # Reads OPENAI_API_KEY (and OPENAI_BASE_URL, if you front it with a
         # gateway) from the environment.

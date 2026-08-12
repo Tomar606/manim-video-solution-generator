@@ -6,32 +6,60 @@
 #
 # mode: inspiration  -> match the tone, reuse when it fits (default)
 # mode: verbatim     -> use these exact lines at the matching moments
+#
+# These lines are taken from the two manually verified scripts in samples/
+# (फैराडे के नियम, संक्षारण). Prose rules live in NOTES.md; the full format is in
+# pyq_script_format.md.
 mode: inspiration
 
-# Optional free-text guidance appended to the house style notes.
-notes: |
-  Speak to a student who is trying, not to a class. Technical terms stay in
-  English; everything joining them is Hindi.
+# {वर्ष} is spoken as Hindi WORDS, never digits: 2026 -> "दो हज़ार छब्बीस".
+# Several years keep the shortened middle: "दो हज़ार उन्नीस, इक्कीस और दो हज़ार
+# तेईस". Values in the working go the other way: 2l is spoken "two-ell".
+year_hook:
+  - एमपी बोर्ड कक्षा बारहवीं के बच्चों! ये सवाल {वर्ष} में आ चुका है और इस साल भी आपकी त्रैमासिक परीक्षा में आ सकता है।
+  - एमपी बोर्ड कक्षा बारहवीं के बच्चों! ये सवाल {वर्ष} में आ चुका है — और इस साल भी आपकी त्रैमासिक परीक्षा में पूछा जा सकता है।
+
+promise:
+  - और इस वीडियो के अंत तक आप इसे पूरा याद करके, परीक्षा में सही तरीके से लिखना भी सीख जाओगे।
+  - और इस वीडियो के अंत तक आप {विषय} को पूरा याद करके, परीक्षा में सही तरीके से लिखना भी सीख जाओगे।
 
 opener:
-  - Chalo, aaj ek interesting sawaal se shuru karte hain.
-  - Aaj hum ek aisa concept dekhenge jo exam mein bar bar aata hai.
+  - तो चलिए।
+  - तो चलिए, शुरू करते हैं।
 
-hook:
-  - Yeh sawaal dekhne mein simple lagta hai, par ismein ek twist hai.
+# Standard way into a definition beat.
+definition_opener:
+  - सबसे पहले समझते हैं—{पद} किसे कहते हैं?
+  - अब समझते हैं—{पद} किसे कहते हैं?
+  - तो {पद} कहता है की—
+
+# Say this BEFORE the definition or the tricky point, never after, and always
+# with the reason attached. A bare "ध्यान से सुनो" is not the house style.
+focus_cue:
+  - और इसे ध्यान से समझना, क्योंकि अगर परीक्षा में बिल्कुल ऐसा ही लिख दिया, तो आपके नंबर पक्के हैं।
+  - और यहाँ एक बात ध्यान से याद रखना—बहुत सारे बच्चे यहीं गलती करते हैं।
+  - ये याद रखना, यहाँ संबंध {अ} और {ब} के बीच है।
+  - अब यहाँ ज़रा ध्यान से देखना, यही तो पेपर में पूछा जाता है।
+
+# The plain-language restatement that follows every exam-exact definition.
+gloss:
+  - मतलब, {सरल व्याख्या}।
+
+memory_aid:
+  - इसे याद रखने का आसान तरीका है—
+  - बस, इन तीनों को याद रखो—{सूची}।
+  - बस इतना याद रखना—
 
 transition:
-  - Theek hai, ab aage badhte hain.
-  - Ab isko thoda aur simplify karte hain.
+  - अब समझते हैं—
+  - तो बच्चों, जैसे {पहला} याद किया, वैसे ही {दूसरा} भी इसी तरह याद कर लो।
+  - इसलिए—
+  - और समानुपात हटाने पर—
 
-emphasis:
-  - Yeh wala step sabse important hai, dhyaan se dekhna.
-
-question:
-  - Ab socho, agar yeh value badal jaaye toh kya hoga?
-
-answer:
-  - Toh hamara final answer yeh raha.
+recap:
+  - बच्चों, बस इतना याद रख लिया, तो परीक्षा में {विषय} का ये पूरा उत्तर कभी नहीं भूलोगे।
 
 closing:
-  - Bas itna hi. Agli video mein milte hain.
+  - अब इसे परीक्षा में कैसे लिखना है, इसका पूरा उत्तर आपकी स्क्रीन पर आ जाएगा।
+  - इसे सेव कर लेना और इसका स्क्रीनशॉट लेना मत भूलना।
+  - और ऐसे ही आसान और मजेदार तरीके से पढ़ने के लिए अरिहान के 'उन्नति बैच' से जुड़ो।

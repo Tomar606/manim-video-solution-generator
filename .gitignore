@@ -45,3 +45,18 @@ Thumbs.db
 # Logs
 *.log
 projects/*/avatar/briefs/
+.usage/
+pricing.json
+
+# Local drop folder. Source material lives on the machine that has it — the four
+# 8K background plates alone are 130 MB. The README explains what goes here.
+inbox/*
+!inbox/README.md
+!inbox/.gitkeep
+
+# Generated anchor frames. Their prompts are model-written, so these are not
+# reproducible byte-for-byte, but they are cached locally (frames/prompts.json)
+# and cost a few cents to remake — not worth 15 MB of history.
+projects/*/frames/*.png
+projects/*/frames_hi/*.png
+projects/*/aiclips/test_*/
