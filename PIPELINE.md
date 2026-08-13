@@ -205,6 +205,13 @@ subscription. `video spend` reads the ledger at `.usage/spend.jsonl`.
 
 ## 8. Mistakes already made — do not remake them
 
+- **`\;` in a regex is a bare semicolon, not LaTeX's thin space.** A cleanup
+  pass meant to strip `\quad`, `\,`, `\!` and `\;` from the sheet's LaTeX
+  deleted **every semicolon in the prose** of all 14 chemistry scripts — 219 of
+  them — leaving double spaces mid-sentence. Escape it as `\\;`. More
+  generally: a cleaner that edits delivered text needs its own before/after
+  diff, because the damage reads as ordinary whitespace.
+
 - **Naming a thing in positive instructions is a signal to draw it.** A "LOGO
   SAFE AREA" block that said "logo" five times produced logos in both top
   corners. §16 is removed; never write logo/watermark/badge/wordmark into a
