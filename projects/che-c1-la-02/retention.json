@@ -1,0 +1,16 @@
+{
+  "topic_type": "definition",
+  "hook_mechanism": "mistake",
+  "hook_angle": "कई छात्र ΔT_b का चिन्ह उल्टा लिख देते हैं और K_b को K_f से मिला देते हैं; सही प्रतीकों और निर्भरता को साफ करेंगे।",
+  "transition_mechanisms": [
+    "direct_continuation",
+    "therefore",
+    "visual_first",
+    "direct_continuation"
+  ],
+  "part_opening_mechanisms": [
+    "mistake",
+    "bridge_recap"
+  ],
+  "retention_intensity": "medium"
+}

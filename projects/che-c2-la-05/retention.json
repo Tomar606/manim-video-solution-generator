@@ -1,0 +1,16 @@
+{
+  "topic_type": "process",
+  "hook_mechanism": "challenge",
+  "hook_angle": "बाहर से अंदर तक शुष्क सेल की परतें और उनका काम गिनाने की चुनौती",
+  "transition_mechanisms": [
+    "direct_continuation",
+    "visual_first",
+    "partial_reveal",
+    "direct_continuation"
+  ],
+  "part_opening_mechanisms": [
+    "challenge",
+    "bridge_recap"
+  ],
+  "retention_intensity": "medium"
+}

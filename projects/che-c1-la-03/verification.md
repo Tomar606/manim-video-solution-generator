@@ -1,25 +1,28 @@
 **1. Factually wrong**
+Nothing in the algebra is wrong. Two errors of framing:
+- Heading says "आण्विक द्रव्यमान"; the question (and NCERT) says **मोलर द्रव्यमान** — use that word throughout.
+- Eq. (1) is asserted, not derived. NCERT gets it from p_A = x_A·p_A° ⇒ (p_A° − p_A)/p_A° = 1 − x_A = x_B. Show this line.
 
-- "राउल्ट के नियमानुसार… आपेक्षिक अवनमन विलेय के मोल अंश के बराबर होता है" — that is the *निष्कर्ष*, not the नियम. NCERT's law is **p₁ = x₁p₁°**. Show the two lines the answer skips: p₁° − p₁ = p₁°(1 − x₁) = p₁°x₂.
-- "आण्विक द्रव्यमान" — question and NCERT say **मोलर द्रव्यमान**. Use that.
-- Nothing else is wrong; equations (1)–(4) and the तनु-विलयन approximation are correct.
+**2. Missing for full marks**
+- **The answer never gives M_B — that is the entire question.** Must end with:
+ M_B = (W_B · M_A · p_A°) / (W_A · (p_A° − p_A))
+- The **परिभाषा** as a separate opening line: "शुद्ध विलायक के वाष्प दाब तथा विलयन के वाष्प दाब के अंतर (अवनमन) का शुद्ध विलायक के वाष्प दाब से अनुपात, वाष्प दाब में आपेक्षिक अवनमन कहलाता है।"
+- State it is an **अणुसंख्य गुणधर्म** and is **मात्रकहीन** (unitless).
+- State conditions: **अवाष्पशील, अवियोजित विलेय; तनु विलयन**.
 
-**2. Missing (marks lost)**
+**3. Frozen NCERT Hindi terms (must appear verbatim)**
+वाष्प दाब · आपेक्षिक अवनमन · अवाष्पशील विलेय · विलायक · विलयन · **मोल अंश** (NCERT prints मोल अंश, not मोल प्रभाज) · राउल्ट का नियम · तनु विलयन · मोलर द्रव्यमान · अणुसंख्य गुणधर्म
 
-- **The definition is absent** — the question's first half. Write: शुद्ध विलायक के वाष्प दाब तथा विलयन के वाष्प दाब के अंतर (अवनमन) और शुद्ध विलायक के वाष्प दाब का अनुपात, वाष्प दाब का आपेक्षिक अवनमन कहलाता है। **यह मात्रकरहित (इकाईरहित) है** और एक **अणुसंख्य गुणधर्म** है।
-- **The final expression for M_B is never written** — the entire point of the question. Must end at:
- M_B = (W_B × M_A × p_A°) / (W_A × (p_A° − p_A))
-- Conditions: विलयन तनु हो, विलेय **अवाष्पशील** एवं **अनवाष्पशील/अवियोज्य** (न वियोजन न संगुणन) हो, विलयन आदर्श हो।
+**4. Derivation order**
+1) परिभाषा 2) राउल्ट का नियम p_A = x_A p_A° 3) 1 − x_A = x_B 4) x_B = n_B/(n_A+n_B) 5) n = W/M substitution 6) तनु विलयन ⇒ neglect W_B/M_B in denominator 7) **solve for M_B**.
 
-**3. Frozen Hindi terms**
-
-वाष्प दाब में आपेक्षिक अवनमन · अवाष्पशील विलेय · राउल्ट का नियम · **मोल अंश** (NCERT हिंदी; "मोल प्रभाज" भी मान्य, पर एक ही चुनें) · मोलर द्रव्यमान · तनु विलयन · अणुसंख्य गुणधर्म · शुद्ध विलायक का वाष्प दाब · विलायक (A) / विलेय (B).
-
-**4. Correct order**
-
-परिभाषा → राउल्ट का नियम p₁ = x₁p₁° → p₁° − p₁ = p₁°(1 − x₁) → x₁ + x₂ = 1 ⇒ (p₁° − p₁)/p₁° = x₂ → x₂ = n_B/(n_A+n_B) → n = W/M प्रतिस्थापन → तनु विलयन में n_B ≪ n_A ⇒ हर में W_B/M_B की उपेक्षा → M_B के लिए हल।
-Commonly reversed: p₁ = x₁p₁° uses the **विलायक** का मोल अंश, while आपेक्षिक अवनमन equals the **विलेय** का मोल अंश; denominator is **p_A°**, never p_A; in the final formula W_B and M_A go **ऊपर**, W_A and Δp **नीचे**.
+Commonly got backwards:
+- Relative lowering = mole fraction of **विलेय (x_B)**, not विलायक.
+- **A = विलायक, B = विलेय** — routinely swapped.
+- Final formula inverted: (p_A° − p_A) belongs in the **denominator**, p_A° in the numerator, with M_A (solvent) on top and W_A (solvent) below. Students write W_B M_B and M_A/W_B.
 
 **5. Animation**
-
-Two beakers side by side: शुद्ध विलायक (dense escaping arrows) vs विलयन (fewer arrows). Solute particles must sit **on the surface layer**, dispersed — that is the cause. Errors to avoid: solute drawn settled at the bottom (kills the explanation); vapour arrows from solute particles (it is अवाष्पशील); showing boiling/bubbles; p_A drawn ≥ p_A°. Draw Δp as a labelled arrow from p_A° down to p_A. If plotting, p vs x₁ is a **straight line** from origin to p₁° at x₁ = 1 — not a curve. Keep A = विलायक, B = विलेय consistent in every frame.
+- Beaker: solvent surface crowded by solute particles, **fewer solvent molecules escaping** than in the pure-solvent beaker beside it. Vapour space must contain **only solvent molecules — never draw solute in the vapour** (it is अवाष्पशील).
+- Two arrows on a pressure scale: p_A° above, p_A below, gap labelled अवनमन. Do not draw p_A above p_A°.
+- If plotting p vs x_A: a **straight line** through origin up to p_A° (ideal Raoult), not a curve.
+- Per repo rule: p_A°, x_B, M_B via `MathTex`; all Hindi labels via `Text` — never glue Devanagari inside a symbol.

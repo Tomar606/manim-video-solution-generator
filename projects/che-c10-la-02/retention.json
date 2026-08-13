@@ -1,0 +1,14 @@
+{
+  "topic_type": "definition",
+  "hook_mechanism": "payoff",
+  "hook_angle": "चार अंक पक्के — परिभाषा और सात रोग–विटामिन के सही जोड़",
+  "transition_mechanisms": [
+    "future_payoff",
+    "direct_continuation"
+  ],
+  "part_opening_mechanisms": [
+    "exam_fomo-short",
+    "bridge_recap"
+  ],
+  "retention_intensity": "medium"
+}

@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import csv
 import io
+import json
 import os
 import re
 import urllib.request
@@ -178,6 +179,92 @@ def verify_answer(q: Question, *, provider: str | None = None) -> str:
 # --------------------------------------------------------------------------- #
 # Step 2 — write the script                                                    #
 # --------------------------------------------------------------------------- #
+HOOK_HISTORY = Path("style/hook_history.json")
+
+# --------------------------------------------------------------------------- #
+# Hook selection                                                              #
+# --------------------------------------------------------------------------- #
+# Chosen here rather than by the model. Both approved samples open on the
+# board/year line, and style/ tells the model samples outrank written rules —
+# so left to itself it copies that opening every time, whatever the topic. The
+# retention spec's own tables are deterministic, so implement them.
+TOPIC_PATTERNS = [
+    ("derivation",  ("निगमन", "व्युत्पत्ति", "सिद्ध कीजिए", "स्थापित कीजिए",
+                     "व्यंजक", "प्रमाणित")),
+    ("numerical",   ("ज्ञात कीजिए", "गणना", "परिकलन")),
+    ("comparison",  ("अंतर", "तुलना", "भेद", "बनाम")),
+    ("process",     ("विधि", "सचित्र", "वर्णन", "बनाने", "निर्माण", "प्रक्रिया")),
+    ("law",         ("नियम", "प्रमेय", "सिद्धांत")),
+    ("exception",   ("अपवाद", "असामान्य")),
+    ("definition",  ("किसे कहते हैं", "क्या है", "परिभाषा", "परिभाषित")),
+]
+# From retention_system.md, chemistry order: prediction, mistake, exam_fomo,
+# challenge, contradiction, analogy — intersected with the per-type table.
+TYPE_HOOKS = {
+    "definition":  ["mistake", "payoff", "exam_fomo"],
+    "law":         ["prediction", "challenge", "contradiction"],
+    "formula":     ["prediction", "challenge", "problem"],
+    "derivation":  ["problem", "payoff", "challenge"],
+    "numerical":   ["challenge", "prediction", "mistake"],
+    "process":     ["prediction", "problem", "challenge"],
+    "comparison":  ["contradiction", "challenge", "prediction"],
+    "exception":   ["contradiction", "mistake"],
+    "factual":     ["exam_fomo", "payoff", "mistake"],
+}
+
+
+def classify_topic(q: "Question") -> str:
+    blob = f"{q.text} {q.answer[:400]}"
+    for kind, needles in TOPIC_PATTERNS:
+        if any(n in blob for n in needles):
+            return kind
+    return "factual"
+
+
+def choose_hook(q: "Question", history: dict) -> tuple[str, str]:
+    """(topic_type, mechanism). Relevance first, recency only to break ties."""
+    kind = classify_topic(q)
+    candidates = TYPE_HOOKS.get(kind, TYPE_HOOKS["factual"])
+    recent = list(history.get("hook_mechanism", []))[-4:]
+    fresh = [c for c in candidates if c not in recent]
+    return kind, (fresh or candidates)[0]
+
+
+def load_history(n: int = 8) -> dict:
+    """Recent hook/transition choices — a preference signal, never a ban."""
+    if not HOOK_HISTORY.exists():
+        return {}
+    try:
+        rows = json.loads(HOOK_HISTORY.read_text(encoding="utf-8"))[-n:]
+    except (json.JSONDecodeError, OSError):
+        return {}
+    out: dict[str, list] = {}
+    for r in rows:
+        for k in ("hook_mechanism", "hook_angle", "transition_mechanisms",
+                  "part_opening_mechanisms"):
+            v = r.get("meta", {}).get(k)
+            if isinstance(v, list):
+                out.setdefault(k, []).extend(v)
+            elif v:
+                out.setdefault(k, []).append(v)
+    out["hooks"] = [r.get("hook", "")[:90] for r in rows if r.get("hook")]
+    return out
+
+
+def remember(qid: str, meta: dict, hook: str) -> None:
+    rows = []
+    if HOOK_HISTORY.exists():
+        try:
+            rows = json.loads(HOOK_HISTORY.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            rows = []
+    rows = [r for r in rows if r.get("qid") != qid]
+    rows.append({"qid": qid, "meta": meta, "hook": hook})
+    HOOK_HISTORY.parent.mkdir(parents=True, exist_ok=True)
+    HOOK_HISTORY.write_text(json.dumps(rows, ensure_ascii=False, indent=2),
+                            encoding="utf-8")
+
+
 WRITE_SYSTEM = """You write scripts for MP Board Class 12 previous-year-question \
 videos, in Hindi (Devanagari), for a Hindi-medium student.
 
@@ -216,7 +303,72 @@ plain restatement opening with “मतलब,”.
 - Before every important definition or tricky point, tell the student to focus \
 AND give the reason (exam marks, or the mistake most students make).
 - Subject terminology and nomenclature never change.
-- 5 to 8 भाग. One concept per भाग."""
+- 5 to 8 भाग. One concept per भाग.
+
+RETENTION AND STRUCTURE — read the priority order first and never reverse it:
+correctness, then clarity, then conceptual progression, then comprehension, then
+retention, then variation, then drama. A creative hook that makes the
+explanation worse is a bad hook; a repetitive but highly relevant hook beats
+forced novelty.
+
+Open with ONE of these mechanisms, chosen for the topic, not at random:
+  exam_fomo    the question genuinely repeats in boards and carries real marks
+  prediction   the concept explains an observable consequence — "क्या होगा अगर…"
+  challenge    the student could reasonably answer before being taught
+  mistake      students genuinely confuse two things or misuse a formula
+  contradiction  intuition differs from the result, or two rules seem to clash
+  analogy      abstract concept with a real analogy that genuinely simplifies
+  payoff       procedural content, clear exam outcome, little natural curiosity
+  problem      the concept is a tool and the application beats the definition
+
+By topic type — definition: payoff/mistake · law: prediction/challenge/
+contradiction · formula: prediction/challenge/problem · derivation: problem/
+payoff/partial reveal · numerical: challenge/prediction · process: curiosity/
+prediction · comparison: contradiction/challenge · exception: surprise/mistake ·
+diagram: prediction/visual-first · exam answer: marks payoff/mistake.
+For chemistry prefer, in order: prediction, mistake, exam_fomo, challenge,
+contradiction, analogy.
+
+THE HOOK AND THE EXAM LINE ARE SEPARATE BEATS. The hook — whichever mechanism
+you chose — is spoken FIRST. The board/class/year/त्रैमासिक परीक्षा line comes
+SECOND, right after it. They merge into one opening ONLY when the chosen
+mechanism is exam_fomo. Do not open every script with the board-and-year line:
+that is one mechanism among eight, and using it every time is precisely the
+template sameness this system exists to prevent. Across a run of scripts the
+mechanisms must genuinely vary with the topic type.
+
+NEVER manufacture exam relevance that is weak, and never call a mistake common
+unless it plausibly is. BANNED outright: "आप यकीन नहीं करेंगे", "आगे जो होगा",
+"इसका जवाब आपको चौंका देगा", "99% बच्चे ये नहीं जानते", "वीडियो के अंत तक जरूर
+देखना", artificial suspense, fake urgency, and REPEATED "ध्यान से सुनो",
+"बच्चों", "आज हम सीखेंगे". If the content is interesting, let the content do the
+retention work.
+
+DO NOT put a retention beat after every section. The video must still sound like
+a teacher explaining something, with stretches of ordinary teaching between the
+curiosity beats.
+
+WHEN THE SCRIPT IS SPLIT, break at a cognitive boundary — a concept fully
+established, a question raised but unanswered, a formula derived with its
+application still to come. Never mid-explanation, and never invent a cliffhanger
+where nothing is genuinely unresolved. End a part with one of: open_loop,
+question_carryover, contradiction, cliffhanger (rarely), partial_reveal,
+future_payoff, challenge, or direct_continuation — not every part needs a
+dramatic ending. Open the next part with a DIFFERENT mechanism: answer_first,
+callback, direct_continuation, recap_question, visual_first or
+resolution_first. Do not recap merely because it is Part 2; recap only when the
+earlier concept is actually needed. Whatever a transition promises, the next
+part must actually pay off.
+
+The CTA is not a retention device: concept, then exam payoff, then summary, then
+CTA.
+
+BEFORE THE SCRIPT, output one line of metadata and nothing else on that line:
+META: {"topic_type": "...", "hook_mechanism": "...", "hook_angle": "...",
+"transition_mechanisms": [...], "part_opening_mechanisms": [...],
+"retention_intensity": "low|medium|high"}
+Then a blank line, then the script. The metadata is internal — never let its
+wording leak into the spoken lines."""
 
 # Roughly 120 spoken words per minute — the rate implied by the team's own
 # prompt skill, which chunks narration into 10-second segments of 18-22 words.
@@ -274,6 +426,28 @@ QUESTION BANK'S ANSWER (a starting point, not the authority):
 ACCURACY CHECK — this overrides the answer above wherever they disagree:
 {verification}"""
 
+    hist = load_history()
+    kind, mech = choose_hook(q, hist)
+    task += (f"\n\nTOPIC TYPE: {kind}\nUSE THIS HOOK MECHANISM: {mech}\n"
+             "This is decided for you from the retention system's topic table — "
+             "do not substitute another. If the mechanism is NOT exam_fomo, the "
+             "first spoken line must be that hook, and the board/class/year/"
+             "त्रैमासिक परीक्षा line comes SECOND. The approved samples all open "
+             "on the exam line because they happen to use exam_fomo; do not copy "
+             "their opening when a different mechanism is specified. Report the "
+             "mechanism you were given in the META line.")
+    if hist:
+        task += ("\n\nRECENT CHOICES ACROSS THE LAST FEW VIDEOS — a preference "
+                 "signal, not a ban. If the best mechanism for THIS topic is one "
+                 "of these, use it anyway but change the wording, framing and "
+                 "angle. If two mechanisms fit equally, prefer the less recent.\n"
+                 f"  hook mechanisms : {hist.get('hook_mechanism', [])}\n"
+                 f"  hook angles     : {hist.get('hook_angle', [])}\n"
+                 f"  transitions     : {hist.get('transition_mechanisms', [])}\n"
+                 f"  part openings   : {hist.get('part_opening_mechanisms', [])}\n"
+                 "  opening lines already used (do not echo their phrasing):\n"
+                 + "\n".join(f"    - {h}" for h in hist.get("hooks", [])))
+
     if findings:
         task = (f"{task}\n\nYOUR PREVIOUS DRAFT FAILED THESE MECHANICAL CHECKS. "
                 f"Fix every one and return the complete corrected script:\n"
@@ -289,6 +463,18 @@ ACCURACY CHECK — this overrides the answer above wherever they disagree:
     out = complete(system, prompt,
                    provider=provider or SCRIPT_PROVIDER, effort=effort)
     return re.sub(r"^```[a-z]*\n|\n```$", "", out.strip()).strip()
+
+
+def split_meta(text: str) -> tuple[dict, str]:
+    """Peel the META line off the front of a draft."""
+    m = re.match(r"\s*META:\s*(\{.*?\})\s*\n", text, re.S)
+    if not m:
+        return {}, text
+    try:
+        meta = json.loads(m.group(1))
+    except json.JSONDecodeError:
+        meta = {}
+    return meta, text[m.end():].lstrip("\n")
 
 
 # --------------------------------------------------------------------------- #
@@ -384,9 +570,14 @@ def check_script(text: str, q: Question, *, parts: int = 1) -> Check:
                               f'({len(s.split())} words): "{s[:60]}…"')
 
     joined = " ".join(spoken)
-    if q.years and year_phrase(q.years) not in joined:
+    # The year must appear near the top, but NOT necessarily in the first line:
+    # requiring it there forced every script to open on exam_fomo regardless of
+    # which hook mechanism suited the topic.
+    if q.years and year_phrase(q.years) not in " ".join(spoken[:4]):
         c.findings.append(
-            f'The hook must name the year(s) as "{year_phrase(q.years)}".')
+            f'The exam line must name the year(s) as "{year_phrase(q.years)}" '
+            f'within the first few lines (it follows the hook, and is only the '
+            f'opening itself when the hook mechanism is exam_fomo).')
     if "त्रैमासिक परीक्षा" not in joined:
         c.findings.append('The hook must say "त्रैमासिक परीक्षा", not a bare परीक्षा.')
     if "मतलब" not in joined:
@@ -419,23 +610,27 @@ def draft(q: Question, *, provider: str | None = None,
           verification: str | None = None) -> tuple[str, Check, str]:
     """Verify, write, then repair until the mechanical checks pass."""
     ver = verification if verification is not None else verify_answer(q)
-    text = write_script(q, ver, provider=provider, style=style)
+    meta, text = split_meta(write_script(q, ver, provider=provider, style=style))
 
     # A script only reveals its length once written, so measure the draft and
     # rewrite it as parts if the render would run past three minutes.
     parts = estimate_parts(text)
     if parts > 1:
-        text = write_script(q, ver, provider=provider, style=style, parts=parts)
+        meta, text = split_meta(
+            write_script(q, ver, provider=provider, style=style, parts=parts))
 
     chk = check_script(text, q, parts=parts)
     for _ in range(max_attempts - 1):
         if chk.ok:
             break
-        text = write_script(q, ver, provider=provider, style=style, parts=parts,
-                            findings="\n".join(f"- {f}" for f in chk.findings),
-                            previous=text)
+        meta, text = split_meta(write_script(
+            q, ver, provider=provider, style=style, parts=parts,
+            findings="\n".join(f"- {f}" for f in chk.findings), previous=text))
         chk = check_script(text, q, parts=parts)
-    return text, chk, ver
+
+    hook = (chk.spoken or [""])[0]
+    remember(q.qid, meta, hook)
+    return text, chk, ver, meta
 
 
 # --------------------------------------------------------------------------- #

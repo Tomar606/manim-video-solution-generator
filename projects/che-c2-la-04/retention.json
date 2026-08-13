@@ -1,0 +1,17 @@
+{
+  "topic_type": "process",
+  "hook_mechanism": "challenge",
+  "hook_angle": "क्या रेडॉक्स को दो पात्रों में बाँटते ही तार में धारा चल पड़ेगी — किस तरफ इलेक्ट्रॉन जाएँगे, कौन-सा ध्रुव क्या होगा?",
+  "transition_mechanisms": [
+    "now_understand",
+    "visual_first",
+    "future_payoff",
+    "direct_continuation",
+    "therefore"
+  ],
+  "part_opening_mechanisms": [
+    "challenge",
+    "bridge_recap"
+  ],
+  "retention_intensity": "medium"
+}

@@ -1,0 +1,272 @@
+[
+  {
+    "qid": "CHE-C2-LA-03",
+    "meta": {
+      "topic_type": "law",
+      "hook_mechanism": "prediction",
+      "hook_angle": "What happens to total conductivity when solution is infinitely dilute — will it split into independent ionic parts?",
+      "transition_mechanisms": [
+        "therefore",
+        "now_understand",
+        "direct_continuation"
+      ],
+      "part_opening_mechanisms": [
+        "prediction",
+        "bridge_recap"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "अगर घोल को इतना तनु कर दें कि आयन एक-दूसरे के प्रभाव से लगभग मुक्त हो जाएँ, तो कुल चालकता किन हिस्सों में बाँट जाएगी?"
+  },
+  {
+    "qid": "CHE-C1-LA-03",
+    "meta": {
+      "topic_type": "derivation",
+      "hook_mechanism": "problem",
+      "hook_angle": "मापा हुआ वाष्प दाब घटाव से विलेय का मोलर द्रव्यमान निकालना",
+      "transition_mechanisms": [
+        "partial_reveal",
+        "direct_continuation"
+      ],
+      "part_opening_mechanisms": [
+        "exam_fomo",
+        "direct_continuation"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "एमपी बोर्ड कक्षा बारहवीं के बच्चों! ये सवाल दो हज़ार पच्चीस में आ चुका है और इस साल भी आपकी त्रैमासिक परीक्षा में आ सकता है।"
+  },
+  {
+    "qid": "CHE-C1-LA-01",
+    "meta": {
+      "topic_type": "process",
+      "hook_mechanism": "prediction",
+      "hook_angle": "बाह्य दाब बढ़ाते ही जल का परासरण कब थमेगा — उसी क्षण का माप",
+      "transition_mechanisms": [
+        "direct_continuation",
+        "future_payoff"
+      ],
+      "part_opening_mechanisms": [
+        "prediction",
+        "bridge"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "अगर विलयन पर बाह्य दाब बढ़ाते जाएँ, तो किस क्षण परासरण बिल्कुल रुक जाएगा?"
+  },
+  {
+    "qid": "CHE-C1-LA-02",
+    "meta": {
+      "topic_type": "definition",
+      "hook_mechanism": "mistake",
+      "hook_angle": "कई छात्र ΔT_b का चिन्ह उल्टा लिख देते हैं और K_b को K_f से मिला देते हैं; सही प्रतीकों और निर्भरता को साफ करेंगे।",
+      "transition_mechanisms": [
+        "direct_continuation",
+        "therefore",
+        "visual_first",
+        "direct_continuation"
+      ],
+      "part_opening_mechanisms": [
+        "mistake",
+        "bridge_recap"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "बहुत सारे बच्चे डेल्टा-टी-बी का चिन्ह उल्टा लिख देते हैं, और के-बी को के-एफ से मिला देते हैं।"
+  },
+  {
+    "qid": "CHE-C2-LA-05",
+    "meta": {
+      "topic_type": "process",
+      "hook_mechanism": "challenge",
+      "hook_angle": "बाहर से अंदर तक शुष्क सेल की परतें और उनका काम गिनाने की चुनौती",
+      "transition_mechanisms": [
+        "direct_continuation",
+        "visual_first",
+        "partial_reveal",
+        "direct_continuation"
+      ],
+      "part_opening_mechanisms": [
+        "challenge",
+        "bridge_recap"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "अगर मैं अभी कहूँ—बाहर से अंदर तक शुष्क सेल की हर परत और उसका काम गिना दो, कर लोगे?"
+  },
+  {
+    "qid": "CHE-C3-LA-01",
+    "meta": {
+      "topic_type": "derivation",
+      "hook_mechanism": "payoff",
+      "hook_angle": "चार अंक पक्के — वेग स्थिरांक k का व्यंजक स्टेप-बाय-स्टेप और तैयार फॉर्मूला",
+      "transition_mechanisms": [
+        "direct_continuation",
+        "therefore",
+        "resolution_first",
+        "future_payoff"
+      ],
+      "part_opening_mechanisms": [
+        "exam_fomo-short",
+        "bridge_recap"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "एमपी बोर्ड कक्षा बारहवीं के बच्चों! ये सवाल दो हज़ार बीस में आ चुका है, और इस बार भी आपकी त्रैमासिक परीक्षा में आ सकता है।"
+  },
+  {
+    "qid": "CHE-C3-LA-02",
+    "meta": {
+      "topic_type": "derivation",
+      "hook_mechanism": "payoff",
+      "hook_angle": "चार अंकों का पक्का स्कोर — शून्य कोटि का t₁/₂ निकालकर उसकी निर्भरता दिखाएँ",
+      "transition_mechanisms": [
+        "direct_continuation",
+        "future_payoff"
+      ],
+      "part_opening_mechanisms": [
+        "exam_fomo",
+        "bridge_recap"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "एमपी बोर्ड कक्षा बारहवीं के बच्चों! ये सवाल दो हज़ार तेईस और दो हज़ार चौबीस में आ चुका है, और इस बार भी आपकी त्रैमासिक परीक्षा में आ सकता है।"
+  },
+  {
+    "qid": "CHE-C2-LA-04",
+    "meta": {
+      "topic_type": "process",
+      "hook_mechanism": "challenge",
+      "hook_angle": "क्या रेडॉक्स को दो पात्रों में बाँटते ही तार में धारा चल पड़ेगी — किस तरफ इलेक्ट्रॉन जाएँगे, कौन-सा ध्रुव क्या होगा?",
+      "transition_mechanisms": [
+        "now_understand",
+        "visual_first",
+        "future_payoff",
+        "direct_continuation",
+        "therefore"
+      ],
+      "part_opening_mechanisms": [
+        "challenge",
+        "bridge_recap"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "अगर रेडॉक्स अभिक्रिया को दो पात्रों में बाँट दें, तो क्या तार में विद्युत् अपने आप बहने लगेगी?"
+  },
+  {
+    "qid": "CHE-C5-LA-01",
+    "meta": {
+      "topic_type": "factual",
+      "hook_mechanism": "exam_fomo",
+      "hook_angle": "PYQ on hybridisation and geometry of two classic complexes — one weak-field tetrahedral, one strong-field octahedral — guaranteed 4 marks",
+      "transition_mechanisms": [
+        "direct_continuation",
+        "future_payoff",
+        "resolution_first"
+      ],
+      "part_opening_mechanisms": [
+        "exam_fomo-short",
+        "bridge_recap"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "एमपी बोर्ड कक्षा बारहवीं के बच्चों! ये सवाल दो हज़ार उन्नीस में आ चुका है, और इस बार भी आपकी त्रैमासिक परीक्षा में आ सकता है।"
+  },
+  {
+    "qid": "CHE-C4-LA-01",
+    "meta": {
+      "topic_type": "process",
+      "hook_mechanism": "prediction",
+      "hook_angle": "पीले क्रोमेट में अम्ल मिलते ही नारंगी डाइक्रोमेट बन जाएगा — यही दिशा तैयारी के दूसरे चरण को तय करती है",
+      "transition_mechanisms": [
+        "direct_continuation",
+        "therefore",
+        "future_payoff"
+      ],
+      "part_opening_mechanisms": [
+        "prediction",
+        "bridge_recap"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "अगर पीले क्रोमेट के घोल में अम्ल डाल दें, तो रंग तुरन्त नारंगी क्यों हो जाता है?"
+  },
+  {
+    "qid": "CHE-C4-LA-03",
+    "meta": {
+      "topic_type": "factual",
+      "hook_mechanism": "mistake",
+      "hook_angle": "कई छात्र Zn, Cd, Hg को संक्रमण मान लेते हैं और आयन बनाते समय 3d/4s से इलेक्ट्रॉन निकलने का क्रम उल्टा लिख देते हैं",
+      "transition_mechanisms": [
+        "future_payoff",
+        "direct_continuation"
+      ],
+      "part_opening_mechanisms": [
+        "mistake",
+        "bridge_recap",
+        "bridge_recap"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "अक्सर बच्चे जिंक, कैडमियम, मरकरी को भी संक्रमण मान लेते हैं—और आयनन में इलेक्ट्रॉन का क्रम उल्टा लिख देते हैं।"
+  },
+  {
+    "qid": "CHE-C4-LA-02",
+    "meta": {
+      "topic_type": "factual",
+      "hook_mechanism": "mistake",
+      "hook_angle": "KMnO₄ ऑक्सीकारक है पर स्वयं अपचयित होता है; उदासीन माध्यम में MnS नहीं, MnO₂ बनता है — यहीं गलती होती है",
+      "transition_mechanisms": [
+        "direct_continuation",
+        "partial_reveal",
+        "future_payoff",
+        "resolution_first"
+      ],
+      "part_opening_mechanisms": [
+        "exam_fomo-short",
+        "bridge_recap"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "एमपी बोर्ड कक्षा बारहवीं के बच्चों! ये सवाल दो हज़ार उन्नीस में आ चुका है, और इस बार भी आपकी त्रैमासिक परीक्षा में आ सकता है。"
+  },
+  {
+    "qid": "CHE-C10-LA-01",
+    "meta": {
+      "topic_type": "factual",
+      "hook_mechanism": "payoff",
+      "hook_angle": "चार अंक पक्के — विटामिनों की कमी के रोग और स्रोत को टेबल की तरह याद",
+      "transition_mechanisms": [
+        "direct_continuation",
+        "future_payoff",
+        "resolution_first",
+        "direct_continuation",
+        "future_payoff"
+      ],
+      "part_opening_mechanisms": [
+        "exam_fomo-short",
+        "bridge_recap"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "एमपी बोर्ड कक्षा बारहवीं के बच्चों! ये सवाल दो हज़ार पच्चीस में आ चुका है और इस साल भी आपकी त्रैमासिक परीक्षा में आ सकता है।"
+  },
+  {
+    "qid": "CHE-C10-LA-02",
+    "meta": {
+      "topic_type": "definition",
+      "hook_mechanism": "payoff",
+      "hook_angle": "चार अंक पक्के — परिभाषा और सात रोग–विटामिन के सही जोड़",
+      "transition_mechanisms": [
+        "future_payoff",
+        "direct_continuation"
+      ],
+      "part_opening_mechanisms": [
+        "exam_fomo-short",
+        "bridge_recap"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "एमपी बोर्ड कक्षा बारहवीं के बच्चों! ये सवाल दो हज़ार अठारह में आ चुका है, और इस बार भी आपकी त्रैमासिक परीक्षा में आ सकता है।"
+  }
+]

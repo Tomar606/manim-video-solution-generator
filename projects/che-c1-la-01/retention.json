@@ -1,0 +1,14 @@
+{
+  "topic_type": "process",
+  "hook_mechanism": "prediction",
+  "hook_angle": "बाह्य दाब बढ़ाते ही जल का परासरण कब थमेगा — उसी क्षण का माप",
+  "transition_mechanisms": [
+    "direct_continuation",
+    "future_payoff"
+  ],
+  "part_opening_mechanisms": [
+    "prediction",
+    "bridge"
+  ],
+  "retention_intensity": "medium"
+}

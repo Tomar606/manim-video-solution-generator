@@ -1,0 +1,16 @@
+{
+  "topic_type": "factual",
+  "hook_mechanism": "mistake",
+  "hook_angle": "KMnO₄ ऑक्सीकारक है पर स्वयं अपचयित होता है; उदासीन माध्यम में MnS नहीं, MnO₂ बनता है — यहीं गलती होती है",
+  "transition_mechanisms": [
+    "direct_continuation",
+    "partial_reveal",
+    "future_payoff",
+    "resolution_first"
+  ],
+  "part_opening_mechanisms": [
+    "exam_fomo-short",
+    "bridge_recap"
+  ],
+  "retention_intensity": "medium"
+}

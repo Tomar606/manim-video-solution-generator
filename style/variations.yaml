@@ -15,7 +15,7 @@ mode: inspiration
 # {वर्ष} is spoken as Hindi WORDS, never digits: 2026 -> "दो हज़ार छब्बीस".
 # Several years keep the shortened middle: "दो हज़ार उन्नीस, इक्कीस और दो हज़ार
 # तेईस". Values in the working go the other way: 2l is spoken "two-ell".
-year_hook:
+exam_line:   # follows the hook — it is NOT automatically the opening
   - एमपी बोर्ड कक्षा बारहवीं के बच्चों! ये सवाल {वर्ष} में आ चुका है और इस साल भी आपकी त्रैमासिक परीक्षा में आ सकता है।
   - एमपी बोर्ड कक्षा बारहवीं के बच्चों! ये सवाल {वर्ष} में आ चुका है — और इस साल भी आपकी त्रैमासिक परीक्षा में पूछा जा सकता है।
 

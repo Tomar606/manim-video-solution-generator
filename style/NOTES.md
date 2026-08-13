@@ -69,8 +69,24 @@ STRUCTURE. `प्रश्न N — <विषय>`, then `भाग 1 — श�
 Each भाग has `शिक्षक:` on its own line, then spoken lines in curly quotes “ ”.
 One concept per भाग.
 
-HOOK names board, class, year(s) and त्रैमासिक परीक्षा — that word, not a bare
-परीक्षा. Then the promise, then “तो चलिए।”
+THE OPENING HAS TWO PARTS, AND THEY ARE NOT THE SAME THING.
+
+  1. THE HOOK — whichever mechanism retention_system.md selects for this topic:
+     prediction, mistake, challenge, contradiction, problem, payoff, analogy or
+     exam_fomo. This is the FIRST thing said.
+  2. THE EXAM LINE — board, class, the year(s) and त्रैमासिक परीक्षा (that word,
+     not a bare परीक्षा). This normally comes SECOND, right after the hook.
+
+Only when the chosen mechanism IS exam_fomo do the two merge into one opening.
+For every other mechanism the hook leads and the exam line follows, e.g.
+
+    "अगर विद्युत् की मात्रा दोगुनी कर दें, तो मुक्त पदार्थ की मात्रा कितनी होगी?"
+    "एमपी बोर्ड कक्षा बारहवीं के बच्चों — ये सवाल {वर्ष} में आ चुका है, और इस
+     साल भी आपकी त्रैमासिक परीक्षा में आ सकता है।"
+
+Do NOT open every video with the board-and-year line. That is one hook
+mechanism among several, and using it every time is exactly the template
+sameness the retention system exists to prevent.
 
 CLOSING is fixed: the answer appears on screen → “इसे सेव कर लेना और इसका
 स्क्रीनशॉट लेना मत भूलना।” → अरिविहान के ‘उन्नति बैच’ से जुड़ो.

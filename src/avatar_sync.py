@@ -118,6 +118,99 @@ def cues_from_duration(lines: list[str], total: float, *,
     return cues
 
 
+def speech_segments(audio: str | Path, *, min_silence: float = 0.40,
+                    noise_db: int = -32) -> list[tuple[float, float]]:
+    """Spans of actual speech, found by detecting the pauses between them."""
+    out = subprocess.run(
+        ["ffmpeg", "-v", "info", "-i", str(audio),
+         "-af", f"silencedetect=noise={noise_db}dB:d={min_silence}", "-f", "null", "-"],
+        capture_output=True, text=True).stderr
+    starts = [float(m) for m in re.findall(r"silence_start:\s*([\d.]+)", out)]
+    ends = [float(m) for m in re.findall(r"silence_end:\s*([\d.]+)", out)]
+    total = clip_duration(audio)
+
+    spans, cursor = [], 0.0
+    for s, e in zip(starts, ends + [total]):
+        if s > cursor + 0.05:
+            spans.append((round(cursor, 3), round(s, 3)))
+        cursor = e
+    if cursor < total - 0.05:
+        spans.append((round(cursor, 3), round(total, 3)))
+    return spans
+
+
+def cues_from_speech(lines: list[str], audio: str | Path, *,
+                     min_silence: float | None = None) -> list[CaptionCue] | None:
+    """Align lines to real speech spans, when the counts agree.
+
+    Far better than apportioning a total: the presenter's own pauses mark where
+    one line ends and the next begins. The pause threshold is searched for the
+    value that yields exactly one span per line — if none does, the caller
+    should fall back to weighting, because a mismatched alignment is worse than
+    an estimated one.
+    """
+    # Search both axes. Pause length alone is not enough: one recording split
+    # cleanly at 0.40s/-32dB, another needed 0.35s/-36dB — between -35dB (one
+    # segment too many) and -40dB (one too few). Studio noise floor and the
+    # presenter's pacing both move, so fix neither.
+    durations = [min_silence] if min_silence else [
+        0.25, 0.30, 0.32, 0.35, 0.38, 0.40, 0.45, 0.50, 0.55, 0.60, 0.70]
+    for d in durations:
+        for noise in (-30, -32, -34, -35, -36, -37, -38, -40):
+            spans = speech_segments(audio, min_silence=d, noise_db=noise)
+            if len(spans) == len(lines):
+                return [CaptionCue(i, ln, s, e)
+                        for i, (ln, (s, e)) in enumerate(zip(lines, spans))]
+    return None
+
+
+def cues_from_transcript(lines: list[str], words: list[dict],
+                         total: float | None = None) -> list[CaptionCue]:
+    """Anchor lines to a transcript's word timings by syllable progress.
+
+    Literal word matching is not available: Whisper returns one clip in
+    Devanagari and another romanised, and it mishears names besides. What is
+    stable is *how far through the speech* a word is. So both sides are
+    measured in syllables, a progress curve is built from the transcript's own
+    word times, and each script line's syllable span is read off that curve.
+
+    Pauses need no special handling — they sit in the gaps between word
+    timestamps and are therefore already in the curve.
+    """
+    if not lines or not words:
+        return []
+    cum, running = [], 0
+    for w in words:
+        running += syllables(w["w"])
+        cum.append((running, w["s"], w["e"]))
+    spoken_total = running
+
+    line_syl = [syllables(l) for l in lines]
+    script_total = sum(line_syl)
+
+    def time_at(progress: float, use_end: bool) -> float:
+        """Time at a 0..1 point through the speech."""
+        target = progress * spoken_total
+        prev_t = 0.0
+        for n, s, e in cum:
+            if n >= target:
+                return e if use_end else s
+            prev_t = e
+        return prev_t
+
+    cues, acc = [], 0
+    for i, (line, syl) in enumerate(zip(lines, line_syl)):
+        start = time_at(acc / script_total, use_end=False)
+        acc += syl
+        end = time_at(acc / script_total, use_end=True)
+        if cues and start < cues[-1].end:
+            start = cues[-1].end
+        cues.append(CaptionCue(i, line, round(start, 3), round(max(end, start + 0.4), 3)))
+    if total:
+        cues[-1] = CaptionCue(cues[-1].index, cues[-1].text, cues[-1].start, round(total, 3))
+    return cues
+
+
 def spoken_lines(script_bhaag: str | Path, part: int | None = None) -> list[str]:
     """The quoted lines of a भाग-format script, optionally one PART only."""
     text = Path(script_bhaag).read_text(encoding="utf-8")
@@ -133,10 +226,13 @@ def plan(script_bhaag: str | Path, avatar_clip: str | Path, *,
          captions: str | Path | None = None,
          part: int | None = None) -> list[CaptionCue]:
     """The timing plan a scene should follow, from whichever input exists."""
+    lines = spoken_lines(script_bhaag, part)
     if captions:
         return cues_from_captions(captions)
-    return cues_from_duration(spoken_lines(script_bhaag, part),
-                              clip_duration(avatar_clip))
+    aligned = cues_from_speech(lines, avatar_clip)
+    if aligned:
+        return aligned
+    return cues_from_duration(lines, clip_duration(avatar_clip))
 
 
 def write_plan(cues: list[CaptionCue], dest: str | Path) -> Path:

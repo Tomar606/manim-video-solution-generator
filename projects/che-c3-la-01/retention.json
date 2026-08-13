@@ -1,0 +1,16 @@
+{
+  "topic_type": "derivation",
+  "hook_mechanism": "payoff",
+  "hook_angle": "चार अंक पक्के — वेग स्थिरांक k का व्यंजक स्टेप-बाय-स्टेप और तैयार फॉर्मूला",
+  "transition_mechanisms": [
+    "direct_continuation",
+    "therefore",
+    "resolution_first",
+    "future_payoff"
+  ],
+  "part_opening_mechanisms": [
+    "exam_fomo-short",
+    "bridge_recap"
+  ],
+  "retention_intensity": "medium"
+}

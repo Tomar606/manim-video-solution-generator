@@ -1,0 +1,15 @@
+{
+  "topic_type": "factual",
+  "hook_mechanism": "mistake",
+  "hook_angle": "कई छात्र Zn, Cd, Hg को संक्रमण मान लेते हैं और आयन बनाते समय 3d/4s से इलेक्ट्रॉन निकलने का क्रम उल्टा लिख देते हैं",
+  "transition_mechanisms": [
+    "future_payoff",
+    "direct_continuation"
+  ],
+  "part_opening_mechanisms": [
+    "mistake",
+    "bridge_recap",
+    "bridge_recap"
+  ],
+  "retention_intensity": "medium"
+}

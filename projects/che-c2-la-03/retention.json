@@ -1,0 +1,15 @@
+{
+  "topic_type": "law",
+  "hook_mechanism": "prediction",
+  "hook_angle": "What happens to total conductivity when solution is infinitely dilute — will it split into independent ionic parts?",
+  "transition_mechanisms": [
+    "therefore",
+    "now_understand",
+    "direct_continuation"
+  ],
+  "part_opening_mechanisms": [
+    "prediction",
+    "bridge_recap"
+  ],
+  "retention_intensity": "medium"
+}

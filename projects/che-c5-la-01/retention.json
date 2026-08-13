@@ -1,0 +1,15 @@
+{
+  "topic_type": "factual",
+  "hook_mechanism": "exam_fomo",
+  "hook_angle": "PYQ on hybridisation and geometry of two classic complexes — one weak-field tetrahedral, one strong-field octahedral — guaranteed 4 marks",
+  "transition_mechanisms": [
+    "direct_continuation",
+    "future_payoff",
+    "resolution_first"
+  ],
+  "part_opening_mechanisms": [
+    "exam_fomo-short",
+    "bridge_recap"
+  ],
+  "retention_intensity": "medium"
+}

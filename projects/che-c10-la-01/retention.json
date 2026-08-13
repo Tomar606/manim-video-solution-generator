@@ -1,0 +1,17 @@
+{
+  "topic_type": "factual",
+  "hook_mechanism": "payoff",
+  "hook_angle": "चार अंक पक्के — विटामिनों की कमी के रोग और स्रोत को टेबल की तरह याद",
+  "transition_mechanisms": [
+    "direct_continuation",
+    "future_payoff",
+    "resolution_first",
+    "direct_continuation",
+    "future_payoff"
+  ],
+  "part_opening_mechanisms": [
+    "exam_fomo-short",
+    "bridge_recap"
+  ],
+  "retention_intensity": "medium"
+}

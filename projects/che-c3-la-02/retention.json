@@ -1,0 +1,14 @@
+{
+  "topic_type": "derivation",
+  "hook_mechanism": "payoff",
+  "hook_angle": "चार अंकों का पक्का स्कोर — शून्य कोटि का t₁/₂ निकालकर उसकी निर्भरता दिखाएँ",
+  "transition_mechanisms": [
+    "direct_continuation",
+    "future_payoff"
+  ],
+  "part_opening_mechanisms": [
+    "exam_fomo",
+    "bridge_recap"
+  ],
+  "retention_intensity": "medium"
+}

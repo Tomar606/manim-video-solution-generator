@@ -1,0 +1,14 @@
+{
+  "topic_type": "derivation",
+  "hook_mechanism": "problem",
+  "hook_angle": "मापा हुआ वाष्प दाब घटाव से विलेय का मोलर द्रव्यमान निकालना",
+  "transition_mechanisms": [
+    "partial_reveal",
+    "direct_continuation"
+  ],
+  "part_opening_mechanisms": [
+    "exam_fomo",
+    "direct_continuation"
+  ],
+  "retention_intensity": "medium"
+}

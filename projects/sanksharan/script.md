@@ -1,11 +1,9 @@
 ---
 title: संक्षारण
 orientation: portrait
-theme: midnight
+theme: chemistry-bg
 language: hindi
-chroma:
-  preset: custom
-  rect: [0.0, 0.60, 1.0, 0.40]   # bottom 40% = HeyGen presenter
+chroma: none
 avatar:
   placement: auto
   timing: audio
