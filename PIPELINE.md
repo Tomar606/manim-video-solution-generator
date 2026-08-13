@@ -138,6 +138,33 @@ Two things that will waste an hour if missed:
 `ReplacementTransform`. `FadeOut` leaves the mobject in the scene, so captions
 stack up as ghosts unless you `self.remove()` them.
 
+### Rendering order: the avatar comes first
+
+**The Manim video is rendered after the HeyGen clip exists, not before.** The
+avatar's audio is the clock — each caption has to be the line being spoken at
+that instant, and both clips must end together. Rendering to a guessed duration
+puts the words on screen out of step with the words in the ear.
+
+`src/avatar_sync.py` produces the timing plan:
+
+```python
+from src.avatar_sync import plan, write_plan
+cues = plan("projects/<slug>/script_bhaag.md",
+            "inbox/<avatar>.mp4",
+            captions="inbox/<avatar>.srt",   # ask HeyGen for this — it is exact
+            part=1)
+write_plan(cues, "projects/<slug>/timing_part1.json")
+```
+
+With no caption file it apportions the measured duration by **syllable weight**,
+not word count — Hindi word lengths vary far too much for words to work
+("और" and "व्युत्क्रमानुपाती" are one word each).
+
+**Screen layout is fixed.** The top strip carries the caption and nothing else,
+readable but modest (~27pt, at most two lines) — every point it grows is space
+the animation loses. Everything else on screen is animation, formulae,
+derivation and labelling.
+
 ## 5. Backgrounds
 
 `assets/backgrounds/{physics,chemistry,biology,maths}.png` at 1080×1920,
