@@ -49,10 +49,17 @@ it in the dashboard — the audio would no longer match.
 **A beat is a clip; a stage is a track.** The dashboard is a timeline because
 the pipeline already had that shape.
 
-**The chroma zone is the presenter's box.** A script that reserves space with
-`chroma: right_half` renders that half flat green with all content kept out; the
-compositor then keys the presenter into exactly that region. `avatar.placement:
-auto` reads it straight off the script. One concept, two stages.
+**The chroma zone is the presenter's box** — for the reels track. A script that
+reserves space with `chroma: right_half` renders that half flat green with all
+content kept out; the compositor then keys the presenter into exactly that
+region. `avatar.placement: auto` reads it straight off the script.
+
+**The PYQ track does the opposite: `chroma: none`.** HeyGen already delivers a
+green-screened avatar, so painting green in Manim as well is redundant — it
+discards real background and any despill error eats into the plate. The Manim
+render carries the FULL background; the avatar clip carries the key. Content is
+still composed inside the top 60% so the presenter never covers it, but that is
+a layout convention now, not a painted zone.
 
 **Repair loops instead of one-shot generation.** The renderer feeds Manim
 tracebacks back to Claude; the script writer feeds voice-evaluation findings

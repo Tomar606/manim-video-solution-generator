@@ -60,3 +60,7 @@ inbox/*
 projects/*/frames/*.png
 projects/*/frames_hi/*.png
 projects/*/aiclips/test_*/
+
+# Rendered Manim output — regenerated from the scene + script, and a single
+# 1080x1920 part is several MB.
+projects/*/media/videos/

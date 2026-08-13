@@ -173,8 +173,17 @@ def build_prompt(script: VideoScript, seg: DialogueSegment, style_spec: str,
                  label_language: str | None = None) -> str:
     language = (label_language or getattr(script, "language", "hinglish")).lower()
     directive = LABEL_LANGUAGES.get(language, LABEL_LANGUAGES["english"])
+    # A landscape full-bleed anchor fights the top-half rule: the segment prompt
+    # says "keep everything in the top half" while the attached reference shows
+    # a poster filling the frame, and the reference wins. That is the documented
+    # cause of the sickle-cell "animation crossed the 50% line" failure, so a
+    # portrait script defaults to a top-half composition. FRAME_LAYOUT still
+    # overrides when set explicitly.
+    default_layout = FRAME_LAYOUT
+    if str(getattr(script.orientation, "value", script.orientation)).lower() == "portrait":
+        default_layout = "top_half"
     composition = FRAME_COMPOSITIONS.get(
-        os.getenv("FRAME_LAYOUT", FRAME_LAYOUT), FRAME_COMPOSITIONS["full"])
+        os.getenv("FRAME_LAYOUT", default_layout), FRAME_COMPOSITIONS["full"])
     prompt = complete(
         f"{PROMPT_SYSTEM}\n\nCOMPOSITION: {composition}"
         f"\n\nLABEL LANGUAGE: {directive}"
@@ -662,7 +671,20 @@ SOURCE SCRIPT:
 {beats}""",
         provider=provider, effort="high")).strip()
 
-    total = len(re.findall(r"^\s*\|\s*\d+\s*\|", plan, re.M)) or 0
+    # Count segments from the "Seg N ends with:" lines, which are emitted once
+    # per segment and nowhere else. Counting numbered table rows instead is
+    # wrong: the plan also contains a corrections table (spelling fixes, repeat
+    # locks) whose rows are numbered too, and summing both inflated a 17-segment
+    # script to 27. The extra batches then had no real segments to write, so the
+    # model asked what was meant and the run lost them.
+    ends = {int(n) for n in re.findall(r"Seg\s+(\d+)\s+ends with", plan)}
+    total = max(ends) if ends else 0
+    if not total:                       # fall back to the widest segment-map row
+        rows = re.findall(r"^\s*\|\s*(\d+)\s*\|.*\|.*\|", plan, re.M)
+        total = max((int(r) for r in rows), default=0)
+    if ends and len(ends) != total:
+        print(f"   warning: plan lists {len(ends)} segment end-states but "
+              f"numbers run to {total} — check the plan for gaps")
     print(f"   plan: {total or 'unknown'} segments")
 
     dest = Path(out_path)
@@ -678,6 +700,14 @@ SOURCE SCRIPT:
             f"""Using the plan below, write the FULL prompt for segments
 {start} to {end} only — every block in the tested order, nothing abbreviated,
 each in its own ``` code block.
+
+THIS IS A HEADLESS BATCH. There is no one to answer you. The skill's Step 5
+asks you to confirm the segment map before writing — skip that step entirely.
+Do NOT ask a question, do NOT request confirmation, do NOT offer to write the
+prompts once something is clarified, and do NOT stop early. Resolve every
+ambiguity yourself, state the assumption in one line, and write all
+{end - start + 1} prompts. A reply that ends in a question is a failed batch:
+the run has no way to answer it and those segments are lost.
 
 BACKGROUND: {background_rule}
 §16 is REMOVED — do not reinstate it. The prompt must never contain the words

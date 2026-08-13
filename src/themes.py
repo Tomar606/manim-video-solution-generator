@@ -112,6 +112,47 @@ THEMES: dict[str, Theme] = {
         accent="#5B9DF9", accent_2="#FFA75C", line="#2A4C7E",
         font="Poppins", is_dark=True,
     ),
+    # --- Subject plates for the MP Board PYQ videos ---------------------- #
+    # 1080x1920 portrait, downscaled 4:1 from the supplied 8K artwork. The art
+    # sits in the left and right margins, so content must stay inside the safe
+    # column measured per plate (see PIPELINE.md) as well as inside the top 60%.
+    "chemistry-bg": Theme(
+        name="chemistry-bg",
+        background="#0B1B3A",
+        background_style=BackgroundStyle.IMAGE,
+        background_image="assets/backgrounds/chemistry.png",
+        primary="#FFFFFF", secondary="#C9D8F0", muted="#7A93B8",
+        accent="#5BC8F9", accent_2="#FFC15C", line="#2A4C7E",
+        font="Poppins", is_dark=True,
+    ),
+    "physics-plate": Theme(
+        name="physics-plate",
+        background="#062A2E",
+        background_style=BackgroundStyle.IMAGE,
+        background_image="assets/backgrounds/physics.png",
+        primary="#FFFFFF", secondary="#BFE0E4", muted="#6E9298",
+        accent="#4FD1C5", accent_2="#FFC15C", line="#14484F",
+        font="Poppins", is_dark=True,
+    ),
+    "biology-bg": Theme(
+        name="biology-bg",
+        background="#08302B",
+        background_style=BackgroundStyle.IMAGE,
+        background_image="assets/backgrounds/biology.png",
+        primary="#FFFFFF", secondary="#BEE3D5", muted="#6E948A",
+        accent="#57D9A3", accent_2="#FFC15C", line="#145043",
+        font="Poppins", is_dark=True,
+    ),
+    "maths-bg": Theme(
+        name="maths-bg",
+        background="#1E1836",
+        background_style=BackgroundStyle.IMAGE,
+        background_image="assets/backgrounds/maths.png",
+        primary="#FFFFFF", secondary="#D2C8EA", muted="#8B80AC",
+        accent="#A78BFA", accent_2="#FFC15C", line="#3B3160",
+        font="Poppins", is_dark=True,
+    ),
+
     # --- Light variants ---
     "ivory": Theme(
         name="ivory",

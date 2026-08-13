@@ -119,8 +119,24 @@ fixed it — **read it before changing any prompt block.**
 
 ### If Manim
 
-Not yet run end-to-end. Needs `pkg-config` + Python 3.10–3.12 + LaTeX locally,
-or the Docker image. See "Rendering" in `CLAUDE.md`.
+Working. Docker is not required and its image is currently broken anyway — the
+local path is `brew install pkg-config`, Manim on Python 3.11, and **TinyTeX**
+for LaTeX (`~/Library/TinyTeX`, no sudo, unlike BasicTeX's .pkg). Install
+`standalone preview amsmath physics dvisvgm mhchem` via `tlmgr`.
+
+Two things that will waste an hour if missed:
+
+- **Compose the scene, don't import the helpers.** `compose_file()` inlines
+  `manim_helpers.py` beneath a header that sets `THEME`, `CHROMA`, `ORIENTATION`
+  and the frame size. A scene that does `from src.manim_helpers import ...`
+  gets an 8x8 default frame, so `norm_point(0.5, 0.085)` lands at 37% instead
+  of 8%, and no background image.
+- **`chroma: none` for this track.** The green screen comes from HeyGen; Manim
+  renders the full background. See CLAUDE.md.
+
+`TransformMatchingTex` leaves unmatched source glyphs on screen — use
+`ReplacementTransform`. `FadeOut` leaves the mobject in the scene, so captions
+stack up as ghosts unless you `self.remove()` them.
 
 ## 5. Backgrounds
 

@@ -1,40 +1,30 @@
-**ACCURACY BRIEF — संक्षारण (Corrosion), MP Board Class 12**
+# ACCURACY BRIEF — संक्षारण (Corrosion), MP Board Class 12
 
-**Beat 1 — general**
-Chemistry-lab framing only. Board name "एमपी बोर्ड" and "कक्षा 12वीं" spelled in Devanagari, no digits spoken.
+**Rust colour and texture.** Iron rust is reddish-brown to orange-brown, flaky, powdery — never smooth grey, never green. Green corrosion belongs to copper (basic copper carbonate patina), not iron. Aluminium/zinc corrosion is dull white-grey. Silver tarnish is black. Do not mix these on one nail.
 
-**Beat 2 — definition / rust**
-- Rust on iron is **reddish-brown to orange-brown, flaky, powdery** — not smooth red, not black.
-- Rust is **hydrated iron(III) oxide, Fe₂O₃·xH₂O**. If a formula appears on screen, use that. Never write "FeO" or plain "Fe₂O₃".
-- Iron/steel before rusting is **grey-silver with dull metallic sheen** — not chrome-mirror, not yellow.
-- The word equation must show **three inputs**: धातु (iron) + वायुमण्डलीय गैसें (O₂) + नमी (H₂O). Dropping water is the single most common error — dry iron in dry air does not rust; the syllabus is explicit.
-- Rust grows **outward from the surface in patches**, and **flakes off**, exposing fresh metal below. Do not draw a uniform protective film (that is aluminium's behaviour, not iron's).
-- Copper corrosion, if shown as contrast, is **green** (basic copper carbonate); silver tarnish is **black** (Ag₂S). Do not colour iron rust green or silver tarnish brown.
+**Rusting needs BOTH.** Every rust visual must show air/oxygen AND water/moisture together. Syllabus-standard demo: three test tubes — (1) nail in water + air = rusts, (2) nail in boiled water sealed with oil layer, no air = no rust, (3) nail in dry air with CaCl₂/anhydrous calcium chloride = no rust. If only water is drawn, it is wrong.
 
-**Beat 3 — three factors, in this order**
-1. धातु की प्रकृति — show a reactivity comparison; **more reactive = corrodes faster**. If a series appears: K, Na, Ca, Mg, Al, Zn, Fe, Pb, Cu, Ag, Au — Zn **above** Fe, Cu and Ag **below** Fe. Never put Fe above Zn.
-2. अशुद्धियाँ — impure metal corrodes **faster**; show impure sample more rusted than pure. Not the reverse.
-3. वातावरण — air, moisture, gases. Coastal/humid = more corrosion.
-Count is **exactly three**, numbered १, २, ३ on screen.
+**Rust formula, if shown on screen.** Hydrated ferric oxide, Fe₂O₃·xH₂O. Not FeO, not Fe₃O₄ (that is black magnetic oxide, not rust). Subscripts and the dot must be typeset properly.
 
-**Beat 4 — three preventions, in this order**
-1. रोधिका (barrier) — paint/grease/oil as a **continuous unbroken covering layer over** the iron. A gap in the layer means rust starts there.
-2. समर्पित/त्यागी बचाव — coating metal must be **more reactive than iron**, and it **corrodes first and is consumed**, iron stays intact. Galvanisation = **zinc on iron**. Zinc layer is **dull bluish-grey/matte with spangle pattern**, not shiny gold. Never show tin or copper here — those are less reactive and would worsen rusting if scratched.
-3. विद्युत् प्लेटिंग — zinc, nickel or chromium. If a cell is drawn: **object to be plated is the cathode (negative terminal)**, plating metal is the anode, both in an electrolyte of that metal's salt. Reversing the electrodes is a frequent slip. Chromium plating = **bright mirror-silver**; nickel = **warm silvery, slightly yellowish**.
+**Galvanisation (beat 3).** Zinc coats iron, not the reverse. Zinc is bluish-grey/silvery, dull, not gold and not yellow. Draw as a continuous outer layer *on top of* the iron; the iron core stays inside. Standard image: corrugated grey roofing sheet or a zinc-coated bucket/nail. Zinc corrodes first and sacrificially — arrow of electron flow, if drawn, goes zinc → iron.
 
-Layer order in any cross-section: **base metal at the bottom, coating on top, environment above** — three stacked bands, never coating drawn beneath the iron.
+**Order of the sacrificial idea.** Zinc is more reactive than iron; iron more reactive than copper/tin. If a reactivity ladder appears: Zn above Fe above Sn/Cu. Never put zinc below iron.
 
-**Beat 5 — answer card**
-Must contain, in the same order as spoken: definition → three factors → three preventions. Screenshot prompt implies static, fully legible text; nothing animating out.
+**Counts are fixed by the script.** Beat 2: exactly THREE factors, in this order — nature of the metal, impurities in the metal, environment. Beat 3: exactly THREE preventive measures, in this order — barrier (paint/grease/oil), sacrificial protection (galvanisation as the example), electroplating. Three, not four; no "alloying" or "anodising" panel, even though both are real — the answer must match what students write.
 
-**COMMON ERRORS TO AVOID**
-- Rust shown as bright red or as a smooth even coat.
-- Water/moisture omitted from the rusting equation.
-- Zinc drawn as shiny golden, or galvanised sheet drawn mirror-bright.
-- Tin-coating shown as an example of sacrificial protection.
-- Electroplating cell with the object as anode.
-- Green patina used for iron rust.
-- Four or two items where the script says three.
-- Rust drawn as a protective sealed layer that stops further corrosion.
-- English "Corrosion" as the on-screen heading when narration says संक्षारण.
-- Any digit or symbol rendered in a spoken line.
+**Barrier layer.** Paint/grease/oil sits as a thin unbroken film over the metal surface. Show rust starting at a scratch/break in the film, not through intact paint.
+
+**Electroplating.** Zinc, nickel, or chromium — those three named metals. Chromium plating is mirror-bright silver. If a cell is drawn: object to be plated is the cathode (negative terminal), plating metal is the anode.
+
+**Process order (must not be reversed).** Clean metal → exposure to moist air → surface pitting → reddish-brown flaky rust → flaking exposes fresh metal → deeper corrosion.
+
+## COMMON ERRORS TO AVOID
+- Green rust on an iron nail (that's copper)
+- Rusting shown in water alone, or air alone, with no second test tube for contrast
+- Golden/brassy zinc coating on galvanised iron
+- Iron drawn coating zinc
+- Fe₃O₄ or FeO labelled as "rust"
+- Four or five factors/measures instead of three
+- Rust blooming through unbroken paint
+- Gold, platinum or stainless steel shown corroding
+- Smooth glossy rust instead of flaky powder

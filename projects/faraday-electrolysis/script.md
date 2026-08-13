@@ -1,11 +1,13 @@
 ---
 title: फैराडे के विद्युत्-अपघटन के नियम
 orientation: portrait
-theme: midnight
+theme: chemistry-bg
 language: hindi
-chroma:
-  preset: custom
-  rect: [0.0, 0.60, 1.0, 0.40]   # bottom 40% = HeyGen presenter
+# No chroma zone: the Manim render carries the FULL background. The
+# green screen lives on the HeyGen avatar clip, which is keyed and
+# composited on top. Content still stays inside the top 60% so the
+# presenter never covers it.
+chroma: none
 avatar:
   placement: auto
   timing: audio
@@ -30,5 +32,5 @@ speakers:
 %% भाग 4 — दोनों नियमों को एक साथ याद करो || ON SCREEN (exact, never spoken): W = Z i t ; W₁ / W₂ = E₁ / E₂
 
 [narrator]
-बच्चों, बस इतना याद रख लिया, तो परीक्षा में फैराडे के दोनों नियमों का ये पूरा उत्तर कभी नहीं भूलोगे। अब इसे परीक्षा में कैसे लिखना है, इसका पूरा उत्तर आपकी स्क्रीन पर आ जाएगा। इसे सेव कर लेना और इसका स्क्रीनशॉट लेना मत भूलना। और ऐसे ही आसान और मजेदार तरीके से पढ़ने के लिए अरिहान के ‘उन्नति बैच’ से जुड़ो।
+बच्चों, बस इतना याद रख लिया, तो परीक्षा में फैराडे के दोनों नियमों का ये पूरा उत्तर कभी नहीं भूलोगे। अब इसे परीक्षा में कैसे लिखना है, इसका पूरा उत्तर आपकी स्क्रीन पर आ जाएगा। इसे सेव कर लेना और इसका स्क्रीनशॉट लेना मत भूलना। और ऐसे ही आसान और मजेदार तरीके से पढ़ने के लिए अरिविहान के ‘उन्नति बैच’ से जुड़ो।
 %% भाग 5 — अंतिम भाग

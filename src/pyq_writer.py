@@ -94,6 +94,20 @@ class Question:
         return self.qid.lower().replace("_", "-")
 
 
+def _clean(raw: str) -> str:
+    """Strip the artefacts the sheet carries into every question and answer.
+
+    The rows are OCR/mathpix exports: markdown image embeds pointing at
+    cdn.mathpix.com, stray \\section*{} wrappers, and collapsed whitespace.
+    None of it belongs in a script or in the question printed on the document.
+    """
+    s = re.sub(r"!\[[^\]]*\]\([^)]*\)", " ", raw or "")     # ![](https://cdn.mathpix…)
+    s = re.sub(r"https?://\S+", " ", s)
+    s = re.sub(r"\\section\*\{([^}]*)\}", r"\1", s)
+    s = re.sub(r"\s*\bचित्र\b\s*$", "", s.strip())
+    return " ".join(s.split()).lstrip(". ")
+
+
 def _years(raw: str) -> list[int]:
     """"2019, 20, 22 , 24" -> [2019, 2020, 2022, 2024]."""
     out: list[int] = []
@@ -123,8 +137,8 @@ def load_questions(tab: str = "Chemistry", *, sheet_id: str = SHEET_ID,
         out.append(Question(
             qid=r[1].strip(), subject=r[2].strip(), chapter_no=r[3].strip(),
             chapter=r[4].strip(), category=r[5].strip(),
-            text=" ".join(r[7].split()).lstrip(". "),
-            answer=" ".join(r[8].split()),
+            text=_clean(r[7]),
+            answer=_clean(r[8]),
             years=_years(r[9]),
             answer_image=r[11].strip() if len(r) > 11 else "",
         ))
@@ -204,11 +218,46 @@ AND give the reason (exam marks, or the mistake most students make).
 - Subject terminology and nomenclature never change.
 - 5 to 8 भाग. One concept per भाग."""
 
+# Roughly 120 spoken words per minute — the rate implied by the team's own
+# prompt skill, which chunks narration into 10-second segments of 18-22 words.
+WORDS_PER_MIN = 120
+
+SPLIT_RULES = """
+THIS SCRIPT IS TOO LONG FOR ONE VIDEO AND MUST BE WRITTEN IN {n} PARTS, in ONE
+document. Follow this convention exactly:
+
+- Divide with a bare `PART 1`, `PART 2`{extra} line.
+- Inside a part, headings lose their numbers: `फैराडे का प्रथम नियम 🎙️`, not
+  `भाग 2 — …`. Numbering does not run across parts.
+- Cut at a CONCEPT boundary, not at a word count. One law, one case, one stage
+  of the derivation per part.
+- PART 1's hook is shorter and names the marks instead of promising:
+    “एमपी बोर्ड कक्षा बारहवीं के बच्चों! ये सवाल {{वर्ष}} में आ चुका है, और इस
+     बार भी आपकी त्रैमासिक परीक्षा में आ सकता है।”
+    “तो चलो, इसे ऐसे याद करते हैं कि परीक्षा में आपके चार नंबर पक्के हो जाएँ!”
+- Every part except the last ends with a `Part N Ending 🎙️` section: first the
+  one thing to remember with its formula, then what the next part will answer —
+  “…ये समझेंगे अगले पार्ट में।”
+- Parts after the first open with a bridge, NOT the hook. No exam years, no
+  board/class line — those are spent:
+    “बच्चों, Part 1 में हमने समझा …, और अब समझते हैं …”
+  Write "Part 1" in Latin, not transliterated.
+- ONLY the final part carries the closing: answer on screen, save it, take a
+  screenshot, अरिविहान के उन्नति बैच से जुड़ो. Earlier parts must NOT have it.
+- Splitting is a chance to tighten. Do not pad a part to fill it."""
+
+
+def estimate_parts(text: str) -> int:
+    """How many videos this script becomes: >3 min -> 2, >5 min -> 3."""
+    spoken = SPOKEN_RE.findall(text)
+    mins = sum(len(s.split()) for s in spoken) / WORDS_PER_MIN
+    return 1 if mins <= 3 else (2 if mins <= 5 else 3)
+
 
 def write_script(q: Question, verification: str, *,
                  provider: str | None = None,
                  style: style_mod.StyleGuide | None = None,
-                 effort: str = "high",
+                 effort: str = "high", parts: int = 1,
                  findings: str = "", previous: str = "") -> str:
     guide = style if style is not None else style_mod.load()
 
@@ -230,9 +279,14 @@ ACCURACY CHECK — this overrides the answer above wherever they disagree:
                 f"Fix every one and return the complete corrected script:\n"
                 f"{findings}\n\nPREVIOUS DRAFT:\n{previous}")
 
+    system = WRITE_SYSTEM
+    if parts > 1:
+        system += "\n" + SPLIT_RULES.format(
+            n=parts, extra=" and `PART 3`" if parts > 2 else "")
+
     section = guide.prompt_section()
     prompt = f"{section}\n\n{'=' * 60}\n\n{task}" if section else task
-    out = complete(WRITE_SYSTEM, prompt,
+    out = complete(system, prompt,
                    provider=provider or SCRIPT_PROVIDER, effort=effort)
     return re.sub(r"^```[a-z]*\n|\n```$", "", out.strip()).strip()
 
@@ -267,7 +321,7 @@ class Check:
         return not self.findings
 
 
-def check_script(text: str, q: Question) -> Check:
+def check_script(text: str, q: Question, *, parts: int = 1) -> Check:
     c = Check()
     lines = [l.strip() for l in text.split("\n")]
     spoken = [" ".join(m.split()) for m in SPOKEN_RE.findall(text)]
@@ -278,17 +332,49 @@ def check_script(text: str, q: Question) -> Check:
     if not re.search(r"^प्रश्न\s*\d*\s*[—-]", text, re.M):
         c.findings.append("Missing the `प्रश्न — <विषय>` title line.")
 
-    bhaag = re.findall(r"^भाग\s*\d+\s*[—-].*$", text, re.M)
-    if not 5 <= len(bhaag) <= 8:
-        c.findings.append(f"Found {len(bhaag)} भाग; the house format uses 5 to 8.")
-    if bhaag and "🎙️" not in "".join(bhaag):
-        c.findings.append("भाग headings must carry the 🎙️ marker.")
+    if parts > 1:
+        found = re.findall(r"^\s*PART\s+(\d+)\s*$", text, re.M | re.I)
+        if len(found) < 2:
+            c.findings.append(
+                f"This script needs splitting but has {len(found)} `PART n` divider(s).")
+        else:
+            # What matters is that no single part runs past three minutes —
+            # not that the count matches a formula. A 5.5-minute script split
+            # into two 2.8-minute parts is correct even though the >5 min rule
+            # would have suggested three.
+            chunks = re.split(r"^\s*PART\s+\d+\s*$", text, flags=re.M)[1:]
+            for n, chunk in enumerate(chunks, 1):
+                mins = sum(len(s.split()) for s in SPOKEN_RE.findall(chunk)) / WORDS_PER_MIN
+                if mins > 3.0:
+                    c.findings.append(
+                        f"Part {n} runs about {mins:.1f} min — over the three-minute limit.")
+        if not re.search(r"Part\s+\d+\s+Ending", text, re.I):
+            c.findings.append(
+                "A split script needs a `Part N Ending 🎙️` section with the "
+                "recap and the handoff to the next part.")
+        if "अगले पार्ट" not in text:
+            c.findings.append(
+                'Part 1 must hand off with "…ये समझेंगे अगले पार्ट में।"')
+        head, tail = text.split("PART 2", 1) if "PART 2" in text else (text, "")
+        if "उन्नति बैच" in head:
+            c.findings.append(
+                "The उन्नति बैच closing belongs only to the final part.")
+    else:
+        bhaag = re.findall(r"^भाग\s*\d+\s*[—-].*$", text, re.M)
+        if not 5 <= len(bhaag) <= 8:
+            c.findings.append(f"Found {len(bhaag)} भाग; the house format uses 5 to 8.")
+        if bhaag and "🎙️" not in "".join(bhaag):
+            c.findings.append("भाग headings must carry the 🎙️ marker.")
 
     for s in spoken:
-        if re.search(r"\d", s):
+        # "Part 1" is required verbatim by the split convention — a later part
+        # opens by naming the one before it — so it is not a stray digit.
+        s_nodigit = re.sub(r"\bPart\s*\d+\b", "Part", s)
+        if re.search(r"\d", s_nodigit):
             c.findings.append(
                 f'Digit in a spoken line — years become Hindi words, values '
                 f'become English tokens: "{s[:70]}"')
+        del s_nodigit
         if ALGEBRA_GLYPH.search(s) or (("=" in s or "/" in s) and LATIN_VAR.search(s)):
             c.findings.append(
                 f'Algebra inside a spoken line; formulas go on their own line '
@@ -308,6 +394,20 @@ def check_script(text: str, q: Question) -> Check:
                           'restatement right after it.')
     if not FOCUS_CUE.search(joined):
         c.findings.append("No focus cue before the important parts.")
+    # The sheet's answers are LaTeX dumps and it leaks through. \vec{E} in a
+    # spoken line would be read aloud by TTS; on screen it just prints as
+    # backslash-vee-e-c. The samples show clean glyphs (W ∝ Q, W₁).
+    latex = re.findall(r"\\[a-zA-Z]+", text)
+    if latex:
+        c.findings.append(
+            f"Raw LaTeX left in the script ({', '.join(sorted(set(latex))[:4])}) "
+            f"— convert to clean glyphs: \\vec{{E}} -> E⃗, \\frac{{a}}{{b}} -> a/b.")
+    # A Bengali sha once slipped into a शिक्षक tag from the source document.
+    stray = set(re.findall(r"[\u0980-\u09FF]", text))
+    if stray:
+        c.findings.append(
+            f"Non-Devanagari Indic characters present: {''.join(sorted(stray))}")
+
     for needle in CLOSERS:
         if needle not in joined:
             c.findings.append(f'Closing is incomplete — "{needle}" is missing.')
@@ -320,14 +420,21 @@ def draft(q: Question, *, provider: str | None = None,
     """Verify, write, then repair until the mechanical checks pass."""
     ver = verification if verification is not None else verify_answer(q)
     text = write_script(q, ver, provider=provider, style=style)
-    chk = check_script(text, q)
+
+    # A script only reveals its length once written, so measure the draft and
+    # rewrite it as parts if the render would run past three minutes.
+    parts = estimate_parts(text)
+    if parts > 1:
+        text = write_script(q, ver, provider=provider, style=style, parts=parts)
+
+    chk = check_script(text, q, parts=parts)
     for _ in range(max_attempts - 1):
         if chk.ok:
             break
-        text = write_script(q, ver, provider=provider, style=style,
+        text = write_script(q, ver, provider=provider, style=style, parts=parts,
                             findings="\n".join(f"- {f}" for f in chk.findings),
                             previous=text)
-        chk = check_script(text, q)
+        chk = check_script(text, q, parts=parts)
     return text, chk, ver
 
 

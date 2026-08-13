@@ -73,7 +73,7 @@ HOOK names board, class, year(s) and त्रैमासिक परीक्
 परीक्षा. Then the promise, then “तो चलिए।”
 
 CLOSING is fixed: the answer appears on screen → “इसे सेव कर लेना और इसका
-स्क्रीनशॉट लेना मत भूलना।” → अरिहान के ‘उन्नति बैच’ से जुड़ो.
+स्क्रीनशॉट लेना मत भूलना।” → अरिविहान के ‘उन्नति बैच’ से जुड़ो.
 
 SMALL THINGS THAT MATTER. Em-dash — is the house connector ("पहला—धातु की
 प्रकृति"). Enumerate explicitly पहला/दूसरा/तीसरा and close with "बस, इन तीनों को
