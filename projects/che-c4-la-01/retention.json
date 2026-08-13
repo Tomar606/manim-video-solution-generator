@@ -1,14 +1,15 @@
 {
   "topic_type": "process",
   "hook_mechanism": "prediction",
-  "hook_angle": "पीले क्रोमेट में अम्ल मिलते ही नारंगी डाइक्रोमेट बन जाएगा — यही दिशा तैयारी के दूसरे चरण को तय करती है",
+  "hook_angle": "अम्ल मिलते ही पीला क्रोमेट नारंगी डाइक्रोमेट बनता है — यही दिशा आगे की तैयारी और अभिक्रियाओं को तय करती है",
   "transition_mechanisms": [
     "direct_continuation",
-    "therefore",
-    "future_payoff"
+    "future_payoff",
+    "resolution_first"
   ],
   "part_opening_mechanisms": [
-    "prediction",
+    "exam_fomo-short",
+    "bridge_recap",
     "bridge_recap"
   ],
   "retention_intensity": "medium"

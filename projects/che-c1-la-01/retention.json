@@ -1,14 +1,16 @@
 {
   "topic_type": "process",
   "hook_mechanism": "prediction",
-  "hook_angle": "बाह्य दाब बढ़ाते ही जल का परासरण कब थमेगा — उसी क्षण का माप",
+  "hook_angle": "अगर झिल्ली के पार जल को बहने ही न दिया जाए और विलयन पर बाहरी दाब बढ़ाया जाए, तो क्या उसी क्षण परासरण दाब मिल जाएगा?",
   "transition_mechanisms": [
-    "direct_continuation",
-    "future_payoff"
+    "future_payoff",
+    "visual_first",
+    "direct_continuation"
   ],
   "part_opening_mechanisms": [
     "prediction",
-    "bridge"
+    "bridge_recap",
+    "bridge_recap"
   ],
   "retention_intensity": "medium"
 }

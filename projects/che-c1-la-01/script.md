@@ -1,5 +1,5 @@
 ---
-title: परासरण दाब मापन की बर्कले एवं हार्टले विधि और इसके लाभ
+title: परासरण दाब मापन की बर्कले एवं हार्टले विधि: संक्षिप्त वर्णन और लाभ
 orientation: portrait
 theme: midnight
 language: hindi
