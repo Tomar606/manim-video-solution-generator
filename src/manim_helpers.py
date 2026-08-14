@@ -452,11 +452,191 @@ def caption_pill(text: str, font_size: int | None = None):
 # --------------------------------------------------------------------------- #
 # Base scene                                                                   #
 # --------------------------------------------------------------------------- #
+
+# --------------------------------------------------------------------------- #
+# Layout guard                                                                 #
+# --------------------------------------------------------------------------- #
+# Two classes of bug kept reaching finished videos, and both are mechanical, so
+# both are checked mechanically here rather than by watching the render:
+#
+#   1. Content overlapping other content — a rusted bar drawn on top of a word
+#      equation, a label sitting across a diagram. `place()` fits one block
+#      inside the stage band, but nothing stopped two blocks occupying the same
+#      space, and a label attached with `next_to` after placement escapes the
+#      band entirely.
+#
+#   2. Animating along STORED COORDINATES. Electrons in the Daniell cell flew
+#      straight through the air between the beakers instead of following the
+#      wire, because the path had been captured as a list of points at
+#      construction time and `place()` then moved and scaled the cell out from
+#      under it. `along()` exists so a path is always taken from the drawn
+#      mobject, which moves with its group.
+
+def along(mobject):
+    """A path for MoveAlongPath, taken from the mobject actually on screen.
+
+    Always use this instead of rebuilding a path from remembered points. A
+    stored point list does not follow its group through `place()`, `scale()` or
+    `move_to()`, and the animation then runs somewhere the viewer can see is
+    wrong.
+    """
+    path = mobject.copy()
+    path.set_stroke(width=0, opacity=0)
+    path.set_fill(opacity=0)
+    return path
+
+
+def mark_group(mob, tag=None):
+    """Tag every part of a composite so the guard treats them as one thing.
+
+    A diagram is often revealed piece by piece — `FadeIn(cell.left.glass)`, then
+    the rods, then the bridge — which puts the PARTS in the scene as top-level
+    mobjects with no family relationship between them. They overlap each other
+    by design, and without this they read as violations.
+    """
+    tag = tag if tag is not None else id(mob)
+    mob._layout_group = tag
+    for sub in mob.get_family():
+        sub._layout_group = tag
+    return mob
+
+
+def _leaf_boxes(m, limit=64):
+    """Bounding boxes of the leaves, not of the whole group.
+
+    A sparse diagram has a huge bounding box that a nearby label sits inside
+    without touching any of it. Comparing leaf to leaf is what distinguishes a
+    label placed beside a beaker from a label printed across one.
+    """
+    fam = [s for s in m.get_family() if len(s.submobjects) == 0]
+    if not fam or len(fam) > limit:
+        b = _bbox(m)
+        return [b] if b else []
+    out = []
+    for s in fam:
+        b = _bbox(s)
+        if b:
+            out.append(b)
+    return out
+
+
+def _bbox(m):
+    try:
+        c = m.get_center()
+        w, h = m.width, m.height
+    except Exception:
+        return None
+    if not (np.isfinite(w) and np.isfinite(h)) or w <= 0 or h <= 0:
+        return None
+    return (c[0] - w / 2, c[1] - h / 2, c[0] + w / 2, c[1] + h / 2)
+
+
+def _overlap_frac(a, b):
+    """Intersection area as a fraction of the SMALLER box."""
+    ix = min(a[2], b[2]) - max(a[0], b[0])
+    iy = min(a[3], b[3]) - max(a[1], b[1])
+    if ix <= 0 or iy <= 0:
+        return 0.0
+    inter = ix * iy
+    sa = (a[2] - a[0]) * (a[3] - a[1])
+    sb = (b[2] - b[0]) * (b[3] - b[1])
+    return inter / max(min(sa, sb), 1e-9)
+
+
 class ThemedScene(Scene):
     """Base class: paints the themed background + chroma zone and exposes a
     safe content area plus color/typeset helpers. Subclasses implement
     ``construct`` and should keep drawn content inside ``self.safe_*``.
     """
+
+
+    # --- layout guard ---------------------------------------------------- #
+    # Set by a scene that reserves bands: (top, bottom) as fractions of the
+    # frame height from the top. Content outside this is reported.
+    STAGE_BAND: tuple[float, float] | None = None
+    OVERLAP_TOL = 0.22        # ignore touching; flag real occlusion
+    AUDIT_LAYOUT = True
+
+    def _stage_mobjects(self):
+        """Top-level content — not the background, chroma zone or caption."""
+        skip = {id(getattr(self, "background", None)),
+                id(getattr(self, "chroma_zone", None)),
+                id(getattr(self, "caption_mob", None))}
+        return [m for m in self.mobjects if id(m) not in skip]
+
+    def audit_layout(self, label=""):
+        """Report content that overlaps other content or leaves its band.
+
+        Called automatically after every animation. It records rather than
+        raises: one frame of a transition legitimately has two things crossing,
+        and failing the render there would be worse than the bug. The report is
+        printed at the end, where it is impossible to miss.
+        """
+        if not self.AUDIT_LAYOUT:
+            return
+        band_top = norm_point(0.5, self.STAGE_BAND[0])[1] if self.STAGE_BAND else None
+        band_bot = norm_point(0.5, self.STAGE_BAND[1])[1] if self.STAGE_BAND else None
+
+        items = []
+        for m in self._stage_mobjects():
+            b = _bbox(m)
+            if b is None:
+                continue
+            # anything living entirely above the stage is a caption, including
+            # the outgoing one that is still on screen mid-swap
+            if band_top is not None and b[1] > band_top:
+                continue
+            items.append((m, b, _leaf_boxes(m)))
+
+        for i in range(len(items)):
+            mi, bi, li = items[i]
+            for j in range(i + 1, len(items)):
+                mj, bj, lj = items[j]
+                if mj in mi.get_family() or mi in mj.get_family():
+                    continue
+                # parts of one diagram, revealed separately
+                gi = getattr(mi, "_layout_group", None)
+                if gi is not None and gi == getattr(mj, "_layout_group", None):
+                    continue
+                if _overlap_frac(bi, bj) <= 0.01:
+                    continue                      # boxes do not even touch
+                f = max((_overlap_frac(a, b) for a in li for b in lj), default=0.0)
+                if f > self.OVERLAP_TOL:
+                    self._layout_violations.append(
+                        f"t={self.time:6.2f}s {label} OVERLAP {f:.0%} between "
+                        f"{type(mi).__name__} and {type(mj).__name__}")
+
+        if band_top is not None:
+            for m, b, _ in items:
+                if b[3] > band_top + 0.05 or b[1] < band_bot - 0.05:
+                    self._layout_violations.append(
+                        f"t={self.time:6.2f}s {label} OUTSIDE BAND "
+                        f"{type(m).__name__} spans y {b[1]:.2f}..{b[3]:.2f}, "
+                        f"band is {band_bot:.2f}..{band_top:.2f}")
+
+    def play(self, *args, **kwargs):
+        super().play(*args, **kwargs)
+        try:
+            self.audit_layout()
+        except Exception as exc:            # a guard must never break a render
+            self._layout_violations.append(f"audit failed: {exc}")
+
+    def report_layout(self) -> None:
+        """Print what the guard caught. Run at tear-down, where it cannot be
+        missed by whoever kicked off the render."""
+        v = getattr(self, "_layout_violations", [])
+        if not v:
+            return
+        seen, uniq = set(), []
+        for line in v:
+            k = line.split(" ", 1)[1]
+            if k not in seen:
+                seen.add(k); uniq.append(line)
+        print("\n" + "=" * 70)
+        print(f"LAYOUT GUARD: {len(uniq)} distinct problem(s) in this scene")
+        for line in uniq[:40]:
+            print("  " + line)
+        print("=" * 70 + "\n")
 
     def setup(self) -> None:
         super().setup()
@@ -477,6 +657,8 @@ class ThemedScene(Scene):
         self.chroma_zone = build_chroma_zone()
         if self.chroma_zone is not None and not CHROMA.get("animate_in"):
             self.add(self.chroma_zone)
+
+        self._layout_violations: list[str] = []
 
         # Upper-half content region (reels layout: graphics + labels up top).
         self.upper_w = _fw()
@@ -689,6 +871,7 @@ class ThemedScene(Scene):
 
     def tear_down(self) -> None:
         self._write_cues()
+        self.report_layout()
         try:
             super().tear_down()
         except AttributeError:

@@ -43,7 +43,8 @@ from pathlib import Path as _Path
 
 import numpy as np
 
-from src.manim_helpers import ThemedScene, norm_point, register_fonts
+from src.manim_helpers import (ThemedScene, along, mark_group, norm_point,
+                               register_fonts)
 
 INK   = "#FFFFFF"
 DIM   = "#B9C6DC"
@@ -83,6 +84,9 @@ class _Stop(Exception):
 
 class _Base(ThemedScene):
     CAPTION_MODE = "narration"
+    # The shared layout guard reports content that overlaps other content or
+    # leaves the stage band. See src/manim_helpers.audit_layout.
+    STAGE_BAND = (STAGE_TOP, STAGE_BOT)
 
     # ---- text ---------------------------------------------------------- #
     def hindi(self, text, size=CAPTION_SIZE, color=INK, weight=FONT_W):
@@ -293,17 +297,29 @@ class _Base(ThemedScene):
         g = VGroup(pair, bridge, wire)
         g.left, g.right, g.bridge, g.wire = left, right, bridge, wire
         g.zn, g.cu = left.rod, right.rod
-        g.wire_path = [left.rod.get_top(), [lrx, wy, 0], [rrx, wy, 0], right.rod.get_top()]
+        # The cell is revealed piece by piece, so its parts enter the scene as
+        # separate top-level mobjects. Tag them as one thing or the guard reads
+        # a rod sitting inside its own beaker as an overlap.
+        mark_group(g)
+        # No stored point list. `place()` scales and moves this group, and a
+        # remembered path does not follow — that is exactly how the electrons
+        # ended up crossing the gap through the air instead of along the wire.
+        # Take the path from `g.wire` at animation time, via along().
         return g
 
     def electrons(self, cell, n=5):
-        """Dots that travel the wire from zinc to copper.
+        """Dots that travel ALONG THE WIRE from zinc to copper.
+
+        The path comes from `cell.wire` itself — the object on screen — so it
+        stays correct however the cell has been scaled or moved. Rebuilding it
+        from remembered coordinates is what sent the electrons straight across
+        the gap between the beakers.
 
         Direction is not decorative: electrons leave the metal being oxidised.
         Zinc is the anode, so they run LEFT to RIGHT through the wire, and they
         never pass through the solution — that is what the salt bridge is for.
         """
-        path = VMobject().set_points_as_corners(cell.wire_path)
+        path = along(cell.wire)
         dots = VGroup(*[Dot(radius=0.075, color=NEG) for _ in range(n)])
         for k, d in enumerate(dots):
             d.move_to(path.point_from_proportion(k / max(n, 1) * 0.2))
@@ -460,7 +476,7 @@ class DaniellPart1(_Base):
             self.play(*[MoveAlongPath(d, path) for d in dots],
                       run_time=1.8, rate_func=linear)
             for k, d in enumerate(dots):
-                d.move_to(path.point_from_proportion(k / 5 * 0.2))
+                d.move_to(path.point_from_proportion(k / len(dots) * 0.2))
         self.hold()
 
         # ---- cue 14: handoff -------------------------------------------- #

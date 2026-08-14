@@ -157,3 +157,39 @@ To check any delivered file:
 ```bash
 ffmpeg -v error -i final/clip.mp4 -f null -    # silence means clean
 ```
+
+## Preflight — run it before every render
+
+```bash
+.venv-tools/bin/python tools/preflight.py              # all avatar-track projects
+.venv-tools/bin/python tools/preflight.py daniell-cell # one
+```
+
+Exit code 1 on any FAIL, so it can gate a render. Every check exists because
+that exact bug reached a finished video and had to be found by watching it:
+
+| check | the bug it caught |
+|---|---|
+| composed file complete | a DOTALL regex in `recompose.py` deleted from its line to end-of-file; the result still parsed, just missing most of the scene |
+| no stored-coordinate paths | electrons crossed the gap between the beakers through the air, because the path was captured before `place()` scaled the cell |
+| transcript has no holes | Whisper silently dropped 34s, and the captions in that stretch were wrong |
+| captions have end times | without one a caption hangs through every pause between sentences |
+| captions monotonic / within audio | a caption starting after the audio ends is never shown |
+| key hue is green, holes ≈ 0 | a mistuned key put the background through the presenter's face |
+| generated image has real alpha | an opaque PNG composites as a hard rectangle on the plate |
+
+## The layout guard runs inside every render
+
+`src/manim_helpers.ThemedScene` audits after every animation and prints what it
+found at tear-down. It reports rather than raises — one frame of a transition
+legitimately has two things crossing, and failing there would be worse than the
+bug.
+
+It catches content overlapping content, and content leaving the stage band. Two
+things a scene must do for it to be accurate:
+
+- set `STAGE_BAND = (top, bottom)` so it knows the reserved area
+- call `mark_group(diagram)` on any composite revealed **piece by piece**, or a
+  rod inside its own beaker reads as an overlap
+
+And use `along(mobject)` for `MoveAlongPath` — never a remembered point list.

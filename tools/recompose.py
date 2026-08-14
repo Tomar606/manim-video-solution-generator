@@ -31,13 +31,21 @@ JOBS = [
      "projects/daniell-cell/script.md"),
 ]
 
-STRIP = (r"^from manim import \*.*$", r"^import numpy as np$",
+# A parenthesised import spans several lines; stripping only the first left the
+# continuation behind and the composed file failed with IndentationError.
+STRIP = (r"^from manim import \*.*$",
+         r"^import numpy as np$",
+         r"^from src\.manim_helpers import \([^)]*\)",
          r"^from src\.manim_helpers import .*$")
 
 
 def main(jobs=JOBS):
     for src, dst, script in jobs:
         body = Path(src).read_text(encoding="utf-8")
+        # NOT re.S on the line patterns: with DOTALL, `^from manim import \*.*$`
+        # matches from that line to the END OF THE FILE and silently deletes the
+        # whole scene. Only the parenthesised import needs to span lines, and it
+        # is bounded by `[^)]*` rather than by DOTALL.
         for pat in STRIP:
             body = re.sub(pat, "", body, flags=re.M)
         out = compose_file(parse_script(Path(script).read_text(encoding="utf-8")), body)
