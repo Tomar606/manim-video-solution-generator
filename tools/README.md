@@ -116,3 +116,23 @@ draw it (`.claude/skills/video-prompt/references/bug-ledger.md`).
 `src/concept_images.py` handles the alpha: gpt-image-2 has no transparency and
 paints the checkerboard if asked for it, so the prompt requests a white studio
 sweep which is cut to real alpha afterwards.
+
+## Whisper drops audio silently — always check
+
+On real clips the `small` model lost a **34-second stretch** of a 107s part and
+`medium` still lost 10.6s, with no error either time: just a hole in the word
+list, which becomes a hole in the captions that nobody notices until the video
+is watched. `transcribe.py` warns about any gap over 4s.
+
+The same audio transcribes fine when handed over on its own, so
+`tools/fill_gaps.py` cuts each gap out, transcribes it alone and merges the
+words back at the right offset. Run it until it reports no gaps — that recovered
+`"E के समानुपाती हैं"`, which the caption had been showing as `"W के"`.
+
+## Captions need an end, not just a start
+
+A line with only a start stays up until the next one replaces it, so it hangs
+through every pause between sentences and reads as out of sync even though its
+start was right. Each line carries `end` — the moment its last word stops being
+spoken — and the scene takes the caption down there if the next line is not due
+within ~0.45s.

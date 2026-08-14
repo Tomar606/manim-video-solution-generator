@@ -186,6 +186,35 @@ class _Base(ThemedScene):
             self.remove(old)
         self.caption_mob = new
 
+    def _clear_caption(self):
+        """Take the caption down when its sentence has finished being spoken.
+
+        Without this a line stays up until the next one replaces it, so it hangs
+        through every pause between sentences — which reads as the caption being
+        out of sync even though its start was right.
+        """
+        if self.caption_mob is None:
+            return
+        old = self.caption_mob
+        self.caption_mob = None
+        super().play(FadeOut(old, shift=UP * 0.08), run_time=0.20)
+        self.remove(old)
+
+    def _expire(self, upto):
+        """Drop the current caption if it has outlived its line and the next
+        line is not due yet."""
+        end = getattr(self, "_cap_end", None)
+        if self.caption_mob is None or end is None or upto < end:
+            return
+        nxt = self._pending[0]["start"] if self._pending else None
+        # only bother if the screen would otherwise sit on a stale line
+        if nxt is None or nxt - end > 0.45:
+            gap = end - self.time
+            if gap > 0.02:
+                self.wait(gap)
+            self._clear_caption()
+            self._cap_end = None
+
     def _due(self, upto=None):
         """Show every caption line whose moment has arrived.
 
@@ -193,12 +222,16 @@ class _Base(ThemedScene):
         stale caption on screen while the avatar has moved on.
         """
         limit = self.time if upto is None else upto
-        while self._pending and self._pending[0]["start"] <= limit + 1e-3:
+        while True:
+            self._expire(limit)
+            if not (self._pending and self._pending[0]["start"] <= limit + 1e-3):
+                break
             nxt = self._pending.pop(0)
             gap = nxt["start"] - self.time
             if gap > 0.02:
                 self.wait(gap)
             self._line(nxt["text"])
+            self._cap_end = nxt.get("end")
 
     def play(self, *args, **kwargs):
         # An animation must not swallow a line that falls due while it runs.
@@ -264,6 +297,7 @@ class FaradayPart1(_Base):
         self.caption_mob = None
         self._wcache = {}
         self._pending = list(LINES)
+        self._cap_end = None
         try:
             self._build()
         except _Stop:
@@ -400,6 +434,7 @@ class FaradayPart2(_Base):
         self.caption_mob = None
         self._wcache = {}
         self._pending = list(LINES)
+        self._cap_end = None
         try:
             self._build()
         except _Stop:

@@ -66,11 +66,21 @@ Caption every word of the transcript, in order, from index 0 to {len(words)-1}."
     raw = re.sub(r"^```(?:json)?|```$", "", raw.strip(), flags=re.M).strip()
     rows = json.loads(raw[raw.index("["):raw.rindex("]") + 1])
 
+    # Each line also gets an END — the moment its last word stops being spoken.
+    # Without one a caption stays up until the next line replaces it, so it
+    # lingers through every pause between sentences and through the gap before
+    # the next beat, which reads as the caption being out of sync.
+    idx = [max(0, min(int(r["w"]), len(words) - 1)) for r in rows]
     lines, prev = [], -1e9
-    for r in rows:
-        i = max(0, min(int(r["w"]), len(words) - 1))
+    for n, r in enumerate(rows):
+        i = idx[n]
+        # the line runs to the word before the next line starts
+        last = (idx[n + 1] - 1) if n + 1 < len(rows) else len(words) - 1
+        last = max(i, min(last, len(words) - 1))
         t = max(words[i]["s"], prev + gap)
-        lines.append({"start": round(t, 2), "text": r["text"].strip()})
+        lines.append({"start": round(t, 2),
+                      "end": round(max(words[last]["e"], t + 0.6), 2),
+                      "text": r["text"].strip()})
         prev = t
 
     Path(out_path).write_text(json.dumps(lines, ensure_ascii=False, indent=2),
