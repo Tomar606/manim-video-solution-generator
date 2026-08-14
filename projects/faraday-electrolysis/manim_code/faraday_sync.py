@@ -55,6 +55,18 @@ CLIP_END = {1: 91.05, 2: 107.67}[PART]
 LINES = json.loads((_Path(ASSET_ROOT) /
     f"projects/faraday-electrolysis/lines_part{PART}.json").read_text(encoding="utf-8"))
 
+# Generated illustrations. Used where a drawn diagram genuinely fails to teach:
+# the series apparatus rendered as vectors was two empty rectangles joined by a
+# bar, with the electrolytes, the electrode metals and the single shared circuit
+# — the whole point of "same current through both" — all invisible.
+#
+# The image carries NO text. Generated lettering is unreliable, and unreliable
+# lettering on an exam diagram is worse than none; every label below is drawn in
+# Manim, where it is correct by construction.
+IMAGES = {
+    "series_cells": "projects/faraday-electrolysis/images/series_cells_4ae74384589f0415.png",
+}
+
 HILITE = {
     "विद्युत्-रासायनिक तुल्यांक": Z_COL, "रासायनिक तुल्यांक": E_COL,
     "प्रथम नियम": Z_COL, "पहला नियम": Z_COL, "दूसरा नियम": E_COL,
@@ -151,6 +163,13 @@ class _Base(ThemedScene):
         c = TIMING[i]
         if not keep:
             self.clear_stage()
+        # A cue asking for no caption owns the screen — the question card is
+        # the visual, and a caption over it is clutter. The track is decoupled
+        # from the cues now, so silence it explicitly until this cue ends
+        # rather than relying on the caption=False flag alone.
+        if not caption:
+            nxt = TIMING[i + 1]["start"] if i + 1 < len(TIMING) else CLIP_END
+            self._pending = [l for l in self._pending if l["start"] >= nxt]
         self.at(c["start"] - 0.30)
         self._i = i
 
@@ -398,17 +417,23 @@ class FaradayPart2(_Base):
         self.hold()
 
         # ---- cue 1-2: two cells IN SERIES ------------------------------- #
+        # An image, not drawn shapes. See IMAGES above for why. ImageMobject is
+        # a Mobject and not a VMobject, so this is a Group and never a VGroup.
         self.cue(1)
-        c1 = self.cell(0.52, battery=False)
-        c2 = self.cell(0.52, battery=False)
-        pair = VGroup(c1, c2).arrange(RIGHT, buff=1.15)
-        link = Line(c1.ca.get_top() + UP*0.55, c2.an.get_top() + UP*0.55).set_stroke(DIM, 4)
+        rig = ImageMobject(str(_Path(ASSET_ROOT) / IMAGES["series_cells"]))
+        rig.height = 4.5
+        e1 = MathTex(r"CuSO_4").scale(0.75).set_color(CU)
+        e2 = MathTex(r"AgNO_3").scale(0.75).set_color(ZN)
+        e1.next_to(rig, DOWN, buff=0.10).shift(LEFT * rig.width * 0.24)
+        e2.next_to(rig, DOWN, buff=0.10).shift(RIGHT * rig.width * 0.24)
         ser = self.hindi("श्रेणीक्रम — दोनों में समान विद्युत्", size=26, color=GOLD)
-        grp = VGroup(pair, link, ser)
-        ser.next_to(pair, DOWN, buff=0.34)
-        self.place(grp, y=0.40)
-        self.play(FadeIn(pair), run_time=0.8)
-        self.play(Create(link), FadeIn(ser, shift=UP*0.1), run_time=0.7)
+        grp = Group(rig, e1, e2)
+        ser.next_to(grp, DOWN, buff=0.26)
+        grp.add(ser)
+        self.place(grp, y=0.42)
+        self.play(FadeIn(rig, scale=1.03), run_time=0.9)
+        self.play(FadeIn(e1, shift=UP*0.10), FadeIn(e2, shift=UP*0.10), run_time=0.5)
+        self.play(FadeIn(ser, shift=UP*0.10), run_time=0.5)
         self.hold()
 
         self.cue(2, keep=True)

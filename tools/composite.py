@@ -60,14 +60,19 @@ def composite(bg, avatar, key, out, windows=None):
          f"similarity={key['sim']}:blend=0.05,format=rgba,alphaextract")
     alpha = ("[a1][a2]blend=all_mode=darken,dilation,dilation,erosion,erosion,"
              "eq=contrast=2.2:brightness=-0.10,erosion,erosion,gblur=sigma=1.0")
-    head = (f"[1:v]crop=650:930:650:150,format=rgba,"
-            f"despill=type=green:mix=0.7:expand=0.5,split=3[c][d1][d2];"
-            f"[d1]{k % key['v1']}[a1];[d2]{k % key['v2']}[a2];{alpha}[al];")
+    # ORDER IS LOAD-BEARING: despill runs on the COLOUR branch only, never
+    # before the key. Despilling first turns the green screen brown, so hsvkey
+    # no longer finds the hue it is looking for, nothing becomes transparent,
+    # and the whole despilled background composites as a brown rectangle behind
+    # the presenter. The keys must see the raw crop.
+    head = (f"[1:v]crop=650:930:650:150,format=rgba,split=3[c][d1][d2];"
+            f"[d1]{k % key['v1']}[a1];[d2]{k % key['v2']}[a2];{alpha}[al];"
+            f"[c]despill=type=green:mix=0.7:expand=0.5[cc];")
 
     if windows:
         w = _weight_expr(windows)
         fc = (head +
-              f"[c][al]alphamerge,split=2[av1][av2];"
+              f"[cc][al]alphamerge,split=2[av1][av2];"
               f"[av1]scale={FULL_W}:-2:flags=lanczos[big];"
               f"[av2]scale={SMALL_W}:-2:flags=lanczos[small];"
               f"[0:v]format=rgba,split=2[bg1][bg2];"
@@ -76,7 +81,7 @@ def composite(bg, avatar, key, out, windows=None):
               f"[full][shr]blend=all_expr='A*(1-({w}))+B*({w})'[v]")
     else:
         fc = (head +
-              f"[c][al]alphamerge,scale={FULL_W}:-2:flags=lanczos[av];"
+              f"[cc][al]alphamerge,scale={FULL_W}:-2:flags=lanczos[av];"
               f"[0:v]format=rgba[bg];"
               f"[bg][av]overlay=x=(W-w)/2:y={FULL_Y}:eval=init,format=yuv420p[v]")
 

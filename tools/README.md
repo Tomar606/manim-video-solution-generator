@@ -75,3 +75,44 @@ timed correctly. The caption track is a flat list of `{start, text}` and is
 deliberately NOT tied to the animation cues — a long animation must not hold a
 stale caption. In the scene, `self.play` is overridden to flush any line that
 falls due while an animation runs.
+
+## Filter order in the composite
+
+`despill` runs on the **colour branch only**, after the key has been taken from
+the raw crop. Despilling first turns the green screen brown, `hsvkey` no longer
+finds the hue it is looking for, nothing becomes transparent, and the whole
+despilled background composites as a **brown rectangle behind the presenter**.
+
+```
+[1:v]crop,format=rgba,split=3[c][d1][d2];   <- raw crop feeds BOTH keys
+[d1]hsvkey(v1),alphaextract[a1];
+[d2]hsvkey(v2),alphaextract[a2];
+[a1][a2]blend=darken,<repair>[al];
+[c]despill[cc];                             <- colour only
+[cc][al]alphamerge,...
+```
+
+## The question card owns the screen
+
+A `cue(i, caption=False)` suppresses the caption track until the next cue. The
+track is on its own clock now, so the flag alone no longer stops it — `cue()`
+drops any line falling before the next cue's start. Without this the first
+captions play over the question card.
+
+## When to reach for a generated image
+
+Almost never. Equations, graphs and labelled apparatus are sharper, exactly
+controllable and free as Manim vectors. Use an image when a drawn diagram
+genuinely fails to teach — the Faraday series apparatus rendered as vectors was
+two empty rectangles joined by a bar, with the electrolytes, the electrode
+metals and the shared circuit all invisible.
+
+**Never ask the model for text in the image.** Generated lettering is
+unreliable, and unreliable lettering on an exam diagram is worse than none. Ask
+for the apparatus only and draw every label in Manim over the top. Do not name a
+label, sign or symbol in the prompt either — naming a thing is an instruction to
+draw it (`.claude/skills/video-prompt/references/bug-ledger.md`).
+
+`src/concept_images.py` handles the alpha: gpt-image-2 has no transparency and
+paints the checkerboard if asked for it, so the prompt requests a white studio
+sweep which is cut to real alpha afterwards.

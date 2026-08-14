@@ -218,7 +218,11 @@ class Sanksharan(ThemedScene):
         c = TIMING[i]
         if not keep:
             self.clear_stage()
-        self._pending = [l for l in LINES if l["cue"] == i] if caption else []
+        # A cue asking for no caption owns the screen — the question card is
+        # the visual, and a caption over it is clutter.
+        if not caption:
+            nxt = TIMING[i + 1]["start"] if i + 1 < len(TIMING) else CLIP_END
+            self._pending = [l for l in self._pending if l["start"] >= nxt]
         self.at(c["start"] - 0.30)
         self._cue_i = i
         if self._pending:
@@ -308,7 +312,7 @@ class Sanksharan(ThemedScene):
     def construct(self):
         register_fonts()
         self.caption_mob = None
-        self._pending = []
+        self._pending = list(LINES)
         try:
             self._build()
         except _StopScene:

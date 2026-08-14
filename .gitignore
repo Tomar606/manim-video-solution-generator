@@ -71,3 +71,9 @@ projects/*/aiclips/test_*/
 # Rendered Manim output — regenerated from the scene + script, and a single
 # 1080x1920 part is several MB.
 projects/*/media/videos/
+
+# Local interpreters for the avatar-synced track (see tools/README.md).
+# Kept in the repo dir rather than the scratchpad, which gets wiped between
+# sessions and took the whole manim install with it once.
+.venv-manim/
+.venv-tools/
