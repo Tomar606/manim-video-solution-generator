@@ -1,0 +1,14 @@
+{
+  "topic_type": "comparison",
+  "hook_mechanism": "contradiction",
+  "hook_angle": "कभी छड़ क्षेत्र के समान्तर तो कभी लम्बवत्—आकर्षण बनाम प्रतिकर्षण की टकराती तस्वीर",
+  "transition_mechanisms": [
+    "contradiction",
+    "question_carryover"
+  ],
+  "part_opening_mechanisms": [
+    "answer_first",
+    "callback"
+  ],
+  "retention_intensity": "medium"
+}

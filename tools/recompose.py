@@ -1,0 +1,46 @@
+"""Rebuild the composed scene files from their hand-written sources.
+
+`compose_file()` INLINES src/manim_helpers.py under a generated header that
+defines THEME, CHROMA, ORIENTATION, ASSET_ROOT and the frame size. A scene must
+therefore never import the helpers itself — doing so once produced an 8x8 frame
+with the caption at 37% and no background at all.
+
+So the scene source keeps its own imports for editing and type checking, and
+they are stripped here. Every edit to a scene source has to be re-composed
+before rendering or the render silently uses the previous version.
+
+    python tools/recompose.py
+"""
+from __future__ import annotations
+
+import re
+from pathlib import Path
+
+from src.script_parser import parse_script
+from src.scene_codegen import compose_file
+
+JOBS = [
+    ("projects/sanksharan/manim_code/sanksharan.py",
+     "projects/sanksharan/manim_code/sank_composed.py",
+     "projects/sanksharan/script.md"),
+    ("projects/faraday-electrolysis/manim_code/faraday_sync.py",
+     "projects/faraday-electrolysis/manim_code/far_composed.py",
+     "projects/faraday-electrolysis/script.md"),
+]
+
+STRIP = (r"^from manim import \*.*$", r"^import numpy as np$",
+         r"^from src\.manim_helpers import .*$")
+
+
+def main(jobs=JOBS):
+    for src, dst, script in jobs:
+        body = Path(src).read_text(encoding="utf-8")
+        for pat in STRIP:
+            body = re.sub(pat, "", body, flags=re.M)
+        out = compose_file(parse_script(Path(script).read_text(encoding="utf-8")), body)
+        Path(dst).write_text(out, encoding="utf-8")
+        print(f"  {dst}  ({len(out.splitlines())} lines)")
+
+
+if __name__ == "__main__":
+    main()

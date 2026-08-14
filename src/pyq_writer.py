@@ -230,6 +230,93 @@ def choose_hook(q: "Question", history: dict) -> tuple[str, str]:
     return kind, (fresh or candidates)[0]
 
 
+# Part endings and re-entries, from retention_system.md. Ordered by how well
+# each suits the topic type; `direct_continuation` is deliberately kept in every
+# list because the spec insists not every part needs a dramatic ending.
+TYPE_TRANSITIONS = {
+    "derivation":  ["partial_reveal", "future_payoff", "open_loop",
+                    "direct_continuation"],
+    "law":         ["question_carryover", "challenge", "future_payoff",
+                    "direct_continuation"],
+    "comparison":  ["contradiction", "question_carryover", "open_loop",
+                    "direct_continuation"],
+    "process":     ["open_loop", "question_carryover", "future_payoff",
+                    "direct_continuation"],
+    "numerical":   ["challenge", "partial_reveal", "future_payoff",
+                    "direct_continuation"],
+    "definition":  ["future_payoff", "open_loop", "question_carryover",
+                    "direct_continuation"],
+}
+# Every re-entry mechanism here connects back to the part before it.
+# `direct_continuation` is deliberately absent: the retention spec allows a part
+# to simply carry on, but a student arriving at Part 2 on its own has no idea
+# what Part 1 established, and the videos are published as separate clips. So
+# each part opens by saying where we are — the MECHANISM varies, the bridge
+# does not.
+TYPE_OPENINGS = {
+    "derivation":  ["callback", "resolution_first", "visual_first",
+                    "recap_question"],
+    "law":         ["answer_first", "recap_question", "callback",
+                    "resolution_first"],
+    "comparison":  ["resolution_first", "answer_first", "callback",
+                    "visual_first"],
+    "process":     ["visual_first", "callback", "recap_question",
+                    "answer_first"],
+    "numerical":   ["answer_first", "resolution_first", "callback",
+                    "recap_question"],
+    "definition":  ["callback", "answer_first", "recap_question",
+                    "resolution_first"],
+}
+# Prose the writer needs, so the mechanism name is never guessed at.
+MECHANISM_GLOSS = {
+    "open_loop":           "raise the next question and leave it hanging",
+    "question_carryover":  "end on a question this part cannot answer yet",
+    "contradiction":       "end on the two facts that appear to clash",
+    "partial_reveal":      "the result is reached, its use is still to come",
+    "future_payoff":       "name what the next part makes possible",
+    "challenge":           "ask the student to attempt it before the next part",
+    "direct_continuation": "stop plainly, no device — the topic simply continues",
+    "answer_first":        "answer what the last part left hanging, then say "
+                           "in one line what that part had established",
+    "callback":            "name what the previous part established, then carry "
+                           "the one idea forward from it",
+    "recap_question":      "restate where the previous part got to and the "
+                           "question it left open",
+    "visual_first":        "recall the previous part in a line, then open on the "
+                           "diagram and explain from it",
+    "resolution_first":    "give the resolution first, then say which part it "
+                           "resolves and how it was reached",
+}
+
+
+def choose_part_plan(kind: str, parts: int, history: dict) -> dict:
+    """Per-part endings and re-entries, all distinct inside one script.
+
+    The user's rule: a three-part script must not end two parts the same way,
+    nor open two the same way. Uniqueness is guaranteed here by consuming from
+    an ordered list, so it cannot depend on the model remembering what it did
+    in an earlier part it can no longer see.
+    """
+    if parts < 2:
+        return {}
+
+    def pick(table: dict, seen_key: str, n: int) -> list[str]:
+        pool = table.get(kind) or table["definition"]
+        recent = list(history.get(seen_key, []))[-3:]
+        # least-recently-used first, order within the type table preserved
+        ranked = [c for c in pool if c not in recent] + \
+                 [c for c in pool if c in recent]
+        return (ranked * 3)[:n]
+
+    # parts-1 endings (the last part ends on the answer card, not a transition)
+    return {
+        "transition_mechanisms": pick(TYPE_TRANSITIONS,
+                                      "transition_mechanisms", parts - 1),
+        "part_opening_mechanisms": pick(TYPE_OPENINGS,
+                                        "part_opening_mechanisms", parts - 1),
+    }
+
+
 def load_history(n: int = 8) -> dict:
     """Recent hook/transition choices — a preference signal, never a ban."""
     if not HOOK_HISTORY.exists():
@@ -436,6 +523,28 @@ ACCURACY CHECK — this overrides the answer above wherever they disagree:
              "on the exam line because they happen to use exam_fomo; do not copy "
              "their opening when a different mechanism is specified. Report the "
              "mechanism you were given in the META line.")
+    plan = choose_part_plan(kind, parts, hist)
+    if plan:
+        trans, opens = plan["transition_mechanisms"], plan["part_opening_mechanisms"]
+        rows = []
+        for i, (t, o) in enumerate(zip(trans, opens), start=1):
+            rows.append(f"  Part {i} ENDS with   : {t} — {MECHANISM_GLOSS[t]}")
+            rows.append(f"  Part {i + 1} OPENS with : {o} — {MECHANISM_GLOSS[o]}")
+        task += (
+            f"\n\nPART STRUCTURE — this script is {parts} parts. Use exactly "
+            "these endings and re-entries, in this order:\n" + "\n".join(rows) +
+            "\n\nNo two parts may end the same way and no two may open the same "
+            "way — that is the point of the list.\n\n"
+            "EVERY part after the first must still say, in its FIRST spoken "
+            "line, what the previous part established — these publish as "
+            "separate clips and a student may arrive at Part 2 with no idea "
+            "what came before. What varies is HOW, per the mechanism above; "
+            "what never varies is that the bridge is there. Do not reuse the "
+            "wording “बच्चों, पिछले पार्ट में हमने...” in more than one part of "
+            "the same script — name the actual result carried forward instead "
+            "(“पिछले पार्ट में फ्लक्स q बटा ε-नॉट निकला था — अब…”). "
+            "Report these in the META line.")
+
     if hist:
         task += ("\n\nRECENT CHOICES ACROSS THE LAST FEW VIDEOS — a preference "
                  "signal, not a ban. If the best mechanism for THIS topic is one "
@@ -494,6 +603,11 @@ CLOSERS = ("स्क्रीनशॉट", "उन्नति बैच")
 # is normal speech; what must never be spoken is a relation between them.
 ALGEBRA_GLYPH = re.compile(r"[∝×÷√^]")
 LATIN_VAR = re.compile(r"(?<![A-Za-z])[A-Za-z](?![A-Za-z])")
+LATIN_RUN = re.compile(r"[A-Za-z]{2,}")
+# "Part 1" is the one Latin run the split convention requires — a later part
+# opens by naming the one before it. Everything else must be spelled the way it
+# is spoken.
+SPOKEN_LATIN_OK = {"Part"}
 FOCUS_CUE = re.compile(r"ध्यान से|याद रख|गलती करते|ज़रा देख|नोट कर")
 
 
@@ -507,7 +621,19 @@ class Check:
         return not self.findings
 
 
-def check_script(text: str, q: Question, *, parts: int = 1) -> Check:
+# A bridge can be worded many ways and the point is that the student is told
+# where we are — not that a particular phrase was used. Matching only
+# "पिछले पार्ट" rejected perfectly good openings like "पिछले हिस्से में…" and
+# sent the repair loop round in circles.
+BRIDGE_RE = re.compile(
+    r"पिछल[ेीा]\s*(पार्ट|भाग|हिस्से|हिस्सा|कड़ी|वीडियो|बार)|"
+    r"पहल[ेा]\s*(पार्ट|भाग|हिस्से)|Part\s*\d|"
+    r"अब\s*तक|अभी\s*तक|इससे\s*पहले|यहाँ\s*तक|"
+    r"(हमने|आपने)\s+(देखा|समझा|निकाला|पाया|सीखा|जाना|लिखा|स्थापित)")
+
+
+def check_script(text: str, q: Question, *, parts: int = 1,
+                 hook_mech: str | None = None) -> Check:
     c = Check()
     lines = [l.strip() for l in text.split("\n")]
     spoken = [" ".join(m.split()) for m in SPOKEN_RE.findall(text)]
@@ -538,6 +664,31 @@ def check_script(text: str, q: Question, *, parts: int = 1) -> Check:
             c.findings.append(
                 "A split script needs a `Part N Ending 🎙️` section with the "
                 "recap and the handoff to the next part.")
+
+        # No two parts may open the same way, and none may end the same way.
+        # The prompt asks for this; left unchecked the model still opens every
+        # part with "बच्चों, पिछले पार्ट में हमने…". Compare on the opening
+        # content words, so a reworded copy of the same move is still caught.
+        def _shape(s: str) -> str:
+            words = [w for w in re.sub(r"[^\w\s]", " ", s).split()
+                     if w not in ("बच्चों", "तो", "अब", "और", "चलिए", "बस")]
+            return " ".join(words[:5])
+
+        chunks = re.split(r"^\s*PART\s+\d+\s*$", text, flags=re.M)[1:]
+        for label, idx in (("open", 0), ("end", -1)):
+            shapes = {}
+            for n, chunk in enumerate(chunks, 1):
+                sp = SPOKEN_RE.findall(chunk)
+                if not sp:
+                    continue
+                sh = _shape(" ".join(sp[idx].split()))
+                if sh and sh in shapes:
+                    c.findings.append(
+                        f"Part {shapes[sh]} and Part {n} {'open' if idx == 0 else 'end'} "
+                        f"on the same line — every part must {'open' if idx == 0 else 'end'} "
+                        f"differently. Rewrite Part {n}'s "
+                        f"{'first' if idx == 0 else 'last'} spoken line.")
+                shapes[sh] = n
         if "अगले पार्ट" not in text:
             c.findings.append(
                 'Part 1 must hand off with "…ये समझेंगे अगले पार्ट में।"')
@@ -568,6 +719,49 @@ def check_script(text: str, q: Question, *, parts: int = 1) -> Check:
         if len(s.split()) > 34:
             c.findings.append(f'Spoken line too long to say in one breath '
                               f'({len(s.split())} words): "{s[:60]}…"')
+        # A single Latin letter in prose is fine — a verified script names W₁
+        # and W₂ out loud. A RUN of them is not: physics calculus notation
+        # (dS, dl, dB), function names (cos, sin) and vertex labels (AOP) went
+        # to TTS verbatim, which reads them as English words rather than
+        # spelling them out. They must be written the way they are said.
+        for tok in LATIN_RUN.findall(s):
+            if tok in SPOKEN_LATIN_OK:
+                continue
+            c.findings.append(
+                f'"{tok}" is Latin text inside a spoken line — TTS reads it '
+                f'verbatim. Write it as it is pronounced in Hindi '
+                f'(dS -> "डी-एस", dl -> "डी-एल", cos -> "कॉस", AOP -> '
+                f'"ए-ओ-पी"), and keep the symbol itself for the On Screen '
+                f'line: "{s[:60]}"')
+
+    # Every part after the first must open by saying where the last one got to.
+    # These publish as separate clips, so a student can land on Part 2 cold.
+    if parts > 1:
+        for n, chunk in enumerate(
+                re.split(r"^\s*PART\s+\d+\s*$", text, flags=re.M)[2:], start=2):
+            sp = SPOKEN_RE.findall(chunk)
+            if sp and not BRIDGE_RE.search(" ".join(sp[:2])):
+                c.findings.append(
+                    f"Part {n} opens without saying what the previous part "
+                    f"established — it publishes as its own clip, so a student "
+                    f"may arrive here with no context. Open it with a one-line "
+                    f"bridge naming the actual result carried forward, then "
+                    f"continue. Word it differently from the other parts. "
+                    f'Currently: "{sp[0][:60]}"')
+
+    # The assigned mechanism has to be the OPENING, not a label in the META. The
+    # samples all open on the board/year line because they happen to use
+    # exam_fomo, and left to itself the model copies that opening for every
+    # topic — which is how five scripts in a row began with the same sentence.
+    if hook_mech and hook_mech != "exam_fomo" and spoken:
+        first = spoken[0]
+        if "एमपी बोर्ड" in first or (q.years and year_phrase(q.years) in first):
+            c.findings.append(
+                f"The hook mechanism for this topic is {hook_mech}, so the "
+                f"FIRST spoken line must be that hook. It is currently the "
+                f"board/year line, which belongs SECOND. Rewrite line 1 as a "
+                f"{hook_mech} hook about this specific question and move the "
+                f'exam line after it. Currently: "{first[:60]}"')
 
     joined = " ".join(spoken)
     # The year must appear near the top, but NOT necessarily in the first line:
@@ -614,20 +808,42 @@ def draft(q: Question, *, provider: str | None = None,
 
     # A script only reveals its length once written, so measure the draft and
     # rewrite it as parts if the render would run past three minutes.
+    # Writing it as parts makes it longer — the re-entries and part endings are
+    # new material — so a draft that measured 2 parts can come back needing 3.
+    # Re-measure and rewrite until the count settles, or the part plan is short
+    # by one and the last part silently ends like an earlier one.
     parts = estimate_parts(text)
-    if parts > 1:
+    for _ in range(3):
+        if parts <= 1:
+            break
         meta, text = split_meta(
             write_script(q, ver, provider=provider, style=style, parts=parts))
+        again = estimate_parts(text)
+        if again == parts:
+            break
+        parts = again
 
-    chk = check_script(text, q, parts=parts)
+    mech = choose_hook(q, load_history())[1]
+    chk = check_script(text, q, parts=parts, hook_mech=mech)
     for _ in range(max_attempts - 1):
         if chk.ok:
             break
         meta, text = split_meta(write_script(
             q, ver, provider=provider, style=style, parts=parts,
             findings="\n".join(f"- {f}" for f in chk.findings), previous=text))
-        chk = check_script(text, q, parts=parts)
+        chk = check_script(text, q, parts=parts, hook_mech=mech)
 
+    # Record what was ASKED for, not what the model said it did. The META line
+    # is the model's own report and it drifts — it named the mechanism it felt
+    # it had used rather than the one it was given, so `problem` went into the
+    # history three times running and the rotation never actually rotated.
+    # `load_history()` is stable across this whole call because `remember()`
+    # only fires below, so this reproduces exactly what write_script() decided.
+    hist = load_history()
+    kind = classify_topic(q)
+    meta["topic_type"] = kind
+    meta["hook_mechanism"] = choose_hook(q, hist)[1]
+    meta.update(choose_part_plan(kind, estimate_parts(text), hist))
     hook = (chk.spoken or [""])[0]
     remember(q.qid, meta, hook)
     return text, chk, ver, meta

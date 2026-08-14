@@ -58,6 +58,17 @@ is common unless it plausibly is.
 Chemistry order of preference: prediction, mistake, exam_fomo, challenge,
 contradiction, analogy.
 
+## The assigned mechanism must be the actual opening
+
+The approved samples all open on the board/class/year line, because they happen
+to use `exam_fomo`. Left to itself the model copies that opening whatever
+mechanism it was given, and reports the assigned mechanism in the META line
+anyway — five physics scripts in a row began with the identical sentence.
+
+So when the mechanism is anything other than `exam_fomo`, the FIRST spoken line
+is that hook and the exam line comes SECOND. `check_script` fails a script whose
+opening line carries the board or year phrase under any other mechanism.
+
 ## Banned
 
 Generic clickbait of any kind: "आप यकीन नहीं करेंगे", "आगे जो होगा",

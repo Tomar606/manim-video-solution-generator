@@ -1,0 +1,12 @@
+{
+  "topic_type": "derivation",
+  "hook_mechanism": "problem",
+  "hook_angle": "आंशिक परावैद्युत होने पर V को परतों में जोड़कर C निकालना, फिर धातु पट्टिका का प्रभाव समझना",
+  "transition_mechanisms": [
+    "future_payoff"
+  ],
+  "part_opening_mechanisms": [
+    "resolution_first"
+  ],
+  "retention_intensity": "medium"
+}

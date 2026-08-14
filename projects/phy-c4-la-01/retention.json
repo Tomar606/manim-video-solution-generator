@@ -1,0 +1,14 @@
+{
+  "topic_type": "derivation",
+  "hook_mechanism": "problem",
+  "hook_angle": "अक्ष पर बिंदु दूर जाए तो चुंबकीय क्षेत्र कैसे घटेगा—सीधे बायो‑सावर्ट से व्यंजक निकालकर देखेंगे",
+  "transition_mechanisms": [
+    "direct_continuation",
+    "partial_reveal"
+  ],
+  "part_opening_mechanisms": [
+    "visual_first",
+    "direct_continuation"
+  ],
+  "retention_intensity": "medium"
+}

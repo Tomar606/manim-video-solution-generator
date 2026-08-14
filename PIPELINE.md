@@ -247,3 +247,79 @@ qs = load_questions("Chemistry")
 text, checks, verification = draft(qs[0])
 print(checks.ok, checks.findings)
 ```
+
+## 10. Avatar-synced videos (the PYQ Manim track)
+
+A video whose clock comes from a **real HeyGen clip** rather than from
+synthesized narration. The audio already exists and cannot be changed, so every
+stage conforms to it. Tooling: [`tools/`](tools/README.md).
+
+`projects/faraday-electrolysis/` and `projects/sanksharan/` are the two worked
+examples; their scene files are **hand-written source**, not build output, and
+are committed.
+
+### The order that matters
+
+`transcribe` → `captions_from_audio` → `calibrate_key` → `recompose` → render →
+`avatar_windows` → `composite`.
+
+### Mistakes already made here
+
+- **Captions must come from the AUDIO, not the script.** A shoot mixes lines
+  from the current script, an earlier draft, and paraphrase. The approved
+  Faraday master covered only 51% / 58% of what its own clips actually say, and
+  whole sentences — including the formal statement of the first law — played
+  under a caption showing something else. Diagnose with
+  `tools/align.coverage()`, and note it must be measured **audio→text**:
+  script→audio looks fine even when the script is the wrong draft, because
+  every script line does appear somewhere.
+- **`chromakey` cannot key this green screen.** It is lit unevenly (value
+  0.67–0.99 within one frame), so a tolerance wide enough for the dark side also
+  matches skin midtones — 8.3% of the presenter's face was transparent with the
+  background showing through. The key is `hsvkey` on **hue**, which does not
+  drift with lighting, applied twice at different value references and combined
+  with `blend=darken`. Calibrate per clip: the three clips so far needed three
+  different settings.
+- **Despill leaves a dark olive rim** on hair unless the alpha is eroded twice
+  first; that ring is spill-contaminated pixels, not subject.
+- **`overlay=format=yuv420` destroys alpha.** Stay RGBA until the final
+  `format=yuv420p`.
+- **One caption line at a time.** A whole sentence held while only its first
+  half is spoken reads as out of sync even when correctly timed. The caption
+  track is a flat `{start, text}` list on its own clock, deliberately *not*
+  keyed to the animation cues, and `self.play` is overridden so a long animation
+  cannot hold a stale line.
+- **Wrap captions on measured width, not character count.** Devanagari conjuncts
+  are not equal width; a character-count wrap ran captions to the frame edge
+  with zero margin.
+- **The stage band's top is not a constant.** It is derived from the current
+  caption's actual bottom, or a three-line caption collides with the animation.
+- **`scale` cannot resize per frame and `zoompan` destroys alpha.** The
+  presenter's shrink is two complete composites blended by a time expression.
+  It is slow (~40 min for a 90s part); skip the windows argument when not needed.
+- **`--max-turns 1` on the Claude CLI loses the whole response** if the model
+  reaches for a tool: the denial consumes the only turn and it returns
+  `error_max_turns` with no text. `src/llm.py` allows 6.
+
+### PYQ script rules learned the hard way
+
+- **The assigned hook mechanism must be the actual first line.** Every approved
+  sample opens on the board/year line because they happen to use `exam_fomo`, so
+  the model copies that opening for every topic and still reports the assigned
+  mechanism in its META. Five physics scripts opened with the identical
+  sentence. `check_script(hook_mech=...)` now fails that.
+- **Record the decision, not the model's echo.** History drove hook rotation off
+  the META line, which drifts, so `problem` came up three times running and the
+  rotation never rotated. `draft()` records what was *asked for*.
+- **Every part after the first opens with a bridge.** Parts publish as separate
+  clips. `BRIDGE_RE` enforces it — and it must accept the many ways to word one
+  ("पिछले हिस्से में", "अब तक हमने"), or the repair loop oscillates forever
+  fixing a bridge that was already there.
+- **A whole-script repair regresses.** Fixing the opening rewrites the script and
+  restores the sample's opening. Splice single lines in with code instead.
+- **Keep the best draft.** A repair pass can fix one finding and introduce two.
+- **`estimate_parts` measures the FIRST draft**, but writing it as parts makes it
+  longer; re-measure until the count settles or the part plan comes up short.
+- **Multi-letter Latin in a spoken line is read as an English word** by TTS
+  (`dS`, `dl`, `cos`). Write them as said: "डी-एस", "कॉस". *Single* letters are
+  fine — the approved samples say `W₁` and `W₂` aloud.

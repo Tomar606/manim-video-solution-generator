@@ -29,6 +29,17 @@ the Hindi beside it as a label. "ऐनोड (ऑक्सीकरण): Zn →
 "E°सेल = E°कैथोड − E°ऐनोड" is not — the renderer draws Hindi and formulae by
 different paths and cannot mix them inside one expression.
 
+NOTATION IS NOT TRANSLATED — verified against NCERT Hindi (Class 12 रसायन
+विज्ञान and भौतिकी). These stay EXACTLY as written, inside Hindi sentences:
+  · chemical formulas — NaOH, Na₂CO₃, H₂SO₄, KMnO₄, K₂Cr₂O₇, Fe₂O₃. NCERT
+    writes them as formulas in Hindi-medium text; never spell them out as
+    "सोडियम हाइड्रॉक्साइड" in place of the formula.
+  · symbols and variables — q, r, n, F₁₂, r̂, ε₀, Λ, λ, α, θ, π, Δ
+  · digits — always Latin (5 cm, चित्र 1.4, वर्ष 2025), never ०-९
+  · units — mol, kg, bar, atm, N/C, C/m
+Only English PROSE gets translated: counter-pressure -> प्रति-दाब,
+vapour -> वाष्प. A formula is not English; it is notation.
+
 TERMINOLOGY IS FROZEN. Subject terms and nomenclature never get simplified,
 renamed or anglicised — विद्युत्-रासायनिक तुल्यांक, समानुपाती, निरक्षीय स्थिति,
 द्विध्रुव आघूर्ण stay exactly as they are. Everything joining them is casual.

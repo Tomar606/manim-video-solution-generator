@@ -368,8 +368,11 @@ class Conversation:
                 f"(use the Read tool on each):\n{listing}"
             )
         else:
-            # No tools at all: one turn, pure text generation.
-            cmd += ["--max-turns", "1", "--allowed-tools", ""]
+            # No tools at all: pure text generation. The turn budget is not 1,
+            # though — the model sometimes still reaches for a tool, and with a
+            # single turn that denial ends the run with `error_max_turns` and no
+            # text at all. A few spare turns let it recover and answer.
+            cmd += ["--max-turns", "6", "--allowed-tools", ""]
 
         try:
             proc = subprocess.run(

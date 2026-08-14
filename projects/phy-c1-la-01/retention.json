@@ -1,0 +1,12 @@
+{
+  "topic_type": "derivation",
+  "hook_mechanism": "problem",
+  "hook_angle": "अगर बंद पृष्ठ का आकार बदल दें, क्या वैद्युत फ्लक्स बदलेगा?",
+  "transition_mechanisms": [
+    "partial_reveal"
+  ],
+  "part_opening_mechanisms": [
+    "direct_continuation"
+  ],
+  "retention_intensity": "medium"
+}

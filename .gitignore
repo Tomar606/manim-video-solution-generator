@@ -12,7 +12,14 @@ __pycache__/
 # only the script and the assets an author supplied are worth committing.
 output/
 projects/*/audio/
-projects/*/manim_code/
+# NOT projects/*/manim_code/ wholesale: the scene file for a hand-built video is
+# SOURCE, not build output — it is written once and edited by hand, and losing it
+# means rebuilding the whole animation. Only the composed file is generated
+# (scene + inlined manim_helpers under a generated header), so only that is
+# ignored. See tools/recompose.py.
+projects/*/manim_code/*_composed.py
+projects/*/manim_code/segment_*.py
+projects/*/manim_code/__pycache__/
 projects/*/media/
 projects/*/work/
 projects/*/final/

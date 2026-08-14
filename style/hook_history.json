@@ -268,5 +268,89 @@
       "retention_intensity": "medium"
     },
     "hook": "एमपी बोर्ड कक्षा बारहवीं के बच्चों! ये सवाल दो हज़ार अठारह में आ चुका है, और इस बार भी आपकी त्रैमासिक परीक्षा में आ सकता है।"
+  },
+  {
+    "qid": "PHY-C1-LA-01",
+    "meta": {
+      "topic_type": "derivation",
+      "hook_mechanism": "problem",
+      "hook_angle": "अगर बंद पृष्ठ का आकार बदल दें, क्या वैद्युत फ्लक्स बदलेगा?",
+      "transition_mechanisms": [
+        "partial_reveal"
+      ],
+      "part_opening_mechanisms": [
+        "direct_continuation"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "अगर बंद पृष्ठ का आकार बड़ा या छोटा कर दें, तो वैद्युत फ्लक्स बदलेगा या नहीं?"
+  },
+  {
+    "qid": "PHY-C1-LA-02",
+    "meta": {
+      "topic_type": "derivation",
+      "hook_mechanism": "challenge",
+      "hook_angle": "क्या गॉसीय पृष्ठ का आकार बदलने पर फ्लक्स या E बदलता है — सममिति का सही उपयोग ही जवाब देता है",
+      "transition_mechanisms": [
+        "open_loop"
+      ],
+      "part_opening_mechanisms": [
+        "callback"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "एमपी बोर्ड कक्षा बारहवीं के बच्चों! ये सवाल दो हज़ार तेईस में आ चुका है और इस बार भी आपकी त्रैमासिक परीक्षा में आ सकता है।"
+  },
+  {
+    "qid": "PHY-C2-LA-01",
+    "meta": {
+      "topic_type": "derivation",
+      "hook_mechanism": "problem",
+      "hook_angle": "आंशिक परावैद्युत होने पर V को परतों में जोड़कर C निकालना, फिर धातु पट्टिका का प्रभाव समझना",
+      "transition_mechanisms": [
+        "future_payoff"
+      ],
+      "part_opening_mechanisms": [
+        "resolution_first"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "एमपी बोर्ड कक्षा बारहवीं के बच्चों! ये सवाल दो हज़ार बीस में आ चुका है, और इस बार भी आपकी त्रैमासिक परीक्षा में आ सकता है।"
+  },
+  {
+    "qid": "PHY-C4-LA-01",
+    "meta": {
+      "topic_type": "derivation",
+      "hook_mechanism": "problem",
+      "hook_angle": "अक्ष पर बिंदु दूर जाए तो चुंबकीय क्षेत्र कैसे घटेगा—सीधे बायो‑सावर्ट से व्यंजक निकालकर देखेंगे",
+      "transition_mechanisms": [
+        "direct_continuation",
+        "partial_reveal"
+      ],
+      "part_opening_mechanisms": [
+        "visual_first",
+        "direct_continuation"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "अगर वृत्ताकार धारा पाश से थोड़ी दूर अक्ष पर चले जाएँ, तो चुंबकीय क्षेत्र कैसे बदलेगा—बढ़ेगा, घटेगा या कोई सरल नियम देगा?"
+  },
+  {
+    "qid": "PHY-C5-LA-01",
+    "meta": {
+      "topic_type": "comparison",
+      "hook_mechanism": "contradiction",
+      "hook_angle": "कभी छड़ क्षेत्र के समान्तर तो कभी लम्बवत्—आकर्षण बनाम प्रतिकर्षण की टकराती तस्वीर",
+      "transition_mechanisms": [
+        "contradiction",
+        "question_carryover"
+      ],
+      "part_opening_mechanisms": [
+        "answer_first",
+        "callback"
+      ],
+      "retention_intensity": "medium"
+    },
+    "hook": "एमपी बोर्ड कक्षा बारहवीं के बच्चों! ये सवाल दो हज़ार अठारह में आ चुका है, और इस बार भी आपकी त्रैमासिक परीक्षा में आ सकता है।"
   }
 ]

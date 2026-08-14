@@ -1,0 +1,12 @@
+{
+  "topic_type": "derivation",
+  "hook_mechanism": "challenge",
+  "hook_angle": "क्या गॉसीय पृष्ठ का आकार बदलने पर फ्लक्स या E बदलता है — सममिति का सही उपयोग ही जवाब देता है",
+  "transition_mechanisms": [
+    "open_loop"
+  ],
+  "part_opening_mechanisms": [
+    "callback"
+  ],
+  "retention_intensity": "medium"
+}

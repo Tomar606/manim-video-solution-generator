@@ -1,28 +1,22 @@
-**1. Factual errors**
+**Verdict: physics is correct, but the statement of Gauss's theorem is incomplete and the flux notation is sloppy — both cost marks.**
 
-- गॉस प्रमेय का कथन अधूरा/गलत है। NCERT: कुल फ्लक्स = परिबद्ध आवेश का **1/ε₀ गुना** — पर यह केवल **निर्वात/मुक्त आकाश** में और **बंद पृष्ठ** के लिए है। कथन में "कुल विद्युत फ्लक्स" (न कि "फ्लक्स") लिखना और $\phi_E = \oint \vec{E}\cdot\overrightarrow{ds} = \frac{q}{\varepsilon_0}$ समाकल रूप देना ज़रूरी है। बिना समाकल रूप के कथन आधा अंक कटता है।
-- $\oint \vec{E}\cdot\overrightarrow{ds}$ में सदिश चिह्न गायब हैं — बैंक में सर्वत्र अदिश $E\cdot ds$ छपा है। सदिश चिह्न लिखवाइए।
-- $\cos 0°$ का कारण नहीं दिया। लिखना होगा: गोलीय पृष्ठ पर $\vec{E}$ और क्षेत्रफल सदिश $\overrightarrow{ds}$ दोनों **त्रिज्यीय दिशा** में हैं, अतः $\theta = 0°$।
-- $E \oint ds$ बाहर निकालने का औचित्य नहीं: **सममिति के कारण गॉसीय पृष्ठ के प्रत्येक बिन्दु पर $E$ का परिमाण समान है**, इसलिए $E$ समाकल से बाहर आता है। यही पूरे निगमन का मर्म है और यही सबसे अधिक छूटता है।
+**1. Errors**
+- गॉस प्रमेय's statement omits **निर्वात/मुक्त आकाश में** and, more importantly, the flux must be **निर्गत (outward) फ्लक्स** through a **बंद पृष्ठ**. Also the standard NCERT statement is $\phi_E = \frac{1}{\varepsilon_0} \times$ (परिबद्ध आवेश) — write $\oint \vec{E}\cdot\overrightarrow{ds} = \frac{q}{\varepsilon_0}$, not just $\phi_E = q/\varepsilon_0$.
+- $\oint E \cdot ds = \oint E\, ds \cos 0°$ is written twice as if two different things; the first must be the **vector** form $\oint \vec{E}\cdot\overrightarrow{ds}$. Missing arrows/dot-product is a real deduction.
+- Not an error but must be stated: $\cos 0°$ is used **because** $\vec{E}$ is radially outward and $\overrightarrow{ds}$ is along the outward normal — i.e. $\vec{E} \parallel \overrightarrow{ds}$ at every point. The bank asserts $\cos 0°$ without justification.
 
-**2. पूर्ण अंकों के लिए जो जोड़ना है**
+**2. Missing for full marks**
+- Justification that $E$ is **constant in magnitude** over the Gaussian surface (spherical symmetry) — that alone permits $E$ to come out of the integral. This is the crux of the derivation; without it $\oint E\,ds = E\oint ds$ is unearned.
+- Naming the sphere as the **गॉसीय पृष्ठ** chosen deliberately for symmetry.
+- Final line should note the force is along $OP$ (**अपसारी/प्रतिकर्षण** for like charges) — Coulomb's law is a vector law.
 
-- अंत में सदिश रूप: $\vec{F} = \frac{1}{4\pi\varepsilon_0}\frac{qq_0}{r^2}\hat{r}$, और कथन कि बल **आवेशों को मिलाने वाली रेखा** के अनुदिश है।
-- माध्यम में: $\varepsilon = \varepsilon_0\varepsilon_r$ (या $K$), अतः $F = \frac{1}{4\pi\varepsilon_0 K}\frac{qq_0}{r^2}$।
-- SI मात्रक: $\varepsilon_0 = 8.85\times10^{-12}\ \text{C}^2\text{N}^{-1}\text{m}^{-2}$, $\frac{1}{4\pi\varepsilon_0} = 9\times10^{9}\ \text{Nm}^2\text{C}^{-2}$।
+**3. Frozen terminology (NCERT Hindi)**
+गॉस प्रमेय · वैद्युत फ्लक्स · बंद पृष्ठ · गॉसीय पृष्ठ · परिबद्ध आवेश · क्षेत्रफल अवयव · निर्वात की विद्युतशीलता ($\varepsilon_0$) · विद्युत क्षेत्र की तीव्रता · व्युत्क्रम वर्ग का नियम · बिंदु आवेश · पृष्ठ का बाह्य अभिलंब
 
-**3. जो शब्द ज्यों-के-त्यों लिखने हैं**
+**4. Step order**
+Statement → point charge $+q$ at $O$ → sphere of radius $r$ as Gaussian surface → symmetry ⇒ $E$ constant, $\vec{E}\parallel \overrightarrow{ds}$ → $\phi_E = E\cdot 4\pi r^2$ → equate to $q/\varepsilon_0$ → $E$ → place $q_0$, $F = q_0E$ → Coulomb.
+**Commonly reversed:** students write $\phi_E = \varepsilon_0 q$ or $E = \frac{q}{4\pi\varepsilon_0 r}$ (r not squared). Also $\varepsilon_0$ sits in the **denominator** throughout.
 
-गॉस की प्रमेय, गॉसीय पृष्ठ, बंद पृष्ठ, विद्युत फ्लक्स, परिबद्ध आवेश, क्षेत्रफल अवयव, क्षेत्रफल सदिश, विद्युत क्षेत्र की तीव्रता, त्रिज्यीय, सममिति, निर्वात की विद्युतशीलता, परावैद्युतांक, व्युत्क्रम वर्ग का नियम।
-
-**4. क्रम — और जो उलटा हो जाता है**
-
-कथन → चित्र व गॉसीय पृष्ठ का चयन → $\theta=0°$ → सममिति से $E$ बाहर → $\oint ds = 4\pi r^2$ → समी.(1) → गॉस से समी.(2) → तुलना → $E$ → $F=q_0E$ → कूलॉम नियम।
-
-उलटा होने वाला सम्बन्ध: $F = q_0E$ को $E = q_0F$ लिख देना। साथ ही $\varepsilon_0$ **हर** में है, अंश में नहीं; और $1/4\pi\varepsilon_0$ का $4\pi$ गोले के $4\pi r^2$ से आता है — यह जोड़ना दिखाएँ, यही "निगमन" है।
-
-**5. एनिमेशन में**
-
-$+q$ केन्द्र पर, त्रिज्या $r$ का गोला (वृत्त + परिप्रेक्ष्य दीर्घवृत्त), पृष्ठ पर छोटा पैच $ds$, उससे **बाहर की ओर अभिलम्ब** $\hat{n}$, और उसी दिशा में $\vec{E}$ का तीर — दोनों अध्यारोपित दिखें ताकि $\theta=0°$ स्पष्ट हो। सभी तीर एकसमान लंबाई के (समान $E$)।
-
-बचने योग्य त्रुटियाँ: $ds$ का तीर स्पर्शरेखीय दिखाना; तीरों की लंबाई असमान; आवेश केन्द्र से हटा हुआ (तब सममिति टूटती है); $q_0$ को पहले से $P$ पर रखना (वह अंतिम चरण में आता है); Devanagari को $E°_{सेल}$ जैसे सूत्र के भीतर चिपकाना — हिन्दी `Text()`, सूत्र `MathTex()`।
+**5. Animation**
+Draw: charge $+q$ at centre $O$, dashed sphere radius $r$, point $P$ on the surface, a small patch $ds$ with **outward normal arrow coincident with $\vec{E}$** at that patch, field lines radial and uniformly spaced.
+Avoid: charge drawn off-centre; $ds$ normal at an angle to $\vec{E}$; field lines denser on one side; solid sphere hiding the charge; and per CLAUDE.md, never glue Devanagari into MathTex — `गॉसीय पृष्ठ` as `Text()`, $\varepsilon_0$ as `MathTex()`.
