@@ -76,19 +76,19 @@ Generic clickbait of any kind: "आप यकीन नहीं करेंग
 "वीडियो के अंत तक जरूर देखना". Also: artificial suspense, fake urgency,
 excessive rhetorical questions, and *repeated* "बच्चों", "आज हम सीखेंगे".
 
-**"ध्यान से सुनो" is not banned — repeating it is.** The team asked for a
-warmer, more conversational explaining voice, and lines of this shape are the
-approved register:
+**"ध्यान से सुनो" is not banned — repeating it is.** The team's note on the
+first batch was that the scripts read too formal. The rule that came out of it:
 
-    "इतना दिमाग़ में बैठ गया? अब आगे समझते हैं"     — check in after a hard idea
-    "ऐसा समझाऊँगा कि मज़ा आ जायेगा"                  — promise before a long stretch
-    "ध्यान से सुनो, यहीं नंबर कटते हैं"              — warn where marks are lost
+> **Subject matter formal, connective tissue casual.**
 
-The rule is that each is used where it is TRUE and worded differently every
-time. "यहीं नंबर कटते हैं" belongs at the exact place students lose marks — a
-reversed sign, a dropped unit, a skipped step — not sprinkled for tone.
+The teaching keeps its register; the sentences between the teaching should sound
+like a person talking — "चलो इतना हो गया? अब आगे बढ़ते हैं", "इस बात को दिमाग
+में बिठा लो", "नेक्स्ट पार्ट में मिलते हैं", "फॉलो कर लो". Casual never means
+mocking or talking down.
 
-If the content is interesting, let the content do the retention work.
+The full table of what to avoid and what to say instead is in `NOTES.md`, and
+the approved alternatives for each recurring moment are in `variations.yaml`.
+Use a different one each time.
 
 ## Rhythm, not a template
 

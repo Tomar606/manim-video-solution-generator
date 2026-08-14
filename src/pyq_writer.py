@@ -475,8 +475,10 @@ document. Follow this convention exactly:
      बार भी आपकी त्रैमासिक परीक्षा में आ सकता है।”
     “तो चलो, इसे ऐसे याद करते हैं कि परीक्षा में आपके चार नंबर पक्के हो जाएँ!”
 - Every part except the last ends with a `Part N Ending 🎙️` section: first the
-  one thing to remember with its formula, then what the next part will answer —
-  “…ये समझेंगे अगले पार्ट में।”
+  one thing to remember with its formula, then what the next part will answer.
+  Say it the way a person would, and prefer “नेक्स्ट पार्ट में मिलते हैं”:
+  “तो यहाँ तक तो कर लिया? सही बात है! अब आंसर में कैसे लिखना है, ये नेक्स्ट
+  पार्ट में मिलते हैं।”
 - Parts after the first open with a bridge, NOT the hook. No exam years, no
   board/class line — those are spent:
     “बच्चों, Part 1 में हमने समझा …, और अब समझते हैं …”
@@ -625,6 +627,11 @@ class Check:
 # where we are — not that a particular phrase was used. Matching only
 # "पिछले पार्ट" rejected perfectly good openings like "पिछले हिस्से में…" and
 # sent the repair loop round in circles.
+# The handoff at the end of a part. Wording is the writer's choice; pointing
+# forward is not.
+HANDOFF_RE = re.compile(r"नेक्स्ट\s*पार्ट|अगले\s*पार्ट|अगली\s*कड़ी|"
+                        r"आगे\s*वाले\s*पार्ट|अगले\s*भाग")
+
 BRIDGE_RE = re.compile(
     r"पिछल[ेीा]\s*(पार्ट|भाग|हिस्से|हिस्सा|कड़ी|वीडियो|बार)|"
     r"पहल[ेा]\s*(पार्ट|भाग|हिस्से)|Part\s*\d|"
@@ -689,9 +696,15 @@ def check_script(text: str, q: Question, *, parts: int = 1,
                         f"differently. Rewrite Part {n}'s "
                         f"{'first' if idx == 0 else 'last'} spoken line.")
                 shapes[sh] = n
-        if "अगले पार्ट" not in text:
+        # The handoff must NAME what comes next; the wording is free. It used to
+        # demand "…ये समझेंगे अगले पार्ट में।" verbatim, which the team then asked
+        # us to drop in favour of "नेक्स्ट पार्ट में मिलते हैं" and similar — the
+        # check would have failed every script written to the new guidance.
+        if not HANDOFF_RE.search(text):
             c.findings.append(
-                'Part 1 must hand off with "…ये समझेंगे अगले पार्ट में।"')
+                'Every part but the last must hand off by naming what the next '
+                'one covers — "…नेक्स्ट पार्ट में मिलते हैं", "…ये समझेंगे अगले '
+                'पार्ट में", or any wording that points forward.')
         head, tail = text.split("PART 2", 1) if "PART 2" in text else (text, "")
         if "उन्नति बैच" in head:
             c.findings.append(

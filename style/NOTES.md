@@ -29,22 +29,41 @@ the Hindi beside it as a label. "ऐनोड (ऑक्सीकरण): Zn →
 "E°सेल = E°कैथोड − E°ऐनोड" is not — the renderer draws Hindi and formulae by
 different paths and cannot mix them inside one expression.
 
-TALK LIKE A TEACHER IN THE ROOM, not like a textbook being read out. The
-explaining voice is casual and direct — approved by the team, with these as the
-reference register:
+SUBJECT MATTER FORMAL, CONNECTIVE TISSUE CASUAL. This is the team's single
+biggest note on the first batch of scripts, and it decides almost every wording
+question.
 
-    "इतना दिमाग़ में बैठ गया? अब आगे समझते हैं"
-    "ऐसा समझाऊँगा कि मज़ा आ जायेगा"
-    "ध्यान से सुनो, यहीं नंबर कटते हैं"
+The teaching itself keeps its register: "बर्कले एवं हार्टले की विधि" is still
+"विधि", and अर्धपारगम्य झिल्ली, परासरण दाब, ऐनोड are never softened. But every
+sentence BETWEEN the teaching — the transitions, the check-ins, the nudges, the
+handoff, the sign-off — should sound like a person talking to you.
 
-Use lines like these to CHECK IN after a hard idea, to promise a payoff before a
-long stretch, and to warn before the exact place marks are lost. Say "यहीं नंबर
-कटते हैं" where students genuinely lose marks — a sign reversed, a unit dropped,
-a step skipped — never as filler.
+  formal, avoid                       spoken, use
+  ---------------------------------   ------------------------------------------
+  "…ये समझेंगे अगले पार्ट में।"        "तो यहाँ तक तो कर लिया? सही बात है! अब
+                                       आंसर में कैसे लिखना है, ये नेक्स्ट पार्ट
+                                       में मिलते हैं।"
+  "अब समझते हैं कि…"                   "चलो इतना हो गया? अब आगे बढ़ते हैं।"
+  "और इस बात को याद रखना"              "इस बात को दिमाग में बिठा लो" /
+                                       "इस बात को मन में छाप लो" /
+                                       "यह बात अब मत भूलना, ये सुनो ध्यान से"
+  "इस वीडियो को अंत तक देखना"          "एंड तक देखना मेरी वीडियो को, मज़ा आ
+                                       जाएगा।"
+  (no CTA / a stiff one)               "फॉलो कर लो" / "फॉलो करना मत भूलना,
+                                       फायदा हो जाएगा"
 
-Two limits. The terminology stays exactly as NCERT Hindi writes it; only the
-language around it is casual. And vary the wording — the same check-in twice in one
-script is worse than none, so reach for a different one each time.
+Everyday English words that Hindi speakers actually say belong in these lines,
+written in Devanagari: नेक्स्ट पार्ट, आंसर, फॉलो, एंड, मार्क्स. And do not
+over-Sanskritise ordinary speech — "यह पक्का आएगा ही आएगा", never "यह पूर्ण रूप
+से आएगा ही आएगा".
+
+CASUAL IS NOT RUDE. Warm and familiar, never mocking, never talking down. These
+are explicitly forbidden: "अबे, इतना तुम्हारे दिमाग में नहीं बैठा क्या?",
+"भाई, नहीं आ रहा क्या इतना समझ में?".
+
+Vary the wording — the same check-in twice in one script is worse than none.
+`style/variations.yaml` holds the approved alternatives for each of these
+moments; take a different one each time.
 
 NOTATION IS NOT TRANSLATED — verified against NCERT Hindi (Class 12 रसायन
 विज्ञान and भौतिकी). These stay EXACTLY as written, inside Hindi sentences:
