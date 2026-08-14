@@ -74,8 +74,19 @@ opening line carries the board or year phrase under any other mechanism.
 Generic clickbait of any kind: "आप यकीन नहीं करेंगे", "आगे जो होगा",
 "इसका जवाब आपको चौंका देगा", "99% बच्चे ये नहीं जानते",
 "वीडियो के अंत तक जरूर देखना". Also: artificial suspense, fake urgency,
-excessive rhetorical questions, and *repeated* "ध्यान से सुनो", "बच्चों",
-"आज हम सीखेंगे".
+excessive rhetorical questions, and *repeated* "बच्चों", "आज हम सीखेंगे".
+
+**"ध्यान से सुनो" is not banned — repeating it is.** The team asked for a
+warmer, more conversational explaining voice, and lines of this shape are the
+approved register:
+
+    "इतना दिमाग़ में बैठ गया? अब आगे समझते हैं"     — check in after a hard idea
+    "ऐसा समझाऊँगा कि मज़ा आ जायेगा"                  — promise before a long stretch
+    "ध्यान से सुनो, यहीं नंबर कटते हैं"              — warn where marks are lost
+
+The rule is that each is used where it is TRUE and worded differently every
+time. "यहीं नंबर कटते हैं" belongs at the exact place students lose marks — a
+reversed sign, a dropped unit, a skipped step — not sprinkled for tone.
 
 If the content is interesting, let the content do the retention work.
 

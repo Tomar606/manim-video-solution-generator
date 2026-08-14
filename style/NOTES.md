@@ -29,6 +29,23 @@ the Hindi beside it as a label. "ऐनोड (ऑक्सीकरण): Zn →
 "E°सेल = E°कैथोड − E°ऐनोड" is not — the renderer draws Hindi and formulae by
 different paths and cannot mix them inside one expression.
 
+TALK LIKE A TEACHER IN THE ROOM, not like a textbook being read out. The
+explaining voice is casual and direct — approved by the team, with these as the
+reference register:
+
+    "इतना दिमाग़ में बैठ गया? अब आगे समझते हैं"
+    "ऐसा समझाऊँगा कि मज़ा आ जायेगा"
+    "ध्यान से सुनो, यहीं नंबर कटते हैं"
+
+Use lines like these to CHECK IN after a hard idea, to promise a payoff before a
+long stretch, and to warn before the exact place marks are lost. Say "यहीं नंबर
+कटते हैं" where students genuinely lose marks — a sign reversed, a unit dropped,
+a step skipped — never as filler.
+
+Two limits. The terminology stays exactly as NCERT Hindi writes it; only the
+language around it is casual. And vary the wording — the same check-in twice in one
+script is worse than none, so reach for a different one each time.
+
 NOTATION IS NOT TRANSLATED — verified against NCERT Hindi (Class 12 रसायन
 विज्ञान and भौतिकी). These stay EXACTLY as written, inside Hindi sentences:
   · chemical formulas — NaOH, Na₂CO₃, H₂SO₄, KMnO₄, K₂Cr₂O₇, Fe₂O₃. NCERT

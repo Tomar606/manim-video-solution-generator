@@ -26,6 +26,9 @@ JOBS = [
     ("projects/faraday-electrolysis/manim_code/faraday_sync.py",
      "projects/faraday-electrolysis/manim_code/far_composed.py",
      "projects/faraday-electrolysis/script.md"),
+    ("projects/daniell-cell/manim_code/daniell.py",
+     "projects/daniell-cell/manim_code/dan_composed.py",
+     "projects/daniell-cell/script.md"),
 ]
 
 STRIP = (r"^from manim import \*.*$", r"^import numpy as np$",

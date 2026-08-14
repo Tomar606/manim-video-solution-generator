@@ -22,15 +22,10 @@ The alpha is then repaired in four steps, each fixing something visible:
 
 THE RESIZE
 ----------
-Implemented as two complete composites blended by a time expression, NOT by
-scaling the avatar stream. `scale` cannot change output size per frame, and
-`zoompan` destroys the alpha the key just produced. Blending two finished RGB
-frames is smooth, keeps the key intact, and ramps over 0.6s so the change reads
-as the presenter stepping back rather than as a cut.
-
-It is slow — `blend=all_expr` evaluates its expression per pixel, and a 90s
-1080x1920 part takes roughly 40 minutes. With no windows it falls back to a
-single composite, which is a few minutes.
+`scale` cannot change output size per frame and `zoompan` destroys the alpha the
+key just produced, so the two sizes are two pre-scaled streams and `overlay
+enable=` picks between them per frame. That costs nothing; blending two finished
+composites with an expression cost 9x the whole rest of the job.
 """
 from __future__ import annotations
 
@@ -42,17 +37,6 @@ from pathlib import Path
 # where the presenter sits, full size and reduced
 FULL_W, FULL_Y = 1040, 955
 SMALL_W, SMALL_Y = 846, 1140
-RAMP = 0.6
-
-
-def _weight_expr(windows) -> str:
-    """W(T): 0 = full size, 1 = shrunk, with a ramp at each edge."""
-    terms = [f"min((T-{a:.2f})/{RAMP}\\,1)*min(({b:.2f}-T)/{RAMP}\\,1)"
-             for a, b in windows]
-    inner = terms[0] if len(terms) == 1 else "max(" + "\\,".join(terms) + ")"
-    while inner.count("max(") > 1:            # ffmpeg's max takes two arguments
-        inner = inner.replace("max(", "max(", 1)
-    return f"clip({inner}\\,0\\,1)"
 
 
 def composite(bg, avatar, key, out, windows=None):
@@ -70,15 +54,25 @@ def composite(bg, avatar, key, out, windows=None):
             f"[c]despill=type=green:mix=0.7:expand=0.5[cc];")
 
     if windows:
-        w = _weight_expr(windows)
+        # Switch between two sizes with overlay `enable`, NOT by blending two
+        # finished composites. blend=all_expr evaluates its expression per pixel
+        # per frame — 5.6 billion evaluations for a 90s 1080x1920 part — which
+        # turned a 6-minute composite into a 55-minute one. `enable` costs
+        # nothing: each overlay simply does not run outside its window.
+        #
+        # The price is that the size change is a cut rather than a 0.6s ramp.
+        # It lands where the stage content appears or clears anyway, so it reads
+        # as the presenter stepping back rather than as a glitch.
+        inside = "+".join(f"between(t\\,{a:.2f}\\,{b:.2f})" for a, b in windows)
         fc = (head +
               f"[cc][al]alphamerge,split=2[av1][av2];"
               f"[av1]scale={FULL_W}:-2:flags=lanczos[big];"
               f"[av2]scale={SMALL_W}:-2:flags=lanczos[small];"
-              f"[0:v]format=rgba,split=2[bg1][bg2];"
-              f"[bg1][big]overlay=x=(W-w)/2:y={FULL_Y}:eval=init,format=yuv420p[full];"
-              f"[bg2][small]overlay=x=(W-w)/2:y={SMALL_Y}:eval=init,format=yuv420p[shr];"
-              f"[full][shr]blend=all_expr='A*(1-({w}))+B*({w})'[v]")
+              f"[0:v]format=rgba[bg];"
+              f"[bg][big]overlay=x=(W-w)/2:y={FULL_Y}:eval=init:"
+              f"enable='not({inside})'[o1];"
+              f"[o1][small]overlay=x=(W-w)/2:y={SMALL_Y}:eval=init:"
+              f"enable='{inside}',format=yuv420p[v]")
     else:
         fc = (head +
               f"[cc][al]alphamerge,scale={FULL_W}:-2:flags=lanczos[av];"
