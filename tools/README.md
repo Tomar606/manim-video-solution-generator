@@ -136,3 +136,24 @@ through every pause between sentences and reads as out of sync even though its
 start was right. Each line carries `end` — the moment its last word stops being
 spoken — and the scene takes the caption down there if the next line is not due
 within ~0.45s.
+
+## The composite writes atomically and verifies
+
+A run killed mid-write left a partial file at the destination, and the next run
+wrote to the same path while the dying process still held it. The result had a
+valid duration and a plausible size but decoded with 2604 errors and played
+wrongly. `composite.py` now encodes to `<name>.partial.mp4`, decodes it to check
+it is clean, and only then moves it into place — so a destination file is either
+absent or good.
+
+If you ever kill a composite, confirm it is gone before restarting:
+
+```bash
+pkill -9 -f composite.py; pkill -9 ffmpeg; sleep 3; pgrep -fl ffmpeg
+```
+
+To check any delivered file:
+
+```bash
+ffmpeg -v error -i final/clip.mp4 -f null -    # silence means clean
+```

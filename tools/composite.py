@@ -79,13 +79,27 @@ def composite(bg, avatar, key, out, windows=None):
               f"[0:v]format=rgba[bg];"
               f"[bg][av]overlay=x=(W-w)/2:y={FULL_Y}:eval=init,format=yuv420p[v]")
 
+    # Write to a temp name and move into place. A previous run killed mid-write
+    # left a partial file at the destination, and the next run wrote to the same
+    # path while the dying process still held it — two writers, and the result
+    # decoded with 2604 errors while still reporting a valid duration.
+    out = Path(out)
+    tmp = out.with_suffix(".partial.mp4")
     cmd = ["ffmpeg", "-v", "error", "-i", str(bg), "-i", str(avatar),
            "-filter_complex", fc, "-map", "[v]", "-map", "1:a",
            "-c:v", "libx264", "-preset", "medium", "-crf", "19",
            "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k",
-           "-movflags", "+faststart", str(out), "-y"]
+           "-movflags", "+faststart", str(tmp), "-y"]
     print(f"compositing -> {out}" + (f" ({len(windows)} resize window(s))" if windows else ""))
     subprocess.run(cmd, check=True)
+
+    # refuse to publish a file that does not decode cleanly
+    errs = subprocess.run(["ffmpeg", "-v", "error", "-i", str(tmp), "-f", "null", "-"],
+                          capture_output=True, text=True).stderr.strip()
+    if errs:
+        raise SystemExit(f"{tmp} decodes with errors, not moving into place:\n"
+                         f"{errs.splitlines()[0]}")
+    tmp.replace(out)
     print("done")
 
 
