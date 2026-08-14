@@ -19,6 +19,7 @@ from __future__ import annotations
 
 from manim import *  # noqa: F401,F403
 import json as _json
+import os as _os
 import numpy as np
 from pathlib import Path as _Path
 
@@ -501,6 +502,28 @@ def mark_group(mob, tag=None):
     return mob
 
 
+def _hides_things(m) -> bool:
+    """Can this mobject actually occlude what is behind it?
+
+    A stroke-only shape cannot: a SurroundingRectangle enclosing an equation, a
+    beaker outline around its label, a wire crossing a caption. Only something
+    with fill, or text, hides anything — so only those are worth reporting.
+    """
+    from manim import ImageMobject
+    if isinstance(m, ImageMobject):
+        return True
+    fam = m.get_family()
+    for s in fam:
+        try:
+            if float(s.get_fill_opacity()) > 0.25:
+                return True
+        except Exception:
+            continue
+    # Text and MathTex render as filled glyphs, but report fill through a
+    # different path in some manim versions
+    return type(m).__name__ in {"Text", "MathTex", "Tex", "MarkupText", "DecimalNumber"}
+
+
 def _leaf_boxes(m, limit=64):
     """Bounding boxes of the leaves, not of the whole group.
 
@@ -600,6 +623,9 @@ class ThemedScene(Scene):
                     continue
                 if _overlap_frac(bi, bj) <= 0.01:
                     continue                      # boxes do not even touch
+                # an outline cannot hide anything it encloses
+                if not (_hides_things(mi) and _hides_things(mj)):
+                    continue
                 f = max((_overlap_frac(a, b) for a in li for b in lj), default=0.0)
                 if f > self.OVERLAP_TOL:
                     self._layout_violations.append(
@@ -637,6 +663,19 @@ class ThemedScene(Scene):
         for line in uniq[:40]:
             print("  " + line)
         print("=" * 70 + "\n")
+
+    # PREVIEW collapses the waits that conform the scene to the audio clock.
+    # A 113-second part spends almost all of its render sitting still; the
+    # animations are a small fraction of it. With the waits clamped the same
+    # scene draws every beat in a fraction of the time, which is what makes a
+    # storyboard cheap enough to look at BEFORE committing to a real render.
+    PREVIEW = bool(_os.getenv("PREVIEW"))
+    PREVIEW_WAIT = 0.10
+
+    def wait(self, duration=1.0, *args, **kwargs):
+        if self.PREVIEW:
+            duration = min(duration, self.PREVIEW_WAIT)
+        return super().wait(duration, *args, **kwargs)
 
     def setup(self) -> None:
         super().setup()

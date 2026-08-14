@@ -158,6 +158,29 @@ To check any delivered file:
 ffmpeg -v error -i final/clip.mp4 -f null -    # silence means clean
 ```
 
+## Review BEFORE rendering — the storyboard
+
+The loop that has to be avoided: render 12 minutes, watch, report one layout
+problem, fix, render again.
+
+```bash
+.venv-tools/bin/python tools/storyboard.py daniell-cell dan_composed \
+    DaniellPart1 --env DANIELL_PART=1
+```
+
+**2m30s instead of ~12 minutes**, and it produces one contact sheet with every
+beat of the scene on it — `projects/<slug>/storyboard_<Scene>.png`. Look at that,
+give ALL the layout feedback at once, fix, look again. Only render when the
+sheet is right.
+
+It works because `PREVIEW=1` clamps the waits that conform the scene to the
+audio clock. A 113-second part spends nearly all of its render sitting still;
+the animations are a small fraction of it. Timing is meaningless in a preview —
+layout is the whole point — so the waits are the first thing to throw away.
+
+The layout guard's findings are printed with the sheet, so a geometric problem
+and a visual one arrive together.
+
 ## Preflight — run it before every render
 
 ```bash
