@@ -50,8 +50,9 @@ from pathlib import Path
 #                          to clear his forehead
 FULL_W, FULL_Y = 712, 966          # 66% of 1080
 SMALL_W, SMALL_Y = 605, 1325       # 56% of 1080
-EASE = 0.5                          # seconds, ease-in-ease-out each edge
-CANVAS_W, CANVAS_H = 800, 1100      # holds the small avatar; zoom reaches full
+EASE = 0.75                         # seconds, the ramp at each edge
+FPS = 30
+CANVAS_W, CANVAS_H = 800, 1150      # holds the small avatar; zoom reaches full
 
 
 def _ease_expr(windows, var="t") -> str:
@@ -92,29 +93,42 @@ def composite(bg, avatar, key, out, windows=None):
             f"[c]despill=type=green:mix=0.7:expand=0.5[cc];")
 
     if windows:
-        # The presenter switches between two sizes with overlay `enable`.
+        # The size change RAMPS over EASE seconds — a true scale, per frame.
         #
-        # THIS IS A CUT, NOT A RAMP, and four attempts at a smooth one have
-        # failed — recorded here so the fifth does not repeat them:
+        # Five attempts got here; recorded so nobody repeats them:
         #   `scale`            cannot change output size per frame at all
-        #   `blend=all_expr`   works, but evaluates per pixel: 17x the whole job
-        #   `zoompan`          its `z` did not follow the time expression here;
-        #                      measured, the presenter still stepped in a frame
-        #   alpha cross-fade   `colorchannelmixer=aa=0` zeroes alpha for good
-        #                      and `fade` cannot restore what is no longer there,
-        #                      so the presenter disappeared entirely
-        # A working cut beats a broken dissolve. The cut lands where the stage
-        # content appears or clears anyway.
-        inside = "+".join(f"between(t\\,{a:.2f}\\,{b:.2f})" for a, b in windows)
+        #   `blend=all_expr`   works, but per-pixel: 17x the whole job
+        #   `zoompan` with it/ot  DOES NOT RAMP. Tested in isolation, `z` follows
+        #                      neither `it` nor `ot` — only `on`, the output
+        #                      FRAME NUMBER. That one substitution is the whole
+        #                      fix; everything below had been right before.
+        #   fade + colorchannelmixer=aa=0  zeroed alpha for good; presenter gone
+        #   alpha cross-dissolve  showed BOTH sizes at once — a double exposure,
+        #                      because the two differ in position as well as size
+        #
+        # zoompan destroys alpha, so colour and alpha are zoomed as two separate
+        # streams with the identical curve and merged after. The alpha travels
+        # as its own greyscale video and survives intact.
+        #
+        # zoompan only zooms IN, so the canvas carries the presenter at his
+        # SMALL size and zooms out to full when nothing is behind him.
+        ratio = FULL_W / SMALL_W
+        T = f"(on/{FPS})"                       # zoompan's only usable clock
+        ease_z = _ease_expr(windows, T)
+        ease_y = _ease_expr(windows, "t")       # overlay does have `t`
+        z = f"1+{ratio - 1:.4f}*(1-({ease_z}))"
+        pan = (f"pad={CANVAS_W}:{CANVAS_H}:(ow-iw)/2:0:%s,"
+               f"zoompan=z='{z}':d=1:s={CANVAS_W}x{CANVAS_H}:fps={FPS}")
+        y = f"{FULL_Y}+({SMALL_Y - FULL_Y})*({ease_y})"
         fc = (head +
-              f"[cc][al]alphamerge,split=2[av1][av2];"
-              f"[av1]scale={FULL_W}:-2:flags=lanczos[big];"
-              f"[av2]scale={SMALL_W}:-2:flags=lanczos[small];"
+              f"[cc][al]alphamerge,split=2[colr][alph];"
+              f"[colr]scale={SMALL_W}:-2:flags=lanczos,{pan % 'black@0'}[zc];"
+              f"[alph]alphaextract,scale={SMALL_W}:-2:flags=lanczos,"
+              f"{pan % 'black'}[za];"
+              f"[zc][za]alphamerge[av];"
               f"[0:v]format=rgba[bg];"
-              f"[bg][big]overlay=x=(W-w)/2:y={FULL_Y}:eval=init:"
-              f"enable='not({inside})':eof_action=pass[o1];"
-              f"[o1][small]overlay=x=(W-w)/2:y={SMALL_Y}:eval=init:"
-              f"enable='{inside}':eof_action=pass,format=yuv420p[v]")
+              f"[bg][av]overlay=x=(W-w)/2:y='{y}':eval=frame:"
+              f"eof_action=pass,format=yuv420p[v]")
 
     else:
         fc = (head +
