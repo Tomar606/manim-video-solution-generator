@@ -647,6 +647,115 @@ class ThemedScene(Scene):
         except Exception as exc:            # a guard must never break a render
             self._layout_violations.append(f"audit failed: {exc}")
 
+    def question_card(self, question, highlight="", years=""):
+        """The approved opening card: ringed ?, gold प्रश्न, notepaper, years.
+
+        Geometry lives in src/question_card.py, measured off the approved still.
+        The text wraps and shrinks to the paper's writable area and asserts
+        containment, so a long question cannot leak off the paper.
+        """
+        from src.question_card import (CREAM, GOLD, PAPER, PAPER_HILITE, PAPER_INK,
+                                       PAPER_TILT, PAPER_W, PAPER_Y, Q_MARK_R,
+                                       Q_MARK_Y, Q_WORD_SIZE, Q_WORD_Y, RULE_W,
+                                       RULE_Y, TEAL, TICK_PAD, YEARS_Y,
+                                       fit_lines, fits, writable_box)
+        fw, fh = config.frame_width, config.frame_height
+        F = "Khand"
+        cache = {}
+
+        def txt(s, size, colour=CREAM):
+            return Text(s, font=F, font_size=size, color=colour, weight="BOLD")
+
+        def wid(word, size):
+            k = (word, size)
+            if k not in cache:
+                cache[k] = Text(word, font=F, font_size=size, weight="BOLD").width
+            return cache[k]
+
+        def ticks(around, colour, n, pad):
+            g = VGroup()
+            hw, hh = around.width / 2 + pad, around.height / 2 + pad * 0.55
+            spots = [(-hw, hh * .55), (-hw * .96, -hh * .15), (-hw * .80, hh * .95),
+                     (hw, hh * .55), (hw * .96, -hh * .15), (hw * .80, hh * .95)]
+            for i, (x, y) in enumerate(spots[:n]):
+                L, w0, w1 = 0.24, 0.020, 0.062
+                tk = Polygon([0, -w0, 0], [L, -w1, 0], [L, w1, 0], [0, w0, 0])
+                tk.set_fill(colour, 1).set_stroke(width=0)
+                out = -1 if x < 0 else 1
+                tk.rotate(PI if out < 0 else 0).rotate(out * (0.30 + 0.32 * (i % 3)))
+                tk.move_to(around.get_center() + np.array([x, y, 0]))
+                g.add(tk)
+            return g
+
+        def scribble(width, colour, wobble=0.035, n=26):
+            pts = []
+            for i in range(n):
+                u = i / (n - 1)
+                y = (np.sin(u * 5.2) * .3 + np.sin(u * 11.0 + 1.1) * .18) * wobble
+                y += (u - .5) ** 2 * -wobble * 1.4
+                pts.append(np.array([(u - .5) * width, y, 0]))
+            s = VMobject().set_points_smoothly(pts).set_stroke(colour, 7, opacity=.95)
+            s2 = s.copy().shift(DOWN * wobble * .9).set_stroke(colour, 4, opacity=.55)
+            return VGroup(s, s2)
+
+        ring = Circle(radius=fh * Q_MARK_R).set_stroke(TEAL, 5).set_fill(opacity=0)
+        qm = txt("?", int(fh * Q_MARK_R * 105), TEAL).move_to(ring.get_center())
+        head = VGroup(ring, qm).move_to(norm_point(0.5, Q_MARK_Y))
+        word = txt("प्रश्न", Q_WORD_SIZE, GOLD).move_to(norm_point(0.5, Q_WORD_Y))
+        sp = ticks(word, GOLD, 6, TICK_PAD)
+        rule = scribble(word.width * RULE_W, CREAM, wobble=0.018)
+        rule.rotate(PAPER_TILT * .7).move_to(norm_point(0.5, RULE_Y))
+
+        paper = ImageMobject(PAPER)
+        paper.width = fw * PAPER_W
+        paper.move_to(norm_point(0.5, PAPER_Y))
+
+        (cx, cy), bw, bh = writable_box(paper)
+        lh = {}
+
+        def line_h(s):
+            if s not in lh:
+                lh[s] = Text("नियम", font=F, font_size=s, weight="BOLD").height + 0.16
+            return lh[s]
+
+        size, lines = fit_lines(question, wid, bw, bh, line_h,
+                                lambda s: wid(" ", s))
+        rows = VGroup()
+        for words in lines:
+            line = " ".join(words)
+            t2c = {highlight: PAPER_HILITE} if highlight and highlight in line else {}
+            rows.add(Text(line, font=F, font_size=size, color=PAPER_INK,
+                          weight="BOLD", t2c=t2c))
+        rows.arrange(DOWN, buff=0.16, aligned_edge=LEFT)
+        if rows.width > bw:
+            rows.scale(bw / rows.width)
+        rows.rotate(PAPER_TILT).move_to([cx, cy, 0])
+        if not fits(rows, paper):
+            raise ValueError(f"question does not fit the paper at size {size}")
+        swoosh = scribble(rows.width * .62, PAPER_INK, wobble=.045)
+        swoosh.rotate(PAPER_TILT).next_to(rows, DOWN, buff=0.20)
+
+        yr = VGroup(txt("वर्ष ", 36), txt(years, 42, TEAL),
+                    txt(" में", 36)).arrange(RIGHT, buff=0.10)
+        ytxt = VGroup(yr, txt("ये प्रश्न था", 36)).arrange(DOWN, buff=0.12)
+        pill = RoundedRectangle(width=ytxt.width + .85, height=ytxt.height + .48,
+                                corner_radius=.30).set_stroke(GOLD, 4).set_fill(opacity=0)
+        pills = VGroup(pill, ytxt)
+        pills.rotate(PAPER_TILT * .8).move_to(norm_point(0.5, YEARS_Y))
+        psp = ticks(pill, GOLD, 4, 0.22)
+
+        self.play(FadeIn(head, scale=1.15), run_time=0.5)
+        self.play(FadeIn(word, shift=UP * .14), run_time=0.45)
+        self.play(LaggedStart(*[GrowFromCenter(s) for s in sp], lag_ratio=.08),
+                  Create(rule), run_time=0.55)
+        self.play(FadeIn(paper, shift=DOWN * .30, scale=1.04), run_time=0.7)
+        self.play(LaggedStart(*[FadeIn(r, shift=RIGHT * .14) for r in rows],
+                              lag_ratio=.20), run_time=0.9)
+        self.play(Create(swoosh), run_time=0.45)
+        self.play(FadeIn(pills, shift=UP * .12),
+                  LaggedStart(*[GrowFromCenter(s) for s in psp], lag_ratio=.08),
+                  run_time=0.6)
+
     def report_layout(self) -> None:
         """Print what the guard caught. Run at tear-down, where it cannot be
         missed by whoever kicked off the render."""

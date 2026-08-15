@@ -37,9 +37,13 @@ Z_COL  = "#7CE0B0"
 E_COL  = "#C792EA"
 
 FONT, FONT_W = "Khand", "BOLD"
-CAPTION_SIZE, CAPTION_W, CAPTION_TOP = 36, 0.88, 0.105
-STAGE_TOP, STAGE_BOT, STAGE_W = 0.225, 0.545, 0.84
-CAPTION_GAP = 0.28          # clear space under the caption, scene units
+# Measured off the approved stills (see src/reference_style.py): captions are
+# roughly twice the size we shipped, and the presenter is 66% of frame width,
+# not 96%. STAGE_BOT clears his head — 50.3% at full size, 62% once he steps
+# back — so content stops at 60% and the two can never meet.
+CAPTION_SIZE, CAPTION_W, CAPTION_TOP = 68, 0.92, 0.090
+STAGE_TOP, STAGE_BOT, STAGE_W = 0.290, 0.600, 0.86
+CAPTION_GAP = 0.30          # clear space under the caption, scene units
 
 PART = int(_os.getenv("FARADAY_PART", "1"))
 TIMING = json.loads((_Path(ASSET_ROOT) /
@@ -304,24 +308,10 @@ class FaradayPart1(_Base):
             pass
 
     def _build(self):
-        # ---- cue 0: question card, no caption --------------------------- #
+        # ---- cue 0: the question card, in the approved design ------------ #
         self.cue(0, caption=False)
-        qb = VGroup(*[self.hindi(l, size=40) for l in
-                      ["फैराडे के विद्युत्-अपघटन के", "नियम लिखिए।"]]
-                    ).arrange(DOWN, buff=0.28, aligned_edge=LEFT)
-        marks = VGroup(self.hindi("अंक", size=25, color=DIM),
-                       self.hindi("4", size=46, color=GOLD)).arrange(DOWN, buff=0.12)
-        years = VGroup(self.hindi("वर्ष", size=25, color=DIM),
-                       self.hindi("2023, 25", size=44, color=GOLD)).arrange(DOWN, buff=0.12)
-        meta = VGroup(marks, years).arrange(RIGHT, buff=1.0, aligned_edge=UP)
-        rule = Line(LEFT, RIGHT).set_stroke(GOLD, 4).set_width(meta.width * 1.05)
-        card = VGroup(qb, rule, meta).arrange(DOWN, buff=0.60)
-        qb.align_to(card, LEFT); rule.align_to(card, RIGHT); meta.align_to(card, RIGHT)
-        self.place(card, y=0.44)
-        self.play(LaggedStart(*[FadeIn(l, shift=RIGHT*0.25) for l in qb],
-                              lag_ratio=0.22), run_time=1.3)
-        self.play(GrowFromEdge(rule, RIGHT), run_time=0.4)
-        self.play(FadeIn(meta, shift=UP*0.15), run_time=0.7)
+        self.question_card("फैराडे के विद्युत्-अपघटन के नियम लिखिए।",
+                           "विद्युत्-अपघटन", "2023, 2025")
         self.hold()
 
         self.cue(1); self.hold()

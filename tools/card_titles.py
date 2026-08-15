@@ -21,6 +21,10 @@ revision video — handwritten on a torn notepaper, three lines at most.
 Rules:
 - Devanagari only. Formulas and symbols stay as written (KMnO₄, [NiCl₄]²⁻).
 - FIVE TO EIGHT WORDS. This is a hard limit; the paper is small.
+- NO hyphenated compounds. "वाष्प-दाब-में-आपेक्षिक-अवनमन" is one unbreakable
+  token to a line wrapper and runs off the paper at any readable size. Write it
+  as separate words: "वाष्प दाब में आपेक्षिक अवनमन". A hyphen inside a single
+  established term (विद्युत्-अपघटन, बायो-सेवर्ट) is fine — a chain of them is not.
 - It must read like the question, not like a topic label: keep the imperative
   where there is one ("लिखिए", "समझाइए", "सिद्ध कीजिए").
 - Keep the subject terminology exactly as given.

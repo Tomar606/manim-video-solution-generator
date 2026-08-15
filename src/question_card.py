@@ -24,9 +24,15 @@ from __future__ import annotations
 
 # Fractions of the paper image. Generous of the measured values because the
 # paper is drawn at a slight angle and the bottom-right corner is torn away.
-WRITABLE = (0.205, 0.215, 0.935, 0.845)     # x0, y0, x1, y1
+WRITABLE = (0.200, 0.190, 0.940, 0.870)     # x0, y0, x1, y1
 
 PAPER = "assets/design/notepaper.png"
+
+# Measured off the asset's top edge over 62 samples: the sheet is not square to
+# the frame. Everything drawn ON it — the handwriting, the underline — and the
+# elements around it take the same angle, or the card reads as a straight
+# caption sitting on a crooked paper.
+PAPER_TILT = 0.0442          # radians, +2.54 degrees
 
 # Palette from the approved still
 PAPER_INK   = "#132A4A"      # the handwriting
@@ -35,21 +41,68 @@ GOLD        = "#F2B233"
 CREAM       = "#FFFFFF"
 TEAL        = "#2AA9C4"
 
-# Vertical layout, fractions of frame height, from the approved still
-Q_MARK_Y    = 0.068
-Q_WORD_Y    = 0.125
-RULE_Y      = 0.183
-PAPER_Y     = 0.400          # centre of the paper
-PAPER_H     = 0.395          # its height
-YEARS_Y     = 0.645
+# Every number below is MEASURED off the approved still and checked against a
+# render of this card, component by component. Earlier versions had the tilt
+# measured and everything else guessed, and the header overlapped the ring.
+#
+#   component   reference (fraction of frame)
+#   ? ring      y  4.4%.. 9.9%   h  5.4%   w  9.4%   centred
+#   प्रश्न+ticks y  7.7%..17.8%   h 10.1%   w 40.9%
+#   notepaper   y 19.7%..66.6%   h 46.9%   w 83.7%
+#   years pill  y 57.2%..79.9%   h 22.7%   w 60.6%
+Q_MARK_Y    = 0.044          # ring centre — clear of प्रश्न below it
+Q_MARK_R    = 0.027          # ring radius, fraction of frame HEIGHT
+Q_WORD_Y    = 0.106
+Q_WORD_SIZE = 78             # was 96 — the word crowded the ring above it
+TICK_PAD    = 0.30           # ticks sit CLOSE to the word, as in the still           # ticks reach out to the reference's 40.9% width
+RULE_Y      = 0.151
+RULE_W      = 1.55           # the rule runs WIDER than the word
+PAPER_Y     = 0.371          # centre: reference spans 19.7%..66.6%
+PAPER_W     = 0.78          # slightly smaller than the still reads          # width drives the fit, not height
+YEARS_Y     = 0.635          # BELOW the torn edge, never on it
 
 START_SIZE  = 62             # handwriting size before any shrink
-MIN_SIZE    = 26             # below this the card is unreadable; raise instead
+# Measured, not guessed: at font_size 26 a Khand Bold line renders 44px tall on
+# a 1080x1920 frame — about the size of the labels under a diagram, which read
+# fine on a phone. Below that it stops being handwriting and starts being fine
+# print, so the card raises instead of shrinking further.
+MIN_SIZE    = 26
+
+
+def split_long(word, width_of, limit):
+    """Break a token that is wider than the paper, whatever the size.
+
+    Hyphenated compounds — "वाष्प-दाब-में-आपेक्षिक-अवनमन" — are a single
+    unbreakable token to a greedy wrapper, and one of them ran nearly three
+    times the width of the paper at the smallest readable size. They break at
+    their own hyphens; anything else breaks mid-word rather than leaking.
+    """
+    if width_of(word) <= limit:
+        return [word]
+    if "-" in word:
+        out, cur = [], ""
+        for part in word.split("-"):
+            trial = f"{cur}-{part}" if cur else part
+            if cur and width_of(trial) > limit:
+                out.append(cur + "-")
+                cur = part
+            else:
+                cur = trial
+        return out + ([cur] if cur else [])
+    lo, out = 0, []
+    while lo < len(word):
+        hi = len(word)
+        while hi > lo + 1 and width_of(word[lo:hi]) > limit:
+            hi -= 1
+        out.append(word[lo:hi])
+        lo = hi
+    return out
 
 
 def wrap_to_width(words, width_of, limit, space):
     """Greedy wrap on MEASURED width — Devanagari conjuncts are not equal width,
     so a character count overflows on exactly the questions that matter."""
+    words = [p for w in words for p in split_long(w, width_of, limit)]
     lines, cur, w = [], [], 0.0
     for word in words:
         ww = width_of(word)

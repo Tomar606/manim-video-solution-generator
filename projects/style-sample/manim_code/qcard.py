@@ -9,9 +9,11 @@ from manim import *  # noqa: F403
 import numpy as np
 
 from src.manim_helpers import ThemedScene, norm_point, register_fonts
-from src.question_card import (CREAM, GOLD, PAPER, PAPER_H, PAPER_HILITE,
-                               PAPER_INK, PAPER_Y, Q_MARK_Y, Q_WORD_Y, RULE_Y,
-                               TEAL, YEARS_Y, fit_lines, fits, writable_box)
+from src.question_card import (CREAM, GOLD, PAPER, PAPER_HILITE,
+                               PAPER_INK, PAPER_TILT, PAPER_W, PAPER_Y,
+                               Q_MARK_R, Q_MARK_Y, Q_WORD_SIZE, Q_WORD_Y,
+                               RULE_W, RULE_Y, TEAL, TICK_PAD, YEARS_Y, fit_lines,
+                               fits, writable_box)
 
 FONT, FONT_W = "Khand", "BOLD"
 
@@ -19,10 +21,11 @@ FONT, FONT_W = "Khand", "BOLD"
 class QuestionCard(ThemedScene):
     CAPTION_MODE = "narration"
 
-    # the question and years a batch would supply per video
-    QUESTION = "फैराडे के विद्युत्-अपघटन के नियम लिखिए।"
-    HIGHLIGHT = "विद्युत्-अपघटन"
-    YEARS = "2023-2025"
+    # A batch supplies these per video. Defaults are the approved reference.
+    import os as _os
+    QUESTION = _os.getenv("CARD_Q", "फैराडे के विद्युत्-अपघटन के नियम लिखिए।")
+    HIGHLIGHT = _os.getenv("CARD_HL", "विद्युत्-अपघटन")
+    YEARS = _os.getenv("CARD_YEARS", "2023-2025")
 
     def t(self, s, size, colour=CREAM, weight=FONT_W):
         return Text(s, font=FONT, font_size=size, color=colour, weight=weight)
@@ -46,11 +49,37 @@ class QuestionCard(ThemedScene):
         spots = [(-hw, hh * 0.55), (-hw * 0.96, -hh * 0.15), (-hw * 0.80, hh * 0.95),
                  (hw, hh * 0.55), (hw * 0.96, -hh * 0.15), (hw * 0.80, hh * 0.95)]
         for i, (x, y) in enumerate(spots[:n]):
-            tick = Line(ORIGIN, RIGHT * 0.20).set_stroke(colour, 7)
-            tick.rotate((-1 if x < 0 else 1) * (0.35 + 0.35 * (i % 3)))
+            # Tapered, not a rectangle: thin at the inner end, thick at the
+            # outer, the way a pen tick actually lands.
+            L, w0, w1 = 0.24, 0.020, 0.062
+            tick = Polygon([0, -w0, 0], [L, -w1, 0], [L, w1, 0], [0, w0, 0])
+            tick.set_fill(colour, 1).set_stroke(width=0)
+            out = -1 if x < 0 else 1
+            tick.rotate(PI if out < 0 else 0)                 # point outward
+            tick.rotate(out * (0.30 + 0.32 * (i % 3)))
             tick.move_to(around.get_center() + np.array([x, y, 0]))
             g.add(tick)
         return g
+
+    def scribble(self, width, colour=CREAM, wobble=0.035, n=26):
+        """A pen-drawn underline, not a ruled line.
+
+        The reference stroke wanders and varies in weight; a straight Line reads
+        as a UI divider on a page that is otherwise hand-made.
+        """
+        pts = []
+        for i in range(n):
+            u = i / (n - 1)
+            x = (u - 0.5) * width
+            y = (np.sin(u * 5.2) * 0.3 + np.sin(u * 11.0 + 1.1) * 0.18) * wobble
+            y += (u - 0.5) ** 2 * -wobble * 1.4                # slight bow
+            pts.append([x, y, 0])
+        s = VMobject().set_points_smoothly([np.array(p) for p in pts])
+        s.set_stroke(colour, 7, opacity=0.95)
+        # a lighter second pass, offset, the way a pen doubles back
+        s2 = s.copy().shift(DOWN * wobble * 0.9 + RIGHT * width * 0.012)
+        s2.set_stroke(colour, 4, opacity=0.55)
+        return VGroup(s, s2)
 
     def construct(self):
         register_fonts()
@@ -58,19 +87,19 @@ class QuestionCard(ThemedScene):
         fw, fh = config.frame_width, config.frame_height
 
         # ---- ? in a ring ------------------------------------------------- #
-        ring = Circle(radius=0.42).set_stroke(TEAL, 5).set_fill(opacity=0)
-        qm = self.t("?", 62, TEAL).move_to(ring.get_center())
+        ring = Circle(radius=fh * Q_MARK_R).set_stroke(TEAL, 5).set_fill(opacity=0)
+        qm = self.t("?", int(fh * Q_MARK_R * 105), TEAL).move_to(ring.get_center())
         head = VGroup(ring, qm).move_to(norm_point(0.5, Q_MARK_Y))
 
         # ---- प्रश्न, gold, with sparks and a rule under it ---------------- #
-        word = self.t("प्रश्न", 96, GOLD).move_to(norm_point(0.5, Q_WORD_Y))
-        sp = self.sparks(word)
-        rule = Line(LEFT, RIGHT).set_width(word.width * 1.15)
-        rule.set_stroke(CREAM, 4, opacity=0.9).move_to(norm_point(0.5, RULE_Y))
+        word = self.t("प्रश्न", Q_WORD_SIZE, GOLD).move_to(norm_point(0.5, Q_WORD_Y))
+        sp = self.sparks(word, pad=TICK_PAD)
+        rule = self.scribble(word.width * RULE_W, CREAM, wobble=0.018)
+        rule.rotate(PAPER_TILT * 0.7).move_to(norm_point(0.5, RULE_Y))
 
         # ---- the notepaper ----------------------------------------------- #
         paper = ImageMobject(PAPER)
-        paper.height = fh * PAPER_H
+        paper.width = fw * PAPER_W          # width is what the reference fixes
         paper.move_to(norm_point(0.5, PAPER_Y))
 
         # ---- the question, fitted so it CANNOT leak ---------------------- #
@@ -92,6 +121,7 @@ class QuestionCard(ThemedScene):
         rows.arrange(DOWN, buff=0.16, aligned_edge=LEFT)
         if rows.width > bw:                       # a single very long word
             rows.scale(bw / rows.width)
+        rows.rotate(PAPER_TILT)                # sit on the ruled lines
         rows.move_to([cx, cy, 0])
         if not fits(rows, paper):
             raise ValueError(
@@ -99,24 +129,21 @@ class QuestionCard(ThemedScene):
                 f"text {rows.width:.2f}x{rows.height:.2f}, box {bw:.2f}x{bh:.2f}")
 
         # the hand-drawn double underline
-        swoosh = VGroup(
-            ArcBetweenPoints(LEFT * rows.width * 0.34, RIGHT * rows.width * 0.34,
-                             angle=-0.18).set_stroke(PAPER_INK, 7),
-            ArcBetweenPoints(LEFT * rows.width * 0.30, RIGHT * rows.width * 0.31,
-                             angle=-0.26).set_stroke(PAPER_INK, 5),
-        )
-        swoosh.next_to(rows, DOWN, buff=0.22)
+        swoosh = self.scribble(rows.width * 0.62, PAPER_INK, wobble=0.045)
+        swoosh.rotate(PAPER_TILT)
+        swoosh.next_to(rows, DOWN, buff=0.20)
 
         # ---- the years pill ---------------------------------------------- #
-        yr = VGroup(self.t("वर्ष ", 38, CREAM), self.t(self.YEARS, 44, TEAL),
-                    self.t(" में", 38, CREAM)).arrange(RIGHT, buff=0.10)
-        yr2 = self.t("ये प्रश्न था", 38, CREAM)
-        ytxt = VGroup(yr, yr2).arrange(DOWN, buff=0.14)
-        pill = RoundedRectangle(width=ytxt.width + 1.05, height=ytxt.height + 0.62,
-                                corner_radius=0.34)
+        yr = VGroup(self.t("वर्ष ", 36, CREAM), self.t(self.YEARS, 42, TEAL),
+                    self.t(" में", 36, CREAM)).arrange(RIGHT, buff=0.10)
+        yr2 = self.t("ये प्रश्न था", 36, CREAM)
+        ytxt = VGroup(yr, yr2).arrange(DOWN, buff=0.12)
+        pill = RoundedRectangle(width=ytxt.width + 0.85, height=ytxt.height + 0.48,
+                                corner_radius=0.30)
         pill.set_stroke(GOLD, 4).set_fill(opacity=0)
-        pills = VGroup(pill, ytxt).move_to(norm_point(0.5, YEARS_Y))
-        psp = self.sparks(pill, GOLD, n=4, pad=0.30)
+        pills = VGroup(pill, ytxt)
+        pills.rotate(PAPER_TILT * 0.8).move_to(norm_point(0.5, YEARS_Y))
+        psp = self.sparks(pill, GOLD, n=4, pad=0.22)
 
         # ---- play --------------------------------------------------------- #
         self.play(FadeIn(head, scale=1.15), run_time=0.5)

@@ -23,7 +23,8 @@ import sys
 import numpy as np
 from PIL import Image
 
-AV_TOP, AV_L, AV_R = 955, 20, 1060      # the presenter's rectangle, full size
+# the presenter at his FULL size: 66% of 1080 wide, head at 50.3%
+AV_TOP, AV_L, AV_R = 966, 184, 896
 INK = 1200                              # px of content before it is worth resizing
 PAD = 0.8                               # start the shrink before content appears
 

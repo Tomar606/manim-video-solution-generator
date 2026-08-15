@@ -38,9 +38,11 @@ from pathlib import Path
 # the presenter is 56-66% of frame width there, against 96% in our first cut —
 # he was half again too big and crowding every diagram.
 #   no diagram on screen : ~66% wide, head at ~51%
-#   diagram on screen    : ~56% wide, head at ~64%
+#   diagram on screen    : ~56% wide, head at ~69% — measured off the
+#                          question-card still, where the years pill has
+#                          to clear his forehead
 FULL_W, FULL_Y = 712, 966          # 66% of 1080
-SMALL_W, SMALL_Y = 605, 1190       # 56% of 1080
+SMALL_W, SMALL_Y = 605, 1325       # 56% of 1080
 EASE = 0.5                          # seconds, ease-in-ease-out each edge
 CANVAS_W, CANVAS_H = 800, 1100      # holds the small avatar; zoom reaches full
 
@@ -83,15 +85,19 @@ def composite(bg, avatar, key, out, windows=None):
             f"[c]despill=type=green:mix=0.7:expand=0.5[cc];")
 
     if windows:
-        # Switch between two sizes with overlay `enable`, NOT by blending two
-        # finished composites. blend=all_expr evaluates its expression per pixel
-        # per frame — 5.6 billion evaluations for a 90s 1080x1920 part — which
-        # turned a 6-minute composite into a 55-minute one. `enable` costs
-        # nothing: each overlay simply does not run outside its window.
+        # The presenter switches between two sizes with overlay `enable`.
         #
-        # The price is that the size change is a cut rather than a 0.6s ramp.
-        # It lands where the stage content appears or clears anyway, so it reads
-        # as the presenter stepping back rather than as a glitch.
+        # THIS IS A CUT, NOT A RAMP, and four attempts at a smooth one have
+        # failed — recorded here so the fifth does not repeat them:
+        #   `scale`            cannot change output size per frame at all
+        #   `blend=all_expr`   works, but evaluates per pixel: 17x the whole job
+        #   `zoompan`          its `z` did not follow the time expression here;
+        #                      measured, the presenter still stepped in a frame
+        #   alpha cross-fade   `colorchannelmixer=aa=0` zeroes alpha for good
+        #                      and `fade` cannot restore what is no longer there,
+        #                      so the presenter disappeared entirely
+        # A working cut beats a broken dissolve. The cut lands where the stage
+        # content appears or clears anyway.
         inside = "+".join(f"between(t\\,{a:.2f}\\,{b:.2f})" for a, b in windows)
         fc = (head +
               f"[cc][al]alphamerge,split=2[av1][av2];"
@@ -102,6 +108,7 @@ def composite(bg, avatar, key, out, windows=None):
               f"enable='not({inside})'[o1];"
               f"[o1][small]overlay=x=(W-w)/2:y={SMALL_Y}:eval=init:"
               f"enable='{inside}',format=yuv420p[v]")
+
     else:
         fc = (head +
               f"[cc][al]alphamerge,scale={FULL_W}:-2:flags=lanczos[av];"
