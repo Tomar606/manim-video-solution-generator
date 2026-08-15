@@ -478,8 +478,9 @@ class FaradayPart2(_Base):
         self.cue(1)
         rig = ImageMobject(str(_Path(ASSET_ROOT) / IMAGES["series_cells"]))
         rig.height = 4.5
-        e1 = MathTex(r"CuSO_4").scale(0.75).set_color(CU)
-        e2 = MathTex(r"AgNO_3").scale(0.75).set_color(ZN)
+        # the same labelling as part 1: pinned to a band, joined by a dashed arc
+        e1 = MathTex(r"CuSO_4").scale(0.70).set_color(CU)
+        e2 = MathTex(r"AgNO_3").scale(0.70).set_color(ZN)
         e1.next_to(rig, DOWN, buff=0.10).shift(LEFT * rig.width * 0.24)
         e2.next_to(rig, DOWN, buff=0.10).shift(RIGHT * rig.width * 0.24)
         ser = self.hindi("श्रेणीक्रम — दोनों में समान विद्युत्", size=26, color=GOLD)

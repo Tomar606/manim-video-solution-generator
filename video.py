@@ -550,6 +550,10 @@ def cmd_endscreenshot(args) -> int:
     if args.notes:
         extra = (extra + "\n" + args.notes).strip()
 
+    if getattr(args, "fresh_temp", False):
+        import shutil
+        shutil.rmtree(temp_dir, ignore_errors=True)
+
     print(f"📸 EndScreenshot — {args.sheet}")
     try:
         result = ES.generate(
@@ -559,7 +563,10 @@ def cmd_endscreenshot(args) -> int:
             question_label=args.label, heading=args.heading or "",
             highlight=args.highlight, extra_rules=extra,
             quality=args.quality, max_pages=args.max_pages,
-            fresh_temp=args.fresh_temp,
+            temp_only=not getattr(args, "approve", False),
+            # `--fresh-temp` is honoured by clearing the cached temp rather than
+            # by a keyword: EndScreenshot.generate() does not take one, and
+            # passing it raised TypeError on every run.
             log=lambda msg: print(f"   {msg}", flush=True),
         )
     except ES.EndScreenshotError as exc:
@@ -567,9 +574,15 @@ def cmd_endscreenshot(args) -> int:
         return 2
 
     pages = result["pages"]
-    print(f"\n✅ {len(pages)} page(s) · {result['images_generated']} image(s) "
-          f"generated" + (" (temp reused)" if result["temp_cached"] else ""))
-    print(f"   temp: {result['temp']}")
+    if not pages:
+        # temp_only is the default and is deliberate: the typeset mockup costs
+        # nothing, so it is always produced first for review and no image is
+        # paid for until someone has looked at it.
+        print(f"\n📝 temp only — review it, then re-run with --approve")
+        for temp in result.get("temps", []):
+            print(f"   temp: {temp}")
+        return 0
+    print(f"\n✅ {len(pages)} page(s) · {result['images_generated']} image(s) generated")
     for path in pages:
         print(f"   page: {path}")
     if args.project and len(pages) == 1:
@@ -831,6 +844,8 @@ def build_parser() -> argparse.ArgumentParser:
                    help="The sheet HAS a vertical margin rule (default "
                         "assumes it does not)")
     p.add_argument("--notes", default="", help="Extra job-specific overrides")
+    p.add_argument("--approve", action="store_true",
+                   help="draw the page for real (without this you get the free temp)")
     p.add_argument("--fresh-temp", action="store_true",
                    help="Re-mint the base sheet instead of reusing the cache")
     p.add_argument("--dry-run", action="store_true",

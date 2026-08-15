@@ -109,6 +109,17 @@ login and the host has no Manim, but the repair loop needs both. So
   So Hindi goes through `Text()`, formulae through `MathTex()`, and Devanagari
   must never be glued inside a symbol (`E°सेल`). Getting this wrong gives tofu
   boxes one way and a LaTeX failure the other.
+- **Pillow needs libraqm, or every Devanagari image is silently wrong.** Without
+  it Pillow has no complex-script shaping: it draws the codepoints in storage
+  order, so `विद्युत्` comes out `वदि्युत्` and `नियम` comes out `नयिम` — the
+  `ि` matra sitting after its consonant instead of before it. Nothing errors,
+  and it is easy to read past. This bites `EndScreenshot`, whose typeset temp is
+  the reference the image model copies, so a garbled temp becomes a garbled
+  answer card. Check with `PIL.features.check("raqm")`; fix with
+  `brew install libraqm` then `pip install --force-reinstall --no-binary Pillow
+  --no-build-isolation pillow` (Pillow 12 also needs `pybind11` present first,
+  and `--no-binary :all:` instead of `--no-binary Pillow` will sit for half an
+  hour building every build dependency from source).
 - **Never write "logo", "watermark", "badge" or "wordmark" into a generation
   prompt — not even as a negative.** Naming a thing is a signal to draw it; a
   block that said "logo" five times while asking for empty corners produced a
