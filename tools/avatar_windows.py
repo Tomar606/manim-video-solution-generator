@@ -25,8 +25,11 @@ from PIL import Image
 
 # the presenter at his FULL size: 66% of 1080 wide, head at 50.3%
 AV_TOP, AV_L, AV_R = 966, 184, 896
-INK = 1200                              # px of content before it is worth resizing
+INK = 4000                              # px of content before it is worth moving
 PAD = 0.8                               # start the shrink before content appears
+MERGE_GAP = 8.0                         # windows closer than this become one
+MIN_LEN = 2.5                           # a window shorter than this is not worth it
+PER_MINUTE = 2                          # at most this many moves per minute
 
 
 def windows(video, dur, step=0.5):
@@ -54,11 +57,20 @@ def windows(video, dur, step=0.5):
 
     out = []
     for a, b in ([max(0.0, a - PAD), min(dur, b + PAD)] for a, b in runs):
-        if out and a <= out[-1][1] + 0.4:
-            out[-1][1] = max(out[-1][1], b)
+        if out and a <= out[-1][1] + MERGE_GAP:
+            out[-1][1] = max(out[-1][1], b)     # near neighbours become one move
         else:
             out.append([round(a, 1), round(b, 1)])
-    return out
+
+    # Every resize costs the viewer attention, so only the ones that earn it
+    # survive: long enough to be worth doing, and no more than PER_MINUTE of
+    # them. Six moves in a 91s clip read as fidgeting.
+    out = [w for w in out if w[1] - w[0] >= MIN_LEN]
+    cap = max(1, int(round(dur / 60.0 * PER_MINUTE)))
+    if len(out) > cap:
+        out.sort(key=lambda w: w[0] - w[1])     # longest first
+        out = sorted(out[:cap])
+    return [[round(a, 1), round(b, 1)] for a, b in out]
 
 
 if __name__ == "__main__":

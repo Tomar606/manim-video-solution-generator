@@ -50,16 +50,16 @@ TEAL        = "#2AA9C4"
 #   प्रश्न+ticks y  7.7%..17.8%   h 10.1%   w 40.9%
 #   notepaper   y 19.7%..66.6%   h 46.9%   w 83.7%
 #   years pill  y 57.2%..79.9%   h 22.7%   w 60.6%
-Q_MARK_Y    = 0.044          # ring centre — clear of प्रश्न below it
+Q_MARK_Y    = 0.033          # ring centre — clear of प्रश्न below it
 Q_MARK_R    = 0.027          # ring radius, fraction of frame HEIGHT
-Q_WORD_Y    = 0.106
+Q_WORD_Y    = 0.095
 Q_WORD_SIZE = 78             # was 96 — the word crowded the ring above it
 TICK_PAD    = 0.30           # ticks sit CLOSE to the word, as in the still           # ticks reach out to the reference's 40.9% width
-RULE_Y      = 0.151
+RULE_Y      = 0.140
 RULE_W      = 1.55           # the rule runs WIDER than the word
-PAPER_Y     = 0.371          # centre: reference spans 19.7%..66.6%
-PAPER_W     = 0.78          # slightly smaller than the still reads          # width drives the fit, not height
-YEARS_Y     = 0.635          # BELOW the torn edge, never on it
+PAPER_Y     = 0.345          # centre: reference spans 19.7%..66.6%
+PAPER_W     = 0.72          # slightly smaller than the still reads          # width drives the fit, not height
+YEARS_Y     = 0.593          # BELOW the torn edge, never on it
 
 START_SIZE  = 62             # handwriting size before any shrink
 # Measured, not guessed: at font_size 26 a Khand Bold line renders 44px tall on

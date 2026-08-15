@@ -49,7 +49,8 @@ from pathlib import Path
 #                          question-card still, where the years pill has
 #                          to clear his forehead
 FULL_W, FULL_Y = 712, 966          # 66% of 1080
-SMALL_W, SMALL_Y = 605, 1325       # 56% of 1080
+SMALL_W, SMALL_Y = 668, 1245        # a 6% step, not 15% — just enough
+                                    # to clear content that stops at 60%       # 56% of 1080
 EASE = 0.75                         # seconds, the ramp at each edge
 FPS = 30
 CANVAS_W, CANVAS_H = 800, 1150      # holds the small avatar; zoom reaches full
@@ -123,8 +124,12 @@ def composite(bg, avatar, key, out, windows=None):
         ease_z = _ease_expr(windows, T)
         ease_y = _ease_expr(windows, "t")       # overlay does have `t`
         z = f"1+{ratio - 1:.4f}*(1-({ease_z}))"
+        # zoompan zooms about x=0,y=0 unless told otherwise, which walks the
+        # presenter left as he scales — the off-centre drift the manager spotted.
+        # Anchoring x to the canvas centre keeps him centred at every zoom level.
         pan = (f"pad={CANVAS_W}:{CANVAS_H}:(ow-iw)/2:0:%s,"
-               f"zoompan=z='{z}':d=1:s={CANVAS_W}x{CANVAS_H}:fps={FPS}")
+               f"zoompan=z='{z}':d=1:s={CANVAS_W}x{CANVAS_H}:fps={FPS}"
+               f":x='iw/2-(iw/zoom/2)':y='0'")
         y = f"{FULL_Y}+({SMALL_Y - FULL_Y})*({ease_y})"
         fc = (head +
               f"[cc][al]alphamerge,split=2[colr][alph];"

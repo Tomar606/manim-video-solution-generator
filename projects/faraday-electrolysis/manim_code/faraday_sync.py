@@ -41,7 +41,7 @@ FONT, FONT_W = "Khand", "BOLD"
 # roughly twice the size we shipped, and the presenter is 66% of frame width,
 # not 96%. STAGE_BOT clears his head — 50.3% at full size, 62% once he steps
 # back — so content stops at 60% and the two can never meet.
-CAPTION_SIZE, CAPTION_W, CAPTION_TOP = 68, 0.92, 0.090
+CAPTION_SIZE, CAPTION_W, CAPTION_TOP = 66, 0.92, 0.090
 STAGE_TOP, STAGE_BOT, STAGE_W = 0.290, 0.600, 0.86
 CAPTION_GAP = 0.30          # clear space under the caption, scene units
 
