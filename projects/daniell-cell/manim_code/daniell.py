@@ -43,8 +43,8 @@ from pathlib import Path as _Path
 
 import numpy as np
 
-from src.manim_helpers import (ThemedScene, along, mark_group, norm_point,
-                               register_fonts)
+from src.manim_helpers import (ThemedScene, along, fit_caption, mark_group,
+                               norm_point, register_fonts, wrap_measured)
 
 INK   = "#FFFFFF"
 DIM   = "#B9C6DC"
@@ -60,7 +60,7 @@ GREEN = "#7CE0B0"
 VIO   = "#C792EA"
 
 FONT, FONT_W = "Khand", "BOLD"
-CAPTION_SIZE, CAPTION_W, CAPTION_TOP = 36, 0.88, 0.105
+CAPTION_SIZE, CAPTION_W, CAPTION_TOP = 36, 0.90, 0.105
 STAGE_TOP, STAGE_BOT, STAGE_W = 0.225, 0.545, 0.84
 CAPTION_GAP = 0.28
 
@@ -113,31 +113,32 @@ class _Base(ThemedScene):
                         out[whole] = colour
         return out
 
-    def _w(self, word, size):
-        k = (word, size)
-        if k not in self._wcache:
-            self._wcache[k] = Text(word, font=FONT, font_size=size,
-                                   weight=FONT_W).width
-        return self._wcache[k]
+    def _measure(self, line, size):
+        """Mobject for a whole candidate LINE, cached.
+
+        Whole LINE, not word: a space has no ink, so Manim measures it as
+        0.0000 wide. Summing word widths therefore treats spaces as free, every
+        line takes one word too many, and the caption reaches the frame edge.
+        """
+        # Lazily created: not every scene in this file has a construct() that
+        # sets it up, and a caption must never depend on one having run.
+        cache = self.__dict__.setdefault("_wcache", {})
+        k = (line, size)
+        if k not in cache:
+            cache[k] = Text(line, font=FONT, font_size=size, weight=FONT_W)
+        return cache[k]
 
     def caption(self, text, size=CAPTION_SIZE):
-        """Wrapped on measured width — Devanagari conjuncts are not equal width,
-        and a character count ran captions to the frame edge."""
+        """Wrapped on the measured width of each LINE. Devanagari conjuncts are
+        not equal width so a character count overflows; summing word widths
+        overflows too, because a space has no ink and Manim measures it as
+        0.0000 wide. Either way the caption reaches the frame edge."""
         limit = config.frame_width * CAPTION_W
-        space = self._w(" ", size)
-        lines, cur, cw = [], "", 0.0
-        for word in text.split():
-            ww = self._w(word, size)
-            trial = cw + (space + ww if cur else ww)
-            if cur and trial > limit:
-                lines.append(cur); cur, cw = word, ww
-            else:
-                cur, cw = f"{cur} {word}".strip(), trial
-        if cur:
-            lines.append(cur)
+        lines = wrap_measured(text, limit, lambda l: self._measure(l, size))
         g = VGroup(*[Text(l, font=FONT, font_size=size, color=INK,
                           weight=FONT_W, t2c=self._hl(l)) for l in lines])
         g.arrange(DOWN, buff=0.16)
+        fit_caption(g, limit)
         g.move_to(norm_point(0.5, CAPTION_TOP))
         g.shift(DOWN * g.height / 2)      # top-anchored: keeps the top 10% clear
         return g
@@ -352,22 +353,13 @@ class DaniellPart1(_Base):
     def _build(self):
         # ---- cue 0: question card, no caption --------------------------- #
         self.cue(0, caption=False)
-        qb = VGroup(*[self.hindi(l, size=38) for l in
-                      ["विद्युत्-रासायनिक सेल एवं उसकी", "क्रियाविधि — डेनियल सेल"]]
-                    ).arrange(DOWN, buff=0.26, aligned_edge=LEFT)
-        marks = VGroup(self.hindi("अंक", size=25, color=DIM),
-                       self.hindi("4", size=46, color=GOLD)).arrange(DOWN, buff=0.12)
-        years = VGroup(self.hindi("वर्ष", size=25, color=DIM),
-                       self.hindi("2018, 23", size=44, color=GOLD)).arrange(DOWN, buff=0.12)
-        meta = VGroup(marks, years).arrange(RIGHT, buff=1.0, aligned_edge=UP)
-        rule = Line(LEFT, RIGHT).set_stroke(GOLD, 4).set_width(meta.width * 1.05)
-        card = VGroup(qb, rule, meta).arrange(DOWN, buff=0.55)
-        qb.align_to(card, LEFT); rule.align_to(card, RIGHT); meta.align_to(card, RIGHT)
-        self.place(card, y=0.44)
-        self.play(LaggedStart(*[FadeIn(l, shift=RIGHT * 0.25) for l in qb],
-                              lag_ratio=0.22), run_time=1.3)
-        self.play(GrowFromEdge(rule, RIGHT), run_time=0.4)
-        self.play(FadeIn(meta, shift=UP * 0.15), run_time=0.7)
+        # The approved opening design, the same one the other PYQ scenes use —
+        # geometry measured off the still in src/question_card.py, with the
+        # question wrapped and shrunk to the paper's writable area so it cannot
+        # leak off the page.
+        self.question_card("विद्युत्-रासायनिक सेल एवं उसकी क्रियाविधि "
+                           "डेनियल सेल का उदाहरण देकर समझाइए।",
+                           "डेनियल सेल", "2018 और 2023")
         self.hold()
 
         # ---- cue 1: the question ---------------------------------------- #

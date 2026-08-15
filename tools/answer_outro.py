@@ -87,6 +87,23 @@ def plate_colour(video: Path, at: float) -> str:
     return f"0x{r:02X}{g:02X}{b:02X}"
 
 
+def written_bottom(grey) -> int | None:
+    """Last row of the sheet that carries handwriting.
+
+    A ruled line spans the full width, so a per-row ink count cannot tell one
+    from a line of text — both light up. Smoothing the profile over roughly one
+    line pitch does separate them: writing raises the average across the band it
+    sits in, a hairline rule barely moves it.
+    """
+    import numpy as np
+    h, w = grey.shape
+    profile = (grey < INK_LEVEL).sum(axis=1) / w
+    window = max(9, h // 50)
+    smooth = np.convolve(profile, np.ones(window) / window, mode="same")
+    rows = np.nonzero(smooth > INK_FLOOR)[0]
+    return int(rows.max()) if len(rows) else None
+
+
 def trim_blank_tail(card: Path, dest: Path) -> Path:
     """Crop the unwritten bottom of the sheet away, or return it untouched.
 
@@ -119,6 +136,98 @@ def trim_blank_tail(card: Path, dest: Path) -> Path:
     return dest
 
 
+def rule_rows(arr, x: int) -> list[int]:
+    """Rows where a ruled line crosses, probed down a single column."""
+    import numpy as np
+    col = arr[:, x].astype(int).mean(axis=1)
+    paper = float(np.median(col))
+    dark = [i for i, v in enumerate(col) if v < paper - 14]
+    if not dark:
+        return []
+    runs, start, prev = [], dark[0], dark[0]
+    for i in dark[1:]:
+        if i - prev > 3:
+            runs.append((start + prev) // 2)
+            start = i
+        prev = i
+    runs.append((start + prev) // 2)
+    return runs
+
+
+def to_full_page(card: Path, frame_w: int, frame_h: int, dest: Path) -> Path:
+    """Make the sheet fill the whole 9:16 frame, at the largest readable size.
+
+    The sheet is 2:3 and the frame is 9:16, so one of the two has to give. The
+    options are not equal:
+
+      crop the sides   scaling to the frame's HEIGHT makes the sheet 1280 wide
+                       and 200px would have to come off it — straight through
+                       the text, which starts 60px in
+      bars             centring the sheet leaves the plate showing top and
+                       bottom, which is not a full page
+      extend the paper fit the WIDTH, then continue the ruling below
+
+    So: fit the width, then keep drawing the sheet's own ruled paper until the
+    frame is full. The lines are found by probing a column, and the extension is
+    pasted a whole pitch after the last one, so the ruling carries on at its own
+    spacing instead of jumping. The paper is copied from the sheet's blank tail
+    rather than drawn, so it keeps the photographed grain and stays the same
+    page rather than becoming a graphic stuck underneath one.
+    """
+    import numpy as np
+    from PIL import Image
+
+    im = Image.open(card).convert("RGB")
+    scale = frame_w / im.width
+    im = im.resize((frame_w, max(1, round(im.height * scale))), Image.LANCZOS)
+    if im.height >= frame_h:
+        im = im.crop((0, 0, frame_w, frame_h))      # keep the top: writing is there
+        im.save(dest)
+        return dest
+
+    arr = np.asarray(im)
+    probe = max(2, int(frame_w * 0.5))              # mid-page: blank below the text
+    rows = rule_rows(arr, probe)
+    page = Image.new("RGB", (frame_w, frame_h))
+    page.paste(im, (0, 0))
+
+    written = written_bottom(np.asarray(im.convert("L")).astype(int))
+    diffs = [b - a for a, b in zip(rows, rows[1:])] if len(rows) > 2 else []
+    pitch = int(np.median(diffs)) if diffs else 0
+    if pitch < 8 or not rows:
+        # no ruling to continue — fill with the paper's own colour, which still
+        # gives a full page rather than a letterboxed card
+        paper = tuple(np.median(arr[-20:].reshape(-1, 3), axis=0).astype(int))
+        page.paste(Image.new("RGB", (frame_w, frame_h - im.height), paper),
+                   (0, im.height))
+        page.save(dest)
+        return dest
+
+    # A band starting ON a line, a whole number of pitches tall, taken from
+    # paper that is genuinely BLANK — the first rule clear of the last written
+    # row. Picking by a fraction of the page instead repeated the closing lines
+    # of the answer three times down the extension.
+    floor = (written + pitch) if written is not None else int(im.height * 0.55)
+    band_top = next((r for r in rows if r > floor), None)
+    if band_top is None:
+        paper = tuple(np.median(arr[-20:].reshape(-1, 3), axis=0).astype(int))
+        page.paste(Image.new("RGB", (frame_w, frame_h - im.height), paper),
+                   (0, im.height))
+        page.save(dest)
+        return dest
+    n = max(1, (frame_h - im.height) // pitch + 1)
+    band_bottom = min(arr.shape[0], band_top + n * pitch)
+    n = max(1, (band_bottom - band_top) // pitch)
+    band = im.crop((0, band_top, frame_w, band_top + n * pitch))
+
+    y = rows[-1] + pitch
+    while y < frame_h:
+        page.paste(band, (0, y))
+        y += band.height
+    page.save(dest)
+    return dest
+
+
 def build(video: Path, card: Path, out: Path, hold: float, fade: float,
           plate: str | None = None) -> None:
     v = probe(video)
@@ -130,12 +239,12 @@ def build(video: Path, card: Path, out: Path, hold: float, fade: float,
     card_dur = fade + hold + fade        # fade up, hold, fade to black
     total = dur - fade + card_dur
 
-    # The card sits on the plate at its own aspect; `force_original_aspect_ratio`
-    # is what keeps a landscape answer sheet from being stretched to portrait.
+    # The page already fills the frame exactly (to_full_page), so the plate is
+    # only there as a ground in case a caller passes an odd-sized image.
     tail = (
         f"color=c={plate}:s={w}x{h}:r={fps}:d={card_dur}[plate];"
-        f"[2:v]scale={int(w * CARD_W)}:{int(h * CARD_H)}"
-        f":force_original_aspect_ratio=decrease[card];"
+        f"[2:v]scale={w}:{h}:force_original_aspect_ratio=increase,"
+        f"crop={w}:{h}[card];"
         f"[plate][card]overlay=(W-w)/2:(H-h)/2:format=auto[tail0];"
         # black at the very end, not a dissolve back to the plate
         f"[tail0]fade=t=out:st={fade + hold}:d={fade}:color=black,"
@@ -185,9 +294,11 @@ def main() -> int:
         if not path.exists():
             raise SystemExit(f"❌ not found: {path}")
     print(f"🎬 answer outro -> {out}")
-    if not a.no_trim:
-        # beside the card, not beside the video: `final/` holds deliverables
-        card = trim_blank_tail(card, card.with_name(f"{card.stem}_trimmed.png"))
+    # NOT trimmed first: fitting to the frame's width scales the sheet the same
+    # either way, so trimming buys no size — it only removes the blank paper the
+    # extension needs to carry the ruling down the page.
+    v = probe(video)
+    card = to_full_page(card, v["w"], v["h"], card.with_name(f"{card.stem}_page.png"))
     build(video, card, out, a.hold, a.fade, a.plate)
     return 0
 

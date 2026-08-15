@@ -339,6 +339,61 @@ NARRATION_MAX_LINES = 4
 NARRATION_LINE_BUFF = 0.15
 
 
+# How much frame the caption may occupy, and so the gap it leaves at each side.
+# The approved stills span 4.6%..96.2%, so the house margin is ~4.6% a side;
+# 0.90 keeps that with a little room, and a little is the point — a caption that
+# runs to the bezel reads as an error even when every word is right.
+CAPTION_MAX_W = 0.90
+
+
+def wrap_measured(text: str, max_w: float, build) -> list[str]:
+    """Greedy wrap that measures the candidate LINE, not the sum of its words.
+
+    Summing word widths and adding a space width is the obvious approach and it
+    is wrong twice over. A space has NO INK, so `Text(" ").width` is not the
+    advance the renderer will use — Manim reports a bounding box and a blank
+    string has none, which makes spaces look free and packs more words onto the
+    line than fit. Kerning across a join then adds a little more. Both errors
+    push the same way, so the line always comes out wider than the wrapper
+    believed: PYQ captions were landing 4px from a 1080px frame edge against a
+    limit that should have left 43.
+
+    Measuring the assembled line has neither problem, because it is the same
+    string the scene will draw. `build(line)` returns a mobject for it; results
+    are cached by the caller's own cache if it has one.
+
+    A single word wider than `max_w` is kept on its own line rather than broken:
+    Devanagari splits inside a cluster orphan their combining marks. Callers
+    should scale such a line down — `fit_caption` does.
+    """
+    lines: list[str] = []
+    cur = ""
+    for word in text.split():
+        trial = f"{cur} {word}".strip()
+        if cur and build(trial).width > max_w:
+            lines.append(cur)
+            cur = word
+        else:
+            cur = trial
+    if cur:
+        lines.append(cur)
+    return lines
+
+
+def fit_caption(group, max_w: float):
+    """Last line of defence: nothing leaves the caption's side margins.
+
+    `wrap_measured` already makes overflow impossible for text that CAN be
+    wrapped, so reaching the scale here means one unbreakable token is wider
+    than the whole margin. That is worth knowing about, hence the note.
+    """
+    if group.width > max_w:
+        print(f"   caption over width by "
+              f"{(group.width - max_w) / max_w * 100:.1f}% — scaling to fit")
+        group.scale_to_fit_width(max_w)
+    return group
+
+
 def _greedy_wrap(text: str, per_line: int) -> list[str]:
     lines: list[str] = []
     cur = ""

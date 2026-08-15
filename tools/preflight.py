@@ -21,6 +21,7 @@ from pathlib import Path
 OK, WARN, FAIL = "ok", "warn", "FAIL"
 CLIP_TAIL = 2.5          # a caption may not start this close to the end
 MAX_GAP = 4.0            # transcript hole worth reporting
+CAPTION_MIN_MARGIN = 0.03   # of frame width, each side
 
 
 class Report:
@@ -230,6 +231,52 @@ def check_images(root: Path, rep: Report):
                 rep.add(OK, f"images/{img.name}")
 
 
+def check_caption_margins(root: Path, rep: Report):
+    """No caption may run to the frame edge.
+
+    A wrap limit is only a limit if the wrapper measures what will actually be
+    drawn. The one that shipped summed word widths and added a space — and Manim
+    reports a space as 0.0000 wide, because it measures ink and a space has
+    none. Spaces therefore cost nothing, every line took one word too many, and
+    a 92% limit produced captions 4px from a 1080px edge. Nothing failed; it
+    just looked wrong, which is exactly the class of bug this file exists for.
+
+    Measured off the render rather than the source, so it holds however the
+    scene was written.
+    """
+    import io
+
+    import numpy as np
+    from PIL import Image
+
+    for video in sorted(root.glob("media/videos/**/*.mp4")):
+        worst, at = 1.0, 0.0
+        for t in range(3, 120, 6):
+            raw = subprocess.run(
+                ["ffmpeg", "-v", "error", "-ss", str(t), "-i", str(video),
+                 "-frames:v", "1", "-f", "image2pipe", "-vcodec", "png", "-"],
+                capture_output=True).stdout
+            if not raw:
+                break
+            a = np.asarray(Image.open(io.BytesIO(raw)).convert("L")).astype(int)
+            h, w = a.shape
+            strip = a[int(h * 0.03):int(h * 0.16)]
+            cols = np.nonzero((strip > 170).sum(axis=0) > 2)[0]
+            if len(cols) < 10:
+                continue
+            margin = min(cols[0], w - 1 - cols[-1]) / w
+            if margin < worst:
+                worst, at = margin, t
+        if worst > 0.5:
+            continue                        # no caption found; nothing to judge
+        name = f"{video.stem} caption margin"
+        if worst < CAPTION_MIN_MARGIN:
+            rep.add(FAIL, name, f"{worst * 100:.2f}% at {at:.0f}s "
+                                f"(want >= {CAPTION_MIN_MARGIN * 100:.0f}%)")
+        else:
+            rep.add(OK, name, f"{worst * 100:.2f}% at {at:.0f}s")
+
+
 def preflight(root: Path) -> Report:
     rep = Report()
     check_composed(root, rep)
@@ -240,6 +287,7 @@ def preflight(root: Path) -> Report:
     check_keys(root, rep)
     check_windows(root, rep)
     check_images(root, rep)
+    check_caption_margins(root, rep)
     return rep
 
 

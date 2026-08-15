@@ -25,7 +25,8 @@ from pathlib import Path as _Path
 
 import numpy as np
 
-from src.manim_helpers import ThemedScene, norm_point, register_fonts, ui_font
+from src.manim_helpers import (ThemedScene, fit_caption, norm_point,
+                               register_fonts, ui_font, wrap_measured)
 
 # --- palette --------------------------------------------------------------- #
 INK    = "#FFFFFF"
@@ -53,7 +54,7 @@ FONT_W = "BOLD"
 # block fits inside the stage — that is the permanent fix for the overlapping
 # figures: it is impossible to place something taller or wider than its band.
 CAPTION_SIZE  = 36
-CAPTION_W     = 0.88
+CAPTION_W     = 0.90
 CAPTION_TOP = 0.105
 STAGE_TOP, STAGE_BOT = 0.225, 0.545      # ends above the presenter's head
 CAPTION_GAP = 0.28                       # clear space under the caption
@@ -173,35 +174,32 @@ class Sanksharan(ThemedScene):
                         out[whole] = colour
         return out
 
-    def _w(self, word, size):
-        """Rendered width of one word, cached — wrapping measures, not counts."""
-        if not hasattr(self, "_wcache"):
-            self._wcache = {}
-        k = (word, size)
-        if k not in self._wcache:
-            self._wcache[k] = Text(word, font=FONT, font_size=size,
-                                   weight=FONT_W).width
-        return self._wcache[k]
+    def _measure(self, line, size):
+        """Mobject for a whole candidate LINE, cached.
+
+        Whole LINE, not word: a space has no ink, so Manim measures it as
+        0.0000 wide. Summing word widths therefore treats spaces as free, every
+        line takes one word too many, and the caption reaches the frame edge.
+        """
+        # Lazily created: not every scene in this file has a construct() that
+        # sets it up, and a caption must never depend on one having run.
+        cache = self.__dict__.setdefault("_wcache", {})
+        k = (line, size)
+        if k not in cache:
+            cache[k] = Text(line, font=FONT, font_size=size, weight=FONT_W)
+        return cache[k]
 
     def caption(self, text, size=CAPTION_SIZE):
         """Wrapped on measured width, with the load-bearing words picked out.
 
-        Measured, not counted: a character-count wrap assumes every glyph is
-        equally wide, which Devanagari conjuncts are not, so a long caption
-        could reach the frame edge with no margin left.
+        Measured, not counted, and measured per LINE: a character-count wrap
+        assumes every glyph is equally wide, which Devanagari conjuncts are not,
+        and summing word widths treats the spaces between them as free, because
+        a space has no ink for Manim to measure. Either way the caption reaches
+        the frame edge with no margin left.
         """
         limit = config.frame_width * CAPTION_W
-        space = self._w(" ", size)
-        lines, cur, cw = [], "", 0.0
-        for word in text.split():
-            ww = self._w(word, size)
-            trial = cw + (space + ww if cur else ww)
-            if cur and trial > limit:
-                lines.append(cur); cur, cw = word, ww
-            else:
-                cur, cw = f"{cur} {word}".strip(), trial
-        if cur:
-            lines.append(cur)
+        lines = wrap_measured(text, limit, lambda l: self._measure(l, size))
         grp = VGroup()
         for ln in lines:
             grp.add(Text(ln, font=FONT, font_size=size, color=INK,
@@ -210,7 +208,10 @@ class Sanksharan(ThemedScene):
         # Deliberately NOT scaled to fit. Scaling made every long caption
         # smaller than every short one, so the type size jumped around all
         # video. A caption that needs more room takes another line instead;
-        # the wrap width above is what keeps it inside the frame.
+        # the wrap width above is what keeps it inside the frame. fit_caption
+        # only bites if one unbreakable token is wider than the whole margin,
+        # and says so when it does.
+        fit_caption(grp, limit)
         # Top 10% of the frame stays empty. Anchoring by the top edge keeps
         # that true whether the caption runs to one line or two — a fixed
         # centre let the taller ones bleed off the top.
@@ -369,40 +370,15 @@ class Sanksharan(ThemedScene):
     def _build(self):
 
         # ============ cue 0 — QUESTION CARD, no caption ================== #
+        # The approved opening design (ringed ?, gold प्रश्न, the question
+        # handwritten on torn notepaper, years on a gold pill). Geometry is
+        # measured off the still in src/question_card.py, and the text wraps and
+        # shrinks to the paper's writable area, so a longer question than this
+        # one still cannot leak off the page.
         self.cue(0, caption=False)
-        qtext = ("संक्षारण किसे कहते हैं? इसे प्रभावित करने वाले तीन कारकों को "
-                 "लिखकर इससे बचाव के कोई तीन उपाय लिखिए।")
-        words, ql, cur = qtext.split(), [], ""
-        for w in words:
-            if len(f"{cur} {w}".strip()) > 32 and cur:
-                ql.append(cur); cur = w
-            else:
-                cur = f"{cur} {w}".strip()
-        ql.append(cur)
-
-        qblock = VGroup(*[self.hindi(l, size=40, color=INK) for l in ql])
-        qblock.arrange(DOWN, buff=0.28, aligned_edge=LEFT)
-        mw = config.frame_width * 0.84
-        if qblock.width > mw:
-            qblock.scale(mw / qblock.width)
-
-        marks = VGroup(self.hindi("अंक", size=25, color=DIM),
-                       self.hindi("4", size=46, color=GOLD)).arrange(DOWN, buff=0.12)
-        years = VGroup(self.hindi("वर्ष", size=25, color=DIM),
-                       self.hindi("2025", size=46, color=GOLD)).arrange(DOWN, buff=0.12)
-        meta = VGroup(marks, years).arrange(RIGHT, buff=1.05, aligned_edge=UP)
-        rule = Line(LEFT, RIGHT).set_stroke(GOLD, 4).set_width(meta.width * 1.06)
-
-        card = VGroup(qblock, rule, meta).arrange(DOWN, buff=0.62)
-        qblock.align_to(card, LEFT)                      # question left-aligned
-        rule.align_to(card, RIGHT)
-        meta.align_to(card, RIGHT)                       # weightage + years right
-        self.place(card, y=0.42)
-
-        self.play(LaggedStart(*[FadeIn(l, shift=RIGHT * 0.25) for l in qblock],
-                              lag_ratio=0.22), run_time=1.7)
-        self.play(GrowFromEdge(rule, RIGHT), run_time=0.5)
-        self.play(FadeIn(meta, shift=UP * 0.15), run_time=0.8)
+        self.question_card("संक्षारण किसे कहते हैं? इसे प्रभावित करने वाले तीन "
+                           "कारकों को लिखकर इससे बचाव के कोई तीन उपाय लिखिए।",
+                           "संक्षारण", "2025")
         self.hold()
         self.play(FadeOut(card), run_time=0.45)
 

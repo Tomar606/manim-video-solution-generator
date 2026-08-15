@@ -23,7 +23,8 @@ from pathlib import Path as _Path
 
 import numpy as np
 
-from src.manim_helpers import ThemedScene, norm_point, register_fonts
+from src.manim_helpers import (ThemedScene, fit_caption, norm_point,
+                               register_fonts, wrap_measured)
 
 INK    = "#FFFFFF"
 DIM    = "#B9C6DC"
@@ -41,7 +42,7 @@ FONT, FONT_W = "Khand", "BOLD"
 # roughly twice the size we shipped, and the presenter is 66% of frame width,
 # not 96%. STAGE_BOT clears his head — 50.3% at full size, 62% once he steps
 # back — so content stops at 60% and the two can never meet.
-CAPTION_SIZE, CAPTION_W, CAPTION_TOP = 62, 0.92, 0.090
+CAPTION_SIZE, CAPTION_W, CAPTION_TOP = 62, 0.90, 0.090
 STAGE_TOP, STAGE_BOT, STAGE_W = 0.290, 0.600, 0.86
 CAPTION_GAP = 0.30          # clear space under the caption, scene units
 
@@ -119,36 +120,35 @@ class _Base(ThemedScene):
                         out[whole] = colour
         return out
 
-    def _w(self, word, size):
-        """Rendered width of one word, cached — wrapping measures, not counts."""
-        k = (word, size)
-        if k not in self._wcache:
-            self._wcache[k] = Text(word, font=FONT, font_size=size,
-                                   weight=FONT_W).width
-        return self._wcache[k]
+    def _measure(self, line, size):
+        """Mobject for a whole candidate LINE, cached.
+
+        Whole LINE, not word: a space has no ink, so Manim measures it as
+        0.0000 wide. Summing word widths therefore treats spaces as free, every
+        line takes one word too many, and the caption reaches the frame edge.
+        """
+        # Lazily created: not every scene in this file has a construct() that
+        # sets it up, and a caption must never depend on one having run.
+        cache = self.__dict__.setdefault("_wcache", {})
+        k = (line, size)
+        if k not in cache:
+            cache[k] = Text(line, font=FONT, font_size=size, weight=FONT_W)
+        return cache[k]
 
     def caption(self, text, size=CAPTION_SIZE):
-        # Wrap on MEASURED width, not character count. A character count
-        # assumes every glyph is equally wide, which Devanagari conjuncts are
-        # not, so long captions ran to the frame edge with no margin at all.
-        # The old code then forced everything back to two lines by splitting
-        # the word list in half, which made the overflow worse rather than
-        # better. A caption that needs a third line now takes one.
+        # Wrap on the MEASURED width of each candidate LINE. Character counts
+        # assume every glyph is equally wide, which Devanagari conjuncts are
+        # not. Summing word widths and adding a space width is no better: a
+        # space has no ink for Manim to measure, so it reads as free and the
+        # line takes one word too many. Both errors push the same way, and the
+        # caption ends up at the bezel — 4px of margin on a 1080px frame
+        # against a limit that should have left 54.
         limit = config.frame_width * CAPTION_W
-        space = self._w(" ", size)
-        lines, cur, cw = [], "", 0.0
-        for word in text.split():
-            ww = self._w(word, size)
-            trial = cw + (space + ww if cur else ww)
-            if cur and trial > limit:
-                lines.append(cur); cur, cw = word, ww
-            else:
-                cur, cw = (f"{cur} {word}".strip()), trial
-        if cur:
-            lines.append(cur)
+        lines = wrap_measured(text, limit, lambda l: self._measure(l, size))
         g = VGroup(*[Text(l, font=FONT, font_size=size, color=INK,
                           weight=FONT_W, t2c=self._hl(l)) for l in lines])
-        g.arrange(DOWN, buff=0.16)          # never scaled: fixed type size
+        g.arrange(DOWN, buff=0.16)          # fixed size unless it must give
+        fit_caption(g, limit)
         # Top 10% stays empty; anchor by top edge so a taller caption grows
         # downward into the gap rather than bleeding off the frame.
         g.move_to(norm_point(0.5, CAPTION_TOP))

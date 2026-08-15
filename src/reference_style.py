@@ -48,7 +48,10 @@ CAPTION_TOP_Y     = 0.085     # ref1 8.5%, ref3 11.2%
 CAPTION_MID_Y     = 0.310     # ref2 — centred when nothing else is on screen
 CAPTION_LINE_H    = 0.084     # ref1: 16.7% over two lines
 CAPTION_SIZE      = 72        # ~2x what we had; matches the measured line height
-CAPTION_W         = 0.92      # ref1 spans 4.6%..96.2%
+# ref1 spans 4.6%..96.2%, so the house margin is ~4.6% a side. 0.90 keeps that
+# with a little room. It is a *wrap* limit, and it only holds if the wrapper
+# measures the assembled line — see `wrap_measured` in src/manim_helpers.py.
+CAPTION_W         = 0.90
 
 DIVIDER_Y         = 0.265
 DIVIDER_W         = 0.56
