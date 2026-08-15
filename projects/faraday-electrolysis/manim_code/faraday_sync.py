@@ -41,7 +41,7 @@ FONT, FONT_W = "Khand", "BOLD"
 # roughly twice the size we shipped, and the presenter is 66% of frame width,
 # not 96%. STAGE_BOT clears his head — 50.3% at full size, 62% once he steps
 # back — so content stops at 60% and the two can never meet.
-CAPTION_SIZE, CAPTION_W, CAPTION_TOP = 66, 0.92, 0.090
+CAPTION_SIZE, CAPTION_W, CAPTION_TOP = 62, 0.92, 0.090
 STAGE_TOP, STAGE_BOT, STAGE_W = 0.290, 0.600, 0.86
 CAPTION_GAP = 0.30          # clear space under the caption, scene units
 
@@ -94,10 +94,24 @@ class _Base(ThemedScene):
         return Text(text, font=FONT, font_size=size, color=color, weight=weight)
 
     def _hl(self, line):
+        """Words to colour, extended to whole words.
+
+        Colouring a bare key splits the string wherever it matches, and a split
+        inside a Devanagari cluster orphans the combining mark — "इलेक्ट्रॉन"
+        matching inside "इलेक्ट्रॉनों" left the "ों" on its own and it rendered
+        as a dotted circle. Matching the key but colouring the full word keeps
+        every cluster intact.
+        """
         out = {}
         for w in sorted(HILITE, key=len, reverse=True):
-            if w in line and not any(w in k for k in out):
-                out[w] = HILITE[w]
+            if w not in line or any(w in k for k in out):
+                continue
+            colour = HILITE[w]
+            for token in line.split():
+                if w in token:
+                    whole = token.strip(",।?!—:;")
+                    if whole and not any(whole in k for k in out):
+                        out[whole] = colour
         return out
 
     def _w(self, word, size):

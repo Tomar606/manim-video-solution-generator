@@ -153,10 +153,24 @@ class Sanksharan(ThemedScene):
         return self.place(g, y=y)
 
     def _hilite(self, line):
+        """Words to colour, extended to whole words.
+
+        Colouring a bare key splits the string wherever it matches, and a split
+        inside a Devanagari cluster orphans the combining mark — "इलेक्ट्रॉन"
+        matching inside "इलेक्ट्रॉनों" left the "ों" on its own and it rendered
+        as a dotted circle. Matching the key but colouring the full word keeps
+        every cluster intact.
+        """
         out = {}
-        for word in sorted(HILITE, key=len, reverse=True):
-            if word in line and not any(word in k for k in out):
-                out[word] = HILITE[word]
+        for w in sorted(HILITE, key=len, reverse=True):
+            if w not in line or any(w in k for k in out):
+                continue
+            colour = HILITE[w]
+            for token in line.split():
+                if w in token:
+                    whole = token.strip(",।?!—:;")
+                    if whole and not any(whole in k for k in out):
+                        out[whole] = colour
         return out
 
     def _w(self, word, size):
