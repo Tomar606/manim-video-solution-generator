@@ -216,3 +216,26 @@ things a scene must do for it to be accurate:
   rod inside its own beaker reads as an overlap
 
 And use `along(mobject)` for `MoveAlongPath` — never a remembered point list.
+
+## The answer card
+
+`video.py endscreenshot` typesets a mock-up for nothing and only pays for the
+image once you pass `--approve`. Two tools finish the job:
+
+| tool | what it does |
+|---|---|
+| `fix_text.py` | repair a wrong word on the generated page, in the browser |
+| `answer_outro.py` | fade the card up over the end of a finished video, hold, fade to black |
+
+**Fix the word; do not re-roll the page.** The image model copies the typeset
+temp, and its mistakes are Devanagari-specific — a dropped halant
+(`अपघट्यों` → `अपघटयों`), a lost anusvara (`हैं` → `है`), a swapped consonant
+(`इलेक्ट्रोड` → `इलेब्ट्रोड`). Re-generating trades one for another: five rolls
+of the same card produced four different wrong words and never repeated one.
+`fix_text.py` boxes the word, fills it with the paper's own colour, redraws the
+ruled lines that crossed it, and writes the correction in Kalam — sized and
+aligned to the word it replaces by measuring the headline it hangs from, so it
+lands on the same rail as its neighbours.
+
+Both depend on Pillow having libraqm; `fix_text.py` refuses to start without it
+rather than write a garbled fix over a garbled word. See CLAUDE.md.
