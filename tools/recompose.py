@@ -26,6 +26,12 @@ JOBS = [
     ("projects/faraday-electrolysis/manim_code/faraday_sync.py",
      "projects/faraday-electrolysis/manim_code/far_composed.py",
      "projects/faraday-electrolysis/script.md"),
+    ("projects/style-sample/manim_code/qcard.py",
+     "projects/style-sample/manim_code/qcard_composed.py",
+     "projects/style-sample/script.md"),
+    ("projects/style-sample/manim_code/sample.py",
+     "projects/style-sample/manim_code/sample_composed.py",
+     "projects/style-sample/script.md"),
     ("projects/daniell-cell/manim_code/daniell.py",
      "projects/daniell-cell/manim_code/dan_composed.py",
      "projects/daniell-cell/script.md"),
@@ -33,6 +39,9 @@ JOBS = [
 
 # A parenthesised import spans several lines; stripping only the first left the
 # continuation behind and the composed file failed with IndentationError.
+# NOT stripped: src.reference_style is a plain constants module and is NOT
+# inlined the way manim_helpers is, so the composed file still has to import it.
+# manim is invoked from the repo root, so `src` is on the path.
 STRIP = (r"^from manim import \*.*$",
          r"^import numpy as np$",
          r"^from src\.manim_helpers import \([^)]*\)",

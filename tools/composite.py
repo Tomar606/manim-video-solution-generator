@@ -34,9 +34,38 @@ import subprocess
 import sys
 from pathlib import Path
 
-# where the presenter sits, full size and reduced
-FULL_W, FULL_Y = 1040, 955
-SMALL_W, SMALL_Y = 846, 1140
+# Where the presenter sits. Measured off the reference stills, not guessed:
+# the presenter is 56-66% of frame width there, against 96% in our first cut —
+# he was half again too big and crowding every diagram.
+#   no diagram on screen : ~66% wide, head at ~51%
+#   diagram on screen    : ~56% wide, head at ~64%
+FULL_W, FULL_Y = 712, 966          # 66% of 1080
+SMALL_W, SMALL_Y = 605, 1190       # 56% of 1080
+EASE = 0.5                          # seconds, ease-in-ease-out each edge
+CANVAS_W, CANVAS_H = 800, 1100      # holds the small avatar; zoom reaches full
+
+
+def _ease_expr(windows, var="t") -> str:
+    """0 outside every window, 1 inside, easing across EASE seconds at each edge.
+
+    `(1-cos(pi*x))/2` is the cosine ease-in-ease-out: flat at both ends, fastest
+    in the middle. ffmpeg's max() takes two arguments, so several windows nest.
+
+    `var` matters: zoompan has NO `t` — its clock is `it` (input timestamp) —
+    while overlay uses `t`. Passing `t` to zoompan makes the expression evaluate
+    to a constant, and the resize becomes the hard cut this exists to avoid.
+    """
+    h = EASE / 2
+
+    def one(a, b):
+        up = f"(1-cos(PI*clip(({var}-{a - h:.2f})/{EASE}\\,0\\,1)))/2"
+        dn = f"(1-cos(PI*clip(({b + h:.2f}-{var})/{EASE}\\,0\\,1)))/2"
+        return f"min({up}\\,{dn})"
+
+    expr = one(*windows[0])
+    for a, b in windows[1:]:
+        expr = f"max({expr}\\,{one(a, b)})"
+    return expr
 
 
 def composite(bg, avatar, key, out, windows=None):
