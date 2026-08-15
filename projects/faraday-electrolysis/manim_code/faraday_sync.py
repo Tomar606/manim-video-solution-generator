@@ -542,3 +542,17 @@ class FaradayPart2(_Base):
         self.place(end, y=0.44)
         self.play(FadeIn(end, scale=1.06), run_time=0.7)
         self.hold()
+
+        self.close_on_answer()
+
+    # ---- the answer card the question closes on ------------------------- #
+    # Only on the LAST part. `ANSWER_CARD` is produced by the EndScreenshot
+    # package (`video endscreenshot`); when it has not been made yet the beat is
+    # skipped rather than failing the render, so a rebuild never blocks on it.
+    def close_on_answer(self):
+        import os as _o
+        from pathlib import Path as _P
+        img = _o.getenv("ANSWER_CARD",
+                        f"projects/faraday-electrolysis/answer_card.png")
+        if (_P(ASSET_ROOT) / img).exists():
+            self.end_card(img, hold=5.0)

@@ -756,6 +756,39 @@ class ThemedScene(Scene):
                   LaggedStart(*[GrowFromCenter(s) for s in psp], lag_ratio=.08),
                   run_time=0.6)
 
+    def end_card(self, image, hold=5.0, fade_in=0.6, fade_out=0.8):
+        """Close on the hand-written answer photo, then fade to black.
+
+        Only ever on the LAST part of a question — the earlier parts hand off to
+        the next one instead. The image comes from the EndScreenshot package
+        (`video endscreenshot`), which draws the Q&A card.
+
+        This runs PAST the presenter's audio: the clip has finished talking by
+        here, so the composite lets the background continue after the avatar
+        ends (overlay `eof_action=pass`) and the tail is silent.
+
+        The black is a real mobject rather than a camera fade, so it composites
+        over the presenter too — otherwise he keeps talking on top of a black
+        screen.
+        """
+        from pathlib import Path as _P
+        img = ImageMobject(str(_P(ASSET_ROOT) / image) if not _P(image).is_absolute()
+                           else str(image))
+        # fit the frame, leaving a hair of margin
+        img.height = config.frame_height * 0.96
+        if img.width > config.frame_width * 0.96:
+            img.width = config.frame_width * 0.96
+        img.move_to(ORIGIN).set_z_index(50)
+
+        black = Rectangle(width=config.frame_width * 1.02,
+                          height=config.frame_height * 1.02)
+        black.set_fill("#000000", 1).set_stroke(width=0).set_z_index(60)
+
+        self.play(FadeIn(img), run_time=fade_in)
+        self.wait(hold)
+        self.play(FadeIn(black), run_time=fade_out)
+        self.wait(0.3)
+
     def report_layout(self) -> None:
         """Print what the guard caught. Run at tear-down, where it cannot be
         missed by whoever kicked off the render."""

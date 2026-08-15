@@ -6,6 +6,13 @@
 output of tools/avatar_windows.py: the times when Manim content sits behind the
 presenter, during which the presenter shrinks and drops so the content shows.
 
+THE END CARD
+------------
+The last part closes on the answer photo, which runs several seconds PAST the
+presenter's audio. `eof_action=pass` on every overlay lets the background carry
+on once the avatar clip ends, instead of the composite stopping at the shorter
+of the two.
+
 THE KEY
 -------
 Hue-based, keyed twice, combined with `darken`. See tools/calibrate_key.py for
@@ -105,15 +112,15 @@ def composite(bg, avatar, key, out, windows=None):
               f"[av2]scale={SMALL_W}:-2:flags=lanczos[small];"
               f"[0:v]format=rgba[bg];"
               f"[bg][big]overlay=x=(W-w)/2:y={FULL_Y}:eval=init:"
-              f"enable='not({inside})'[o1];"
+              f"enable='not({inside})':eof_action=pass[o1];"
               f"[o1][small]overlay=x=(W-w)/2:y={SMALL_Y}:eval=init:"
-              f"enable='{inside}',format=yuv420p[v]")
+              f"enable='{inside}':eof_action=pass,format=yuv420p[v]")
 
     else:
         fc = (head +
               f"[cc][al]alphamerge,scale={FULL_W}:-2:flags=lanczos[av];"
               f"[0:v]format=rgba[bg];"
-              f"[bg][av]overlay=x=(W-w)/2:y={FULL_Y}:eval=init,format=yuv420p[v]")
+              f"[bg][av]overlay=x=(W-w)/2:y={FULL_Y}:eval=init:eof_action=pass,format=yuv420p[v]")
 
     # Write to a temp name and move into place. A previous run killed mid-write
     # left a partial file at the destination, and the next run wrote to the same

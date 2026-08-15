@@ -227,6 +227,55 @@ generated code — deterministic, so they look identical in every video.
 
 ---
 
+## The hand-written answer card
+
+The closing beat can be a photograph of a notebook page with the question and
+its full answer written out by hand — the still a viewer screenshots. That page
+is generated, not photographed:
+
+```bash
+./bin/video answer <slug> \
+  --question-file content/q1_question.txt \
+  --answer-file  content/q1_answer.txt
+# -> projects/<slug>/assets/answer.png   (referenced by answer_image:)
+```
+
+It is a port of the "AI Notes" generator in the sibling `notes-editor` repo
+(master prompt V32), keeping the parts that carry the quality:
+
+- **The page is measured, not guessed.** The blank sheet's real ruled lines are
+  counted, every tagged line is costed in rows, and a page breaks only when it
+  is physically full — so no page is left half empty and no heading is stranded
+  at the foot of one.
+- **The master prompt's whole point is imperfection.** Variable pen pressure,
+  dry-pen skips, ink pooling, letterforms that differ on every repetition,
+  drifting baselines. A page that looks like a font has failed.
+- **Content is rendered verbatim.** The model may vary how a letter is *drawn*;
+  it may never change which letter is drawn.
+
+One stage of the original does not apply and is dropped: `notes-editor` reads
+source PDFs and compresses a chapter into shorthand. Here the question and
+answer are given exactly, so `tag_content()` only marks them up
+(`<<Q>>`, `<<ANS>>`, `<<SUBHEAD>>`, `<<POINT>>`, `<<TEXT>>`, `<<GAP>>`).
+
+Three things needed adapting, and they are the ones to know about:
+
+| | Why |
+|---|---|
+| Blank page is supplied | Ours is already blank, so the erase-a-sample API call is skipped |
+| No vertical margin rule | The prompt parks `Q1:`/`Ans:` left of a red margin line; our sheet has none, so labels go inline (`--margin-line` if yours has one) |
+| Devanagari runs wider | The row budget is word-count based and tuned for English; Hindi gets fewer words per row, or every page overflows |
+
+Hindi also needs its accuracy rules pinned down explicitly — left alone, the
+model "varies" a matra the way it varies a letterform and writes `है` as `हैं`.
+That override is applied automatically when the text contains Devanagari.
+
+The handwriting itself is copied from `assets/handwriting/sample_hand.png`.
+Swap it with `--style` for a different hand — and note the sample is English,
+so a real Hindi sample will give better Devanagari.
+
+---
+
 ## Sound
 
 Scenes score themselves. A scene calls `self.cue("whoosh")` just before an
@@ -274,6 +323,7 @@ projects/<slug>/
 | `src/composite.py` | chromakey + despill + placement |
 | `src/qc.py` | Claude vision review |
 | `src/assemble.py` | conform → concat → mix → mux |
+| `src/handwriting.py` | hand-written answer cards (notes-editor port) |
 | `src/dashboard.py` | the browser UI |
 | `src/llm.py` | Claude access (CLI or API backend) |
 

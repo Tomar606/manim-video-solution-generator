@@ -9,6 +9,13 @@
 $ErrorActionPreference = "Stop"
 Set-Location (Join-Path $PSScriptRoot "..")
 
+# src/manim_render.py shells out to the `manim` BINARY, and its `auto` backend
+# probes for it with shutil.which(). Invoking .venv\Scripts\python.exe does not
+# put .venv\Scripts on PATH, so without this local renders fail with
+# "`manim` CLI not found on PATH" and `auto` silently falls back to Docker.
+$venvBin = Join-Path (Get-Location) ".venv\Scripts"
+if (Test-Path $venvBin) { $env:PATH = "$venvBin;$env:PATH" }
+
 $venvPy = ".\.venv\Scripts\python.exe"
 $runtime = if ($env:VIDEO_RUNTIME) { $env:VIDEO_RUNTIME } else { "auto" }
 
