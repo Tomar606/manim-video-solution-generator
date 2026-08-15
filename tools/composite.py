@@ -88,7 +88,13 @@ def composite(bg, avatar, key, out, windows=None):
     # no longer finds the hue it is looking for, nothing becomes transparent,
     # and the whole despilled background composites as a brown rectangle behind
     # the presenter. The keys must see the raw crop.
-    head = (f"[1:v]crop=650:930:650:150,format=rgba,split=3[c][d1][d2];"
+    # NORMALISE THE FRAMERATE FIRST. The HeyGen clips are 25fps while the Manim
+    # background is 30. Plain `overlay` reconciles that on its own, but zoompan
+    # re-times the stream against its own clock and the picture then drifts off
+    # the audio — a desync that grows through the clip and only shows up on
+    # playback. `fps` duplicates frames with correct timestamps; zoompan can be
+    # trusted once every stream reaching it is already at the target rate.
+    head = (f"[1:v]fps={FPS},crop=650:930:650:150,format=rgba,split=3[c][d1][d2];"
             f"[d1]{k % key['v1']}[a1];[d2]{k % key['v2']}[a2];{alpha}[al];"
             f"[c]despill=type=green:mix=0.7:expand=0.5[cc];")
 
