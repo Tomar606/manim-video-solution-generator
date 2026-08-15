@@ -15,6 +15,13 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+# src/manim_render.py shells out to the `manim` BINARY, and manim_render's
+# `auto` backend probes for it with shutil.which(). Execing .venv/bin/python
+# does not put .venv/bin on PATH, so without this the binary is invisible:
+# local renders die with "`manim` CLI not found on PATH" and `auto` silently
+# falls back to Docker.
+[[ -d .venv/bin ]] && export PATH="$PWD/.venv/bin:$PATH"
+
 RUNTIME="${VIDEO_RUNTIME:-auto}"
 
 venv_ok() { [[ -x .venv/bin/python ]] && .venv/bin/python -c "import manim" 2>/dev/null; }

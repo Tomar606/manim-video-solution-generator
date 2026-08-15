@@ -8,6 +8,7 @@
     video avatar <project>                       briefs, or fetch/ingest clips
     video composite <project>                    key the presenter over it
     video qc <project>                           Claude reviews the frames
+    video endscreenshot [project]                the hand-written Q&A end card
     video build <project>                        everything, in order
     video status [project]                       where each stage stands
     video doctor                                 is this machine set up?
@@ -477,6 +478,88 @@ def cmd_qc(args) -> int:
     return 0 if report["verdict"] != "fail" else 3
 
 
+def _es_default(which: str) -> Path:
+    """Default EndScreenshot asset paths, resolved without importing the
+    package (argparse builds every subparser on every run, and EndScreenshot
+    pulls in Pillow)."""
+    base = Path(__file__).resolve().parent / "EndScreenshot" / "assets"
+    return base / ("blank_ruled.jpeg" if which == "sheet" else "sample_hand.jpg")
+
+
+def cmd_endscreenshot(args) -> int:
+    """Make the EndScreenshot photo: the Q&A card the video ends on.
+
+    Two passes (see EndScreenshot/pipeline.py): step 1 mints the base sheet,
+    step 2 writes the question and answer onto it. The temp is cached, so a
+    re-run of the same sheet pays for step 2 alone.
+
+    With a project, the pages land in its ``assets/`` so they can be referenced
+    straight from the script's ``answer_image:``. Deliberately not recorded in
+    job.json: STAGES is a fixed tuple, and the artifact on disk is the state —
+    the same way a parseable script.md means the script stage is done.
+    """
+    import EndScreenshot as ES
+    from EndScreenshot import prompts as ES_prompts
+
+    def _read(value, path, what):
+        if value:
+            return value.strip()
+        if path:
+            return Path(path).read_text(encoding="utf-8").strip()
+        raise SystemExit(f"❌ Give me the {what}: --{what} or --{what}-file")
+
+    question = _read(args.question, args.question_file, "question")
+    answer = _read(args.answer, args.answer_file, "answer")
+
+    if args.project:
+        project = Project.open(args.project, projects_dir=args.projects_dir)
+        out_dir = project.assets_dir
+        temp_dir = Path(args.temp_dir) if args.temp_dir else ES.DEFAULT_OUT / "temp"
+    else:
+        out_dir = Path(args.out or ES.DEFAULT_OUT)
+        temp_dir = Path(args.temp_dir) if args.temp_dir else None
+
+    if args.dry_run:
+        info = ES.dry_run(question, answer, sheet=args.sheet,
+                          question_label=args.label, heading=args.heading or "")
+        print(f"{info['ruled_rows']} ruled rows, {info['usable_rows']} usable")
+        print(f"content wants ~{info['wants_rows']} rows "
+              f"-> {len(info['pages'])} page(s)")
+        for line in info["lines"]:
+            print(f"   {line}")
+        return 0
+
+    extra = "" if args.margin_line else ES_prompts.NO_MARGIN_OVERRIDE
+    if args.notes:
+        extra = (extra + "\n" + args.notes).strip()
+
+    print(f"📸 EndScreenshot — {args.sheet}")
+    try:
+        result = ES.generate(
+            question, answer,
+            sheet=args.sheet, style=args.style,
+            out_dir=out_dir, temp_dir=temp_dir, stem=args.stem or "answer",
+            question_label=args.label, heading=args.heading or "",
+            highlight=args.highlight, extra_rules=extra,
+            quality=args.quality, max_pages=args.max_pages,
+            fresh_temp=args.fresh_temp,
+            log=lambda msg: print(f"   {msg}", flush=True),
+        )
+    except ES.EndScreenshotError as exc:
+        print(f"❌ {exc}")
+        return 2
+
+    pages = result["pages"]
+    print(f"\n✅ {len(pages)} page(s) · {result['images_generated']} image(s) "
+          f"generated" + (" (temp reused)" if result["temp_cached"] else ""))
+    print(f"   temp: {result['temp']}")
+    for path in pages:
+        print(f"   page: {path}")
+    if args.project and len(pages) == 1:
+        print(f"\n   In script.md:  answer_image: assets/{pages[0].name}")
+    return 0
+
+
 def cmd_build(args) -> int:
     """Run the whole pipeline, stopping at the first stage that can't proceed."""
     project = Project.open(args.project, projects_dir=args.projects_dir)
@@ -698,6 +781,37 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--effort", default="medium",
                    choices=["low", "medium", "high"])
     p.set_defaults(func=cmd_qc)
+
+    # endscreenshot ---------------------------------------------------------
+    p = sub.add_parser("endscreenshot",
+                       help="Hand-write the closing Q&A card (temp -> photo)")
+    p.add_argument("project", nargs="?",
+                   help="Write into this project's assets/ (omit for --out)")
+    p.add_argument("--question"), p.add_argument("--question-file")
+    p.add_argument("--answer"), p.add_argument("--answer-file")
+    p.add_argument("--sheet", default=str(_es_default("sheet")),
+                   help="The blank ruled page (step 1's input)")
+    p.add_argument("--style", default=str(_es_default("style")),
+                   help="A page in the handwriting to copy")
+    p.add_argument("--label", default="Q1", help="Question label (default Q1)")
+    p.add_argument("--heading", help="Optional title line above the question")
+    p.add_argument("--stem", help="Output filename stem (default 'answer')")
+    p.add_argument("--out", help="Output dir when no project is given")
+    p.add_argument("--temp-dir", help="Where temps are cached")
+    p.add_argument("--quality", choices=["low", "medium", "high"],
+                   help="Overrides OPENAI_HANDWRITE_QUALITY")
+    p.add_argument("--max-pages", type=int, default=8)
+    p.add_argument("--highlight", action="store_true",
+                   help="Allow highlighter swipes on headings")
+    p.add_argument("--margin-line", action="store_true",
+                   help="The sheet HAS a vertical margin rule (default "
+                        "assumes it does not)")
+    p.add_argument("--notes", default="", help="Extra job-specific overrides")
+    p.add_argument("--fresh-temp", action="store_true",
+                   help="Re-mint the base sheet instead of reusing the cache")
+    p.add_argument("--dry-run", action="store_true",
+                   help="Show the tagged lines and page split; no API calls")
+    p.set_defaults(func=cmd_endscreenshot)
 
     # build -----------------------------------------------------------------
     p = sub.add_parser("build", help="Run every stage in order")

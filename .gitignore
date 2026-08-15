@@ -1,3 +1,8 @@
+# Standalone answer-card renders. Cards written into a project's assets/ ARE
+# tracked (they're an input to script.md's answer_image:) — this is only the
+# scratch output dir used when `video answer` runs without a project.
+out/
+
 # Environment
 .env
 venv/
@@ -45,3 +50,25 @@ Thumbs.db
 # Logs
 *.log
 projects/*/avatar/briefs/
+
+# EndScreenshot build output. The generated pages and the cached temp sheets
+# are regenerated from content/ + assets/, so only those two are worth keeping.
+EndScreenshot/out/
+
+# --- Secrets: never commit anything that can carry a credential ---------------
+# Broadened beyond a bare `.env` so variants (.env.local, .env.production,
+# api.env, direnv, service-account JSON, private keys) cannot slip through.
+.env
+.env.*
+*.env
+!.env.example
+!.env.sample
+!.env.template
+.envrc
+secrets.json
+credentials.json
+service-account*.json
+*.pem
+*.p12
+*.pfx
+id_rsa*
