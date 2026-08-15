@@ -69,6 +69,11 @@ LINES = json.loads((_Path(ASSET_ROOT) /
 # Manim, where it is correct by construction.
 IMAGES = {
     "series_cells": "projects/faraday-electrolysis/images/series_cells_4ae74384589f0415.png",
+    # The single cell, in the reference's glossy style. Drawn as flat vectors it
+    # read as two grey bars in a rectangle; the glass highlights, the liquid
+    # gradient and the bubbles are what make it look like apparatus. No text in
+    # the image — every label is drawn over it, where it is exactly right.
+    "cell": "projects/faraday-electrolysis/images/cell_glossy_33db81647b79e18a.png",
 }
 
 HILITE = {
@@ -332,28 +337,40 @@ class FaradayPart1(_Base):
 
         # ---- cue 2-3: the cell, ions, deposit --------------------------- #
         self.cue(2)
-        c = self.place(self.cell(0.95), y=0.42)
-        lab = self.electrode_labels(c)
-        self.play(Create(c[0]), FadeIn(c.liquid), run_time=0.7)
-        self.play(FadeIn(c[2]), FadeIn(c[3]), Create(c[4]), FadeIn(c[5]), run_time=0.8)
-        self.play(FadeIn(lab, shift=UP*0.1), run_time=0.5)
+        rig = ImageMobject(str(_Path(ASSET_ROOT) / IMAGES["cell"]))
+        rig.height = config.frame_height * 0.225
+        rig.move_to(norm_point(0.5, 0.395))
+        # the electrodes, for the arrows to point at — the image has no labels
+        an_t = Dot(radius=0.001).move_to(
+            rig.get_center() + LEFT * rig.width * 0.20 + DOWN * rig.height * 0.30)
+        ca_t = Dot(radius=0.001).move_to(
+            rig.get_center() + RIGHT * rig.width * 0.20 + DOWN * rig.height * 0.30)
+        anode = self.label_pointer(an_t, "ऐनोड (+)", CU, side=-1, band_y=0.545,
+                                   sub=("यहाँ ऑक्सीकरण होता है",))
+        cathode = self.label_pointer(ca_t, "कैथोड (−)", NEG, side=+1, band_y=0.545,
+                                     sub=("यहाँ अपचयन होता है",))
+        self.spread_labels(anode, cathode)
+        self.play(FadeIn(rig, shift=UP * 0.10), run_time=0.8)
+        self.play(FadeIn(anode, shift=UP * 0.10), run_time=0.5)
+        self.play(FadeIn(cathode, shift=UP * 0.10), run_time=0.5)
+        c = rig            # later cues position ions relative to the cell
         self.hold()
 
         self.cue(3, keep=True)      # the cell stays; ions move through it
         rng = np.random.default_rng(7)
         cat = VGroup(*[Dot(point=[rng.uniform(-0.6, 0.4),
-                                  c.liquid.get_y() + rng.uniform(-0.6, 0.6), 0],
+                                  rig.get_y() + rng.uniform(-0.5, 0.4), 0],
                            radius=0.075, color=CU) for _ in range(7)])
         ani = VGroup(*[Dot(point=[rng.uniform(-0.4, 0.6),
-                                  c.liquid.get_y() + rng.uniform(-0.6, 0.6), 0],
+                                  rig.get_y() + rng.uniform(-0.5, 0.4), 0],
                            radius=0.062, color=NEG) for _ in range(7)])
         self.play(FadeIn(cat), FadeIn(ani), run_time=0.5)
-        self.play(*[d.animate.move_to([c.ca.get_x()-0.26, d.get_y(), 0]) for d in cat],
-                  *[d.animate.move_to([c.an.get_x()+0.26, d.get_y(), 0]) for d in ani],
+        self.play(*[d.animate.move_to([ca_t.get_x() - 0.26, d.get_y(), 0]) for d in cat],
+                  *[d.animate.move_to([an_t.get_x() + 0.26, d.get_y(), 0]) for d in ani],
                   run_time=1.6)
         dep = Rectangle(width=0.30, height=2.05*0.95, fill_color=CU,
                         fill_opacity=1, stroke_width=0)
-        dep.next_to(c.ca, LEFT, buff=0.0).align_to(c.ca, UP)
+        dep.move_to([ca_t.get_x() - 0.14, rig.get_y(), 0])
         self.play(FadeIn(dep), run_time=0.5)
         self.hold()
 

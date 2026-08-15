@@ -756,6 +756,67 @@ class ThemedScene(Scene):
                   LaggedStart(*[GrowFromCenter(s) for s in psp], lag_ratio=.08),
                   run_time=0.6)
 
+    def label_pointer(self, target, label, colour, sub=(), side=-1,
+                      band_y=None, size=34, sub_size=21):
+        """A colour-coded label joined to a diagram part by a dashed curve.
+
+        The reference style: the term in its own colour, one or two smaller
+        white lines under it, and a dashed arc rising to what it names with an
+        arrowhead at the top.
+
+        Labels are PINNED TO A BAND rather than hung off the target with
+        `next_to`. Hung off the target they land wherever the diagram happens to
+        end — which put them under the presenter once, and across the beaker
+        another time. A fixed band means the left and right labels always share
+        a baseline and the arc absorbs the difference.
+
+        `band_y` defaults to just below the stage, so a caller that has not
+        thought about it still gets a label clear of the diagram.
+        """
+        F = getattr(self, "LABEL_FONT", "Khand")
+        lab = Text(label, font=F, font_size=size, color=colour, weight="BOLD")
+        parts = [lab]
+        if sub:
+            subs = VGroup(*[Text(s, font=F, font_size=sub_size, color="#FFFFFF",
+                                 weight="BOLD") for s in sub])
+            subs.arrange(DOWN, buff=0.08)
+            parts.append(subs)
+        block = VGroup(*parts).arrange(DOWN, buff=0.16)
+
+        if band_y is None:
+            band_y = getattr(self, "STAGE_BAND", (0.29, 0.60))[1] - 0.045
+        block.move_to([target.get_x() + side * 0.62, norm_point(0.5, band_y)[1], 0])
+
+        arc = DashedVMobject(
+            ArcBetweenPoints(block.get_top() + UP * 0.06,
+                             target.get_bottom() + DOWN * 0.04,
+                             angle=side * 0.5), num_dashes=9)
+        arc.set_stroke(colour, 3, opacity=0.85)
+        tip = Triangle(fill_opacity=1, color=colour).scale(0.072)
+        tip.rotate(PI).move_to(target.get_bottom() + DOWN * 0.04)
+        g = VGroup(block, arc, tip)
+        g.block, g.arc = block, arc
+        return g
+
+    def spread_labels(self, *groups, gap=0.28):
+        """Push labels apart until none of them touch.
+
+        Two labels under one diagram will collide the moment either term is
+        long — "यहाँ ऑक्सीकरण होता है" under one electrode and "यहाँ अपचयन होता
+        है" under the other ran into each other and neither could be read. This
+        walks them outward until they clear, then re-aims their arcs.
+        """
+        if len(groups) < 2:
+            return VGroup(*groups)
+        blocks = sorted(groups, key=lambda g: g.block.get_x())
+        for i in range(1, len(blocks)):
+            a, b = blocks[i - 1].block, blocks[i].block
+            overlap = (a.get_right()[0] + gap) - b.get_left()[0]
+            if overlap > 0:
+                blocks[i - 1].shift(LEFT * overlap / 2)
+                blocks[i].shift(RIGHT * overlap / 2)
+        return VGroup(*groups)
+
     def end_card(self, image, hold=5.0, fade_in=0.6, fade_out=0.8):
         """Close on the hand-written answer photo, then fade to black.
 
