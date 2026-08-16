@@ -702,6 +702,102 @@ class ThemedScene(Scene):
         except Exception as exc:            # a guard must never break a render
             self._layout_violations.append(f"audit failed: {exc}")
 
+
+    # ---------------------------------------------------------------- beats --
+    # A small set of vetted blocks that every PYQ scene is built from. They
+    # exist so nine parts can be authored as DATA rather than as nine hand-laid
+    # scenes: each one returns a mobject that has already been through
+    # `place()`, so it cannot cross the caption above it or the presenter below,
+    # and the whole batch inherits one set of layout decisions instead of nine.
+    #
+    # `hi` colours the load-bearing word in a line — "make sure important
+    # equations don't get missed" means the equation has to be the thing the eye
+    # lands on, not one more grey line among several.
+
+    def beat_points(self, items, title=None, size=34, hi=None, colour=None):
+        """A short list. Anything longer than five lines is split by the caller;
+        six lines at a readable size do not fit the stage band and shrinking
+        them to fit is how a slide becomes unreadable on a phone."""
+        rows = VGroup()
+        if title:
+            rows.add(Text(str(title), font=ui_font(), font_size=size + 6,
+                          color=colour or "#FFC15C", weight="BOLD"))
+        for it in items[:5]:
+            t2c = {hi: "#FFC15C"} if hi and hi in str(it) else {}
+            rows.add(Text(str(it), font=ui_font(), font_size=size,
+                          color="#FFFFFF", weight="MEDIUM", t2c=t2c))
+        rows.arrange(DOWN, buff=0.34, aligned_edge=LEFT)
+        return self.place(rows)
+
+    def beat_formula(self, tex, label=None, size=1.15, colour="#FFFFFF"):
+        """One or more equations, large, boxed if labelled.
+
+        Equations are the part of an answer a student copies verbatim, so they
+        are given the whole stage and the largest type any block uses.
+        """
+        eqs = VGroup(*[MathTex(t).scale(size).set_color(colour)
+                       for t in ([tex] if isinstance(tex, str) else tex)])
+        eqs.arrange(DOWN, buff=0.42)
+        if label:
+            cap = Text(str(label), font=ui_font(), font_size=30,
+                       color="#7CE0B0", weight="BOLD")
+            eqs = VGroup(cap, eqs).arrange(DOWN, buff=0.40)
+        return self.place(eqs)
+
+    def beat_flow(self, items, size=30):
+        """a -> b -> c, wrapped to two rows if it will not fit one."""
+        chain = VGroup()
+        for i, it in enumerate(items):
+            if i:
+                chain.add(Text("→", font=ui_font(), font_size=size + 4,
+                               color="#B9C6DC"))
+            chain.add(Text(str(it), font=ui_font(), font_size=size,
+                           color="#FFFFFF", weight="MEDIUM"))
+        chain.arrange(RIGHT, buff=0.26)
+        _, w, _ = self.stage_box()
+        if chain.width > w:                     # wrap rather than shrink to fit
+            half = len(chain) // 2 // 2 * 2
+            chain = VGroup(VGroup(*chain[:half]).arrange(RIGHT, buff=0.26),
+                           VGroup(*chain[half:]).arrange(RIGHT, buff=0.26)
+                           ).arrange(DOWN, buff=0.34)
+        return self.place(chain)
+
+    def beat_compare(self, left, right, size=28):
+        """Two labelled columns — the shape most 'compare these' answers want.
+
+        A divider is drawn BETWEEN the columns rather than the columns being
+        spaced apart and hoped over: with a rule there, a long line on one side
+        reads as belonging to that side even when it runs close to the middle.
+        """
+        def col(spec):
+            g = VGroup(Text(str(spec[0]), font=ui_font(), font_size=size + 5,
+                            color="#FFC15C", weight="BOLD"))
+            for line in spec[1][:4]:
+                g.add(Text(str(line), font=ui_font(), font_size=size,
+                           color="#FFFFFF", weight="MEDIUM"))
+            return g.arrange(DOWN, buff=0.26, aligned_edge=LEFT)
+
+        l, r = col(left), col(right)
+        bar = Line(UP, DOWN).set_stroke("#2A3C57", 3)
+        bar.set_height(max(l.height, r.height) * 1.06)
+        return self.place(VGroup(l, bar, r).arrange(RIGHT, buff=0.55))
+
+    def beat_image(self, path, caption=None, height=None):
+        """A generated illustration. ImageMobject is NOT a VMobject, so it can
+        never go in a VGroup — see CLAUDE.md."""
+        img = ImageMobject(str(path))
+        _, w, h = self.stage_box()
+        img.height = min(height or h * 0.80, h * 0.86)
+        if img.width > w * 0.92:
+            img.width = w * 0.92
+        grp = Group(img)
+        if caption:
+            cap = Text(str(caption), font=ui_font(), font_size=26,
+                       color="#B9C6DC", weight="MEDIUM")
+            cap.next_to(img, DOWN, buff=0.24)
+            grp = Group(img, cap)
+        return self.place(grp)
+
     def question_card(self, question, highlight="", years="", sheet=None,
                       sheet_head="प्रश्न"):
         """The approved opening card: ringed ?, gold प्रश्न, notepaper, years.

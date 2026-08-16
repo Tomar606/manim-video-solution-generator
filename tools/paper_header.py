@@ -93,9 +93,15 @@ Q_BAND   = (345, 815, 1020, 1032)   # ONLY where the design's question ink sits.
                                     # torn corner into a pale block. A replacement
                                     # that runs to three lines simply writes the
                                     # last one onto clean paper below.
-Q_LEFT   = 358                      # where the first line starts
+Q_LEFT   = 330                      # where the first line starts. '(1)' ends
+                                    # at x=260, so this is as far left as the
+                                    # question can begin — the extra width buys
+                                    # a line back on the longest questions.
 Q_TOP    = 820                      # top of the first line's ink
-Q_LINE_H = 105                      # measured line pitch
+Q_LINE_H = 105                      # measured line pitch at Q_INK_H
+Q_BOTTOM = 1112                     # last row the paper can carry text on.
+                                    # 1168 put the closing line of the two
+                                    # longest questions ON the torn edge.
 Q_INK_H  = 98                       # measured height of one line's ink
 
 
@@ -239,14 +245,23 @@ def subject_line(hindi: str, english: str, target_h: int,
     return img
 
 
-def question_block(text: str, ink_h: int, max_w: int) -> list[Image.Image]:
+def question_block(text: str, ink_h: int, max_w: int,
+                   avail_h: int | None = None):
     """The question, wrapped and set the way the design sets it.
 
     Wrapped on MEASURED width — Devanagari conjuncts are not equal width, so a
     character count overflows exactly on the long questions, and this sheet has
     a hard right edge where the paper is torn.
+
+    And wrapped to a HEIGHT as well. The design was drawn with a nine-word
+    question; four of the five in this batch are two to three times that, and
+    wrapping to width alone simply kept adding lines — they ran off the torn
+    bottom edge of the paper. So the type shrinks until the block fits the paper
+    it is written on, exactly as the notepaper card does.
+
+    Returns (rows, line_pitch): the pitch scales with the type, or a shrunken
+    block would still be set on the original spacing and run off anyway.
     """
-    size = ink_h
     probe = ImageDraw.Draw(Image.new("L", (1, 1)))
 
     def font(px):
@@ -259,32 +274,66 @@ def question_block(text: str, ink_h: int, max_w: int) -> list[Image.Image]:
                          int(xs.max()) + 1, int(ys.max()) + 1))
 
     def draw(line, px):
+        """A line cropped horizontally to its ink but NOT vertically.
+
+        Cropping vertically too and then stacking the crops aligns their TOPS,
+        and Devanagari lines are not the same height — one with a high matra is
+        taller than one without, so the line under it gets pushed down into it.
+        Every line keeps the same vertical window here, so stacking them at a
+        fixed pitch aligns their BASELINES, which is what leading means.
+        """
         f = font(px)
         w = int(probe.textlength(line, font=f)) + px * 2
         img = Image.new("RGBA", (w, px * 3), (0, 0, 0, 0))
         ImageDraw.Draw(img).text((px, px * 2), line, font=f,
                                  fill=INK + (255,), anchor="ls")
-        return ink_of(img)
+        a = np.asarray(img)[..., 3] > 40
+        cols = np.nonzero(a.any(axis=0))[0]
+        return img.crop((int(cols.min()), 0, int(cols.max()) + 1, img.height))
 
-    # size from the tallest word, so every line matches the design's line height
+    def wrap(px):
+        f = font(px)
+        lines, cur = [], ""
+        for word in text.split():
+            trial = f"{cur} {word}".strip()
+            if cur and probe.textlength(trial, font=f) > max_w:
+                lines.append(cur); cur = word
+            else:
+                cur = trial
+        if cur:
+            lines.append(cur)
+        return lines
+
+    # Size so one line's INK matches the design's line height. `size` is a font
+    # size and `ink_h` is a measured pixel height — they are different units, so
+    # the pitch below is scaled by size/base_size, never by size/ink_h. Scaling
+    # by the latter collapsed four lines into two overlapping ones.
+    size = ink_h
     probe_word = max(text.split(), key=len)
     for _ in range(8):
-        h = draw(probe_word, size).height
-        if abs(h - ink_h) <= 2:
+        h = draw(probe_word, size)
+        a = np.asarray(h)[..., 3] > 40
+        ys = np.nonzero(a.any(axis=1))[0]
+        got = int(ys.max() - ys.min() + 1) if len(ys) else ink_h
+        if abs(got - ink_h) <= 2:
             break
-        size = max(8, round(size * ink_h / max(1, h)))
+        size = max(8, round(size * ink_h / max(1, got)))
+    base_size = size
 
-    f = font(size)
-    lines, cur = [], ""
-    for word in text.split():
-        trial = f"{cur} {word}".strip()
-        if cur and probe.textlength(trial, font=f) > max_w:
-            lines.append(cur); cur = word
-        else:
-            cur = trial
-    if cur:
-        lines.append(cur)
-    return [draw(l, size) for l in lines]
+    def pitch_for(px):
+        # 1.10: a block set smaller needs proportionally MORE leading, because
+        # Devanagari carries matras above the headline and conjuncts below the
+        # baseline whatever the size.
+        return max(1, round(Q_LINE_H * (px / base_size) * 1.10))
+
+    floor = max(16, int(base_size * 0.55))
+    while size > floor:
+        lines = wrap(size)
+        if avail_h is None or len(lines) * pitch_for(size) <= avail_h:
+            break
+        size -= 2
+    lines = wrap(size)
+    return [draw(l, size) for l in lines], pitch_for(size), size * 2
 
 
 def build(subject: str, dest: Path, question: str | None = None) -> Path:
@@ -308,13 +357,16 @@ def build(subject: str, dest: Path, question: str | None = None) -> Path:
     # the right of them is replaced, so each sample carries its own subject's
     # question instead of borrowing chemistry's.
     sheet = inpaint_band(sheet, Q_BAND)
-    rows = question_block(question or QUESTIONS[subject], Q_INK_H,
-                          Q_BAND[2] - Q_LEFT - 10)
+    rows, pitch, baseline = question_block(question or QUESTIONS[subject],
+                                           Q_INK_H, Q_BAND[2] - Q_LEFT - 10,
+                                           avail_h=Q_BOTTOM - Q_TOP)
     for i, row in enumerate(rows):
         row = row.rotate(-TILT_DEG, expand=True, resample=Image.BICUBIC)
-        y = Q_TOP + i * Q_LINE_H
+        # baselines, not tops: `baseline` is where the text sits inside every
+        # crop, so subtracting it puts each line's baseline on the same rail
+        y = Q_TOP + i * pitch - baseline + int(Q_INK_H * 0.80)
         # each line starts a little further left as the sheet rises to the right
-        x = Q_LEFT - int(i * Q_LINE_H * np.tan(np.radians(-TILT_DEG)))
+        x = Q_LEFT - int(i * pitch * np.tan(np.radians(-TILT_DEG)))
         sheet.alpha_composite(row, (x, y))
 
     dest.parent.mkdir(parents=True, exist_ok=True)
