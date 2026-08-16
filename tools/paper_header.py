@@ -176,9 +176,13 @@ def inpaint_band(im: Image.Image, band) -> Image.Image:
     a[y0:y1, x0:x1] = np.clip(
         a[y0:y1, x0:x1] + rng.normal(0, 2.2, (n, x1 - x0, 1)), 0, 255)
 
-    out = im.copy()
-    out.paste(Image.fromarray(a.astype(np.uint8)), (0, 0))
-    return out
+    # Write back through the ALPHA channel, never by pasting.
+    # `out.paste(rgb_image, (0, 0))` on an RGBA sheet sets alpha to 255
+    # everywhere, so the transparent surround around the torn edge becomes
+    # opaque — and the card then rendered as a black rectangle behind the paper.
+    out = np.array(im.convert("RGBA"))
+    out[..., :3] = a.astype(np.uint8)
+    return Image.fromarray(out, "RGBA")
 
 
 def measure_original() -> tuple[int, int, int, int]:
@@ -283,7 +287,8 @@ def question_block(text: str, ink_h: int, max_w: int) -> list[Image.Image]:
     return [draw(l, size) for l in lines]
 
 
-def build(subject: str, dest: Path) -> Path:
+def build(subject: str, dest: Path, question: str | None = None) -> Path:
+    """One sheet. `question` overrides the sample question for that subject."""
     hindi, english = SUBJECTS[subject]
     ox0, oy0, ox1, oy1 = measure_original()
     sheet = inpaint_band(Image.open(DESIGN).convert("RGBA"), BAND)
@@ -303,7 +308,8 @@ def build(subject: str, dest: Path) -> Path:
     # the right of them is replaced, so each sample carries its own subject's
     # question instead of borrowing chemistry's.
     sheet = inpaint_band(sheet, Q_BAND)
-    rows = question_block(QUESTIONS[subject], Q_INK_H, Q_BAND[2] - Q_LEFT - 10)
+    rows = question_block(question or QUESTIONS[subject], Q_INK_H,
+                          Q_BAND[2] - Q_LEFT - 10)
     for i, row in enumerate(rows):
         row = row.rotate(-TILT_DEG, expand=True, resample=Image.BICUBIC)
         y = Q_TOP + i * Q_LINE_H
@@ -320,11 +326,14 @@ def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--subject", choices=sorted(SUBJECTS))
     p.add_argument("--out", default=str(OUT))
+    p.add_argument("--question", help="override the sample question")
+    p.add_argument("--name", help="output filename stem")
     a = p.parse_args()
     todo = [a.subject] if a.subject else sorted(SUBJECTS)
     for s in todo:
-        dest = Path(a.out) / f"paper_header_{s}.png"
-        build(s, dest)
+        stem = a.name or f"paper_header_{s}"
+        dest = Path(a.out) / f"{stem}.png"
+        build(s, dest, question=a.question)
         print(f"   {SUBJECTS[s][0]} – {SUBJECTS[s][1]:12} -> {dest}")
     return 0
 

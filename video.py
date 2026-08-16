@@ -555,26 +555,42 @@ def _paste_figure(pages, figure: Path, diagram) -> None:
         bx0, by0 = max(0, box[0]), max(0, box[1])
         bx1, by1 = min(pw, box[2]), min(ph, box[3])
 
-        # Clear only INK, not the whole rectangle. Flat-filling the box and
-        # redrawing the rules leaves a visibly flatter, whiter patch around the
-        # figure, because the paper's grain and shading go with it. The page is
-        # asked to leave this area empty anyway, so usually there is nothing to
-        # remove — and where the model does stray in, only its marks go.
-        region = arr[by0:by1, bx0:bx1]
-        flat = region.reshape(-1, 3)
-        bright = flat[flat.min(axis=1) > 200]
+        # Clear the WHOLE reserved rectangle, then put the ruling back.
+        #
+        # Clearing only the ink is gentler and leaves the paper's grain intact,
+        # and it worked on the render where the model honoured "leave this area
+        # empty". It does not hold: compliance varies run to run, and on the run
+        # where the model wrote its answer straight across the box, ink-only
+        # clearing left ghost words showing THROUGH the figure and dropped the
+        # words it had written there off the end of their lines.
+        #
+        # Losing a word out of an answer is a content error; a slightly flatter
+        # patch of paper is not. So the box is cleared outright, and the rules
+        # that crossed it are redrawn from a probe OUTSIDE it, where the model's
+        # drawing cannot interfere.
+        region = arr[by0:by1, bx0:bx1].reshape(-1, 3)
+        bright = region[region.min(axis=1) > 200]
         paper = (bright.mean(axis=0) if len(bright) > 20
                  else np.array([250.0, 250.0, 250.0])).astype(np.uint8)
-        grey = region.astype(int).mean(axis=2)
-        ink = grey < (float(paper.mean()) - 45)      # darker than any ruled line
-        if ink.any():
-            from PIL import ImageFilter
-            blur = np.asarray(
-                Image.fromarray(region).filter(ImageFilter.GaussianBlur(9)))
-            region[ink] = blur[ink]
-            region[ink] = paper
-            print(f"   figure: cleared {int(ink.sum())} stray ink px from the box")
-        arr[by0:by1, bx0:bx1] = region
+
+        probe = bx1 + 12 if bx1 + 12 < pw else max(0, bx0 - 12)
+        col = arr[by0:by1, probe].astype(int).mean(axis=1)
+        rules, start, prev = [], None, None
+        for i, v in enumerate(col):
+            if v < float(paper.mean()) - 14:
+                if start is None:
+                    start = i
+                prev = i
+            elif start is not None and i - prev > 3:
+                rules.append((start + prev) // 2)
+                start = None
+        if start is not None:
+            rules.append((start + prev) // 2)
+
+        arr[by0:by1, bx0:bx1] = paper
+        for ry in rules:
+            y = by0 + ry
+            arr[max(by0, y - 1):y + 1, bx0:bx1] = arr[y, probe]
 
         im = Image.fromarray(arr).convert("RGBA")
         im.alpha_composite(small, (bx0 + (w - small.width) // 2,

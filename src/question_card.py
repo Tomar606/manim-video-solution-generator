@@ -186,3 +186,11 @@ def fits(text_mob, paper_mob, slack=0.02):
             abs(text_mob.get_center()[1] - cy) <= bh / 2 + slack and
             text_mob.width <= bw * (1 + slack) and
             text_mob.height <= bh * (1 + slack))
+
+# --- v2: the torn exam-paper sheet -----------------------------------------
+# The sheet is taller and narrower in proportion than the sticky notepaper it
+# replaces, and it carries its own printed header, so it sits lower and the
+# years pill drops with it. Measured off inbox/new_sticky reference.jpeg.
+SHEET_W       = 0.80      # of frame width
+SHEET_Y       = 0.375     # centre, as a fraction of frame height
+SHEET_YEARS_Y = 0.640     # the pill clears the torn bottom edge

@@ -702,7 +702,8 @@ class ThemedScene(Scene):
         except Exception as exc:            # a guard must never break a render
             self._layout_violations.append(f"audit failed: {exc}")
 
-    def question_card(self, question, highlight="", years=""):
+    def question_card(self, question, highlight="", years="", sheet=None,
+                      sheet_head="प्रश्न"):
         """The approved opening card: ringed ?, gold प्रश्न, notepaper, years.
 
         Geometry lives in src/question_card.py, measured off the approved still.
@@ -714,6 +715,7 @@ class ThemedScene(Scene):
                                        PAPER_HILITE, PAPER_INK, PAPER_TILT,
                                        PAPER_W, PAPER_Y, Q_MARK_R, Q_MARK_Y,
                                        Q_WORD_SIZE, Q_WORD_Y, RULE_W, RULE_W_MAX,
+                                       SHEET_W, SHEET_Y, SHEET_YEARS_Y,
                                        RULE_Y, TEAL, TICK_PAD, YEARS_Y,
                                        fit_lines, fits, writable_box)
         fw, fh = config.frame_width, config.frame_height
@@ -758,11 +760,13 @@ class ThemedScene(Scene):
         ring = Circle(radius=fh * Q_MARK_R).set_stroke(TEAL, 5).set_fill(opacity=0)
         qm = txt("?", int(fh * Q_MARK_R * 105), TEAL).move_to(ring.get_center())
         head = VGroup(ring, qm).move_to(norm_point(0.5, Q_MARK_Y))
-        # The heading is scaled to a fixed share of the frame rather than set at
-        # a fixed point size: "MP Board - 12th" is about three times the width of
-        # the "प्रश्न" this replaced, and the sparks and the rule are both sized
-        # FROM the word, so a literal swap pushed all three past the frame edge.
-        word = txt(HEAD_TEXT, Q_WORD_SIZE, GOLD)
+        # Back to "प्रश्न". It was "MP Board - 12th" while the sheet below was
+        # plain notepaper and named nothing; the exam-paper sheet prints the
+        # board, class, year and subject itself, so repeating them here says the
+        # same thing twice. Still scaled to a share of the frame rather than set
+        # at a fixed point size — the sparks and the rule are sized FROM the
+        # word, so a longer heading pushes all three past the frame edge.
+        word = txt(sheet_head or HEAD_TEXT, Q_WORD_SIZE, GOLD)
         if word.width > fw * HEAD_W_MAX:
             word.scale(fw * HEAD_W_MAX / word.width)
         word.move_to(norm_point(0.5, Q_WORD_Y))
@@ -775,9 +779,39 @@ class ThemedScene(Scene):
                         CREAM, wobble=0.018)
         rule.rotate(DECOR_TILT).move_to(norm_point(0.5, RULE_Y))
 
-        paper = ImageMobject(PAPER)
-        paper.width = fw * PAPER_W
-        paper.move_to(norm_point(0.5, PAPER_Y))
+        # `sheet` is a torn corner of the real exam paper with the question
+        # already PRINTED on it (tools/paper_header.py). When one is given the
+        # card places it as-is and draws nothing on top — the question, the
+        # board line and the subject are all part of that photograph. Without
+        # one the card falls back to the lined notepaper and typesets the
+        # question onto it, which is what every earlier video used.
+        paper = ImageMobject(str(sheet) if sheet else PAPER)
+        paper.width = fw * (SHEET_W if sheet else PAPER_W)
+        paper.move_to(norm_point(0.5, SHEET_Y if sheet else PAPER_Y))
+        if sheet:
+            self.play(FadeIn(head, scale=1.15), run_time=0.5)
+            self.play(FadeIn(word, shift=UP * .14), run_time=0.45)
+            self.play(LaggedStart(*[GrowFromCenter(t) for t in sp],
+                                  lag_ratio=.08), run_time=0.5)
+            self.play(Create(rule), run_time=0.4)
+            self.play(FadeIn(paper, shift=DOWN * .30, scale=1.04), run_time=0.8)
+            yr = VGroup(txt("वर्ष ", 36), txt(years, 42, TEAL),
+                        txt(" में", 36)).arrange(RIGHT, buff=0.10)
+            ytxt = VGroup(yr, txt("ये प्रश्न था", 36)).arrange(DOWN, buff=0.12)
+            pill = RoundedRectangle(width=ytxt.width + .85,
+                                    height=ytxt.height + .48,
+                                    corner_radius=.30
+                                    ).set_stroke(GOLD, 4).set_fill(opacity=0)
+            pills = VGroup(pill, ytxt)
+            pills.rotate(DECOR_TILT).move_to(norm_point(0.5, SHEET_YEARS_Y))
+            psp = ticks(pill, GOLD, 4, 0.22)
+            self.play(FadeIn(pills, shift=UP * .12),
+                      LaggedStart(*[GrowFromCenter(t) for t in psp],
+                                  lag_ratio=.08), run_time=0.6)
+            # Nothing is registered anywhere: the original branch does not
+            # either. The scene's own cue() clears the screen at the next cue,
+            # which is how the card leaves.
+            return
 
         (cx, cy), bw, bh = writable_box(paper)
         lh = {}

@@ -329,8 +329,15 @@ class FaradayPart1(_Base):
     def _build(self):
         # ---- cue 0: the question card, in the approved design ------------ #
         self.cue(0, caption=False)
+        # v2 card: the question is PRINTED on a torn corner of the exam paper
+        # (assets/design/question_sheet.png, built by tools/paper_header.py), so
+        # nothing is typeset onto it here. The frame around it — ring, प्रश्न,
+        # sparks, rule, years pill — is unchanged.
         self.question_card("फैराडे के विद्युत्-अपघटन के नियम लिखिए।",
-                           "विद्युत्-अपघटन", "2023, 2025")
+                           "विद्युत्-अपघटन", "2023, 2025",
+                           sheet=_Path(ASSET_ROOT) / "projects" /
+                           "faraday-electrolysis" / "assets" / "design" /
+                           "question_sheet.png")
         self.hold()
 
         self.cue(1); self.hold()
