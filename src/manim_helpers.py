@@ -709,9 +709,11 @@ class ThemedScene(Scene):
         The text wraps and shrinks to the paper's writable area and asserts
         containment, so a long question cannot leak off the paper.
         """
-        from src.question_card import (CREAM, GOLD, PAPER, PAPER_HILITE, PAPER_INK,
-                                       PAPER_TILT, PAPER_W, PAPER_Y, Q_MARK_R,
-                                       Q_MARK_Y, Q_WORD_SIZE, Q_WORD_Y, RULE_W,
+        from src.question_card import (CREAM, DECOR_TILT, GOLD, HEAD_TEXT,
+                                       HEAD_W_MAX, PAPER,
+                                       PAPER_HILITE, PAPER_INK, PAPER_TILT,
+                                       PAPER_W, PAPER_Y, Q_MARK_R, Q_MARK_Y,
+                                       Q_WORD_SIZE, Q_WORD_Y, RULE_W, RULE_W_MAX,
                                        RULE_Y, TEAL, TICK_PAD, YEARS_Y,
                                        fit_lines, fits, writable_box)
         fw, fh = config.frame_width, config.frame_height
@@ -756,10 +758,22 @@ class ThemedScene(Scene):
         ring = Circle(radius=fh * Q_MARK_R).set_stroke(TEAL, 5).set_fill(opacity=0)
         qm = txt("?", int(fh * Q_MARK_R * 105), TEAL).move_to(ring.get_center())
         head = VGroup(ring, qm).move_to(norm_point(0.5, Q_MARK_Y))
-        word = txt("प्रश्न", Q_WORD_SIZE, GOLD).move_to(norm_point(0.5, Q_WORD_Y))
-        sp = ticks(word, GOLD, 6, TICK_PAD)
-        rule = scribble(word.width * RULE_W, CREAM, wobble=0.018)
-        rule.rotate(PAPER_TILT * .7).move_to(norm_point(0.5, RULE_Y))
+        # The heading is scaled to a fixed share of the frame rather than set at
+        # a fixed point size: "MP Board - 12th" is about three times the width of
+        # the "प्रश्न" this replaced, and the sparks and the rule are both sized
+        # FROM the word, so a literal swap pushed all three past the frame edge.
+        word = txt(HEAD_TEXT, Q_WORD_SIZE, GOLD)
+        if word.width > fw * HEAD_W_MAX:
+            word.scale(fw * HEAD_W_MAX / word.width)
+        word.move_to(norm_point(0.5, Q_WORD_Y))
+        # Sparks clear the text by a share of ITS width, not a fixed pad: a
+        # fixed 0.30 sat right against a heading this wide, and two of the six
+        # spots are placed at 80% of the half-width, which falls INSIDE a wide
+        # word where it fell outside a short one.
+        sp = ticks(word, GOLD, 6, max(TICK_PAD, word.width * 0.11))
+        rule = scribble(min(word.width * RULE_W, fw * RULE_W_MAX),
+                        CREAM, wobble=0.018)
+        rule.rotate(DECOR_TILT).move_to(norm_point(0.5, RULE_Y))
 
         paper = ImageMobject(PAPER)
         paper.width = fw * PAPER_W
@@ -805,7 +819,7 @@ class ThemedScene(Scene):
         pill = RoundedRectangle(width=ytxt.width + .85, height=ytxt.height + .48,
                                 corner_radius=.30).set_stroke(GOLD, 4).set_fill(opacity=0)
         pills = VGroup(pill, ytxt)
-        pills.rotate(PAPER_TILT * .8).move_to(norm_point(0.5, YEARS_Y))
+        pills.rotate(DECOR_TILT).move_to(norm_point(0.5, YEARS_Y))
         psp = ticks(pill, GOLD, 4, 0.22)
 
         self.play(FadeIn(head, scale=1.15), run_time=0.5)

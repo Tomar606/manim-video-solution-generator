@@ -39,6 +39,14 @@ PAPER = "assets/design/notepaper.png"
 # rotated by the edge angle sat visibly across the lines it was meant to follow.
 PAPER_TILT = 0.1003          # radians, +5.75 degrees
 
+# The angle for things NEAR the card but not ON it — the rule under the heading,
+# the years pill. These used to be written as fractions of PAPER_TILT, which
+# quietly doubled them when PAPER_TILT was corrected from 2.53° to 5.75°: a rule
+# that had been a hair off level became visibly crooked under a horizontal
+# heading. They are decorations, not things lying on the paper, so they get
+# their own small angle and stay put when the paper's is re-measured.
+DECOR_TILT = 0.031           # radians, +1.8 degrees — the approved look
+
 # Palette from the approved still
 PAPER_INK   = "#132A4A"      # the handwriting
 PAPER_HILITE = "#1B7FA8"     # the highlighted phrase, teal
@@ -55,10 +63,22 @@ TEAL        = "#2AA9C4"
 #   प्रश्न+ticks y  7.7%..17.8%   h 10.1%   w 40.9%
 #   notepaper   y 19.7%..66.6%   h 46.9%   w 83.7%
 #   years pill  y 57.2%..79.9%   h 22.7%   w 60.6%
-Q_MARK_Y    = 0.033          # ring centre — clear of प्रश्न below it
+Q_MARK_Y    = 0.033          # ring centre — clear of the heading below it
 Q_MARK_R    = 0.027          # ring radius, fraction of frame HEIGHT
 Q_WORD_Y    = 0.095
 Q_WORD_SIZE = 78             # was 96 — the word crowded the ring above it
+
+# The heading over the notepaper. It was "प्रश्न"; the board and class say more
+# to a student scrolling past, and every question in the batch is the same board
+# and class, so it is the same on every card.
+HEAD_TEXT   = "MP Board - 12th"
+# ...but it is roughly three times the width of "प्रश्न", and BOTH the sparks
+# and the rule are sized from the word, so a literal swap threw all three past
+# the frame. The heading is scaled to this fraction of frame width, and the rule
+# is capped separately, so the block keeps the reference's proportions whatever
+# the text says.
+HEAD_W_MAX  = 0.50
+RULE_W_MAX  = 0.66
 TICK_PAD    = 0.30           # ticks sit CLOSE to the word, as in the still           # ticks reach out to the reference's 40.9% width
 RULE_Y      = 0.140
 RULE_W      = 1.55           # the rule runs WIDER than the word
