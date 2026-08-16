@@ -1,0 +1,79 @@
+[
+  {
+    "at": 5,
+    "type": "formula",
+    "label": "क्षारीय माध्यम",
+    "tex": [
+      "MnO_4^{-} + e^{-} \\rightarrow MnO_4^{2-}"
+    ]
+  },
+  {
+    "at": 8,
+    "type": "compare",
+    "left": [
+      "अम्लीय",
+      [
+        "Mn2+ बनता है"
+      ]
+    ],
+    "right": [
+      "क्षारीय",
+      [
+        "MnO4 2− बनता है"
+      ]
+    ]
+  },
+  {
+    "at": 12,
+    "type": "formula",
+    "label": "क्षारीय माध्यम में",
+    "tex": [
+      "2KMnO_4 + 2KOH \\rightarrow 2K_2MnO_4 + H_2O + [O]"
+    ]
+  },
+  {
+    "at": 14,
+    "type": "points",
+    "title": "ऑक्सीकरण अवस्था",
+    "items": [
+      "Mn : +7  से  +6",
+      "अर्थात् अपचयन"
+    ],
+    "hi": "अपचयन"
+  },
+  {
+    "at": 18,
+    "type": "formula",
+    "label": "उदाहरण — KI का ऑक्सीकरण",
+    "tex": [
+      "KI + 3[O] \\rightarrow KIO_3"
+    ]
+  },
+  {
+    "at": 28,
+    "type": "formula",
+    "label": "उदासीन माध्यम",
+    "tex": [
+      "2KMnO_4 + H_2O \\rightarrow 2MnO_2 + 2KOH + 3[O]"
+    ]
+  },
+  {
+    "at": 32,
+    "type": "formula",
+    "label": "उदाहरण — H2S का ऑक्सीकरण",
+    "tex": [
+      "H_2S + [O] \\rightarrow H_2O + S"
+    ]
+  },
+  {
+    "at": 35,
+    "type": "points",
+    "title": "याद रखो — क्या बनता है",
+    "items": [
+      "अम्लीय  →  Mn2+",
+      "क्षारीय  →  MnO4 2−",
+      "उदासीन  →  MnO2"
+    ],
+    "hi": "MnO2"
+  }
+]

@@ -35,6 +35,21 @@ JOBS = [
     ("projects/daniell-cell/manim_code/daniell.py",
      "projects/daniell-cell/manim_code/dan_composed.py",
      "projects/daniell-cell/script.md"),
+    ("projects/che-c1-la-01/manim_code/pyq.py",
+     "projects/che-c1-la-01/manim_code/pyq_composed.py",
+     "projects/faraday-electrolysis/script.md"),
+    ("projects/che-c1-la-02/manim_code/pyq.py",
+     "projects/che-c1-la-02/manim_code/pyq_composed.py",
+     "projects/faraday-electrolysis/script.md"),
+    ("projects/che-c2-la-05/manim_code/pyq.py",
+     "projects/che-c2-la-05/manim_code/pyq_composed.py",
+     "projects/faraday-electrolysis/script.md"),
+    ("projects/che-c3-la-02/manim_code/pyq.py",
+     "projects/che-c3-la-02/manim_code/pyq_composed.py",
+     "projects/faraday-electrolysis/script.md"),
+    ("projects/che-c4-la-02/manim_code/pyq.py",
+     "projects/che-c4-la-02/manim_code/pyq_composed.py",
+     "projects/faraday-electrolysis/script.md"),
 ]
 
 # A parenthesised import spans several lines; stripping only the first left the

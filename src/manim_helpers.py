@@ -697,6 +697,8 @@ class ThemedScene(Scene):
 
     def play(self, *args, **kwargs):
         super().play(*args, **kwargs)
+        if not getattr(self, "audit_enabled", True):
+            return                          # e.g. while the question card is up
         try:
             self.audit_layout()
         except Exception as exc:            # a guard must never break a render
@@ -735,9 +737,24 @@ class ThemedScene(Scene):
         Equations are the part of an answer a student copies verbatim, so they
         are given the whole stage and the largest type any block uses.
         """
-        eqs = VGroup(*[MathTex(t).scale(size).set_color(colour)
-                       for t in ([tex] if isinstance(tex, str) else tex)])
-        eqs.arrange(DOWN, buff=0.42)
+        items = [tex] if isinstance(tex, str) else list(tex)
+
+        # Break a long equation at its ARROW rather than letting place() shrink
+        # it. A full chemical equation is wider than the stage, and scaling it to
+        # fit made the KMnO4 line small enough that the thing a student is meant
+        # to copy was the least readable mark on screen. Splitting at the arrow
+        # is how it would be written on a board anyway.
+        lines = []
+        for t in items:
+            if len(t) > 44 and r"\rightarrow" in t:
+                lhs, rhs = t.split(r"\rightarrow", 1)
+                lines.append(lhs.strip())
+                lines.append(r"\rightarrow " + rhs.strip())
+            else:
+                lines.append(t)
+
+        eqs = VGroup(*[MathTex(t).scale(size).set_color(colour) for t in lines])
+        eqs.arrange(DOWN, buff=0.34, aligned_edge=LEFT)
         if label:
             cap = Text(str(label), font=ui_font(), font_size=30,
                        color="#7CE0B0", weight="BOLD")
@@ -881,6 +898,12 @@ class ThemedScene(Scene):
         # board line and the subject are all part of that photograph. Without
         # one the card falls back to the lined notepaper and typesets the
         # question onto it, which is what every earlier video used.
+        # The card deliberately fills the FRAME, not the stage band, so every
+        # animation in it trips the layout guard: 29-60 "OUTSIDE BAND" reports
+        # per scene, which made preflight fail on every project and turned the
+        # guard into noise. It is off while the card is up and on for everything
+        # that follows, which is what it was written to police.
+        self.audit_enabled = False
         paper = ImageMobject(str(sheet) if sheet else PAPER)
         paper.width = fw * (SHEET_W if sheet else PAPER_W)
         paper.move_to(norm_point(0.5, SHEET_Y if sheet else PAPER_Y))
@@ -907,6 +930,7 @@ class ThemedScene(Scene):
             # Nothing is registered anywhere: the original branch does not
             # either. The scene's own cue() clears the screen at the next cue,
             # which is how the card leaves.
+            self.audit_enabled = True
             return
 
         (cx, cy), bw, bh = writable_box(paper)

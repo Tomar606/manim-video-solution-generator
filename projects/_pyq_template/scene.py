@@ -153,6 +153,106 @@ class PyqPart(ThemedScene):
             body = VGroup(VGroup(ax, solvent, solution, atm), xl, yl)
         return self.place(body)
 
+    # ---- diagrams ---------------------------------------------------------- #
+    # Two questions in this batch name a piece of apparatus, and one says
+    # "सचित्र" outright. Those are drawn, not generated: every part carries a
+    # label, and a generated illustration gets the picture roughly right and the
+    # lettering wrong.
+
+    def apparatus(self, kind):
+        if kind == "berkeley":
+            return self._berkeley()
+        if kind == "dry_cell":
+            return self._dry_cell()
+        raise ValueError(f"unknown apparatus: {kind}")
+
+    def _berkeley(self):
+        """बर्कले एवं हार्टले — two concentric tubes.
+
+        The inner tube is porous and carries the semipermeable membrane; the
+        outer one is gun metal with the piston. Water crosses INWARD-to-OUTWARD
+        (into the solution), so the arrow points at the solution, and the
+        capillary is on the inner tube, which is what falls.
+        """
+        outer = RoundedRectangle(width=5.2, height=1.85, corner_radius=0.18
+                                 ).set_stroke(DIM, 4)
+        soln = Rectangle(width=5.0, height=1.6, stroke_width=0,
+                         fill_color="#2E6FA8", fill_opacity=0.45)
+        inner = RoundedRectangle(width=3.3, height=0.82, corner_radius=0.12
+                                 ).set_stroke(CYAN, 4)
+        water = Rectangle(width=3.15, height=0.66, stroke_width=0,
+                          fill_color="#8FD3F4", fill_opacity=0.55)
+        membrane = DashedLine(inner.get_corner(UL) + RIGHT * 0.06,
+                              inner.get_corner(DL) + RIGHT * 0.06,
+                              dash_length=0.07).set_stroke(GREEN, 5)
+        cap = Line([0, 0, 0], [0, 1.05, 0]).set_stroke(CYAN, 4)
+        cap.next_to(inner, UP, buff=0).shift(LEFT * 1.15)
+        funnel = Polygon([-0.22, 0, 0], [0.22, 0, 0], [0.06, -0.34, 0],
+                         [-0.06, -0.34, 0]).set_stroke(DIM, 3)
+        funnel.next_to(inner, UP, buff=0).shift(RIGHT * 1.15).rotate(PI)
+        piston = Rectangle(width=0.26, height=0.95).set_stroke(GOLD, 4)
+        piston.next_to(outer, UP, buff=-0.10).shift(RIGHT * 2.0)
+        arrow = Arrow([-0.5, 0, 0], [0.6, 0, 0], buff=0, color=GREEN,
+                      stroke_width=5, max_tip_length_to_length_ratio=0.28)
+        arrow.next_to(membrane, RIGHT, buff=0.10)
+
+        soln.move_to(outer.get_center())
+        water.move_to(inner.get_center())
+        rig = VGroup(outer, soln, inner, water, membrane, cap, funnel,
+                     piston, arrow)
+
+        # Labelled, because an unlabelled schematic teaches nothing — the first
+        # render was a row of rectangles. Names go OUTSIDE the rig on alternating
+        # sides so no leader crosses another.
+        def tag(text, colour, target, side, dy):
+            t = Text(text, font=FONT, font_size=26, color=colour, weight="BOLD")
+            t.next_to(rig, side, buff=0.22).shift(UP * dy)
+            arm = DashedLine(t.get_edge_center(-side), target,
+                             dash_length=0.06).set_stroke(colour, 2.5)
+            return VGroup(arm, t)
+
+        # SHORT labels, tight to the rig. Long ones on both sides widened the
+        # group until place() shrank the whole diagram to half the stage — the
+        # names were unreadable and the apparatus was a row of small boxes. The
+        # caption is already saying the full term while each one appears.
+        labels = VGroup(
+            tag("झिल्ली", GREEN, membrane.get_center(), LEFT, 0.34),
+            tag("सरन्ध्र नली", CYAN, inner.get_bottom(), LEFT, -0.52),
+            tag("केशिका", CYAN, cap.get_top(), UP, 0.0),
+            tag("पिस्टन", GOLD, piston.get_top(), RIGHT, 0.52),
+            tag("विलयन", VIOLET, soln.get_corner(DR) + LEFT * 0.5, RIGHT, -0.42),
+        )
+        return self.place(VGroup(rig, labels), pad=0.99)
+
+    def _dry_cell(self):
+        """शुष्क सेल, in cross-section — the only view its layers can be
+        labelled in. Zinc can = anode = NEGATIVE; carbon rod = cathode =
+        positive but inert. Reversing those is the standard mistake."""
+        can = RoundedRectangle(width=2.5, height=3.5, corner_radius=0.14
+                               ).set_stroke("#C6D3E0", 4)
+        zinc = RoundedRectangle(width=2.25, height=3.25, corner_radius=0.12,
+                                stroke_width=0, fill_color="#9FB4C7",
+                                fill_opacity=0.35)
+        paste = RoundedRectangle(width=1.85, height=2.9, corner_radius=0.10,
+                                 stroke_width=0, fill_color="#3E7CB1",
+                                 fill_opacity=0.40)
+        mix = RoundedRectangle(width=1.15, height=2.5, corner_radius=0.08,
+                               stroke_width=0, fill_color="#4A4238",
+                               fill_opacity=0.75)
+        rod = Rectangle(width=0.32, height=2.85, stroke_width=2,
+                        stroke_color="#E0C089", fill_color="#6E5B3A",
+                        fill_opacity=1.0).shift(UP * 0.12)
+        cap = Rectangle(width=0.62, height=0.22, stroke_width=2,
+                        stroke_color="#E0C089", fill_color="#E0C089",
+                        fill_opacity=1.0)
+        cap.next_to(rod, UP, buff=0)
+        body = VGroup(can, zinc, paste, mix, rod, cap)
+        for m in (zinc, paste, mix):
+            m.move_to(can.get_center())
+        rod.move_to(can.get_center() + UP * 0.12)
+        cap.next_to(rod, UP, buff=0)
+        return self.place(body)
+
     # ---- timing ------------------------------------------------------------ #
     def _line(self, text, end=None):
         new = self.caption(text)
@@ -177,6 +277,8 @@ class PyqPart(ThemedScene):
             return self.beat_image(ROOT / spec["src"], spec.get("caption"))
         if t == "graph":
             return self.graph(spec.get("kind", "zero_order"))
+        if t == "apparatus":
+            return self.apparatus(spec["kind"])
         raise ValueError(f"unknown beat type: {t}")
 
     def construct(self):
@@ -195,19 +297,45 @@ class PyqPart(ThemedScene):
         self.at(card_at)
 
         beats = {int(b["at"]): b for b in BEATS}
+        first = min(beats) if beats else None
+        # The card owns the screen while it is up: no captions over it. Its own
+        # heading sits exactly where a caption would go, and the first render
+        # had "ये सवाल दो हज़ार चौबीस में" written straight across प्रश्न.
+        # per PART: part 1 opens on the question and holds the card through the
+        # hook, part 2 only needs it briefly over the recap.
+        _cl = META.get("card_lines", first or 0)
+        card_until = int(_cl[str(PART)] if isinstance(_cl, dict) else _cl)
         for i, line in enumerate(LINES):
-            self.at(float(line["start"]))
-            if i in beats:
-                for m in self.stage_mobs:
-                    self.remove(m)
+            self.at(max(0.0, float(line["start"]) - 0.35))
+            if i == card_until or i in beats:
+                self.clear_stage()          # the card goes here, and every beat
+                                            # replaces the one before it
                 self.stage_mobs = []
+            if i in beats:
                 built = self.build_beat(beats[i])
                 self.stage_mobs.append(built)
-                self.add(built)
+                self.play(FadeIn(built, shift=UP * 0.12), run_time=0.35)
                 self.audit_layout(f"beat@{i}")
-            self._line(line["text"], line.get("end"))
+            self.at(float(line["start"]))
+            if i >= card_until:
+                self._line(line["text"], line.get("end"))
         self.at(CLIP_END)
         self.report_layout()
+
+    def clear_stage(self, rt=0.30):
+        """Take everything off the stage except the caption and the plate.
+
+        Clearing is automatic and opt-out, exactly as in the hand-built scenes:
+        the failure mode of opt-in clearing is a SILENT overlap. Without this
+        the question card — which deliberately fills the whole frame — stayed up
+        for the entire video with every beat and caption drawn on top of it.
+        """
+        keep = {getattr(self, "caption_mob", None),
+                getattr(self, "background", None),
+                getattr(self, "chroma_zone", None)}
+        doomed = [m for m in self.mobjects if m not in keep and m is not None]
+        if doomed:
+            self.play(*[FadeOut(m) for m in doomed], run_time=rt)
 
     def at(self, t):
         """Advance the clock to an absolute time in the CLIP.
