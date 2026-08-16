@@ -503,6 +503,54 @@ def _es_default(which: str) -> Path:
     return base / ("blank_ruled.jpeg" if which == "sheet" else "sample_hand.jpg")
 
 
+def _paste_figure(pages, figure: Path, width_frac: float = 0.80) -> None:
+    """Draw the figure onto the finished page, below whatever was written.
+
+    The figure is NOT passed through generation. Reserving a rectangle for it
+    has the model draw its own version there, and its version had the electrode
+    signs reversed and every Devanagari label garbled — on a figure whose whole
+    content is which electrode is which, that is not a cosmetic loss. So the
+    page is generated as text alone and the drawn figure is composited after.
+
+    Where it goes is MEASURED, not reserved. The model's handwriting runs about
+    five ruled rows looser than the typeset mock-up predicts, so a row index
+    chosen up front lands on the last line of the answer — it did, twice. The
+    last written row on the actual page is unambiguous, so the figure is placed
+    from that.
+
+    It is composited rather than pasted: the figure is drawn on transparency,
+    so the sheet's ruling and grain carry on behind it and it reads as drawn on
+    the page rather than stuck to it.
+    """
+    import numpy as np
+    from PIL import Image
+
+    fig = Image.open(figure).convert("RGBA")
+    for page in pages:
+        im = Image.open(page).convert("RGBA")
+        pw, ph = im.size
+
+        grey = np.asarray(im.convert("L")).astype(int)
+        profile = (grey < 130).sum(axis=1) / pw
+        window = max(9, ph // 50)
+        smooth = np.convolve(profile, np.ones(window) / window, mode="same")
+        rows = np.nonzero(smooth > 0.025)[0]
+        top = (int(rows.max()) + int(ph * 0.035)) if len(rows) else int(ph * 0.55)
+
+        avail_w, avail_h = int(pw * width_frac), ph - int(ph * 0.03) - top
+        if avail_h < ph * 0.12:
+            print("   figure: no room left under the answer — page left as is")
+            continue
+        scale = min(avail_w / fig.width, avail_h / fig.height)
+        small = fig.resize((max(1, round(fig.width * scale)),
+                            max(1, round(fig.height * scale))), Image.LANCZOS)
+        im.alpha_composite(small, ((pw - small.width) // 2, top))
+        im.convert("RGB").save(page)
+        print(f"   figure: drawn below the answer at y={top}, "
+              f"{small.width}x{small.height}")
+    return
+
+
 def cmd_endscreenshot(args) -> int:
     """Make the EndScreenshot photo: the Q&A card the video ends on.
 
@@ -554,6 +602,19 @@ def cmd_endscreenshot(args) -> int:
         import shutil
         shutil.rmtree(temp_dir, ignore_errors=True)
 
+    # A figure, for the questions that expect one on the page — an examiner
+    # marks the labelled cell in "डेनियल सेल का उदाहरण देकर समझाइए", and no
+    # amount of prose replaces it. Drawn by tools/answer_figure.py rather than
+    # generated: a model gets the picture roughly right and the LETTERING wrong,
+    # and on a figure about which electrode is which, the lettering is the whole
+    # content. Passed as a path; EndScreenshot flows the text around it.
+    figure = None
+    if getattr(args, "diagram", None):
+        figure = Path(args.diagram)
+        if not figure.exists():
+            print(f"❌ diagram not found: {figure}")
+            return 2
+
     print(f"📸 EndScreenshot — {args.sheet}")
     try:
         result = ES.generate(
@@ -582,6 +643,9 @@ def cmd_endscreenshot(args) -> int:
         for temp in result.get("temps", []):
             print(f"   temp: {temp}")
         return 0
+    if figure is not None:
+        _paste_figure(pages, figure, args.diagram_width)
+
     print(f"\n✅ {len(pages)} page(s) · {result['images_generated']} image(s) generated")
     for path in pages:
         print(f"   page: {path}")
@@ -833,6 +897,10 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--label", default="Q1", help="Question label (default Q1)")
     p.add_argument("--heading", help="Optional title line above the question")
     p.add_argument("--stem", help="Output filename stem (default 'answer')")
+    p.add_argument("--diagram", help="Figure to draw on the page "
+                                     "(see tools/answer_figure.py)")
+    p.add_argument("--diagram-width", type=float, default=0.80,
+                   help="figure width as a fraction of the page")
     p.add_argument("--out", help="Output dir when no project is given")
     p.add_argument("--temp-dir", help="Where temps are cached")
     p.add_argument("--quality", choices=["low", "medium", "high"],

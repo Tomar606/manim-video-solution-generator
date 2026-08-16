@@ -240,7 +240,11 @@ class Sanksharan(ThemedScene):
             self._pending = [l for l in self._pending if l["start"] >= nxt]
         self.at(c["start"] - 0.30)
         self._cue_i = i
-        if self._pending:
+        # `caption` has to gate the display as well as the filter. Filtering
+        # alone still popped the next surviving line and put it on screen during
+        # cue 0 — so the question card came up with a caption lying across the
+        # प्रश्न heading, which is exactly what caption=False asks to prevent.
+        if caption and self._pending:
             self._line(self._pending.pop(0)["text"])
 
     def _line(self, text):
@@ -379,8 +383,9 @@ class Sanksharan(ThemedScene):
         self.question_card("संक्षारण किसे कहते हैं? इसे प्रभावित करने वाले तीन "
                            "कारकों को लिखकर इससे बचाव के कोई तीन उपाय लिखिए।",
                            "संक्षारण", "2025")
+        # No explicit fade-out: cue(1) clears the stage, the same way the other
+        # PYQ scenes leave their question card.
         self.hold()
-        self.play(FadeOut(card), run_time=0.45)
 
         # ============ cue 1 — captions begin ============================ #
         self.cue(1)
