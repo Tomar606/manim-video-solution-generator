@@ -784,7 +784,16 @@ class ThemedScene(Scene):
         rows.arrange(DOWN, buff=0.16, aligned_edge=LEFT)
         if rows.width > bw:
             rows.scale(bw / rows.width)
-        rows.rotate(PAPER_TILT).move_to([cx, cy, 0])
+        # Rotate FIRST, then fit. A block rotated by θ has a bounding box of
+        # w·cosθ + h·sinθ by w·sinθ + h·cosθ — at 5.75° that is 5% wider and
+        # nearly 20% taller than the block that was wrapped. Fitting before the
+        # rotation therefore measures the wrong rectangle, and the containment
+        # assert below rejected a question that does fit the paper.
+        rows.rotate(PAPER_TILT)
+        shrink = min(bw / rows.width, bh / rows.height, 1.0)
+        if shrink < 1.0:
+            rows.scale(shrink)
+        rows.move_to([cx, cy, 0])
         if not fits(rows, paper):
             raise ValueError(f"question does not fit the paper at size {size}")
         swoosh = scribble(rows.width * .62, PAPER_INK, wobble=.045)
@@ -921,6 +930,20 @@ class ThemedScene(Scene):
         for line in uniq[:40]:
             print("  " + line)
         print("=" * 70 + "\n")
+
+        # Printing is not enough. A Manim render prints thousands of lines and
+        # this block scrolls past; labels sitting on the beaker walls were
+        # reported here and still reached a finished video. Write it beside the
+        # scene as well, where preflight reads it and FAILS the next render.
+        try:
+            import json as _json
+            from pathlib import Path as _P
+            out = _P(__file__).resolve().parent / "layout_violations.json"
+            out.write_text(_json.dumps(
+                {"scene": type(self).__name__, "problems": uniq[:60]},
+                ensure_ascii=False, indent=2), encoding="utf-8")
+        except Exception:
+            pass                    # a guard must never break a render
 
     # PREVIEW collapses the waits that conform the scene to the audio clock.
     # A 113-second part spends almost all of its render sitting still; the

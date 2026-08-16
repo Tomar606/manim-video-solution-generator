@@ -188,43 +188,57 @@ def to_full_page(card: Path, frame_w: int, frame_h: int, dest: Path) -> Path:
     arr = np.asarray(im)
     probe = max(2, int(frame_w * 0.5))              # mid-page: blank below the text
     rows = rule_rows(arr, probe)
-    page = Image.new("RGB", (frame_w, frame_h))
+
+    # Ground the page in the sheet's own paper colour, NOT the default black.
+    # Every failure below — no ruling found, no blank band to copy, a band that
+    # runs past the sheet — then degrades to plain paper, which reads as the
+    # bottom of a page. It used to degrade to black, and a 300px black bar under
+    # the answer is the one outcome that cannot be mistaken for a sheet of paper.
+    blank = arr[int(arr.shape[0] * 0.90):]
+    paper = tuple(int(v) for v in np.median(blank.reshape(-1, 3), axis=0))
+    page = Image.new("RGB", (frame_w, frame_h), paper)
     page.paste(im, (0, 0))
 
     written = written_bottom(np.asarray(im.convert("L")).astype(int))
     diffs = [b - a for a, b in zip(rows, rows[1:])] if len(rows) > 2 else []
     pitch = int(np.median(diffs)) if diffs else 0
-    if pitch < 8 or not rows:
-        # no ruling to continue — fill with the paper's own colour, which still
-        # gives a full page rather than a letterboxed card
-        paper = tuple(np.median(arr[-20:].reshape(-1, 3), axis=0).astype(int))
-        page.paste(Image.new("RGB", (frame_w, frame_h - im.height), paper),
-                   (0, im.height))
-        page.save(dest)
-        return dest
 
     # A band starting ON a line, a whole number of pitches tall, taken from
     # paper that is genuinely BLANK — the first rule clear of the last written
     # row. Picking by a fraction of the page instead repeated the closing lines
     # of the answer three times down the extension.
-    floor = (written + pitch) if written is not None else int(im.height * 0.55)
-    band_top = next((r for r in rows if r > floor), None)
-    if band_top is None:
-        paper = tuple(np.median(arr[-20:].reshape(-1, 3), axis=0).astype(int))
-        page.paste(Image.new("RGB", (frame_w, frame_h - im.height), paper),
-                   (0, im.height))
-        page.save(dest)
-        return dest
-    n = max(1, (frame_h - im.height) // pitch + 1)
-    band_bottom = min(arr.shape[0], band_top + n * pitch)
-    n = max(1, (band_bottom - band_top) // pitch)
-    band = im.crop((0, band_top, frame_w, band_top + n * pitch))
+    band = None
+    if pitch >= 8 and rows:
+        floor = (written + pitch) if written is not None else int(im.height * 0.55)
+        band_top = next((r for r in rows if r > floor), None)
+        if band_top is not None:
+            # CLAMPED to the sheet. Cropping past the bottom edge returns BLACK
+            # padding, and pasting that under the answer put a 300px black bar
+            # at the end of the video — the one thing this function exists to
+            # prevent. An answer whose figure runs to the foot of the sheet
+            # leaves no blank band at all, which is exactly when it happened.
+            usable = (arr.shape[0] - band_top) // pitch
+            n = min(max(1, (frame_h - im.height) // pitch + 1), usable)
+            if n >= 1:
+                band = im.crop((0, band_top, frame_w, band_top + n * pitch))
 
-    y = rows[-1] + pitch
-    while y < frame_h:
-        page.paste(band, (0, y))
-        y += band.height
+    if band is not None and band.height > 0:
+        y = rows[-1] + pitch
+        while y < frame_h:
+            page.paste(band, (0, y))
+            y += band.height
     page.save(dest)
+
+    # The EXTENSION must be paper to the last row. Only below the sheet: a row
+    # of handwriting is legitimately darker than blank paper, so checking the
+    # whole page flagged the question line every time and the warning stopped
+    # meaning anything. Below the sheet there is nothing but paper to find.
+    lum = np.asarray(Image.open(dest).convert("L")).astype(int).mean(axis=1)
+    limit = float(np.median(np.asarray(im.convert("L")).astype(int))) - 55
+    bad = np.nonzero(lum[im.height:] < limit)[0]
+    if len(bad):
+        print(f"   \u26a0 the page is not paper below y={im.height + int(bad.min())} "
+              f"({len(bad)} row(s)) \u2014 the ruling extension failed")
     return dest
 
 

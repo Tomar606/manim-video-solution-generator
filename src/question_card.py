@@ -28,11 +28,16 @@ WRITABLE = (0.200, 0.190, 0.940, 0.870)     # x0, y0, x1, y1
 
 PAPER = "assets/design/notepaper.png"
 
-# Measured off the asset's top edge over 62 samples: the sheet is not square to
-# the frame. Everything drawn ON it — the handwriting, the underline — and the
-# elements around it take the same angle, or the card reads as a straight
+# The angle everything drawn ON the sheet takes, or the card reads as a straight
 # caption sitting on a crooked paper.
-PAPER_TILT = 0.0442          # radians, +2.54 degrees
+#
+# Measured off the RULED LINES, by tracking six of them across the sheet and
+# fitting each: +5.75 degrees. It was previously measured off the top edge and
+# came out at +2.54, which is a different angle and the wrong one — the top edge
+# is TORN, so its slope is whatever the tear happened to do, while the ruled
+# lines are printed parallel and are what handwriting actually sits on. Text
+# rotated by the edge angle sat visibly across the lines it was meant to follow.
+PAPER_TILT = 0.1003          # radians, +5.75 degrees
 
 # Palette from the approved still
 PAPER_INK   = "#132A4A"      # the handwriting

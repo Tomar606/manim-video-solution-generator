@@ -414,8 +414,16 @@ class DaniellPart1(_Base):
         self.hold()
 
         self.cue(6, keep=True)
-        zl = self.hindi("जिंक", size=26, color=ZN).next_to(cell.zn, LEFT, buff=0.30)
-        cl = self.hindi("कॉपर", size=26, color=CU).next_to(cell.cu, RIGHT, buff=0.30)
+        # Labels go ABOVE the rods, shifted outward — never beside them.
+        # `half_cell` puts each electrode INSIDE its beaker, so LEFT of the zinc
+        # rod and RIGHT of the copper rod are both beaker wall: the labels sat on
+        # the glass. Above the rod is clear of the rim (rod top 0.998, glass top
+        # 0.989), and the outward shift keeps them off the wire's vertical leg,
+        # which drops onto the rod's own x.
+        zl = self.hindi("जिंक", size=26, color=ZN).next_to(
+            cell.zn, UP, buff=0.16).shift(LEFT * 0.55)
+        cl = self.hindi("कॉपर", size=26, color=CU).next_to(
+            cell.cu, UP, buff=0.16).shift(RIGHT * 0.55)
         self.play(FadeIn(cell.zn, shift=DOWN * 0.15), FadeIn(cell.cu, shift=DOWN * 0.15),
                   run_time=0.7)
         self.play(FadeIn(zl), FadeIn(cl), run_time=0.5)
@@ -509,8 +517,16 @@ class DaniellPart2(_Base):
         self.cue(0)
         cell = self.cell(0.92)
         self.place(cell, y=0.46)
-        zl = self.hindi("ऐनोड", size=25, color=GREEN).next_to(cell.zn, LEFT, buff=0.30)
-        cl = self.hindi("कॉपर", size=25, color=CU).next_to(cell.cu, RIGHT, buff=0.30)
+        # Labels go ABOVE the rods, shifted outward — never beside them.
+        # `half_cell` puts each electrode INSIDE its beaker, so LEFT of the zinc
+        # rod and RIGHT of the copper rod are both beaker wall: the labels sat on
+        # the glass. Above the rod is clear of the rim (rod top 0.998, glass top
+        # 0.989), and the outward shift keeps them off the wire's vertical leg,
+        # which drops onto the rod's own x.
+        zl = self.hindi("ऐनोड", size=25, color=GREEN).next_to(
+            cell.zn, UP, buff=0.16).shift(LEFT * 0.55)
+        cl = self.hindi("कॉपर", size=25, color=CU).next_to(
+            cell.cu, UP, buff=0.16).shift(RIGHT * 0.55)
         self.play(FadeIn(cell), FadeIn(zl), FadeIn(cl), run_time=0.8)
         dots, path = self.electrons(cell, n=5)
         self.add(dots)
@@ -519,7 +535,8 @@ class DaniellPart2(_Base):
 
         self.cue(1, keep=True)
         ask = self.hindi("कॉपर पर क्या?", size=30, color=VIO)
-        ask.next_to(cell.cu, DOWN, buff=0.30)
+        # below the BEAKER, not the rod: below the rod is the solution
+        ask.next_to(cell.right, DOWN, buff=0.24)
         self.play(Indicate(cell.cu, color=CU, scale_factor=1.12), run_time=0.8)
         self.play(FadeIn(ask, shift=UP * 0.1), run_time=0.5)
         self.hold()

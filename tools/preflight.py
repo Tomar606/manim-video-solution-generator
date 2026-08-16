@@ -277,6 +277,28 @@ def check_caption_margins(root: Path, rep: Report):
             rep.add(OK, name, f"{worst * 100:.2f}% at {at:.0f}s")
 
 
+def check_layout_guard(root: Path, rep: Report):
+    """What the in-render layout guard found last time this scene was rendered.
+
+    The guard prints its findings at tear-down, and a Manim render prints
+    thousands of lines around them — the electrode labels sitting on the beaker
+    walls were reported there and still shipped. It now also writes them beside
+    the scene, so the next preflight refuses to let the same render happen
+    twice.
+    """
+    for f in sorted(root.glob("manim_code/layout_violations.json")):
+        try:
+            d = json.loads(f.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as e:
+            rep.add(WARN, "layout_violations.json parses", str(e)); continue
+        problems = d.get("problems", [])
+        if problems:
+            rep.add(FAIL, f"layout guard ({d.get('scene', '?')})",
+                    f"{len(problems)} problem(s), e.g. {problems[0][:70]}")
+        else:
+            rep.add(OK, f"layout guard ({d.get('scene', '?')})")
+
+
 def preflight(root: Path) -> Report:
     rep = Report()
     check_composed(root, rep)
@@ -288,6 +310,7 @@ def preflight(root: Path) -> Report:
     check_windows(root, rep)
     check_images(root, rep)
     check_caption_margins(root, rep)
+    check_layout_guard(root, rep)
     return rep
 
 
