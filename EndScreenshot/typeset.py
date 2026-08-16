@@ -143,7 +143,13 @@ def measure(base) -> Geometry:
 # model instead of redrawn by hand; ghosting still shows WHAT the figure is,
 # WHERE it sits and HOW BIG it is, with nothing solid enough to trace.
 GHOST_STRENGTH = 0.42          # 0 = invisible, 1 = full contrast
-DIAGRAM_GUTTER = 18            # px of air between the text and the figure
+DIAGRAM_GUTTER = 60            # px of air between the text and the figure.
+                               # 18 was enough for the TYPESET mock-up but not
+                               # for the handwriting drawn from it: the model
+                               # ran a word past the wrap point and the figure
+                               # then covered it, silently dropping 'में' from a
+                               # sentence. The gutter has to absorb the model's
+                               # slop, not just the typesetter's.
 
 
 # The supplied sheet's rules are extremely faint. Measured against them, the

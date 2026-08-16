@@ -503,52 +503,85 @@ def _es_default(which: str) -> Path:
     return base / ("blank_ruled.jpeg" if which == "sheet" else "sample_hand.jpg")
 
 
-def _paste_figure(pages, figure: Path, width_frac: float = 0.80) -> None:
-    """Draw the figure onto the finished page, below whatever was written.
+_BLANK_FIGURE_BOX = """FIGURE AREA — the faint grey figure printed in IMAGE 3
+marks a region that must be left EMPTY on your page.
 
-    The figure is NOT passed through generation. Reserving a rectangle for it
-    has the model draw its own version there, and its version had the electrode
-    signs reversed and every Devanagari label garbled — on a figure whose whole
-    content is which electrode is which, that is not a cosmetic loss. So the
-    page is generated as text alone and the drawn figure is composited after.
+- Do NOT draw, sketch, trace or suggest that figure, or any figure, anywhere.
+- Leave that whole rectangle as blank ruled paper: the printed rules carry
+  straight across it exactly as they do everywhere else on the sheet, with
+  nothing written or drawn on them.
+- Write the handwritten answer around it, exactly as the reference layout shows
+  — the text stops at the left edge of that rectangle on the lines it crosses,
+  and resumes full width on the lines below it.
+- Nothing may extend into the rectangle: no stray marks, no labels, no arrows,
+  no part of any letter.
+"""
 
-    Where it goes is MEASURED, not reserved. The model's handwriting runs about
-    five ruled rows looser than the typeset mock-up predicts, so a row index
-    chosen up front lands on the last line of the answer — it did, twice. The
-    last written row on the actual page is unambiguous, so the figure is placed
-    from that.
 
-    It is composited rather than pasted: the figure is drawn on transparency,
-    so the sheet's ruling and grain carry on behind it and it reads as drawn on
-    the page rather than stuck to it.
+def _paste_figure(pages, figure: Path, diagram) -> None:
+    """Draw the real figure into the box the page reserved for it.
+
+    The box goes through generation so the prose WRAPS around it — the reference
+    sheet has the diagram inline at the top right with text flowing beside it,
+    not stranded under the answer. But what the image model draws in that box is
+    its own redrawing, and its Daniell cell came back with the electrode signs
+    REVERSED and every Devanagari label garbled. On a figure whose entire content
+    is which electrode is which, that is not a cosmetic loss.
+
+    So the box is cleared and the drawn figure composited in. Clearing matters:
+    compositing over the model's attempt left both figures visible on top of
+    each other. The paper colour and the ruled lines that crossed the box are
+    restored from the page itself, and the ruling is probed OUTSIDE the box —
+    inside it, the model's drawing is in the way.
     """
     import numpy as np
     from PIL import Image
 
     fig = Image.open(figure).convert("RGBA")
+    box = (int(diagram.x0), int(diagram.y0), int(diagram.x1), int(diagram.y1))
+    w, h = box[2] - box[0], box[3] - box[1]
+    if w < 8 or h < 8:
+        print("   figure: reserved box is degenerate — page left as generated")
+        return
+
+    scale = min(w / fig.width, h / fig.height)
+    small = fig.resize((max(1, round(fig.width * scale)),
+                        max(1, round(fig.height * scale))), Image.LANCZOS)
+
     for page in pages:
-        im = Image.open(page).convert("RGBA")
-        pw, ph = im.size
+        im = Image.open(page).convert("RGB")
+        arr = np.array(im)
+        ph, pw = arr.shape[:2]
+        bx0, by0 = max(0, box[0]), max(0, box[1])
+        bx1, by1 = min(pw, box[2]), min(ph, box[3])
 
-        grey = np.asarray(im.convert("L")).astype(int)
-        profile = (grey < 130).sum(axis=1) / pw
-        window = max(9, ph // 50)
-        smooth = np.convolve(profile, np.ones(window) / window, mode="same")
-        rows = np.nonzero(smooth > 0.025)[0]
-        top = (int(rows.max()) + int(ph * 0.035)) if len(rows) else int(ph * 0.55)
+        # Clear only INK, not the whole rectangle. Flat-filling the box and
+        # redrawing the rules leaves a visibly flatter, whiter patch around the
+        # figure, because the paper's grain and shading go with it. The page is
+        # asked to leave this area empty anyway, so usually there is nothing to
+        # remove — and where the model does stray in, only its marks go.
+        region = arr[by0:by1, bx0:bx1]
+        flat = region.reshape(-1, 3)
+        bright = flat[flat.min(axis=1) > 200]
+        paper = (bright.mean(axis=0) if len(bright) > 20
+                 else np.array([250.0, 250.0, 250.0])).astype(np.uint8)
+        grey = region.astype(int).mean(axis=2)
+        ink = grey < (float(paper.mean()) - 45)      # darker than any ruled line
+        if ink.any():
+            from PIL import ImageFilter
+            blur = np.asarray(
+                Image.fromarray(region).filter(ImageFilter.GaussianBlur(9)))
+            region[ink] = blur[ink]
+            region[ink] = paper
+            print(f"   figure: cleared {int(ink.sum())} stray ink px from the box")
+        arr[by0:by1, bx0:bx1] = region
 
-        avail_w, avail_h = int(pw * width_frac), ph - int(ph * 0.03) - top
-        if avail_h < ph * 0.12:
-            print("   figure: no room left under the answer — page left as is")
-            continue
-        scale = min(avail_w / fig.width, avail_h / fig.height)
-        small = fig.resize((max(1, round(fig.width * scale)),
-                            max(1, round(fig.height * scale))), Image.LANCZOS)
-        im.alpha_composite(small, ((pw - small.width) // 2, top))
+        im = Image.fromarray(arr).convert("RGBA")
+        im.alpha_composite(small, (bx0 + (w - small.width) // 2,
+                                   by0 + (h - small.height) // 2))
         im.convert("RGB").save(page)
-        print(f"   figure: drawn below the answer at y={top}, "
-              f"{small.width}x{small.height}")
-    return
+    print(f"   figure: drawn in the reserved box {box}")
+
 
 
 def cmd_endscreenshot(args) -> int:
@@ -608,12 +641,19 @@ def cmd_endscreenshot(args) -> int:
     # generated: a model gets the picture roughly right and the LETTERING wrong,
     # and on a figure about which electrode is which, the lettering is the whole
     # content. Passed as a path; EndScreenshot flows the text around it.
-    figure = None
+    figure, diagram = None, None
     if getattr(args, "diagram", None):
         figure = Path(args.diagram)
         if not figure.exists():
             print(f"❌ diagram not found: {figure}")
             return 2
+        # Reserved as a real Diagram so the prose WRAPS AROUND it, the way the
+        # reference sheet has it — inline at the top right, not stranded below
+        # the answer. What the model draws inside the box is erased afterwards
+        # and replaced with the drawn figure; see _paste_figure.
+        from EndScreenshot.typeset import Diagram
+        diagram = Diagram(path=str(figure), row=args.diagram_row, rows=0,
+                          width_frac=args.diagram_width, side=args.diagram_side)
 
     print(f"📸 EndScreenshot — {args.sheet}")
     try:
@@ -625,6 +665,19 @@ def cmd_endscreenshot(args) -> int:
             highlight=args.highlight, extra_rules=extra,
             quality=args.quality, max_pages=args.max_pages,
             temp_only=not getattr(args, "approve", False),
+            diagram=diagram,
+            # NOT ES_prompts.DIAGRAM_PROMPT. That asks the model to redraw the
+            # figure itself, and its Daniell cell came back with the electrode
+            # signs reversed and the Devanagari labels garbled — then spilled
+            # its labels outside the reserved box, so erasing the box left a
+            # duplicate set underneath ours. Asking for the space to be left
+            # EMPTY gets the wrap for free and nothing to clean up: the real
+            # figure is composited into it afterwards.
+            diagram_rules=(_BLANK_FIGURE_BOX if diagram is not None else ""),
+            # The reference sheet carries the Arivihan wordmark across the
+            # middle, under the handwriting. Every page gets it.
+            watermark_path=(None if args.no_watermark else args.watermark),
+            watermark_scale=args.wm_scale, watermark_opacity=args.wm_opacity,
             # `--fresh-temp` is honoured by clearing the cached temp rather than
             # by a keyword: EndScreenshot.generate() does not take one, and
             # passing it raised TypeError on every run.
@@ -644,7 +697,7 @@ def cmd_endscreenshot(args) -> int:
             print(f"   temp: {temp}")
         return 0
     if figure is not None:
-        _paste_figure(pages, figure, args.diagram_width)
+        _paste_figure(pages, figure, diagram)
 
     print(f"\n✅ {len(pages)} page(s) · {result['images_generated']} image(s) generated")
     for path in pages:
@@ -899,8 +952,18 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--stem", help="Output filename stem (default 'answer')")
     p.add_argument("--diagram", help="Figure to draw on the page "
                                      "(see tools/answer_figure.py)")
-    p.add_argument("--diagram-width", type=float, default=0.80,
+    p.add_argument("--diagram-width", type=float, default=0.44,
                    help="figure width as a fraction of the page")
+    p.add_argument("--diagram-row", type=int, default=2,
+                   help="first ruled row the figure sits on")
+    p.add_argument("--diagram-side", default="right",
+                   choices=["left", "right"])
+    p.add_argument("--watermark",
+                   default=str(Path(__file__).resolve().parent / "EndScreenshot"
+                               / "assets" / "watermark.png"))
+    p.add_argument("--no-watermark", action="store_true")
+    p.add_argument("--wm-scale", type=float, default=0.68)
+    p.add_argument("--wm-opacity", type=float, default=3.0)
     p.add_argument("--out", help="Output dir when no project is given")
     p.add_argument("--temp-dir", help="Where temps are cached")
     p.add_argument("--quality", choices=["low", "medium", "high"],
