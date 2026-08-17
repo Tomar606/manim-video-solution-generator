@@ -380,9 +380,12 @@ class Sanksharan(ThemedScene):
         # shrinks to the paper's writable area, so a longer question than this
         # one still cannot leak off the page.
         self.cue(0, caption=False)
+        # v2 card: the question is PRINTED on the torn exam sheet.
         self.question_card("संक्षारण किसे कहते हैं? इसे प्रभावित करने वाले तीन "
                            "कारकों को लिखकर इससे बचाव के कोई तीन उपाय लिखिए।",
-                           "संक्षारण", "2025")
+                           "संक्षारण", "2025",
+                           sheet=_Path(ASSET_ROOT) / "projects" / "sanksharan"
+                           / "assets" / "design" / "question_sheet.png")
         # No explicit fade-out: cue(1) clears the stage, the same way the other
         # PYQ scenes leave their question card.
         self.hold()

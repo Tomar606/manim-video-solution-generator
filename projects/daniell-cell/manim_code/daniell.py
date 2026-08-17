@@ -357,9 +357,13 @@ class DaniellPart1(_Base):
         # geometry measured off the still in src/question_card.py, with the
         # question wrapped and shrunk to the paper's writable area so it cannot
         # leak off the page.
+        # v2 card: the question is PRINTED on the torn exam sheet, so nothing
+        # is typeset onto it here. The frame around it is unchanged.
         self.question_card("विद्युत्-रासायनिक सेल एवं उसकी क्रियाविधि "
                            "डेनियल सेल का उदाहरण देकर समझाइए।",
-                           "डेनियल सेल", "2018 और 2023")
+                           "डेनियल सेल", "2018 और 2023",
+                           sheet=_Path(ASSET_ROOT) / "projects" / "daniell-cell"
+                           / "assets" / "design" / "question_sheet.png")
         self.hold()
 
         # ---- cue 1: the question ---------------------------------------- #
