@@ -71,7 +71,7 @@ Q_WORD_SIZE = 78             # was 96 — the word crowded the ring above it
 # The heading over the notepaper. It was "प्रश्न"; the board and class say more
 # to a student scrolling past, and every question in the batch is the same board
 # and class, so it is the same on every card.
-HEAD_TEXT   = "MP Board - 12th"
+HEAD_TEXT   = "MP Board - 12th"   # the heading, per the brief — not प्रश्न
 # ...but it is roughly three times the width of "प्रश्न", and BOTH the sparks
 # and the rule are sized from the word, so a literal swap threw all three past
 # the frame. The heading is scaled to this fraction of frame width, and the rule
@@ -194,3 +194,18 @@ def fits(text_mob, paper_mob, slack=0.02):
 SHEET_W       = 0.80      # of frame width
 SHEET_Y       = 0.375     # centre, as a fraction of frame height
 SHEET_YEARS_Y = 0.640     # the pill clears the torn bottom edge
+
+# The washi tape across the top of the sheet, carried over from the v1 sticky
+# note. It is what makes the sheet read as stuck to the board rather than
+# floating, and it survived the change of paper — measured off
+# inbox/new_sticky reference.jpeg.
+TAPE_W       = 0.20      # of frame width
+TAPE_H       = 0.026     # of frame height
+TAPE_COLOUR  = "#2AA9C4"
+TAPE_OPACITY = 0.82
+TAPE_TILT    = -0.055    # radians; it sits across the corner, not square
+TAPE_EDGE    = 0.081     # measured at the sheet's CENTRE column, not its
+                         # topmost pixel: the paper is tilted, so its highest
+                         # point is a corner and the middle of the top edge sits
+                         # 8.1% down the bitmap. Using the corner left the tape
+                         # floating clear of the paper.

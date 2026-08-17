@@ -816,7 +816,9 @@ class ThemedScene(Scene):
         return self.place(grp)
 
     def question_card(self, question, highlight="", years="", sheet=None,
-                      sheet_head="प्रश्न"):
+                      sheet_head=None):
+        """`sheet_head` defaults to HEAD_TEXT ("MP Board - 12th") so every
+        project gets the same heading without each scene naming it."""
         """The approved opening card: ringed ?, gold प्रश्न, notepaper, years.
 
         Geometry lives in src/question_card.py, measured off the approved still.
@@ -829,6 +831,8 @@ class ThemedScene(Scene):
                                        PAPER_W, PAPER_Y, Q_MARK_R, Q_MARK_Y,
                                        Q_WORD_SIZE, Q_WORD_Y, RULE_W, RULE_W_MAX,
                                        SHEET_W, SHEET_Y, SHEET_YEARS_Y,
+                                       TAPE_COLOUR, TAPE_H, TAPE_OPACITY,
+                                       TAPE_EDGE, TAPE_TILT, TAPE_W,
                                        RULE_Y, TEAL, TICK_PAD, YEARS_Y,
                                        fit_lines, fits, writable_box)
         fw, fh = config.frame_width, config.frame_height
@@ -913,7 +917,17 @@ class ThemedScene(Scene):
             self.play(LaggedStart(*[GrowFromCenter(t) for t in sp],
                                   lag_ratio=.08), run_time=0.5)
             self.play(Create(rule), run_time=0.4)
+            tape = RoundedRectangle(width=fw * TAPE_W, height=fh * TAPE_H,
+                                    corner_radius=0.04)
+            tape.set_fill(TAPE_COLOUR, TAPE_OPACITY).set_stroke(width=0)
+            # Straddle the PAPER's edge, not the image's. The sheet PNG carries
+            # a transparent margin above the torn edge — 3.9% of its height — so
+            # get_top() is empty space and the tape floated well clear of the
+            # paper, sitting on the rule above it.
+            tape.rotate(TAPE_TILT).move_to(
+                paper.get_top() + DOWN * paper.height * TAPE_EDGE)
             self.play(FadeIn(paper, shift=DOWN * .30, scale=1.04), run_time=0.8)
+            self.play(FadeIn(tape, scale=1.2), run_time=0.30)
             yr = VGroup(txt("वर्ष ", 36), txt(years, 42, TEAL),
                         txt(" में", 36)).arrange(RIGHT, buff=0.10)
             ytxt = VGroup(yr, txt("ये प्रश्न था", 36)).arrange(DOWN, buff=0.12)

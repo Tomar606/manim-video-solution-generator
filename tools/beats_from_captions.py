@@ -31,24 +31,43 @@ from pathlib import Path
 WINDOW = 4              # caption lines per on-screen block
 MIN_WINDOW = 3          # never leave a stub of one line at the end
 
-SYSTEM = """तुम एक शिक्षण वीडियो के लिए स्क्रीन-टेक्स्ट बनाते हो।
+SYSTEM = """तुम एक शैक्षिक वीडियो के Instructional Visual Director हो।
 सिर्फ़ JSON लौटाओ, कोई और शब्द नहीं।"""
 
-PROMPT = """नीचे कुछ कैप्शन लाइनें हैं जो शिक्षक इस समय बोल रहा है। इन्हीं के आधार पर
-स्क्रीन पर दिखाने के लिए एक छोटा ब्लॉक बनाओ।
+PROMPT = """नीचे कुछ कैप्शन लाइनें हैं जो शिक्षक अभी बोल रहा है।
 
-नियम:
-- सिर्फ़ इन्हीं लाइनों की बात कहो। कोई नई जानकारी मत जोड़ो।
-- बहुत छोटा रखो: शीर्षक 2-4 शब्द, हर बिंदु अधिकतम 6 शब्द, अधिकतम 3 बिंदु।
-- अगर इनमें कोई समीकरण या सूत्र है तो type "formula" दो और tex में LaTeX लिखो
-  (LaTeX में देवनागरी कभी मत लिखो — वह label में जाए)।
-- अगर दो चीज़ों की तुलना है तो type "compare" दो।
-- वरना type "points" दो।
+पहले तय करो कि शिक्षक क्या कर रहा है (teaching intent), फिर तय करो कि क्या कोई
+दृश्य वास्तव में समझने में मदद करेगा।
 
-सिर्फ़ JSON लौटाओ, इस आकार में:
-{"type":"points","title":"...","items":["...","..."]}
-{"type":"formula","label":"...","tex":["..."]}
-{"type":"compare","left":["शीर्षक",["..."]],"right":["शीर्षक",["..."]]}
+सबसे ज़रूरी नियम: हर वाक्य के लिए ग्राफ़िक मत बनाओ। अगर स्क्रीन पर कुछ दिखाने से
+समझ बेहतर नहीं होती, तो {"type":"none"} लौटाओ। खाली स्क्रीन स्वीकार्य है।
+
+दूसरा नियम: स्क्रीन-टेक्स्ट कैप्शन की नकल नहीं है। कैप्शन बताता है, स्क्रीन
+व्यवस्थित करती है। जो शब्द बोले जा रहे हैं उन्हें दोबारा मत लिखो — उन्हें
+शीर्षक, बिंदु, सूत्र या तुलना में बदलो। हर बिंदु अधिकतम 5 शब्द।
+
+intent इनमें से चुनो:
+DEFINITION, LIST, ADVANTAGES, COMPARISON, PROCESS, CAUSE_EFFECT, FORMULA,
+DERIVATION, DIAGRAM, GRAPH, EXAMPLE, KEYWORD, COMMON_MISTAKE, RECAP,
+TRANSITION, PURE_NARRATION
+
+फिर उसी के अनुसार दृश्य चुनो:
+- गिनती/सूची/लाभ ("तीन कारक", "चार बातें", "पहला… दूसरा…") -> points,
+  और "reveal":"progressive" दो ताकि हर बिंदु बोले जाने पर आए
+- दो चीज़ों की तुलना -> compare
+- क्रम/प्रक्रिया -> flow
+- समीकरण या सूत्र -> formula (LaTeX में देवनागरी कभी नहीं; वह label में)
+- परिभाषा/मुख्य शब्द -> points, अधिकतम 2 बिंदु
+- सिर्फ़ जोड़ने वाला वाक्य, प्रेरणा, दोहराव -> none
+
+सिर्फ़ JSON लौटाओ:
+{"type":"points","intent":"...","reason":"...","title":"...","items":["..."],
+ "reveal":"progressive"}
+{"type":"formula","intent":"...","reason":"...","label":"...","tex":["..."]}
+{"type":"compare","intent":"...","reason":"...","left":["शीर्षक",["..."]],
+ "right":["शीर्षक",["..."]]}
+{"type":"flow","intent":"...","reason":"...","items":["...","..."]}
+{"type":"none","intent":"...","reason":"..."}
 
 कैप्शन लाइनें:
 """
@@ -76,7 +95,9 @@ def block_for(lines, lo, hi, complete):
         spec = json.loads(m.group(0))
     except json.JSONDecodeError:
         return None
-    if spec.get("type") not in {"points", "formula", "compare"}:
+    if spec.get("type") == "none":
+        return None                     # a deliberate no-graphic decision
+    if spec.get("type") not in {"points", "formula", "compare", "flow"}:
         return None
     # Devanagari inside MathTex kills the whole render with a LaTeX Unicode
     # error, so it is stripped here rather than trusted to the prompt.
@@ -86,6 +107,13 @@ def block_for(lines, lo, hi, complete):
             return None
         spec["tex"] = keep
     spec["at"] = lo
+    # A progressive list needs to know WHEN each item is named. Spreading them
+    # across the window is the honest approximation: the window is the span in
+    # which the teacher lists them.
+    if spec.get("reveal") == "progressive" and spec.get("items"):
+        n = len(spec["items"])
+        step = max(1, (hi - lo) // max(1, n))
+        spec["reveal_at"] = [lo + i * step for i in range(n)]
     return spec
 
 
