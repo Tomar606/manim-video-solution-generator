@@ -271,21 +271,158 @@ class DryCellFigure(Scene):
 
         # --- leader lines out to the labels ------------------------------ #
         def leader(point, side, text, dy):
-            end = np.array([side * 3.35, dy, 0])
+            # Short leaders. The first version reached out to x = ±3.35 and made
+            # the whole figure 3:1 — dropped into the answer sheet's reserved
+            # box it shrank until the labels were unreadable. A figure for a
+            # page has to be roughly as tall as it is wide.
+            end = np.array([side * 2.05, dy, 0])
             line = hand(seg(point, end), amp=0.012, width=1.4, seed=abs(int(dy * 7)),   # seeds must be non-negative; dy is not
                         colour=INK, passes=1, overshoot=0.02)
-            tag = label(text)
-            tag.next_to(end, RIGHT if side > 0 else LEFT, buff=0.12)
+            tag = label(text, 21)
+            tag.next_to(end, RIGHT if side > 0 else LEFT, buff=0.10)
             return VGroup(line, tag)
 
         tags = VGroup(
-            leader([-1.50, 1.55, 0], -1, "कागज/स्टील जैकेट", 1.95),
-            leader([-1.36, 0.55, 0], -1, "जिंक पात्र — ऐनोड (−)", 0.75),
-            leader([-1.15, -0.75, 0], -1, "NH₄Cl + ZnCl₂ पेस्ट", -0.75),
-            leader([0.72, -1.60, 0], +1, "MnO₂ + कार्बन चूर्ण", -1.60),
-            leader([0.21, 1.30, 0], +1, "कार्बन छड़ — कैथोड (+)", 1.45),
+            leader([-1.50, 1.72, 0], -1, "स्टील जैकेट", 2.05),
+            leader([-1.36, 0.70, 0], -1, "जिंक पात्र", 0.85),
+            leader([-1.15, -0.60, 0], -1, "ऐनोड (−)", -0.35),
+            leader([-1.05, -1.60, 0], -1, "NH₄Cl + ZnCl₂", -1.65),
+            leader([0.72, -1.15, 0], +1, "MnO₂ + कार्बन", -1.20),
+            leader([0.21, 1.30, 0], +1, "कार्बन छड़", 1.55),
+            leader([0.21, 0.20, 0], +1, "कैथोड (+)", 0.35),
         )
 
         fig = VGroup(shading, drawn, tags)
+        fig.move_to(ORIGIN).scale(1.05)
+        self.add(fig)
+
+
+class BerkeleyFigure(Scene):
+    """बर्कले एवं हार्टले — the apparatus, laid out as inbox/answer_reference.jpeg
+    lays it out: the two concentric tubes horizontal, the pressure gauge and the
+    applied-pressure arm above, the capillary at one end and the stopcock funnel
+    at the other.
+
+    Accuracy: the INNER tube is the porous one and carries the semipermeable
+    membrane and the pure water; the OUTER tube holds the test solution and the
+    piston. Water passes membrane -> solution, so the capillary level FALLS.
+    """
+
+    def construct(self):
+        def label(t, size=25, colour=INK_D):
+            return Text(t, font="Kalam", font_size=size, color=colour)
+
+        # outer vessel: a flattened hexagon, as in the reference
+        ow, oh = 4.4, 1.5
+        outer = VGroup(
+            seg([-ow/2, oh/2, 0], [ow/2, oh/2, 0]),
+            seg([ow/2, oh/2, 0], [ow/2 + 0.42, 0, 0]),
+            seg([ow/2 + 0.42, 0, 0], [ow/2, -oh/2, 0]),
+            seg([ow/2, -oh/2, 0], [-ow/2, -oh/2, 0]),
+            seg([-ow/2, -oh/2, 0], [-ow/2 - 0.42, 0, 0]),
+            seg([-ow/2 - 0.42, 0, 0], [-ow/2, oh/2, 0]),
+        )
+        # inner porous tube: a band across the middle
+        inner = VGroup(seg([-ow/2, 0.30, 0], [ow/2, 0.30, 0]),
+                       seg([-ow/2, -0.30, 0], [ow/2, -0.30, 0]))
+
+        # the arms: applied pressure, gauge, capillary, stopcock funnel
+        stem_l = VGroup(seg([-1.5, oh/2, 0], [-1.5, 1.55, 0]),
+                        seg([-1.5, 1.55, 0], [-0.15, 1.55, 0]))
+        stem_r = VGroup(seg([1.5, oh/2, 0], [1.5, 1.55, 0]),
+                        seg([1.5, 1.55, 0], [0.35, 1.55, 0]))
+        gauge = Circle(radius=0.30).move_to([1.05, 1.90, 0])
+        gauge_stem = seg([1.05, 1.55, 0], [1.05, 1.60, 0])
+        cap = VGroup(seg([-2.55, 0, 0], [-2.55, 1.30, 0]))
+        funnel = VGroup(seg([2.60, 0.10, 0], [2.60, 1.15, 0]),
+                        seg([2.42, 1.15, 0], [2.78, 1.15, 0]))
+
+        drawn = VGroup(
+            hand(outer, amp=0.024, width=2.3, seed=1, colour=INK),
+            hand(inner, amp=0.018, width=1.9, seed=2, colour=INK_D),
+            hand(VGroup(stem_l, stem_r), amp=0.020, width=1.9, seed=3, colour=INK),
+            hand(gauge, amp=0.016, width=1.9, seed=4, colour=INK_D, overshoot=0.0),
+            hand(VGroup(gauge_stem, cap, funnel), amp=0.018, width=1.9,
+                 seed=5, colour=INK),
+        )
+        shading = VGroup(
+            hatch(-ow/2 + 0.05, ow/2 - 0.05, -0.62, -0.34, step=0.13, seed=11),
+            hatch(-ow/2 + 0.05, ow/2 - 0.05, 0.38, 0.66, step=0.13, seed=12),
+        )
+
+        def tag(text, point, side, dy):
+            t = label(text)
+            t.next_to(drawn, side, buff=0.26).shift(UP * dy)
+            arm = hand(seg(t.get_edge_center(-side), point), amp=0.010,
+                       width=1.3, seed=abs(int(dy * 9)) + 1, colour=INK,
+                       passes=1, overshoot=0.02)
+            return VGroup(arm, t)
+
+        tags = VGroup(
+            tag("प्रयुक्त दाब", [-0.9, 1.55, 0], UP, 0.30),
+            tag("दाब मापक", gauge.get_top(), RIGHT, 1.05),
+            tag("टोंटीदार कीप", [2.60, 1.00, 0], RIGHT, 0.30),
+            tag("केशिका नली", [-2.55, 1.00, 0], LEFT, 0.55),
+            tag("अर्द्धपारगम्य झिल्ली", [-0.6, 0.30, 0], LEFT, -0.55),
+            tag("विलयन", [1.2, -0.55, 0], RIGHT, -0.70),
+            tag("जल", [0.0, 0.0, 0], DOWN, -0.10),
+        )
+        fig = VGroup(shading, drawn, tags)
+        fig.move_to(ORIGIN).scale(1.05)
+        self.add(fig)
+
+
+class BoilingGraphFigure(Scene):
+    """क्वथनांक में उन्नयन — the graph the question asks for by name.
+
+    Both curves rise; the SOLUTION's sits BELOW the solvent's at every
+    temperature, so it meets the atmospheric-pressure line further right. That
+    is the whole argument — a figure where they meet together, or where the
+    solution is above, says the opposite of the answer.
+    """
+
+    def construct(self):
+        def label(t, size=24, colour=INK_D):
+            return Text(t, font="Kalam", font_size=size, color=colour)
+
+        ax_x, ax_y = 5.0, 3.1
+        axes = VGroup(seg([0, 0, 0], [ax_x, 0, 0]), seg([0, 0, 0], [0, ax_y, 0]))
+
+        def curve(scale, x_to):
+            pts = [[x, scale * np.exp(0.52 * x), 0]
+                   for x in np.linspace(0.2, x_to, 60)]
+            return VMobject().set_points_smoothly([np.array(p) for p in pts])
+
+        solvent = curve(0.34, 4.05)
+        solution = curve(0.24, 4.62)
+        atm_y = 0.34 * np.exp(0.52 * 4.05)
+        atm = DashedLine([0, atm_y, 0], [ax_x, atm_y, 0], dash_length=0.10)
+
+        t0, t1 = 4.05, 4.62
+        drop0 = DashedLine([t0, atm_y, 0], [t0, 0, 0], dash_length=0.08)
+        drop1 = DashedLine([t1, atm_y, 0], [t1, 0, 0], dash_length=0.08)
+
+        drawn = VGroup(
+            hand(axes, amp=0.016, width=2.2, seed=1, colour=INK_D),
+            hand(solvent, amp=0.020, width=2.4, seed=2, colour=INK_D, overshoot=0.0),
+            hand(solution, amp=0.020, width=2.4, seed=3, colour=INK, overshoot=0.0),
+        )
+        dashes = VGroup(atm, drop0, drop1).set_stroke(INK, 1.6)
+
+        tags = VGroup(
+            label("वायुमण्डलीय दाब").next_to(atm, UP, buff=0.08).align_to(atm, LEFT),
+            # The two curve labels end up at almost the same point — the
+            # curves converge at the top right — so they are pushed apart
+            # deliberately rather than hung off the ends and left to collide.
+            label("शुद्ध विलायक").next_to(solvent.get_end(), UP, buff=0.14
+                                          ).shift(LEFT * 0.30),
+            label("विलयन").next_to(solution.get_end(), RIGHT, buff=0.14
+                                   ).shift(DOWN * 0.28),
+            label("वाष्प दाब", 23).rotate(PI / 2).next_to(axes, LEFT, buff=0.16),
+            label("ताप", 23).next_to(axes, DOWN, buff=0.20),
+            label("Tb°", 23).next_to([t0, 0, 0], DOWN, buff=0.12),
+            label("Tb", 23).next_to([t1, 0, 0], DOWN, buff=0.12),
+        )
+        fig = VGroup(drawn, dashes, tags)
         fig.move_to(ORIGIN).scale(1.05)
         self.add(fig)

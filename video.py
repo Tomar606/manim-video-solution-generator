@@ -518,6 +518,46 @@ marks a region that must be left EMPTY on your page.
 """
 
 
+def _paste_below(pages, figure: Path, width_frac: float = 0.62) -> None:
+    """Draw the figure under whatever was written, measured off the page.
+
+    Where it goes is measured, not reserved: the model's handwriting runs about
+    five ruled rows looser than the typeset mock-up predicts, so a row index
+    chosen up front lands on the last line of the answer. The last row that
+    actually carries ink is unambiguous.
+    """
+    import numpy as np
+    from PIL import Image
+
+    fig = Image.open(figure).convert("RGBA")
+    for page in pages:
+        im = Image.open(page).convert("RGBA")
+        pw, ph = im.size
+        # Threshold at 105, not 130: the Arivihan WATERMARK is grey and runs
+        # well down the page, and at 130 it counts as writing — the detector
+        # then thinks the sheet is full and refuses to place the figure on a
+        # page that is a third empty. Handwriting is a dark blue ballpoint and
+        # sits far below either level.
+        grey = np.asarray(im.convert("L")).astype(int)
+        profile = (grey < 105).sum(axis=1) / pw
+        window = max(9, ph // 50)
+        smooth = np.convolve(profile, np.ones(window) / window, mode="same")
+        rows = np.nonzero(smooth > 0.030)[0]
+        top = (int(rows.max()) + int(ph * 0.030)) if len(rows) else int(ph * 0.55)
+
+        avail_w, avail_h = int(pw * width_frac), ph - int(ph * 0.03) - top
+        if avail_h < ph * 0.12:
+            print("   figure: no room under the answer — page left as is")
+            continue
+        k = min(avail_w / fig.width, avail_h / fig.height)
+        small = fig.resize((max(1, round(fig.width * k)),
+                            max(1, round(fig.height * k))), Image.LANCZOS)
+        im.alpha_composite(small, ((pw - small.width) // 2, top))
+        im.convert("RGB").save(page)
+        print(f"   figure: drawn below the answer at y={top}, "
+              f"{small.width}x{small.height}")
+
+
 def _paste_figure(pages, figure: Path, diagram) -> None:
     """Draw the real figure into the box the page reserved for it.
 
@@ -658,7 +698,19 @@ def cmd_endscreenshot(args) -> int:
     # and on a figure about which electrode is which, the lettering is the whole
     # content. Passed as a path; EndScreenshot flows the text around it.
     figure, diagram = None, None
-    if getattr(args, "diagram", None):
+    if getattr(args, "diagram", None) and getattr(args, "diagram_below", False):
+        # Below the prose, measured from the finished page. The reserved-box
+        # route gives the reference's inline layout, but it depends on the model
+        # honouring the gap — and it does so inconsistently: the same settings
+        # that worked on one question wrote straight through the box on the next
+        # and clipped words off the ends of lines. Losing a word from an answer
+        # is a content error; a figure sitting under the text instead of beside
+        # it is a layout preference. This path cannot clip anything.
+        figure = Path(args.diagram)
+        if not figure.exists():
+            print(f"❌ diagram not found: {figure}")
+            return 2
+    elif getattr(args, "diagram", None):
         figure = Path(args.diagram)
         if not figure.exists():
             print(f"❌ diagram not found: {figure}")
@@ -713,7 +765,10 @@ def cmd_endscreenshot(args) -> int:
             print(f"   temp: {temp}")
         return 0
     if figure is not None:
-        _paste_figure(pages, figure, diagram)
+        if diagram is not None:
+            _paste_figure(pages, figure, diagram)
+        else:
+            _paste_below(pages, figure, args.diagram_width)
 
     print(f"\n✅ {len(pages)} page(s) · {result['images_generated']} image(s) generated")
     for path in pages:
@@ -974,6 +1029,8 @@ def build_parser() -> argparse.ArgumentParser:
                    help="first ruled row the figure sits on")
     p.add_argument("--diagram-side", default="right",
                    choices=["left", "right"])
+    p.add_argument("--diagram-below", action="store_true",
+                   help="place the figure under the answer instead of beside it")
     p.add_argument("--watermark",
                    default=str(Path(__file__).resolve().parent / "EndScreenshot"
                                / "assets" / "watermark.png"))
