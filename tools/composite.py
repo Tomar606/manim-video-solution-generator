@@ -52,6 +52,8 @@ FULL_W, FULL_Y = 712, 966          # 66% of 1080
 SMALL_W, SMALL_Y = 668, 1245        # a 6% step, not 15% — just enough
                                     # to clear content that stops at 60%       # 56% of 1080
 EASE = 0.75                         # seconds, the ramp at each edge
+PRESENTER_FADE = 0.9                # slow enough to read as direction,
+                                    # not as a dropped frame
 FPS = 30
 CANVAS_W, CANVAS_H = 800, 1150      # holds the small avatar; zoom reaches full
 
@@ -79,7 +81,7 @@ def _ease_expr(windows, var="t") -> str:
     return expr
 
 
-def composite(bg, avatar, key, out, windows=None):
+def composite(bg, avatar, key, out, windows=None, presenter=None):
     k = (f"hsvkey=hue={key['hue']}:sat={key['sat']}:val=%s:"
          f"similarity={key['sim']}:blend=0.05,format=rgba,alphaextract")
     alpha = ("[a1][a2]blend=all_mode=darken,dilation,dilation,erosion,erosion,"
@@ -95,8 +97,32 @@ def composite(bg, avatar, key, out, windows=None):
     # the audio — a desync that grows through the clip and only shows up on
     # playback. `fps` duplicates frames with correct timestamps; zoompan can be
     # trusted once every stream reaching it is already at the target rate.
+    # THE PRESENTER STEPPING ASIDE.
+    # Where a diagram or a derivation needs the whole vertical frame, he fades
+    # out and returns when the demonstration ends. Done on the keyed alpha with
+    # `fade=alpha=1`, which is a cheap per-frame ramp — NOT with
+    # colorchannelmixer=aa, which zeroed the alpha permanently and lost him for
+    # the rest of the clip, and not with blend expressions, which cost 17x.
+    # Fade the MASK's luma, not an alpha channel. `[al]` is a greyscale matte
+    # that alphamerge applies later — it has no alpha plane of its own, so
+    # `fade=alpha=1` on it is a no-op and the presenter stayed fully visible
+    # through the whole derivation. Fading the matte to black is what makes him
+    # transparent.
+    hide = ""
+    for a, z in (presenter or []):
+        ramp_in = max(a + PRESENTER_FADE, z - PRESENTER_FADE)
+        hide += (
+            # ramp out, ONLY across its own seconds
+            f",fade=t=out:st={a:.2f}:d={PRESENTER_FADE}:color=black"
+            f":enable='between(t,{a:.2f},{a + PRESENTER_FADE:.2f})'"
+            # hold him hidden for the body of the window
+            f",lutyuv=y=0:enable='between(t,{a + PRESENTER_FADE:.2f},{ramp_in:.2f})'"
+            # ramp back in, again only across its own seconds
+            f",fade=t=in:st={ramp_in:.2f}:d={PRESENTER_FADE}:color=black"
+            f":enable='between(t,{ramp_in:.2f},{z:.2f})'")
+
     head = (f"[1:v]fps={FPS},crop=650:930:650:150,format=rgba,split=3[c][d1][d2];"
-            f"[d1]{k % key['v1']}[a1];[d2]{k % key['v2']}[a2];{alpha}[al];"
+            f"[d1]{k % key['v1']}[a1];[d2]{k % key['v2']}[a2];{alpha}{hide}[al];"
             f"[c]despill=type=green:mix=0.7:expand=0.5[cc];")
 
     if windows:
@@ -158,7 +184,9 @@ def composite(bg, avatar, key, out, windows=None):
            "-c:v", "libx264", "-preset", "medium", "-crf", "19",
            "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k",
            "-movflags", "+faststart", str(tmp), "-y"]
-    print(f"compositing -> {out}" + (f" ({len(windows)} resize window(s))" if windows else ""))
+    print(f"compositing -> {out}"
+          + (f" ({len(windows)} resize window(s))" if windows else "")
+          + (f" ({len(presenter)} presenter fade(s))" if presenter else ""))
     subprocess.run(cmd, check=True)
 
     # refuse to publish a file that does not decode cleanly
@@ -176,4 +204,5 @@ if __name__ == "__main__":
         sys.exit(__doc__)
     bg, av, keyf, out = sys.argv[1:5]
     wins = json.loads(Path(sys.argv[5]).read_text()) if len(sys.argv) > 5 else None
-    composite(bg, av, json.loads(Path(keyf).read_text()), out, wins)
+    pres = json.loads(Path(sys.argv[6]).read_text()) if len(sys.argv) > 6 else None
+    composite(bg, av, json.loads(Path(keyf).read_text()), out, wins, pres)

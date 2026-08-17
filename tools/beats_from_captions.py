@@ -23,7 +23,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from src.visual_director import (SYSTEM, merge_figures, merge_sequences,
-                                 parse, prompt_for, with_reveal)
+                                 parse, prompt_for, with_build,
+                                 with_presenter, with_reveal)
 
 WINDOW = 5              # caption lines per decision
 MIN_WINDOW = 3          # never leave a stub of one line at the end
@@ -62,7 +63,9 @@ def run(project: str, part: str, window: int = WINDOW, log=print) -> int:
             quiet += 1                      # a deliberate no-graphic decision
             continue
         spec["at"] = lo
-        generated.append(with_reveal(spec, lo, hi))
+        spec = with_reveal(spec, lo, hi)
+        spec = with_build(spec, lo, hi)
+        generated.append(with_presenter(spec))
 
     generated = merge_sequences(generated)
     beats = merge_figures(generated, existing)

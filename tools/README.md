@@ -256,3 +256,25 @@ Figures already in a beats file (`apparatus`, `graph`, `image`) are merged back
 untouched. `preflight` then checks the invariants: no block that merely repeats
 its caption, not a block in every window, a figure present when the question
 demands one, and counted lists set to reveal progressively.
+
+## The presenter stepping aside
+
+A scene cannot hide the presenter — he is composited after the render. So a beat
+DECLARES `presenter: "hidden"`, `tools/presenter_windows.py` turns those
+declarations into absolute time windows, and `composite.py` fades the keyed
+matte over them.
+
+The director marks a beat hidden only where the visual genuinely needs the
+height: a diagram being walked through, a derivation being built. Windows
+shorter than 6s are dropped — fading someone out and back inside three seconds
+reads as a glitch, not as direction.
+
+Two things that had to be got right, both invisible in the code:
+
+- Fade the matte's **luma**, not an alpha channel. `[al]` is a greyscale matte
+  that `alphamerge` applies later; it has no alpha plane, so `fade=alpha=1` on
+  it is a no-op and the presenter stayed fully visible.
+- **Gate each phase with `enable`.** `fade=t=in` renders black *before* its
+  start time, so chaining out-then-in blanked the presenter from the first
+  frame of the clip. Each phase — ramp out, hold hidden (`lutyuv=y=0`), ramp in
+  — is enabled only across its own seconds.

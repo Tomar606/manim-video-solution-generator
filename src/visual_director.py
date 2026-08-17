@@ -69,6 +69,17 @@ INTENT_VISUAL = {
 # but the one being spoken is bright and the rest are quiet.
 PROGRESSIVE = {"LIST", "ADVANTAGES", "RECAP", "PROCESS"}
 
+# Intents whose equations are CONSTRUCTED rather than displayed. The brief is
+# explicit: never show the final equation from the beginning, and the student
+# must always be able to answer "what changed?".
+BUILT = {"DERIVATION", "FORMULA"}
+
+# Intents that earn the whole vertical frame. The presenter fades out over a
+# slow opacity ramp and returns when the demonstration ends — the educational
+# content has priority, and the presenter is a guide rather than a permanent
+# centrepiece. Everything else keeps him on screen.
+FULL_FRAME = {"DIAGRAM", "DERIVATION"}
+
 # What the question demands, read off its own wording. The question is the
 # strongest single signal for the visual strategy of the whole video.
 QUESTION_STRATEGY = [
@@ -171,6 +182,30 @@ def parse(raw: str):
         spec["tex"] = keep
     if spec["type"] == "points" and not spec.get("items"):
         return None
+    return spec
+
+
+def with_build(spec, lo: int, hi: int):
+    """Give a derivation the caption indices at which each line is written."""
+    if spec.get("type") != "formula":
+        return spec
+    tex = spec.get("tex") or []
+    if spec.get("intent") in BUILT and len(tex) > 1:
+        spec["build"] = "progressive"
+        step = max(1, (hi - lo) // max(1, len(tex)))
+        spec["reveal_at"] = [lo + i * step for i in range(len(tex))]
+    return spec
+
+
+def with_presenter(spec):
+    """Decide whether the presenter should step aside for this beat.
+
+    Only where the visual genuinely needs the height — a diagram being walked
+    through, a derivation being built. A talking head over a full-frame diagram
+    is the presenter competing with the thing he is explaining.
+    """
+    if spec.get("intent") in FULL_FRAME or spec.get("type") in FIGURE_TYPES:
+        spec.setdefault("presenter", "hidden")
     return spec
 
 
