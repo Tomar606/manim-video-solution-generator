@@ -69,6 +69,44 @@ back. Anywhere output can be checked mechanically, it gets checked and retried.
 render from fixed templates in `src/scene_templates.py` — no model call, so they
 look identical in every video.
 
+## Every PYQ video goes through the visual director
+
+`src/visual_director.py` decides what the student SEES at each moment. It is a
+pipeline stage (`video beats <project>`), not an optional polish pass, and every
+video built from now on runs through it.
+
+The question it answers is *what visual would make this sentence easier for a
+Class 12 Hindi-medium student to understand, remember, or reproduce in the
+exam* — never *what graphic can I put here*. That second question is what
+produced the version where the screen spent the whole video restating the
+captions.
+
+Three things follow from that, and all three are load-bearing:
+
+- **"No graphic" is a valid answer.** On the dry-cell part the director chose a
+  visual for 7 windows out of 58. A quiet moment with the presenter, the
+  captions and a clean plate is correct whenever a graphic would not add
+  understanding. `preflight` warns if almost nothing is left quiet, because
+  that means the director has stopped choosing.
+- **Screen text is not caption text.** Captions say what was said; the screen
+  ORGANISES it — a heading, a list, a comparison. preflight warns when a block's
+  words mostly repeat the caption underneath it.
+- **The question's own wording sets the strategy.** सचित्र means the diagram is
+  the spine; सिद्ध कीजिए means a derivation built step by step; लाभ/कारक/उपाय
+  means a progressive list. `question_strategy()` reads this off the question
+  and biases the whole part. preflight FAILS a part whose question demands a
+  figure and has none — that shipped once.
+
+What the director does **not** decide: which figure belongs to which question,
+and when each of its labels is named. Those are judgements about the question
+rather than about a sentence, so they stay hand-placed in the beats file and are
+merged back in untouched.
+
+Counted lists FILL IN rather than landing whole — every item ends up on screen
+so the student has the map, with the one being spoken bright and the rest quiet.
+Diagram labels work the same way, attached to a part BY NAME through an anchor
+table so they survive the diagram being rescaled.
+
 ## Models: per-stage, on purpose
 
 | Stage | Model | Why |

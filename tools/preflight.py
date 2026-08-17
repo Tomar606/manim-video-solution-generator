@@ -299,6 +299,75 @@ def check_layout_guard(root: Path, rep: Report):
             rep.add(OK, f"layout guard ({d.get('scene', '?')})")
 
 
+def check_visual_direction(root: Path, rep: Report):
+    """The director's invariants, checked on the beats file.
+
+    These are the failures that produced bad videos before the director
+    existed, so they are checked rather than assumed:
+
+      redundancy   screen text that repeats the caption it sits on. The student
+                   already hears it; showing it again is noise, and an earlier
+                   pass filled the screen with restated narration.
+      density      a block for every caption window. If almost nothing is left
+                   visually quiet the director has stopped choosing.
+      demanded     a question that says सचित्र or ग्राफ with no figure anywhere
+                   in the part — this shipped once.
+      counted      a counted list that lands whole instead of filling in.
+    """
+    import json as _json
+    import re as _re
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    from src.visual_director import PROGRESSIVE, question_strategy
+
+    meta_f = root / "meta.json"
+    if not meta_f.exists():
+        return
+    meta = _json.loads(meta_f.read_text(encoding="utf-8"))
+    strategy, _ = question_strategy(meta.get("question", ""))
+
+    for beats_f in sorted(root.glob("beats_part*.json")):
+        part = beats_f.stem.split("part")[-1]
+        lines_f = root / f"lines_part{part}.json"
+        if not lines_f.exists():
+            continue
+        beats = _json.loads(beats_f.read_text(encoding="utf-8"))
+        lines = _json.loads(lines_f.read_text(encoding="utf-8"))
+        name = f"beats_part{part}"
+
+        # redundancy: does a block just restate the caption under it?
+        def words(t):
+            return set(_re.findall(r"[^\s,।?!—:;]+", str(t)))
+        echoed = 0
+        for b in beats:
+            said = words(" ".join(l["text"] for l in
+                                  lines[b["at"]:b["at"] + 2]))
+            shown = words(" ".join(str(x) for x in
+                                   (b.get("items") or []) + [b.get("title", "")]))
+            if shown and len(shown & said) / len(shown) > 0.75:
+                echoed += 1
+        if echoed:
+            rep.add(WARN, f"{name} restates captions",
+                    f"{echoed} block(s) mostly repeat the words under them")
+
+        quiet = max(0, (len(lines) // 5) - len(beats))
+        if len(beats) and quiet <= 0:
+            rep.add(WARN, f"{name} density",
+                    "a block for every window — the director is not choosing")
+
+        figures = [b for b in beats if b.get("type") in
+                   {"apparatus", "graph", "image"}]
+        if strategy in {"diagram", "graph"} and not figures:
+            rep.add(FAIL, f"{name} figure demanded",
+                    f"the question asks for a {strategy} and this part has none")
+
+        for b in beats:
+            if b.get("intent") in PROGRESSIVE and len(b.get("items", [])) > 2 \
+                    and b.get("reveal") != "progressive":
+                rep.add(WARN, f"{name} counted list",
+                        f"block at {b['at']} lands whole; it should fill in")
+        rep.add(OK, name, f"{len(beats)} beat(s), {len(figures)} figure(s)")
+
+
 def preflight(root: Path) -> Report:
     rep = Report()
     check_composed(root, rep)
@@ -311,6 +380,7 @@ def preflight(root: Path) -> Report:
     check_images(root, rep)
     check_caption_margins(root, rep)
     check_layout_guard(root, rep)
+    check_visual_direction(root, rep)
     return rep
 
 

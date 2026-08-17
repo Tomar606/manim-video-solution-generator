@@ -778,6 +778,28 @@ def cmd_endscreenshot(args) -> int:
     return 0
 
 
+def cmd_beats(args) -> int:
+    """Run the visual director over a PYQ part's captions.
+
+    This is a pipeline stage, not a one-off: the rules live in
+    src/visual_director.py, so re-running this after changing them re-decides
+    every video that gets rebuilt.
+    """
+    sys.path.insert(0, str(Path(__file__).resolve().parent / "tools"))
+    from beats_from_captions import run
+
+    root = Path(args.projects_dir or DEFAULT_PROJECTS_DIR) / args.project
+    parts = ([args.part] if args.part else
+             sorted(f.stem.split("part")[-1]
+                    for f in root.glob("lines_part*.json")))
+    if not parts:
+        print(f"❌ no caption tracks in {root} — transcribe and caption first")
+        return 2
+    for part in parts:
+        run(args.project, part, window=args.window)
+    return 0
+
+
 def cmd_build(args) -> int:
     """Run the whole pipeline, stopping at the first stage that can't proceed."""
     project = Project.open(args.project, projects_dir=args.projects_dir)
@@ -1057,6 +1079,13 @@ def build_parser() -> argparse.ArgumentParser:
     p.set_defaults(func=cmd_endscreenshot)
 
     # build -----------------------------------------------------------------
+    p = sub.add_parser("beats", help="visual director: captions -> on-screen beats")
+    p.add_argument("project")
+    p.add_argument("--part", help="one part; default every part with captions")
+    p.add_argument("--window", type=int, default=5,
+                   help="caption lines per decision")
+    p.set_defaults(func=cmd_beats)
+
     p = sub.add_parser("build", help="Run every stage in order")
     p.add_argument("project")
     p.add_argument("--no-audio", action="store_true")

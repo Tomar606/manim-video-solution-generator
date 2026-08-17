@@ -239,3 +239,20 @@ lands on the same rail as its neighbours.
 
 Both depend on Pillow having libraqm; `fix_text.py` refuses to start without it
 rather than write a garbled fix over a garbled word. See CLAUDE.md.
+
+## The visual director
+
+`video beats <project>` runs `src/visual_director.py` over a part's caption
+track and writes `beats_part<N>.json`. The rules live in that one module, so
+changing them re-decides every video that is rebuilt afterwards.
+
+| it decides | it does not decide |
+|---|---|
+| whether a moment needs a visual at all | which figure belongs to a question |
+| which visual serves the teaching intent | when each diagram label is named |
+| whether a list fills in progressively | caption content or timing |
+
+Figures already in a beats file (`apparatus`, `graph`, `image`) are merged back
+untouched. `preflight` then checks the invariants: no block that merely repeats
+its caption, not a block in every window, a figure present when the question
+demands one, and counted lists set to reveal progressively.
