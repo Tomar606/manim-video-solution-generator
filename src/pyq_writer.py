@@ -565,6 +565,11 @@ ACCURACY CHECK — this overrides the answer above wherever they disagree:
                 f"{findings}\n\nPREVIOUS DRAFT:\n{previous}")
 
     system = WRITE_SYSTEM
+    # The spoken layer. Kept in src/connectors.py so the pools, the limits and
+    # the cross-video repetition history live in one place and every script
+    # written from here on picks up a change to them.
+    from src.connectors import brief as connector_brief
+    system += "\n" + connector_brief(getattr(q, "subject", "Chemistry"))
     if parts > 1:
         system += "\n" + SPLIT_RULES.format(
             n=parts, extra=" and `PART 3`" if parts > 2 else "")
