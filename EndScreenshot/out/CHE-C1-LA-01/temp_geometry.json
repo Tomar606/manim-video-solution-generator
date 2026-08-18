@@ -1,0 +1,13 @@
+{
+  "size": [
+    1024,
+    1536
+  ],
+  "rules": 34,
+  "pitch": 43.909,
+  "text_x": 96.0,
+  "right_x": 935.0,
+  "body_size": 34,
+  "head_size": 31,
+  "usable_rows": 32
+}
