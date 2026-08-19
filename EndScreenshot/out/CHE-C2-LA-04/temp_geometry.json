@@ -3,11 +3,11 @@
     1024,
     1536
   ],
-  "rules": 34,
-  "pitch": 43.909,
-  "text_x": 96.0,
-  "right_x": 935.0,
-  "body_size": 34,
-  "head_size": 31,
-  "usable_rows": 33
+  "rules": 43,
+  "pitch": 30.647,
+  "text_x": 74.0,
+  "right_x": 934.1,
+  "body_size": 24,
+  "head_size": 21,
+  "usable_rows": 42
 }
