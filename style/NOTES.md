@@ -44,9 +44,9 @@ handoff, the sign-off — should sound like a person talking to you.
                                        आंसर में कैसे लिखना है, ये नेक्स्ट पार्ट
                                        में मिलते हैं।"
   "अब समझते हैं कि…"                   "चलो इतना हो गया? अब आगे बढ़ते हैं।"
-  "और इस बात को याद रखना"              "इस बात को दिमाग में बिठा लो" /
-                                       "इस बात को मन में छाप लो" /
-                                       "यह बात अब मत भूलना, ये सुनो ध्यान से"
+  "और इस बात को याद रखना"              "इस बात को एक बार clear कर लो"
+                                       (one such line per point, never two;
+                                       most points need none at all)
   "इस वीडियो को अंत तक देखना"          "एंड तक देखना मेरी वीडियो को, मज़ा आ
                                        जाएगा।"
   (no CTA / a stiff one)               "फॉलो कर लो" / "फॉलो करना मत भूलना,
@@ -95,7 +95,7 @@ opening with “मतलब,”. Standard opener: “सबसे पहले 
 TELL THEM TO FOCUS BEFORE THE IMPORTANT PART, NEVER AFTER, AND ALWAYS WITH A
 REASON:
     “और इसे ध्यान से समझना, क्योंकि अगर परीक्षा में बिल्कुल ऐसा ही लिख दिया, तो
-     आपके नंबर पक्के हैं।”
+     परीक्षा में यही क्रम पूछा जाता है।”
     “और यहाँ एक बात ध्यान से याद रखना—बहुत सारे बच्चे यहीं गलती करते हैं।”
 A bare “ध्यान से सुनो” with no reason is not the house style.
 

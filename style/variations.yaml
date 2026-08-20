@@ -39,7 +39,7 @@ promise:
   - एंड तक साथ रहो, पूरा टॉपिक क्लियर हो जाएगा।
   - एंड तक रहोगे, आंसर लिखने का तरीका पक्का सेट हो जाएगा।
   - एंड तक जुड़ो, जो डाउट है न, सब खत्म करके ही छोड़ूँगा।
-  - एंड तक देखना, छोटे ट्रिक्स और कीवर्ड्स मिलेंगे जो सीधे मार्क्स दिलाएंगे।
+  - एंड तक देखना, छोटे ट्रिक्स और कीवर्ड्स मिलेंगे जो लिखते वक़्त काम आएंगे।
   - एंड तक रुको, रिविजन पॉइंट्स मन में छप जाएंगे।
   - एंड तक रहना, एग्जाम में क्या लिखना है, पूरा भरोसा आ जाएगा।
   - एंड तक देखना, मज़ा भी आएगा और कॉन्सेप्ट पक्का बैठ जाएगा।
@@ -68,30 +68,24 @@ check_in:
 
 # The way into a new concept. {पद} is the term, and the term itself is never
 # made casual — only the sentence carrying it.
+# Keep these plain. A definition does not need to be announced — the entries
+# that demanded attention first ("…एकदम सटीक तरीके से सुनो", "…मन में छाप लो")
+# were being stamped into every script, so two scripts written the same day
+# opened their definition with the identical sentence. Removed on 2026-08-17.
 definition_opener:
   - चलो इतना हो गया? अब आगे बढ़ते हैं। {पद} क्या होता है, छोटा सा साफ करें।
-  - ठीक है, अब {पद} की परिभाषा एकदम सटीक तरीके से सुनो।
   - जो पढ़ा मज़बूत। अब {पद} का मतलब एक लाइन में तय कर लेते हैं।
-  - नेक्स्ट चलते हैं, {पद} की परिभाषा मन में छाप लो, यही काम आएगी।
-  - यह बात अब मत भूलना, {पद} की सही परिभाषा ये सुनो ध्यान से।
   - बढ़िया, अब {पद} को परिभाषित करते हैं, ताकि आंसर में सीधे लिख सको।
   - अभी तक क्लियर? तो {पद} की परिभाषा एकदम छोटे में बता दूँ।
   - चलिए, {पद} का अर्थ बिल्कुल स्पष्ट कर लें, फिर सवालों पर आएँगे।
 
-# Say this BEFORE the definition or the tricky point, never after, and always
-# with the reason attached. "यहीं नंबर कटते हैं" belongs where marks are
-# genuinely lost — a reversed sign, a dropped unit — not sprinkled for tone.
-focus_cue:
-  - यह बात अब मत भूलना, ये सुनो ध्यान से, यहीं से परिभाषा शुरू होती है।
-  - ध्यान से सुनो, यहीं नंबर कटते हैं, बच्चे शब्द बदल देते हैं।
-  - इस बात को दिमाग में बिठा लो, पेपर में यही लाइन मांगी जाती है।
-  - इस बात को मन में छाप लो, यही कॉमन गलती आंसर बिगाड़ देती है।
-  - ज़रा ठहरो, मुख्य बात आ रही है, यही लिखोगे तो पक्के मार्क्स मिलेंगे।
-  - सुनो ध्यान से, परिभाषा का असली शब्द यही है, बाकी से अर्थ बदल जाएगा।
-  - अब फोकस करो, इसी जगह पर उलझन होती है, गलती से पूरा आंसर उलट जाता है।
-  - इसे गौर से पकड़ो, बोर्ड चेकिंग में यही शब्द देखा जाता है।
-  - थोड़ा ध्यान जमा लो, परिभाषा पहले समझो, तभी नेक्स्ट लाइनें अपने आप बनेंगी।
-  - यह बात दिल में रखो, अक्सर यहां उदाहरण लिख देते हैं, जबकि परिभाषा चाहिए।
+# `focus_cue` used to live here: a pool of lines to say BEFORE every definition
+# or tricky point. It is deleted, not shortened. A pool is the wrong mechanism
+# for this — every entry is an attention demand, so offering the writer a menu
+# guarantees one lands on every point, and the same entry lands in every script.
+# Whether a misconception needs any lead-in at all, and what it should say, is
+# decided per sentence in `src/connectors.py`; the rule there is to name the
+# mistake inside the correction rather than announce that one is coming.
 
 # The last line of a part. {आगे} is what the next part covers, and it must be
 # named. Prefer "नेक्स्ट पार्ट में मिलते हैं" over "अगले पार्ट में".

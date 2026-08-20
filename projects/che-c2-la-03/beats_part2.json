@@ -1,0 +1,44 @@
+[
+ {
+  "at": 3,
+  "type": "image",
+  "src": "images/gap_part2.png",
+  "intent": "SUPPORT",
+  "reason": "यहाँ स्क्रीन खाली रह जाती थी — शिक्षक बोल रहा है और ऊपर कुछ नहीं; विषय से जुड़ा चित्र रखा गया है",
+  "caption": "कॉपर कैथोड पर निक्षेपण"
+ },
+ {
+  "at": 11,
+  "type": "compare",
+  "intent": "SUMMARY",
+  "reason": "ऐनोड-कैथोड की परिभाषा आमने-सामने — यही सबसे ज़्यादा उलटी लिखी जाती है",
+  "left": [
+   "ऐनोड (−)",
+   [
+    "ऑक्सीकरण",
+    "$Zn \\rightarrow Zn^{2+} + 2e^-$"
+   ]
+  ],
+  "right": [
+   "कैथोड (+)",
+   [
+    "अपचयन",
+    "$Cu^{2+} + 2e^- \\rightarrow Cu$"
+   ]
+  ]
+ },
+ {
+  "at": 21,
+  "type": "formula",
+  "build": "progressive",
+  "label": "सम्पूर्ण सेल अभिक्रिया",
+  "intent": "SUMMARY",
+  "reason": "दोनों अर्ध-अभिक्रियाएँ जोड़कर पूरी अभिक्रिया",
+  "tex": [
+   "Zn + Cu^{2+} \\longrightarrow Zn^{2+} + Cu"
+  ],
+  "reveal_at": [
+   22
+  ]
+ }
+]

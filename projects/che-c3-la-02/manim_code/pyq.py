@@ -29,20 +29,27 @@ from pathlib import Path as _Path
 
 import numpy as np
 
-from src.manim_helpers import (ThemedScene, fit_caption, norm_point,
-                               register_fonts, wrap_measured)
+from src.manim_helpers import (ThemedScene, fit_caption, keep_clear, mark_group,
+                               norm_point, register_fonts, wrap_measured)
 
 INK, DIM, GOLD = "#FFFFFF", "#B9C6DC", "#FFC15C"
 GREEN, VIOLET, CYAN = "#7CE0B0", "#C792EA", "#5BC8F9"
 
 FONT, FONT_W = "Khand", "BOLD"
 CAPTION_SIZE, CAPTION_W, CAPTION_TOP = 62, 0.90, 0.090
-STAGE_TOP, STAGE_BOT, STAGE_W = 0.290, 0.600, 0.86
+# STAGE_BOT is derived from where the compositor actually puts the presenter:
+# tools/composite.py overlays him at FULL_Y=966 of a 1920-high frame, so his head
+# starts at 0.503. The band used to run to 0.600 — a hundred pixels INSIDE him —
+# so the layout guard happily passed content that the avatar then covered, which
+# is how "Mn: +7 -> +2" ended up behind his head. Keep this above 966/1920 with a
+# margin; if the compositor's placement changes, this has to change with it.
+STAGE_TOP, STAGE_BOT, STAGE_W = 0.290, 0.492, 0.86
 CAPTION_GAP = 0.30
 
 PROJECT = _os.getenv("PYQ_PROJECT", "che-c2-la-05")
 PART = int(_os.getenv("PYQ_PART", "1"))
 ROOT = _Path(ASSET_ROOT) / "projects" / PROJECT
+FIGURES = ROOT / "assets" / "figures"
 
 LINES = json.loads((ROOT / f"lines_part{PART}.json").read_text(encoding="utf-8"))
 BEATS = json.loads((ROOT / f"beats_part{PART}.json").read_text(encoding="utf-8"))
@@ -135,10 +142,15 @@ class PyqPart(ThemedScene):
                               dash_length=0.10).set_stroke(GOLD, 3)
             tag = Text("t½", font=FONT, font_size=26, color=GOLD
                        ).next_to(ax.c2p(2.7, 0), DOWN, buff=0.16)
-            body = VGroup(ax, line, half, drop, tag)
             xl.next_to(ax, DOWN, buff=0.20)
             yl.next_to(ax, LEFT, buff=0.20)
-            body = VGroup(body, xl, yl)
+            # The tag marks a point ON the axis, so its x is meaningful and the
+            # axis label sits under the middle of the same axis — they were
+            # drawn straight through each other. The tag keeps its x and is
+            # pushed clear; `xl` is passed first because its position is the
+            # one that must not move.
+            keep_clear([xl, tag])
+            body = VGroup(VGroup(ax, line, half, drop, tag), xl, yl)
         else:                                   # boiling-point elevation
             solvent = ax.plot(lambda x: 0.55 * np.exp(0.52 * x),
                               x_range=[0, 4.2], color=CYAN, stroke_width=6)
@@ -158,6 +170,258 @@ class PyqPart(ThemedScene):
     # "सचित्र" outright. Those are drawn, not generated: every part carries a
     # label, and a generated illustration gets the picture roughly right and the
     # lettering wrong.
+
+    def figure(self, name, draw="scan", hide=None):
+        """The question's figure — rebuilt in Manim where we have a builder.
+
+        Tracing the scan (see `tools/figure_from_scan.py`) gets the arrangement
+        exactly right, and that is what the builders below are measured from.
+        But a trace is the book's ink: at scan resolution its lines wobble and
+        its edges are soft, and recoloured white on the dark plate that reads as
+        a blurry photocopy rather than as part of the video. So the trace is used
+        as the REFERENCE and the figure is redrawn from primitives — same layout,
+        same labels, clean strokes, and every stroke animatable on its own.
+
+        The traced scan is the DEFAULT and is what ships: rebuilding the figure
+        in Manim gives cleaner strokes, but it is a redrawing, and a redrawing can
+        drift from the figure the student actually has in front of them. The
+        rebuild stays available behind `"draw": "manim"` on the beat.
+        """
+        if draw == "manim" and name == "berkeley":
+            return self._berkeley_figure()
+        if draw == "manim" and name == "boiling":
+            return self._boiling_figure()
+        return self.scan_figure(name, hide=hide)
+
+    def _boiling_figure(self):
+        """क्वथनांक में उन्नयन, drawn rather than traced.
+
+        The book's own graph is traced like every other figure, but at the size
+        it gets on a 9:16 stage its scanned curves and hand lettering go muddy —
+        so this one is redrawn. The GEOMETRY still comes from the book: two
+        vapour-pressure curves, the solution's below the solvent's, both meeting
+        the one-atmosphere line, and the two boiling points those meetings drop
+        to, with the gap between them marked as delta-Tb.
+
+        The solvent meets the line FIRST (lower temperature): the whole answer is
+        that adding a solute pushes the boiling point right, so a figure with the
+        curves the other way round argues the opposite of the narration.
+        """
+        ax = Axes(x_range=[0, 6, 1], y_range=[0, 5, 1], x_length=5.4,
+                  y_length=3.5, tips=False,
+                  axis_config={"stroke_color": INK, "stroke_width": 3,
+                               "include_ticks": False})
+        ATM = 3.6
+        solvent = ax.plot(lambda x: 0.55 * np.exp(0.52 * x), x_range=[0.2, 4.05],
+                          color=CYAN, stroke_width=6)
+        solution = ax.plot(lambda x: 0.40 * np.exp(0.52 * x), x_range=[0.2, 4.62],
+                           color=VIOLET, stroke_width=6)
+        xs = np.log(ATM / 0.55) / 0.52          # solvent  boils here
+        xl_ = np.log(ATM / 0.40) / 0.52         # solution boils here
+        atm = DashedLine(ax.c2p(0, ATM), ax.c2p(5.2, ATM),
+                         dash_length=0.11).set_stroke(GOLD, 3)
+        drop_s = DashedLine(ax.c2p(xs, ATM), ax.c2p(xs, 0),
+                            dash_length=0.09).set_stroke(DIM, 2.5)
+        drop_l = DashedLine(ax.c2p(xl_, ATM), ax.c2p(xl_, 0),
+                            dash_length=0.09).set_stroke(DIM, 2.5)
+        gap = DoubleArrow(ax.c2p(xs, 1.05), ax.c2p(xl_, 1.05), buff=0,
+                          color=GOLD, stroke_width=4,
+                          max_tip_length_to_length_ratio=0.22)
+        xlab = Text("ताप", font=FONT, font_size=26, color=DIM).next_to(ax, DOWN, buff=0.22)
+        ylab = Text("वाष्प दाब", font=FONT, font_size=26, color=DIM
+                    ).next_to(ax, LEFT, buff=0.22).rotate(PI / 2)
+        rig = VGroup(ax, solvent, solution, atm, drop_s, drop_l, gap, xlab, ylab)
+
+        marks = {}
+        for k, pt in {"solvent": ax.c2p(2.6, 0.55 * np.exp(0.52 * 2.6)),
+                      "solution": ax.c2p(3.3, 0.40 * np.exp(0.52 * 3.3)),
+                      "tb0": ax.c2p(xs, 0), "tb": ax.c2p(xl_, 0),
+                      "atm": ax.c2p(0.4, ATM), "gap": ax.c2p((xs + xl_) / 2, 1.05)}.items():
+            d = Dot(pt, radius=0.001).set_opacity(0)
+            marks[k] = d
+            rig.add(d)
+
+        c, w, h = self.stage_box()
+        rig.scale(min(w * 0.72 / rig.width, h * 0.80 / rig.height))
+        self.place(rig, pad=0.99)
+        rig.anchors = marks
+        return rig
+
+    def _berkeley_figure(self):
+        """बर्कले एवं हार्टले, laid out exactly as the textbook prints it.
+
+        Measured off the scan: a flattened vessel whose middle band is the inner
+        tube (जल), with विलयन above and below it, the two tube walls drawn as
+        solid bars, the piston a cup on the centre of the top edge with the
+        applied pressure arrow landing inside it, the gauge hanging off the
+        piston neck by its own pipe, the stopcock funnel rising on the right and
+        the capillary bundle leaving to the left.
+        """
+        def poly(*pts, w=4, colour=INK):
+            m = VMobject().set_points_as_corners([np.array([x, y, 0.]) for x, y in pts])
+            return m.set_stroke(colour, w)
+
+        # vessel — flat top and bottom, chamfered ends, inner tube across the middle
+        top = poly((-2.40, 0.55), (-2.00, 1.35), (2.00, 1.35), (2.40, 0.55))
+        bot = poly((-2.40, -0.55), (-2.00, -1.35), (2.00, -1.35), (2.40, -0.55))
+        tube = poly((-2.60, 0.55), (-2.60, -0.55), w=4)
+        tube_r = poly((2.60, 0.55), (2.60, -0.55), w=4)
+        soln_t = Polygon(*[np.array([x, y, 0.]) for x, y in
+                           ((-2.40, 0.55), (-2.00, 1.35), (2.00, 1.35), (2.40, 0.55))])
+        soln_b = Polygon(*[np.array([x, y, 0.]) for x, y in
+                           ((-2.40, -0.55), (-2.00, -1.35), (2.00, -1.35), (2.40, -0.55))])
+        for s in (soln_t, soln_b):
+            s.set_stroke(width=0).set_fill(VIOLET, 0.13)
+        water = Rectangle(width=5.2, height=1.10, stroke_width=0)
+        water.set_fill(CYAN, 0.13)
+
+        # the two solid bars ARE the semipermeable wall — the figure's strongest mark
+        bars = VGroup(*[Rectangle(width=5.2, height=0.10, stroke_width=0)
+                        .set_fill(INK, 1).move_to([0, y, 0]) for y in (0.55, -0.55)])
+        # porous wall, hatched at each end of the inner tube
+        hatch = VGroup(*[Line([sx * 2.52, y, 0], [sx * 2.22, y, 0]).set_stroke(INK, 2.5)
+                         for sx in (-1, 1) for y in (-0.30, -0.15, 0.0, 0.15, 0.30)])
+
+        # piston: a cup on a neck, with the applied pressure landing inside it
+        neck = Rectangle(width=0.34, height=0.95).set_stroke(INK, 4).move_to([0, 1.02, 0])
+        cup = poly((-0.52, 2.10), (-0.52, 1.50), (0.52, 1.50), (0.52, 2.10))
+        fill_line = Line([-0.44, 1.86, 0], [0.44, 1.86, 0]).set_stroke(INK, 2.5)
+        press = Arrow([0, 2.92, 0], [0, 2.16, 0], buff=0, color=GOLD, stroke_width=6,
+                      max_tip_length_to_length_ratio=0.30)
+
+        # gauge, piped off the neck exactly as the book pipes it
+        gpipe = poly((0.17, 1.12), (1.34, 1.12), (1.34, 1.52), w=3.5)
+        dial = Circle(radius=0.30).set_stroke(INK, 4).move_to([1.34, 1.82, 0])
+        needle = Line([1.34, 1.82, 0], [1.20, 2.02, 0]).set_stroke(INK, 3)
+
+        # stopcock funnel on the right
+        rtube = poly((2.60, 0.0), (3.38, 0.0), (3.38, 1.78), w=3.5)
+        tap = Square(0.17).set_stroke(INK, 3).set_fill(INK, 1).move_to([3.38, 1.24, 0])
+        fun = VGroup(poly((3.38, 1.78), (3.16, 2.12), w=3.5),
+                     poly((3.38, 1.78), (3.60, 2.12), w=3.5))
+
+        # capillary bundle leaving to the left and turning down
+        cap = VGroup(*[poly((-2.60, dy), (-3.34, dy), (-3.68, dy - 1.05), w=3)
+                       for dy in (-0.20, 0.0, 0.20)])
+
+        rig = VGroup(soln_t, soln_b, water, top, bot, tube, tube_r, bars, hatch,
+                     neck, cup, fill_line, gpipe, dial, needle, rtube, tap, fun,
+                     cap, press)
+
+        # Invisible anchors ride INSIDE the group, so they are scaled and moved
+        # by place() along with the drawing. A label can then name the part it
+        # points at and its leader stays attached — the traced version got its
+        # leaders free because they were part of the scan, and redrawing the
+        # figure lost them, leaving every label floating unattached.
+        anchors = {"membrane": (-2.62, 0.55), "capillary": (-3.52, -0.86),
+                   "funnel": (3.44, 1.98), "pressure": (0.0, 2.62),
+                   "gauge": (1.34, 1.82), "water": (0.0, 0.0),
+                   "soln_top": (-1.1, 0.95), "soln_bot": (-1.1, -0.95)}
+        marks = {k: Dot([x, y, 0], radius=0.001).set_opacity(0)
+                 for k, (x, y) in anchors.items()}
+        rig.add(*marks.values())
+
+        c, w, h = self.stage_box()
+        rig.scale(min(w * 0.70 / rig.width, h * 0.92 / rig.height))
+        self.place(rig, pad=0.99)
+        rig.anchors = marks
+        return rig
+
+    def scan_figure(self, name, hide=None):
+        """The figure from the QUESTION'S OWN textbook page, as vector art.
+
+        `tools/figure_from_scan.py` traces the scan the question was extracted
+        from, so this is the book's own ink rather than a redrawing of it — which
+        matters because the student meets that exact figure in the exam. Being
+        vector, it can be drawn on stroke by stroke instead of fading in.
+
+        Recoloured to INK: the trace is black-on-white and the stage is dark, so
+        importing it unchanged puts a black figure on a near-black plate.
+        """
+        fig = SVGMobject(str(FIGURES / f"{name}.svg"))
+        fig.set_fill(INK, opacity=1).set_stroke(INK, width=1.0, opacity=1)
+        # Some figures letter themselves INSIDE the drawing — the boiling-point
+        # graph writes विलायक and विलयन along the two curves. At scan resolution
+        # those words trace to solid blobs, and they cannot be erased from the
+        # bitmap first: the curve runs through the same box, so erasing takes the
+        # line with it and every repair attempt either gapped or deformed the
+        # curve the whole figure is about. Dropping the glyphs HERE is safe —
+        # each traced word is its own submobject, so the curves are untouched —
+        # and the word is then re-typeset over the space it left.
+        for zone in hide or []:
+            x0, y0, x1, y1 = zone
+            ul, w, h = fig.get_corner(UL), fig.width, fig.height
+            # Size guard: a zone is matched on the submobject's CENTRE, and a
+            # curve spanning the plot has its centre in the middle of the plot
+            # too — without this, hiding a word deleted the curve it labelled.
+            doomed = [m for m in fig.submobjects
+                      if x0 <= (m.get_center()[0] - ul[0]) / w <= x1
+                      and y0 <= (ul[1] - m.get_center()[1]) / h <= y1
+                      and m.width < w * 0.22 and m.height < h * 0.22]
+            fig.remove(*doomed)
+        # SVGMobject imports at its own default height, which has nothing to do
+        # with the stage — the first render put the apparatus in a 330px band in
+        # the middle of a 1080 frame. `place()` only ever scales DOWN, so the
+        # figure has to be grown to the stage here before it is placed. Room is
+        # left at the sides for the labels that hang off the drawing.
+        c, w, h = self.stage_box()
+        fig.scale(min(w * 0.62 / fig.width, h * 0.86 / fig.height))
+        return self.place(fig, pad=0.99)
+
+    def clamp_to_band(self, mob):
+        """Pull a mobject back inside the stage band.
+
+        `place()` clamps whatever it is given, but labels and focus boxes are
+        built AFTER the block they belong to and are never passed through it, so
+        they escape the band: a label hanging under a diagram and a focus box
+        drawn around the last line of a derivation both dipped below the band and
+        into the presenter. Raising the band made that visible rather than
+        causing it — the content was always going there.
+        """
+        _, _, _ = self.stage_box()
+        top = norm_point(0.5, STAGE_TOP)[1]
+        bot = norm_point(0.5, STAGE_BOT)[1]
+        if getattr(self, "caption_mob", None) is not None:
+            top = min(top, self.caption_mob.get_bottom()[1] - CAPTION_GAP)
+        low, high = mob.get_bottom()[1], mob.get_top()[1]
+        if low < bot:
+            mob.shift(UP * (bot - low))
+        elif high > top:
+            mob.shift(DOWN * (high - top))
+        return mob
+
+    def figure_label(self, fig, fx, fy, text, rel=0.075, align="c"):
+        """A label at a fraction of the FIGURE's own box.
+
+        Positions are fractions rather than scene coordinates because `place()`
+        rescales the figure to whatever room the stage has left, and a label
+        written in scene coordinates lands somewhere else the moment it does.
+        The scan already carries the book's leader lines, so these sit at the
+        far end of a leader that is part of the drawing.
+        """
+        ul = fig.get_corner(UL)
+        p = ul + np.array([fx * fig.width, -fy * fig.height, 0])
+        # `$...$` routes the label through LaTeX. Some figures name their parts
+        # with a formula — MnO₂ + C, NH₄Cl+ZnCl₂ — and Devanagari fonts have no
+        # subscripts, so those set in Text() come out as tofu. Devanagari must
+        # never go INSIDE the maths, so a part named in both is authored as two
+        # labels, which is how the book stacks them anyway.
+        s = str(text)
+        if s.startswith("$") and s.endswith("$"):
+            t = MathTex(s[1:-1], color=INK)
+        else:
+            t = Text(s, font=FONT, font_size=40, color=INK, weight=FONT_W)
+        # Sized against a REFERENCE glyph, not against this label's own height.
+        # Devanagari height depends on which matras a word happens to carry, so
+        # scaling each label to the same box makes "जल" tower over "अर्धपारगम्य".
+        # A fixed font size is no good either: the figure is scaled to the stage,
+        # so absolute text came out huge on it and the labels ran through each
+        # other in the first render.
+        ref = Text("क", font=FONT, font_size=40, weight=FONT_W)
+        t.scale(rel * fig.height / ref.height)
+        edge = {"c": ORIGIN, "l": LEFT, "r": RIGHT}[align]
+        t.move_to(p, aligned_edge=edge)
+        return t
 
     def apparatus(self, kind):
         if kind == "berkeley":
@@ -364,6 +628,34 @@ class PyqPart(ThemedScene):
             return self.beat_image(ROOT / spec["src"], spec.get("caption"))
         if t == "graph":
             return self.graph(spec.get("kind", "zero_order"))
+        if t in ("figure", "scan_figure"):
+            fig = self.figure(spec["name"], draw=spec.get("draw", "scan"),
+                              hide=spec.get("hide"))
+            # Same contract as `apparatus`: built now, revealed one label per
+            # caption that names a part.
+            self._labels = []
+            # The figure and its labels are ONE diagram: विलयन and जल sit inside
+            # the vessel's own bands, exactly as the book prints them, so every
+            # label reads as a 100% overlap unless they share a layout group.
+            tag = id(fig)
+            mark_group(fig, tag)
+            for spec_l in spec.get("labels", []):
+                lab = self.figure_label(fig, spec_l["x"], spec_l["y"],
+                                        spec_l["text"],
+                                        rel=spec_l.get("rel", 0.075),
+                                        align=spec_l.get("align", "c"))
+                part = spec_l.get("part")
+                anchors = getattr(fig, "anchors", None)
+                if part and anchors and part in anchors:
+                    tgt = anchors[part].get_center()
+                    d = tgt - lab.get_center()
+                    n = d / (np.linalg.norm(d) or 1.0)
+                    arm = Line(lab.get_boundary_point(n) + n * 0.10, tgt)
+                    lab = VGroup(arm.set_stroke(INK, 2.5), lab)
+                self.clamp_to_band(lab)
+                mark_group(lab, tag)
+                self._labels.append((int(spec_l["at"]), lab))
+            return fig
         if t == "apparatus":
             rig = self.apparatus(spec["kind"])
             # Labels are BUILT here but revealed later, each on the caption that
@@ -390,11 +682,16 @@ class PyqPart(ThemedScene):
         self._wcache = {}
         self.stage_mobs = []
 
-        # cue 0 is always the question card; the sheet carries the question
+        # cue 0 is always the question card; the sheet carries the question.
+        # Except for a REPLACEMENT ENDING rendered as its own part: it is spliced
+        # onto the middle of a finished video, so opening it on the question card
+        # would show the card twice.
+        no_card = str(PART) in set(META.get("no_card", []))
         card_at = float(LINES[0]["start"])
-        self.question_card(META["question"], META.get("highlight", ""),
-                           META.get("years", ""),
-                           sheet=ROOT / "assets" / "design" / "question_sheet.png")
+        if not no_card:
+            self.question_card(META["question"], META.get("highlight", ""),
+                               META.get("years", ""),
+                               sheet=ROOT / "assets" / "design" / "question_sheet.png")
         self.at(card_at)
 
         beats = {int(b["at"]): b for b in BEATS}
@@ -405,7 +702,8 @@ class PyqPart(ThemedScene):
         # per PART: part 1 opens on the question and holds the card through the
         # hook, part 2 only needs it briefly over the recap.
         _cl = META.get("card_lines", first or 0)
-        card_until = int(_cl[str(PART)] if isinstance(_cl, dict) else _cl)
+        card_until = -1 if no_card else int(
+            _cl[str(PART)] if isinstance(_cl, dict) else _cl)
         for i, line in enumerate(LINES):
             self.at(max(0.0, float(line["start"]) - 0.35))
             if i == card_until or i in beats:
@@ -437,7 +735,15 @@ class PyqPart(ThemedScene):
                     self._labels = []
                     built = self.build_beat(spec)
                     self.stage_mobs.append(built)
-                    self.play(FadeIn(built, shift=UP * 0.12), run_time=0.35)
+                    if spec["type"] in ("figure", "scan_figure"):
+                        # Drawn on, not faded in: the figure is vector, so the
+                        # student watches the apparatus being built up the way a
+                        # teacher draws it on the board. Kept under two seconds —
+                        # `at()` can wait but never rewind, so an animation that
+                        # overruns eats into the next caption's window.
+                        self.play(Write(built, lag_ratio=0.02), run_time=1.8)
+                    else:
+                        self.play(FadeIn(built, shift=UP * 0.12), run_time=0.35)
                 self.audit_layout(f"beat@{i}")
 
             # items and diagram labels arrive on the caption that names them
@@ -459,7 +765,8 @@ class PyqPart(ThemedScene):
                     # animates a mobject that is still invisible — the first
                     # render showed the focus box around empty space.
                     self.play(eq.animate.set_opacity(1.0), run_time=0.45)
-                    box = SurroundingRectangle(eq, color=GOLD, buff=0.16)
+                    box = self.clamp_to_band(
+                        SurroundingRectangle(eq, color=GOLD, buff=0.16))
                     box.set_stroke(width=3)
                     old = getattr(self, "_focus_box", None)
                     if old is not None:
@@ -491,6 +798,7 @@ class PyqPart(ThemedScene):
         doomed = [m for m in self.mobjects if m not in keep and m is not None]
         if doomed:
             self.play(*[FadeOut(m) for m in doomed], run_time=rt)
+        self._card_up = False       # the stage is ours again — resume auditing
 
     def at(self, t):
         """Advance the clock to an absolute time in the CLIP.

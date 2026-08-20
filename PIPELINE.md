@@ -323,3 +323,98 @@ are committed.
 - **Multi-letter Latin in a spoken line is read as an English word** by TTS
   (`dS`, `dl`, `cos`). Write them as said: "डी-एस", "कॉस". *Single* letters are
   fine — the approved samples say `W₁` and `W₂` aloud.
+
+---
+
+## PYQ video build — what this session added
+
+Everything below is wired into `tools/preflight.py`, so a build cannot get past
+a defect these describe. Run `python tools/preflight.py <slug>` before rendering.
+
+### Figures come from the question's own textbook page
+`tools/figure_from_scan.py` — the sheet's column 11 holds a Mathpix scan of the
+page each question came from. The figure in the video is traced from that scan
+with `potrace`, not generated and not redrawn: three attempts at generating the
+Berkeley–Hartley apparatus each produced a plausible but *different* machine.
+The trace threshold is per-scan (Berkeley 118, dry cell 80) — always look at the
+`_preview.png`. Scanned labels are erased and re-typeset; the book's leader lines
+are kept.
+
+`--heal` reconnects strokes an erase box cuts, and `hide` zones in a beat drop a
+traced word at the mobject level (with a size guard, or it deletes the curve the
+word sits on).
+
+### Every diagram label must be spoken
+`tools/check_labels.py` proves each label is named by the audio at the moment it
+appears. The default cue is the label's LONGEST word — matching on any word let
+`दाब मापक` pass against a caption that merely said दाब. Parts the narration never
+names (`दाब मापक`, `धातु की टोपी`) must be declared `"spoken": false` and appear
+WITH the figure, never at a later caption.
+
+### Overlaps are prevented, not reported
+The layout guard used to compare only top-level blocks, so a collision *inside*
+one block was invisible — which is why `t½` printed through `समय (t)` for weeks.
+It now compares every text mobject on the stage against every other, names both
+offenders, and `keep_clear()` resolves collisions at build time.
+
+`clamp_to_band()` pulls late-added elements (diagram labels, formula focus
+boxes) back inside the band — they never went through `place()`.
+
+### The stage band is derived from the compositor
+`STAGE_BOT = 0.492` because `tools/composite.py` puts the presenter at
+`FULL_Y = 966` of 1920, i.e. his head starts at 0.503. The band used to run to
+0.600 — a hundred pixels *inside* him. If the compositor's placement changes,
+this must change with it.
+
+### `place()` grows as well as shrinks
+It only ever scaled down, so a short block kept its authored font size inside a
+388px band: fine on a desktop preview, too small on a phone. It now grows blocks
+to fill the band, capped at `MAX_GROW`.
+
+### No dead screen
+`tools/visual_gaps.py` reports any stretch over 3s with nothing on the stage
+(there were 111 seconds across the first six videos — the band clears when the
+question card comes down and nothing replaces it). `tools/fill_visual_gaps.py`
+fills them with a captioned photograph of the actual substance or apparatus.
+`tools/example_images.py` does the same where the teacher names a real object.
+
+Both generate on a keyable ground and cut it out, because gpt-image-2 refuses
+`background="transparent"`. Opaque subjects use magenta; **glassware must use the
+grey path** — magenta shows *through* the glass and the key takes the liquid with
+it, leaving a pink hollow beaker. Both are pinned to 1024x1024 / medium quality:
+these sit behind a talking presenter and the larger sizes buy detail nobody sees.
+
+### The answer page arrives on its cue
+`tools/answer_overlay.py` finds "स्क्रीन पर आ" in the caption track and holds the
+page from there to the last frame, fitted to frame width (the pages are 2:3 and
+the frame is 9:16 — covering would crop the ends off every handwritten line).
+Blank ruled sheets in a page set are detected and skipped.
+
+**Not every video should get one.** The replacement endings say the answer is on
+the *notes button*; overlaying a page there contradicts the narration. Check what
+the clip actually says.
+
+### Replacement endings
+Cut the original at the caption where the new ending re-records the same line,
+then composite the ending with `windows=[[-1.0, 0.375]]` so the avatar starts at
+the geometry the original holds at the cut and eases to centre — otherwise he
+jumps in size and position and the edit is obvious.
+
+### Traps that cost time here
+- **The sheet's IDs are not the only IDs.** An older sheet numbered chapter 2 and
+  3 differently; answer pages and ending clips follow the new one. Match on the
+  QUESTION TEXT when they disagree.
+- **Clip filenames lie.** Two vitamin clips were filed by name and turned out to
+  be different questions — the year each part 1 speaks ("ये सवाल 2018 में") is
+  in the sheet and settles it. Check before building.
+- **Devanagari inside `MathTex` kills the render.** Put the Hindi in the beat's
+  label. Preflight now fails it.
+- **LaTeX markup in a `points`/`flow`/`compare` item prints literally** — those
+  render through `Text()`. Wrap maths in `$...$`.
+- **Two parts of one project cannot render in parallel** — they share
+  `media/partial_movie_files` and clobber each other. Parallelise across
+  projects.
+- **The card's year is digits; the narration's year is words.** They are not the
+  same field.
+- **Compositing is single-threaded** (189s with the CPU 84% idle). Run three at
+  once.

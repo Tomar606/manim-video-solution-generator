@@ -1,209 +1,166 @@
-"""The spoken layer: how a real teacher joins one idea to the next.
+"""The spoken layer: deciding when a teacher would say anything at all.
 
-The academic explanation is already accurate and textbook-aligned. What this
-module governs is whether it SOUNDS like a person saying it aloud, or like a
-textbook being read out.
+This is NOT a pool of warm phrases to insert. That was the previous design and
+it produced exactly the failure it was meant to prevent — a ready-made line
+glued to the front of every important sentence:
 
-    not   "अब हम इस विषय को समझते हैं। तत्पश्चात हम इसके महत्वपूर्ण बिंदुओं का
-           अध्ययन करेंगे।"
-    but   "चलो, अब इसको थोड़ा ध्यान से समझते हैं। यहीं पर एक important point है।"
+    "ज़रा ठहरो, मुख्य बात आ रही है, यही लिखोगे तो पक्के मार्क्स मिलेंगे।"
+    "अनन्त तनुता पर किसी विद्युत्-अपघट्य की सीमान्त मोलर चालकता…"
 
-TWO LAYERS, KEPT SEPARATE
--------------------------
-The ACADEMIC layer — definitions, terminology, formulae, exam points — is never
-loosened to sound friendlier. The SPEECH layer around it is where the warmth
-lives. A connector that changes what is being taught is a bug, not a flourish.
+The teacher there sounds like an advertisement wrapped around a textbook. What a
+real teacher says is quieter and shorter, and most of the time is nothing:
 
-THE RULE THAT MATTERS MOST
---------------------------
-"No connector" is a valid choice, and it is the right one roughly a quarter of
-the time. `NO_CONNECTOR_RATE` exists so the writer is not pushed into gluing a
-casual phrase onto every paragraph — a sentence that already sounds natural
-spoken aloud is finished. The quality test is one line: if removing the
-connector leaves the sentence sounding just as natural, it should not be there.
+    "सबसे पहले Kohlrausch का law समझते हैं."
+    "अनन्त तनुता पर किसी electrolyte की limiting molar conductivity…"
+    "और यहाँ एक important बात है—हर ion का contribution दूसरे ion से
+     independent होता है."
 
-REPETITION IS TRACKED BY PATTERN, NOT JUST BY STRING
-----------------------------------------------------
-"अब इस point को ध्यान से समझो" and "अब इस बात को ध्यान से समझो" are different
-strings and the same sentence. `pattern_of()` reduces a connector to its shape
-so the writer can be told which SHAPES are stale, not merely which words.
+THE DECISION, NOT THE PHRASE
+----------------------------
+For each beat: classify what it is doing, ask whether a connector actually
+helps, and only then pick a level. `LEVEL_0` — say nothing — is the default and
+the most common outcome, and `speech_style` sets how often the others are even
+considered.
+
+THE TEST THAT SETTLES EVERY CASE
+--------------------------------
+Would the script be better with the connector removed? If yes, remove it. A
+connector the student NOTICES has already been over-written; the language is
+supposed to disappear into the teaching.
+
+CONNECTORS OFTEN AREN'T SENTENCES
+---------------------------------
+The most natural result is usually a modification of the academic sentence, not
+a new one in front of it:
+
+    worse   "अब एक important point है." / "NaCl में एक Cl⁻ होता है."
+    better  "NaCl में एक ही Cl⁻ है, इसलिए यहाँ एक ही λ°(Cl⁻) आएगा."
+
+CONTENT IS THE HOOK
+-------------------
+Curiosity should come from the concept, not from language wrapped around it.
+"अब देखो, BaCl₂ में coefficient दो कहाँ से आया" earns attention; "अब एक बहुत
+important point समझते हैं" only announces it.
 """
 from __future__ import annotations
 
 import json
 import re
+import unicodedata
 from pathlib import Path
 
 HISTORY = Path("style/connector_history.json")
 
-# Roughly a quarter of the opportunities should take no connector at all.
-NO_CONNECTOR_RATE = 0.25
-
-# --------------------------------------------------------------------------- #
-# The pools. Grouped by WHERE they belong and what they are for, because the
-# selection rule is "classify the moment, then draw from the matching pool" —
-# never "pick a nice-sounding phrase".
-# --------------------------------------------------------------------------- #
-POOLS: dict[str, list[str]] = {
-    # ---- openings ---------------------------------------------------------
-    "hook_exam": [
-        "आज का ये question ध्यान से समझना, exam में काफ़ी काम आएगा।",
-        "इस question को skip मत करना, इसका concept आगे भी बार-बार काम आएगा।",
-        "ये concept clear हो गया, तो आगे के questions काफ़ी easy लगेंगे।",
-        "आज का ये point छोटा है, लेकिन marks के लिए काफ़ी important है।",
-        "ये topic tough लगता है, लेकिन एक बार logic समझ आ गया तो काफ़ी simple है।",
-    ],
-    "hook_curiosity": [
-        "लेकिन यहाँ एक interesting बात है…",
-        "अब यहाँ से actual concept start होता है।",
-        "अब देखो, यहाँ actually होता क्या है।",
-        "यहीं पर एक छोटी सी चीज़ पूरा concept change कर देती है।",
-        "अब एक ऐसी बात समझते हैं जो students अक्सर miss कर देते हैं।",
-    ],
-    "hook_pain": [
-        "अगर ये topic तुम्हें confusing लगता है, तो tension मत लो।",
-        "इस question में students अक्सर यहीं अटक जाते हैं।",
-        "ये part confusing लग सकता है, लेकिन logic बहुत simple है।",
-        "बहुत students इस point को रटने की कोशिश करते हैं, लेकिन पहले इसका logic समझना ज़रूरी है।",
-    ],
-    "hook_reassure": [
-        "tension की कोई बात नहीं है, इसको step by step करते हैं।",
-        "पहले basic चीज़ clear करते हैं, फिर पूरा concept connect हो जाएगा।",
-        "इसको रटने की ज़रूरत नहीं है, पहले समझते हैं।",
-        "बस logic पकड़ लो, formula याद रखना भी easy हो जाएगा।",
-    ],
-
-    # ---- moving between ideas --------------------------------------------
-    "transition": [
-        "चलो, अब आगे बढ़ते हैं।",
-        "ठीक है, अब इसको देखते हैं।",
-        "तो अब तक का concept clear हो गया।",
-        "यहाँ तक ठीक है? चलो, अब आगे बढ़ते हैं।",
-        "ठीक है, अब इसी को आगे लेके चलते हैं।",
-    ],
-    "part_end": [
-        "तो यहाँ तक ये part clear है।",
-        "बस, ये part दिमाग़ में clear रखो।",
-        "लेकिन अभी एक important चीज़ बाकी है।",
-        "अब जो next point है, उसको miss मत करना।",
-        "ये point याद रखना, क्योंकि आगे इसी की ज़रूरत पड़ेगी।",
-    ],
-    "part_open": [
-        "चलो, अब वहीं से आगे बढ़ते हैं।",
-        "तो जहाँ हमने छोड़ा था, वहीं से continue करते हैं।",
-        "पिछले part में जो समझा था, अब उसी को आगे लेके चलते हैं।",
-        "अब यहाँ से concept और clear होगा।",
-    ],
-
-    # ---- attention --------------------------------------------------------
-    "focus_before": [
-        "अब इस बात को एकदम ध्यान से समझना।",
-        "यहाँ थोड़ा extra ध्यान देना।",
-        "ये wala point दिमाग़ में बिठा लो।",
-        "यहाँ एक छोटी सी बात है, लेकिन बहुत important है।",
-        "अब ध्यान से देखो, यहीं पर concept clear होगा।",
-    ],
-    "focus_after": [
-        "बस, ये point याद रखना।",
-        "ये बात अब भूलनी नहीं है।",
-        "इस point पर exam में ग़लती नहीं होनी चाहिए।",
-        "ये point आगे question solve करते वक़्त काम आएगा।",
-    ],
-
-    # ---- formulae ---------------------------------------------------------
-    "formula_before": [
-        "अब formula देखने से पहले इसका logic समझ लो।",
-        "formula तो याद हो जाएगा, पहले समझते हैं ये आया कहाँ से।",
-        "ये formula रटना नहीं है, इसका meaning समझना है।",
-    ],
-    "formula_after": [
-        "बस, ये relation दिमाग़ में बिठा लो।",
-        "formula clear है, अब इसका application देखते हैं।",
-        "अब question आए तो इसी relation को use करना है।",
-    ],
-
-    # ---- mistakes ---------------------------------------------------------
-    "mistake_before": [
-        "अब यहाँ एक mistake बिलकुल मत करना।",
-        "यहीं पर students अक्सर confuse हो जाते हैं।",
-        "ये दोनों similar लगते हैं, लेकिन difference बहुत important है।",
-        "इस जगह पर एक छोटी सी mistake पूरा answer बिगाड़ सकती है।",
-    ],
-    "mistake_after": [
-        "बस, ये mistake avoid करनी है।",
-        "exam में इसी point का ध्यान रखना।",
-        "इस difference को दिमाग़ में clear रखो।",
-    ],
-
-    # ---- reassurance, examples, recap, closing ---------------------------
-    "reassure": [
-        "अगर अभी थोड़ा confusing लग रहा है, tension मत लो।",
-        "पहली बार में confusing लगना normal है।",
-        "एक बार मेरे साथ step by step देखो, clear हो जाएगा।",
-        "अगर यहाँ तक समझ आ रहा है, तो आगे का part भी easily समझ आ जाएगा।",
-    ],
-    "example": [
-        "चलो, एक example से समझते हैं।",
-        "theory समझ आ गई? अब example से पक्का करते हैं।",
-        "अब देखते हैं actual question में ये कैसे use होता है।",
-    ],
-    "recap": [
-        "एक बार quickly recap कर लेते हैं।",
-        "चलो, अब जो पढ़ा उसको एक बार connect करते हैं।",
-        "अब देखो, पूरा concept कैसे connect हो रहा है।",
-    ],
-    "closing": [
-        "तो बस, अब ये concept एकदम clear है।",
-        "अब ये question तुम्हें पहले जितना difficult नहीं लगेगा।",
-        "concept clear है, तो अब question तुम handle कर सकते हो।",
-        "इसको एक बार revise कर लेना, फिर concept और पक्का हो जाएगा।",
-    ],
+# Retention and casualness are different dimensions and were previously
+# controlled by one knob, which is why turning retention up made the teacher
+# sound salesy rather than interested.
+DEFAULT_STYLE = {
+    "teacher_personality": "warm_expert",
+    "language": "simple_hinglish",
+    "connector_density": "low",          # low | medium | high
+    "emotional_intensity": "low_medium",  # low | low_medium | medium | high
+    "academic_priority": "very_high",
+    "naturalness_priority": "very_high",
+    "student_address_frequency": "low",
+    "exam_claim_intensity": "low",
+    "creator_style_intensity": "low",
 }
 
-# Per video. The point of a cap is that emphasis only means something when it is
-# rationed — a script where every paragraph is "बहुत important" has no important
-# paragraphs in it.
-LIMITS = {
-    "hook": 1, "reassure": 3, "exam_emphasis": 3, "creator": 2,
-    "beta": 2, "closing": 1,
-}
+# Share of opportunities that should end in NO CONNECTOR at each density.
+# Dense academic material wants more silence, not less.
+QUIET_RATE = {"low": 0.50, "medium": 0.35, "high": 0.25}
 
-# Never. Some are rude, some are false comfort on a genuinely hard topic, and
-# some are simply worn out from overuse.
-BANNED = [
-    "अबे", "भाई", "ओए", "क्या कर रहे हो", "इतना भी नहीं आता", "दिमाग़ लगाओ",
-    "ये तो बहुत easy है", "तुमसे नहीं होगा", "guys",
+# What a beat is doing. Classified before anything is chosen, because the
+# decision follows the role — a formula introduction does not want the same
+# treatment as a common mistake.
+BEAT_TYPES = [
+    "opening", "question_introduction", "concept_introduction", "definition",
+    "explanation", "simplification", "example", "formula_introduction",
+    "formula_explanation", "derivation", "application", "comparison",
+    "common_mistake", "important_point", "exam_writing", "recap",
+    "part_transition", "final_closure", "cta",
 ]
 
-# Vocabulary that sounds native to each subject. A preference, not a quota —
-# forcing "mechanism" into a maths script is worse than not having it.
-SUBJECT_WORDS = {
-    "Physics": ["logic", "direction", "relation", "formula", "approach", "application"],
-    "Chemistry": ["reaction", "condition", "difference", "trend", "mechanism", "formula"],
-    "Biology": ["process", "sequence", "function", "difference", "feature"],
-    "Maths": ["approach", "step", "condition", "formula", "method", "application"],
+# Beats where a connector rarely earns its place: the academic sentence already
+# flows, and anything added is announcement rather than teaching.
+USUALLY_SILENT = {
+    "explanation", "formula_explanation", "derivation", "application",
+    "definition", "concept_introduction",
 }
 
-# The shape a video's warmth should follow. Curiosity to open, reassurance where
-# it is genuinely hard, confidence at the end — the student should travel from
-# "मुझे नहीं समझ आ रहा" to "अच्छा, समझ आ गया".
-ARC = ["hook_curiosity", "reassure", "focus_before", "example", "closing"]
+# Claims the system must never invent. They are marketing, and a teacher who
+# guarantees marks stops sounding like a teacher.
+BANNED = [
+    "मार्क्स पक्के", "पक्के मार्क्स", "नंबर पक्के", "चार नंबर पक्के",
+    "marks पक्के", "पक्का आएगा", "टॉपर बन जाओगे", "selection पक्का",
+    "अबे", "भाई", "ओए", "इतना भी नहीं आता", "तुमसे नहीं होगा",
+    "आप यकीन नहीं करेंगे", "99% बच्चे ये नहीं जानते",
+]
+
+# Phrases that ASK FOR ATTENTION. At most one may sit around any one academic
+# point — the failure is not any single line but the pile-up:
+#   "…परिभाषा एकदम सटीक तरीके से सुनो." + "इस बात को दिमाग में बिठा लो," +
+#   "पेपर में यही लाइन मांगी जाती है." — three, back to back, before one
+# definition. Each is defensible alone; together they are an advertisement.
+ATTENTION = [
+    "ध्यान से", "दिमाग में बिठा लो", "याद रखना", "मत भूलना", "miss मत करना",
+    "ज़रा ठहरो", "सुनो", "important है", "ग़ौर", "note कर लो",
+]
+STACK_WINDOW = 3        # consecutive spoken lines that count as "one point"
+
+# Frames that ANNOUNCE a mistake instead of naming it. These survive every
+# rule about frequency because each script uses one — the defect only shows up
+# when you read two scripts side by side and find the same sentence in both
+# ("अब फोकस करो, इसी जगह पर उलझन होती है" landed verbatim in the Physics and
+# Biology scripts). The fix is to state the wrong idea and the right one in one
+# sentence, so flag the frame wherever it appears, even once.
+FRAMES = [
+    "इसी जगह पर उलझन होती है", "यहाँ उलझन होती है", "यहीं गड़बड़ होती है",
+    "यहीं पर गलती होती है", "इसी जगह गलती होती है",
+]
+
+# Listing the phrases was not enough. Ban one wording and the next script opens
+# the same slot with a different one — "अब फोकस करो, इसी जगह पर उलझन होती है"
+# became "इस बात को मन में छाप लो, यही कॉमन गलती आंसर बिगाड़ देती है", again in
+# two scripts at once. What repeats is the SHAPE: an announcing clause, then the
+# claim that a mistake exists, and only then the actual correction. So match the
+# shape — an attention imperative and a mistake word ahead of the em-dash that
+# introduces the real content.
+ANNOUNCE = re.compile(
+    r"(छाप लो|बिठा लो|फ़ोकस|फोकस|ध्यान|याद रख|सुनो|note कर|मन में)")
+MISTAKE = re.compile(r"(गलती|ग़लती|उलझन|confuse|बिगाड़|उलट जात|चूक)")
+
+
+# Not banned — just not filler. Each needs a reason to be there.
+RATIONED = {
+    "बेटा": 2, "ध्यान से": 2, "दिमाग़ में बिठा लो": 1, "बस": 3,
+    "चलो": 3, "देखो": 3, "important": 4, "बच्चों": 2,
+}
+
+
+def style_for(subject: str, topic_type: str = "") -> dict:
+    """The speech settings for this script. Dense material gets quieter."""
+    s = dict(DEFAULT_STYLE)
+    if topic_type in {"derivation", "law", "formula", "numerical"}:
+        s["connector_density"] = "low"
+    elif topic_type in {"process", "definition"}:
+        s["connector_density"] = "medium" if subject == "Biology" else "low"
+    return s
 
 
 def pattern_of(line: str) -> str:
-    """A connector reduced to its shape, so near-duplicates can be spotted.
+    """A line reduced to its shape, so semantic twins are caught.
 
     "अब इस point को ध्यान से समझो" and "अब इस बात को ध्यान से समझो" are two
-    strings and one sentence. Tracking exact text alone lets the same shape run
+    strings and one sentence; tracking exact text alone lets one shape run
     through a whole script unnoticed.
     """
     words = re.findall(r"[^\s,।?!—:;]+", line)
-    keep = {"अब", "चलो", "तो", "बस", "यहाँ", "लेकिन", "अगर", "ये"}
+    keep = {"अब", "चलो", "तो", "बस", "यहाँ", "लेकिन", "अगर", "ये", "इस"}
     return " ".join(w if w in keep else "X" for w in words[:6])
 
 
 def load_history(n: int = 5) -> dict:
-    """Connectors and shapes used in the last n videos — a preference, not a ban."""
     if not HISTORY.exists():
         return {"lines": [], "patterns": []}
     try:
@@ -211,7 +168,30 @@ def load_history(n: int = 5) -> dict:
     except (json.JSONDecodeError, OSError):
         return {"lines": [], "patterns": []}
     lines = [l for r in rows for l in r.get("lines", [])]
-    return {"lines": lines, "patterns": [pattern_of(l) for l in lines]}
+    return {"lines": lines, "patterns": sorted({pattern_of(l) for l in lines}),
+            "used": _connectorish(lines)}
+
+
+def _connectorish(lines: list[str]) -> list[str]:
+    """Recently written lines that ASK for attention, verbatim.
+
+    Shapes alone were not enough. `pattern_of()` truncates to six words and
+    replaces most of them with X, so two scripts can share a whole sentence and
+    still look different to it — which is how the same misconception line got
+    written twice. Whole lines are fed back so the writer can see the actual
+    sentence it must not repeat.
+    """
+    mark = [_norm(m) for m in ATTENTION + FRAMES]
+    seen, out = set(), []
+    for line in reversed(lines):
+        n = _norm(line)
+        if not any(m in n for m in mark) or n in seen:
+            continue
+        seen.add(n)
+        out.append(line if len(line) <= 90 else line[:88] + "…")
+        if len(out) >= 8:
+            break
+    return out
 
 
 def remember(qid: str, lines: list[str]) -> None:
@@ -227,46 +207,154 @@ def remember(qid: str, lines: list[str]) -> None:
                        encoding="utf-8")
 
 
-def used_in(script: str) -> list[str]:
-    """Connectors from the pools that appear in a finished script."""
-    return [line for pool in POOLS.values() for line in pool if line in script]
+def _norm(t: str) -> str:
+    """Fold nukta variants so दिमाग and दिमाग़ compare equal.
+
+    The audit missed a stacked attention marker because the script wrote दिमाग
+    and the list held दिमाग़ — the same word, two codepoint sequences.
+    """
+    return unicodedata.normalize("NFKD", t).replace("\u093c", "")
 
 
-def brief(subject: str = "Chemistry") -> str:
-    """The connector rules, as the script writer is told them."""
+def audit(script: str) -> list[str]:
+    """Everything in a finished script that the brief forbids or rations."""
+    script = _norm(script)
+    out = []
+    for b in (_norm(x) for x in BANNED):
+        if b in script:
+            out.append(f"banned claim: {b!r}")
+    for word, cap in RATIONED.items():
+        n = script.count(_norm(word))
+        if n > cap:
+            out.append(f"{word!r} used {n}x (max {cap})")
+    for f in (_norm(x) for x in FRAMES):
+        if f in script:
+            out.append(f"warning frame instead of naming the mistake: {f!r}")
+
+    spoken = re.findall(r"“([^”]+)”", script)
+
+    # CJK punctuation reaches TTS verbatim. A script shipped with "जाएगा。" —
+    # a full-width stop instead of a danda — and nothing caught it because it
+    # looks almost right at a glance.
+    for ch in "。，、；：？！":
+        if ch in script:
+            out.append(f"CJK punctuation in a spoken line: {ch!r}")
+
+    for line in spoken:
+        head = re.split(r"[—:]", line, 1)[0]
+        if ANNOUNCE.search(head) and MISTAKE.search(head):
+            out.append(f"preamble before the correction: {head[:60]!r}")
+            break
+
+    # stacking: more than one attention marker inside a short run of lines
+    marked = [any(_norm(a) in line for a in ATTENTION) for line in spoken]
+    for i in range(len(marked)):
+        window = marked[i:i + STACK_WINDOW]
+        if sum(window) > 1:
+            out.append(f"attention markers stacked around one point "
+                       f"(lines {i + 1}-{i + len(window)})")
+            break
+
+    shapes = [pattern_of(s) for s in spoken]
+    for shape in set(shapes):
+        # An all-X shape carries no signal: it just means "a sentence of this
+        # many words with none of the tracked opening words". Counting those as
+        # repetition flagged every script for writing ordinary prose.
+        if set(shape.split()) == {"X"}:
+            continue
+        if shapes.count(shape) > 3:
+            out.append(f"sentence shape repeated {shapes.count(shape)}x: {shape}")
+    return out
+
+
+def brief(subject: str = "Chemistry", topic_type: str = "") -> str:
+    """The speech-layer instruction the script writer is given."""
+    st = style_for(subject, topic_type)
+    quiet = int(QUIET_RATE[st["connector_density"]] * 100)
     hist = load_history()
-    stale = sorted(set(hist["patterns"]))[:12]
-    words = ", ".join(SUBJECT_WORDS.get(subject, SUBJECT_WORDS["Chemistry"]))
-    pools = "\n".join(
-        f"  {name}:\n" + "\n".join(f"    - {l}" for l in lines)
-        for name, lines in POOLS.items())
+    stale = hist["patterns"][:10]
+    used = hist.get("used", [])
     return f"""
-बोलचाल की परत (speech layer) — ये academic परत से अलग है और उसे बदलती नहीं।
+=== बोली की परत (यह academic परत को नहीं बदलती) ===
 
-काम एक ही है: script ऐसी लगे जैसे एक असली शिक्षक बच्चे से बात कर रहा हो, न कि
-किताब पढ़ी जा रही हो। परिभाषा, शब्दावली, सूत्र और exam points जस के तस रहें।
+लक्ष्य: एक असली शिक्षक जो एक बच्चे के सामने बैठकर समझा रहा है। न YouTuber, न
+motivational speaker, न विज्ञापन। परिभाषा, शब्दावली, सूत्र और exam points जस के
+तस रहें — बोली सिर्फ़ उनके आस-पास के वाक्यों में आए।
 
-सबसे ज़रूरी नियम: हर पैराग्राफ़ से पहले casual line चिपकाना ज़रूरी नहीं।
-लगभग एक-चौथाई जगहों पर कोई connector नहीं होना चाहिए। कसौटी यह है — अगर
-connector हटाने पर वाक्य उतना ही स्वाभाविक लगता है, तो उसे मत रखो।
+क्रम कभी उलटा मत करो: पहले academic सटीकता, फिर स्वाभाविक बोली, उसके बाद कहीं
+जाकर भावना।
 
-नीचे दिए pools से ही चुनो, और मौक़े के हिसाब से चुनो (opening, transition,
-important point, formula, mistake, example, recap, closing):
+सबसे ज़रूरी नियम — ज़्यादातर जगह कुछ भी मत जोड़ो।
+लगभग {quiet}% मौक़ों पर कोई connector नहीं होना चाहिए। हर paragraph से पहले
+casual line लगाना ही गलती है। कसौटी एक ही है: अगर connector हटाने पर script
+बेहतर लगती है, तो उसे हटा दो। जिस connector पर बच्चे का ध्यान जाए, वह ज़्यादा
+लिखा जा चुका है।
 
-{pools}
+तीन स्तर:
+  स्तर 0 — कुछ नहीं। यही default है और सबसे ज़्यादा इस्तेमाल होगा।
+           जैसे: "BaCl₂ में दो Cl⁻ हैं, इसलिए यहाँ 2λ°(Cl⁻) आएगा."
+  स्तर 1 — छोटा, सामान्य जोड़। सबसे आम connector यही हों।
+           जैसे: "चलो, अब इसी को formula से समझते हैं." /
+                 "Simple भाषा में समझो." / "यहाँ एक चीज़ ध्यान रखना."
+  स्तर 2 — भावनात्मक। तभी, जब सचमुच कारण हो; कम ही आए।
+           जैसे: "यहीं पर बच्चे अक्सर confuse होते हैं, इसलिए इसे ठीक से
+                 समझ लेते हैं."
+"important" लिखा होने भर से स्तर 2 मत लगाओ।
 
-एक ही video में एक connector दोबारा मत दोहराओ, और एक ही आकार (pattern) बार-बार
-मत लाओ। पिछले videos में ये आकार पहले ही इस्तेमाल हो चुके हैं, इनसे बचो:
+connector अक्सर अलग वाक्य नहीं होता — academic वाक्य को ही स्वाभाविक बना दो:
+  कमज़ोर: "अब एक important point है." + "NaCl में एक Cl⁻ होता है."
+  बेहतर : "NaCl में एक ही Cl⁻ है, इसलिए यहाँ एक ही λ°(Cl⁻) आएगा."
+
+जिज्ञासा भाषा से नहीं, विषय से पैदा करो:
+  कमज़ोर: "अब एक बहुत important बात समझते हैं."
+  बेहतर : "अब देखो, BaCl₂ में coefficient दो कहाँ से आया."
+
+जहाँ बच्चों की आम गलती बतानी हो, वहाँ गलती का नाम लो — यह मत बताओ कि यहाँ कोई
+गलती होती है। "यहाँ उलझन होती है" जैसा ढाँचा हर विषय पर चिपक जाता है और हर
+script में एक ही वाक्य बन जाता है:
+  कमज़ोर: "अब फोकस करो, इसी जगह पर उलझन होती है, गलती से सतह के तल के साथ कोण
+          ले लेते हैं."
+  बेहतर : "कोण सतह के तल से नहीं लिया जाता — हमेशा बाहर की ओर अभिलम्ब से."
+गलत बात और सही बात एक ही वाक्य में आमने-सामने रखो; चेतावनी अलग से मत लगाओ।
+
+यह शब्दों की नहीं, ढाँचे की बात है। यह ढाँचा पूरी तरह मना है:
+  [ध्यान माँगने वाला वाक्यांश] + [यहाँ गलती होती है] + "—" + [असली सुधार]
+सिर्फ़ वाक्यांश बदल देने से बात नहीं बनती — "फोकस करो" की जगह "मन में छाप लो"
+लिखना वही गलती दोबारा करना है। सुधार सीधे पहले शब्द से शुरू होना चाहिए।
+
+exam की बात शिक्षक की सलाह जैसी हो, दावे जैसी नहीं:
+  कमज़ोर: "ये लिख दिया तो मार्क्स पक्के."
+  बेहतर : "Definition में ये दोनों points लिखना, तभी answer पूरा होगा."
+
+ये कभी मत लिखो: {', '.join(BANNED[:8])}.
+ये शब्द सीमित हैं (हर एक को कारण चाहिए):
+{', '.join(f'{w} ≤ {c}' for w, c in RATIONED.items())}.
+
+एक ही academic बिंदु के आस-पास एक से ज़्यादा attention marker मत लगाओ। लगातार
+तीन पंक्तियों में एक से ज़्यादा नहीं। यह ढेर सबसे बड़ी गलती है:
+  गलत: "…परिभाषा एकदम सटीक तरीके से सुनो." + "इस बात को दिमाग में बिठा लो," +
+        "पेपर में यही लाइन मांगी जाती है." फिर परिभाषा।
+  सही : "सबसे पहले कोलराउश का नियम समझते हैं." फिर सीधे परिभाषा।
+हर एक अलग-अलग ठीक लगता है; तीनों साथ में विज्ञापन बन जाते हैं।
+
+"एंड तक रहोगे तो…" वाली retention-promise सिर्फ़ शुरुआत की उस एक तय पंक्ति में
+चलती है (hook → वर्ष-पंक्ति → promise)। उसके बाद पूरे script में दोबारा कहीं
+भी दर्शक को रोके रखने का वादा मत लिखो।
+
+एक ही video में कोई वाक्य-आकार बार-बार मत दोहराओ। पिछले scripts में ये आकार
+पहले ही इस्तेमाल हो चुके हैं:
 {chr(10).join('  - ' + p for p in stale) if stale else '  (कोई नहीं)'}
 
-सीमाएँ: hook अधिकतम {LIMITS['hook']}, reassurance अधिकतम {LIMITS['reassure']},
-exam-emphasis अधिकतम {LIMITS['exam_emphasis']}, "बेटा" अधिकतम {LIMITS['beta']},
-closing अधिकतम {LIMITS['closing']}.
+ये पूरी पंक्तियाँ पिछले scripts में लिखी जा चुकी हैं। इन्हें दोबारा मत लिखो —
+न ज्यों की त्यों, न थोड़ा बदलकर:
+{chr(10).join('  - ' + u for u in used) if used else '  (कोई नहीं)'}
 
-{subject} के लिए स्वाभाविक शब्द: {words}.
+भाग बदलते समय अंत और अगली शुरुआत को एक जोड़ी की तरह लिखो — अगला भाग वहीं से
+उठे जहाँ पिछला छूटा। "अगले पार्ट में मिलते हैं" तभी, जब सचमुच ठीक बैठे।
 
-ये कभी मत लिखो: {', '.join(BANNED)}.
+अंत: संक्षेप → आत्मविश्वास → (ज़रूरत हो तो) एक CTA। "like/share/follow" अपने
+आप मत जोड़ो।
 
-भावनात्मक क्रम: जिज्ञासा → समझ → ध्यान → आश्वासन → आत्मविश्वास → संतोष।
-लगातार hype नहीं — सिर्फ़ वहाँ ज़ोर दो जहाँ बात सचमुच ज़रूरी है।
+भावनात्मक क्रम: जिज्ञासा → स्पष्टता → ध्यान → समझ → आत्मविश्वास → संतोष।
+hook → hook → important → marks → hook नहीं।
 """

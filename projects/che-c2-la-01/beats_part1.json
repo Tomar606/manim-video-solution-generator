@@ -1,0 +1,36 @@
+[
+ {
+  "at": 7,
+  "type": "formula",
+  "build": "progressive",
+  "label": "फैराडे का प्रथम नियम",
+  "intent": "SUMMARY",
+  "reason": "पहला नियम और उसका सूत्र — यही उत्तर की पहली पंक्ति है",
+  "tex": [
+   "w \\propto Q",
+   "w = Z I t"
+  ],
+  "reveal_at": [
+   7,
+   14
+  ]
+ },
+ {
+  "at": 27,
+  "type": "points",
+  "reveal": "progressive",
+  "title": "प्रथम नियम — याद रखने योग्य",
+  "intent": "SUMMARY",
+  "reason": "शिक्षक खुद कह रहा है कि पहले नियम में बस इतना याद रहे",
+  "items": [
+   "w ∝ आवेश Q",
+   "Z = विद्युत् रासायनिक तुल्यांक",
+   "Q = I × t"
+  ],
+  "reveal_at": [
+   27,
+   28,
+   29
+  ]
+ }
+]

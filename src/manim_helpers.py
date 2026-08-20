@@ -579,6 +579,55 @@ def _hides_things(m) -> bool:
     return type(m).__name__ in {"Text", "MathTex", "Tex", "MarkupText", "DecimalNumber"}
 
 
+
+def _first_words(t, n=18):
+    """A short, readable id for a text mobject in a violation message."""
+    s = getattr(t, "text", None) or getattr(t, "tex_string", None) or type(t).__name__
+    s = " ".join(str(s).split())
+    return s[:n] + ("…" if len(s) > n else "")
+
+
+def _text_units(m):
+    """The Text/MathTex pieces inside `m`, as whole words — not as glyphs.
+
+    `_leaf_boxes` descends to individual glyph outlines, which is right for
+    asking whether a label sits ON a beaker but useless for asking whether two
+    LABELS collide: every glyph of "समय (t)" is its own leaf, so the guard
+    compared letters instead of words.
+    """
+    from manim import MathTex, Tex, Text
+    out, stack = [], [m]
+    while stack:
+        x = stack.pop()
+        if isinstance(x, (Text, Tex, MathTex)):
+            out.append(x)                    # a word — do not go inside it
+        else:
+            stack.extend(x.submobjects)
+    return out
+
+
+def keep_clear(mobs, direction=None, buff=0.10, limit=40):
+    """Move each mobject along `direction` until it clears the ones before it.
+
+    Prevention, not reporting. The guard can only ever say a render was wrong
+    AFTER it was rendered; this makes the collision impossible at build time.
+    Order is meaningful — earlier mobjects hold their position and later ones
+    give way — so pass the thing whose position carries meaning first.
+    """
+    from manim import DOWN
+    direction = DOWN if direction is None else direction
+    placed = []
+    for m in mobs:
+        for _ in range(limit):
+            box = _bbox(m)
+            if box is None or not any(_overlap_frac(box, _bbox(p)) > 0.001
+                                      for p in placed if _bbox(p)):
+                break
+            m.shift(direction * buff)
+        placed.append(m)
+    return mobs
+
+
 def _leaf_boxes(m, limit=64):
     """Bounding boxes of the leaves, not of the whole group.
 
@@ -652,6 +701,13 @@ class ThemedScene(Scene):
         """
         if not self.AUDIT_LAYOUT:
             return
+        # The question card owns the whole frame by design — it is meant to
+        # cover the stage band and its heading sits inside it. Auditing while it
+        # is up produced sixty entries per render, all of them that same
+        # intended behaviour, which is how a report stops being read. There is
+        # nothing else on screen to audit until it is cleared.
+        if getattr(self, "_card_up", False):
+            return
         band_top = norm_point(0.5, self.STAGE_BAND[0])[1] if self.STAGE_BAND else None
         band_bot = norm_point(0.5, self.STAGE_BAND[1])[1] if self.STAGE_BAND else None
 
@@ -686,6 +742,34 @@ class ThemedScene(Scene):
                     self._layout_violations.append(
                         f"t={self.time:6.2f}s {label} OVERLAP {f:.0%} between "
                         f"{type(mi).__name__} and {type(mj).__name__}")
+
+        # Two pieces of TEXT overlapping is never intentional, and until now it
+        # was never checked: the loop above compares top-level mobjects, so a
+        # collision between two labels of the SAME block — the t-half tag drawn
+        # through the x-axis label of its own graph — was invisible to it.
+        # Collected across the WHOLE stage, not per block. Two labels of one
+        # diagram are separate top-level mobjects that share a layout group, so
+        # the pairwise loop above skips them and the per-block loop sees one word
+        # each — टोंटीदार कीप landed straight on दाब मापक and the guard passed it.
+        # Text on text is never intentional, whatever it belongs to.
+        words = [(m, w, _bbox(w)) for m, _b, _l in items for w in _text_units(m)]
+        words = [(m, w, b) for m, w, b in words if b is not None]
+        seen = False
+        for i in range(len(words)):
+            if seen:
+                break
+            mi, wi, bi = words[i]
+            for j in range(i + 1, len(words)):
+                mj, wj, bj = words[j]
+                if wj in wi.get_family() or wi in wj.get_family():
+                    continue
+                f = _overlap_frac(bi, bj)
+                if f > 0.06:
+                    self._layout_violations.append(
+                        f"t={self.time:6.2f}s {label} TEXT-ON-TEXT {f:.0%} "
+                        f"({_first_words(wi)} / {_first_words(wj)})")
+                    seen = True
+                    break
 
         if band_top is not None:
             for m, b, _ in items:
@@ -786,12 +870,34 @@ class ThemedScene(Scene):
         spaced apart and hoped over: with a rule there, a long line on one side
         reads as belonging to that side even when it runs close to the middle.
         """
+        def cell(text, fs, colour, weight):
+            """`$...$` sets the line as maths instead of as text.
+
+            The products column of a comparison is formulae — Mn²⁺, MnO₄²⁻ — and
+            a Devanagari-capable font has no superscripts, so authoring them as
+            LaTeX and rendering them through Text() printed the markup itself:
+            the screen read "Mn^{2+}" and "MnO_4^{2-}". Maths goes to MathTex,
+            scaled off a reference glyph so it sits at the same optical size as
+            the words beside it.
+            """
+            t = str(text)
+            if t.startswith("$") and t.endswith("$"):
+                m = MathTex(t[1:-1], color=colour)
+                # Scaled against a REFERENCE glyph in each system, never against
+                # this item's own height: a formula carrying a superscript is
+                # taller, so height-matching shrank MnO_4^{2-} below MnO_2 and
+                # the column came out in three different sizes.
+                ref_t = Text("H", font=ui_font(), font_size=fs, weight=weight)
+                ref_m = MathTex("H")
+                m.scale(ref_t.height / max(ref_m.height, 1e-6))
+                return m
+            return Text(t, font=ui_font(), font_size=fs, color=colour,
+                        weight=weight)
+
         def col(spec):
-            g = VGroup(Text(str(spec[0]), font=ui_font(), font_size=size + 5,
-                            color="#FFC15C", weight="BOLD"))
+            g = VGroup(cell(spec[0], size + 5, "#FFC15C", "BOLD"))
             for line in spec[1][:4]:
-                g.add(Text(str(line), font=ui_font(), font_size=size,
-                           color="#FFFFFF", weight="MEDIUM"))
+                g.add(cell(line, size, "#FFFFFF", "MEDIUM"))
             return g.arrange(DOWN, buff=0.26, aligned_edge=LEFT)
 
         l, r = col(left), col(right)
@@ -804,16 +910,26 @@ class ThemedScene(Scene):
         never go in a VGroup — see CLAUDE.md."""
         img = ImageMobject(str(path))
         _, w, h = self.stage_box()
-        img.height = min(height or h * 0.80, h * 0.86)
+        # The label is part of the block, so the picture cannot take the whole
+        # band or there is nowhere for the words to go. Reserve the strip first,
+        # then fit the picture into what is left — sizing the picture first and
+        # hanging the label underneath pushed it out of the band and into the
+        # presenter.
+        cap = None
+        if caption:
+            cap = Text(str(caption), font=ui_font(), font_size=34,
+                       color="#FFFFFF", weight="SEMIBOLD")
+            if cap.width > w * 0.92:
+                cap.scale(w * 0.92 / cap.width)
+        strip = (cap.height + 0.34) if cap is not None else 0.0
+        img.height = max(0.1, min(height or (h * 0.94 - strip), h * 0.96 - strip))
         if img.width > w * 0.92:
             img.width = w * 0.92
-        grp = Group(img)
-        if caption:
-            cap = Text(str(caption), font=ui_font(), font_size=26,
-                       color="#B9C6DC", weight="MEDIUM")
-            cap.next_to(img, DOWN, buff=0.24)
-            grp = Group(img, cap)
-        return self.place(grp)
+        if cap is None:
+            return self.place(Group(img))
+        cap.next_to(img, DOWN, buff=0.30)
+        # Group(), not VGroup(): ImageMobject is not a VMobject — see CLAUDE.md.
+        return self.place(Group(img, cap))
 
     def question_card(self, question, highlight="", years="", sheet=None,
                       sheet_head=None):
@@ -835,6 +951,7 @@ class ThemedScene(Scene):
                                        TAPE_EDGE, TAPE_TILT, TAPE_W,
                                        RULE_Y, TEAL, TICK_PAD, YEARS_Y,
                                        fit_lines, fits, writable_box)
+        self._card_up = True        # stands the layout guard down; see audit_layout
         fw, fh = config.frame_width, config.frame_height
         F = "Khand"
         cache = {}

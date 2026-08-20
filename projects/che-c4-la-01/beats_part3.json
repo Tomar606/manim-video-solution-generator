@@ -1,0 +1,80 @@
+[
+ {
+  "at": 3,
+  "type": "image",
+  "src": "images/gap_part3.png",
+  "intent": "SUPPORT",
+  "reason": "यहाँ स्क्रीन खाली रह जाती थी — शिक्षक बोल रहा है और ऊपर कुछ नहीं; विषय से जुड़ा चित्र रखा गया है",
+  "caption": "फेरस से फेरिक ऑक्सीकरण"
+ },
+ {
+  "at": 6,
+  "type": "formula",
+  "build": "progressive",
+  "intent": "FORMULA",
+  "label": "अम्लीय फेरस सल्फेट के साथ",
+  "reason": "पहली अभिक्रिया — Fe²⁺ का Fe³⁺ में ऑक्सीकरण",
+  "tex": [
+   "K_2Cr_2O_7 + 4H_2SO_4 \\longrightarrow K_2SO_4 + Cr_2(SO_4)_3 + 4H_2O + 3[O]",
+   "Fe^{2+} \\longrightarrow Fe^{3+}"
+  ],
+  "reveal_at": [
+   7,
+   9
+  ]
+ },
+ {
+  "at": 14,
+  "type": "formula",
+  "build": "progressive",
+  "intent": "FORMULA",
+  "label": "KI के साथ",
+  "reason": "दूसरी अभिक्रिया — आयोडाइड से आयोडीन",
+  "tex": [
+   "6KI + K_2Cr_2O_7 + 7H_2SO_4 \\longrightarrow",
+   "4K_2SO_4 + Cr_2(SO_4)_3 + 7H_2O + 3I_2"
+  ],
+  "reveal_at": [
+   15,
+   18
+  ]
+ },
+ {
+  "at": 19,
+  "type": "formula",
+  "build": "progressive",
+  "intent": "FORMULA",
+  "label": "H₂S के साथ",
+  "reason": "तीसरी अभिक्रिया — H₂S से सल्फर",
+  "tex": [
+   "3H_2S + K_2Cr_2O_7 + 4H_2SO_4 \\longrightarrow",
+   "K_2SO_4 + Cr_2(SO_4)_3 + 7H_2O + 3S"
+  ],
+  "reveal_at": [
+   20,
+   22
+  ]
+ },
+ {
+  "at": 23,
+  "type": "compare",
+  "intent": "SUMMARY",
+  "reason": "शिक्षक तीनों को एक पंक्ति में दोहरा रहा है — वही तुलना स्क्रीन पर",
+  "left": [
+   "अभिकारक",
+   [
+    "$Fe^{2+}$",
+    "$KI$",
+    "$H_2S$"
+   ]
+  ],
+  "right": [
+   "उत्पाद",
+   [
+    "$Fe^{3+}$",
+    "$I_2$",
+    "$S$"
+   ]
+  ]
+ }
+]

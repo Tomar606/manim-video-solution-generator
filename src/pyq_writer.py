@@ -34,7 +34,12 @@ SCRIPT_PROVIDER = os.getenv("SCRIPT_LLM", "auto")
 # per-stage split in CLAUDE.md. Override with VERIFY_LLM if that changes.
 VERIFY_PROVIDER = os.getenv("VERIFY_LLM", "auto")
 
-SHEET_ID = "1E0oZc96akGYf15Nu8v5Q0ZKGy--baAuKf8g-GUXRcEo"
+# The MAIN TRACKING DASHBOARD sheet. It replaced an earlier sheet whose
+# chapter-2 and chapter-3 numbering was off by one — that sheet called the
+# dry cell C2-LA-05 and zero-order C3-LA-02, while every answer page, ending
+# clip and folder from the team calls them C2-LA-04 and C3-LA-01. This one
+# agrees with them, so IDs from here can be trusted against those files.
+SHEET_ID = "1uJDts0O1Z4UER5sVpKmPp2jE8SNjEUy_xhcLpUXRn4Q"
 SHEET_CSV = ("https://docs.google.com/spreadsheets/d/{id}/gviz/tq"
              "?tqx=out:csv&sheet={tab}")
 
@@ -387,8 +392,12 @@ in an em-dash, put the formula on its own line, then say what the symbols mean.
 become English tokens ("two-ell", "two-p").
 - The definition itself is textbook-exact and is followed immediately by a \
 plain restatement opening with “मतलब,”.
-- Before every important definition or tricky point, tell the student to focus \
-AND give the reason (exam marks, or the mistake most students make).
+- Do NOT put a focus line before every important definition or tricky point. \
+That rule produced a script where each definition arrived behind "ज़रा ठहरो, \
+मुख्य बात आ रही है, यही लिखोगे तो पक्के मार्क्स मिलेंगे" — an advertisement \
+wrapped around a textbook. Say it only where a real teacher would: a genuine \
+confusion, a step that is easy to get wrong. At most ONE such marker around any \
+one academic point, and never a marks guarantee.
 - Subject terminology and nomenclature never change.
 - 5 to 8 भाग. One concept per भाग.
 
@@ -453,7 +462,11 @@ CTA.
 BEFORE THE SCRIPT, output one line of metadata and nothing else on that line:
 META: {"topic_type": "...", "hook_mechanism": "...", "hook_angle": "...",
 "transition_mechanisms": [...], "part_opening_mechanisms": [...],
-"retention_intensity": "low|medium|high"}
+"retention_intensity": "low|medium|high", "connector_density": "low|medium",
+"emotional_intensity": "low|low_medium|medium"}
+Retention and casualness are DIFFERENT dimensions: a script can be highly
+retentive because the concept is interesting and still be sparse in
+conversational asides. Do not raise one because the other is high.
 Then a blank line, then the script. The metadata is internal — never let its
 wording leak into the spoken lines."""
 
@@ -569,7 +582,8 @@ ACCURACY CHECK — this overrides the answer above wherever they disagree:
     # the cross-video repetition history live in one place and every script
     # written from here on picks up a change to them.
     from src.connectors import brief as connector_brief
-    system += "\n" + connector_brief(getattr(q, "subject", "Chemistry"))
+    system += "\n" + connector_brief(getattr(q, "subject", "Chemistry"),
+                                      topic_type=classify_topic(q))
     if parts > 1:
         system += "\n" + SPLIT_RULES.format(
             n=parts, extra=" and `PART 3`" if parts > 2 else "")
@@ -864,6 +878,14 @@ def draft(q: Question, *, provider: str | None = None,
     meta.update(choose_part_plan(kind, estimate_parts(text), hist))
     hook = (chk.spoken or [""])[0]
     remember(q.qid, meta, hook)
+
+    # Sentence shapes go into a SEPARATE history, and it has to be written here
+    # rather than by the caller: three scripts written in one run all read the
+    # same snapshot, so a phrase the model likes ("अब फोकस करो, इसी जगह पर उलझन
+    # होती है") landed verbatim in two of them. Recording per script makes the
+    # second one see the first.
+    from src.connectors import remember as connector_remember
+    connector_remember(q.qid, list(chk.spoken or []))
     return text, chk, ver, meta
 
 

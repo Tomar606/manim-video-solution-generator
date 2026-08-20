@@ -354,8 +354,11 @@ def check_visual_direction(root: Path, rep: Report):
             rep.add(WARN, f"{name} density",
                     "a block for every window — the director is not choosing")
 
+        # `scan_figure`/`figure` are the traced-from-the-textbook types and are
+        # now how every diagram question is answered. Leaving them out of this
+        # set made preflight FAIL a part whose figure is the whole point of it.
         figures = [b for b in beats if b.get("type") in
-                   {"apparatus", "graph", "image"}]
+                   {"apparatus", "graph", "image", "figure", "scan_figure"}]
         if strategy in {"diagram", "graph"} and not figures:
             rep.add(FAIL, f"{name} figure demanded",
                     f"the question asks for a {strategy} and this part has none")
@@ -366,6 +369,81 @@ def check_visual_direction(root: Path, rep: Report):
                 rep.add(WARN, f"{name} counted list",
                         f"block at {b['at']} lands whole; it should fill in")
         rep.add(OK, name, f"{len(beats)} beat(s), {len(figures)} figure(s)")
+
+
+def check_figure_labels(root: Path, rep: Report):
+    """Every diagram label must be named by the audio, at the moment it lands.
+
+    A wrong or late label is worse than no label: the student copies the figure
+    into the exam with अर्धपारगम्य झिल्ली against the wrong part. Two of these
+    shipped in the first traced build — प्रयुक्त दाब a caption early, and
+    दाब मापक cued to a caption that never mentions the gauge — and neither was
+    visible in a still. tools/check_labels.py is the authority; this runs it for
+    every part so a render cannot get past a mislabelled figure.
+    """
+    from tools.check_labels import check as check_labels
+    for f in sorted(root.glob("beats_part*.json")):
+        part = int(re.search(r"beats_part(\d+)", f.name).group(1))
+        try:
+            problems = check_labels(root, part)
+        except (OSError, json.JSONDecodeError, KeyError) as e:
+            rep.add(WARN, f"figure labels (part {part})", str(e)); continue
+        if problems:
+            rep.add(FAIL, f"figure labels (part {part})",
+                    f"{len(problems)} problem(s): {problems[0][:80]}")
+        else:
+            rep.add(OK, f"figure labels (part {part})")
+
+
+def check_math_markup(root: Path, rep: Report):
+    """LaTeX markup must not sit in a block that renders through Text().
+
+    `points`, `flow` and `compare` set their lines with Text(), so a line
+    authored as LaTeX prints the markup instead of the formula — the KMnO4
+    comparison put "Mn^{2+}" and "MnO_4^{2-}" on screen verbatim. Maths in those
+    blocks is written as `$...$`, which the scene routes to MathTex.
+    """
+    TEXT_BLOCKS = {"points", "flow", "compare", "scan_figure", "figure"}
+    for f in sorted(root.glob("beats_part*.json")):
+        try:
+            beats = json.loads(f.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as e:
+            rep.add(WARN, f"{f.name} parses", str(e)); continue
+        hits = []
+        for b in beats:
+            if b.get("type") not in TEXT_BLOCKS:
+                continue
+            for k in ("title", "items", "left", "right", "labels"):
+                blob = json.dumps(b.get(k, ""), ensure_ascii=False)
+                hits += [m for m in re.findall(r'"[^"]*[\^_][^"]*"', blob)
+                         if not (m.startswith('"$') and m.endswith('$"'))]
+        if hits:
+            rep.add(FAIL, f"{f.name} raw LaTeX in a text block",
+                    f"{len(hits)}, e.g. {hits[0]} — wrap it in $...$")
+        else:
+            rep.add(OK, f"{f.name} maths markup")
+
+
+def check_devanagari_in_tex(root: Path, rep: Report):
+    """Devanagari must never appear inside a `tex` field.
+
+    LaTeX has no Devanagari and the Devanagari font has no maths, so the two
+    render by different paths and cannot be mixed — CLAUDE.md says so, and a
+    `\\text{चतुष्फलकीय}` inside a MathTex still killed a render with a Unicode
+    error after every other check had passed.
+    """
+    DEVANAGARI_IN_TEX = re.compile(r"[\u0900-\u097F]")
+    for f in sorted(root.glob("beats_part*.json")):
+        try:
+            beats = json.loads(f.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        bad = [t for b in beats for t in b.get("tex", []) if DEVANAGARI_IN_TEX.search(t)]
+        if bad:
+            rep.add(FAIL, f"{f.name} Devanagari in maths",
+                    f"{len(bad)}, e.g. {bad[0][:48]} — move it to the label")
+        else:
+            rep.add(OK, f"{f.name} maths is Devanagari-free")
 
 
 def preflight(root: Path) -> Report:
@@ -381,6 +459,9 @@ def preflight(root: Path) -> Report:
     check_caption_margins(root, rep)
     check_layout_guard(root, rep)
     check_visual_direction(root, rep)
+    check_figure_labels(root, rep)
+    check_math_markup(root, rep)
+    check_devanagari_in_tex(root, rep)
     return rep
 
 
