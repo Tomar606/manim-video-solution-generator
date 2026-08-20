@@ -446,6 +446,35 @@ def check_devanagari_in_tex(root: Path, rep: Report):
             rep.add(OK, f"{f.name} maths is Devanagari-free")
 
 
+def check_superscript_notation(root: Path, rep: Report):
+    """A degree sign typed into plain text is almost always a superscript zero.
+
+    `T°b` was shipped where the notation is T with subscript b and superscript
+    zero — the ring has to sit AFTER the b, raised, and only LaTeX can place it.
+    The same trap catches Λ°m and E°cell. Anything with a degree sign that is not
+    already inside `$...$` is therefore reported: either it is a real temperature
+    (write it in the caption, not as a symbol) or it needs to be maths.
+    """
+    for f in sorted(root.glob("beats_part*.json")):
+        try:
+            beats = json.loads(f.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        hits = []
+        for b in beats:
+            texts = [l.get("text", "") for l in b.get("labels", [])]
+            if isinstance(b.get("items"), list):
+                texts += [x for x in b["items"] if isinstance(x, str)]
+            for t in texts:
+                if "\u00b0" in t and not (t.startswith("$") and t.endswith("$")):
+                    hits.append(t)
+        if hits:
+            rep.add(FAIL, f"{f.name} degree sign outside maths",
+                    f"{len(hits)}, e.g. {hits[0][:40]} — use $T_b^{{0}}$")
+        else:
+            rep.add(OK, f"{f.name} superscript notation")
+
+
 def preflight(root: Path) -> Report:
     rep = Report()
     check_composed(root, rep)
@@ -462,6 +491,7 @@ def preflight(root: Path) -> Report:
     check_figure_labels(root, rep)
     check_math_markup(root, rep)
     check_devanagari_in_tex(root, rep)
+    check_superscript_notation(root, rep)
     return rep
 
 
