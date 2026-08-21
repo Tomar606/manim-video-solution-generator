@@ -1,0 +1,31 @@
+THIS SHEET IS UNRULED. IMAGE 1 has NO horizontal ruled lines — only the printed pink margin frame. Draw NO ruled lines, no faint grid, no guide lines of any kind. Keep your OWN straight, evenly spaced baselines at exactly IMAGE 3's line positions and spacing, letters the size of IMAGE 2's. Reproduce the pink margin frame and the Page No./Date box from IMAGE 1 unchanged.
+
+IMAGE 3 IS A HAND-LAID BLUEPRINT, NOT TYPE — REPRODUCE ITS IRREGULARITY, DO NOT TIDY IT. Its rows drift and tilt, its words sit at different heights and sizes, its left edge is ragged and its word gaps are uneven. All of that is deliberate. Straightening it back out is the failure mode.
+
+THE MARGIN LABELS ARE EXACTLY `प्रश्न` AND `उत्तर` — bare words, NO question number and NO full stop. IMAGE 4 shows a numbered label; do NOT copy its number. `उत्तर` is उ + त् + त + र with a DOUBLED त्त conjunct — never `उतर` with a single त. Check this word first.
+
+IGNORE any faint diagonal watermark in IMAGE 2 or IMAGE 4; draw NO watermark, logo, diagonal text or lettering of any kind across your page.
+
+IMAGE 2 IS THE SAME UNRULED NOTEBOOK AS IMAGE 1 — same paper, same printed pink margin frame, no horizontal rules anywhere in it. Copy its hand exactly: its letterforms, its rounder open bowls, its slight forward slant, its letter size, its stroke weight and pen pressure, and its TWO INK COLOURS USED IN THE SAME ROLES — the darker near-black navy for the question row, the brighter blue for the whole answer body, including the Latin words and the equations. Do not copy IMAGE 2's words, its bullet list, its figure labels or its layout.
+
+IMAGE 2 OUTRANKS IMAGE 4 FOR THE LETTERFORMS. Where the two hands differ, write IMAGE 2's hand. Take from IMAGE 4 only the PAPER, the margin frame and HOW IRREGULAR real writing is — not its letter shapes.
+
+SPELL THESE EXACTLY as IMAGE 3 spells them, letter for letter — these are where this page will break:
+विद्युत्-अपघटन · विद्युत्-रासायनिक · अपघट्यों · विलयनों · पदार्थों · तुल्यांकों · मात्राएँ · जहाँ · इलेक्ट्रोड · ऐम्पियर · सेकण्ड · श्रेणीक्रम · श्रेणी क्रम · द्वितीय · विभिन्न · एकत्रित · निक्षेपित · तुल्यांक · स्थिरांक · कूलॉम · प्रवाहित · समानुपाती · माइकल फैराडे · मुक्त · सन् · समान · प्रथम · आवेश · रासायनिक
+
+CONJUNCTS TO DRAW IN FULL, not simplified: त्त (उत्तर) · क्ट (इलेक्ट्रोड) · क्त (मुक्त, एकत्रित) · क्ष (निक्षेपित) · न्न (विभिन्न) · ण्ड (सेकण्ड) · म्प (ऐम्पियर) · श्र/क्र (श्रेणीक्रम) · द्व (द्वितीय) · घ्य (अपघट्यों) · ल्य (तुल्यांक) · स्थ (स्थिरांक) · र्थ (पदार्थों) · प्र (प्रवाहित, प्रथम).
+
+BINDU / ANUSVARA — copy each one exactly, do not add and do not drop:
+अपघट्यों · विलयनों · पदार्थों · तुल्यांकों all END in ों. मात्राएँ ends in एँ. जहाँ has ँ. `समान` has NO bindu and NO halant — it is plain समान, never समानु or समान्.
+
+है vs हैं — there are SEVEN, and they are not all the same. Copy IMAGE 3 exactly:
+  है  (singular) in: "...के समानुपाती होती है।" (first law) · "...W ग्राम पदार्थ मुक्त होता है, तो" · "जहाँ, Z विद्युत्-रासायनिक तुल्यांक है।" · "...प्रवाहित की जाती है, तो"
+  हैं (plural)   in: "...के समानुपाती होती हैं।" (second law) · "...क्रमश: W_1 व W_2 हैं तथा" · "...क्रमश: E_1 व E_2 हैं, तो"
+
+MATHS. Draw `∝` as a proper full-size proportionality sign (a rounded "oc" ligature), the same height as the W and E beside it — IMAGE 3 renders it small, that is a font artefact, not the size to copy. `∵` is the three-dot "because" sign. Subscripts W_1, W_2, E_1, E_2 are written as a lowered small 1 and 2 — W₁, W₂, E₁, E₂ — never as "W_1" with a visible underscore. Same for H_2SO_4, CuSO_4, AgNO_3 in the figure. `W/E` and `W_1/W_2 = E_1/E_2` are written with a horizontal fraction bar, numerator above and denominator below, drawn freehand.
+
+THE FIGURE. Draw it by hand in pen, following the faint guide in IMAGE 3 — three beakers standing in a row, each holding two vertical electrode plates, wired in SERIES to a battery symbol at the top, with coiled-wire squiggles on the connecting leads and a liquid level line across each beaker. Hand-drawn, slightly wavering lines — NOT a traced or ruled technical drawing. Its labels read EXACTLY, left to right:
+  तनु H₂SO₄     ·     CuSO₄ विलयन     ·     AgNO₃ विलयन
+and the caption under it reads EXACTLY:
+  चित्र–श्रेणीक्रम में व्यवस्थित विभिन्न वोल्टामीटर
+Do not invent, translate or reword any figure label. The text wraps around the figure exactly as IMAGE 3 shows it — do not push the figure onto its own rows.
