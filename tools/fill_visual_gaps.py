@@ -92,6 +92,25 @@ def _cut_grey(path: Path) -> None:
     Image.fromarray(np.dstack([a, al * 255]).astype(np.uint8), "RGBA").save(path)
 
 
+def _trim(path: Path) -> None:
+    """Crop the transparent margin away.
+
+    The subject sits inside a square canvas, so a diagonal nail was mostly empty
+    space — and the beat sizes the whole canvas, which made the nail tiny on
+    screen. Cropping to the subject lets the picture fill the room it is given.
+    """
+    import numpy as np
+    from PIL import Image
+    im = Image.open(path).convert("RGBA")
+    a = np.asarray(im)
+    ys, xs = np.where(a[..., 3] > 12)
+    if not len(ys):
+        return
+    pad = 8
+    im.crop((max(0, xs.min()-pad), max(0, ys.min()-pad),
+             min(a.shape[1], xs.max()+pad), min(a.shape[0], ys.max()+pad))).save(path)
+
+
 def subject_of(root: Path, part: int, a: float, b: float) -> str:
     lines = json.loads((root / f"lines_part{part}.json").read_text(encoding="utf-8"))
     said = " ".join(l["text"] for l in lines if a <= float(l["start"]) < b)
@@ -157,6 +176,7 @@ def main() -> int:
             generate_image(f"{brief}\n\n{ground}", dest,
                            size="1024x1024", quality="medium")
             _cut_grey(dest) if glassy else _cut_magenta(dest)
+            _trim(dest)
 
             beats_p = root / f"beats_part{part}.json"
             beats = json.loads(beats_p.read_text(encoding="utf-8"))

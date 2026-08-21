@@ -475,6 +475,120 @@ def check_superscript_notation(root: Path, rep: Report):
             rep.add(OK, f"{f.name} superscript notation")
 
 
+def check_card_art(root: Path, rep: Report):
+    """The question card must be this question's card.
+
+    The sheet is a torn corner of the exam paper with the question PRINTED into
+    the PNG (tools/paper_header.py), and the scene places it as-is. Setting a
+    new project up by copying another one's assets therefore ships that other
+    question's card — eight videos were about to open on the KMnO4 question.
+    A sheet shared with any other project is the signature of that mistake.
+    """
+    import hashlib
+    mine = root / "assets" / "design" / "question_sheet.png"
+    if not mine.is_file():
+        rep.add(WARN, "question card art", "no question_sheet.png")
+        return
+    h = hashlib.md5(mine.read_bytes()).hexdigest()
+    def question_of(proj: Path) -> str:
+        m = proj / "meta.json"
+        if not m.is_file():
+            return ""
+        try:
+            return json.loads(m.read_text(encoding="utf-8")).get("question", "")
+        except (OSError, json.JSONDecodeError):
+            return ""
+
+    # Two projects for the SAME question may legitimately share a card — the
+    # legacy folders do. Only a shared card across DIFFERENT questions is a bug.
+    ours = question_of(root)[:40]
+    twins = [p.parent.parent.parent.name
+             for p in Path("projects").glob("*/assets/design/question_sheet.png")
+             if p != mine and hashlib.md5(p.read_bytes()).hexdigest() == h
+             and question_of(p.parent.parent.parent)[:40] != ours]
+    if twins:
+        rep.add(FAIL, "question card art",
+                f"identical to {', '.join(twins)} — rebuild with this question")
+    else:
+        rep.add(OK, "question card art")
+
+
+def check_veo_clips(root: Path, rep: Report):
+    """Beats routed to Veo, and whether their clips are fit to ship.
+
+    A `type: video` beat is a hole in the Manim render — the scene deliberately
+    draws nothing there, because tools/composite.py lays a generated clip over
+    those frames. So an unfilled or unreviewed video beat is not a cosmetic
+    problem: it is a stretch of finished video with the plate, the captions and
+    the presenter, and a conspicuous nothing where the demonstration was meant
+    to be. That is why the missing-clip case FAILS rather than warns.
+
+    The failed-review case only warns. The clip exists, somebody can watch it,
+    and the reviewer may reasonably overrule a vision model — but they have to
+    make that call knowingly, by setting `usable` in clips_part<N>.json.
+    """
+    import json as _json
+
+    for beats_f in sorted(root.glob("beats_part*.json")):
+        part = beats_f.stem.split("part")[-1]
+        beats = _json.loads(beats_f.read_text(encoding="utf-8"))
+        vids = [b for b in beats if b.get("type") == "video"]
+        if not vids:
+            continue
+        name = f"veo_part{part}"
+
+        missing_brief = [b["at"] for b in vids if not b.get("brief")]
+        if missing_brief:
+            rep.add(FAIL, f"{name} brief",
+                    f"video beat(s) at {missing_brief} have no `brief` — "
+                    f"`video veo` has nothing to write a prompt from")
+
+        clips_f = root / f"clips_part{part}.json"
+        if not clips_f.exists():
+            rep.add(FAIL, f"{name} not generated",
+                    f"{len(vids)} video beat(s) but no clips_part{part}.json — "
+                    f"run `video veo {root.name} --part {part}`")
+            continue
+
+        clips = {c["at"]: c for c in _json.loads(clips_f.read_text(encoding="utf-8"))}
+        for b in vids:
+            c = clips.get(b["at"])
+            if c is None:
+                rep.add(FAIL, f"{name} missing clip",
+                        f"beat at {b['at']} has no clip; the render will have a "
+                        f"hole there")
+                continue
+            if not (root / c["src"]).is_file():
+                rep.add(FAIL, f"{name} missing file",
+                        f"beat at {b['at']} points at {c['src']}, which is not there")
+            elif not c.get("usable", True):
+                rep.add(WARN, f"{name} failed review",
+                        f"beat at {b['at']} did not pass the visual check after "
+                        f"{c.get('attempts', '?')} attempt(s) and will be left out "
+                        f"— see veo_review_part{part}.json")
+            if float(c["end"]) - float(c["start"]) < 1.0:
+                rep.add(WARN, f"{name} short window",
+                        f"beat at {b['at']} is on screen for under a second; the "
+                        f"next beat is probably anchored too close behind it")
+
+            # Labels are the only thing besides the animation allowed over a Veo
+            # clip, so where they land is worth checking here rather than after
+            # an hour of rendering. `label_faults` is the same function the veo
+            # stage warns with — repeated here because this is the last point at
+            # which a nudge in the beats file is still cheap.
+            from src.veo import label_faults
+            for fault in label_faults(c.get("labels") or [],
+                                      full=bool(c.get("full"))):
+                rep.add(WARN, f"{name} label placement", f"beat {b['at']}: {fault}")
+            for lab in c.get("labels") or []:
+                if not (root / lab["png"]).is_file():
+                    rep.add(FAIL, f"{name} missing label art",
+                            f"beat {b['at']}: {lab['png']} is not there")
+        good = sum(1 for b in vids
+                   if clips.get(b["at"], {}).get("usable", False))
+        rep.add(OK, name, f"{good}/{len(vids)} clip(s) cleared the visual check")
+
+
 def preflight(root: Path) -> Report:
     rep = Report()
     check_composed(root, rep)
@@ -492,6 +606,8 @@ def preflight(root: Path) -> Report:
     check_math_markup(root, rep)
     check_devanagari_in_tex(root, rep)
     check_superscript_notation(root, rep)
+    check_card_art(root, rep)
+    check_veo_clips(root, rep)
     return rep
 
 

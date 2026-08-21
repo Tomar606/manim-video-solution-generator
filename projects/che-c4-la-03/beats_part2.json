@@ -1,13 +1,5 @@
 [
  {
-  "at": 3,
-  "type": "image",
-  "src": "images/gap_part2.png",
-  "intent": "SUPPORT",
-  "reason": "यहाँ स्क्रीन खाली रह जाती थी — शिक्षक बोल रहा है और ऊपर कुछ नहीं; विषय से जुड़ा चित्र रखा गया है",
-  "caption": "आयनीकरण एन्थैल्पी प्रवृत्ति"
- },
- {
   "at": 6,
   "type": "points",
   "reveal": "progressive",

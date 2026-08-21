@@ -809,8 +809,19 @@ class ThemedScene(Scene):
             rows.add(Text(str(title), font=ui_font(), font_size=size + 6,
                           color=colour or "#FFC15C", weight="BOLD"))
         for it in items[:5]:
-            t2c = {hi: "#FFC15C"} if hi and hi in str(it) else {}
-            rows.add(Text(str(it), font=ui_font(), font_size=size,
+            t = str(it)
+            # `$...$` sets the line as maths. `compare` learned this when
+            # "Mn^{2+}" printed as markup; points did not, so a summary line
+            # written as $\Delta T_b = T_b - T_b^{0}$ shipped showing its LaTeX.
+            if t.startswith("$") and t.endswith("$"):
+                m = MathTex(t[1:-1], color="#FFFFFF")
+                ref_t = Text("H", font=ui_font(), font_size=size, weight="MEDIUM")
+                ref_m = MathTex("H")
+                m.scale(ref_t.height / max(ref_m.height, 1e-6))
+                rows.add(m)
+                continue
+            t2c = {hi: "#FFC15C"} if hi and hi in t else {}
+            rows.add(Text(t, font=ui_font(), font_size=size,
                           color="#FFFFFF", weight="MEDIUM", t2c=t2c))
         rows.arrange(DOWN, buff=0.34, aligned_edge=LEFT)
         return self.place(rows)
@@ -828,19 +839,27 @@ class ThemedScene(Scene):
         # fit made the KMnO4 line small enough that the thing a student is meant
         # to copy was the least readable mark on screen. Splitting at the arrow
         # is how it would be written on a board anyway.
+        # The arrow may be written several ways, and `\rightarrow` is NOT a
+        # substring of `\longrightarrow` — so a check for the short form alone
+        # never fired on the equations that actually needed splitting, and they
+        # shipped scaled down to fit the width.
+        ARROWS = (r"\longrightarrow", r"\rightarrow", r"\to ")
         lines = []
         for t in items:
-            if len(t) > 44 and r"\rightarrow" in t:
-                lhs, rhs = t.split(r"\rightarrow", 1)
+            arrow = next((a for a in ARROWS if a in t), None)
+            if arrow and len(t) > 34:
+                lhs, rhs = t.split(arrow, 1)
                 lines.append(lhs.strip())
-                lines.append(r"\rightarrow " + rhs.strip())
+                lines.append(arrow.strip() + " " + rhs.strip())
             else:
                 lines.append(t)
 
         eqs = VGroup(*[MathTex(t).scale(size).set_color(colour) for t in lines])
         eqs.arrange(DOWN, buff=0.34, aligned_edge=LEFT)
         if label:
-            cap = Text(str(label), font=ui_font(), font_size=30,
+            # sized like a `compare` column heading, which is the size the user
+            # picked out as right; place() then grows the whole block together
+            cap = Text(str(label), font=ui_font(), font_size=40,
                        color="#7CE0B0", weight="BOLD")
             eqs = VGroup(cap, eqs).arrange(DOWN, buff=0.40)
         return self.place(eqs)

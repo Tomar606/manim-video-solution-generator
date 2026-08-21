@@ -291,6 +291,9 @@ def question_block(text: str, ink_h: int, max_w: int,
         cols = np.nonzero(a.any(axis=0))[0]
         return img.crop((int(cols.min()), 0, int(cols.max()) + 1, img.height))
 
+    def draw_width(line, px):
+        return probe.textbbox((0, 0), line, font=font(px))[2]
+
     def wrap(px):
         f = font(px)
         lines, cur = [], ""
@@ -333,6 +336,23 @@ def question_block(text: str, ink_h: int, max_w: int,
             break
         size -= 2
     lines = wrap(size)
+
+    # Last resort: TRUNCATE. The loop above shrinks the type until the block
+    # fits, but it stops at a legibility floor — and below that floor it used to
+    # print anyway, so the longest questions ran off the torn bottom edge and
+    # onto the background. A question that cannot fit at a readable size is cut
+    # at the last line that fits and ends in an ellipsis; the card is a hook, and
+    # the full question is on screen in the caption and on the answer page.
+    if avail_h is not None:
+        pitch = pitch_for(size)
+        keep = max(1, int(avail_h // pitch))
+        if len(lines) > keep:
+            lines = lines[:keep]
+            tail = lines[-1].rstrip(" ।,;:-")
+            # trim words until the ellipsis itself also fits the width
+            while tail and draw_width(tail + " ...", size) > max_w:
+                tail = " ".join(tail.split(" ")[:-1]).rstrip(" ।,;:-")
+            lines[-1] = (tail + " ...") if tail else "..."
     return [draw(l, size) for l in lines], pitch_for(size), size * 2
 
 

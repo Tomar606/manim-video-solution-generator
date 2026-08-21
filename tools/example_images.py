@@ -117,6 +117,7 @@ def main() -> int:
             generate_image(obj + "." + GROUND, dest,
                            size="1024x1024", quality="medium")
             cut_out(dest)
+            _trim(dest)
             beats.append({"at": i, "type": "image",
                           "src": f"images/example_p{part}_{i}.png",
                           "intent": "EXAMPLE",

@@ -1,0 +1,23 @@
+{
+  "_comment": [
+    "Every place the pipeline has to touch Google Flow's UI, in one file, because",
+    "Flow is a Radix SPA with hashed class names and it WILL move. When a run",
+    "fails with 'prompt box not found' or 'click target not found', this is the",
+    "file to edit — nothing else needs to change.",
+    "",
+    "How to find a replacement: open the Flow project, right-click the control,",
+    "Inspect, and prefer in this order — a data- attribute, an aria-label, a",
+    "stable semantic tag. Never a hashed class name; those change on every Flow",
+    "deploy. `generate_text` matches on visible button text and is the most",
+    "durable of the three, which is why it is the default rather than a fallback.",
+    "",
+    "`plate_input` is the file input behind Flow's reference-image control. It is",
+    "usually hidden and often only mounted once you have opened that panel, so if",
+    "set_image reports 'no file input matched', open the panel by hand once and",
+    "re-run — the pipeline is not able to click a control it cannot see."
+  ],
+  "prompt": "[data-slate-editor=\"true\"]",
+  "generate_text": "generate",
+  "generate_selector": null,
+  "plate_input": "input[type=\"file\"]"
+}

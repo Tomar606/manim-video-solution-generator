@@ -164,6 +164,25 @@ login and the host has no Manim, but the repair loop needs both. So
   logo in both corners. See `.claude/skills/video-prompt/references/bug-ledger.md`.
 - **A bare `complete()` resolves to the Claude CLI**, so `SCRIPT_LLM` is
   ignored unless a caller passes `provider=` explicitly.
+- **A generated clip carries the animation and NOTHING else.** No text in any
+  script (Veo cannot set Devanagari, so labels are typeset by
+  `src/veo_labels.py` and composited over the top), and no decoration — no
+  border, vignette, sparkle, lens flare or title card. Say it positively in the
+  prompt and enumerate it in the NEGATIVE list, never the other way round.
+- **A Veo clip's background is UPLOADED, not described.** The subject plate goes
+  into Flow itself, so the clip is generated on the same picture Manim renders
+  and can be spliced into the middle of a part invisibly. Describe a background
+  and Veo builds its own, discards ours, and the splice reads as a jump cut.
+- **A generated clip is never reversed to make it longer.** Boomerang is the
+  obvious way to stretch eight seconds over fifteen and it teaches rust
+  un-rusting and gas dissolving back into an electrode — wrong in a way that
+  looks completely fine to anyone not paying attention. `src/veo_conform.py`
+  slows, loops or holds instead, chosen by the beat's `motion`.
+- **`tpad` after `minterpolate` needs an `fps` between them.** minterpolate emits
+  timestamps off the 1/FPS grid, so the cloned pad frames land past where `-t`
+  cuts: the pad is generated and immediately discarded, and the clip comes out a
+  tenth of a second short of its window. Cost an hour; measured at 7.87s where
+  8.00s was asked for.
 - **Model-written prompts break caches.** `src/frames.py` keys its image cache
   on the prompt, but the prompt itself is generated, so it differs every run and
   never hits. Prompts are cached in `frames/prompts.json` — seed it before any
@@ -187,6 +206,13 @@ src/manim_render.py   render locally or inside the container
 src/sfx.py            synthesized effects + cue mixing
 src/avatar.py         briefs, manual drop, HeyGen provider
 src/composite.py      chromakey + despill + placement
+src/veo.py            the Flow route: one beat -> a checked, fitted clip
+src/veo_prompts.py    writing that beat's prompt, and revising it when it fails
+src/veo_qc.py         grading the frames, and where a clip stops being usable
+src/veo_conform.py    cutting the hallucinated tail, fitting the rest to the window
+src/veo_labels.py     the Devanagari labels that go over a generated clip
+src/flow_bridge.py    the local half of the browser bridge
+flow/extension/       the Chrome extension that drives Flow in a background tab
 src/qc.py             Claude vision review of rendered frames
 src/assemble.py       conform -> concat -> mix -> mux
 src/dashboard.py      the browser editor (single self-contained page)

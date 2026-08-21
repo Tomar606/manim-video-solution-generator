@@ -800,6 +800,62 @@ def cmd_beats(args) -> int:
     return 0
 
 
+def cmd_veo(args) -> int:
+    """Fill every `type: video` beat with a checked, downloaded Flow clip.
+
+    The stage is a no-op on a part with no video beats, which is most of them —
+    see the routing table in PIPELINE.md. It is safe to leave in a build script.
+    """
+    from src import veo
+    from src.flow_bridge import FlowError
+
+    root = Path(args.projects_dir or DEFAULT_PROJECTS_DIR) / args.project
+    if not root.is_dir():
+        print(f"❌ no project at {root}")
+        return 2
+    parts = ([args.part] if args.part else
+             sorted(f.stem.split("part")[-1]
+                    for f in root.glob("beats_part*.json")))
+    if not parts:
+        print(f"❌ no beats files in {root} — run `video beats {args.project}` first")
+        return 2
+
+    failed = 0
+    for part in parts:
+        try:
+            out = veo.run(str(root), int(part), attempts=args.attempts,
+                          use_plate=not args.no_plate, provider=args.provider)
+        except (veo.VeoError, FlowError) as exc:
+            print(f"❌ part {part}: {exc}")
+            return 1
+        failed += sum(1 for c in out["clips"] if not c["usable"])
+    # A clip that never passed is a hole in the video, so it is worth a non-zero
+    # exit — but the clips that DID pass are already written and the run is not
+    # repeated. `video preflight` reports the same thing before a render.
+    return 3 if failed else 0
+
+
+def cmd_flow(args) -> int:
+    """Run the bridge on its own, or say whether the browser half is alive."""
+    from src.flow_bridge import FlowBridge, FlowError, serve_forever
+
+    if args.serve:
+        return serve_forever(args.port)
+
+    b = FlowBridge(args.port).start()
+    try:
+        info = b.wait_for_worker(timeout=args.timeout)
+    except FlowError as exc:
+        print(f"❌ {exc}")
+        return 1
+    finally:
+        b.stop()
+    tab = info.get("tab")
+    print("✅ extension connected")
+    print(f"   flow tab: {tab or '— none open. Open your Flow project in any tab.'}")
+    return 0 if tab else 2
+
+
 def cmd_build(args) -> int:
     """Run the whole pipeline, stopping at the first stage that can't proceed."""
     project = Project.open(args.project, projects_dir=args.projects_dir)
@@ -1085,6 +1141,26 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--window", type=int, default=5,
                    help="caption lines per decision")
     p.set_defaults(func=cmd_beats)
+
+    p = sub.add_parser("veo", help="generate the `type: video` beats in Google Flow")
+    p.add_argument("project")
+    p.add_argument("--part", help="one part; default every part with beats")
+    p.add_argument("--attempts", type=int, default=3,
+                   help="tries per beat before giving up (first try plus revisions)")
+    p.add_argument("--no-plate", action="store_true",
+                   help="do not attach the subject background to the generation. "
+                        "Only for debugging — without it the clip carries a "
+                        "background of Veo's invention and cannot be spliced in.")
+    p.add_argument("--provider", help="override the LLM backend for the prompt writer")
+    p.set_defaults(func=cmd_veo)
+
+    p = sub.add_parser("flow", help="the browser bridge Veo generation runs through")
+    p.add_argument("--serve", action="store_true",
+                   help="run the bridge until Ctrl-C, so the extension stays "
+                        "connected between runs")
+    p.add_argument("--port", type=int, default=8765)
+    p.add_argument("--timeout", type=float, default=20.0)
+    p.set_defaults(func=cmd_flow)
 
     p = sub.add_parser("build", help="Run every stage in order")
     p.add_argument("project")

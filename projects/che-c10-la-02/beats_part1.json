@@ -1,13 +1,5 @@
 [
  {
-  "at": 0,
-  "type": "image",
-  "src": "images/gap_part1.png",
-  "intent": "SUPPORT",
-  "reason": "यहाँ स्क्रीन खाली रह जाती थी — शिक्षक बोल रहा है और ऊपर कुछ नहीं; विषय से जुड़ा चित्र रखा गया है",
-  "caption": "विटामिन युक्त खाद्य पदार्थ"
- },
- {
   "at": 9,
   "type": "points",
   "reveal": "progressive",

@@ -13,6 +13,15 @@ scene already knows how to place safely:
     {"at": 20,"type": "compare", "left": ["अम्लीय", ["…"]], "right": [...]}
     {"at": 26,"type": "image",   "src": "images/dry_cell.png", "caption": "…"}
     {"at": 31,"type": "graph",   "kind": "zero_order"}
+    {"at": 36,"type": "video",   "brief": "rust creeping across wet iron", "seconds": 8,
+              "presenter": "hidden"}
+
+`video` is the one type that draws nothing. It reserves the stage for a Veo clip
+generated on this same background plate and laid over the render by
+tools/composite.py — for the handful of beats where the thing that has to move is
+photoreal or organic and neither Manim nor a still can show it moving. `brief` is
+hand-written (it is a judgement about the question, like a figure), and
+`video veo <project> --part N` is what fills it.
 
 `at` is an index into the caption track, not a timestamp: the captions come from
 the clip's own transcript, so anchoring to them keeps every block on the words
@@ -36,7 +45,7 @@ INK, DIM, GOLD = "#FFFFFF", "#B9C6DC", "#FFC15C"
 GREEN, VIOLET, CYAN = "#7CE0B0", "#C792EA", "#5BC8F9"
 
 FONT, FONT_W = "Khand", "BOLD"
-CAPTION_SIZE, CAPTION_W, CAPTION_TOP = 62, 0.90, 0.090
+CAPTION_SIZE, CAPTION_W, CAPTION_TOP = 55, 0.90, 0.090
 # STAGE_BOT is derived from where the compositor actually puts the presenter:
 # tools/composite.py overlays him at FULL_Y=966 of a 1920-high frame, so his head
 # starts at 0.503. The band used to run to 0.600 — a hundred pixels INSIDE him —
@@ -105,11 +114,25 @@ class PyqPart(ThemedScene):
         return (np.array([0., (top + bot) / 2, 0.]),
                 config.frame_width * STAGE_W, top - bot)
 
-    def place(self, mob, y=0.5, pad=0.94):
+    MAX_GROW = 2.2          # a two-word block must not become a billboard
+
+    def place(self, mob, y=0.5, pad=0.94, grow=True):
+        """Fit a block to the stage band — shrinking it OR growing it.
+
+        This only ever shrank. That was fine when the band was 60% of the frame,
+        but the band now stops above the presenter at 0.492, and a short block
+        kept its authored font size inside a 388px strip: readable on a desktop
+        preview, too small on the phone these are watched on. Growing to fill the
+        band is what makes the type mobile-legible without hand-tuning every
+        beat's font size.
+        """
         c, w, h = self.stage_box()
-        s = min((w * pad) / mob.width if mob.width > w * pad else 1.0,
-                (h * pad) / mob.height if mob.height > h * pad else 1.0)
-        if s < 1.0:
+        if mob.width <= 0 or mob.height <= 0:
+            return mob
+        s = min((w * pad) / mob.width, (h * pad) / mob.height)
+        if s > 1.0:
+            s = min(s, self.MAX_GROW) if grow else 1.0
+        if abs(s - 1.0) > 0.01:
             mob.scale(s)
         top, bot = c[1] + h / 2, c[1] - h / 2
         cy = top - (top - bot) * y
@@ -577,9 +600,18 @@ class PyqPart(ThemedScene):
         marks = ["①", "②", "③", "④", "⑤"]
         bodies = []
         for i, it in enumerate(items[:5]):
+            t = str(it)
+            # `$...$` is maths, not text. This is the reveal path — the same slip
+            # that printed "$\Delta T_b = T_b - T_b^{0}$" verbatim in the
+            # क्वथनांक summary, because only `compare` had learned the rule.
+            if t.startswith("$") and t.endswith("$"):
+                body = MathTex(t[1:-1], color=INK)
+                ref = Text("H", font=FONT, font_size=32, weight="MEDIUM")
+                body.scale(ref.height / max(MathTex("H").height, 1e-6))
+            else:
+                body = Text(t, font=FONT, font_size=32, color=INK, weight="MEDIUM")
             line = VGroup(Text(marks[i], font=FONT, font_size=32, color=CYAN),
-                          Text(str(it), font=FONT, font_size=32, color=INK,
-                               weight="MEDIUM")).arrange(RIGHT, buff=0.22)
+                          body).arrange(RIGHT, buff=0.22)
             bodies.append(line)
             rows.add(line)
         rows.arrange(DOWN, buff=0.30, aligned_edge=LEFT)
@@ -599,10 +631,25 @@ class PyqPart(ThemedScene):
         go quiet — the worked steps remain as context while exactly one thing
         holds the focus.
         """
-        lines = spec["tex"] if isinstance(spec["tex"], list) else [spec["tex"]]
+        raw = spec["tex"] if isinstance(spec["tex"], list) else [spec["tex"]]
+        # A full chemical equation is wider than the stage, so place() fits it by
+        # WIDTH and the whole block — heading included — comes out small. Break it
+        # at the arrow, the way it would be written on a board, and the block can
+        # then be grown to fill the band instead.
+        ARROWS = (r"\longrightarrow", r"\rightarrow", r"\to ")
+        lines = []
+        for t in raw:
+            arrow = next((a for a in ARROWS if a in t), None)
+            if arrow and len(t) > 34:
+                lhs, rhs = t.split(arrow, 1)
+                lines.append(lhs.strip())
+                lines.append(arrow.strip() + " " + rhs.strip())
+            else:
+                lines.append(t)
         rows = VGroup()
         if spec.get("label"):
-            rows.add(Text(str(spec["label"]), font=FONT, font_size=30,
+            # sized like a compare-column heading, which reads correctly on a phone
+            rows.add(Text(str(spec["label"]), font=FONT, font_size=40,
                           color=GREEN, weight="BOLD"))
         eqs = [MathTex(t).scale(1.05).set_color(INK) for t in lines]
         for e in eqs:
@@ -624,6 +671,14 @@ class PyqPart(ThemedScene):
             return self.beat_flow(spec["items"])
         if t == "compare":
             return self.beat_compare(spec["left"], spec["right"])
+        if t == "video":
+            # Nothing is drawn, and that is the point. A Veo clip is laid over
+            # these frames by tools/composite.py — the clip was generated on
+            # THIS background plate, so it replaces the picture from VEO_CUT
+            # down while the caption above it keeps running. Anything Manim drew
+            # here would sit underneath it, invisible except at the two fades
+            # where it would flicker into view.
+            return VGroup()
         if t == "image":
             return self.beat_image(ROOT / spec["src"], spec.get("caption"))
         if t == "graph":
@@ -718,6 +773,15 @@ class PyqPart(ThemedScene):
                     self.add(rows)
                     self._pending_reveal = list(zip(spec.get("reveal_at", []), bodies))
                     self._pending_steps = []
+                elif spec["type"] == "video":
+                    # The stage was cleared above and stays cleared: a Veo clip
+                    # covers these frames at composite time. There is nothing to
+                    # build, nothing to fade in, and nothing for the layout
+                    # guard to audit — an empty VGroup through FadeIn animates a
+                    # mobject with no points and warns on every render.
+                    self._pending_reveal = []
+                    self._pending_steps = []
+                    self._labels = []
                 elif spec["type"] == "formula" and spec.get("build") == "progressive":
                     self._pending_reveal = []
                     self._labels = []
@@ -749,10 +813,23 @@ class PyqPart(ThemedScene):
             # items and diagram labels arrive on the caption that names them
             for at, body in list(getattr(self, "_pending_reveal", [])):
                 if at == i:
-                    for _, other in self._pending_reveal:
-                        if other is not body and other.get_fill_opacity() > 0.5:
-                            other.set_opacity(0.55)   # earlier items go quiet
+                    # Set EVERY item's state explicitly from its reveal time.
+                    # The old rule dimmed "anything currently brighter than 0.5",
+                    # which made the result depend on the order things happened
+                    # in — and item ① vanished outright once ② arrived instead of
+                    # going quiet. Deterministic beats clever: already revealed
+                    # is 0.55, the current one is 1.0, the rest stay hidden.
+                    for at2, other in self._pending_reveal:
+                        if other is body:
+                            continue
+                        other.set_opacity(0.55 if at2 <= i else 0.0)
                     self.play(body.animate.set_opacity(1.0), run_time=0.30)
+                    # every item revealed so far must still be on screen
+                    gone = [j for j, (a2, o) in enumerate(self._pending_reveal, 1)
+                            if a2 <= i and o.get_fill_opacity() < 0.2]
+                    if gone:
+                        self._layout_violations.append(
+                            f"t={self.time:6.2f}s REVEALED ITEM VANISHED: {gone}")
             # a derivation advances one line at a time, and the line just
             # written is the one that is boxed
             for at, eq in list(getattr(self, "_pending_steps", [])):

@@ -102,7 +102,65 @@ drawn as the Greek letter alpha"*, *"broken words split across lines"*, *"a
 floating letter W"*. Manim renders `∝` correctly by construction. If a beat is
 mostly notation, Veo is the wrong tool and the pack is fighting it.
 
-### If Veo: the prompt pack
+### A third route: one beat goes to Veo, the rest stays in Manim
+
+The table above is a whole-video decision, and it is the wrong grain for the
+common case — a part that is entirely Manim work except for one moment where
+something has to be seen *moving* and no amount of Manim will show it. Rust
+creeping across wet iron. Gas bubbling off an electrode. Tissue swelling under
+osmosis. Those are photoreal and organic; everything around them is still
+equations and a labelled diagram.
+
+So a single beat can be routed to Flow on its own:
+
+```json
+{"at": 21, "type": "video", "brief": "rust creeping outward across a wet iron nail,\n            the bright metal going orange-brown from the wet edge inward",
+ "seconds": 12, "motion": "one_way", "presenter": "hidden",
+ "labels": [{"at": 23, "text": "जंग की परत", "x": 0.42, "y": 0.62}]}
+```
+
+Then `video veo <project> --part 1`. Per beat it writes the prompt, audits it
+before spending a credit, attaches the subject background plate, submits it to
+Flow through the browser, waits, downloads the clip, grades its frames, and
+revises and regenerates up to three times. Manim draws nothing at that beat;
+`tools/composite.py` lays the clip over those frames.
+
+**`brief` is hand-written, like a figure.** Which moment deserves a generated
+clip is a judgement about the question, not about a sentence, so the visual
+director does not decide it — the same reasoning that keeps `apparatus` and
+`scan_figure` hand-placed.
+
+Four rules the route is built around, each enforced in more than one place:
+
+- **The background is attached, not described.** `assets/backgrounds/<subject>.png`
+  is uploaded into Flow itself, so the clip is generated ON the plate Manim
+  renders. That is what lets it be spliced into the middle of a part without a
+  visible cut. Describing a background in words guarantees a mismatch; skill §15
+  says so, `audit()` refuses a prompt that does not reference the supplied
+  image, and check B of the visual review compares the first and last frame for
+  drift.
+- **The clip carries the animation and nothing else.** No text in any script, no
+  numerals, no equations — and no decoration either: no borders, vignettes,
+  sparkles, lens flares or title cards. Stated positively in the prompt,
+  enumerated in the NEGATIVE list (never in the body — naming a thing is a
+  signal to draw it), and graded as checks A1 and A2.
+- **Labels are ours.** Veo cannot set Devanagari, so `src/veo_labels.py` typesets
+  them in Khand and the compositor lays them over the clip — which also means
+  each one arrives on the caption that names it, as everywhere else in this
+  track. A label below 50% is flagged, because the presenter is there.
+- **The clip is fitted to the presenter, never the reverse.** Flow returns a
+  fixed ~8s; the window is however long the teacher talks. The review reports
+  where the clip stops being correct — Veo is usually right at the start and
+  drifts — that tail is cut, and the good part is slowed, looped or held to fill
+  the window, chosen by the beat's `motion`. **It is never reversed:** boomerang
+  would double the length and teach rust un-rusting.
+
+Outputs: `clips_part<N>.json` (tracked — the decision record), `veo/` (the clips
+and every rejected attempt, gitignored), `veo_review_part<N>.json`.
+`tools/preflight.py` FAILS a part with an ungenerated video beat, because the
+render would have a hole in it. Setup is in [`flow/README.md`](flow/README.md).
+
+### If Veo for the whole video: the prompt pack
 
 `src/frames.py` builds it:
 
@@ -418,3 +476,86 @@ jumps in size and position and the edit is obvious.
   same field.
 - **Compositing is single-threaded** (189s with the CPU 84% idle). Run three at
   once.
+
+---
+
+## Presenter geometry — measured, never assumed
+
+Two constants controlled how the presenter was placed, and both were measured
+off a single shoot. Every later clip inherited numbers that were wrong for it.
+
+**The crop.** `crop=650:930:650:150` was hardcoded. The true extent measures 680
+to 886 px across one batch, so the fixed window sliced a forearm off at a hard
+vertical edge whenever he stood or gestured wider. `tools/avatar_crop.py`
+measures it per clip: it samples frames, keys the green the same way the
+compositor does, and takes the largest connected non-green region touching the
+bottom of the frame. Plain "not green" returns the whole frame — the shoot has a
+whiteboard and stands outside the screen.
+
+**The vertical anchor, which is coupled to the crop.** `FULL_Y = 966` was a fixed
+TOP offset. The avatar is scaled to a fixed on-screen WIDTH, so a wider crop
+scales to a SHORTER avatar — and with a fixed top he floats clear of the frame
+edge. The top is now derived from the scaled height so his feet land on 1920
+whatever the crop measures: the crop sets his SIZE, never his POSITION. The crop
+also always extends to the bottom of the source, because he is standing on it.
+
+Fixing the crop without the anchor produced a floating presenter across a whole
+rebuild. They are one change, not two.
+
+**A third size.** Stretches with nothing on the stage no longer get a filler
+image — the presenter grows into them instead (`biggrow_part<N>.json`, 81% wide).
+An image is placed only where the narration dwells on that object as its own
+subject; a gap sits over the hook and the exam framing, which is the one place
+in a video where no object can earn a picture.
+
+## Screen that is dead in two different ways
+
+`tools/visual_gaps.py` reports both:
+
+- **EMPTY** — nothing on the stage.
+- **FROZEN** — one block unchanged for 20s+ while the teacher keeps talking. The
+  Daniell cell held one comparison table for 59 of its 112 seconds, straight
+  through the passage about ions moving. Nothing detected it, because something
+  *was* technically on screen.
+
+Arrivals count as movement: `reveal_at` items, figure `labels[].at`, formula
+steps. Without counting labels a fully annotated diagram reads as frozen.
+
+`tools/scene_script.py <slug>` prints the plan as text — every block, what
+arrives when, the words spoken over it, and a **Needs a decision** section
+listing every EMPTY and FROZEN stretch. Read it before rendering: every visual
+change made after watching a composite costs a full render and composite.
+
+## The script is the teaching plan
+
+`script_bhaag.md` carries `On Screen:` directions. Authoring beats from the
+transcript alone dropped the middle of a derivation — शून्य कोटि's script
+specifies 8 steps for part 1 (separation of variables, the integral, the units)
+and the built video jumped from the rate law to the answer, so `k = x/t` appeared
+with `x` undefined and the next beat substituted `[A]` into an equation that did
+not contain it.
+
+Read the script first; the transcript is the CLOCK and the arbiter of what was
+actually said. A derivation GROWS one line at a time — 16 separate screens loses
+the student; pace around 10-15s per step.
+
+## More traps found the hard way
+
+- **Editing a running bash script corrupts it.** Bash reads incrementally; an
+  edit mid-execution killed a queue partway through. Runners execute from a
+  frozen copy.
+- **`pkill` on a parent leaves orphaned children.** An orphan plus a new runner
+  meant two workers on the same project — the memory spike that killed the
+  user's apps AND the partial-file collision. The runner takes a lock.
+- **ffmpeg unbounded took 320% CPU and ~600MB.** Capped via `FFMPEG_THREADS`
+  (x264 holds a frame buffer per thread, so the cap bounds memory too).
+- **A full disk fails renders silently.** Manim wrote nothing and reported
+  success; a fix appeared not to work for an hour. Check `df` before blaming code.
+- **`$...$` maths support must exist in EVERY text renderer.** It was added to
+  `compare` only, so `points` printed `$\Delta T_b = T_b - T_b^{0}$` verbatim.
+- **Conditional reveal state is order-dependent.** "Dim anything brighter than
+  0.5" made list item ① vanish outright when ② arrived. Set every item's state
+  explicitly from its reveal time.
+- **A question printed into the sheet PNG can overflow the paper.** The shrink
+  loop stops at a legibility floor and used to print anyway, running off the torn
+  edge onto the background. It now truncates with an ellipsis.

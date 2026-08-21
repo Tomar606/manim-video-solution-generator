@@ -1,13 +1,5 @@
 [
  {
-  "at": 6,
-  "type": "image",
-  "src": "images/gap_part1.png",
-  "intent": "SUPPORT",
-  "reason": "यहाँ स्क्रीन खाली रह जाती थी — शिक्षक बोल रहा है और ऊपर कुछ नहीं; विषय से जुड़ा चित्र रखा गया है",
-  "caption": "आयरन क्रोमाइट अयस्क"
- },
- {
   "at": 12,
   "type": "flow",
   "reveal": "progressive",
