@@ -115,3 +115,14 @@ projects/*/veo/
 # behind. `out/` above already covers its 131 MB of rendered frames and video.
 node_modules/
 *.bak
+
+# A separate product (the Hindi notes kit) that was bundled in here. It has no
+# connection to the video pipeline and nothing in this repo references it; it
+# stays on disk but out of the repo. Move it to its own home when convenient.
+EndScreenshot/hindi-notes-kit/
+
+# Manim's LaTeX caches. Regenerated on the first render that needs them.
+texts/
+Tex/
+__pycache__/
+.DS_Store

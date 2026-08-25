@@ -1,0 +1,19 @@
+# The PYQ track (tools/) — everything EXCEPT Manim.
+#
+# Manim 0.18 pins an old numpy and whisper wants a new one, so the two cannot
+# share an interpreter. Two venvs, on purpose:
+#
+#   .venv-manim  -> manim==0.18.1        (rendering only)
+#   .venv-tools  -> this file            (everything else)
+#
+# Mixing them is not a style preference: whichever is installed second downgrades
+# the other's numpy and one of the two stops importing.
+
+openai-whisper           # word-level timings from a presenter clip
+numpy                    # frame maths in the crop/key measurement
+pillow                   # Devanagari typesetting for the answer card
+                         #   macOS also needs libraqm, or every Devanagari image
+                         #   is silently mis-shaped — see CLAUDE.md
+python-docx              # reading the script drafts the team writes in Word
+pydantic>=2.10.0         # structured LLM outputs, shared with src/
+python-dotenv>=1.0.1
