@@ -75,6 +75,21 @@ class ClipReview(BaseModel):
                     "and does not end somewhere different from where it began")
 
 
+class Continuity(BaseModel):
+    """Whether clip N+1 actually starts where clip N stopped."""
+    continuous: bool = Field(
+        description="true only if the clip's first frame could cut straight "
+                    "from the reference frame with no visible jump")
+    changes: list[str] = Field(
+        default_factory=list,
+        description="each thing that differs between the two frames and would "
+                    "be seen at the cut, one short phrase each")
+    severity: str = Field(
+        default="none",
+        description="none, minor or major. major = a viewer would read it as a "
+                    "different shot; minor = a viewer might notice on a rewatch")
+
+
 SYSTEM = """You are grading a generated animation clip that is about to be spliced \
 into a Class 12 Hindi exam-answer video. Be exacting: this clip teaches, and a \
 plausible-looking error is worse than an obvious one because nobody catches it.
@@ -240,6 +255,79 @@ def good_until(review_dict: dict, stamps: list[float]) -> float:
     if n == 0:
         return 0.0
     return float(stamps[min(n, len(stamps)) - 1])
+
+
+CONTINUITY_SYSTEM = """You are checking whether two frames belong to the same \
+continuous take.
+
+The FIRST image is the last frame of a clip that has already been accepted. The \
+SECOND is the first frame of the clip generated to follow it, and in the finished \
+video they are adjacent: the first is on screen, then the second is, with no \
+transition between them.
+
+Judge only whether the cut would be VISIBLE. You are not grading whether the \
+second frame is attractive or correct — another pass does that. You are asking \
+one question: would a viewer watching this cut at normal speed perceive the \
+picture as continuing, or as being replaced?
+
+Things that make it a cut, and all of them are `major`: the apparatus is a \
+different shape, size or proportion; a part of it has moved, appeared or gone; \
+the colours or materials differ; the light comes from somewhere else or has a \
+different warmth; the camera is at a different distance or angle; the background \
+has changed at all.
+
+Motion that has CONTINUED is not a cut and is the whole point — a liquid a \
+little higher, rust spread a little further, a bubble in a different place. \
+Judge the setting, not the state of the process."""
+
+
+def continuity(reference: Path, clip: Path, *, work: Path,
+               provider: str | None = None) -> dict:
+    """Compare the frame handed forward against the frame the new clip opens on.
+
+    This is the defect that only exists once clips are adjacent, and it is
+    invisible to the main review, which sees one clip at a time and would call
+    a beautifully-rendered wrong apparatus a pass. It is also the defect a
+    reference upload is most likely to half-solve: Flow usually honours the
+    frame, and "usually" across five clips is a sequence with a jump in it.
+
+    Kept out of `review()` deliberately. The two graders disagree about
+    different things and want different repairs — a failed check means the
+    prompt did not pin a fact down, a failed seam means the prompt stopped
+    saying it was a continuation — and folding the reference frame into the
+    review's frame roll would also shift the numbering `last_good_frame` is
+    counted in.
+    """
+    work.mkdir(parents=True, exist_ok=True)
+    opening = work / f"{Path(clip).stem}_open.png"
+    r = subprocess.run(
+        ["ffmpeg", "-y", "-v", "error", "-ss", "0", "-i", str(clip),
+         "-frames:v", "1", "-q:v", "2", str(opening)],
+        capture_output=True, text=True)
+    if r.returncode != 0 or not opening.is_file():
+        return {"continuous": False, "severity": "major",
+                "changes": ["the clip's first frame could not be read"]}
+
+    got = complete_json(
+        CONTINUITY_SYSTEM,
+        "Frame 1 is the end of the accepted clip. Frame 2 is the start of the "
+        "clip meant to continue it. Would the cut between them be visible?",
+        Continuity, effort="high", images=[str(reference), str(opening)],
+        provider=provider)
+    out = got.model_dump()
+    out["reference"] = str(reference)
+    out["opening"] = str(opening)
+    return out
+
+
+def seam_defects(cont: dict) -> list[str]:
+    """The seam findings, phrased so `revise_prompt` can act on them."""
+    if not cont or cont.get("severity") != "major":
+        return []
+    return [f"this clip must continue the previous one seamlessly, but it "
+            f"restarts the shot: {c}" for c in cont.get("changes", [])] or \
+           ["this clip must continue the previous one seamlessly, but its first "
+            "frame does not match the frame it was generated from"]
 
 
 def defect_lines(review_dict: dict) -> list[str]:

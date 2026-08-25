@@ -58,12 +58,37 @@ from pathlib import Path
 # with a picture that has not earned its place is worse than leaving it empty —
 # so the presenter grows into it instead. 81% wide, head higher, so the frame
 # reads as composed rather than half-used.
-BIG_W, BIG_Y = 880, 800
-FULL_W, FULL_Y = 712, 966          # 66% of 1080
-SMALL_W, SMALL_Y = 668, 1245        # a 6% step, not 15% — just enough
+# While the QUESTION CARD is up, the card is the subject and the presenter is
+# not. He shrinks so his head sits JUST BELOW the years pill — the pill's bottom
+# edge is at 0.697 of the frame, and this is the width that puts the top of his
+# head a little under it rather than leaving a hole or covering the pill. At full
+# size his head reaches 0.48 and covers it, which is what shipped twice.
+#
+# TWO SIZES PER PART, NEVER MORE. This size while the card is up, one working
+# size afterwards. Resizing on every block looks restless on screen, so the
+# per-block shrink and the grow-into-empty-space windows are NOT used together
+# with this — one eased change per part, at the moment the card leaves.
+CARD_W = 423
+BIG_W, BIG_Y = 780, 800
+# HEAD BELOW 40%, CONTENT ABOVE 50%. The edu-video stage ends at y=850 (44%),
+# so the presenter is sized to put the top of his head at about 52% — clear of
+# the graphics, and comfortably below the 40% line the brief sets as the limit.
+# Widths chosen from where the TOP OF THE HEAD must land, measured off the
+# actual clip rather than guessed:
+#   CARD_W  423 -> head at 68% : under the years pill while the card is up
+#   FULL_W  645 -> head at 51% : STRICTLY below half whenever graphics are up
+#   BIG_W   780 -> head at 41% : only where the screen is captions and nothing else
+# A little margin is left on each so a clip whose presenter stands taller than
+# this one still cannot cross its line.
+HEAD_TARGET = 0.51
+FULL_W, FULL_Y = 645, 966          # 66% of 1080
+SMALL_W, SMALL_Y = 420, 1245        # a 6% step, not 15% — just enough
                                     # to clear content that stops at 60%       # 56% of 1080
 EASE = 0.75                         # seconds, the ramp at each edge
-PRESENTER_FADE = 0.9                # slow enough to read as direction,
+PRESENTER_FADE = 0.75               # the brief: fade the presenter out over
+                                    # three quarters of a second when a diagram
+                                    # needs the whole screen, and back in when
+                                    # the content returns to the top half.
                                     # not as a dropped frame
 FPS = 30
 CANVAS_W, CANVAS_H = 800, 1150      # holds the small avatar; zoom reaches full
@@ -179,7 +204,7 @@ def _inputs(clips):
 
 
 def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
-              big=None, crop=None):
+              big=None, crop=None, card=None):
     k = (f"hsvkey=hue={key['hue']}:sat={key['sat']}:val=%s:"
          f"similarity={key['sim']}:blend=0.05,format=rgba,alphaextract")
     alpha = ("[a1][a2]blend=all_mode=darken,dilation,dilation,erosion,erosion,"
@@ -232,6 +257,38 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
     cbox = crop or {}
     cw, ch = int(cbox.get("w") or 650), int(cbox.get("h") or 930)
     cx, cy = int(cbox.get("x") or 650), int(cbox.get("y") or 150)
+    # keep the crop's own y: `cy` is rebound to the card's ease expression below,
+    # and the geometry sidecar was recording that expression as the crop offset
+    crop_y = cy
+    # Size from the SUBJECT, crop from the padded box. The padding exists so a
+    # gesture is never sliced; counting it as part of him would shrink him.
+    # Size basis = subject + the ORIGINAL 40px margin, which is the framing that
+    # was approved. The crop is padded further (90px) purely so a gesture between
+    # sampled frames cannot be sliced. Sizing off the padded box instead would
+    # shrink him by the amount of the extra padding.
+    sw = int(cbox.get("subj_w") or cw) + 80
+    pad_k = cw / max(sw, 1)
+    # CENTRE ON THE BODY, NOT THE CROP BOX. The crop spans the union of every
+    # gesture, so an arm reaching further one way makes the box asymmetric and
+    # centring the box left the presenter about 26px off in every video.
+    crop_cx = cx + cw / 2.0
+    if crop and "body_cx" not in crop:
+        # Guard, not a nicety. Without body_cx the frame falls back to centring
+        # the CROP BOX, and the crop box spans the widest gesture rather than the
+        # body — which put the presenter ~26px left of centre in every delivered
+        # video. Re-measure rather than ship that silently.
+        print("  ! crop measurement has no body_cx — re-measuring for centring")
+        try:
+            from tools.avatar_crop import measure as _m
+            crop = _m(Path(avatar)); cbox = crop
+            cw, ch = int(cbox["w"]), int(cbox["h"])
+            cx, cy = int(cbox["x"]), int(cbox["y"])
+            crop_y = cy
+            crop_cx = cx + cw / 2.0
+        except Exception as e:                      # noqa: BLE001
+            print(f"  ! re-measure failed ({type(e).__name__}); centring on the box")
+    body_cx = float(cbox.get("body_cx") or crop_cx)
+    dx_src = crop_cx - body_cx                       # source px to shift right
     if not crop:
         print("  ! no measured crop — legacy window, limbs may clip")
     head = (veo_fc +
@@ -247,10 +304,37 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
     # then whatever the crop, his feet land on 1920 and only his SIZE changes.
     FRAME_H = 1920
     def top_for(width_px):
-        return int(FRAME_H - ch * (width_px / max(cw, 1)))
+        # width_px is the SUBJECT's intended on-screen width; the rendered image
+        # is the padded crop, so it is wider by pad_k.
+        return int(FRAME_H - ch * ((width_px * pad_k) / max(cw, 1)))
     full_y, small_y, big_y = top_for(FULL_W), top_for(SMALL_W), top_for(BIG_W)
+    card_y = top_for(CARD_W)
+    # The canvas holds the SMALL-scaled avatar and zoompan zooms out from it, so
+    # it must be at least that big. It used to be a fixed 800x1150, sized for the
+    # old narrow crop; a padded crop scales to more than that and ffmpeg refuses
+    # to `pad` an image to smaller than itself. Derive it instead.
+    # the shift, expressed in OUTPUT pixels at the working scale
+    dx_out = int(round(dx_src * (FULL_W * pad_k) / max(cw, 1)))
+    base_w = int(SMALL_W * pad_k)
+    base_h = int(ch * base_w / max(cw, 1))
+    # zoompan MAGNIFIES A REGION of the canvas — anything outside that region is
+    # cut, it is not revealed. So the canvas must be big enough to still hold the
+    # avatar at the LARGEST zoom used, or his legs are sliced off mid-torso while
+    # the background behind him still reaches the bottom edge. That is what a
+    # canvas sized for the smallest state produced.
+    max_ratio = max(FULL_W, BIG_W, CARD_W, SMALL_W) / max(SMALL_W, 1)
+    canvas_w = int(max(CANVAS_W, base_w * max_ratio + 24)) // 2 * 2
+    canvas_h = int(max(CANVAS_H, base_h * max_ratio + 24)) // 2 * 2
+    # Assert it rather than trust it. The crop always runs to the bottom of the
+    # source, so the presenter reaches y=1920 BY CONSTRUCTION — unless the canvas
+    # is too small for the largest zoom, which silently slices his legs off.
+    need_h = base_h * max_ratio
+    if canvas_h < need_h:
+        raise SystemExit(f"canvas {canvas_h}px cannot hold the avatar at "
+                         f"{max_ratio:.2f}x zoom (needs {need_h:.0f}px) — "
+                         f"he would be cut off at the bottom")
 
-    if windows or big:
+    if windows or big or card:
         # The size change RAMPS over EASE seconds — a true scale, per frame.
         #
         # Five attempts got here; recorded so nobody repeats them:
@@ -270,8 +354,8 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
         #
         # zoompan only zooms IN, so the canvas carries the presenter at his
         # SMALL size and zooms out to full when nothing is behind him.
-        ratio = FULL_W / SMALL_W
-        big_ratio = BIG_W / SMALL_W
+        ratio = (FULL_W * pad_k) / (SMALL_W * pad_k)
+        big_ratio = (BIG_W * pad_k) / (SMALL_W * pad_k)
         T = f"(on/{FPS})"                       # zoompan's only usable clock
         ease_z = _ease_expr(windows, T) if windows else "0"
         ease_y = _ease_expr(windows, "t") if windows else "0"
@@ -281,31 +365,54 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
         # is empty — so adding them is safe.
         bz = _ease_expr(big, T) if big else "0"
         by = _ease_expr(big, "t") if big else "0"
+        cz = _ease_expr(card, T) if card else "0"
+        cy = _ease_expr(card, "t") if card else "0"
+        card_ratio = (CARD_W * pad_k) / (SMALL_W * pad_k)
         z = (f"1+{ratio - 1:.4f}*(1-({ease_z}))"
-             f"+{big_ratio - ratio:.4f}*({bz})")
+             f"+{big_ratio - ratio:.4f}*({bz})"
+             f"+{card_ratio - ratio:.4f}*({cz})")
         # zoompan zooms about x=0,y=0 unless told otherwise, which walks the
         # presenter left as he scales — the off-centre drift the manager spotted.
         # Anchoring x to the canvas centre keeps him centred at every zoom level.
-        pan = (f"pad={CANVAS_W}:{CANVAS_H}:(ow-iw)/2:0:%s,"
-               f"zoompan=z='{z}':d=1:s={CANVAS_W}x{CANVAS_H}:fps={FPS}"
+        pan = (f"pad={canvas_w}:{canvas_h}:(ow-iw)/2:0:%s,"
+               f"zoompan=z='{z}':d=1:s={canvas_w}x{canvas_h}:fps={FPS}"
                f":x='iw/2-(iw/zoom/2)':y='0'")
         y = (f"{full_y}+({small_y - full_y})*({ease_y})"
-             f"+({big_y - full_y})*({by})")
+             f"+({big_y - full_y})*({by})"
+             f"+({card_y - full_y})*({cy})")
         fc = (head +
               f"[cc][al]alphamerge,split=2[colr][alph];"
-              f"[colr]scale={SMALL_W}:-2:flags=lanczos,{pan % 'black@0'}[zc];"
-              f"[alph]alphaextract,scale={SMALL_W}:-2:flags=lanczos,"
+              f"[colr]scale={int(SMALL_W * pad_k)}:-2:flags=lanczos,{pan % 'black@0'}[zc];"
+              f"[alph]alphaextract,scale={int(SMALL_W * pad_k)}:-2:flags=lanczos,"
               f"{pan % 'black'}[za];"
               f"[zc][za]alphamerge[av];"
               f"{BG}format=rgba[bg];"
-              f"[bg][av]overlay=x=(W-w)/2:y='{y}':eval=frame:"
+              f"[bg][av]overlay=x=(W-w)/2+({dx_out}):y='{y}':eval=frame:"
               f"eof_action=pass,format=yuv420p[v]")
 
     else:
         fc = (head +
-              f"[cc][al]alphamerge,scale={FULL_W}:-2:flags=lanczos[av];"
+              f"[cc][al]alphamerge,scale={int(FULL_W * pad_k)}:-2:flags=lanczos[av];"
               f"{BG}format=rgba[bg];"
-              f"[bg][av]overlay=x=(W-w)/2:y={full_y}:eval=init:eof_action=pass,format=yuv420p[v]")
+              f"[bg][av]overlay=x=(W-w)/2+({dx_out}):y={full_y}:eval=init:eof_action=pass,format=yuv420p[v]")
+
+    # Record the geometry so it can be CHECKED as numbers. Pixel-hunting the
+    # finished frame is unreliable here: a dark shirt on a dark plate reads as
+    # background, which made the gate report a cut-off presenter on a video that
+    # was correct. The geometry is exact and knowable.
+    from tools.avatar_crop import MARGIN as _M
+    _geom = {"crop": [cw, ch, cx, crop_y], "pad_k": round(pad_k, 4),
+             "canvas": [locals().get("canvas_w"), locals().get("canvas_h")], "dx_out": dx_out}
+    for _n, _W in (("card", CARD_W), ("full", FULL_W), ("big", BIG_W), ("small", SMALL_W)):
+        _sc = (_W * pad_k) / max(cw, 1)
+        _top = FRAME_H - ch * _sc
+        _geom[_n] = {"width": _W, "top": round(_top, 1),
+                     "head": round((_top + _M * _sc) / FRAME_H, 4),
+                     "bottom": round(_top + ch * _sc, 1)}
+    try:
+        Path(str(out) + ".geom.json").write_text(json.dumps(_geom, indent=1))
+    except OSError:
+        pass
 
     # Write to a temp name and move into place. A previous run killed mid-write
     # left a partial file at the destination, and the next run wrote to the same
@@ -317,17 +424,32 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
     # 600MB for a single composite; three of those at once drove an 8GB machine
     # into swap and started killing the user's other apps. x264 also holds a
     # frame buffer per thread, so the cap bounds memory as well as CPU.
-    # Raise FFMPEG_THREADS on a bigger machine.
-    threads = os.environ.get("FFMPEG_THREADS", "3")
+    # Two by default. Unbounded, x264 took ~300% CPU of eight cores and the
+    # machine stopped responding while a render was going — the user saw "the
+    # window is not responding". x264 also holds a frame buffer per thread, so
+    # the cap bounds memory as well. Raise FFMPEG_THREADS on a bigger machine.
+    threads = os.environ.get("FFMPEG_THREADS", "2")
+    # -threads caps the ENCODER only. The filter graph here is heavy — hsvkey,
+    # dilation, erosion, gblur, zoompan — and threads independently, which is
+    # why capping the encoder alone still left ffmpeg at ~300% of eight cores
+    # and the machine unresponsive. These two cap the filters as well.
+    # The presenter clips are 25 fps and the stage is 30. Converting with the
+    # fps filter and then letting zoompan re-stamp the timestamps drifts the
+    # picture against the sound — audible right where the avatar changes size.
+    # -fps_mode cfr pins the output to one constant rate, and aresample keeps
+    # the audio locked to it instead of free-running.
     cmd = ["ffmpeg", "-v", "error", "-threads", threads,
+           "-filter_threads", threads, "-filter_complex_threads", threads,
            "-i", str(bg), "-i", str(avatar),
            # Input order is the contract _veo_chain() indexes against: bg is 0,
            # the avatar is 1, then each clip followed by its own labels.
            *_inputs(clips),
            "-filter_complex", fc, "-map", "[v]", "-map", "1:a",
+           "-fps_mode", "cfr", "-r", str(FPS),
            "-c:v", "libx264", "-preset", "medium", "-crf", "19",
            "-threads", threads, "-x264-params", f"threads={threads}:lookahead-threads=1",
-           "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k",
+           "-pix_fmt", "yuv420p", "-af", "aresample=async=1:first_pts=0",
+           "-c:a", "aac", "-b:a", "192k",
            "-max_muxing_queue_size", "512",
            "-movflags", "+faststart", str(tmp), "-y"]
     print(f"compositing -> {out}"
@@ -377,11 +499,21 @@ if __name__ == "__main__":
 
     def opt(i):
         """The optional trailing arguments are positional, so there has to be a
-        way to say "not this one, but the next one". `-` means skip."""
+        way to say "not this one, but the next one". `-` means skip.
+
+        A path that does not exist is also treated as "skip" rather than as an
+        error: these are all optional refinements — resize windows, a card
+        window — and losing one should soften the composite, not abort it.
+        """
         if len(sys.argv) <= i:
             return None
         v = sys.argv[i].strip()
-        return None if v in ("", "-", "none") else v
+        if v in ("", "-", "none"):
+            return None
+        if not Path(v).is_file():
+            print(f"  ! {v} missing — continuing without it")
+            return None
+        return v
 
     wins = json.loads(Path(opt(5)).read_text()) if opt(5) else None
     pres = json.loads(Path(opt(6)).read_text()) if opt(6) else None
@@ -395,5 +527,6 @@ if __name__ == "__main__":
             print(f"  measured crop {cbox['w']}x{cbox['h']} at {cbox['x']},{cbox['y']}")
         except Exception as e:                      # noqa: BLE001
             print(f"  ! crop measurement failed ({type(e).__name__}); legacy window")
+    cardw = json.loads(Path(opt(10)).read_text()) if opt(10) else None
     composite(bg, av, json.loads(Path(keyf).read_text()), out, wins, pres, clips,
-              big=bigw, crop=cbox)
+              big=bigw, crop=cbox, card=cardw)

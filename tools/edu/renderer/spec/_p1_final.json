@@ -1,0 +1,1885 @@
+[
+ {
+  "seg_id": 1,
+  "duration": 7.08,
+  "voiceover": "शुष्क सेल का उपयोग टॉर्च, टेप रिकॉर्डर, रेडियो, खिलौने, कैलकुलेटर आदि में किया जाता है।",
+  "phrases": [
+   {
+    "text": "शुष्क सेल का उपयोग टॉर्च, टेप रिकॉर्डर,",
+    "golden": "शुष्क सेल",
+    "t_in": 0.0,
+    "t_out": 3.5
+   },
+   {
+    "text": "रेडियो, खिलौने, कैलकुलेटर आदि में किया जाता है।",
+    "golden": null,
+    "t_in": 3.5,
+    "t_out": 7.08
+   }
+  ],
+  "timing": "transcript",
+  "type": "TEXT_ONLY",
+  "labels": []
+ },
+ {
+  "seg_id": 2,
+  "duration": 7.18,
+  "voiceover": "ये सेल लेकलांशी सेल के सिद्धान्त पर कार्य करता है, जिसका आविष्कार जी. लेकलांशी ने 1868 में किया था।",
+  "phrases": [
+   {
+    "text": "ये सेल लेकलांशी सेल के सिद्धान्त पर कार्य करता है,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 3.52
+   },
+   {
+    "text": "जिसका आविष्कार जी. लेकलांशी ने 1868 में किया था।",
+    "golden": null,
+    "t_in": 3.52,
+    "t_out": 7.18
+   }
+  ],
+  "timing": "transcript",
+  "type": "TEXT_ONLY",
+  "labels": []
+ },
+ {
+  "seg_id": 3,
+  "duration": 4.94,
+  "voiceover": "अब आगे वाली बात दिमाग में बिठा लो, क्योंकि यही सबसे ज़रूरी है।",
+  "phrases": [
+   {
+    "text": "अब आगे वाली बात दिमाग में बिठा लो,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.6
+   },
+   {
+    "text": "क्योंकि यही सबसे ज़रूरी है।",
+    "golden": null,
+    "t_in": 2.6,
+    "t_out": 4.94
+   }
+  ],
+  "timing": "transcript",
+  "type": "TEXT_ONLY",
+  "labels": []
+ },
+ {
+  "seg_id": 4,
+  "duration": 6.5,
+  "voiceover": "शुष्क सेल में जिंक का एक खोखला आवरण होता है। यही जिंक का आवरण ऐनोड का काम करता है।",
+  "phrases": [
+   {
+    "text": "शुष्क सेल में जिंक का एक खोखला आवरण होता है।",
+    "golden": "शुष्क सेल",
+    "t_in": 0.0,
+    "t_out": 3.76
+   },
+   {
+    "text": "यही जिंक का आवरण ऐनोड का काम करता है।",
+    "golden": "ऐनोड",
+    "t_in": 3.76,
+    "t_out": 6.5
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/dry-cell.svg",
+   "carry_over": [],
+   "timeline": [
+    {
+     "id": "dc_zinc",
+     "action": "fade_in",
+     "t": 0.4,
+     "dur": 0.6
+    },
+    {
+     "id": "lead_zinc",
+     "action": "fade_in",
+     "t": 1.1,
+     "dur": 0.5
+    }
+   ]
+  },
+  "end_state": [
+   "dc_zinc",
+   "lead_zinc"
+  ],
+  "labels": [
+   {
+    "text": "जिंक पात्र",
+    "x": 0.22,
+    "y": 0.34,
+    "t_in": 1.3,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 5,
+  "duration": 6.88,
+  "voiceover": "इसके अंदर NH₄Cl और थोड़ी मात्रा में ZnCl₂ का पानी में बना हुआ पेस्ट होता है।",
+  "phrases": [
+   {
+    "text": "इसके अंदर NH₄Cl और थोड़ी मात्रा में ZnCl₂ का",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 4.64
+   },
+   {
+    "text": "पानी में बना हुआ पेस्ट होता है।",
+    "golden": null,
+    "t_in": 4.64,
+    "t_out": 6.88
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/dry-cell.svg",
+   "carry_over": [
+    "dc_zinc",
+    "lead_zinc"
+   ],
+   "timeline": [
+    {
+     "id": "dc_electrolyte",
+     "action": "fade_in",
+     "t": 0.4,
+     "dur": 0.6
+    },
+    {
+     "id": "lead_electrolyte",
+     "action": "fade_in",
+     "t": 1.1,
+     "dur": 0.5
+    }
+   ]
+  },
+  "end_state": [
+   "dc_electrolyte",
+   "dc_zinc",
+   "lead_electrolyte",
+   "lead_zinc"
+  ],
+  "labels": [
+   {
+    "text": "जिंक पात्र",
+    "x": 0.22,
+    "y": 0.34,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "NH₄Cl + ZnCl₂",
+    "x": 0.21,
+    "y": 0.79,
+    "t_in": 1.3,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 6,
+  "duration": 3.66,
+  "voiceover": "चलो, यहाँ तक हो गया? अब बीच वाला हिस्सा देखते हैं।",
+  "phrases": [
+   {
+    "text": "चलो, यहाँ तक हो गया?",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.66
+   },
+   {
+    "text": "अब बीच वाला हिस्सा देखते हैं।",
+    "golden": null,
+    "t_in": 1.66,
+    "t_out": 3.66
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/dry-cell.svg",
+   "carry_over": [
+    "dc_electrolyte",
+    "dc_zinc",
+    "lead_electrolyte",
+    "lead_zinc"
+   ],
+   "timeline": []
+  },
+  "end_state": [
+   "dc_electrolyte",
+   "dc_zinc",
+   "lead_electrolyte",
+   "lead_zinc"
+  ],
+  "labels": [
+   {
+    "text": "जिंक पात्र",
+    "x": 0.22,
+    "y": 0.34,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "NH₄Cl + ZnCl₂",
+    "x": 0.21,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 7,
+  "duration": 4.46,
+  "voiceover": "अब बीच में एक कार्बन की छड़ होती है, जो कैथोड का काम करती है।",
+  "phrases": [
+   {
+    "text": "अब बीच में एक कार्बन की छड़ होती है,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.56
+   },
+   {
+    "text": "जो कैथोड का काम करती है।",
+    "golden": "कैथोड",
+    "t_in": 2.56,
+    "t_out": 4.46
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/dry-cell.svg",
+   "carry_over": [
+    "dc_electrolyte",
+    "dc_zinc",
+    "lead_electrolyte",
+    "lead_zinc"
+   ],
+   "timeline": [
+    {
+     "id": "dc_rod",
+     "action": "fade_in",
+     "t": 0.36,
+     "dur": 0.6
+    },
+    {
+     "id": "dc_cap",
+     "action": "fade_in",
+     "t": 0.86,
+     "dur": 0.5
+    },
+    {
+     "id": "lead_rod",
+     "action": "fade_in",
+     "t": 1.06,
+     "dur": 0.5
+    }
+   ]
+  },
+  "end_state": [
+   "dc_cap",
+   "dc_electrolyte",
+   "dc_rod",
+   "dc_zinc",
+   "lead_electrolyte",
+   "lead_rod",
+   "lead_zinc"
+  ],
+  "labels": [
+   {
+    "text": "जिंक पात्र",
+    "x": 0.22,
+    "y": 0.34,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "NH₄Cl + ZnCl₂",
+    "x": 0.21,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "कार्बन छड़",
+    "x": 0.79,
+    "y": 0.14,
+    "t_in": 1.26,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 8,
+  "duration": 6.02,
+  "voiceover": "और इस कार्बन की छड़ के चारों ओर MnO₂ और कार्बन चूर्ण का काला पेस्ट भरा होता है।",
+  "phrases": [
+   {
+    "text": "और इस कार्बन की छड़ के चारों ओर",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.32
+   },
+   {
+    "text": "MnO₂ और कार्बन चूर्ण का काला पेस्ट भरा होता है।",
+    "golden": null,
+    "t_in": 2.32,
+    "t_out": 6.02
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/dry-cell.svg",
+   "carry_over": [
+    "dc_cap",
+    "dc_electrolyte",
+    "dc_rod",
+    "dc_zinc",
+    "lead_electrolyte",
+    "lead_rod",
+    "lead_zinc"
+   ],
+   "timeline": [
+    {
+     "id": "dc_mno2",
+     "action": "fade_in",
+     "t": 0.4,
+     "dur": 0.6
+    },
+    {
+     "id": "lead_mno2",
+     "action": "fade_in",
+     "t": 1.1,
+     "dur": 0.5
+    }
+   ]
+  },
+  "end_state": [
+   "dc_cap",
+   "dc_electrolyte",
+   "dc_mno2",
+   "dc_rod",
+   "dc_zinc",
+   "lead_electrolyte",
+   "lead_mno2",
+   "lead_rod",
+   "lead_zinc"
+  ],
+  "labels": [
+   {
+    "text": "जिंक पात्र",
+    "x": 0.22,
+    "y": 0.34,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "NH₄Cl + ZnCl₂",
+    "x": 0.21,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "कार्बन छड़",
+    "x": 0.79,
+    "y": 0.14,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "MnO₂ + कार्बन",
+    "x": 0.78,
+    "y": 0.79,
+    "t_in": 1.3,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 9,
+  "duration": 6.2,
+  "voiceover": "यानी बच्चों, एग्जाम में शुष्क सेल का चित्र बनाते समय ये चार चीज़ें बिल्कुल मत भूलना।",
+  "phrases": [
+   {
+    "text": "यानी बच्चों, एग्जाम में शुष्क सेल का चित्र बनाते समय",
+    "golden": "शुष्क सेल",
+    "t_in": 0.0,
+    "t_out": 4.36
+   },
+   {
+    "text": "ये चार चीज़ें बिल्कुल मत भूलना।",
+    "golden": null,
+    "t_in": 4.36,
+    "t_out": 6.2
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/dry-cell.svg",
+   "carry_over": [
+    "dc_cap",
+    "dc_electrolyte",
+    "dc_mno2",
+    "dc_rod",
+    "dc_zinc",
+    "lead_electrolyte",
+    "lead_mno2",
+    "lead_rod",
+    "lead_zinc"
+   ],
+   "timeline": [
+    {
+     "id": "dc_seal",
+     "action": "fade_in",
+     "t": 0.5,
+     "dur": 0.6
+    },
+    {
+     "id": "lead_seal",
+     "action": "fade_in",
+     "t": 1.2,
+     "dur": 0.5
+    }
+   ]
+  },
+  "end_state": [
+   "dc_cap",
+   "dc_electrolyte",
+   "dc_mno2",
+   "dc_rod",
+   "dc_seal",
+   "dc_zinc",
+   "lead_electrolyte",
+   "lead_mno2",
+   "lead_rod",
+   "lead_seal",
+   "lead_zinc"
+  ],
+  "labels": [
+   {
+    "text": "जिंक पात्र",
+    "x": 0.22,
+    "y": 0.34,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "NH₄Cl + ZnCl₂",
+    "x": 0.21,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "कार्बन छड़",
+    "x": 0.79,
+    "y": 0.14,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "MnO₂ + कार्बन",
+    "x": 0.78,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "सील",
+    "x": 0.22,
+    "y": 0.12,
+    "t_in": 1.4,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 10,
+  "duration": 3.74,
+  "voiceover": "सबसे पहले, Zn का बाहरी आवरण — ये ऐनोड का काम करता है।",
+  "phrases": [
+   {
+    "text": "सबसे पहले, Zn का बाहरी आवरण —",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.2
+   },
+   {
+    "text": "ये ऐनोड का काम करता है।",
+    "golden": "ऐनोड",
+    "t_in": 2.2,
+    "t_out": 3.74
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/dry-cell.svg",
+   "carry_over": [
+    "dc_cap",
+    "dc_electrolyte",
+    "dc_mno2",
+    "dc_rod",
+    "dc_seal",
+    "dc_zinc",
+    "lead_electrolyte",
+    "lead_mno2",
+    "lead_rod",
+    "lead_seal",
+    "lead_zinc"
+   ],
+   "timeline": [
+    {
+     "id": "dc_zinc",
+     "action": "pulse",
+     "t": 0.0,
+     "dur": 1.1
+    }
+   ]
+  },
+  "end_state": [
+   "dc_cap",
+   "dc_electrolyte",
+   "dc_mno2",
+   "dc_rod",
+   "dc_seal",
+   "dc_zinc",
+   "lead_electrolyte",
+   "lead_mno2",
+   "lead_rod",
+   "lead_seal",
+   "lead_zinc"
+  ],
+  "labels": [
+   {
+    "text": "जिंक पात्र",
+    "x": 0.22,
+    "y": 0.34,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "NH₄Cl + ZnCl₂",
+    "x": 0.21,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "कार्बन छड़",
+    "x": 0.79,
+    "y": 0.14,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "MnO₂ + कार्बन",
+    "x": 0.78,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "सील",
+    "x": 0.22,
+    "y": 0.12,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "1",
+    "x": 0.105,
+    "y": 0.34,
+    "t_in": 0.0,
+    "accent": true
+   }
+  ]
+ },
+ {
+  "seg_id": 11,
+  "duration": 5.38,
+  "voiceover": "दूसरा, NH₄Cl और ZnCl₂ का पेस्ट — यह विद्युत्-अपघट्य का काम करता है।",
+  "phrases": [
+   {
+    "text": "दूसरा, NH₄Cl और ZnCl₂ का पेस्ट —",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 3.26
+   },
+   {
+    "text": "यह विद्युत्-अपघट्य का काम करता है।",
+    "golden": null,
+    "t_in": 3.26,
+    "t_out": 5.38
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/dry-cell.svg",
+   "carry_over": [
+    "dc_cap",
+    "dc_electrolyte",
+    "dc_mno2",
+    "dc_rod",
+    "dc_seal",
+    "dc_zinc",
+    "lead_electrolyte",
+    "lead_mno2",
+    "lead_rod",
+    "lead_seal",
+    "lead_zinc"
+   ],
+   "timeline": [
+    {
+     "id": "dc_electrolyte",
+     "action": "pulse",
+     "t": 0.0,
+     "dur": 1.1
+    }
+   ]
+  },
+  "end_state": [
+   "dc_cap",
+   "dc_electrolyte",
+   "dc_mno2",
+   "dc_rod",
+   "dc_seal",
+   "dc_zinc",
+   "lead_electrolyte",
+   "lead_mno2",
+   "lead_rod",
+   "lead_seal",
+   "lead_zinc"
+  ],
+  "labels": [
+   {
+    "text": "जिंक पात्र",
+    "x": 0.22,
+    "y": 0.34,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "NH₄Cl + ZnCl₂",
+    "x": 0.21,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "कार्बन छड़",
+    "x": 0.79,
+    "y": 0.14,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "MnO₂ + कार्बन",
+    "x": 0.78,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "सील",
+    "x": 0.22,
+    "y": 0.12,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "1",
+    "x": 0.105,
+    "y": 0.34,
+    "t_in": -0.6,
+    "accent": true
+   },
+   {
+    "text": "2",
+    "x": 0.045,
+    "y": 0.79,
+    "t_in": 0.0,
+    "accent": true
+   }
+  ]
+ },
+ {
+  "seg_id": 12,
+  "duration": 3.84,
+  "voiceover": "तीसरा, बीच में लगी कार्बन रॉड — यह कैथोड का काम करती है।",
+  "phrases": [
+   {
+    "text": "तीसरा, बीच में लगी कार्बन रॉड —",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.02
+   },
+   {
+    "text": "यह कैथोड का काम करती है।",
+    "golden": "कैथोड",
+    "t_in": 2.02,
+    "t_out": 3.84
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/dry-cell.svg",
+   "carry_over": [
+    "dc_cap",
+    "dc_electrolyte",
+    "dc_mno2",
+    "dc_rod",
+    "dc_seal",
+    "dc_zinc",
+    "lead_electrolyte",
+    "lead_mno2",
+    "lead_rod",
+    "lead_seal",
+    "lead_zinc"
+   ],
+   "timeline": [
+    {
+     "id": "dc_rod",
+     "action": "pulse",
+     "t": 0.0,
+     "dur": 1.1
+    }
+   ]
+  },
+  "end_state": [
+   "dc_cap",
+   "dc_electrolyte",
+   "dc_mno2",
+   "dc_rod",
+   "dc_seal",
+   "dc_zinc",
+   "lead_electrolyte",
+   "lead_mno2",
+   "lead_rod",
+   "lead_seal",
+   "lead_zinc"
+  ],
+  "labels": [
+   {
+    "text": "जिंक पात्र",
+    "x": 0.22,
+    "y": 0.34,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "NH₄Cl + ZnCl₂",
+    "x": 0.21,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "कार्बन छड़",
+    "x": 0.79,
+    "y": 0.14,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "MnO₂ + कार्बन",
+    "x": 0.78,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "सील",
+    "x": 0.22,
+    "y": 0.12,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "1",
+    "x": 0.105,
+    "y": 0.34,
+    "t_in": -0.6,
+    "accent": true
+   },
+   {
+    "text": "2",
+    "x": 0.045,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": true
+   },
+   {
+    "text": "3",
+    "x": 0.915,
+    "y": 0.14,
+    "t_in": 0.0,
+    "accent": true
+   }
+  ]
+ },
+ {
+  "seg_id": 13,
+  "duration": 7.58,
+  "voiceover": "और चौथा, MnO₂ और कार्बन पाउडर का पेस्ट, जो कार्बन रॉड के चारों ओर मौजूद रहता है।",
+  "phrases": [
+   {
+    "text": "और चौथा, MnO₂ और कार्बन पाउडर का पेस्ट,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 3.7
+   },
+   {
+    "text": "जो कार्बन रॉड के चारों ओर मौजूद रहता है।",
+    "golden": null,
+    "t_in": 3.7,
+    "t_out": 7.58
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/dry-cell.svg",
+   "carry_over": [
+    "dc_cap",
+    "dc_electrolyte",
+    "dc_mno2",
+    "dc_rod",
+    "dc_seal",
+    "dc_zinc",
+    "lead_electrolyte",
+    "lead_mno2",
+    "lead_rod",
+    "lead_seal",
+    "lead_zinc"
+   ],
+   "timeline": [
+    {
+     "id": "dc_mno2",
+     "action": "pulse",
+     "t": 0.0,
+     "dur": 1.1
+    }
+   ]
+  },
+  "end_state": [
+   "dc_cap",
+   "dc_electrolyte",
+   "dc_mno2",
+   "dc_rod",
+   "dc_seal",
+   "dc_zinc",
+   "lead_electrolyte",
+   "lead_mno2",
+   "lead_rod",
+   "lead_seal",
+   "lead_zinc"
+  ],
+  "labels": [
+   {
+    "text": "जिंक पात्र",
+    "x": 0.22,
+    "y": 0.34,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "NH₄Cl + ZnCl₂",
+    "x": 0.21,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "कार्बन छड़",
+    "x": 0.79,
+    "y": 0.14,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "MnO₂ + कार्बन",
+    "x": 0.78,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "सील",
+    "x": 0.22,
+    "y": 0.12,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "1",
+    "x": 0.105,
+    "y": 0.34,
+    "t_in": -0.6,
+    "accent": true
+   },
+   {
+    "text": "2",
+    "x": 0.045,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": true
+   },
+   {
+    "text": "3",
+    "x": 0.915,
+    "y": 0.14,
+    "t_in": -0.6,
+    "accent": true
+   },
+   {
+    "text": "4",
+    "x": 0.955,
+    "y": 0.79,
+    "t_in": 0.0,
+    "accent": true
+   }
+  ]
+ },
+ {
+  "seg_id": 14,
+  "duration": 7.1,
+  "voiceover": "बस ये बात दिमाग में बिठा लो, कि चित्र बनाते समय इन चारों चीज़ों को सही जगह और सही नाम के साथ ज़रूर दिखाना।",
+  "phrases": [
+   {
+    "text": "बस ये बात दिमाग में बिठा लो,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.92
+   },
+   {
+    "text": "कि चित्र बनाते समय इन चारों चीज़ों को",
+    "golden": null,
+    "t_in": 1.92,
+    "t_out": 4.18
+   },
+   {
+    "text": "सही जगह और सही नाम के साथ ज़रूर दिखाना।",
+    "golden": null,
+    "t_in": 4.18,
+    "t_out": 7.1
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/dry-cell.svg",
+   "carry_over": [
+    "dc_cap",
+    "dc_electrolyte",
+    "dc_mno2",
+    "dc_rod",
+    "dc_seal",
+    "dc_zinc",
+    "lead_electrolyte",
+    "lead_mno2",
+    "lead_rod",
+    "lead_seal",
+    "lead_zinc"
+   ],
+   "timeline": []
+  },
+  "end_state": [
+   "dc_cap",
+   "dc_electrolyte",
+   "dc_mno2",
+   "dc_rod",
+   "dc_seal",
+   "dc_zinc",
+   "lead_electrolyte",
+   "lead_mno2",
+   "lead_rod",
+   "lead_seal",
+   "lead_zinc"
+  ],
+  "labels": [
+   {
+    "text": "जिंक पात्र",
+    "x": 0.22,
+    "y": 0.34,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "NH₄Cl + ZnCl₂",
+    "x": 0.21,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "कार्बन छड़",
+    "x": 0.79,
+    "y": 0.14,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "MnO₂ + कार्बन",
+    "x": 0.78,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "सील",
+    "x": 0.22,
+    "y": 0.12,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "1",
+    "x": 0.105,
+    "y": 0.34,
+    "t_in": -0.6,
+    "accent": true
+   },
+   {
+    "text": "2",
+    "x": 0.045,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": true
+   },
+   {
+    "text": "3",
+    "x": 0.915,
+    "y": 0.14,
+    "t_in": -0.6,
+    "accent": true
+   },
+   {
+    "text": "4",
+    "x": 0.955,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": true
+   }
+  ]
+ },
+ {
+  "seg_id": 15,
+  "duration": 9.82,
+  "voiceover": "बच्चों, क्योंकि प्रश्न में साफ़ लिखा है ‘सचित्र वर्णन’, इसीलिए परीक्षा में चित्र ज़रूर बनाना, सिर्फ़ लिख कर मत छोड़ना।",
+  "phrases": [
+   {
+    "text": "बच्चों, क्योंकि प्रश्न में साफ़ लिखा है ‘सचित्र वर्णन’,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 4.44
+   },
+   {
+    "text": "इसीलिए परीक्षा में चित्र ज़रूर बनाना,",
+    "golden": null,
+    "t_in": 4.44,
+    "t_out": 8.24
+   },
+   {
+    "text": "सिर्फ़ लिख कर मत छोड़ना।",
+    "golden": null,
+    "t_in": 8.24,
+    "t_out": 9.82
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/dry-cell.svg",
+   "carry_over": [
+    "dc_cap",
+    "dc_electrolyte",
+    "dc_mno2",
+    "dc_rod",
+    "dc_seal",
+    "dc_zinc",
+    "lead_electrolyte",
+    "lead_mno2",
+    "lead_rod",
+    "lead_seal",
+    "lead_zinc"
+   ],
+   "timeline": [
+    {
+     "id": "dc_zinc",
+     "action": "fade_out",
+     "t": 8.66,
+     "dur": 0.9
+    },
+    {
+     "id": "dc_electrolyte",
+     "action": "fade_out",
+     "t": 8.66,
+     "dur": 0.9
+    },
+    {
+     "id": "dc_rod",
+     "action": "fade_out",
+     "t": 8.66,
+     "dur": 0.9
+    },
+    {
+     "id": "dc_cap",
+     "action": "fade_out",
+     "t": 8.66,
+     "dur": 0.9
+    },
+    {
+     "id": "dc_mno2",
+     "action": "fade_out",
+     "t": 8.66,
+     "dur": 0.9
+    },
+    {
+     "id": "dc_seal",
+     "action": "fade_out",
+     "t": 8.66,
+     "dur": 0.9
+    },
+    {
+     "id": "lead_zinc",
+     "action": "fade_out",
+     "t": 8.66,
+     "dur": 0.9
+    },
+    {
+     "id": "lead_electrolyte",
+     "action": "fade_out",
+     "t": 8.66,
+     "dur": 0.9
+    },
+    {
+     "id": "lead_rod",
+     "action": "fade_out",
+     "t": 8.66,
+     "dur": 0.9
+    },
+    {
+     "id": "lead_mno2",
+     "action": "fade_out",
+     "t": 8.66,
+     "dur": 0.9
+    },
+    {
+     "id": "lead_seal",
+     "action": "fade_out",
+     "t": 8.66,
+     "dur": 0.9
+    }
+   ]
+  },
+  "end_state": [],
+  "labels": [
+   {
+    "text": "जिंक पात्र",
+    "x": 0.22,
+    "y": 0.34,
+    "t_in": -0.6,
+    "accent": false,
+    "t_out": 8.66
+   },
+   {
+    "text": "NH₄Cl + ZnCl₂",
+    "x": 0.21,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": false,
+    "t_out": 8.66
+   },
+   {
+    "text": "कार्बन छड़",
+    "x": 0.79,
+    "y": 0.14,
+    "t_in": -0.6,
+    "accent": false,
+    "t_out": 8.66
+   },
+   {
+    "text": "MnO₂ + कार्बन",
+    "x": 0.78,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": false,
+    "t_out": 8.66
+   },
+   {
+    "text": "सील",
+    "x": 0.22,
+    "y": 0.12,
+    "t_in": -0.6,
+    "accent": false,
+    "t_out": 8.66
+   },
+   {
+    "text": "1",
+    "x": 0.105,
+    "y": 0.34,
+    "t_in": -0.6,
+    "accent": true,
+    "t_out": 8.66
+   },
+   {
+    "text": "2",
+    "x": 0.045,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": true,
+    "t_out": 8.66
+   },
+   {
+    "text": "3",
+    "x": 0.915,
+    "y": 0.14,
+    "t_in": -0.6,
+    "accent": true,
+    "t_out": 8.66
+   },
+   {
+    "text": "4",
+    "x": 0.955,
+    "y": 0.79,
+    "t_in": -0.6,
+    "accent": true,
+    "t_out": 8.66
+   }
+  ]
+ },
+ {
+  "seg_id": 16,
+  "duration": 4.8,
+  "voiceover": "अब आता है सबसे मज़ेदार हिस्सा, ध्यान से सुनना। कि सेल काम कैसे करता है?",
+  "phrases": [
+   {
+    "text": "अब आता है सबसे मज़ेदार हिस्सा,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.9
+   },
+   {
+    "text": "ध्यान से सुनना।",
+    "golden": null,
+    "t_in": 1.9,
+    "t_out": 2.98
+   },
+   {
+    "text": "कि सेल काम कैसे करता है?",
+    "golden": null,
+    "t_in": 2.98,
+    "t_out": 4.8
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "stage": {
+   "top": 330,
+   "h": 1000
+  },
+  "diagram": {
+   "asset": "assets/dry-cell-working.svg",
+   "carry_over": [],
+   "timeline": [
+    {
+     "id": "w_zinc",
+     "action": "fade_in",
+     "t": 0.3,
+     "dur": 0.6
+    },
+    {
+     "id": "w_electrolyte",
+     "action": "fade_in",
+     "t": 0.5,
+     "dur": 0.6
+    },
+    {
+     "id": "w_mno2",
+     "action": "fade_in",
+     "t": 0.7,
+     "dur": 0.6
+    },
+    {
+     "id": "w_rod",
+     "action": "fade_in",
+     "t": 0.9,
+     "dur": 0.6
+    },
+    {
+     "id": "w_seal",
+     "action": "fade_in",
+     "t": 1.1,
+     "dur": 0.5
+    },
+    {
+     "id": "w_cap",
+     "action": "fade_in",
+     "t": 1.1,
+     "dur": 0.5
+    },
+    {
+     "id": "w_base",
+     "action": "fade_in",
+     "t": 1.3,
+     "dur": 0.5
+    }
+   ]
+  },
+  "end_state": [
+   "w_base",
+   "w_cap",
+   "w_electrolyte",
+   "w_mno2",
+   "w_rod",
+   "w_seal",
+   "w_zinc"
+  ],
+  "labels": []
+ },
+ {
+  "seg_id": 17,
+  "duration": 5.28,
+  "voiceover": "इसे ध्यान से समझना, यहाँ सौ में से अस्सी बच्चे अक्सर गलती करते हैं।",
+  "phrases": [
+   {
+    "text": "इसे ध्यान से समझना,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.88
+   },
+   {
+    "text": "यहाँ सौ में से अस्सी बच्चे अक्सर गलती करते हैं।",
+    "golden": null,
+    "t_in": 1.88,
+    "t_out": 5.28
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "stage": {
+   "top": 330,
+   "h": 1000
+  },
+  "diagram": {
+   "asset": "assets/dry-cell-working.svg",
+   "carry_over": [
+    "w_base",
+    "w_cap",
+    "w_electrolyte",
+    "w_mno2",
+    "w_rod",
+    "w_seal",
+    "w_zinc"
+   ],
+   "timeline": []
+  },
+  "end_state": [
+   "w_base",
+   "w_cap",
+   "w_electrolyte",
+   "w_mno2",
+   "w_rod",
+   "w_seal",
+   "w_zinc"
+  ],
+  "labels": []
+ },
+ {
+  "seg_id": 18,
+  "duration": 6.74,
+  "voiceover": "जब सेल काम करता है, तो जिंक इलेक्ट्रॉन खोकर, Zn²⁺ आयन के रूप में विद्युत्-अपघट्य में चला जाता है।",
+  "phrases": [
+   {
+    "text": "जब सेल काम करता है, तो जिंक इलेक्ट्रॉन खोकर,",
+    "golden": "जिंक",
+    "t_in": 0.0,
+    "t_out": 2.76
+   },
+   {
+    "text": "Zn²⁺ आयन के रूप में विद्युत्-अपघट्य में चला जाता है।",
+    "golden": null,
+    "t_in": 2.76,
+    "t_out": 6.74
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "stage": {
+   "top": 330,
+   "h": 1000
+  },
+  "diagram": {
+   "asset": "assets/dry-cell-working.svg",
+   "carry_over": [
+    "w_base",
+    "w_cap",
+    "w_electrolyte",
+    "w_mno2",
+    "w_rod",
+    "w_seal",
+    "w_zinc"
+   ],
+   "timeline": [
+    {
+     "id": "w_ion1",
+     "action": "fade_in",
+     "t": 0.96,
+     "dur": 0.5
+    },
+    {
+     "id": "w_ion2",
+     "action": "fade_in",
+     "t": 1.46,
+     "dur": 0.5
+    },
+    {
+     "id": "w_ion3",
+     "action": "fade_in",
+     "t": 1.96,
+     "dur": 0.5
+    }
+   ]
+  },
+  "end_state": [
+   "w_base",
+   "w_cap",
+   "w_electrolyte",
+   "w_ion1",
+   "w_ion2",
+   "w_ion3",
+   "w_mno2",
+   "w_rod",
+   "w_seal",
+   "w_zinc"
+  ],
+  "labels": [
+   {
+    "text": "Zn²⁺",
+    "x": 0.44,
+    "y": 0.235,
+    "t_in": 2.86,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 19,
+  "duration": 4.8,
+  "voiceover": "यानी जिंक पर इलेक्ट्रॉन निकल रहे हैं, इसलिए यहाँ पक्का ऑक्सीकरण हो रहा है।",
+  "phrases": [
+   {
+    "text": "यानी जिंक पर इलेक्ट्रॉन निकल रहे हैं,",
+    "golden": "जिंक",
+    "t_in": 0.0,
+    "t_out": 2.44
+   },
+   {
+    "text": "इसलिए यहाँ पक्का ऑक्सीकरण हो रहा है।",
+    "golden": null,
+    "t_in": 2.44,
+    "t_out": 4.8
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "stage": {
+   "top": 330,
+   "h": 1000
+  },
+  "diagram": {
+   "asset": "assets/dry-cell-working.svg",
+   "carry_over": [
+    "w_base",
+    "w_cap",
+    "w_electrolyte",
+    "w_ion1",
+    "w_ion2",
+    "w_ion3",
+    "w_mno2",
+    "w_rod",
+    "w_seal",
+    "w_zinc"
+   ],
+   "timeline": [
+    {
+     "id": "w_e_metal",
+     "action": "fade_in",
+     "t": 0.42,
+     "dur": 0.6
+    }
+   ]
+  },
+  "end_state": [
+   "w_base",
+   "w_cap",
+   "w_e_metal",
+   "w_electrolyte",
+   "w_ion1",
+   "w_ion2",
+   "w_ion3",
+   "w_mno2",
+   "w_rod",
+   "w_seal",
+   "w_zinc"
+  ],
+  "labels": [
+   {
+    "text": "Zn²⁺",
+    "x": 0.44,
+    "y": 0.235,
+    "t_in": -0.6,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 20,
+  "duration": 5.64,
+  "voiceover": "इसलिए जिंक ऐनोड है, और ये इलेक्ट्रॉन बाहरी परिपथ से कार्बन की छड़ की ओर जाते हैं।",
+  "phrases": [
+   {
+    "text": "इसलिए जिंक ऐनोड है,",
+    "golden": "ऐनोड",
+    "t_in": 0.0,
+    "t_out": 1.86
+   },
+   {
+    "text": "और ये इलेक्ट्रॉन बाहरी परिपथ से",
+    "golden": null,
+    "t_in": 1.86,
+    "t_out": 3.7
+   },
+   {
+    "text": "कार्बन की छड़ की ओर जाते हैं।",
+    "golden": null,
+    "t_in": 3.7,
+    "t_out": 5.64
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "stage": {
+   "top": 330,
+   "h": 1000
+  },
+  "diagram": {
+   "asset": "assets/dry-cell-working.svg",
+   "carry_over": [
+    "w_base",
+    "w_cap",
+    "w_e_metal",
+    "w_electrolyte",
+    "w_ion1",
+    "w_ion2",
+    "w_ion3",
+    "w_mno2",
+    "w_rod",
+    "w_seal",
+    "w_zinc"
+   ],
+   "timeline": [
+    {
+     "id": "w_minus",
+     "action": "fade_in",
+     "t": 0.32,
+     "dur": 0.5
+    },
+    {
+     "id": "w_wire",
+     "action": "draw",
+     "t": 2.12,
+     "dur": 0.9
+    },
+    {
+     "id": "w_e_out",
+     "action": "fade_in",
+     "t": 2.62,
+     "dur": 0.6
+    },
+    {
+     "id": "w_e_run",
+     "action": "fade_in",
+     "t": 3.92,
+     "dur": 0.6
+    },
+    {
+     "id": "w_e_rod",
+     "action": "fade_in",
+     "t": 4.72,
+     "dur": 0.6
+    }
+   ]
+  },
+  "end_state": [
+   "w_base",
+   "w_cap",
+   "w_e_metal",
+   "w_e_out",
+   "w_e_rod",
+   "w_e_run",
+   "w_electrolyte",
+   "w_ion1",
+   "w_ion2",
+   "w_ion3",
+   "w_minus",
+   "w_mno2",
+   "w_rod",
+   "w_seal",
+   "w_wire",
+   "w_zinc"
+  ],
+  "labels": [
+   {
+    "text": "Zn²⁺",
+    "x": 0.44,
+    "y": 0.235,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "ऐनोड (−)",
+    "x": 0.8,
+    "y": 0.851,
+    "t_in": 0.52,
+    "accent": false
+   },
+   {
+    "text": "e⁻",
+    "x": 0.251,
+    "y": 0.611,
+    "t_in": 3.02,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 21,
+  "duration": 5.06,
+  "voiceover": "अभी के लिए बस इतना पक्का कर लो — जिंक ऐनोड है। बेटा, इतना तो याद कर लिया।",
+  "phrases": [
+   {
+    "text": "अभी के लिए बस इतना पक्का कर लो —",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.14
+   },
+   {
+    "text": "जिंक ऐनोड है।",
+    "golden": "ऐनोड",
+    "t_in": 2.14,
+    "t_out": 3.22
+   },
+   {
+    "text": "बेटा, इतना तो याद कर लिया।",
+    "golden": null,
+    "t_in": 3.22,
+    "t_out": 5.06
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "stage": {
+   "top": 330,
+   "h": 1000
+  },
+  "diagram": {
+   "asset": "assets/dry-cell-working.svg",
+   "carry_over": [
+    "w_base",
+    "w_cap",
+    "w_e_metal",
+    "w_e_out",
+    "w_e_rod",
+    "w_e_run",
+    "w_electrolyte",
+    "w_ion1",
+    "w_ion2",
+    "w_ion3",
+    "w_minus",
+    "w_mno2",
+    "w_rod",
+    "w_seal",
+    "w_wire",
+    "w_zinc"
+   ],
+   "timeline": [
+    {
+     "id": "w_zinc",
+     "action": "pulse",
+     "t": 0.98,
+     "dur": 1.1
+    },
+    {
+     "id": "w_minus",
+     "action": "pulse",
+     "t": 0.98,
+     "dur": 1.1
+    }
+   ]
+  },
+  "end_state": [
+   "w_base",
+   "w_cap",
+   "w_e_metal",
+   "w_e_out",
+   "w_e_rod",
+   "w_e_run",
+   "w_electrolyte",
+   "w_ion1",
+   "w_ion2",
+   "w_ion3",
+   "w_minus",
+   "w_mno2",
+   "w_rod",
+   "w_seal",
+   "w_wire",
+   "w_zinc"
+  ],
+  "labels": [
+   {
+    "text": "Zn²⁺",
+    "x": 0.44,
+    "y": 0.235,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "ऐनोड (−)",
+    "x": 0.8,
+    "y": 0.851,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "e⁻",
+    "x": 0.251,
+    "y": 0.611,
+    "t_in": -0.6,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 22,
+  "duration": 5.84,
+  "voiceover": "अब कैथोड पर क्या होता है और इसका पूरा आंसर परीक्षा में कैसे लिखना है, वो समझेंगे नेक्स्ट पार्ट में।",
+  "phrases": [
+   {
+    "text": "अब कैथोड पर क्या होता है",
+    "golden": "कैथोड",
+    "t_in": 0.0,
+    "t_out": 1.82
+   },
+   {
+    "text": "और इसका पूरा आंसर परीक्षा में कैसे लिखना है,",
+    "golden": null,
+    "t_in": 1.82,
+    "t_out": 4.34
+   },
+   {
+    "text": "वो समझेंगे नेक्स्ट पार्ट में।",
+    "golden": null,
+    "t_in": 4.34,
+    "t_out": 5.84
+   }
+  ],
+  "timing": "transcript",
+  "type": "DIAGRAM",
+  "stage": {
+   "top": 330,
+   "h": 1000
+  },
+  "diagram": {
+   "asset": "assets/dry-cell-working.svg",
+   "carry_over": [
+    "w_base",
+    "w_cap",
+    "w_e_metal",
+    "w_e_out",
+    "w_e_rod",
+    "w_e_run",
+    "w_electrolyte",
+    "w_ion1",
+    "w_ion2",
+    "w_ion3",
+    "w_minus",
+    "w_mno2",
+    "w_rod",
+    "w_seal",
+    "w_wire",
+    "w_zinc"
+   ],
+   "timeline": [
+    {
+     "id": "w_plus",
+     "action": "fade_in",
+     "t": 0.32,
+     "dur": 0.5
+    }
+   ]
+  },
+  "end_state": [
+   "w_base",
+   "w_cap",
+   "w_e_metal",
+   "w_e_out",
+   "w_e_rod",
+   "w_e_run",
+   "w_electrolyte",
+   "w_ion1",
+   "w_ion2",
+   "w_ion3",
+   "w_minus",
+   "w_mno2",
+   "w_plus",
+   "w_rod",
+   "w_seal",
+   "w_wire",
+   "w_zinc"
+  ],
+  "labels": [
+   {
+    "text": "Zn²⁺",
+    "x": 0.44,
+    "y": 0.235,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "ऐनोड (−)",
+    "x": 0.8,
+    "y": 0.851,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "e⁻",
+    "x": 0.251,
+    "y": 0.611,
+    "t_in": -0.6,
+    "accent": false
+   },
+   {
+    "text": "कैथोड (+)",
+    "x": 0.785,
+    "y": 0.089,
+    "t_in": 0.52,
+    "accent": false
+   }
+  ]
+ }
+]

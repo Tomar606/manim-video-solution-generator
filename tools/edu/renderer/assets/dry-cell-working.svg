@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+  <!-- THE SAME CELL the student has just been shown, drawn large because the
+       presenter is hidden for this stretch. Zinc container, pitch seal, metal
+       cap, carbon rod down the centre, MnO2 + carbon around it, NH4Cl + ZnCl2
+       between that and the wall.
+       The circuit is drawn the way the cell is actually wired: the ANODE is the
+       terminal in the MIDDLE OF THE BASE, the CATHODE is the cap on top of the
+       rod, and the wire runs from the base terminal, round the cell and down
+       into the cap - so the electron path on screen is one unbroken loop.
+       No text elements: every label comes from the spec. -->
+
+  <g id="w_zinc">
+    <rect x="340" y="140" width="400" height="760" rx="26"
+          fill="none" stroke="#7FD4FF" stroke-width="14"/>
+  </g>
+
+  <g id="w_electrolyte">
+    <rect x="382" y="198" width="316" height="660" rx="16"
+          fill="#7FD4FF" fill-opacity="0.14" stroke="#7FD4FF" stroke-width="8"/>
+  </g>
+
+  <g id="w_mno2">
+    <rect x="446" y="234" width="188" height="592" rx="12"
+          fill="#FFC53D" fill-opacity="0.18" stroke="#FFC53D" stroke-width="8"/>
+  </g>
+
+  <g id="w_rod">
+    <rect x="514" y="112" width="52" height="690" rx="10"
+          fill="#12283A" stroke="#FFC53D" stroke-width="11"/>
+  </g>
+
+  <g id="w_seal">
+    <rect x="362" y="140" width="356" height="44" rx="10"
+          fill="#7FD4FF" fill-opacity="0.26" stroke="#7FD4FF" stroke-width="8"/>
+  </g>
+
+  <g id="w_cap">
+    <rect x="500" y="76" width="80" height="40" rx="8"
+          fill="#12283A" stroke="#7FD4FF" stroke-width="10"/>
+  </g>
+
+  <!-- the anode terminal: middle of the bottom side of the cell -->
+  <g id="w_base">
+    <rect x="500" y="900" width="80" height="38" rx="8"
+          fill="#12283A" stroke="#7FD4FF" stroke-width="10"/>
+  </g>
+
+  <g id="w_wire" data-optional>
+    <!-- base terminal -> under the cell -> up the left -> over the top -> cap -->
+    <path d="M540 938 L540 1010 L160 1010 L160 40 L540 40 L540 76" fill="none"
+          stroke="#7FD4FF" stroke-width="10"
+          stroke-linejoin="round" stroke-linecap="round"/>
+  </g>
+
+  <g id="w_minus" data-optional>
+    <!-- negative terminal, beside the base stub -->
+    <line x1="608" y1="919" x2="668" y2="919" stroke="#FF5A5A" stroke-width="13"
+          stroke-linecap="round"/>
+  </g>
+  <g id="w_plus" data-optional>
+    <!-- positive terminal, beside the cap on top of the carbon rod -->
+    <line x1="612" y1="96" x2="672" y2="96" stroke="#7BE3A0" stroke-width="13"
+          stroke-linecap="round"/>
+    <line x1="642" y1="66" x2="642" y2="126" stroke="#7BE3A0" stroke-width="13"
+          stroke-linecap="round"/>
+  </g>
+
+  <!-- Zn2+ leaving the INNER FACE of the zinc wall, into the paste -->
+  <g id="w_ion1" data-optional>
+    <circle cx="418" cy="340" r="26" fill="#FF5A5A" fill-opacity="0.9"/>
+    <path d="M360 340 L384 340" stroke="#FF5A5A" stroke-width="8"/>
+    <path d="M398 340 L378 329 L378 351 Z" fill="#FF5A5A"/>
+  </g>
+  <g id="w_ion2" data-optional>
+    <circle cx="418" cy="520" r="26" fill="#FF5A5A" fill-opacity="0.9"/>
+    <path d="M360 520 L384 520" stroke="#FF5A5A" stroke-width="8"/>
+    <path d="M398 520 L378 509 L378 531 Z" fill="#FF5A5A"/>
+  </g>
+  <g id="w_ion3" data-optional>
+    <circle cx="418" cy="700" r="26" fill="#FF5A5A" fill-opacity="0.9"/>
+    <path d="M360 700 L384 700" stroke="#FF5A5A" stroke-width="8"/>
+    <path d="M398 700 L378 689 L378 711 Z" fill="#FF5A5A"/>
+  </g>
+
+  <!-- electrons: left in the metal, DOWN the wall to the base terminal -->
+  <g id="w_e_metal" data-optional>
+    <circle cx="356" cy="470" r="20" fill="#7BE3A0"/>
+    <circle cx="356" cy="640" r="20" fill="#7BE3A0"/>
+    <path d="M356 730 L356 796" stroke="#7BE3A0" stroke-width="9"/>
+    <path d="M356 816 L344 790 L368 790 Z" fill="#7BE3A0"/>
+  </g>
+  <!-- out under the cell, then up the left side of the circuit -->
+  <g id="w_e_out" data-optional>
+    <circle cx="440" cy="1010" r="20" fill="#7BE3A0"/>
+    <path d="M400 1010 L344 1010" stroke="#7BE3A0" stroke-width="9"/>
+    <path d="M326 1010 L350 998 L350 1022 Z" fill="#7BE3A0"/>
+    <circle cx="160" cy="720" r="20" fill="#7BE3A0"/>
+    <path d="M160 650 L160 590" stroke="#7BE3A0" stroke-width="9"/>
+    <path d="M160 572 L148 598 L172 598 Z" fill="#7BE3A0"/>
+  </g>
+  <!-- across the top, towards the cap -->
+  <g id="w_e_run" data-optional>
+    <circle cx="260" cy="40" r="20" fill="#7BE3A0"/>
+    <circle cx="370" cy="40" r="20" fill="#7BE3A0"/>
+    <path d="M400 40 L452 40" stroke="#7BE3A0" stroke-width="9"/>
+    <path d="M470 40 L446 28 L446 52 Z" fill="#7BE3A0"/>
+  </g>
+  <!-- down through the cap into the carbon rod -->
+  <g id="w_e_rod" data-optional>
+    <circle cx="540" cy="200" r="20" fill="#7BE3A0"/>
+    <path d="M540 250 L540 306" stroke="#7BE3A0" stroke-width="9"/>
+    <path d="M540 326 L528 300 L552 300 Z" fill="#7BE3A0"/>
+  </g>
+</svg>

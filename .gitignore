@@ -110,3 +110,8 @@ id_rsa*
 # clips_part<N>.json IS tracked, because it is the decision record: which clip
 # went in, where, how it was fitted, and whether it passed.
 projects/*/veo/
+
+# The edu-video renderer's dependencies and the ad-hoc backups a fix leaves
+# behind. `out/` above already covers its 131 MB of rendered frames and video.
+node_modules/
+*.bak

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Electrolytic cell: ONE vessel, external battery forces a non-spontaneous
+       redox. Anode (left) is wired to the battery's + terminal so it is
+       positive; cathode (right) is negative. Electrons leave the battery's
+       negative terminal toward the cathode. Signs are paths, never text. -->
+
+  <g id="vessel" data-optional>
+    <path d="M330 210 V400 q0 26 26 26 H724 q26 0 26 -26 V210" fill="none" stroke="#7FD4FF" stroke-width="7"/>
+    <rect x="336" y="272" width="408" height="148" rx="14" fill="#7FD4FF" fill-opacity="0.10"/>
+  </g>
+
+  <g id="electrode_A" data-optional>
+    <rect x="420" y="150" width="30" height="230" rx="6" fill="#12283A" stroke="#B8C6D4" stroke-width="6"/>
+  </g>
+  <g id="electrode_C" data-optional>
+    <rect x="630" y="150" width="30" height="230" rx="6" fill="#12283A" stroke="#B8C6D4" stroke-width="6"/>
+  </g>
+
+  <g id="battery" data-optional>
+    <rect x="450" y="42" width="180" height="52" rx="12" fill="#2A1E05" stroke="#FFC53D" stroke-width="6"/>
+    <path d="M478 55 v26 M492 62 v12" stroke="#FFC53D" stroke-width="7" stroke-linecap="round"/>
+    <path d="M588 62 v12" stroke="#FFC53D" stroke-width="12" stroke-linecap="round"/>
+  </g>
+
+  <g id="wires" data-optional>
+    <path d="M435 150 V68 H450" fill="none" stroke="#B8C6D4" stroke-width="7" stroke-linecap="round"/>
+    <path d="M630 68 H645 V150" fill="none" stroke="#B8C6D4" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <g id="e_flow" data-optional>
+    <path d="M645 92 l0 26 m-9 -10 l9 12 l9 -12" fill="none" stroke="#FFC53D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M435 118 l0 -26 m-9 10 l9 -12 l9 12" fill="none" stroke="#FFC53D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g id="sign_plus_A" data-optional>
+    <circle cx="400" cy="118" r="22" fill="#12283A" stroke="#7CE38B" stroke-width="6"/>
+    <path d="M388 118 h24 M400 106 v24" stroke="#7CE38B" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <g id="sign_minus_C" data-optional>
+    <circle cx="680" cy="118" r="22" fill="#12283A" stroke="#FF5A5A" stroke-width="6"/>
+    <path d="M668 118 h24" stroke="#FF5A5A" stroke-width="7" stroke-linecap="round"/>
+  </g>
+</svg>

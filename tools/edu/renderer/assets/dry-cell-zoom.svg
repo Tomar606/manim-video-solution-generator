@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- The cell MAGNIFIED: a horizontal slice through the wall, the paste and
+       the rod, so the particles are big enough to follow with the eye. The
+       presenter is hidden for this stretch, so the whole width is available.
+       Left  = zinc wall (anode, dissolving)
+       Middle= NH4Cl + ZnCl2 paste
+       Right = carbon rod (cathode)
+       Top   = the external circuit joining them.
+       No text elements: every label comes from the spec. -->
+
+  <g id="z_wall">
+    <!-- zinc wall, cut open -->
+    <rect x="96" y="150" width="86" height="290" rx="6"
+          fill="#7FD4FF" fill-opacity="0.22" stroke="#7FD4FF" stroke-width="9"/>
+  </g>
+
+  <g id="z_paste">
+    <rect x="182" y="150" width="600" height="290"
+          fill="#7FD4FF" fill-opacity="0.10" stroke="#7FD4FF" stroke-width="5"/>
+  </g>
+
+  <g id="z_rod">
+    <rect x="782" y="150" width="120" height="290" rx="6"
+          fill="#12283A" stroke="#FFC53D" stroke-width="9"/>
+  </g>
+
+  <g id="z_mno2" data-optional>
+    <rect x="700" y="150" width="82" height="290"
+          fill="#FFC53D" fill-opacity="0.20" stroke="#FFC53D" stroke-width="5"/>
+  </g>
+
+  <g id="z_wire" data-optional>
+    <!-- external circuit: out of the zinc, over the top, into the rod -->
+    <path d="M139 150 L139 62 L842 62 L842 150" fill="none"
+          stroke="#7FD4FF" stroke-width="8" stroke-linejoin="round"/>
+  </g>
+
+  <g id="z_minus" data-optional>
+    <line x1="118" y1="112" x2="160" y2="112" stroke="#FF5A5A" stroke-width="10"/>
+  </g>
+  <g id="z_plus" data-optional>
+    <line x1="821" y1="112" x2="863" y2="112" stroke="#7BE3A0" stroke-width="10"/>
+    <line x1="842" y1="91" x2="842" y2="133" stroke="#7BE3A0" stroke-width="10"/>
+  </g>
+
+  <!-- Zn2+ leaving the wall, one stage per group so they arrive in sequence -->
+  <g id="z_ion1" data-optional>
+    <circle cx="228" cy="212" r="26" fill="#FF5A5A" fill-opacity="0.85"/>
+    <path d="M196 212 L214 212" stroke="#FF5A5A" stroke-width="6"/>
+  </g>
+  <g id="z_ion2" data-optional>
+    <circle cx="300" cy="300" r="26" fill="#FF5A5A" fill-opacity="0.85"/>
+    <path d="M196 300 L286 300" stroke="#FF5A5A" stroke-width="6"/>
+  </g>
+  <g id="z_ion3" data-optional>
+    <circle cx="372" cy="386" r="26" fill="#FF5A5A" fill-opacity="0.85"/>
+    <path d="M196 386 L358 386" stroke="#FF5A5A" stroke-width="6"/>
+  </g>
+
+  <!-- electrons collecting in the metal, then running the wire to the rod -->
+  <g id="z_e_in" data-optional>
+    <circle cx="139" cy="212" r="19" fill="#7BE3A0"/>
+    <circle cx="139" cy="286" r="19" fill="#7BE3A0"/>
+  </g>
+  <g id="z_e_up" data-optional>
+    <circle cx="139" cy="120" r="19" fill="#7BE3A0"/>
+    <path d="M139 168 L139 146" stroke="#7BE3A0" stroke-width="7"/>
+    <path d="M139 136 L130 156 L148 156 Z" fill="#7BE3A0"/>
+  </g>
+  <g id="z_e_run" data-optional>
+    <circle cx="330" cy="62" r="19" fill="#7BE3A0"/>
+    <circle cx="520" cy="62" r="19" fill="#7BE3A0"/>
+    <circle cx="710" cy="62" r="19" fill="#7BE3A0"/>
+    <path d="M360 62 L490 62 M550 62 L680 62" stroke="#7BE3A0" stroke-width="6"/>
+    <path d="M760 62 L738 51 L738 73 Z" fill="#7BE3A0"/>
+  </g>
+  <g id="z_e_at_rod" data-optional>
+    <circle cx="842" cy="196" r="19" fill="#7BE3A0"/>
+    <path d="M842 92 L842 172" stroke="#7BE3A0" stroke-width="7"/>
+    <path d="M842 184 L832 162 L852 162 Z" fill="#7BE3A0"/>
+  </g>
+
+  <g id="z_lead_wall" data-optional>
+    <path d="M139 452 L139 448" stroke="#9FB6CC" stroke-width="4"/>
+    <circle cx="139" cy="444" r="7" fill="#9FB6CC"/>
+  </g>
+  <g id="z_lead_rod" data-optional>
+    <path d="M842 452 L842 448" stroke="#9FB6CC" stroke-width="4"/>
+    <circle cx="842" cy="444" r="7" fill="#9FB6CC"/>
+  </g>
+</svg>

@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Berkeley-Hartley apparatus, laid out as the answer-sheet figure.
+       Everything that is physically joined is DRAWN joined: the capillary, the
+       piston cylinder, the gauge stem and the funnel stem all meet the vessel's
+       top edge (y=214). Nothing floats.
+       Across the top edge, left to right: capillary 300, piston 440-600,
+       gauge 690, funnel 830 — spaced so no two parts touch.
+       No text elements: every label comes from the spec. -->
+
+  <g id="bh_outer">
+    <path d="M212 214 L868 214 L960 300 L868 404 L212 404 L120 300 Z"
+          fill="none" stroke="#7FD4FF" stroke-width="10" stroke-linejoin="round"/>
+  </g>
+
+  <g id="bh_solution" data-optional>
+    <path d="M220 224 L860 224 L946 300 L860 394 L220 394 L134 300 Z"
+          fill="#7FD4FF" fill-opacity="0.15"/>
+  </g>
+
+  <g id="bh_inner">
+    <line x1="150" y1="262" x2="930" y2="262" stroke="#7FD4FF" stroke-width="9"/>
+    <line x1="150" y1="344" x2="930" y2="344" stroke="#7FD4FF" stroke-width="9"/>
+  </g>
+
+  <g id="bh_water" data-optional>
+    <rect x="152" y="269" width="776" height="70" fill="#7FD4FF" fill-opacity="0.32"/>
+  </g>
+
+  <g id="bh_membrane" data-optional>
+    <line x1="150" y1="262" x2="930" y2="262" stroke="#FFC53D" stroke-width="10"/>
+    <line x1="150" y1="344" x2="930" y2="344" stroke="#FFC53D" stroke-width="10"/>
+  </g>
+
+  <g id="bh_capillary" data-optional>
+    <!-- off the LEFT triangular end: a stub out of the apex, then the tube up -->
+    <path d="M120 288 L74 288 L74 74 M120 314 L102 314 L102 288"
+          stroke="#7FD4FF" stroke-width="9" fill="none" stroke-linejoin="round"/>
+    <path d="M74 74 L102 74 L102 288" stroke="#7FD4FF" stroke-width="9"
+          fill="none" stroke-linejoin="round"/>
+  </g>
+
+  <g id="bh_mark" data-optional>
+    <line x1="52" y1="132" x2="124" y2="132" stroke="#FFC53D" stroke-width="8"/>
+  </g>
+
+  <g id="bh_column" data-optional>
+    <rect x="79" y="132" width="18" height="150" fill="#7FD4FF" fill-opacity="0.6"/>
+  </g>
+
+  <g id="bh_press_block" data-optional>
+    <!-- a PISTON: cylinder standing on the vessel, piston head inside it, rod up -->
+    <path d="M440 214 L440 108 L600 108 L600 214" fill="none"
+          stroke="#7FD4FF" stroke-width="10" stroke-linejoin="round"/>
+    <rect x="452" y="140" width="136" height="30" rx="4"
+          fill="#12283A" stroke="#7FD4FF" stroke-width="9"/>
+    <line x1="520" y1="140" x2="520" y2="62" stroke="#7FD4FF" stroke-width="10"/>
+    <line x1="470" y1="62" x2="570" y2="62" stroke="#7FD4FF" stroke-width="10"/>
+  </g>
+
+  <g id="bh_gauge" data-optional>
+    <!-- dial mounted on the PISTON body -->
+    <line x1="600" y1="146" x2="664" y2="146" stroke="#7FD4FF" stroke-width="9"/>
+    <circle cx="706" cy="146" r="42" fill="#12283A" stroke="#7FD4FF" stroke-width="10"/>
+    <line x1="706" y1="146" x2="732" y2="122" stroke="#FFC53D" stroke-width="8"/>
+  </g>
+
+  <g id="bh_funnel" data-optional>
+    <!-- off the RIGHT triangular end: a stub out of the apex, stem, then cone -->
+    <path d="M960 300 L1000 300 L1000 150" stroke="#7FD4FF" stroke-width="9"
+          fill="none" stroke-linejoin="round"/>
+    <path d="M956 96 L1044 96 L1000 150 Z" fill="none"
+          stroke="#7FD4FF" stroke-width="9" stroke-linejoin="round"/>
+  </g>
+
+  <g id="bh_osmosis" data-optional>
+    <path d="M380 269 L380 234" stroke="#FFC53D" stroke-width="8"/>
+    <path d="M380 222 L369 242 L391 242 Z" fill="#FFC53D"/>
+    <path d="M560 269 L560 234" stroke="#FFC53D" stroke-width="8"/>
+    <path d="M560 222 L549 242 L571 242 Z" fill="#FFC53D"/>
+    <path d="M740 269 L740 234" stroke="#FFC53D" stroke-width="8"/>
+    <path d="M740 222 L729 242 L751 242 Z" fill="#FFC53D"/>
+  </g>
+
+  <g id="bh_fall" data-optional>
+    <path d="M88 152 L88 200" stroke="#FF5A5A" stroke-width="9"/>
+    <path d="M88 212 L76 188 L100 188 Z" fill="#FF5A5A"/>
+  </g>
+
+  <g id="bh_push" data-optional>
+    <path d="M520 26 L520 52" stroke="#FF5A5A" stroke-width="11"/>
+    <path d="M520 64 L506 38 L534 38 Z" fill="#FF5A5A"/>
+  </g>
+
+  <g id="bh_restore" data-optional>
+    <path d="M88 200 L88 152" stroke="#FFC53D" stroke-width="9"/>
+    <path d="M88 140 L76 164 L100 164 Z" fill="#FFC53D"/>
+  </g>
+
+  <!-- LEADER LINES: each fades in with its own label and leaves with it. -->
+  <g id="lead_capillary" data-optional>
+    <path d="M186 78 L112 90" stroke="#9FB6CC" stroke-width="4" fill="none"/>
+    <circle cx="106" cy="91" r="7" fill="#9FB6CC"/>
+  </g>
+  <g id="lead_funnel" data-optional>
+    <path d="M898 76 L972 108" stroke="#9FB6CC" stroke-width="4" fill="none"/>
+    <circle cx="978" cy="111" r="7" fill="#9FB6CC"/>
+  </g>
+  <g id="lead_press" data-optional>
+    <path d="M408 96 L444 122" stroke="#9FB6CC" stroke-width="4" fill="none"/>
+    <circle cx="449" cy="126" r="7" fill="#9FB6CC"/>
+  </g>
+  <g id="lead_gauge" data-optional>
+    <path d="M826 196 L752 166" stroke="#9FB6CC" stroke-width="4" fill="none"/>
+    <circle cx="746" cy="163" r="7" fill="#9FB6CC"/>
+  </g>
+  <g id="lead_membrane" data-optional>
+    <path d="M348 424 L404 356" stroke="#9FB6CC" stroke-width="4" fill="none"/>
+    <circle cx="408" cy="350" r="7" fill="#9FB6CC"/>
+  </g>
+  <g id="lead_mark" data-optional>
+    <path d="M212 122 L136 130" stroke="#9FB6CC" stroke-width="4" fill="none"/>
+    <circle cx="130" cy="131" r="7" fill="#9FB6CC"/>
+  </g>
+  <g id="lead_water" data-optional>
+    <path d="M560 424 L560 356" stroke="#9FB6CC" stroke-width="4" fill="none"/>
+    <circle cx="560" cy="350" r="7" fill="#9FB6CC"/>
+  </g>
+  <g id="lead_solution" data-optional>
+    <path d="M792 424 L846 372" stroke="#9FB6CC" stroke-width="4" fill="none"/>
+    <circle cx="851" cy="367" r="7" fill="#9FB6CC"/>
+  </g>
+  <g id="lead_inner" data-optional>
+    <path d="M560 424 L560 352" stroke="#9FB6CC" stroke-width="4" fill="none"/>
+    <circle cx="560" cy="346" r="7" fill="#9FB6CC"/>
+  </g>
+  <g id="lead_outer" data-optional>
+    <path d="M560 424 L560 412" stroke="#9FB6CC" stroke-width="4" fill="none"/>
+    <circle cx="560" cy="407" r="7" fill="#9FB6CC"/>
+  </g>
+</svg>

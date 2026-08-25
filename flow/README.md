@@ -50,6 +50,14 @@ same person in the same room. Here it would mean the student watching the wrong
 process while the teacher describes this one, so each prompt is submitted alone
 and the clip is whichever media key Flow did not have a moment ago.
 
+**Consecutive clips are generated from each other.** Upstream's ad got its
+continuity from the subject being the same person in the same room in every
+prompt. Ours cannot: a topic that needs half a minute of continuous animation
+gets it as several generations, and Veo remembers nothing between them. So the
+frame a clip ends on is uploaded as the next clip's reference, and the seam
+between them is graded before either is accepted. See `src/veo_sequence.py` and
+the `sequence` route in `PIPELINE.md`.
+
 ## Setup, once
 
 1. `chrome://extensions` → Developer mode → **Load unpacked** → `flow/extension/`
@@ -66,6 +74,32 @@ extension **and** hard-reload the Flow page.
 
 That starts the bridge itself, so `video flow --serve` is only needed if you want
 the extension connected between runs.
+
+## Reference images, and the one selector you have to fill in yourself
+
+A generation can carry up to three images: the background plate, the figure as
+the student's textbook prints it (`reference` on the beat), and — for beats in a
+`sequence` — the frame the previous clip ended on. `src/veo_sequence.py` decides
+what goes up and in what order; `PIPELINE.md` says why that order is what it is.
+
+Two things about Flow's reference control are unknowable from here and are
+handled rather than assumed:
+
+- **It may take only one file.** `set_image` reads `multiple` off the input and
+  attaches only what will fit, reporting the rest as `dropped`. The run prints
+  what did not go in, because a chained clip silently missing its carry frame is
+  a clip that looks perfectly fine on its own.
+- **Emptying the input does not clear the chips.** Flow keeps its own state for
+  the reference images it has rendered, so `clear_images` also clicks their
+  remove buttons — if it knows the selector. `reference_clear` in
+  `selectors.json` is **null** until somebody inspects that ✕ once and fills it
+  in, and until then every sequenced run prints a warning. Guessing a selector
+  here would be worse than leaving it empty: the failure is silent, and it is one
+  clip's reference riding along into the clip after next.
+
+`reference_panel` is the same story for the control that OPENS the panel, if
+Flow only mounts the file input once it has been opened. Leave it null and open
+the panel by hand once per session instead.
 
 ## When Flow moves its UI
 
@@ -89,6 +123,7 @@ and on the Python side:
 
     src/flow_bridge.py    the local server and the command/response protocol
     src/veo.py            the stage: beats -> prompts -> clips -> review -> fit
+    src/veo_sequence.py   carrying the look from one clip into the next
     src/veo_prompts.py    writing and revising the prompt
     src/veo_qc.py         the visual check, and where a clip stops being usable
     src/veo_conform.py    cutting the tail and fitting the rest to the window

@@ -14,10 +14,26 @@
     "`plate_input` is the file input behind Flow's reference-image control. It is",
     "usually hidden and often only mounted once you have opened that panel, so if",
     "set_image reports 'no file input matched', open the panel by hand once and",
-    "re-run — the pipeline is not able to click a control it cannot see."
+    "re-run — the pipeline is not able to click a control it cannot see.",
+    "",
+    "`reference_clear` is the button that REMOVES an already-attached reference",
+    "image — the ✕ on the chip, or whatever Flow renders in its place. It is null",
+    "until somebody inspects the panel once and fills it in, and a null is",
+    "reported rather than worked around, because the failure it causes is silent:",
+    "emptying the file input does not clear the chips Flow has already rendered,",
+    "so one chained clip's carry frame rides along into the clip after next and",
+    "that clip is generated from two references, one of them stale. Everything",
+    "still runs; the sequence is just subtly wrong. `video veo` prints a warning",
+    "on every chained run until this is set.",
+    "",
+    "`reference_panel` is the control that OPENS that panel, if Flow only mounts",
+    "the file input once it has been opened. Also optional: leave it null and open",
+    "the panel by hand once per session instead."
   ],
   "prompt": "[data-slate-editor=\"true\"]",
   "generate_text": "generate",
   "generate_selector": null,
-  "plate_input": "input[type=\"file\"]"
+  "plate_input": "input[type=\"file\"]",
+  "reference_clear": null,
+  "reference_panel": null
 }

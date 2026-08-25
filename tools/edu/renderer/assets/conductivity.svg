@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- The same delocalised electrons that bond the metal also carry charge
+       and kinetic energy through it -> good electrical AND thermal conductor.
+       No text elements: any label comes from the spec. -->
+  <g id="bar" data-optional>
+    <rect x="180" y="195" width="720" height="100" rx="18" fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+  </g>
+  <g id="e_flow" data-optional>
+    <circle cx="215" cy="245" r="12" fill="#FFC53D"/>
+    <circle cx="289" cy="245" r="12" fill="#FFC53D"/>
+    <circle cx="363" cy="245" r="12" fill="#FFC53D"/>
+    <circle cx="437" cy="245" r="12" fill="#FFC53D"/>
+    <circle cx="511" cy="245" r="12" fill="#FFC53D"/>
+    <circle cx="585" cy="245" r="12" fill="#FFC53D"/>
+    <circle cx="659" cy="245" r="12" fill="#FFC53D"/>
+    <circle cx="733" cy="245" r="12" fill="#FFC53D"/>
+    <circle cx="807" cy="245" r="12" fill="#FFC53D"/>
+  </g>
+  <g id="flow_arrow" data-optional>
+    <path d="M200 355 H860" stroke="#FFC53D" stroke-width="7" stroke-linecap="round"/>
+    <path d="M876 355 l-34 -18 v36 z" fill="#FFC53D"/>
+  </g>
+  <g id="heat" data-optional>
+    <path d="M250 150 q13 -22 26 0 q13 22 26 0" fill="none" stroke="#FF7A45" stroke-width="5" stroke-linecap="round"/>
+    <path d="M276 150 q13 -22 26 0 q13 22 26 0" fill="none" stroke="#FF7A45" stroke-width="5" stroke-linecap="round"/>
+    <path d="M302 150 q13 -22 26 0 q13 22 26 0" fill="none" stroke="#FF7A45" stroke-width="5" stroke-linecap="round"/>
+    <path d="M328 150 q13 -22 26 0 q13 22 26 0" fill="none" stroke="#FF7A45" stroke-width="5" stroke-linecap="round"/>
+    <path d="M354 150 q13 -22 26 0 q13 22 26 0" fill="none" stroke="#FF7A45" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>

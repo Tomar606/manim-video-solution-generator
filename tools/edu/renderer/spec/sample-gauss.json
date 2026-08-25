@@ -1,0 +1,57 @@
+[
+  {
+    "seg_id": 1,
+    "type": "TEXT_ONLY",
+    "duration": 10.0,
+    "voiceover": "Gauss ka Law samajhna hai? Sirf ek line me poori kahani chhupi hai.",
+    "phrases": [
+      { "text": "Gauss ka Law samajhna hai?", "golden": "Law",     "t_in": 0.0, "t_out": 4.8 },
+      { "text": "Sirf ek line me poori kahani", "golden": "kahani", "t_in": 5.0, "t_out": 10.0 }
+    ],
+    "veo_background": "slow drifting deep-navy volumetric haze, faint blue rim light from upper left, no objects",
+    "end_state": []
+  },
+
+  {
+    "seg_id": 2,
+    "type": "DIAGRAM",
+    "duration": 10.0,
+    "voiceover": "Ek point charge lo. Uske chaaron taraf ek closed sphere bana lo.",
+    "phrases": [
+      { "text": "Ek point charge lo",           "golden": "charge", "t_in": 0.0, "t_out": 4.8 },
+      { "text": "Chaaron taraf closed sphere",  "golden": "sphere", "t_in": 5.0, "t_out": 10.0 }
+    ],
+    "diagram": {
+      "asset": "assets/gauss-sphere.svg",
+      "carry_over": [],
+      "timeline": [
+        { "id": "charge", "action": "pop_in",  "t": 1.3, "dur": 0.45 },
+        { "id": "field",  "action": "fade_in", "t": 2.6, "dur": 0.8  },
+        { "id": "sphere", "action": "fade_in", "t": 6.1, "dur": 0.9  }
+      ]
+    },
+    "labels": [
+      { "text": "+q", "x": 0.50, "y": 0.72, "t_in": 2.0, "accent": false }
+    ],
+    "veo_background": "same deep-navy haze, one degree darker so the sphere reads, no objects",
+    "end_state": ["charge", "field", "sphere", "label:+q"]
+  },
+
+  {
+    "seg_id": 3,
+    "type": "EQUATION",
+    "duration": 10.0,
+    "voiceover": "Poora flux nikal aata hai — q upon epsilon naught. Bas itna hi.",
+    "phrases": [
+      { "text": "Poora flux nikal aata hai", "golden": "flux", "t_in": 0.0, "t_out": 4.8 },
+      { "text": "Bas itna hi",               "golden": null,   "t_in": 5.0, "t_out": 10.0 }
+    ],
+    "equation": {
+      "latex": "\\Phi_E = \\dfrac{q}{\\varepsilon_0}",
+      "t_in": 1.8,
+      "highlight": { "t": 6.2, "latex": "\\Phi_E = \\dfrac{\\textcolor{#FFC53D}{q}}{\\varepsilon_0}" }
+    },
+    "veo_background": "same deep-navy haze, diagram-free, slight inward push",
+    "end_state": ["equation"]
+  }
+]

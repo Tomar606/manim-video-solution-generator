@@ -1,0 +1,243 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>overlay chips</title>
+<!-- Chips that go ON TOP of a finished video, inside the stage band only
+     (1080 x 470, dropped at y=380). Same fonts, same palette, same line
+     weights as the diagrams already in the video, so an addition cannot read
+     as pasted on. Nothing here is ever taller than 470px: the band's floor is
+     y=850 and the presenter's head starts around y=1000. -->
+<link rel="stylesheet" href="../renderer/style.css">
+<style>
+  html,body{background:transparent;margin:0;padding:0}
+  #band{position:relative;width:1080px;height:470px;overflow:visible}
+  .chip{position:absolute;inset:0;display:none}
+  .chip.on{display:block}
+  .row{position:absolute;left:0;width:1080px;text-align:center;
+       font-family:Poppins,Mukta,sans-serif;font-weight:800;color:var(--ink);
+       text-shadow:var(--shadow);white-space:nowrap}
+  .k{color:var(--gold)}
+  .cap{position:absolute;width:1080px;left:0;text-align:center;
+       font-family:Poppins,Mukta,sans-serif;font-weight:800;font-size:40px;
+       color:var(--ink);text-shadow:var(--shadow)}
+  svg{position:absolute;inset:0}
+  text{font-family:Poppins,Mukta,sans-serif;font-weight:800;
+       paint-order:stroke;stroke:rgba(0,0,0,.85);stroke-width:6px;
+       stroke-linejoin:round}
+</style>
+
+<div id="band">
+
+<!-- ── PART 1 — the exam facts, one row per fact, each arriving on its word ── -->
+<div class="chip" id="p1-use">
+  <div class="row" style="top:76px;font-size:42px">
+    <span class="k">उपयोग</span> &nbsp;टॉर्च, रेडियो, खिलौने, कैलकुलेटर
+  </div>
+</div>
+<div class="chip" id="p1-principle">
+  <div class="row" style="top:210px;font-size:50px">
+    <span class="k">सिद्धान्त</span> &nbsp;लेकलांशी सेल
+  </div>
+</div>
+<div class="chip" id="p1-inventor">
+  <div class="row" style="top:302px;font-size:50px">
+    <span class="k">आविष्कारक</span> &nbsp;जी. लेकलांशी
+  </div>
+</div>
+<div class="chip" id="p1-year">
+  <div class="row" style="top:394px;font-size:50px">
+    <span class="k">वर्ष</span> &nbsp;1868
+  </div>
+</div>
+
+<!-- ── PART 2 ─────────────────────────────────────────────────────────────── -->
+
+<!-- NH3 forms but cannot leave: bubbles rise, the seal stops them -->
+<div class="chip" id="p2-nh3">
+  <svg viewBox="0 0 1080 470">
+    <rect x="440" y="70" width="210" height="352" rx="16"
+          fill="none" stroke="#7FD4FF" stroke-width="8"/>
+    <rect x="456" y="70" width="178" height="26" rx="6"
+          fill="#7FD4FF" fill-opacity="0.28" stroke="#7FD4FF" stroke-width="5"/>
+    <rect x="502" y="112" width="86" height="278" rx="8"
+          fill="#FFC53D" fill-opacity="0.18" stroke="#FFC53D" stroke-width="5"/>
+    <rect x="532" y="92" width="26" height="262" rx="5"
+          fill="#12283A" stroke="#FFC53D" stroke-width="6"/>
+    <g fill="#7BE3A0">
+      <circle cx="472" cy="336" r="14"/><circle cx="616" cy="300" r="12"/>
+      <circle cx="474" cy="244" r="13"/><circle cx="614" cy="196" r="11"/>
+    </g>
+    <g stroke="#7BE3A0" stroke-width="5" fill="none" stroke-linecap="round">
+      <path d="M472 314 L472 286"/><path d="M616 280 L616 254"/>
+      <path d="M474 222 L474 194"/>
+    </g>
+    <!-- the seal is where it stops, so the stop is drawn there -->
+    <path d="M448 118 L642 118" stroke="#FF5A5A" stroke-width="10"
+          stroke-linecap="round"/>
+    <g stroke="#FF5A5A" stroke-width="10" stroke-linecap="round">
+      <path d="M512 90 L568 146"/><path d="M568 90 L512 146"/>
+    </g>
+    <text x="320" y="256" font-size="46" fill="#7BE3A0" text-anchor="middle">NH₃</text>
+    <path d="M362 244 L426 240" stroke="#9FB6CC" stroke-width="4"/>
+  </svg>
+</div>
+
+<!-- one zinc ion, four ammonia molecules, closing into the complex -->
+<div class="chip" id="p2-complex">
+  <svg viewBox="0 0 1080 470">
+    <circle cx="540" cy="235" r="54" fill="#FF5A5A" fill-opacity="0.92"/>
+    <g fill="none" stroke="#7FD4FF" stroke-width="7">
+      <circle cx="380" cy="120" r="42"/><circle cx="700" cy="120" r="42"/>
+      <circle cx="380" cy="350" r="42"/><circle cx="700" cy="350" r="42"/>
+    </g>
+    <g stroke="#7FD4FF" stroke-width="6" fill="#7FD4FF" stroke-linecap="round">
+      <path d="M422 152 L468 188"/><path d="M480 196 L462 178 L462 202 Z"/>
+      <path d="M658 152 L612 188"/><path d="M600 196 L618 178 L618 202 Z"/>
+      <path d="M422 318 L468 282"/><path d="M480 274 L462 292 L462 268 Z"/>
+      <path d="M658 318 L612 282"/><path d="M600 274 L618 292 L618 268 Z"/>
+    </g>
+    <!-- the brackets that make it one ion -->
+    <g stroke="#FFC53D" stroke-width="8" fill="none" stroke-linecap="round">
+      <path d="M232 44 L200 44 L200 426 L232 426"/>
+      <path d="M848 44 L880 44 L880 426 L848 426"/>
+    </g>
+    <text x="912" y="72" font-size="44" fill="#FFC53D">2+</text>
+    <text x="540" y="250" font-size="42" fill="#FFFFFF" text-anchor="middle">Zn²⁺</text>
+    <text x="380" y="134" font-size="36" fill="#7FD4FF" text-anchor="middle">NH₃</text>
+    <text x="700" y="134" font-size="36" fill="#7FD4FF" text-anchor="middle">NH₃</text>
+    <text x="380" y="364" font-size="36" fill="#7FD4FF" text-anchor="middle">NH₃</text>
+    <text x="700" y="364" font-size="36" fill="#7FD4FF" text-anchor="middle">NH₃</text>
+  </svg>
+</div>
+
+<!-- pressure stays in the safe part of the dial -->
+<div class="chip" id="p2-pressure">
+  <svg viewBox="0 0 1080 470">
+    <rect x="250" y="80" width="160" height="330" rx="16"
+          fill="none" stroke="#7FD4FF" stroke-width="8"/>
+    <rect x="264" y="80" width="132" height="24" rx="6"
+          fill="#7FD4FF" fill-opacity="0.28" stroke="#7FD4FF" stroke-width="5"/>
+    <rect x="288" y="118" width="84" height="266" rx="8"
+          fill="#FFC53D" fill-opacity="0.18" stroke="#FFC53D" stroke-width="5"/>
+    <rect x="318" y="96" width="24" height="252" rx="5"
+          fill="#12283A" stroke="#FFC53D" stroke-width="6"/>
+    <path d="M410 180 L520 180" stroke="#9FB6CC" stroke-width="6"/>
+    <circle cx="720" cy="235" r="122" fill="none" stroke="#7FD4FF" stroke-width="8"/>
+    <path d="M634 149 A122 122 0 0 1 720 113" fill="none"
+          stroke="#7BE3A0" stroke-width="14" stroke-linecap="round"/>
+    <path d="M720 113 A122 122 0 0 1 806 149" fill="none"
+          stroke="#FF5A5A" stroke-width="14" stroke-linecap="round"/>
+    <path d="M720 235 L654 176" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="720" cy="235" r="14" fill="#FFFFFF"/>
+    <text x="720" y="330" font-size="40" fill="#FFFFFF" text-anchor="middle">दाब</text>
+  </svg>
+</div>
+
+<!-- the acid eats the zinc wall: pits, then holes -->
+<div class="chip" id="p2-corrode">
+  <svg viewBox="0 0 1080 470">
+    <!-- a magnified slab of the zinc wall -->
+    <path d="M330 60 L410 60 L410 130 Q372 150 410 172 L410 236
+             Q366 258 410 282 L410 350 Q376 372 410 396 L410 420 L330 420 Z"
+          fill="#7FD4FF" fill-opacity="0.14" stroke="#7FD4FF" stroke-width="7"/>
+    <text x="288" y="248" font-size="42" fill="#7FD4FF" text-anchor="end">Zn</text>
+    <!-- acid arriving -->
+    <g fill="#FF5A5A">
+      <circle cx="560" cy="150" r="15"/><circle cx="618" cy="252" r="15"/>
+      <circle cx="556" cy="368" r="15"/>
+    </g>
+    <g stroke="#FF5A5A" stroke-width="6" fill="#FF5A5A" stroke-linecap="round">
+      <path d="M536 150 L474 150"/><path d="M456 150 L482 138 L482 162 Z"/>
+      <path d="M594 252 L482 252"/><path d="M464 252 L490 240 L490 264 Z"/>
+      <path d="M532 368 L474 368"/><path d="M456 368 L482 356 L482 380 Z"/>
+    </g>
+    <text x="690" y="266" font-size="42" fill="#FF5A5A">NH₄Cl</text>
+    <text x="690" y="200" font-size="34" fill="#FFFFFF">अम्लीय</text>
+  </svg>
+</div>
+
+<!-- the holes let the paste out -->
+<div class="chip" id="p2-leak">
+  <svg viewBox="0 0 1080 470">
+    <g fill="none" stroke="#7FD4FF" stroke-width="8" stroke-linecap="round">
+      <path d="M455 70 L625 70"/><path d="M455 422 L625 422"/>
+      <path d="M455 70 L455 196"/><path d="M455 232 L455 316"/>
+      <path d="M455 352 L455 422"/>
+      <path d="M625 70 L625 336"/><path d="M625 372 L625 422"/>
+    </g>
+    <rect x="470" y="70" width="140" height="26" rx="6"
+          fill="#7FD4FF" fill-opacity="0.28" stroke="#7FD4FF" stroke-width="5"/>
+    <rect x="488" y="112" width="104" height="278" rx="8"
+          fill="#FFC53D" fill-opacity="0.18" stroke="#FFC53D" stroke-width="5"/>
+    <rect x="524" y="92" width="32" height="262" rx="5"
+          fill="#12283A" stroke="#FFC53D" stroke-width="6"/>
+    <!-- what comes out of the holes -->
+    <g fill="#FFC53D">
+      <path d="M451 208 q-30 26 -8 46 q24 16 38 -8 q8 -20 -30 -38 Z"/>
+      <circle cx="404" cy="290" r="14"/><circle cx="388" cy="344" r="11"/>
+      <path d="M451 330 q-26 24 -6 42 q22 14 34 -8 q6 -18 -28 -34 Z"/>
+      <circle cx="410" cy="410" r="11"/>
+      <path d="M629 350 q30 26 8 46 q-24 16 -38 -8 q-8 -20 30 -38 Z"/>
+      <circle cx="678" cy="426" r="12"/>
+    </g>
+    <text x="300" y="410" font-size="40" fill="#FFC53D" text-anchor="middle">रिसाव</text>
+  </svg>
+</div>
+
+<!-- the leak-proof build: a steel jacket around the same cell -->
+<div class="chip" id="p2-leakproof">
+  <svg viewBox="0 0 1080 470">
+    <rect x="418" y="42" width="244" height="408" rx="22"
+          fill="#9FB6CC" fill-opacity="0.12" stroke="#9FB6CC" stroke-width="9"/>
+    <rect x="455" y="76" width="170" height="340" rx="16"
+          fill="none" stroke="#7FD4FF" stroke-width="8"/>
+    <rect x="470" y="76" width="140" height="26" rx="6"
+          fill="#7FD4FF" fill-opacity="0.28" stroke="#7FD4FF" stroke-width="5"/>
+    <rect x="488" y="118" width="104" height="268" rx="8"
+          fill="#FFC53D" fill-opacity="0.18" stroke="#FFC53D" stroke-width="5"/>
+    <rect x="524" y="98" width="32" height="252" rx="5"
+          fill="#12283A" stroke="#FFC53D" stroke-width="6"/>
+    <g stroke="#7BE3A0" stroke-width="11" fill="none" stroke-linecap="round"
+       stroke-linejoin="round">
+      <path d="M742 246 L780 288 L856 196"/>
+    </g>
+    <text x="248" y="258" font-size="40" fill="#9FB6CC" text-anchor="middle">स्टील</text>
+    <text x="248" y="306" font-size="40" fill="#9FB6CC" text-anchor="middle">जैकेट</text>
+    <path d="M320 262 L408 254" stroke="#9FB6CC" stroke-width="4"/>
+  </svg>
+</div>
+
+<!-- what the leak-proof cell swaps -->
+<div class="chip" id="p2-koh">
+  <svg viewBox="0 0 1080 470">
+    <text x="266" y="252" font-size="70" fill="#FFFFFF" text-anchor="middle">NH₄Cl</text>
+    <g stroke="#FF5A5A" stroke-width="12" stroke-linecap="round">
+      <path d="M228 86 L304 162"/><path d="M304 86 L228 162"/>
+    </g>
+    <g stroke="#7FD4FF" stroke-width="8" fill="#7FD4FF" stroke-linecap="round">
+      <path d="M448 232 L606 232"/><path d="M632 232 L598 214 L598 250 Z"/>
+    </g>
+    <text x="812" y="252" font-size="70" fill="#7BE3A0" text-anchor="middle">KOH</text>
+    <g stroke="#7BE3A0" stroke-width="11" fill="none" stroke-linecap="round"
+       stroke-linejoin="round">
+      <path d="M760 118 L794 156 L864 72"/>
+    </g>
+  </svg>
+</div>
+
+<!-- optional: which half of the reaction is which -->
+<div class="chip" id="p2-redox">
+  <div class="cap" style="top:406px">
+    <span style="color:#FF5A5A">Zn</span> — ऑक्सीकरण
+    &nbsp;&nbsp;•&nbsp;&nbsp;
+    <span style="color:#7BE3A0">MnO₂</span> — अपचयन
+  </div>
+</div>
+
+</div>
+
+<script>
+  const id = new URLSearchParams(location.search).get('chip');
+  const el = document.getElementById(id);
+  if (el) el.classList.add('on');
+  document.fonts.ready.then(() => { window.READY = true; });
+</script>

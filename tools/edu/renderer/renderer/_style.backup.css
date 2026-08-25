@@ -1,0 +1,109 @@
+/* ============================================================
+   Arivihan Truth Layer — frame styles
+   Canvas: 1080 x 1920. ONLY the top 960px is ever drawn.
+   Bottom 960px stays transparent (avatar goes there in editor).
+   ============================================================ */
+
+@font-face{font-family:Poppins;src:url(vendor/fonts/poppins-latin-700-normal.woff2) format('woff2');font-weight:700;font-display:block}
+@font-face{font-family:Poppins;src:url(vendor/fonts/poppins-latin-800-normal.woff2) format('woff2');font-weight:800;font-display:block}
+@font-face{font-family:Poppins;src:url(vendor/fonts/poppins-latin-900-normal.woff2) format('woff2');font-weight:900;font-display:block}
+@font-face{font-family:Mukta;src:url(vendor/fonts/mukta-devanagari-700-normal.woff2) format('woff2');font-weight:700;font-display:block}
+@font-face{font-family:Mukta;src:url(vendor/fonts/mukta-devanagari-800-normal.woff2) format('woff2');font-weight:800;font-display:block}
+
+:root{
+  /* --- palette: white text is non-negotiable (survives any Veo bg),
+         ONE accent, nothing else. Colour = meaning, not decoration. --- */
+  --ink:        #FFFFFF;
+  --gold:       #FFC53D;   /* the single golden keyword */
+  --gold-soft:  #FFE9A8;
+  --line:       #7FD4FF;   /* diagram strokes */
+  --charge:     #FF5A5A;   /* +ve charge */
+  --field:      #7FD4FF;
+
+  /* --- functional scrim: Veo backgrounds change brightness frame to
+         frame. Without this, white text disappears on bright frames.
+         This is legibility hardware, not decoration.
+         Two lobes, both fully faded out well before y=960 — otherwise
+         the scrim itself draws a visible line across the middle. --- */
+  --scrim: radial-gradient(ellipse 96% 44% at 50% 54%,
+      rgba(4,8,20,.80) 0%,  rgba(4,8,20,.72) 34%,
+      rgba(4,8,20,.44) 62%, rgba(4,8,20,.14) 84%,
+      rgba(4,8,20,0)   100%);
+
+  /* tight dark halo — this, not the scrim, is what actually keeps
+     white type readable when a Veo frame goes bright */
+  --shadow: 0 0 14px rgba(0,0,0,.95), 0 0 38px rgba(0,0,0,.75),
+            0 5px 12px rgba(0,0,0,.9);
+
+  /* --- layout zones (px, from top of the 1920 canvas) ---
+     TEXT SITS AT THE TOP. The diagram sits UNDER it. Everything below
+     --half is untouched, so the avatar always has a clean lower half. --- */
+  --cap-top:   64px;    /* captions sit higher than the skill's default */
+  --cap-h:     240px;
+  --stage-top: 380px;
+  --stage-h:   470px;
+  --half:      960px;      /* the invisible middle line. Nothing crosses it. */
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;background:transparent;overflow:hidden}
+
+#frame{
+  position:relative;width:1080px;height:1920px;
+  font-family:Poppins,Mukta,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* preview-only backdrop, stripped in headless render */
+#frame.preview{background:#0B1020}
+#frame.preview::after{
+  content:'';position:absolute;left:0;top:var(--half);width:1080px;height:960px;
+  background:repeating-linear-gradient(45deg,#151b2e 0 22px,#111629 22px 44px);
+}
+
+#scrim{position:absolute;inset:0 0 960px 0;background:var(--scrim);pointer-events:none}
+
+/* ---------- STAGE: diagram or equation ---------- */
+#stage{
+  position:absolute;left:0;top:var(--stage-top);width:1080px;height:var(--stage-h);
+  display:flex;align-items:center;justify-content:center;
+}
+#stage svg{width:100%;height:100%;overflow:visible}
+#stage .lbl{
+  position:absolute;transform-origin:50% 50%;
+  font-weight:800;font-size:46px;letter-spacing:.2px;color:var(--ink);
+  text-shadow:var(--shadow);white-space:nowrap;
+}
+#stage .lbl.accent{color:var(--gold)}
+
+/* ---------- EQUATION ---------- */
+#eqWrap{
+  position:absolute;left:0;top:var(--stage-top);width:1080px;height:var(--stage-h);
+  display:flex;align-items:center;justify-content:center;
+}
+#eq{transform-origin:50% 50%;filter:drop-shadow(0 6px 26px rgba(0,0,0,.9))}
+#eq > span{font-size:80px}
+#eq .katex{color:var(--ink)}
+
+/* ---------- CAPTION (the script text) ---------- */
+#caption{
+  position:absolute;left:70px;top:var(--cap-top);width:940px;height:var(--cap-h);
+  display:flex;align-items:flex-start;justify-content:center;text-align:center;
+}
+#caption .phrase{
+  position:absolute;top:0;width:940px;transform-origin:50% 0;
+  font-weight:900;line-height:1.16;letter-spacing:-.5px;
+  color:var(--ink);text-shadow:var(--shadow);
+  text-wrap:balance;
+}
+#caption .phrase .g{color:var(--gold)}
+#caption .phrase.xl{font-size:88px}
+#caption .phrase.lg{font-size:76px}
+#caption .phrase.md{font-size:64px}
+#caption .phrase.sm{font-size:54px;line-height:1.20}
+
+/* ---------- preview controls (never rendered headless) ---------- */
+#ui{position:fixed;left:0;bottom:0;width:1080px;padding:24px;background:#000C;
+    display:flex;gap:18px;align-items:center;font:600 26px Poppins;color:#fff;z-index:99}
+#ui input[type=range]{flex:1;height:34px}
+#ui.hide{display:none}

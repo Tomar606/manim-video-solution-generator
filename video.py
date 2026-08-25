@@ -807,6 +807,7 @@ def cmd_veo(args) -> int:
     see the routing table in PIPELINE.md. It is safe to leave in a build script.
     """
     from src import veo
+    from src.veo_sequence import SequenceError
     from src.flow_bridge import FlowError
 
     root = Path(args.projects_dir or DEFAULT_PROJECTS_DIR) / args.project
@@ -825,7 +826,7 @@ def cmd_veo(args) -> int:
         try:
             out = veo.run(str(root), int(part), attempts=args.attempts,
                           use_plate=not args.no_plate, provider=args.provider)
-        except (veo.VeoError, FlowError) as exc:
+        except (veo.VeoError, FlowError, SequenceError, FileNotFoundError) as exc:
             print(f"❌ part {part}: {exc}")
             return 1
         failed += sum(1 for c in out["clips"] if not c["usable"])

@@ -449,6 +449,255 @@ def test_composite(tmp: Path):
 
 
 # --------------------------------------------------------------------------- #
+def test_sequence(tmp: Path):
+    """The chained route: several clips that have to look like one take.
+
+    The unit half is grouping and frame extraction. The orchestration half is
+    the one worth having, and it is aimed at a single question: when a clip in
+    the middle of a sequence is rejected, does the next one continue from the
+    last GOOD frame rather than from the bad one? Carrying a rejected frame
+    forward is the failure mode that would look more consistent than the correct
+    behaviour, and so would never be spotted by watching the output.
+    """
+    from src import veo, veo_prompts, veo_qc, veo_sequence
+    from src.flow_bridge import inbox_dir
+
+    print("\nsequence grouping")
+    B = [{"at": 1, "sequence": "d"}, {"at": 2, "sequence": "d"},
+         {"at": 3}, {"at": 4, "sequence": "e"}]
+    runs = veo_sequence.spans(B)
+    check("adjacent beats sharing an id become one run",
+          [len(r) for r in runs] == [2, 1, 1], str([len(r) for r in runs]))
+    check("an unmarked beat is a run of one", runs[1][0]["at"] == 3)
+    check("a standalone beat keeps the old behaviour",
+          veo_sequence.spans([{"at": 1}]) == [[{"at": 1}]])
+    split = [{"at": 1, "sequence": "d"}, {"at": 2, "sequence": "e"},
+             {"at": 3, "sequence": "d"}]
+    try:
+        veo_sequence.spans(split)
+        check("a split sequence is refused", False)
+    except veo_sequence.SequenceError as e:
+        check("a split sequence is refused, not silently rejoined",
+              "ADJACENT" in str(e), str(e)[:60])
+
+    print("\nthe carry frame")
+    # A clip whose two halves are unmistakably different colours, so the frame
+    # taken from the end can be proved to be the END rather than the start.
+    two = tmp / "two.mp4"
+    ffmpeg("-f", "lavfi", "-i", "color=c=red:s=320x240:d=3:r=24",
+           "-f", "lavfi", "-i", "color=c=blue:s=320x240:d=3:r=24",
+           "-filter_complex", "[0][1]concat=n=2:v=1", "-c:v", "libx264",
+           "-pix_fmt", "yuv420p", str(two))
+    frame = veo_sequence.carry_frame(two, tmp / "carry" / "c.png")
+    from PIL import Image
+    r, g, b = Image.open(frame).convert("RGB").getpixel((160, 120))
+    check("the carried frame comes from the END of the clip", b > 120 and r < 90,
+          f"rgb({r},{g},{b})")
+    try:
+        veo_sequence.carry_frame(tmp / "nope.mp4", tmp / "carry" / "x.png")
+        check("an unreadable clip is refused", False)
+    except veo_sequence.SequenceError:
+        check("an unreadable clip is refused rather than carried as a blank", True)
+
+    print("\nwhat gets uploaded")
+    plate = veo_prompts.plate_for("chemistry")
+    ref = tmp / "ref.png"
+    Image.new("RGB", (40, 40), "white").save(ref)
+    # Compared resolved on both sides: uploads() resolves, and on macOS that
+    # rewrites /var to /private/var, which is correct and not the thing under
+    # test here.
+    R = lambda ps: [Path(x).resolve() for x in ps]  # noqa: E731
+    first = veo_sequence.uploads(plate=plate, reference=ref, carry=None)
+    check("the first clip goes up on the plate", first == R([plate, ref]), str(first))
+    later = veo_sequence.uploads(plate=plate, reference=ref, carry=frame)
+    check("a carried frame REPLACES the plate rather than joining it",
+          later == R([frame, ref]), str(later))
+    check("the carried frame is offered first, so a one-file control keeps it",
+          later[0] == frame.resolve())
+    check("the textbook figure stays attached for every clip of the sequence",
+          ref.resolve() in first and ref.resolve() in later)
+    try:
+        veo_sequence.uploads(plate=tmp / "gone.png", reference=None, carry=None)
+        check("a missing reference is refused", False)
+    except veo_sequence.SequenceError:
+        check("a missing reference is refused before a credit is spent", True)
+    # Chrome resolves nothing and reports nothing: a relative path attaches no
+    # file and the clip comes back merely inconsistent rather than broken.
+    import os
+    here = Path(os.getcwd())
+    rel = Path(os.path.relpath(ref, here))
+    check("a relative path is made absolute before it reaches the browser",
+          all(u.is_absolute() for u in
+              veo_sequence.uploads(plate=None, reference=rel, carry=None)),
+          str(rel))
+
+    print("\nthe reference figure")
+    figs = tmp / "proj2" / "assets" / "figures"
+    figs.mkdir(parents=True)
+    Image.new("RGB", (40, 40), "white").save(figs / "cell_preview.png")
+    check("the traced preview serves when there is no raw crop",
+          veo_prompts.reference_for(tmp / "proj2", "cell").name == "cell_preview.png")
+    Image.new("RGB", (40, 40), "white").save(figs / "cell_scan.png")
+    check("the book's own crop is preferred over the trace",
+          veo_prompts.reference_for(tmp / "proj2", "cell").name == "cell_scan.png")
+    try:
+        veo_prompts.reference_for(tmp / "proj2", "missing")
+        check("an unknown figure is refused", False)
+    except FileNotFoundError as e:
+        check("an unknown figure names the command that would make it",
+              "figure_from_scan" in str(e))
+
+    print("\nthe chained prompt audit")
+    fresh = {"prompt": ("A wide shot of a beaker on a bench. " * 12).strip()
+                       + " The clip is silent. The supplied image is unchanged.",
+             "negative": "text, letters, captions, borders, vignette, sparkles",
+             "checks": ["the beaker is full"]}
+    check("a chained prompt that reads as a fresh shot is caught",
+          any("re-stage" in x for x in veo_prompts.audit(fresh, carried=True)))
+    check("the same prompt is fine when nothing is being continued",
+          veo_prompts.audit(fresh) == [])
+    cont = dict(fresh, prompt=fresh["prompt"] + " The scene continues unchanged "
+                                                "from the supplied first frame.")
+    check("a prompt that says it continues passes",
+          veo_prompts.audit(cont, carried=True) == [],
+          str(veo_prompts.audit(cont, carried=True)))
+
+    print("\norchestration: a sequence with a rejected clip in the middle")
+    proj = tmp / "seq"
+    (proj / "veo").mkdir(parents=True)
+    lines = [{"start": i * 3.0, "end": i * 3.0 + 2.8, "text": f"line {i}"}
+             for i in range(20)]
+    beats = [{"at": at, "type": "video", "sequence": "daniell", "seconds": 8,
+              "presenter": "hidden", "brief": f"stage {n} of the cell"}
+             for n, at in enumerate((2, 5, 8), 1)]
+    (proj / "lines_part1.json").write_text(json.dumps(lines))
+    (proj / "beats_part1.json").write_text(json.dumps(beats, ensure_ascii=False))
+    (proj / "meta.json").write_text(json.dumps(
+        {"subject": "chemistry", "question": "q", "clip_end": {"1": 60.0}},
+        ensure_ascii=False))
+
+    sample = tmp / "seq_sample.mp4"
+    ffmpeg("-f", "lavfi", "-i",
+           "color=c=0x1b2838:s=1080x1920:d=8:r=24,noise=alls=18:allf=t",
+           "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "44", str(sample))
+
+    spec = dict(cont)
+    seen = {"uploads": [], "carried": [], "previous": [], "positions": [],
+            "continuity": []}
+
+    def fake_write(**kw):
+        seen["carried"].append(kw.get("carried"))
+        seen["previous"].append(bool(kw.get("previous")))
+        seen["positions"].append(kw.get("position"))
+        return dict(spec)
+
+    # The middle clip is rejected however many times it is tried.
+    def fake_review(video, s, *, work, brief="", full_frame=True, provider=None):
+        bad = "stage 2" in brief
+        return {"verdict": "fail" if bad else "pass", "summary": "stubbed",
+                "failed_checks": ["nope"] if bad else [], "defects": [],
+                "frames": [], "good_until": 8.0, "last_good_frame": -1,
+                "loopable": False, "tail_problem": ""}
+
+    def fake_continuity(reference, clip, *, work, provider=None):
+        seen["continuity"].append(Path(reference).name)
+        return {"continuous": True, "severity": "none", "changes": []}
+
+    veo_prompts.write_prompt = fake_write
+    veo_prompts.revise_prompt = lambda prev, defects, **kw: dict(prev)
+    veo_qc.review = fake_review
+    veo_qc.continuity = fake_continuity
+
+    class SeqBridge:
+        def __init__(self):
+            self.keys = []
+
+        def start(self):
+            return self
+
+        def stop(self):
+            pass
+
+        def set_status(self, **kw):
+            pass
+
+        def wait_for_worker(self, timeout=90):
+            return {"tab": "https://labs.google/fx/tools/flow/project/x"}
+
+        def call(self, cmd, timeout=None, **kw):
+            if cmd == "set_image":
+                seen["uploads"].append([Path(p).name for p in kw["paths"]])
+                return {"files": len(kw["paths"]), "used": len(kw["paths"]),
+                        "multiple": True, "dropped": []}
+            if cmd == "click":
+                self.keys.append(f"key{len(self.keys) + 1}")
+            elif cmd == "list_media":
+                return {"media": [{"key": k, "url": f"https://x/{k}"} for k in self.keys]}
+            elif cmd == "download":
+                shutil.copy(sample, inbox_dir() / Path(kw["filename"]).name)
+            return {}
+
+    clips = veo.run(str(proj), 1, attempts=2, bridge=SeqBridge())["clips"]
+
+    check("every beat of the sequence produced a clip", len(clips) == 3)
+    check("the first clip is not continued from anything",
+          clips[0]["continues_from"] is None and seen["carried"][0] is False)
+    check("the second clip continues from the first",
+          seen["carried"][1] is True and clips[1]["continues_from"] == 2,
+          str(clips[1]["continues_from"]))
+    check("THE REJECTED CLIP IS NOT CARRIED FORWARD — the third continues from "
+          "the first, not the second",
+          clips[2]["continues_from"] == 2, str(clips[2]["continues_from"]))
+    check("the hole is recorded on the clip, not just printed",
+          clips[1]["verdict"] == "fail" and clips[1]["usable"] is False)
+    check("the previous prompt is shown to the writer so wording is reused",
+          seen["previous"] == [False, True, True], str(seen["previous"]))
+    check("the writer is told where in the sequence it is",
+          seen["positions"] == ["clip 1 of 3", "clip 2 of 3", "clip 3 of 3"],
+          str(seen["positions"]))
+
+    firsts = [u for u in seen["uploads"]]
+    check("the first generation went up on the plate",
+          firsts[0][0] == "chemistry.png", str(firsts[0]))
+    check("every later generation went up on a carried frame, never the plate",
+          all(u[0].endswith(".png") and u[0] != "chemistry.png" for u in firsts[1:]),
+          str(firsts[1:]))
+    # Once, not twice: the middle clip failed its facts and was going to be
+    # regenerated anyway, and "does this wrong clip match the previous frame"
+    # is a question with no useful answer. Only the third clip reached the seam
+    # check, and it was graded against the frame actually carried to it.
+    check("the seam is graded only on a clip that is otherwise good",
+          seen["continuity"] == ["part1_at002.png"], str(seen["continuity"]))
+    check("the carried frames are kept on disk for inspection",
+          len(list((proj / "veo" / "carry").glob("*.png"))) == 2,
+          str(sorted(p.name for p in (proj / "veo" / "carry").glob("*.png"))))
+
+    print("\na seam that does not hold forces a regeneration")
+    tries = {"n": 0}
+
+    def broken_seam(reference, clip, *, work, provider=None):
+        tries["n"] += 1
+        return {"continuous": False, "severity": "major",
+                "changes": ["the beaker is a different shape"]}
+
+    veo_qc.review = lambda *a, **k: {
+        "verdict": "pass", "summary": "stubbed", "failed_checks": [], "defects": [],
+        "frames": [], "good_until": 8.0, "last_good_frame": -1,
+        "loopable": False, "tail_problem": ""}
+    veo_qc.continuity = broken_seam
+    proj2 = tmp / "seq2"
+    (proj2 / "veo").mkdir(parents=True)
+    for f in ("lines_part1.json", "beats_part1.json", "meta.json"):
+        shutil.copy(proj / f, proj2 / f)
+    clips2 = veo.run(str(proj2), 1, attempts=2, bridge=SeqBridge())["clips"]
+    check("a clip whose facts are right but whose seam is broken still fails",
+          clips2[1]["verdict"] == "fail", str(clips2[1]["verdict"]))
+    check("and it was retried rather than accepted", tries["n"] >= 2, str(tries))
+    check("the seam finding is kept with the clip",
+          (clips2[1].get("continuity") or {}).get("severity") == "major")
+
+
+# --------------------------------------------------------------------------- #
 if __name__ == "__main__":
     if not shutil.which("ffmpeg"):
         sys.exit("ffmpeg is required")
@@ -456,6 +705,7 @@ if __name__ == "__main__":
         tmp = Path(d)
         test_bridge()
         test_orchestration(tmp)
+        test_sequence(tmp)
         test_conform(tmp)
         test_composite(tmp)
     print()

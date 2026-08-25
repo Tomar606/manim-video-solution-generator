@@ -107,6 +107,20 @@ def trace(scan: Path, crop: tuple[int, int, int, int],
                 dd.line([(lx, ly), (rx, ry)], fill=0, width=4)
 
     fig = im.crop(crop)
+    # The crop as the book prints it, kept before thresholding throws the greys
+    # away. Manim wants the trace; Google Flow wants this. A Veo generation is
+    # given it as a reference so the apparatus it animates is the one the student
+    # revises from — see `reference_for` in src/veo_prompts.py — and for that job
+    # the shading and line weight are most of the signal, so the traced version
+    # is a poor substitute even though it is the same ink.
+    #
+    # Saved from the ERASED image, deliberately: the labels are typeset over the
+    # clip afterwards in Poppins, and a scan with Devanagari still on it is a
+    # picture of text handed to a tool that must not draw text.
+    scan_ref = out.with_name(out.stem + "_scan.png")
+    scan_ref.parent.mkdir(parents=True, exist_ok=True)
+    fig.save(scan_ref)
+
     fig = fig.resize((fig.width * upscale, fig.height * upscale), Image.LANCZOS)
     fig = ImageOps.autocontrast(fig, cutoff=1)
     bw = fig.point(lambda p: 0 if p < threshold else 255, mode="1")
@@ -154,6 +168,9 @@ def main() -> int:
     png = preview(svg)
     print(f"{svg}  ({svg.stat().st_size // 1024} KB)")
     print(f"{png}  <- check this before rendering")
+    scan_ref = args.out.with_name(args.out.stem + "_scan.png")
+    if scan_ref.is_file():
+        print(f"{scan_ref}  <- the book's own picture, for `reference:` on a Veo beat")
 
     if args.labels and args.labels.is_file():
         dest = svg.with_name(svg.stem + "_labels.json")

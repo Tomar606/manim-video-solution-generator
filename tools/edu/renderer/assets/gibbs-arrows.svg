@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Gibbs energy: Galvanic side (left) DECREASES -> thick arrow down.
+       Electrolytic side (right) INCREASES -> thick arrow up. -->
+  <g id="baseline" data-optional>
+    <path d="M120 235 H960" stroke="#5C6B7A" stroke-width="4" stroke-dasharray="14 12" stroke-linecap="round"/>
+  </g>
+  <g id="g_down" data-optional>
+    <path d="M330 120 V330" stroke="#7CE38B" stroke-width="18" stroke-linecap="round"/>
+    <path d="M330 372 l-42 -58 h84 z" fill="#7CE38B"/>
+  </g>
+  <g id="e_up" data-optional>
+    <path d="M750 350 V140" stroke="#FF5A5A" stroke-width="18" stroke-linecap="round"/>
+    <path d="M750 98 l-42 58 h84 z" fill="#FF5A5A"/>
+  </g>
+</svg>

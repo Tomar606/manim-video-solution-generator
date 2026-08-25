@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arivihan — truth layer frame</title>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="frame">
+  <div id="scrim"></div>
+  <div id="stage"></div>
+  <div id="eqWrap"><div id="eq"></div></div>
+  <div id="caption"></div>
+</div>
+
+<div id="ui" class="hide">
+  <span id="lbl">0.00s</span>
+  <input id="scrub" type="range" min="0" max="10" step="0.033" value="0">
+  <button id="play">▶</button>
+  <select id="pick"></select>
+</div>
+
+<script src="vendor/katex/katex.min.js"></script>
+<script src="engine.js"></script>
+<script>
+(async () => {
+  const q = new URLSearchParams(location.search);
+  const headless = q.get('headless') === '1';
+  const specs = await (await fetch('../spec/segments.json')).json();
+  const frame = document.getElementById('frame');
+  if (!headless) frame.classList.add('preview');
+
+  let idx = parseInt(q.get('seg') ?? '0', 10);
+  await window.RENDER.build(specs[idx]);
+  window.RENDER.setTime(0);
+  window.READY = true;                      // Playwright waits on this
+
+  if (headless) return;
+
+  /* ---- human preview: scrub before you render. This IS the QC gate. ---- */
+  const ui = document.getElementById('ui'), scrub = document.getElementById('scrub'),
+        lbl = document.getElementById('lbl'), play = document.getElementById('play'),
+        pick = document.getElementById('pick');
+  ui.classList.remove('hide');
+  specs.forEach((s, i) => pick.add(new Option(`Seg ${s.seg_id} — ${s.type}`, i)));
+  pick.value = idx;
+  const load = async i => { idx = +i; await window.RENDER.build(specs[idx]);
+    scrub.max = specs[idx].duration; scrub.value = 0; window.RENDER.setTime(0); lbl.textContent='0.00s'; };
+  pick.onchange = e => load(e.target.value);
+  scrub.max = specs[idx].duration;
+  scrub.oninput = e => { window.RENDER.setTime(+e.target.value); lbl.textContent = (+e.target.value).toFixed(2)+'s'; };
+  let raf = null, t0 = 0;
+  play.onclick = () => {
+    if (raf) { cancelAnimationFrame(raf); raf = null; play.textContent='▶'; return; }
+    play.textContent='⏸'; t0 = performance.now() - (+scrub.value)*1000;
+    const step = now => { const t = (now - t0)/1000;
+      if (t > specs[idx].duration) { cancelAnimationFrame(raf); raf=null; play.textContent='▶'; return; }
+      scrub.value = t; lbl.textContent = t.toFixed(2)+'s'; window.RENDER.setTime(t);
+      raf = requestAnimationFrame(step); };
+    raf = requestAnimationFrame(step);
+  };
+})();
+</script>
+</body>
+</html>

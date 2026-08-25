@@ -160,6 +160,88 @@ and every rejected attempt, gitignored), `veo_review_part<N>.json`.
 `tools/preflight.py` FAILS a part with an ungenerated video beat, because the
 render would have a hole in it. Setup is in [`flow/README.md`](flow/README.md).
 
+### A fourth route: several clips in a row that must look like one take
+
+The route above generates each clip as an ISLAND — Manim content on both sides
+of it, so no two generated clips are ever adjacent, and continuity is bought
+entirely by the shared background plate. That stops working the moment a topic
+needs more than eight seconds of continuous animation, because Veo has no memory
+between generations: the same prompt and the same plate give a slightly
+different apparatus every time. Each clip looks fine alone; played back to back
+they read as several videos of several experiments, which for a student
+comparing what they see now against what they saw four seconds ago is worse than
+not animating the topic at all.
+
+Consecutive video beats that share a `sequence` id are generated as one run, and
+each clip after the first is generated **from the frame the previous one ended
+on**:
+
+```json
+{"at": 12, "type": "video", "sequence": "daniell", "reference": "daniell_cell",
+ "brief": "the zinc electrode starts to pit as it dissolves", "motion": "one_way"},
+{"at": 16, "type": "video", "sequence": "daniell", "reference": "daniell_cell",
+ "brief": "the blue of the copper sulphate solution begins to pale", "motion": "one_way"}
+```
+
+Nothing else changes. Each beat still gets its OWN window off the caption it is
+anchored to, is still conformed to it by `src/veo_conform.py`, still carries its
+own labels, and is still graded on its own. A sequence is not one long clip cut
+into pieces — it is N clips that each land on a sentence boundary, which is both
+what keeps the existing machinery working unchanged and the better cut: the
+picture changes where the teacher moves on.
+
+**A beat with no `sequence` behaves exactly as it did before.** That is the whole
+compatibility story; no existing project changes until somebody writes the key.
+
+Four things are worth knowing before using it:
+
+- **The carry frame replaces the plate, it does not join it.** A frame of a clip
+  that was itself generated on the plate already contains the plate, the
+  apparatus and the lighting, so it is a strictly better background than the
+  background. `src/veo_sequence.uploads()` is where that order is decided, and
+  the order is load-bearing: Flow's reference control may accept only one file,
+  and the extension reports which so the run can say what was dropped rather
+  than quietly producing an unchained clip that looks fine on its own.
+- **A rejected clip is never carried forward.** The next clip continues from the
+  last ACCEPTED frame instead, and the run prints where that happened. Carrying
+  a frame the review has just called wrong is how one bad generation becomes the
+  whole sequence — and it would do it while looking *more* consistent than the
+  correct version, which is what makes it worth a rule rather than a comment.
+- **The seam is graded, and a broken one fails the clip.** `veo_qc.continuity()`
+  compares the carried frame against the frame the new clip opens on and asks
+  one question: would the cut be visible? It is a separate pass from the frame
+  review because the two fail for different reasons and want different repairs —
+  a failed check means the prompt did not pin a fact down, a failed seam means
+  the prompt stopped saying it was a continuation. It runs only on a clip that
+  is otherwise good; asking whether a wrong clip matches the previous frame is a
+  question with no useful answer.
+- **`reference` attaches the book's own figure.** See below.
+
+### `reference`: the figure as the student's book prints it
+
+A generated apparatus is a plausible apparatus, and plausible is not what this
+track needs — `tools/figure_from_scan.py` already argues the point at length for
+the Manim path, and Veo invents in exactly the same way. So a video beat can
+name a figure, and the crop of the book page goes into Flow alongside everything
+else:
+
+```json
+{"at": 12, "type": "video", "reference": "dry_cell", "brief": "..."}
+```
+
+It resolves to `assets/figures/<name>_scan.png` — the untouched crop, which
+`figure_from_scan.py` now writes beside the trace it already produced — falling
+back to `<name>_preview.png`. The raw crop is preferred because tracing has
+already thrown the shading away, and shading is much of what makes a generated
+apparatus resemble a printed one.
+
+The scan stays attached for **every** clip of a sequence, and that is not
+redundant with the carry frame. A carry frame propagates whatever clip 1
+invented: if clip 1 drew the wrong Daniell cell, the whole sequence draws the
+wrong Daniell cell, consistently and convincingly. The book's figure is the only
+thing in the loop pulling every clip back towards the arrangement the student
+actually revises from.
+
 ### If Veo for the whole video: the prompt pack
 
 `src/frames.py` builds it:

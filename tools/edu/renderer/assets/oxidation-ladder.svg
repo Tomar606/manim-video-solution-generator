@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Variable oxidation states, Mn as the worked example (+2 .. +7).
+       All numerals come from the spec as labels.
+       NOTE: rungs use SOLID strokes, never a gradient — an objectBoundingBox
+       gradient on a zero-height horizontal line renders as nothing. -->
+  <path id="axis" data-optional d="M400 424 V50"
+        stroke="#7FD4FF" stroke-width="6" stroke-linecap="round" fill="none"/>
+
+  <g id="ox2" data-optional><path d="M400 400 h150" stroke="#7FD4FF" stroke-width="9" stroke-linecap="round"/><circle cx="400" cy="400" r="13" fill="#7FD4FF"/></g>
+  <g id="ox3" data-optional><path d="M400 331 h150" stroke="#94D2F5" stroke-width="9" stroke-linecap="round"/><circle cx="400" cy="331" r="13" fill="#94D2F5"/></g>
+  <g id="ox4" data-optional><path d="M400 262 h150" stroke="#B6CFE6" stroke-width="9" stroke-linecap="round"/><circle cx="400" cy="262" r="13" fill="#B6CFE6"/></g>
+  <g id="ox5" data-optional><path d="M400 193 h150" stroke="#D6C9C4" stroke-width="9" stroke-linecap="round"/><circle cx="400" cy="193" r="13" fill="#D6C9C4"/></g>
+  <g id="ox6" data-optional><path d="M400 124 h150" stroke="#EDC68A" stroke-width="9" stroke-linecap="round"/><circle cx="400" cy="124" r="13" fill="#EDC68A"/></g>
+  <g id="ox7" data-optional><path d="M400 55  h150" stroke="#FFC53D" stroke-width="9" stroke-linecap="round"/><circle cx="400" cy="55"  r="13" fill="#FFC53D"/></g>
+</svg>

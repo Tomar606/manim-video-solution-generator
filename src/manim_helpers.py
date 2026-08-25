@@ -882,6 +882,105 @@ class ThemedScene(Scene):
                            ).arrange(DOWN, buff=0.34)
         return self.place(chain)
 
+    def beat_table(self, cols, rows, size=26):
+        """An N-column table whose rows arrive one at a time.
+
+        `compare` covers two columns of loose lines. This covers what most of
+        these answers actually are: a heading row and N aligned columns, filled
+        one row per spoken pair — the KMnO4 media, the vitamin/disease mapping,
+        the two-complex contrast. Aligned rows are the whole point: the student
+        must never hunt for which cell answers which.
+
+        Returns (group, row_groups) so the scene can reveal rows on their own
+        caption, exactly as a progressive list does.
+        """
+        colour_of = {"warn": "#FF8A7A", "ok": "#7BE3A0", "accent": "#FFC15C"}
+
+        def cell(text, fs, colour, weight):
+            t = str(text)
+            if t.startswith("$") and t.endswith("$"):
+                m = MathTex(t[1:-1], color=colour)
+                ref_t = Text("H", font=ui_font(), font_size=fs, weight=weight)
+                m.scale(ref_t.height / max(MathTex("H").height, 1e-6))
+                return m
+            return Text(t, font=ui_font(), font_size=fs, color=colour,
+                        weight=weight)
+
+        head = VGroup(*[cell(c, size + 2, "#FFC15C", "BOLD") for c in cols])
+        body = []
+        for r in rows:
+            cells = []
+            for i, c in enumerate(r if isinstance(r, list) else r["cells"]):
+                tone = "#FFFFFF"
+                if isinstance(r, dict) and r.get("tone"):
+                    tone = colour_of.get(r["tone"], "#FFFFFF")
+                cells.append(cell(c, size, tone, "MEDIUM"))
+            body.append(VGroup(*cells))
+
+        # column widths from the widest cell, so every row aligns on the same
+        # grid rather than each row arranging itself
+        ncol = len(cols)
+        widths = []
+        for i in range(ncol):
+            items = [head[i]] + [b[i] for b in body if len(b) > i]
+            widths.append(max(x.width for x in items) + 0.42)
+
+        def lay(row):
+            x = 0.0
+            for i, c in enumerate(row):
+                c.move_to(RIGHT * (x + widths[i] / 2))
+                x += widths[i]
+            return row
+
+        lay(head)
+        for b in body:
+            lay(b)
+        grid = VGroup(head, *body).arrange(DOWN, buff=0.30, aligned_edge=LEFT)
+        rule = Line(grid.get_left(), grid.get_right(),
+                    stroke_width=2, color="#9FB6CC").set_opacity(0.5)
+        rule.next_to(head, DOWN, buff=0.14).align_to(grid, LEFT)
+        whole = VGroup(grid, rule)
+        return self.place(whole), body
+
+    def beat_chain(self, items, direction="down", size=28, title=None):
+        """Boxes joined by arrows, arriving one at a time.
+
+        A causal chain, a process rail or a converging cause is a SHAPE, and the
+        shape carries the teaching: solute -> vapour pressure down -> more heat
+        needed -> boiling point up reads as four linked things, not four
+        sentences. Horizontal for a sequence, vertical for a derivation of cause.
+
+        Returns (group, links) so each box can arrive on its own caption.
+        """
+        boxes = []
+        for it in items:
+            t = str(it)
+            if t.startswith("$") and t.endswith("$"):
+                lbl = MathTex(t[1:-1], color="#FFFFFF")
+                ref = Text("H", font=ui_font(), font_size=size, weight="MEDIUM")
+                lbl.scale(ref.height / max(MathTex("H").height, 1e-6))
+            else:
+                lbl = Text(t, font=ui_font(), font_size=size, color="#FFFFFF",
+                           weight="MEDIUM")
+            box = SurroundingRectangle(lbl, buff=0.20, color="#9FB6CC")
+            box.set_stroke(width=2).set_fill("#0E2438", opacity=0.55)
+            boxes.append(VGroup(box, lbl))
+
+        d = DOWN if direction == "down" else RIGHT
+        row = VGroup(*boxes).arrange(d, buff=0.62)
+        arrows = VGroup()
+        for a, b in zip(boxes, boxes[1:]):
+            arrows.add(Arrow(a.get_edge_center(d), b.get_edge_center(-d),
+                             buff=0.06, stroke_width=3,
+                             max_tip_length_to_length_ratio=0.28,
+                             color="#7FD1FF"))
+        whole = VGroup(row, arrows)
+        if title:
+            head = Text(str(title), font=ui_font(), font_size=size + 6,
+                        color="#FFC15C", weight="BOLD")
+            whole = VGroup(head, whole).arrange(DOWN, buff=0.34)
+        return self.place(whole), boxes
+
     def beat_compare(self, left, right, size=28):
         """Two labelled columns — the shape most 'compare these' answers want.
 

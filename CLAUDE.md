@@ -173,6 +173,16 @@ login and the host has no Manim, but the repair loop needs both. So
   into Flow itself, so the clip is generated on the same picture Manim renders
   and can be spliced into the middle of a part invisibly. Describe a background
   and Veo builds its own, discards ours, and the splice reads as a jump cut.
+- **Consecutive generated clips do not match unless you make them.** Veo
+  remembers nothing between generations, so the same prompt on the same plate
+  builds a slightly different apparatus every time — a shade greener, two
+  millimetres wider, lit from the other side. Each clip passes its own review;
+  the sequence is what is broken. Beats sharing a `sequence` id are generated
+  from the previous clip's final frame (`src/veo_sequence.py`) and the seam is
+  graded before the clip is accepted. And a **rejected** clip is never carried
+  forward — propagating a frame the review just condemned makes one bad
+  generation into five, while looking *more* consistent than the correct
+  version.
 - **A generated clip is never reversed to make it longer.** Boomerang is the
   obvious way to stretch eight seconds over fifteen and it teaches rust
   un-rusting and gas dissolving back into an electrode — wrong in a way that
@@ -209,6 +219,7 @@ src/composite.py      chromakey + despill + placement
 src/veo.py            the Flow route: one beat -> a checked, fitted clip
 src/veo_prompts.py    writing that beat's prompt, and revising it when it fails
 src/veo_qc.py         grading the frames, and where a clip stops being usable
+src/veo_sequence.py   carrying a clip's final frame into the next generation
 src/veo_conform.py    cutting the hallucinated tail, fitting the rest to the window
 src/veo_labels.py     the Devanagari labels that go over a generated clip
 src/flow_bridge.py    the local half of the browser bridge

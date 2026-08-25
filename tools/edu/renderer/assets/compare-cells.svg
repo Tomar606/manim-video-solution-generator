@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Side-by-side mini cells. LEFT = galvanic (two beakers + salt bridge).
+       RIGHT = electrolytic (one vessel + battery). cmp_ring highlights the
+       bridge; cmp_cross marks that the right cell has none. -->
+  <g id="divider" data-optional>
+    <path d="M540 70 V430" stroke="#5C6B7A" stroke-width="4" stroke-dasharray="12 14" stroke-linecap="round"/>
+  </g>
+
+  <g id="cmp_g" data-optional>
+    <path d="M90 230 V385 q0 22 22 22 H222 q22 0 22 -22 V230" fill="none" stroke="#7FD4FF" stroke-width="6"/>
+    <rect x="95" y="288" width="166" height="112" rx="12" fill="#7FD4FF" fill-opacity="0.10"/>
+    <path d="M300 230 V385 q0 22 22 22 H432 q22 0 22 -22 V230" fill="none" stroke="#7FD4FF" stroke-width="6"/>
+    <rect x="305" y="288" width="166" height="112" rx="12" fill="#7FD4FF" fill-opacity="0.10"/>
+    <rect x="152" y="185" width="24" height="160" rx="5" fill="#12283A" stroke="#B8C6D4" stroke-width="5"/>
+    <rect x="368" y="185" width="24" height="160" rx="5" fill="#2A1E05" stroke="#FFC53D" stroke-width="5"/>
+  </g>
+  <g id="cmp_bridge" data-optional>
+    <path d="M238 300 V236 q0 -28 28 -28 H278 q28 0 28 28 V300" fill="none"
+          stroke="#EDC68A" stroke-width="16" stroke-linecap="round"/>
+  </g>
+  <g id="cmp_ring" data-optional>
+    <ellipse cx="272" cy="240" rx="86" ry="62" fill="none" stroke="#FFC53D" stroke-width="6" stroke-dasharray="16 10"/>
+  </g>
+
+  <g id="cmp_e" data-optional>
+    <path d="M640 240 V385 q0 22 22 22 H948 q22 0 22 -22 V240" fill="none" stroke="#7FD4FF" stroke-width="6"/>
+    <rect x="645" y="292" width="320" height="108" rx="12" fill="#7FD4FF" fill-opacity="0.10"/>
+    <rect x="712" y="196" width="24" height="160" rx="5" fill="#12283A" stroke="#B8C6D4" stroke-width="5"/>
+    <rect x="874" y="196" width="24" height="160" rx="5" fill="#12283A" stroke="#B8C6D4" stroke-width="5"/>
+    <rect x="740" y="112" width="130" height="42" rx="10" fill="#2A1E05" stroke="#FFC53D" stroke-width="5"/>
+    <path d="M762 122 v22 M773 128 v10" stroke="#FFC53D" stroke-width="6" stroke-linecap="round"/>
+    <path d="M846 128 v10" stroke="#FFC53D" stroke-width="10" stroke-linecap="round"/>
+    <path d="M724 196 V133 H740 M870 133 H886 V196" fill="none" stroke="#B8C6D4" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <g id="cmp_cross" data-optional>
+    <path d="M772 232 l52 52 M824 232 l-52 52" stroke="#FF5A5A" stroke-width="10" stroke-linecap="round"/>
+  </g>
+</svg>

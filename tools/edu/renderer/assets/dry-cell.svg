@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Dry cell, laid out as the answer-sheet figure: a tall cell in the middle
+       with the carbon rod down its centre, and the labels ranged left and right
+       exactly as the book ranges them. The stage is wide and the cell is tall,
+       so the side space is where the labels and leaders live.
+       No text elements: every label comes from the spec. -->
+
+  <g id="dc_zinc">
+    <!-- zinc container: the outer wall, and the anode -->
+    <rect x="430" y="64" width="220" height="368" rx="16"
+          fill="none" stroke="#7FD4FF" stroke-width="10"/>
+  </g>
+
+  <g id="dc_seal" data-optional>
+    <!-- pitch seal across the top -->
+    <rect x="446" y="64" width="188" height="26" rx="6"
+          fill="#7FD4FF" fill-opacity="0.28" stroke="#7FD4FF" stroke-width="6"/>
+  </g>
+
+  <g id="dc_cap" data-optional>
+    <!-- metal cap on the rod -->
+    <rect x="512" y="34" width="56" height="30" rx="5"
+          fill="#12283A" stroke="#7FD4FF" stroke-width="8"/>
+  </g>
+
+  <g id="dc_electrolyte" data-optional>
+    <!-- NH4Cl + ZnCl2 paste, the band inside the zinc wall -->
+    <rect x="452" y="86" width="176" height="330" rx="10"
+          fill="#7FD4FF" fill-opacity="0.16" stroke="#7FD4FF" stroke-width="6"/>
+  </g>
+
+  <g id="dc_mno2" data-optional>
+    <!-- MnO2 + carbon powder packed around the rod -->
+    <rect x="480" y="104" width="120" height="296" rx="8"
+          fill="#FFC53D" fill-opacity="0.20" stroke="#FFC53D" stroke-width="6"/>
+  </g>
+
+  <g id="dc_rod" data-optional>
+    <!-- carbon rod down the centre: the cathode -->
+    <rect x="524" y="52" width="32" height="332" rx="6"
+          fill="#12283A" stroke="#FFC53D" stroke-width="8"/>
+  </g>
+
+  <g id="dc_anode_mark" data-optional>
+    <line x1="418" y1="230" x2="418" y2="266" stroke="#FF5A5A" stroke-width="9"/>
+  </g>
+  <g id="dc_cathode_mark" data-optional>
+    <line x1="662" y1="230" x2="662" y2="266" stroke="#7BE3A0" stroke-width="9"/>
+    <line x1="644" y1="248" x2="680" y2="248" stroke="#7BE3A0" stroke-width="9"/>
+  </g>
+
+  <g id="dc_circuit" data-optional>
+    <!-- external circuit over the top, zinc wall to cap -->
+    <path d="M430 60 L430 26 L540 26" fill="none" stroke="#7FD4FF" stroke-width="7"
+          stroke-linejoin="round"/>
+  </g>
+
+  <g id="dc_electrons" data-optional>
+    <!-- electrons leaving the ZINC and travelling to the ROD -->
+    <circle cx="430" cy="46" r="9" fill="#7BE3A0"/>
+    <circle cx="470" cy="26" r="9" fill="#7BE3A0"/>
+    <circle cx="512" cy="26" r="9" fill="#7BE3A0"/>
+    <path d="M446 26 L470 26 M486 26 L510 26" stroke="#7BE3A0" stroke-width="5"/>
+    <path d="M528 26 L516 19 L516 33 Z" fill="#7BE3A0"/>
+  </g>
+
+  <g id="dc_zn_ion" data-optional>
+    <!-- zinc dissolving into the electrolyte as Zn2+ -->
+    <circle cx="466" cy="180" r="11" fill="#FF5A5A"/>
+    <circle cx="466" cy="262" r="11" fill="#FF5A5A"/>
+    <path d="M444 180 L462 180 M444 262 L462 262" stroke="#FF5A5A" stroke-width="5"/>
+  </g>
+
+  <!-- LEADERS: each arrives with its own label and leaves with it -->
+  <g id="lead_seal" data-optional>
+    <path d="M300 70 L438 66" stroke="#9FB6CC" stroke-width="4" fill="none"/>
+    <circle cx="444" cy="66" r="7" fill="#9FB6CC"/>
+  </g>
+  <g id="lead_zinc" data-optional>
+    <path d="M300 160 L424 172" stroke="#9FB6CC" stroke-width="4" fill="none"/>
+    <circle cx="430" cy="173" r="7" fill="#9FB6CC"/>
+  </g>
+  <g id="lead_anode" data-optional>
+    <path d="M300 250 L412 248" stroke="#9FB6CC" stroke-width="4" fill="none"/>
+    <circle cx="406" cy="248" r="7" fill="#9FB6CC"/>
+  </g>
+  <g id="lead_electrolyte" data-optional>
+    <path d="M300 372 L446 356" stroke="#9FB6CC" stroke-width="4" fill="none"/>
+    <circle cx="452" cy="355" r="7" fill="#9FB6CC"/>
+  </g>
+  <g id="lead_rod" data-optional>
+    <path d="M780 70 L560 76" stroke="#9FB6CC" stroke-width="4" fill="none"/>
+    <circle cx="554" cy="76" r="7" fill="#9FB6CC"/>
+  </g>
+  <g id="lead_cathode" data-optional>
+    <path d="M780 250 L688 248" stroke="#9FB6CC" stroke-width="4" fill="none"/>
+    <circle cx="682" cy="248" r="7" fill="#9FB6CC"/>
+  </g>
+  <g id="lead_mno2" data-optional>
+    <path d="M780 372 L606 352" stroke="#9FB6CC" stroke-width="4" fill="none"/>
+    <circle cx="600" cy="351" r="7" fill="#9FB6CC"/>
+  </g>
+</svg>

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 480">
+  <!-- Arivihan diagram asset. RULES:
+       1. No <text> anywhere. All wording comes from the segment spec.
+       2. Every part that ever animates has an id.
+       3. data-optional = engine hides it unless the spec references it. -->
+  <defs>
+    <radialGradient id="gSphere" cx="38%" cy="30%">
+      <stop offset="0%"  stop-color="#BDEBFF" stop-opacity=".55"/>
+      <stop offset="55%" stop-color="#3DA9E0" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="#0B4C74" stop-opacity=".30"/>
+    </radialGradient>
+    <radialGradient id="gCharge" cx="35%" cy="30%">
+      <stop offset="0%" stop-color="#FFD2D2"/><stop offset="100%" stop-color="#E03131"/>
+    </radialGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7FD4FF"/>
+    </marker>
+  </defs>
+
+  <!-- closed gaussian surface -->
+  <g id="sphere" data-optional>
+    <circle cx="540" cy="240" r="172" fill="url(#gSphere)" stroke="#7FD4FF" stroke-width="4"/>
+    <ellipse cx="540" cy="240" rx="172" ry="46" fill="none"
+             stroke="#7FD4FF" stroke-width="2.5" stroke-opacity=".5"/>
+    <ellipse cx="540" cy="240" rx="46" ry="172" fill="none"
+             stroke="#7FD4FF" stroke-width="2.5" stroke-opacity=".28"/>
+  </g>
+
+  <!-- point charge at centre (the plus is a path, never a glyph) -->
+  <g id="charge" data-optional>
+    <circle cx="540" cy="240" r="26" fill="url(#gCharge)"/>
+    <path d="M540 226 V254 M526 240 H554" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <!-- radius -->
+  <path id="radius" data-optional d="M540 240 L712 240"
+        stroke="#FFC53D" stroke-width="4" stroke-linecap="round" stroke-dasharray="0"/>
+
+  <!-- outward field lines -->
+  <g id="field" data-optional stroke="#7FD4FF" stroke-width="4" stroke-linecap="round"
+     marker-end="url(#arrow)" fill="none">
+    <path d="M540 240 L540 22"/>   <path d="M540 240 L540 458"/>
+    <path d="M540 240 L790 240"/>  <path d="M540 240 L290 240"/>
+    <path d="M540 240 L717 63"/>   <path d="M540 240 L363 63"/>
+    <path d="M540 240 L717 417"/>  <path d="M540 240 L363 417"/>
+  </g>
+
+  <!-- small area element on the surface -->
+  <g id="dA_patch" data-optional>
+    <path d="M672 158 l52 -14 l14 52 l-52 14 z" fill="#FFC53D" fill-opacity=".85"
+          stroke="#FFE9A8" stroke-width="3"/>
+    <path d="M711 175 L790 96" stroke="#FFC53D" stroke-width="4"
+          marker-end="url(#arrow)" fill="none"/>
+  </g>
+</svg>

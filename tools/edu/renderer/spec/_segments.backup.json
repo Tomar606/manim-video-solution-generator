@@ -1,0 +1,1000 @@
+[
+ {
+  "seg_id": 1,
+  "duration": 5.8,
+  "voiceover": "कि बर्कले और हार्टले विधि समझ भी जाओ, याद भी कर लो और परीक्षा में लिखना भी सीख जाओ।",
+  "phrases": [
+   {
+    "text": "कि बर्कले और हार्टले विधि समझ भी जाओ,",
+    "golden": "हार्टले",
+    "t_in": 0.0,
+    "t_out": 2.76
+   },
+   {
+    "text": "याद भी कर लो और परीक्षा में लिखना भी सीख जाओ।",
+    "golden": null,
+    "t_in": 2.96,
+    "t_out": 5.8
+   }
+  ],
+  "type": "TEXT_ONLY"
+ },
+ {
+  "seg_id": 2,
+  "duration": 4.9,
+  "voiceover": "सबसे पहले समझते हैं, बर्कले एवं हार्टले की विधि में परासरण दाब कैसे मापा जाता है।",
+  "phrases": [
+   {
+    "text": "सबसे पहले समझते हैं बर्कले एवं हार्टले की विधि में परासरण दाब कैसे मापा जाता है।",
+    "golden": "परासरण",
+    "t_in": 0.0,
+    "t_out": 4.9
+   }
+  ],
+  "type": "TEXT_ONLY"
+ },
+ {
+  "seg_id": 3,
+  "duration": 6.2,
+  "voiceover": "और बच्चों, यहाँ से ध्यान से सुनना, क्योंकि परीक्षा में भी इसी तरह लिखने के नम्बर मिलते हैं।",
+  "phrases": [
+   {
+    "text": "और बच्चों, यहाँ से ध्यान से सुनना,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.5
+   },
+   {
+    "text": "क्योंकि परीक्षा में भी इसी तरह लिखने के नम्बर मिलते हैं।",
+    "golden": null,
+    "t_in": 2.7,
+    "t_out": 6.2
+   }
+  ],
+  "type": "TEXT_ONLY"
+ },
+ {
+  "seg_id": 4,
+  "duration": 6.2,
+  "voiceover": "इस विधि के उपकरण में दो समकेंद्रीय नलियाँ होती हैं। इनमें से भीतरी नली संरंध्र होती है।",
+  "phrases": [
+   {
+    "text": "इस विधि के उपकरण में दो समकेंद्रीय नलियाँ होती हैं।",
+    "golden": "समकेंद्रीय",
+    "t_in": 0.0,
+    "t_out": 3.22
+   },
+   {
+    "text": "इनमें से भीतरी नली संरंध्र होती है।",
+    "golden": "संरंध्र",
+    "t_in": 3.42,
+    "t_out": 6.2
+   }
+  ],
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/berkeley-hartley.svg",
+   "carry_over": [],
+   "timeline": [
+    {
+     "id": "bh_outer",
+     "action": "fade_in",
+     "t": 0.35,
+     "dur": 0.6
+    },
+    {
+     "id": "bh_inner",
+     "action": "fade_in",
+     "t": 0.9,
+     "dur": 0.6
+    },
+    {
+     "id": "lead_inner",
+     "action": "fade_in",
+     "t": 1.1,
+     "dur": 0.5
+    }
+   ]
+  },
+  "end_state": [
+   "bh_outer",
+   "bh_inner",
+   "lead_inner"
+  ],
+  "labels": [
+   {
+    "text": "दो समकेंद्रीय नलियाँ",
+    "x": 0.5,
+    "y": 0.94,
+    "t_in": 2.2,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 5,
+  "duration": 7.0,
+  "voiceover": "इस भीतरी नली पर विद्युत् विधि से कॉपर फेरोसायनाइड की अर्धपारगम्य झिल्ली बना दी जाती है।",
+  "phrases": [
+   {
+    "text": "इस भीतरी नली पर विद्युत् विधि से कॉपर फेरोसायनाइड की अर्धपारगम्य झिल्ली बना दी जाती है।",
+    "golden": "अर्धपारगम्य",
+    "t_in": 0.0,
+    "t_out": 7.0
+   }
+  ],
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/berkeley-hartley.svg",
+   "carry_over": [
+    "bh_outer",
+    "bh_inner"
+   ],
+   "timeline": [
+    {
+     "id": "bh_membrane",
+     "action": "fade_in",
+     "t": 0.35,
+     "dur": 0.6
+    },
+    {
+     "id": "lead_membrane",
+     "action": "fade_in",
+     "t": 1.1,
+     "dur": 0.5
+    }
+   ]
+  },
+  "end_state": [
+   "bh_outer",
+   "bh_inner",
+   "bh_membrane",
+   "lead_membrane"
+  ],
+  "labels": [
+   {
+    "text": "अर्धपारगम्य झिल्ली",
+    "x": 0.3,
+    "y": 0.94,
+    "t_in": 3.0,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 6,
+  "duration": 6.7,
+  "voiceover": "अब इस बात को याद रखना अर्धपारगम्य झिल्ली इस विधि का बहुत महत्वपूर्ण हिस्सा है।",
+  "phrases": [
+   {
+    "text": "अब इस बात को याद रखना अर्धपारगम्य झिल्ली इस विधि का बहुत महत्वपूर्ण हिस्सा है।",
+    "golden": "अर्धपारगम्य",
+    "t_in": 0.0,
+    "t_out": 6.7
+   }
+  ],
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/berkeley-hartley.svg",
+   "carry_over": [
+    "bh_outer",
+    "bh_inner",
+    "bh_membrane"
+   ],
+   "timeline": [
+    {
+     "id": "bh_membrane",
+     "action": "pulse",
+     "t": 0.8,
+     "dur": 0.9
+    }
+   ]
+  },
+  "end_state": [
+   "bh_outer",
+   "bh_inner",
+   "bh_membrane"
+  ]
+ },
+ {
+  "seg_id": 7,
+  "duration": 6.1,
+  "voiceover": "भीतरी नली के एक सिरे पर केशिका नली और दूसरे सिरे पर टोंटीदार कीप लगी होती है।",
+  "phrases": [
+   {
+    "text": "भीतरी नली के एक सिरे पर केशिका नली",
+    "golden": "केशिका",
+    "t_in": 0.0,
+    "t_out": 2.58
+   },
+   {
+    "text": "और दूसरे सिरे पर टोंटीदार कीप लगी होती है।",
+    "golden": "टोंटीदार",
+    "t_in": 2.78,
+    "t_out": 6.1
+   }
+  ],
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/berkeley-hartley.svg",
+   "carry_over": [
+    "bh_outer",
+    "bh_inner",
+    "bh_membrane"
+   ],
+   "timeline": [
+    {
+     "id": "bh_capillary",
+     "action": "fade_in",
+     "t": 0.35,
+     "dur": 0.6
+    },
+    {
+     "id": "bh_funnel",
+     "action": "fade_in",
+     "t": 0.9,
+     "dur": 0.6
+    },
+    {
+     "id": "lead_capillary",
+     "action": "fade_in",
+     "t": 1.1,
+     "dur": 0.5
+    },
+    {
+     "id": "lead_funnel",
+     "action": "fade_in",
+     "t": 1.5,
+     "dur": 0.5
+    }
+   ]
+  },
+  "end_state": [
+   "bh_outer",
+   "bh_inner",
+   "bh_membrane",
+   "bh_capillary",
+   "bh_funnel",
+   "lead_capillary",
+   "lead_funnel"
+  ],
+  "labels": [
+   {
+    "text": "केशिका नली",
+    "x": 0.26,
+    "y": 0.02,
+    "t_in": 0.4,
+    "accent": false
+   },
+   {
+    "text": "टोंटीदार कीप",
+    "x": 0.84,
+    "y": 0.02,
+    "t_in": 3.0,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 8,
+  "duration": 5.7,
+  "voiceover": "और इस भीतरी नली को चारों तरफ से गन मेटल की बाहरी नली घेरती है।",
+  "phrases": [
+   {
+    "text": "और इस भीतरी नली को चारों तरफ से गन मेटल की बाहरी नली घेरती है।",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 5.7
+   }
+  ],
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/berkeley-hartley.svg",
+   "carry_over": [
+    "bh_outer",
+    "bh_inner",
+    "bh_membrane",
+    "bh_capillary",
+    "bh_funnel"
+   ],
+   "timeline": [
+    {
+     "id": "bh_outer",
+     "action": "pulse",
+     "t": 0.8,
+     "dur": 0.9
+    },
+    {
+     "id": "lead_outer",
+     "action": "fade_in",
+     "t": 1.1,
+     "dur": 0.5
+    }
+   ]
+  },
+  "end_state": [
+   "bh_outer",
+   "bh_inner",
+   "bh_membrane",
+   "bh_capillary",
+   "bh_funnel",
+   "lead_outer"
+  ],
+  "labels": [
+   {
+    "text": "गन मेटल बाहरी नली",
+    "x": 0.5,
+    "y": 0.94,
+    "t_in": 1.0,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 9,
+  "duration": 7.3,
+  "voiceover": "इस बाहरी नली में एक जलरोधक पिस्टन लगा होता है, जिसकी मदद से विलयन पर दाब डाला जाता है। अब समझते हैं कि इस उपकरण से",
+  "phrases": [
+   {
+    "text": "इस बाहरी नली में एक जलरोधक पिस्टन लगा होता है,",
+    "golden": "पिस्टन",
+    "t_in": 0.0,
+    "t_out": 3.88
+   },
+   {
+    "text": "जिसकी मदद से विलयन पर दाब डाला जाता है अब समझते हैं कि इस उपकरण से",
+    "golden": "विलयन",
+    "t_in": 4.08,
+    "t_out": 7.3
+   }
+  ],
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/berkeley-hartley.svg",
+   "carry_over": [
+    "bh_outer",
+    "bh_inner",
+    "bh_membrane",
+    "bh_capillary",
+    "bh_funnel"
+   ],
+   "timeline": [
+    {
+     "id": "bh_press_block",
+     "action": "fade_in",
+     "t": 0.35,
+     "dur": 0.6
+    },
+    {
+     "id": "bh_gauge",
+     "action": "fade_in",
+     "t": 0.9,
+     "dur": 0.6
+    },
+    {
+     "id": "lead_press",
+     "action": "fade_in",
+     "t": 1.1,
+     "dur": 0.5
+    },
+    {
+     "id": "lead_gauge",
+     "action": "fade_in",
+     "t": 1.5,
+     "dur": 0.5
+    }
+   ]
+  },
+  "end_state": [
+   "bh_outer",
+   "bh_inner",
+   "bh_membrane",
+   "bh_capillary",
+   "bh_funnel",
+   "bh_press_block",
+   "bh_gauge",
+   "lead_press",
+   "lead_gauge"
+  ],
+  "labels": [
+   {
+    "text": "प्रयुक्त दाब",
+    "x": 0.3,
+    "y": 0.14,
+    "t_in": 0.6,
+    "accent": false
+   },
+   {
+    "text": "दाब मापक",
+    "x": 0.88,
+    "y": 0.3,
+    "t_in": 3.4,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 10,
+  "duration": 4.7,
+  "voiceover": "परासरण दाब कैसे मापा जाता है?",
+  "phrases": [
+   {
+    "text": "परासरण दाब कैसे मापा जाता है?",
+    "golden": "परासरण",
+    "t_in": 0.0,
+    "t_out": 4.7
+   }
+  ],
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/berkeley-hartley.svg",
+   "carry_over": [
+    "bh_outer",
+    "bh_inner",
+    "bh_membrane",
+    "bh_capillary",
+    "bh_funnel",
+    "bh_press_block",
+    "bh_gauge"
+   ],
+   "timeline": []
+  },
+  "end_state": [
+   "bh_outer",
+   "bh_inner",
+   "bh_membrane",
+   "bh_capillary",
+   "bh_funnel",
+   "bh_press_block",
+   "bh_gauge"
+  ]
+ },
+ {
+  "seg_id": 11,
+  "duration": 8.2,
+  "voiceover": "सबसे पहले भीतरी नली में आसुत जल भरते हैं, और जल का स्तर केशिका नली में एक निश्चित निशान तक रखते हैं।",
+  "phrases": [
+   {
+    "text": "सबसे पहले भीतरी नली में आसुत जल भरते हैं,",
+    "golden": "आसुत",
+    "t_in": 0.0,
+    "t_out": 3.38
+   },
+   {
+    "text": "और जल का स्तर केशिका नली में एक निश्चित निशान तक रखते हैं।",
+    "golden": "केशिका",
+    "t_in": 3.58,
+    "t_out": 8.2
+   }
+  ],
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/berkeley-hartley.svg",
+   "carry_over": [
+    "bh_outer",
+    "bh_inner",
+    "bh_membrane",
+    "bh_capillary",
+    "bh_funnel",
+    "bh_press_block",
+    "bh_gauge"
+   ],
+   "timeline": [
+    {
+     "id": "bh_water",
+     "action": "fade_in",
+     "t": 0.35,
+     "dur": 0.6
+    },
+    {
+     "id": "bh_column",
+     "action": "fade_in",
+     "t": 0.9,
+     "dur": 0.6
+    },
+    {
+     "id": "bh_mark",
+     "action": "fade_in",
+     "t": 1.45,
+     "dur": 0.6
+    },
+    {
+     "id": "lead_mark",
+     "action": "fade_in",
+     "t": 1.1,
+     "dur": 0.5
+    },
+    {
+     "id": "lead_water",
+     "action": "fade_in",
+     "t": 1.5,
+     "dur": 0.5
+    }
+   ]
+  },
+  "end_state": [
+   "bh_outer",
+   "bh_inner",
+   "bh_membrane",
+   "bh_capillary",
+   "bh_funnel",
+   "bh_press_block",
+   "bh_gauge",
+   "bh_water",
+   "bh_column",
+   "bh_mark",
+   "lead_mark",
+   "lead_water"
+  ],
+  "labels": [
+   {
+    "text": "निशान",
+    "x": 0.3,
+    "y": 0.24,
+    "t_in": 4.0,
+    "accent": false
+   },
+   {
+    "text": "जल",
+    "x": 0.5,
+    "y": 0.94,
+    "t_in": 1.2,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 12,
+  "duration": 6.1,
+  "voiceover": "इसके बाद बाहरी नली में वह विलयन भरते हैं, जिसका परासरण दाब ज्ञात करना है।",
+  "phrases": [
+   {
+    "text": "इसके बाद बाहरी नली में वह विलयन भरते हैं,",
+    "golden": "विलयन",
+    "t_in": 0.0,
+    "t_out": 3.18
+   },
+   {
+    "text": "जिसका परासरण दाब ज्ञात करना है।",
+    "golden": "परासरण",
+    "t_in": 3.38,
+    "t_out": 6.1
+   }
+  ],
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/berkeley-hartley.svg",
+   "carry_over": [
+    "bh_outer",
+    "bh_inner",
+    "bh_membrane",
+    "bh_capillary",
+    "bh_funnel",
+    "bh_press_block",
+    "bh_gauge",
+    "bh_water",
+    "bh_column",
+    "bh_mark"
+   ],
+   "timeline": [
+    {
+     "id": "bh_solution",
+     "action": "fade_in",
+     "t": 0.35,
+     "dur": 0.6
+    },
+    {
+     "id": "lead_solution",
+     "action": "fade_in",
+     "t": 1.1,
+     "dur": 0.5
+    }
+   ]
+  },
+  "end_state": [
+   "bh_outer",
+   "bh_inner",
+   "bh_membrane",
+   "bh_capillary",
+   "bh_funnel",
+   "bh_press_block",
+   "bh_gauge",
+   "bh_water",
+   "bh_column",
+   "bh_mark",
+   "bh_solution",
+   "lead_solution"
+  ],
+  "labels": [
+   {
+    "text": "विलयन",
+    "x": 0.74,
+    "y": 0.94,
+    "t_in": 1.0,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 13,
+  "duration": 5.8,
+  "voiceover": "अब परासरण के कारण जल अर्धपारगम्य झिल्ली से होकर विलयन की ओर जाने लगता है।",
+  "phrases": [
+   {
+    "text": "अब परासरण के कारण जल अर्धपारगम्य झिल्ली से होकर विलयन की ओर जाने लगता है।",
+    "golden": "अर्धपारगम्य",
+    "t_in": 0.0,
+    "t_out": 5.8
+   }
+  ],
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/berkeley-hartley.svg",
+   "carry_over": [
+    "bh_outer",
+    "bh_inner",
+    "bh_membrane",
+    "bh_capillary",
+    "bh_funnel",
+    "bh_press_block",
+    "bh_gauge",
+    "bh_water",
+    "bh_column",
+    "bh_mark",
+    "bh_solution"
+   ],
+   "timeline": [
+    {
+     "id": "bh_osmosis",
+     "action": "fade_in",
+     "t": 0.35,
+     "dur": 0.6
+    }
+   ]
+  },
+  "end_state": [
+   "bh_outer",
+   "bh_inner",
+   "bh_membrane",
+   "bh_capillary",
+   "bh_funnel",
+   "bh_press_block",
+   "bh_gauge",
+   "bh_water",
+   "bh_column",
+   "bh_mark",
+   "bh_solution",
+   "bh_osmosis"
+  ],
+  "labels": [
+   {
+    "text": "परासरण",
+    "x": 0.52,
+    "y": 0.36,
+    "t_in": 1.2,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 14,
+  "duration": 5.4,
+  "voiceover": "इस वजह से केशिका नली में जल का स्तर नीचे आने लगता है। बच्चों, यहाँ ध्यान देना,",
+  "phrases": [
+   {
+    "text": "इस वजह से केशिका नली में जल का स्तर नीचे आने लगता है बच्चों, यहाँ ध्यान देना,",
+    "golden": "केशिका",
+    "t_in": 0.0,
+    "t_out": 5.4
+   }
+  ],
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/berkeley-hartley.svg",
+   "carry_over": [
+    "bh_outer",
+    "bh_inner",
+    "bh_membrane",
+    "bh_capillary",
+    "bh_funnel",
+    "bh_press_block",
+    "bh_gauge",
+    "bh_water",
+    "bh_column",
+    "bh_mark",
+    "bh_solution",
+    "bh_osmosis"
+   ],
+   "timeline": [
+    {
+     "id": "bh_fall",
+     "action": "fade_in",
+     "t": 0.35,
+     "dur": 0.6
+    }
+   ]
+  },
+  "end_state": [
+   "bh_outer",
+   "bh_inner",
+   "bh_membrane",
+   "bh_capillary",
+   "bh_funnel",
+   "bh_press_block",
+   "bh_gauge",
+   "bh_water",
+   "bh_column",
+   "bh_mark",
+   "bh_solution",
+   "bh_osmosis",
+   "bh_fall"
+  ],
+  "labels": [
+   {
+    "text": "स्तर गिरता है",
+    "x": 0.28,
+    "y": 0.94,
+    "t_in": 1.0,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 15,
+  "duration": 6.4,
+  "voiceover": "अब हमें परासरण दाब मापना है। अब पिस्टन की सहायता से विलयन पर दाब डालते हैं और केशिका नली में जल के स्तर को",
+  "phrases": [
+   {
+    "text": "अब हमें परासरण दाब मापना है अब पिस्टन की सहायता से विलयन पर दाब डालते हैं और केशिका नली में जल के स्तर को",
+    "golden": "परासरण",
+    "t_in": 0.0,
+    "t_out": 6.4
+   }
+  ],
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/berkeley-hartley.svg",
+   "carry_over": [
+    "bh_outer",
+    "bh_inner",
+    "bh_membrane",
+    "bh_capillary",
+    "bh_funnel",
+    "bh_press_block",
+    "bh_gauge",
+    "bh_water",
+    "bh_column",
+    "bh_mark",
+    "bh_solution",
+    "bh_osmosis",
+    "bh_fall"
+   ],
+   "timeline": [
+    {
+     "id": "bh_push",
+     "action": "fade_in",
+     "t": 0.35,
+     "dur": 0.6
+    }
+   ]
+  },
+  "end_state": [
+   "bh_outer",
+   "bh_inner",
+   "bh_membrane",
+   "bh_capillary",
+   "bh_funnel",
+   "bh_press_block",
+   "bh_gauge",
+   "bh_water",
+   "bh_column",
+   "bh_mark",
+   "bh_solution",
+   "bh_osmosis",
+   "bh_fall",
+   "bh_push"
+  ],
+  "labels": [
+   {
+    "text": "दाब डाला",
+    "x": 0.3,
+    "y": 0.14,
+    "t_in": 2.0,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 16,
+  "duration": 5.2,
+  "voiceover": "वापस पहले वाले निशान पर स्थिर कर देते हैं।",
+  "phrases": [
+   {
+    "text": "वापस पहले वाले निशान पर स्थिर कर देते हैं।",
+    "golden": "निशान",
+    "t_in": 0.0,
+    "t_out": 5.2
+   }
+  ],
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/berkeley-hartley.svg",
+   "carry_over": [
+    "bh_outer",
+    "bh_inner",
+    "bh_membrane",
+    "bh_capillary",
+    "bh_funnel",
+    "bh_press_block",
+    "bh_gauge",
+    "bh_water",
+    "bh_column",
+    "bh_mark",
+    "bh_solution",
+    "bh_osmosis",
+    "bh_fall",
+    "bh_push"
+   ],
+   "timeline": [
+    {
+     "id": "bh_restore",
+     "action": "fade_in",
+     "t": 0.35,
+     "dur": 0.6
+    }
+   ]
+  },
+  "end_state": [
+   "bh_outer",
+   "bh_inner",
+   "bh_membrane",
+   "bh_capillary",
+   "bh_funnel",
+   "bh_press_block",
+   "bh_gauge",
+   "bh_water",
+   "bh_column",
+   "bh_mark",
+   "bh_solution",
+   "bh_osmosis",
+   "bh_fall",
+   "bh_push",
+   "bh_restore"
+  ],
+  "labels": [
+   {
+    "text": "वापस निशान पर",
+    "x": 0.28,
+    "y": 0.94,
+    "t_in": 0.6,
+    "accent": false
+   }
+  ]
+ },
+ {
+  "seg_id": 17,
+  "duration": 8.6,
+  "voiceover": "जब यह स्थायी स्थिति आ जाती है, तब पिस्टन द्वारा लगाया गया दाब ही उस विलयन का परासरण दाब होता है।",
+  "phrases": [
+   {
+    "text": "जब यह स्थायी स्थिति आ जाती है तब पिस्टन द्वारा लगाया गया दाब ही",
+    "golden": "पिस्टन",
+    "t_in": 0.0,
+    "t_out": 5.08
+   },
+   {
+    "text": "उस विलयन का परासरण दाब होता है।",
+    "golden": "परासरण",
+    "t_in": 5.28,
+    "t_out": 8.6
+   }
+  ],
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/berkeley-hartley.svg",
+   "carry_over": [
+    "bh_outer",
+    "bh_inner",
+    "bh_membrane",
+    "bh_capillary",
+    "bh_funnel",
+    "bh_press_block",
+    "bh_gauge",
+    "bh_water",
+    "bh_column",
+    "bh_mark",
+    "bh_solution",
+    "bh_osmosis",
+    "bh_fall",
+    "bh_push",
+    "bh_restore"
+   ],
+   "timeline": []
+  },
+  "end_state": [
+   "bh_outer",
+   "bh_inner",
+   "bh_membrane",
+   "bh_capillary",
+   "bh_funnel",
+   "bh_press_block",
+   "bh_gauge",
+   "bh_water",
+   "bh_column",
+   "bh_mark",
+   "bh_solution",
+   "bh_osmosis",
+   "bh_fall",
+   "bh_push",
+   "bh_restore"
+  ],
+  "equation": {
+   "latex": "\\pi = P_{\\text{applied}}",
+   "t_in": 3.0
+  }
+ },
+ {
+  "seg_id": 18,
+  "duration": 9.8,
+  "voiceover": "तो बच्चों, अब तक हमने बर्कले और हार्टले विधि को समझ लिया। लेकिन इसके चार जरूरी लाभ क्या हैं और इस उत्तर को परीक्षा में कैसे लिखना है",
+  "phrases": [
+   {
+    "text": "तो बच्चों, अब तक हमने बर्कले और हार्टले विधि को समझ लिया।",
+    "golden": "हार्टले",
+    "t_in": 0.0,
+    "t_out": 3.7
+   },
+   {
+    "text": "लेकिन इसके चार जरूरी लाभ क्या हैं",
+    "golden": null,
+    "t_in": 3.9,
+    "t_out": 6.68
+   },
+   {
+    "text": "और इस उत्तर को परीक्षा में कैसे लिखना है",
+    "golden": null,
+    "t_in": 6.88,
+    "t_out": 9.8
+   }
+  ],
+  "type": "DIAGRAM",
+  "diagram": {
+   "asset": "assets/berkeley-hartley.svg",
+   "carry_over": [
+    "bh_outer",
+    "bh_inner",
+    "bh_membrane",
+    "bh_capillary",
+    "bh_funnel",
+    "bh_press_block",
+    "bh_gauge",
+    "bh_water",
+    "bh_column",
+    "bh_mark",
+    "bh_solution",
+    "bh_osmosis",
+    "bh_fall",
+    "bh_push",
+    "bh_restore"
+   ],
+   "timeline": []
+  },
+  "end_state": [
+   "bh_outer",
+   "bh_inner",
+   "bh_membrane",
+   "bh_capillary",
+   "bh_funnel",
+   "bh_press_block",
+   "bh_gauge",
+   "bh_water",
+   "bh_column",
+   "bh_mark",
+   "bh_solution",
+   "bh_osmosis",
+   "bh_fall",
+   "bh_push",
+   "bh_restore"
+  ]
+ }
+]

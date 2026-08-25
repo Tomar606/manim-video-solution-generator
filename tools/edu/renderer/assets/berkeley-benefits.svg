@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- The four advantages, as four numbered slots that fill in. The slots are
+       drawn empty from the start so the student knows four are coming and can
+       leave room; the wording arrives from the spec's labels.
+       No text elements: every label comes from the spec. -->
+
+  <g id="ben_frame">
+    <line x1="90" y1="36" x2="990" y2="36" stroke="#7FD4FF" stroke-width="5"/>
+  </g>
+
+  <g id="ben_slot1" data-optional>
+    <circle cx="128" cy="118" r="30" fill="#12283A" stroke="#7FD4FF" stroke-width="7"/>
+    <line x1="128" y1="102" x2="128" y2="134" stroke="#FFC53D" stroke-width="7"/>
+  </g>
+  <g id="ben_slot2" data-optional>
+    <circle cx="128" cy="212" r="30" fill="#12283A" stroke="#7FD4FF" stroke-width="7"/>
+    <line x1="114" y1="198" x2="142" y2="198" stroke="#FFC53D" stroke-width="7"/>
+    <line x1="114" y1="226" x2="142" y2="226" stroke="#FFC53D" stroke-width="7"/>
+  </g>
+  <g id="ben_slot3" data-optional>
+    <circle cx="128" cy="306" r="30" fill="#12283A" stroke="#7FD4FF" stroke-width="7"/>
+    <line x1="114" y1="292" x2="142" y2="292" stroke="#FFC53D" stroke-width="6"/>
+    <line x1="114" y1="306" x2="142" y2="306" stroke="#FFC53D" stroke-width="6"/>
+    <line x1="114" y1="320" x2="142" y2="320" stroke="#FFC53D" stroke-width="6"/>
+  </g>
+  <g id="ben_slot4" data-optional>
+    <circle cx="128" cy="400" r="30" fill="#12283A" stroke="#7FD4FF" stroke-width="7"/>
+    <line x1="112" y1="386" x2="144" y2="386" stroke="#FFC53D" stroke-width="5"/>
+    <line x1="112" y1="396" x2="144" y2="396" stroke="#FFC53D" stroke-width="5"/>
+    <line x1="112" y1="406" x2="144" y2="406" stroke="#FFC53D" stroke-width="5"/>
+    <line x1="112" y1="416" x2="144" y2="416" stroke="#FFC53D" stroke-width="5"/>
+  </g>
+
+  <g id="ben_rule1" data-optional>
+    <line x1="176" y1="152" x2="980" y2="152" stroke="#5C6B7A" stroke-width="3"/>
+  </g>
+  <g id="ben_rule2" data-optional>
+    <line x1="176" y1="246" x2="980" y2="246" stroke="#5C6B7A" stroke-width="3"/>
+  </g>
+  <g id="ben_rule3" data-optional>
+    <line x1="176" y1="340" x2="980" y2="340" stroke="#5C6B7A" stroke-width="3"/>
+  </g>
+</svg>

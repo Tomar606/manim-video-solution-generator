@@ -42,7 +42,7 @@ import shutil
 import time
 from pathlib import Path
 
-from src import veo_conform, veo_labels, veo_prompts, veo_qc
+from src import veo_sequence, veo_conform, veo_labels, veo_prompts, veo_qc
 from src.flow_bridge import FlowBridge, FlowError, inbox_dir, inbox_rel, settled
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -119,6 +119,15 @@ def label_faults(labels: list[dict], *, full: bool) -> list[str]:
     return out
 
 
+def _first_of(results: list[dict], sequence: str) -> dict | None:
+    """The first clip of a sequence — the one legitimately generated without a
+    carried frame, so it is not counted as a break in the sequence."""
+    for r in results:
+        if r.get("sequence") == sequence:
+            return r
+    return None
+
+
 def resolve(project: str) -> Path:
     p = Path(project)
     if not p.is_dir():
@@ -191,20 +200,37 @@ def _media_url(bridge: FlowBridge, key: str) -> str:
     raise VeoError(f"media {key} vanished from the page before it could be downloaded")
 
 
-def generate_one(bridge: FlowBridge, spec: dict, *, plate: Path | None,
+def generate_one(bridge: FlowBridge, spec: dict, *, images: list[Path],
                  sel: dict, label: str) -> str:
     """Submit one prompt and block until Flow has a clip that was not there before.
 
     Returns the new media key. The before/after key set is the whole mapping
     mechanism — see the module header.
+
+    `images` is ordered most-important-first and may hold the carry frame, the
+    background plate and the textbook figure. They are cleared before they are
+    set: Flow keeps its own state for the chips it has rendered, so attaching
+    without clearing leaves the previous clip's reference attached to this one
+    as well. See `clearImages` in flow/extension/background.js.
     """
     bridge.call("attach", timeout=60)
     before = _media_keys(bridge)
 
-    if plate is not None:
-        bridge.set_status(stage="attaching background plate", detail=plate.name)
-        bridge.call("set_image", paths=[str(plate)], selector=sel["plate_input"],
-                    timeout=120)
+    if images:
+        bridge.set_status(stage="attaching reference images",
+                          detail=", ".join(p.name for p in images))
+        bridge.call("clear_images", selector=sel["plate_input"],
+                    clear_selector=sel.get("reference_clear"), timeout=120)
+        got = bridge.call("set_image", paths=[str(p) for p in images],
+                          selector=sel["plate_input"], timeout=120)
+        # Flow taking only one file is not a crash and must not be treated as
+        # one — the clip still generates. But it generates without whichever
+        # reference was dropped, and a chained clip silently missing its carry
+        # frame is precisely the defect that looks fine in isolation.
+        for name in got.get("dropped") or []:
+            print(f"  ⚠ Flow's reference control took only {got.get('used', 1)} "
+                  f"image, so {Path(name).name} was NOT attached to this "
+                  f"generation")
 
     text = spec["prompt"]
     if spec.get("negative"):
@@ -302,6 +328,13 @@ def run(project: str, part: int, *, attempts: int = MAX_ATTEMPTS,
             break
 
     plate = veo_prompts.plate_for(meta.get("subject", "")) if use_plate else None
+    # Resolved for every beat up front. Doing it lazily inside the loop means a
+    # missing crop is discovered after the earlier clips have been generated and
+    # paid for, and the run then dies holding results it never writes out.
+    # `tools/preflight_beats.py` checks the same thing earlier still; this is the
+    # backstop for a run that skipped it.
+    refs = {int(b["at"]): veo_prompts.reference_for(root, b["reference"])
+            for b in beats if b.get("reference")}
     sel = _selectors()
     out_dir = root / "veo"
     work = out_dir / "review"
@@ -317,111 +350,205 @@ def run(project: str, part: int, *, attempts: int = MAX_ATTEMPTS,
             raise VeoError("no Google Flow tab is open. Open your Flow project in "
                            "any tab — it can stay in the background.")
 
-        for n, beat in enumerate(beats, 1):
-            label = f"part{part} beat@{beat['at']} ({n}/{len(beats)})"
-            b.set_status(run=root.name, scene=label, stage="writing the prompt")
-            print(f"\n=== {label} ===\n{beat['brief']}")
+        runs = veo_sequence.spans(beats)
+        number = {id(bt): i for i, bt in enumerate(beats, 1)}
+        sequenced = [r for r in runs if len(r) > 1]
+        if sequenced and not sel.get("reference_clear"):
+            # Said once, loudly, at the top of the run rather than per clip.
+            print("  ⚠ flow/selectors.json has no `reference_clear` selector. "
+                  "Emptying the file input does not remove the reference chips "
+                  "Flow has already rendered, so a carry frame may stay attached "
+                  "to the clip after next. Inspect the ✕ on a reference chip once "
+                  "and put its selector there.")
+        for seq_run in runs:
+            if len(seq_run) > 1:
+                print(f"\n--- {veo_sequence.describe(seq_run)} ---")
+            carry = veo_sequence.Carry(sequence=seq_run[0].get("sequence") or "")
+            prev_spec: dict | None = None
 
-            full = beat.get("presenter") == "hidden"
-            spec = veo_prompts.write_prompt(
-                brief=beat["brief"], lines=lines, at=int(beat["at"]),
-                subject=meta.get("subject", ""), question=question,
-                accuracy=accuracy, full_frame=full,
-                script=script, duration=GEN_SECONDS, provider=provider)
+            for k, beat in enumerate(seq_run):
+                n = number[id(beat)]
+                label = f"part{part} beat@{beat['at']} ({n}/{len(beats)})"
+                b.set_status(run=root.name, scene=label, stage="writing the prompt")
+                print(f"\n=== {label} ===\n{beat['brief']}")
 
-            history, clip, review = [], None, None
-            for attempt in range(1, attempts + 1):
-                bad = veo_prompts.audit(spec)
-                if bad:
-                    # Fixed before a credit is spent: these are the failures we
-                    # already know the shape of, so paying Veo to demonstrate
-                    # them again would be a waste.
-                    print(f"  prompt audit found {len(bad)} problem(s); revising")
-                    for line in bad:
-                        print(f"    - {line}")
-                    spec = veo_prompts.revise_prompt(spec, bad, provider=provider)
+                full = beat.get("presenter") == "hidden"
 
-                print(f"  attempt {attempt}/{attempts}: submitting")
-                key = generate_one(b, spec, plate=plate, sel=sel, label=label)
-                dest = out_dir / f"part{part}_at{beat['at']:03d}_try{attempt}.mp4"
-                clip = fetch(b, key, dest)
+                # What this generation is built from. A standalone beat resolves
+                # to exactly what it always did — plate, no carry, no reference —
+                # which is what keeps every existing project's behaviour intact.
+                ref = refs.get(int(beat["at"]))
+                carried = carry.frame is not None
+                # Captured HERE, not read back at the end. By the time this
+                # beat's result is written the carry has already advanced to
+                # this beat's own frame, so reading `carry.source_at` there
+                # records every clip as continuing from itself — and it does it
+                # only for the clips that PASSED, which is the half of the data
+                # somebody would be reading to find the seams.
+                continues_from = carry.source_at if carried else None
+                position = (f"clip {k + 1} of {len(seq_run)}"
+                            if len(seq_run) > 1 else "")
+                if carried:
+                    note = f"continuing beat@{carry.source_at}"
+                    if carry.broken:
+                        note += " (the clip in between failed its review and was "
+                        note += "not carried forward)"
+                    print(f"  chained: {note}")
+                if ref:
+                    print(f"  textbook reference: {_rel(ref)}")
 
-                b.set_status(stage="reviewing the frames", detail=dest.name)
-                review = veo_qc.review(clip, spec, work=work, brief=beat["brief"],
-                                       full_frame=full, provider=provider)
-                review.update(attempt=attempt, clip=str(clip.relative_to(root)),
-                              at=int(beat["at"]), prompt=spec["prompt"],
-                              negative=spec.get("negative", ""))
-                reviews.append(review)
-                print(f"  review: {review['verdict']} — {review['summary']}")
+                spec = veo_prompts.write_prompt(
+                    brief=beat["brief"], lines=lines, at=int(beat["at"]),
+                    subject=meta.get("subject", ""), question=question,
+                    accuracy=accuracy, full_frame=full,
+                    script=script, duration=GEN_SECONDS, provider=provider,
+                    carried=carried, referenced=ref is not None,
+                    previous=prev_spec, position=position)
 
-                if review["verdict"] != "fail":
-                    break
-                defects = veo_qc.defect_lines(review)
-                for d in defects:
-                    print(f"    - {d}")
-                history.append(spec)
-                if attempt < attempts:
-                    spec = veo_prompts.revise_prompt(spec, defects, provider=provider)
+                history, clip, review, cont = [], None, None, None
+                for attempt in range(1, attempts + 1):
+                    bad = veo_prompts.audit(spec, carried=carried)
+                    if bad:
+                        # Fixed before a credit is spent: these are the failures
+                        # we already know the shape of, so paying Veo to
+                        # demonstrate them again would be a waste.
+                        print(f"  prompt audit found {len(bad)} problem(s); revising")
+                        for line in bad:
+                            print(f"    - {line}")
+                        spec = veo_prompts.revise_prompt(spec, bad, provider=provider)
 
-            start, end = window(beat, all_beats, lines, clip_end)
-            # THE CLIP IS FITTED TO THE PRESENTER, NEVER THE OTHER WAY ROUND.
-            # Flow returns a fixed ~8s and the presenter talks for as long as he
-            # talks; the tail Veo hallucinated is cut here and the good part is
-            # slowed, looped or held to cover the window. See src/veo_conform.py
-            # for why the choice between those three is a teaching decision.
-            motion = beat.get("motion", "one_way")
-            if motion == "cyclic" and not review.get("loopable"):
-                print("  ⚠ the beat says the motion is cyclic but the review says "
-                      "this clip does not return to where it started; holding the "
-                      "final state instead of looping a visible jump")
-                motion = "settling"
-            good = review.get("good_until")
-            b.set_status(stage="fitting the clip to the window", detail=label)
-            fitted = out_dir / f"part{part}_at{beat['at']:03d}.mp4"
-            try:
-                fit = veo_conform.conform(clip, fitted, good_until=good,
-                                          need=end - start, strategy=motion)
-                print(f"  fitted: {fit['had']}s generated, {fit['usable']}s usable"
-                      + (f" ({fit['trimmed']}s of tail cut)" if fit["trimmed"] > 0.05
-                         else "")
-                      + f" -> {fit['need']}s on screen by {motion}")
-                if review.get("tail_problem") and fit["trimmed"] > 0.05:
-                    print(f"    the cut tail: {review['tail_problem']}")
-            except veo_conform.ConformError as exc:
-                # Not fatal: the unconformed clip is still on disk and still
-                # reviewable, and a run that has already paid for every clip
-                # should not end with nothing written.
-                print(f"  ⚠ could not fit this clip to its window: {exc}")
-                fit, fitted = None, clip
-                review["verdict"] = "fail"
-            # The one thing besides the animation allowed on screen. Typeset
-            # here rather than generated, because Veo cannot set Devanagari —
-            # see src/veo_labels.py.
-            labels = veo_labels.build(beat, lines, start, end, out_dir / "labels",
-                                      f"part{part}_at{beat['at']:03d}")
-            for a in labels:
-                # Stored project-relative, like `src`, so the project survives
-                # being moved or rendered on another machine.
-                a["png"] = str(Path(a["png"]).relative_to(root))
-            for bad in label_faults(labels, full=full):
-                print(f"  ⚠ {bad}")
-            results.append({
-                "at": int(beat["at"]),
-                "start": round(start, 2),
-                "end": round(end, 2),
-                "src": str(fitted.relative_to(root)),
-                "raw": str(clip.relative_to(root)),
-                "full": full,
-                "labels": labels,
-                "fit": fit,
-                "verdict": review["verdict"],
-                "attempts": review["attempt"],
-                # A `fail` still gets written out. Deleting it would leave the
-                # part with a silent hole and nothing to look at; recorded as a
-                # failure, it is a clip somebody can watch and overrule.
-                "usable": review["verdict"] != "fail",
-            })
+                    print(f"  attempt {attempt}/{attempts}: submitting")
+                    images = veo_sequence.uploads(plate=plate, reference=ref,
+                                               carry=carry.frame)
+                    key = generate_one(b, spec, images=images, sel=sel, label=label)
+                    dest = out_dir / f"part{part}_at{beat['at']:03d}_try{attempt}.mp4"
+                    clip = fetch(b, key, dest)
+
+                    b.set_status(stage="reviewing the frames", detail=dest.name)
+                    review = veo_qc.review(clip, spec, work=work, brief=beat["brief"],
+                                           full_frame=full, provider=provider)
+                    review.update(attempt=attempt, clip=str(clip.relative_to(root)),
+                                  at=int(beat["at"]), prompt=spec["prompt"],
+                                  negative=spec.get("negative", ""))
+
+                    # The seam is graded only when there is one, and only once
+                    # the clip is otherwise good: a clip that failed its facts is
+                    # being regenerated anyway, and asking whether a wrong clip
+                    # matches the previous frame is a question with no useful
+                    # answer.
+                    cont, seam = None, []
+                    if carried and review["verdict"] != "fail":
+                        b.set_status(stage="checking the seam", detail=label)
+                        cont = veo_qc.continuity(carry.frame, clip, work=work,
+                                                 provider=provider)
+                        review["continuity"] = cont
+                        seam = veo_qc.seam_defects(cont)
+                        if seam:
+                            review["verdict"] = "fail"
+                            print("  seam: the clip does not continue the previous one")
+                    elif carried:
+                        review["continuity"] = None
+                    reviews.append(review)
+                    print(f"  review: {review['verdict']} — {review['summary']}")
+
+                    if review["verdict"] != "fail":
+                        if cont:
+                            print("  seam: continuous")
+                        break
+                    defects = veo_qc.defect_lines(review) + seam
+                    for d in defects:
+                        print(f"    - {d}")
+                    history.append(spec)
+                    if attempt < attempts:
+                        spec = veo_prompts.revise_prompt(spec, defects, provider=provider)
+
+                start, end = window(beat, all_beats, lines, clip_end)
+                # THE CLIP IS FITTED TO THE PRESENTER, NEVER THE OTHER WAY ROUND.
+                # Flow returns a fixed ~8s and the presenter talks for as long as
+                # he talks; the tail Veo hallucinated is cut here and the good
+                # part is slowed, looped or held to cover the window. See
+                # src/veo_conform.py for why the choice between those three is a
+                # teaching decision.
+                motion = beat.get("motion", "one_way")
+                if motion == "cyclic" and not review.get("loopable"):
+                    print("  ⚠ the beat says the motion is cyclic but the review says "
+                          "this clip does not return to where it started; holding the "
+                          "final state instead of looping a visible jump")
+                    motion = "settling"
+                good = review.get("good_until")
+                b.set_status(stage="fitting the clip to the window", detail=label)
+                fitted = out_dir / f"part{part}_at{beat['at']:03d}.mp4"
+                try:
+                    fit = veo_conform.conform(clip, fitted, good_until=good,
+                                              need=end - start, strategy=motion)
+                    print(f"  fitted: {fit['had']}s generated, {fit['usable']}s usable"
+                          + (f" ({fit['trimmed']}s of tail cut)" if fit["trimmed"] > 0.05
+                             else "")
+                          + f" -> {fit['need']}s on screen by {motion}")
+                    if review.get("tail_problem") and fit["trimmed"] > 0.05:
+                        print(f"    the cut tail: {review['tail_problem']}")
+                except veo_conform.ConformError as exc:
+                    # Not fatal: the unconformed clip is still on disk and still
+                    # reviewable, and a run that has already paid for every clip
+                    # should not end with nothing written.
+                    print(f"  ⚠ could not fit this clip to its window: {exc}")
+                    fit, fitted = None, clip
+                    review["verdict"] = "fail"
+
+                # Hand this clip's last frame to the next one in the sequence — but
+                # only if the review accepted it. Carrying a rejected frame is
+                # how one bad generation becomes the whole sequence, and it does
+                # it while looking MORE consistent than the correct version.
+                passed = review["verdict"] != "fail"
+                if len(seq_run) > 1:
+                    if passed:
+                        try:
+                            carry.accept(int(beat["at"]), veo_sequence.carry_frame(
+                                fitted, out_dir / "carry"
+                                / f"part{part}_at{beat['at']:03d}.png"))
+                        except veo_sequence.SequenceError as exc:
+                            print(f"  ⚠ {exc}")
+                            carry.reject(int(beat["at"]))
+                    else:
+                        print("  this clip was not accepted, so the next clip in "
+                              "the sequence continues from "
+                              + (f"beat@{carry.source_at} instead"
+                                 if carry.frame else "nothing"))
+                        carry.reject(int(beat["at"]))
+                    if passed:
+                        prev_spec = spec
+
+                # The one thing besides the animation allowed on screen. Typeset
+                # here rather than generated, because Veo cannot set Devanagari —
+                # see src/veo_labels.py.
+                labels = veo_labels.build(beat, lines, start, end, out_dir / "labels",
+                                          f"part{part}_at{beat['at']:03d}")
+                for a in labels:
+                    # Stored project-relative, like `src`, so the project survives
+                    # being moved or rendered on another machine.
+                    a["png"] = str(Path(a["png"]).relative_to(root))
+                for bad in label_faults(labels, full=full):
+                    print(f"  ⚠ {bad}")
+                results.append({
+                    "at": int(beat["at"]),
+                    "start": round(start, 2),
+                    "end": round(end, 2),
+                    "src": str(fitted.relative_to(root)),
+                    "raw": str(clip.relative_to(root)),
+                    "full": full,
+                    "labels": labels,
+                    "fit": fit,
+                    "verdict": review["verdict"],
+                    "attempts": review["attempt"],
+                    "sequence": beat.get("sequence"),
+                    "continues_from": continues_from,
+                    "continuity": review.get("continuity"),
+                    "reference": str(ref.relative_to(root)) if ref else None,
+                    # A `fail` still gets written out. Deleting it would leave the
+                    # part with a silent hole and nothing to look at; recorded as a
+                    # failure, it is a clip somebody can watch and overrule.
+                    "usable": review["verdict"] != "fail",
+                })
     finally:
         b.set_status(stage="idle", scene=None, detail="")
         if own:
@@ -441,6 +568,17 @@ def run(project: str, part: int, *, attempts: int = MAX_ATTEMPTS,
 
     bad = [r for r in results if not r["usable"]]
     print(f"\n{len(results)} clip(s) -> {_rel(clips_f)}")
+
+    # A sequence with a hole in it still ships — the clips on either side of the
+    # hole are fine and the part is better with them than without. But the hole
+    # is exactly the thing that is invisible in the output files, so it is said
+    # here rather than left to be discovered in the finished video.
+    holes = [r for r in results if r.get("sequence") and r["usable"]
+             and r.get("continues_from") is None and r is not _first_of(results, r["sequence"])]
+    for r in holes:
+        print(f"⚠ sequence {r['sequence']!r} restarts at beat@{r['at']} — the clip "
+              f"before it was rejected, so this one was generated from the plate "
+              f"rather than from a carried frame. Expect a visible cut there.")
     if bad:
         print(f"{len(bad)} did NOT pass the visual check after {attempts} attempts:")
         for r in bad:

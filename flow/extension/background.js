@@ -166,8 +166,8 @@ async function setPrompt(text, selector) {
   return { chars: have.length, editor: found };
 }
 
-/** Attach the background plate as Flow's reference image, by local file path. */
-async function setImage(paths, selector) {
+/** Find Flow's reference-image file input and describe what it will accept. */
+async function findImageInput(selector) {
   await attach();
   const sel = selector || 'input[type="file"]';
   const doc = await cdp("DOM.getDocument", { depth: -1, pierce: true });
@@ -178,15 +178,65 @@ async function setImage(paths, selector) {
                     " — open Flow's reference-image panel once so the input exists in the DOM");
   }
   // Prefer one that declares it accepts images.
-  let target = nodes[0];
+  let target = nodes[0], attrs = [];
   for (const id of nodes) {
     const d = await cdp("DOM.describeNode", { nodeId: id });
-    const attrs = (d.node && d.node.attributes) || [];
-    const i = attrs.indexOf("accept");
-    if (i >= 0 && /image/i.test(attrs[i + 1] || "")) { target = id; break; }
+    const a = (d.node && d.node.attributes) || [];
+    const i = a.indexOf("accept");
+    if (i >= 0 && /image/i.test(a[i + 1] || "")) { target = id; attrs = a; break; }
+    if (id === target) attrs = a;
   }
-  await cdp("DOM.setFileInputFiles", { nodeId: target, files: paths });
-  return { input: target, files: paths.length };
+  // `multiple` is a boolean attribute: present at all means true.
+  return { nodeId: target, multiple: attrs.indexOf("multiple") >= 0 };
+}
+
+/* Attach reference images to the next generation, by local file path.
+ *
+ * `paths` arrives ordered most-important-first (see src/veo_chain.py: the carry
+ * frame outranks the plate, which outranks the textbook scan). That order is
+ * load-bearing rather than cosmetic, because Flow's control may take only one
+ * file — when it does, the extras are dropped here and `used` reports how many
+ * actually went in, so Python can say what the generation was missing instead of
+ * quietly producing an unchained clip that looks fine on its own.
+ */
+async function setImage(paths, selector) {
+  const input = await findImageInput(selector);
+  const files = input.multiple ? paths : paths.slice(0, 1);
+  await cdp("DOM.setFileInputFiles", { nodeId: input.nodeId, files: files });
+  return { input: input.nodeId, files: paths.length, used: files.length,
+           multiple: input.multiple, dropped: paths.slice(files.length) };
+}
+
+/* Drop whatever is already attached, before attaching this generation's images.
+ *
+ * Emptying the file input is necessary and is NOT sufficient: Flow keeps its own
+ * React state for the chips it renders, and clearing the DOM input leaves those
+ * on screen and still attached to the next submit. The last clip's final frame
+ * silently riding along into the clip after next is the exact failure this
+ * whole route exists to avoid, so the remove buttons get clicked too when a
+ * selector for them is known.
+ *
+ * `reference_clear` in selectors.json is null until somebody inspects the panel
+ * once and fills it in — and a null is honest rather than lazy. Guessing a
+ * selector for a remove button that might be a chip's ✕, a context menu or a
+ * drag-out gives an extension that reports success and clears nothing.
+ */
+async function clearImages(selector, clearSelector) {
+  const input = await findImageInput(selector);
+  await cdp("DOM.setFileInputFiles", { nodeId: input.nodeId, files: [] });
+  let clicked = 0;
+  if (clearSelector) {
+    clicked = await evaluate(`
+      var n = 0;
+      for (const el of document.querySelectorAll(${JSON.stringify(clearSelector)})) {
+        if (el.offsetParent === null) continue;
+        el.click(); n++;
+      }
+      return n;
+    `);
+    await sleep(300);
+  }
+  return { cleared: true, removed: clicked, knows_clear_button: !!clearSelector };
 }
 
 /** Click by selector, or by the tightest visible element containing `text`. */
@@ -283,6 +333,7 @@ async function handle(job) {
     case "eval":       return { value: await evaluate(job.expr) };
     case "set_prompt": return await setPrompt(job.text, job.selector);
     case "set_image":  return await setImage(job.paths, job.selector);
+    case "clear_images": return await clearImages(job.selector, job.clear_selector);
     case "click":      return await click(job.selector, { cdpClick: !!job.cdp, text: job.text || null });
     case "list_media": return { media: await listMedia() };
     case "download":   return await download(job.url, job.filename);

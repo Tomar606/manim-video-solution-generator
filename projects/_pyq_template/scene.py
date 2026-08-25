@@ -61,9 +61,18 @@ ROOT = _Path(ASSET_ROOT) / "projects" / PROJECT
 FIGURES = ROOT / "assets" / "figures"
 
 LINES = json.loads((ROOT / f"lines_part{PART}.json").read_text(encoding="utf-8"))
-BEATS = json.loads((ROOT / f"beats_part{PART}.json").read_text(encoding="utf-8"))
+# PYQ_BATCH=b2 renders the scene-director plan (`beats_b2_part<N>.json`) instead
+# of the original beats, so both batches can be built from one project without
+# either overwriting the other's plan.
+_BATCH = _os.environ.get("PYQ_BATCH", "")
+# PYQ_UNTIL=<seconds> stops the scene early. Rendering 132 seconds to use the
+# first 14 wasted nine minutes; the card is often all that is wanted when the
+# body of the video comes from somewhere else.
+_UNTIL = float(_os.environ.get("PYQ_UNTIL", "0") or 0)
+_bf = ROOT / (f"beats_b2_part{PART}.json" if _BATCH == "b2" else f"beats_part{PART}.json")
+BEATS = json.loads(_bf.read_text(encoding="utf-8"))
 META = json.loads((ROOT / "meta.json").read_text(encoding="utf-8"))
-CLIP_END = float(META["clip_end"][str(PART)])
+CLIP_END = float((META.get("clip_end") or {}).get(str(PART), float(LINES[-1]["start"]) + 3.0))
 
 HILITE = {k: GOLD for k in META.get("hilite", [])}
 
@@ -660,17 +669,85 @@ class PyqPart(ThemedScene):
             e.set_opacity(0.0)
         return rows, eqs
 
+    def _asides(self, spec, host):
+        """Photographs shown BESIDE a block instead of replacing it.
+
+        A beat replaces whatever is on stage, so a photo authored as its own
+        beat wipes the table or derivation underneath it. But a disease photo
+        belongs WITH the row that names the disease, and a rust photo belongs
+        with the definition it illustrates. An aside is placed clear of the host
+        block, appears on its own caption, and is swapped for the next one.
+        """
+        out = []
+        for a in spec.get("images", []):
+            img = ImageMobject(str(ROOT / a["src"]))
+            side = a.get("side", "right")
+            if side == "below":
+                # BELOW the block, centred, and large. Beside it, a photograph
+                # gets pushed to the frame edge and clipped — which is what the
+                # disease photos did. Directly under the table it can be big,
+                # and the presenter is hidden for this stretch so nothing has to
+                # share the space.
+                img.height = float(a.get("h", 4.2))
+                img.next_to(host, DOWN, buff=0.42)
+                img.set_x(host.get_x())
+                _, bw, _ = self.stage_box()
+                if img.width > bw * 0.86:
+                    img.scale(bw * 0.86 / img.width)
+                # Do NOT clamp this one back into the stage band. The band stops
+                # above the presenter, and clamping dragged the photo up onto the
+                # table it was meant to sit under. The presenter is hidden for
+                # this stretch, so the space below the band is free — the only
+                # limit is the bottom of the frame.
+                floor = -config.frame_height / 2 + 0.45
+                if img.get_bottom()[1] < floor:
+                    img.shift(UP * (floor - img.get_bottom()[1]))
+                if img.get_top()[1] > host.get_bottom()[1] - 0.25:
+                    img.next_to(host, DOWN, buff=0.30)
+                    img.set_x(host.get_x())
+                out.append((int(a["at"]), img))
+                continue
+            else:
+                img.height = float(a.get("h", 2.6))
+                img.next_to(host, RIGHT if side == "right" else LEFT, buff=0.45)
+            # keep it inside the stage band, never over the caption or presenter
+            self.clamp_to_band(img)
+            out.append((int(a["at"]), img))
+        return out
+
     def build_beat(self, spec):
         t = spec["type"]
         if t == "points":
             return self.beat_points(spec["items"], spec.get("title"),
                                     hi=spec.get("hi"))
         if t == "formula":
-            return self.beat_formula(spec["tex"], spec.get("label"))
+            grp = self.beat_formula(spec["tex"], spec.get("label"))
+            self._pending_asides = self._asides(spec, grp)
+            return grp
         if t == "flow":
             return self.beat_flow(spec["items"])
         if t == "compare":
             return self.beat_compare(spec["left"], spec["right"])
+        if t == "table":
+            grp, rows = self.beat_table(spec["cols"], spec["rows"],
+                                        size=spec.get("size", 26))
+            self._pending_asides = self._asides(spec, grp)
+            # rows arrive on their own caption, exactly like a progressive list
+            self._pending_reveal = list(zip(spec.get("reveal_at", []), rows))
+            if spec.get("reveal_at"):
+                for r in rows:
+                    r.set_opacity(0.0)
+            return grp
+        if t == "chain":
+            grp, links = self.beat_chain(spec["items"],
+                                         direction=spec.get("direction", "down"),
+                                         size=spec.get("size", 28),
+                                         title=spec.get("title"))
+            self._pending_reveal = list(zip(spec.get("reveal_at", []), links))
+            if spec.get("reveal_at"):
+                for b in links:
+                    b.set_opacity(0.0)
+            return grp
         if t == "video":
             # Nothing is drawn, and that is the point. A Veo clip is laid over
             # these frames by tools/composite.py — the clip was generated on
@@ -686,6 +763,17 @@ class PyqPart(ThemedScene):
         if t in ("figure", "scan_figure"):
             fig = self.figure(spec["name"], draw=spec.get("draw", "scan"),
                               hide=spec.get("hide"))
+            # A सचित्र question's diagram IS the answer, so it takes the band
+            # rather than being capped by the generic MAX_GROW that suits a
+            # block of text. The dry cell shipped at about a sixth of the frame
+            # under a full-size presenter, twice.
+            c, bw, bh = self.stage_box()
+            want = float(spec.get("fill", 0.92))
+            if fig.height > 0 and fig.width > 0:
+                k = min((bw * want) / fig.width, (bh * want) / fig.height)
+                if k > 1.0:
+                    fig.scale(k)
+                    fig.move_to(c)
             # Same contract as `apparatus`: built now, revealed one label per
             # caption that names a part.
             self._labels = []
@@ -762,6 +850,7 @@ class PyqPart(ThemedScene):
         for i, line in enumerate(LINES):
             self.at(max(0.0, float(line["start"]) - 0.35))
             if i == card_until or i in beats:
+                self._pending_asides = []
                 self.clear_stage()          # the card goes here, and every beat
                                             # replaces the one before it
                 self.stage_mobs = []
@@ -782,6 +871,12 @@ class PyqPart(ThemedScene):
                     self._pending_reveal = []
                     self._pending_steps = []
                     self._labels = []
+                elif spec["type"] in ("table", "chain") and spec.get("reveal_at"):
+                    mob = self.build_beat(spec)
+                    self.stage_mobs.append(mob)
+                    self.add(mob)
+                    self._pending_steps = []
+                    self.audit_layout(spec.get("type", ""))
                 elif spec["type"] == "formula" and spec.get("build") == "progressive":
                     self._pending_reveal = []
                     self._labels = []
@@ -830,6 +925,15 @@ class PyqPart(ThemedScene):
                     if gone:
                         self._layout_violations.append(
                             f"t={self.time:6.2f}s REVEALED ITEM VANISHED: {gone}")
+            # a photograph that belongs beside the block, not instead of it
+            for at, img in list(getattr(self, "_pending_asides", [])):
+                if at == i:
+                    for _, other in self._pending_asides:
+                        if other is not img and other in self.mobjects:
+                            self.remove(other)      # one aside at a time
+                    self.add(img)
+                    self.stage_mobs.append(img)
+                    self.play(FadeIn(img, shift=UP * 0.08), run_time=0.30)
             # a derivation advances one line at a time, and the line just
             # written is the one that is boxed
             for at, eq in list(getattr(self, "_pending_steps", [])):
@@ -855,6 +959,12 @@ class PyqPart(ThemedScene):
                 if at == i:
                     self.play(FadeIn(lab, shift=RIGHT * 0.10), run_time=0.30)
                     self.stage_mobs.append(lab)
+                    # audit HERE: a diagram label arrives long after its figure
+                    # was built, so auditing only at build time inspected the
+                    # figure alone and passed four labels lying across it.
+                    self.audit_layout("figure-label")
+            if _UNTIL and float(line["start"]) > _UNTIL:
+                break
             self.at(float(line["start"]))
             if i >= card_until:
                 self._line(line["text"], line.get("end"))

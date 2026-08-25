@@ -1,0 +1,18 @@
+{
+  "name": "arivihan-truth-layer",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "preview": "node server.mjs",
+    "render": "node render.mjs",
+    "bg": "node bg-prompts.mjs",
+    "full": "node full.mjs",
+    "qa": "node qa.mjs"
+  },
+  "dependencies": {
+    "@fontsource/mukta": "^5.2.5",
+    "@fontsource/poppins": "^5.2.5",
+    "katex": "^0.16.11",
+    "playwright": "^1.49.0"
+  }
+}

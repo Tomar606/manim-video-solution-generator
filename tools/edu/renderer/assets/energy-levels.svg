@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- ns and (n-1)d orbital energies sit almost at the same height, so
+       electrons from BOTH can join bonding -> variable oxidation state.
+       No word or number lives here: every label comes from the spec.
+       Bars use SOLID strokes, never gradients (zero-height bbox kills them). -->
+
+  <g id="energy_axis" data-optional>
+    <path d="M140 430 V95" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round" fill="none"/>
+    <path d="M140 88 l-19 30 h38 z" fill="#7FD4FF"/>
+  </g>
+
+  <g id="ns_level" data-optional>
+    <path d="M150 296 h150" stroke="#8FA6B8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round"/>
+    <path d="M300 296 h270" stroke="#7FD4FF" stroke-width="18" stroke-linecap="round"/>
+  </g>
+
+  <g id="nd_level" data-optional>
+    <path d="M150 244 h470" stroke="#8FA6B8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round"/>
+    <path d="M620 244 h270" stroke="#FFC53D" stroke-width="18" stroke-linecap="round"/>
+  </g>
+
+  <g id="gap_bracket" data-optional>
+    <path d="M596 292 V248" stroke="#EDC68A" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <path d="M596 300 l-16 -22 h32 z" fill="#EDC68A"/>
+    <path d="M596 240 l-16 22 h32 z" fill="#EDC68A"/>
+  </g>
+
+  <g id="e_ns" data-optional>
+    <circle cx="368" cy="296" r="19" fill="#0B1F2E" stroke="#7FD4FF" stroke-width="7"/>
+    <circle cx="470" cy="296" r="19" fill="#0B1F2E" stroke="#7FD4FF" stroke-width="7"/>
+  </g>
+
+  <g id="e_nd" data-optional>
+    <circle cx="670" cy="244" r="19" fill="#2A1E05" stroke="#FFC53D" stroke-width="7"/>
+    <circle cx="755" cy="244" r="19" fill="#2A1E05" stroke="#FFC53D" stroke-width="7"/>
+    <circle cx="840" cy="244" r="19" fill="#2A1E05" stroke="#FFC53D" stroke-width="7"/>
+  </g>
+
+  <g id="bond_arrows" data-optional>
+    <path d="M420 268 C 452 176, 512 142, 556 138" stroke="#7FD4FF" stroke-width="7"
+          stroke-linecap="round" fill="none"/>
+    <path d="M566 137 l-32 -16 v32 z" fill="#7FD4FF"/>
+    <path d="M760 216 C 726 168, 676 144, 632 138" stroke="#FFC53D" stroke-width="7"
+          stroke-linecap="round" fill="none"/>
+    <path d="M622 137 l32 -16 v32 z" fill="#FFC53D"/>
+    <circle cx="594" cy="137" r="26" fill="none" stroke="#EDC68A" stroke-width="7"/>
+  </g>
+</svg>

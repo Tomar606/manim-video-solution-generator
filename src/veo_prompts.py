@@ -103,6 +103,41 @@ def plate_for(subject: str) -> Path:
     return p
 
 
+def reference_for(root: Path, name: str) -> Path:
+    """The textbook's own picture of a figure, to attach alongside the plate.
+
+    A generated apparatus is a plausible apparatus, and plausible is not what
+    this track needs. `tools/figure_from_scan.py` already argues this at length
+    for the Manim path: three attempts at the Berkeley-Hartley apparatus each
+    produced a different machine, none of them the one in the book, and a
+    student comparing the video against the page they revise from sees two
+    different machines. Veo invents in exactly the same way, so it gets the same
+    answer — the book's own picture goes in with the prompt.
+
+    Two files can serve, and the raw crop is preferred:
+
+      <name>_scan.png     the untouched crop of the book page: the printed
+                          drawing with its own line weight and paper tone, which
+                          is what "familiar to the student" actually means.
+      <name>_preview.png  the traced version. Cleaner, and still the book's own
+                          ink, so this is a real fallback rather than a
+                          consolation — but tracing has already thrown the
+                          shading away, and shading is much of what makes a
+                          generated apparatus resemble the printed one.
+    """
+    figs = Path(root) / "assets" / "figures"
+    for suffix in ("_scan.png", "_preview.png"):
+        p = figs / f"{name}{suffix}"
+        if p.is_file():
+            return p
+    raise FileNotFoundError(
+        f"the beat asks for reference figure {name!r} but neither "
+        f"{figs / (name + '_scan.png')} nor {figs / (name + '_preview.png')} "
+        f"exists. Crop it out of the book scan first:\n"
+        f"    python tools/figure_from_scan.py inbox/scans/<slug>.png \\\n"
+        f"        --crop L,T,R,B --out {figs / name}")
+
+
 def load_skill() -> str:
     """SKILL.md and its reference blocks, as one system prompt.
 
@@ -124,7 +159,63 @@ def load_skill() -> str:
 # The part of the contract that is ours rather than the skill's, spelled out for
 # the writer. Kept as prose because that is what the model reads best, and kept
 # here rather than in the task string so a change is reviewable in one place.
-def house_contract(*, full_frame: bool) -> str:
+# The BACKGROUND paragraph of the contract, which is different depending on what
+# was actually uploaded — and getting it wrong is not cosmetic. §15's whole
+# mechanism is that the prompt REFERS to the supplied image instead of describing
+# a background; a prompt that talks about "the supplied background plate" when
+# what was supplied is the previous clip's final frame is describing a picture
+# the tool cannot see, which is the failure §15 exists to prevent.
+def _background_clause(*, carried: bool, referenced: bool) -> str:
+    if carried:
+        first = """FIRST FRAME: the image attached to this generation is the exact frame the
+PREVIOUS clip in this sequence ended on. It is not a mood reference and not a
+style hint — it is the picture the student is looking at at the instant this
+clip begins, and this clip has to CONTINUE it.
+
+Everything visible in it is already decided and is not yours to redesign: the
+background, the apparatus and where each part of it sits, its colours and
+proportions, the direction and warmth of the light, the camera's distance and
+angle. Begin on that arrangement, unchanged, and animate the change described
+below from there. Do not restate the scene, do not re-stage it "better", do not
+move the camera to a nicer angle, do not adjust the lighting.
+
+Skill §15 applies in full to this frame the way it normally applies to a plate:
+do not recolour, blur, extend, crop, scale or animate the supplied image. The
+two clips are cut together with no transition, so anything that shifts between
+its last frame and your first is a visible jump in the finished video."""
+    else:
+        first = """BACKGROUND: a background image IS attached to this generation. Skill §15 applies
+in full: do not describe a background, do not invent one, do not recolour,
+blur, extend, crop, scale or animate the one supplied. It must look identical in
+the first frame and the last, and identical to the same plate rendered elsewhere
+in the video — this clip is spliced into the middle of a longer render and any
+drift in the plate reads as a jump cut."""
+
+    if not referenced:
+        return first
+
+    return first + """
+
+REFERENCE FIGURE: a SECOND image is attached — the figure as it is printed in
+the student's own textbook. It is there to be matched, not copied: build the
+apparatus this clip shows to that arrangement, that shape, those proportions and
+those relative positions, so that a student who has revised from the book
+recognises what they are looking at without having to work it out.
+
+Match the arrangement and ignore the medium. It is a page scan, so it is flat
+line art on paper, and this clip is not: keep your own lighting, depth and
+materials. Reproduce its LAYOUT, not its paper, its line weight, its greyness or
+its printing. And note that any lettering visible on the scan is part of the
+book, not part of the brief — those labels are typeset separately and laid over
+this clip afterwards, so nothing written on the scan may appear in the frame.
+
+Where the scan and the description below disagree, the description wins: the
+book's own figure has been checked against the verified answer, and where it was
+found wanting that is exactly what the brief is correcting."""
+
+
+def house_contract(*, full_frame: bool, carried: bool = False,
+                   referenced: bool = False) -> str:
     top = LAYOUT["caption_cut"]
     bot = LAYOUT["full_bottom"] if full_frame else LAYOUT["presenter_top"]
     band = f"between {int(top * 100)}% and {int(bot * 100)}% of the frame height"
@@ -133,16 +224,12 @@ def house_contract(*, full_frame: bool) -> str:
         if full_frame else
         "The whole bottom half of the frame — everything below the middle line — "
         "stays empty background, because a presenter is composited there.")
+    background = _background_clause(carried=carried, referenced=referenced)
     return f"""THIS TRACK'S CONTRACT — these override anything in the skill they disagree with.
 
 FORMAT: {LAYOUT['size']}, and the clip is SILENT (skill §17 applies in full).
 
-BACKGROUND: a background image IS attached to this generation. Skill §15 applies
-in full: do not describe a background, do not invent one, do not recolour,
-blur, extend, crop, scale or animate the one supplied. It must look identical in
-the first frame and the last, and identical to the same plate rendered elsewhere
-in the video — this clip is spliced into the middle of a longer render and any
-drift in the plate reads as a jump cut.
+{background}
 
 ACTIVE BAND: every drawn element — including labels, arrows, glows, shadows and
 any inset — sits {band}. The top {int(top * 100)}% of the frame stays empty
@@ -194,20 +281,63 @@ def _captions_around(lines: list[dict], at: int, span: int = 3) -> str:
     return "\n".join(f"[{i}] {lines[i]['text']}" for i in range(lo, hi))
 
 
+# What the writer is told about the clips on either side of this one. Empty for a
+# standalone beat, which is what keeps the old prompts byte-identical.
+def _chain_context(*, previous: dict | None, position: str, carried: bool) -> str:
+    if not (previous or position or carried):
+        return ""
+    out = ["\nTHIS CLIP IS PART OF A SEQUENCE."]
+    if position:
+        out.append(f"Its place in that sequence: {position}.")
+    out.append(
+        "The clips play back to back with no transition between them, so they "
+        "have to read as ONE continuous demonstration filmed in one take — not "
+        "as several takes of the same subject. The student's eye is on the same "
+        "apparatus across the cut and will catch anything that jumps.")
+    if previous:
+        out.append(
+            "\nTHE PROMPT THAT PRODUCED THE CLIP IMMEDIATELY BEFORE THIS ONE. "
+            "Reuse its wording for everything the two clips share — the "
+            "apparatus, the materials, the palette, the lighting, the camera. "
+            "Do not paraphrase those clauses and do not improve them: two "
+            "descriptions of the same object produce two objects, and this is "
+            "the single most common way a sequence falls apart.\n"
+            f"{previous['prompt']}")
+        if previous.get("negative"):
+            out.append(f"\nAnd its NEGATIVE list, which yours should keep:\n"
+                       f"{previous['negative']}")
+    out.append(
+        "\nWhat you write must move the demonstration FORWARD from there. This "
+        "clip is not a variation on the last one and not a second angle on it — "
+        "it is the next thing that happens. Say what CHANGES; leave everything "
+        "else exactly as it already is.")
+    return "\n".join(out)
+
+
 def write_prompt(*, brief: str, lines: list[dict], at: int, subject: str,
                  question: str, accuracy: str = "", script: str = "",
                  full_frame: bool = True, duration: int = 8,
+                 carried: bool = False, referenced: bool = False,
+                 previous: dict | None = None, position: str = "",
                  provider: str | None = None) -> dict:
     """Turn one beat's brief into a generation-ready Flow prompt.
 
     Returns ``{"prompt": ..., "negative": ..., "checks": [...]}``; `checks` is
     the list the visual review is graded against, written by the same pass that
     wrote the prompt so the two cannot drift apart.
+
+    `carried`, `referenced`, `previous` and `position` are the chain arguments
+    and all four default off, so a standalone beat is written exactly as before.
+    `previous` is the SPEC of the clip immediately before this one in the chain,
+    not merely its brief: the writer needs to see the clauses that produced the
+    picture it is being asked to continue, because the fastest way to break a
+    chain is to describe the same apparatus in different words.
     """
     skill = load_skill()
     task = f"""Write ONE Flow/Veo prompt for a single beat of a Hindi PYQ answer video.
 
-{house_contract(full_frame=full_frame)}
+{house_contract(full_frame=full_frame, carried=carried, referenced=referenced)}
+{_chain_context(previous=previous, position=position, carried=carried)}
 
 THE QUESTION THIS VIDEO ANSWERS:
 {question}
@@ -313,7 +443,7 @@ REQUIRED_NEGATIVES = {
 }
 
 
-def audit(spec: dict) -> list[str]:
+def audit(spec: dict, *, carried: bool = False) -> list[str]:
     """Mechanical checks on a written prompt. No model — these are the mistakes
     that are cheap to detect and expensive to discover in a rendered clip."""
     bad = []
@@ -344,6 +474,17 @@ def audit(spec: dict) -> list[str]:
     if not re.search(r"supplied|attached|uploaded", low):
         bad.append("the prompt does not refer to the supplied background image "
                    "(§15), so Veo will generate its own and discard the plate")
+    if carried and not re.search(
+            r"continu|carries on|carry on|resumes|picks up|"
+            r"(first|opening|supplied|attached|previous) frame", low):
+        # A chained prompt that reads as a fresh shot description gets a fresh
+        # shot. The supplied frame is not a style reference — the prompt has to
+        # say that the picture is already on screen and this clip continues it,
+        # or Veo re-stages the whole thing and the cut jumps.
+        bad.append("this clip continues the previous one and is generated from "
+                   "its final frame, but the prompt never says so — it reads as "
+                   "a fresh shot, and Veo will re-stage the scene rather than "
+                   "carry it on")
     if re.search(r"\bcamera\b.*\b(pan|push|pull|zoom|dolly|handheld)\b", low) \
             and not re.search(r"no (pan|push|pull|zoom|dolly|camera move)", low):
         bad.append("the prompt moves the camera, which moves the plate")
