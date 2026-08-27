@@ -1,0 +1,67 @@
+[
+ {
+  "start": 0.0,
+  "end": 6.584,
+  "text": "तो बच्चों, आज हम Interference और Diffraction के बीच का अंतर बहुत ही आसान तरीके से समझेंगे।"
+ },
+ {
+  "start": 6.584,
+  "end": 9.876,
+  "text": "सबसे पहले ये समझते हैं कि ये दोनों होते कब हैं।"
+ },
+ {
+  "start": 9.876,
+  "end": 16.904,
+  "text": "Interference तब होता है जब दो coherent sources से निकली light waves आपस में superpose करती हैं।"
+ },
+ {
+  "start": 16.904,
+  "end": 25.178,
+  "text": "जबकि Diffraction में सिर्फ एक obstacle से गुज़रती हुई light फैलने लगती है और इसी से diffraction pattern बनता है।"
+ },
+ {
+  "start": 25.178,
+  "end": 28.114,
+  "text": "अब screen पर बनने वाले pattern को देखिए।"
+ },
+ {
+  "start": 28.114,
+  "end": 32.029,
+  "text": "Interference में सारी fringes लगभग एक जैसी होती हैं।"
+ },
+ {
+  "start": 32.029,
+  "end": 39.502,
+  "text": "लेकिन Diffraction में बीच वाली fringe सबसे बड़ी होती है और बाकी fringes धीरे-धीरे छोटी होती जाती हैं।"
+ },
+ {
+  "start": 39.502,
+  "end": 44.307,
+  "text": "लेकिन सिर्फ shape का ही नहीं, इनकी brightness में भी अंतर होता है।"
+ },
+ {
+  "start": 44.307,
+  "end": 49.467,
+  "text": "जैसे Interference में bright fringes की intensity लगभग same होती है।"
+ },
+ {
+  "start": 49.467,
+  "end": 57.652,
+  "text": "वहीं Diffraction में central fringe सबसे ज़्यादा bright होती है और बाकी fringes की brightness कम होती जाती है।"
+ },
+ {
+  "start": 57.652,
+  "end": 62.628,
+  "text": "तो बस इतना याद रखना — जब दो coherent sources मिलेंगे, तो Interference"
+ },
+ {
+  "start": 62.628,
+  "end": 71.881,
+  "text": "होगा। और जब एक obstacle की वजह से light spread होगी, तो Diffraction होगा। बस इतना समझ लिया, तो इस topic को exam में कभी नहीं भूलोगे।"
+ },
+ {
+  "start": 71.881,
+  "end": 75.024,
+  "text": "और अब देखते हैं कि इसे exam में लिखना कैसे है।"
+ }
+]
