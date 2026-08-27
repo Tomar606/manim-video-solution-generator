@@ -740,7 +740,7 @@ class ThemedScene(Scene):
                 f = max((_overlap_frac(a, b) for a in li for b in lj), default=0.0)
                 if f > self.OVERLAP_TOL:
                     self._layout_violations.append(
-                        f"t={self.time:6.2f}s {label} OVERLAP {f:.0%} between "
+                        f"t={self.renderer.time:6.2f}s {label} OVERLAP {f:.0%} between "
                         f"{type(mi).__name__} and {type(mj).__name__}")
 
         # Two pieces of TEXT overlapping is never intentional, and until now it
@@ -766,7 +766,7 @@ class ThemedScene(Scene):
                 f = _overlap_frac(bi, bj)
                 if f > 0.06:
                     self._layout_violations.append(
-                        f"t={self.time:6.2f}s {label} TEXT-ON-TEXT {f:.0%} "
+                        f"t={self.renderer.time:6.2f}s {label} TEXT-ON-TEXT {f:.0%} "
                         f"({_first_words(wi)} / {_first_words(wj)})")
                     seen = True
                     break
@@ -775,7 +775,7 @@ class ThemedScene(Scene):
             for m, b, _ in items:
                 if b[3] > band_top + 0.05 or b[1] < band_bot - 0.05:
                     self._layout_violations.append(
-                        f"t={self.time:6.2f}s {label} OUTSIDE BAND "
+                        f"t={self.renderer.time:6.2f}s {label} OUTSIDE BAND "
                         f"{type(m).__name__} spans y {b[1]:.2f}..{b[3]:.2f}, "
                         f"band is {band_bot:.2f}..{band_top:.2f}")
 
