@@ -1,0 +1,37 @@
+[
+ {
+  "slug": "s-A",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-01/assets/photos/src-a.png",
+  "vit": "A",
+  "tag": "गाजर, दूध, अंडे"
+ },
+ {
+  "slug": "s-B1",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-01/assets/photos/src-b1.png",
+  "vit": "B1",
+  "tag": "साबुत अनाज, दालें"
+ },
+ {
+  "slug": "s-C",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-01/assets/photos/src-c.png",
+  "vit": "C",
+  "tag": "नींबू, आँवला, संतरा"
+ },
+ {
+  "slug": "s-D",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-01/assets/photos/src-d.png",
+  "vit": "D",
+  "tag": "धूप, मछली का तेल"
+ },
+ {
+  "slug": "s-E",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-01/assets/photos/src-e.png",
+  "vit": "E",
+  "tag": "बादाम, बीज, गेहूँ"
+ }
+]

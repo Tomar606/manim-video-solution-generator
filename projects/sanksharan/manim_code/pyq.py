@@ -834,8 +834,7 @@ class PyqPart(ThemedScene):
         if not no_card:
             self.question_card(META["question"], META.get("highlight", ""),
                                META.get("years", ""),
-                               sheet=ROOT / "assets" / "design" / "question_sheet.png",
-                               marks=META.get("marks"))
+                               sheet=ROOT / "assets" / "design" / "question_sheet.png")
         self.at(card_at)
 
         beats = {int(b["at"]): b for b in BEATS}

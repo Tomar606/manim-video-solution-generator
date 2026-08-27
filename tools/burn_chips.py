@@ -77,6 +77,17 @@ def burn(src: Path, out: Path, plan: list[dict]) -> None:
         raise SystemExit(f"{tmp} decodes with errors, not moving into place:\n"
                          f"{errs.splitlines()[0]}")
     tmp.replace(out)
+
+    # CARRY THE GEOMETRY RECORD FORWARD. An overlay pass does not touch the
+    # presenter, but the output gate reads placement from `<file>.geom.json` and
+    # refuses a file that has none -- so patching a delivered video used to make
+    # it un-checkable, which is the opposite of the point.
+    side = Path(str(src) + ".geom.json")
+    if side.exists():
+        Path(str(out) + ".geom.json").write_text(side.read_text())
+    else:
+        print("  ! no geometry sidecar beside the input — the output gate "
+              "will not be able to verify placement")
     print("done")
 
 

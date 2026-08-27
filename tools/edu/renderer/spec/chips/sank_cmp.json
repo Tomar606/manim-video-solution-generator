@@ -1,0 +1,10 @@
+[
+ {
+  "slug": "f1cmp",
+  "mode": "compare",
+  "photos": "/projects/sanksharan/assets/photos/reactive-iron.png,/projects/sanksharan/assets/photos/noble-copper.png",
+  "els": "Fe,Cu",
+  "num": 1,
+  "verdict": "Fe की क्रियाशीलता > Cu की क्रियाशीलता"
+ }
+]
