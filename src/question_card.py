@@ -209,3 +209,16 @@ TAPE_EDGE    = 0.081     # measured at the sheet's CENTRE column, not its
                          # point is a corner and the middle of the top edge sits
                          # 8.1% down the bitmap. Using the corner left the tape
                          # floating clear of the paper.
+
+# --- the marks sticker -------------------------------------------------------
+# A circular sticker stuck on the sheet's top-right corner: the number big, the
+# word under it. It is stuck ON the paper, so it takes its own jaunty angle
+# rather than the paper's -- a sticker laid exactly parallel to the ruled lines
+# reads as printed, which is the opposite of what it is.
+MARKS_R     = 0.047      # radius, fraction of frame HEIGHT
+MARKS_DX    = 0.055      # inset from the sheet's right edge, fraction of WIDTH
+MARKS_DY    = 0.030      # inset from the sheet's top edge, fraction of HEIGHT
+MARKS_TILT  = -0.140     # radians, about -8 degrees, against the paper's +5.75
+MARKS_FACE  = "#F2B233"  # GOLD, so it reads with the years pill below
+MARKS_INK   = "#12283A"  # the plate navy, for contrast on gold
+MARKS_WORD  = "अंक"

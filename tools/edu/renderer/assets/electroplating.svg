@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- ELECTROPLATING, drawn the way the answer sheet draws it. The earlier
+       version was a tank with two grey bars and one label, which shows that
+       something is being dipped but not what makes it plate.
+       What a student has to reproduce for the mark: the cell, the battery and
+       which way round it is, the two electrodes NAMED BY THEIR JOB, the
+       electrolyte being a salt OF THE PLATING METAL, and the direction the
+       metal ions travel. All of that is here, and every label comes from the
+       spec so it can be revealed on the word that names it. -->
+
+  <!-- the tank and the electrolyte -->
+  <g id="ep_tank">
+    <path d="M250 128 L250 404 Q250 424 270 424 L810 424 Q830 424 830 404 L830 128"
+          fill="none" stroke="#7FD4FF" stroke-width="9" stroke-linejoin="round"/>
+  </g>
+  <g id="ep_bath">
+    <path d="M262 196 L262 400 Q262 412 274 412 L806 412 Q818 412 818 400 L818 196 Z"
+          fill="#7FD4FF" fill-opacity="0.13" stroke="#7FD4FF" stroke-width="5"/>
+    <path d="M262 196 L818 196" stroke="#7FD4FF" stroke-width="5"/>
+  </g>
+
+  <!-- ANODE: a bar of the metal being deposited. It dissolves to keep the
+       bath's concentration up, which is why it is the plating metal itself -->
+  <g id="ep_anode">
+    <rect x="326" y="140" width="46" height="234" rx="6"
+          fill="#7FD4FF" fill-opacity="0.30" stroke="#7FD4FF" stroke-width="8"/>
+  </g>
+  <!-- CATHODE: the object being plated -->
+  <g id="ep_cathode">
+    <path d="M690 140 L740 140 L740 300 Q740 340 715 356 Q690 340 690 300 Z"
+          fill="#FFC53D" fill-opacity="0.26" stroke="#FFC53D" stroke-width="8"
+          stroke-linejoin="round"/>
+  </g>
+
+  <!-- the external circuit and the cell that drives it -->
+  <g id="ep_circuit">
+    <path d="M349 140 L349 74 L470 74" fill="none" stroke="#9FB6CC"
+          stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M715 140 L715 74 L610 74" fill="none" stroke="#9FB6CC"
+          stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+  </g>
+  <g id="ep_battery">
+    <!-- long plate positive, short plate negative: the convention the book uses -->
+    <path d="M508 44 L508 104" stroke="#FF5A5A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M534 58 L534 90" stroke="#7FD4FF" stroke-width="9" stroke-linecap="round"/>
+    <path d="M470 74 L508 74" stroke="#9FB6CC" stroke-width="8" stroke-linecap="round"/>
+    <path d="M534 74 L572 74" stroke="#9FB6CC" stroke-width="8" stroke-linecap="round"/>
+    <path d="M572 44 L572 104" stroke="#FF5A5A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M598 58 L598 90" stroke="#7FD4FF" stroke-width="9" stroke-linecap="round"/>
+    <path d="M598 74 L610 74" stroke="#9FB6CC" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <!-- polarity: anode positive, cathode negative. This is the one students
+       invert, because a galvanic cell is the other way round -->
+  <g id="ep_plus" data-optional>
+    <path d="M280 152 L336 152" stroke="#FF5A5A" stroke-width="10" stroke-linecap="round"/>
+    <path d="M308 124 L308 180" stroke="#FF5A5A" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <g id="ep_minus" data-optional>
+    <path d="M772 152 L828 152" stroke="#7BE3A0" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <!-- the metal ions crossing the bath, anode to cathode -->
+  <g id="ep_ions" data-optional>
+    <circle cx="470" cy="248" r="20" fill="#FF5A5A" fill-opacity="0.9"/>
+    <circle cx="560" cy="300" r="20" fill="#FF5A5A" fill-opacity="0.9"/>
+    <circle cx="628" cy="238" r="20" fill="#FF5A5A" fill-opacity="0.9"/>
+    <g stroke="#FF5A5A" stroke-width="7" fill="#FF5A5A" stroke-linecap="round">
+      <path d="M396 248 L444 248"/><path d="M462 248 L436 236 L436 260 Z"/>
+      <path d="M590 300 L636 300"/><path d="M654 300 L628 288 L628 312 Z"/>
+      <path d="M654 238 L672 238"/><path d="M688 238 L664 226 L664 250 Z"/>
+    </g>
+  </g>
+
+  <!-- the deposited layer building on the object -->
+  <g id="ep_deposit" data-optional>
+    <path d="M686 144 L686 300 Q686 342 715 360" fill="none"
+          stroke="#7BE3A0" stroke-width="9" stroke-linecap="round"/>
+    <path d="M744 144 L744 300 Q744 342 715 360" fill="none"
+          stroke="#7BE3A0" stroke-width="9" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -73,10 +73,17 @@ def tag_content(question: str, answer: str, *, question_label: str = "Q1",
                 lines.append("<<GAP>>")
                 lines.append(f"<<SUBHEAD>> {raw.lstrip('#').strip()}")
                 continue
-            item = re.match(r"^(?:[-*•]|\(?[ivx]+\)|\(?\d+[.)])\s+(.*)$",
+            # KEEP A NUMBER, DROP A DOT. The marker used to be stripped for
+            # every kind of list, so a source that counted "(1) (2) (3)" reached
+            # the writer as three anonymous points and came back as three dots --
+            # and the numbering is part of what the examiner is looking for.
+            # A plain dash or dot still becomes the writer's own dot.
+            item = re.match(r"^(?:[-*•]|(\(?(?:[ivx]+|\d+)[.)]))\s+(.*)$",
                             raw, re.I)
             if item:
-                lines.append(f"<<POINT>> {item.group(1).strip()}")
+                marker, body = item.group(1), item.group(2)
+                keep = f"{marker.strip()} " if marker else ""
+                lines.append(f"<<POINT>> {keep}{body.strip()}")
                 continue
             if first:
                 lines.append(f"<<ANS>> {raw}")     # carries the "Ans:" label

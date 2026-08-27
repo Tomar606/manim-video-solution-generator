@@ -1,0 +1,37 @@
+[
+ {
+  "slug": "v-B1",
+  "mode": "define",
+  "title": "विटामिन B₁",
+  "lines": "कमी से — बेरी-बेरी",
+  "show": 1
+ },
+ {
+  "slug": "v-B2",
+  "mode": "define",
+  "title": "विटामिन B₂",
+  "lines": "कमी से — डर्मेटाइटिस",
+  "show": 1
+ },
+ {
+  "slug": "v-B3",
+  "mode": "define",
+  "title": "विटामिन B₃",
+  "lines": "कमी से — पेलैग्रा",
+  "show": 1
+ },
+ {
+  "slug": "v-B9",
+  "mode": "define",
+  "title": "विटामिन B₉",
+  "lines": "कमी से — एनीमिया",
+  "show": 1
+ },
+ {
+  "slug": "v-B12",
+  "mode": "define",
+  "title": "विटामिन B₁₂",
+  "lines": "कमी से — रक्ताल्पता, मेरुदंड कमज़ोर",
+  "show": 1
+ }
+]

@@ -1050,7 +1050,7 @@ class ThemedScene(Scene):
         return self.place(Group(img, cap))
 
     def question_card(self, question, highlight="", years="", sheet=None,
-                      sheet_head=None):
+                      sheet_head=None, marks=None):
         """`sheet_head` defaults to HEAD_TEXT ("MP Board - 12th") so every
         project gets the same heading without each scene naming it."""
         """The approved opening card: ringed ?, gold प्रश्न, notepaper, years.
@@ -1068,6 +1068,8 @@ class ThemedScene(Scene):
                                        TAPE_COLOUR, TAPE_H, TAPE_OPACITY,
                                        TAPE_EDGE, TAPE_TILT, TAPE_W,
                                        RULE_Y, TEAL, TICK_PAD, YEARS_Y,
+                                       MARKS_DX, MARKS_DY, MARKS_FACE, MARKS_INK,
+                                       MARKS_R, MARKS_TILT, MARKS_WORD,
                                        fit_lines, fits, writable_box)
         self._card_up = True        # stands the layout guard down; see audit_layout
         fw, fh = config.frame_width, config.frame_height
@@ -1163,6 +1165,23 @@ class ThemedScene(Scene):
                 paper.get_top() + DOWN * paper.height * TAPE_EDGE)
             self.play(FadeIn(paper, shift=DOWN * .30, scale=1.04), run_time=0.8)
             self.play(FadeIn(tape, scale=1.2), run_time=0.30)
+            # THE MARKS STICKER, on the sheet's top-right corner. Placed off
+            # the paper's own bounding box rather than the frame, so it stays on
+            # the corner if the sheet is ever resized. Drawn after the tape so
+            # it sits on top of it if they ever meet.
+            if marks:
+                r = fh * MARKS_R
+                disc = Circle(radius=r).set_fill(MARKS_FACE, 1)
+                disc.set_stroke(CREAM, 5)
+                num = txt(str(marks), int(r * 122), MARKS_INK)
+                wrd = txt(MARKS_WORD, int(r * 44), MARKS_INK)
+                stack = VGroup(num, wrd).arrange(DOWN, buff=r * 0.10)
+                stack.move_to(disc.get_center())
+                badge = VGroup(disc, stack).rotate(MARKS_TILT)
+                badge.move_to(paper.get_corner(UR)
+                              + np.array([-fw * MARKS_DX, -fh * MARKS_DY, 0]))
+                self.play(FadeIn(badge, scale=1.3), run_time=0.30)
+
             yr = VGroup(txt("वर्ष ", 36), txt(years, 42, TEAL),
                         txt(" में", 36)).arrange(RIGHT, buff=0.10)
             ytxt = VGroup(yr, txt("ये प्रश्न था", 36)).arrange(DOWN, buff=0.12)
