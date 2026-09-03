@@ -36,6 +36,14 @@
  */
 
 const BRIDGE = "http://127.0.0.1:8765";
+
+/* Bumped whenever a verb is added or its contract changes. There is no hot
+ * reload for an unpacked extension, and a stale build does not fail like a
+ * stale build — it fails like a Flow redesign, which is a much more expensive
+ * thing to chase. Twice in one session a "the picker will not open" hunt turned
+ * out to be code that was simply never reloaded. `ping` reports this and
+ * src/flow_bridge.py refuses to run against a mismatch. */
+const BRIDGE_BUILD = 8;
 const FLOW_URL_RE = /^https:\/\/(labs\.google\/fx\/.*tools\/flow|flow\.google)/i;
 
 let looping = false;      // false again whenever the worker is restarted
@@ -43,6 +51,31 @@ let tabId = null;
 let attached = false;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+/* Every await in this worker is a chrome.* callback, and a callback that never
+ * fires is not hypothetical — `chrome.debugger.attach` does exactly that on some
+ * builds. Without this the loop parks on it forever, and because `looping` stays
+ * true the recovery alarm returns immediately and can never revive it: one hung
+ * verb takes the extension out until the browser is restarted, with no error
+ * anywhere. Racing a timer turns that into an error message on the Python side,
+ * which is a bad run instead of a dead extension.
+ */
+function withTimeout(promise, ms, what) {
+  let timer;
+  return Promise.race([
+    promise.finally(() => clearTimeout(timer)),
+    new Promise((_, rej) => {
+      timer = setTimeout(
+        () => rej(new Error(what + " did not return within " + Math.round(ms / 1000) + "s")),
+        ms);
+    }),
+  ]);
+}
+
+// Per-verb ceilings. `download` is the only genuinely slow one; everything else
+// is a DOM call that either answers at once or is broken.
+const VERB_TIMEOUT = { download: 900000, set_image: 180000, clear_images: 180000 };
+const DEFAULT_VERB_TIMEOUT = 120000;
 
 // ---------------------------------------------------------------- keepalive --
 // Calling an extension API resets the 30s idle timer. An in-flight fetch does
@@ -73,11 +106,21 @@ chrome.tabs.onRemoved.addListener((id) => {
   if (id === tabId) { tabId = null; attached = false; }
 });
 
+/* Flow's per-clip editor lives at /project/<id>/edit/<clip>, and it passes every
+ * test the generation view passes: same origin, /project/ in the path, a Slate
+ * editor present on the page. But its editor is the "Describe your edits" box,
+ * not the prompt bar, so a run that lands there types into the wrong control and
+ * reports "prompt did not land in the editor" — which reads like a broken
+ * selector or a Flow redesign rather than like the wrong page, and costs an
+ * afternoon. Rank the generation view first, and report the URL either way so
+ * the caller can refuse what it was handed. */
+const FLOW_EDIT_RE = /\/project\/[^/]+\/edit\//i;
+
 async function findFlowTab() {
   const tabs = await chrome.tabs.query({});
-  // Prefer a tab already inside a project — that is the one with a prompt box.
-  const inProject = tabs.find((t) => t.url && FLOW_URL_RE.test(t.url) && /\/project\//.test(t.url));
-  return inProject || tabs.find((t) => t.url && FLOW_URL_RE.test(t.url)) || null;
+  const flow = tabs.filter((t) => t.url && FLOW_URL_RE.test(t.url));
+  const gen = flow.find((t) => /\/project\//.test(t.url) && !FLOW_EDIT_RE.test(t.url));
+  return gen || flow.find((t) => /\/project\//.test(t.url)) || flow[0] || null;
 }
 
 async function attach() {
@@ -90,18 +133,105 @@ async function attach() {
     throw new Error("no Google Flow tab is open — open your Flow project in any tab (it may stay in the background)");
   }
   tabId = tab.id;
-  await new Promise((res, rej) => chrome.debugger.attach({ tabId }, "1.3", () => {
-    const e = chrome.runtime.lastError;
-    if (e && !/already attached/i.test(e.message)) rej(new Error(e.message));
-    else res();
-  }));
-  attached = true;
-  await cdp("Runtime.enable");
-  await cdp("DOM.enable");
-  await cdp("Page.enable");
-  // THE line that makes a background tab work at all. See the header.
-  try { await cdp("Emulation.setFocusEmulationEnabled", { enabled: true }); } catch (e) {}
-  await chrome.storage.session.set({ tabId, flowUrl: tab.url });
+  // A background tab gets frozen, and eventually discarded, by the browser's
+  // memory saver. A frozen renderer completes the debugger attach and then
+  // answers no CDP command at all, which is indistinguishable from a hang. Ask
+  // for it to be left alone, and if it has already been discarded, reload it —
+  // a discarded tab has no renderer to drive.
+  try { await chrome.tabs.update(tabId, { autoDiscardable: false }); } catch (e) {}
+  // TWO different flags mean "this tab has no live document", and checking only
+  // the obvious one is not enough. `discarded` is the memory saver reclaiming a
+  // tab; `status === "unloaded"` is a tab that was restored with the session and
+  // never actually loaded, which is the normal state of a background tab you
+  // opened and did not click. Both attach cleanly and then answer every DOM
+  // query with nothing — zero buttons, no editor, and a title from the marketing
+  // page rather than the app.
+  if (tab.discarded || tab.status === "unloaded") {
+    await chrome.tabs.reload(tabId);
+    for (let i = 0; i < 60; i++) {
+      await sleep(500);
+      const t = await chrome.tabs.get(tabId);
+      if (!t.discarded && t.status === "complete") break;
+    }
+  }
+  // Each step is timed and named separately. When attaching fails the useful
+  // question is always WHICH call stopped answering — a refused attach is a
+  // permission or another debugger client, a hung Runtime.enable is a wedged
+  // renderer, and the two want different fixes.
+  try {
+    await withTimeout(new Promise((res, rej) => chrome.debugger.attach({ tabId }, "1.3", () => {
+      const e = chrome.runtime.lastError;
+      if (!e) return res();
+      // Two different failures share the words "already attached", and treating
+      // them alike is how a run gets a confusing error three calls later:
+      //
+      //   "Already attached to the target with given id"  -> OURS. Benign; the
+      //       worker restarted and the old session is still live. Carry on.
+      //   "Another debugger is already attached to the tab" -> SOMEBODY ELSE'S.
+      //       DevTools, or the other unpacked flow extension. We are NOT
+      //       attached, so calling res() here sets `attached = true` on a lie
+      //       and the next sendCommand fails with "Debugger is not attached",
+      //       which points nowhere near the real cause.
+      if (/another debugger/i.test(e.message)) {
+        return rej(new Error(
+          "another debugger is already attached to the Flow tab (" + e.message +
+          "). Close DevTools on that tab, and disable any other Flow extension " +
+          "that holds the debugger permission."));
+      }
+      if (/already attached/i.test(e.message)) return res();
+      rej(new Error(e.message));
+    })), 20000, "chrome.debugger.attach");
+    attached = true;
+    // BEST EFFORT, on purpose. `.enable` turns on a domain's EVENTS, and this
+    // worker subscribes to none of them — every verb here uses commands
+    // (Runtime.evaluate, DOM.getDocument, Input.*), and CDP commands do not
+    // require their domain to be enabled. Treating these as prerequisites made
+    // a slow or frozen renderer fail the whole attach, which is how a working
+    // setup reported "attach timed out" and pointed at the wrong thing.
+    // If the renderer really is unreachable, the first real verb says so.
+    for (const domain of ["Runtime", "DOM", "Page"]) {
+      try {
+        await withTimeout(cdp(domain + ".enable"), 8000, domain + ".enable");
+      } catch (e) {
+        console.warn("[flow-bridge] " + domain + ".enable: " + e.message +
+                     " — continuing, commands do not need it");
+      }
+    }
+    // THE line that makes a background tab work at all. See the header. It is
+    // allowed to fail — a foreground tab does not need it — but it is NOT
+    // allowed to hang, which a bare try/catch would not have caught.
+    try {
+      await withTimeout(cdp("Emulation.setFocusEmulationEnabled", { enabled: true }),
+                        10000, "Emulation.setFocusEmulationEnabled");
+    } catch (e) {
+      console.warn("[flow-bridge] focus emulation unavailable:", e.message);
+    }
+    // `status === "complete"` says the DOCUMENT finished loading. Flow is a
+    // client-rendered SPA, so at that moment the page can still be an empty
+    // shell — which is indistinguishable, from a selector's point of view, from
+    // Flow having renamed everything. Waiting for the app to actually mount is
+    // what stops "prompt box not found" from being reported for a page that
+    // simply had not drawn it yet.
+    for (let i = 0; i < 40; i++) {
+      let n = 0;
+      try {
+        const r = await withTimeout(cdp("Runtime.evaluate", {
+          expression: "document.querySelectorAll('button,[role=\"button\"]').length",
+          returnByValue: true,
+        }), 5000, "readiness check");
+        n = (r && r.result && r.result.value) || 0;
+      } catch (e) { /* renderer still coming up */ }
+      if (n > 0) break;
+      await sleep(500);
+    }
+    await chrome.storage.session.set({ tabId, flowUrl: tab.url });
+  } catch (e) {
+    // Leave nothing half-attached: the next call would otherwise skip attach()
+    // entirely on the strength of `attached` and fail somewhere less obvious.
+    attached = false;
+    try { await chrome.debugger.detach({ tabId }); } catch (_) {}
+    throw new Error("attaching to the Flow tab failed at " + e.message);
+  }
 }
 
 /** Evaluate in the page and return the value. Throws on a page-side exception. */
@@ -170,9 +300,23 @@ async function setPrompt(text, selector) {
 async function findImageInput(selector) {
   await attach();
   const sel = selector || 'input[type="file"]';
-  const doc = await cdp("DOM.getDocument", { depth: -1, pierce: true });
-  const q = await cdp("DOM.querySelectorAll", { nodeId: doc.root.nodeId, selector: sel });
-  const nodes = (q && q.nodeIds) || [];
+  let doc = await cdp("DOM.getDocument", { depth: -1, pierce: true });
+  let q = await cdp("DOM.querySelectorAll", { nodeId: doc.root.nodeId, selector: sel });
+  let nodes = (q && q.nodeIds) || [];
+  if (!nodes.length) {
+    // Flow mounts its uploader lazily: after a hard reload the input does not
+    // exist until the asset picker has been opened once. Opening it here is the
+    // whole fix — the alternative was an error telling a human to go and click
+    // something, in a pipeline whose entire point is running unattended.
+    await openPicker(null);
+    await sleep(1200);
+    doc = await cdp("DOM.getDocument", { depth: -1, pierce: true });
+    q = await cdp("DOM.querySelectorAll", { nodeId: doc.root.nodeId, selector: sel });
+    nodes = (q && q.nodeIds) || [];
+    try {
+      await evaluate(`document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true})); return 1;`);
+    } catch (e) {}
+  }
   if (!nodes.length) {
     throw new Error("no file input matched " + sel +
                     " — open Flow's reference-image panel once so the input exists in the DOM");
@@ -239,6 +383,196 @@ async function clearImages(selector, clearSelector) {
   return { cleared: true, removed: clicked, knows_clear_button: !!clearSelector };
 }
 
+
+
+
+/* A real mouse click at page coordinates. Everything in Flow that opens, picks
+ * or confirms is Radix, and Radix acts on pointerdown — el.click() reaches
+ * React's onClick and does nothing, with no error and no clue. */
+async function realClick(x, y) {
+  const pt = { x: Math.round(x), y: Math.round(y), button: "left", clickCount: 1 };
+  await cdp("Input.dispatchMouseEvent", Object.assign({ type: "mouseMoved", buttons: 0 }, pt));
+  await cdp("Input.dispatchMouseEvent", Object.assign({ type: "mousePressed", buttons: 1 }, pt));
+  await cdp("Input.dispatchMouseEvent", Object.assign({ type: "mouseReleased", buttons: 0 }, pt));
+}
+
+/* The reference chips on the prompt bar, by their actual signature.
+ *
+ * Learned by watching the attach done by hand rather than guessed: an attached
+ * reference renders as a ~50x50 control that CONTAINS AN <img> and whose own
+ * text is "cancel" — the Material ligature for its X. So the chip and its remove
+ * button are one element, which is also why the remove control could never be
+ * found by looking for a separate button.
+ *
+ * Every previous version of this counted images by size and position instead,
+ * and with the asset-library panel open that reported twelve chips on a prompt
+ * bar holding none. A wrong count here is worse than no count, because "a chip
+ * appeared" is the proof that the plate was actually attached — and a run that
+ * believes a library thumbnail is generating on an invented background.
+ */
+function chipsJs() {
+  return `
+    var chips = [...document.querySelectorAll('button,[role="button"]')].filter(function (el) {
+      if (!el.querySelector('img')) return false;
+      var t = (el.innerText || '').trim().toLowerCase();
+      if (t.indexOf('cancel') < 0) return false;
+      var r = el.getBoundingClientRect();
+      return r.width > 20 && r.width < 160 && r.height > 20 && r.height < 160;
+    });
+  `;
+}
+
+/* Remove every reference chip from the prompt bar.
+ *
+ * Attaching is additive, so without this a run stacks references: the second
+ * clip of a sequence would carry its own carry frame PLUS the first clip's
+ * plate, and Veo blends them. It bit on the very first run that attached
+ * anything — a chip left behind by a manual test rode along into the next
+ * generation, which then ran with two references and neither the operator nor
+ * the logs would have said so.
+ *
+ * The chip's remove control only exists on hover in most builds, so this
+ * dispatches a real pointerover/mouseover before looking for it. `selector` is
+ * `reference_chip_clear` from selectors.json when the exact control is known;
+ * without it we fall back to a small ✕/close button inside the chip.
+ */
+async function clearPromptRefs(selector) {
+  await attach();
+  let removed = 0;
+  for (let pass = 0; pass < 10; pass++) {
+    const got = await evaluate(chipsJs() + `
+      if (!chips.length) return {done:true, left:0};
+      var c = chips[0];
+      c.scrollIntoView({block:'center'});
+      var r = c.getBoundingClientRect();
+      return {x: Math.round(r.left + r.width/2), y: Math.round(r.top + r.height/2),
+              left: chips.length};
+    `);
+    if (got && got.done) return { removed: removed, left: 0 };
+    // Real mouse: this is a Radix control like everything else here.
+    const pt = { x: got.x, y: got.y, button: "left", clickCount: 1 };
+    await cdp("Input.dispatchMouseEvent", Object.assign({ type: "mouseMoved", buttons: 0 }, pt));
+    await cdp("Input.dispatchMouseEvent", Object.assign({ type: "mousePressed", buttons: 1 }, pt));
+    await cdp("Input.dispatchMouseEvent", Object.assign({ type: "mouseReleased", buttons: 0 }, pt));
+    removed++;
+    await sleep(800);
+  }
+  const left = await evaluate(chipsJs() + `return chips.length;`);
+  return { removed: removed, left: left };
+}
+
+/* Attach an already-uploaded asset to the NEXT generation.
+ *
+ * THIS IS THE STEP THAT WAS MISSING, and its absence is silent. `setImage`
+ * drives Flow's global "Add media" input, which uploads into the PROJECT
+ * LIBRARY — it does not reference the image from the prompt. Everything looked
+ * right: the upload succeeded, the asset appeared, the generation ran. It just
+ * ran with no reference at all, so Veo invented its own background and threw
+ * away the plate the clip has to be spliced onto. Skill §15 is unenforceable
+ * without this.
+ *
+ * The picker is a Radix dialog on the prompt bar. Clicking a tile attaches it
+ * and closes the dialog in one go — there is an "Add to Prompt" button too, but
+ * by the time it could be clicked the dialog has already gone.
+ */
+async function openPicker(selector) {
+  await attach();
+  const find = selector
+    ? `var t = document.querySelector(${JSON.stringify(selector)});`
+    : `var t = [...document.querySelectorAll('button,[role=button]')].find(
+         e => /add_2/.test(e.innerText || "") &&
+              e.getAttribute('aria-haspopup') === 'dialog');`;
+  for (let i = 0; i < 4; i++) {
+    const open = await evaluate(`return !!document.querySelector('[role="dialog"]');`);
+    if (open) return true;
+    // A REAL mouse event, not el.click(). Flow's controls are Radix, and Radix
+    // opens its triggers on pointerdown — a synthetic click reaches the React
+    // onClick and does nothing, silently. Measured on both this picker and the
+    // settings menu: `.click()` left aria-expanded="false" every time, and the
+    // same coordinates through Input.dispatchMouseEvent opened it at once.
+    const at = await evaluate(find + `
+      if (!t) return null;
+      t.scrollIntoView({block:'center'});
+      var r = t.getBoundingClientRect();
+      return {x: Math.round(r.left + r.width/2), y: Math.round(r.top + r.height/2)};`);
+    if (!at) return false;
+    const pt = { x: at.x, y: at.y, button: "left", clickCount: 1 };
+    await cdp("Input.dispatchMouseEvent", Object.assign({ type: "mouseMoved", buttons: 0 }, pt));
+    await cdp("Input.dispatchMouseEvent", Object.assign({ type: "mousePressed", buttons: 1 }, pt));
+    await cdp("Input.dispatchMouseEvent", Object.assign({ type: "mouseReleased", buttons: 0 }, pt));
+    await sleep(1200);
+  }
+  return await evaluate(`return !!document.querySelector('[role="dialog"]');`);
+}
+
+async function addToPrompt(key, selector) {
+  if (!key) throw new Error("add_to_prompt needs the media key to attach");
+  if (!(await openPicker(selector))) {
+    throw new Error("could not open Flow's asset picker — check `reference_open` " +
+                    "in flow/selectors.json");
+  }
+  const before = await evaluate(`return document.querySelectorAll('img').length;`);
+  const hit = await evaluate(`
+    var dlg = document.querySelector('[role="dialog"]');
+    if (!dlg) return {err:'dialog closed'};
+    var want = ${JSON.stringify(String(key))};
+    var im = [...dlg.querySelectorAll('img')].find(
+      i => (i.src||'').indexOf(want) >= 0);
+    if (!im) return {err:'that asset is not in the picker', tiles: dlg.querySelectorAll('img').length};
+    var box = im.closest('button,[role=button],li') || im.parentElement;
+    box.scrollIntoView({block:'center'});
+    var r = box.getBoundingClientRect();
+    return {x: Math.round(r.left + r.width/2), y: Math.round(r.top + r.height/2)};
+  `);
+  if (hit && hit.err) throw new Error(hit.err + (hit.tiles ? " (" + hit.tiles + " tiles visible)" : ""));
+  if (hit && hit.x != null) await realClick(hit.x, hit.y);
+  await sleep(1200);
+
+  // SELECTING IS NOT ATTACHING. The picker is a list of assets on the left and a
+  // preview on the right: clicking a tile only moves the SELECTION, and the
+  // asset is attached by the "Add to Prompt" button under the preview. Leaving
+  // that out leaves the dialog open and the prompt bar empty, which looks
+  // exactly like a click that missed. An older project layout attached on the
+  // tile click alone, which is why omitting this appeared to work once.
+  const confirm = await evaluate(`
+    var d = document.querySelector('[role="dialog"]');
+    if (!d) return {gone:true};
+    var a = [...d.querySelectorAll('button,[role=button]')]
+      .find(e => /add to prompt/i.test(e.innerText || ''));
+    if (!a) return {noButton:true};
+    var r = a.getBoundingClientRect();
+    return {x: Math.round(r.left + r.width/2), y: Math.round(r.top + r.height/2)};
+  `);
+  if (confirm && confirm.x != null) {
+    await realClick(confirm.x, confirm.y);
+    await sleep(1800);
+  }
+
+  // The proof is a chip on the prompt bar, not the click returning.
+  const chips = await evaluate(chipsJs() + `
+    return {chips: chips.length, dialogOpen: !!document.querySelector('[role="dialog"]'),
+            keys: chips.map(function (el) {
+              var im = el.querySelector('img');
+              var m = ((im && im.src) || '').match(/name=([0-9a-f-]+)/);
+              return m ? m[1] : '';
+            })};
+  `);
+  if (!chips.chips) {
+    throw new Error("the asset was clicked but no reference chip appeared on the " +
+                    "prompt bar — the generation would run with no reference, on a " +
+                    "background of its own invention");
+  }
+  // The picker attaches whatever is SELECTED, which is not necessarily what was
+  // clicked. Attaching the wrong picture looks exactly like attaching the right
+  // one, so it is checked rather than assumed.
+  if (chips.keys.indexOf(String(key)) < 0) {
+    throw new Error("the prompt bar carries " + JSON.stringify(chips.keys) +
+                    " but this generation asked for " + key +
+                    " — the picker attached a different asset");
+  }
+  return { attached: true, chips: chips.chips, key: key, dialogOpen: chips.dialogOpen };
+}
+
 /** Click by selector, or by the tightest visible element containing `text`. */
 async function click(selector, opts) {
   const o = opts || {};
@@ -292,7 +626,14 @@ async function listMedia() {
           var key = m ? m[1] : v;
           if (!seen.has(key)) {
             seen.add(key);
-            out.push({key: key, url: v.indexOf("http") === 0 ? v : location.origin + v});
+            // The owning element's tag is what separates a generated CLIP from an
+            // image the pipeline itself uploaded a moment ago. Both are Flow
+            // media and both get a getMediaUrlRedirect URL, so on the URL alone
+            // a reference plate is indistinguishable from the video it was
+            // uploaded to condition.
+            out.push({key: key, tag: e.tagName.toLowerCase(), attr: a,
+                      video: e.tagName.toLowerCase() === "video" || a === "poster",
+                      url: v.indexOf("http") === 0 ? v : location.origin + v});
           }
         }
       }
@@ -304,7 +645,13 @@ async function listMedia() {
 /** Download one URL and resolve only once the file is actually on disk. */
 function download(url, filename) {
   return new Promise((resolve, reject) => {
-    chrome.downloads.download({ url, filename, conflictAction: "overwrite" }, (id) => {
+    // saveAs:false EXPLICITLY. Omitting it does not mean "no dialog" — it means
+    // "follow the browser's default", and with Settings -> Downloads -> "Ask
+    // where to save each file" on, that default is a Save-As dialog per clip.
+    // An unattended run then parks on a modal nobody is there to click, which
+    // is the one thing this whole background-tab design exists to avoid.
+    chrome.downloads.download({ url, filename, conflictAction: "overwrite",
+                                saveAs: false }, (id) => {
       const err = chrome.runtime.lastError;
       if (err || id == null) return reject(new Error(err ? err.message : "download refused"));
       const done = (delta) => {
@@ -312,7 +659,16 @@ function download(url, filename) {
         const st = delta.state && delta.state.current;
         if (st === "complete") {
           chrome.downloads.onChanged.removeListener(done);
-          resolve({ id: id, filename: filename });
+          // Report where the file ACTUALLY went, not where we asked for it.
+          // Chrome silently drops the subdirectory from `filename` sometimes —
+          // measured: the same relative path landed in ~/Downloads/sub/ on one
+          // call and straight in ~/Downloads/ on the next. Python then waits at
+          // a path nothing will ever appear at and reports "the download never
+          // landed" about a download that completed perfectly.
+          chrome.downloads.search({ id: id }, (items) => {
+            var real = (items && items[0] && items[0].filename) || null;
+            resolve({ id: id, filename: filename, path: real });
+          });
         } else if (st === "interrupted") {
           chrome.downloads.onChanged.removeListener(done);
           reject(new Error("download interrupted: " + ((delta.error && delta.error.current) || "?")));
@@ -327,13 +683,30 @@ async function handle(job) {
   switch (job.cmd) {
     case "ping": {
       const tab = await findFlowTab();
-      return { tab: tab ? tab.url : null, attached: attached, tabId: tabId };
+      // `discarded` and `status` are the difference between "no tab" and "a tab
+      // whose renderer is not running", which fail identically from Python and
+      // want completely different fixes.
+      return { build: BRIDGE_BUILD,
+               tab: tab ? tab.url : null, attached: attached, tabId: tabId,
+               discarded: tab ? !!tab.discarded : null,
+               status: tab ? tab.status : null,
+               active: tab ? !!tab.active : null,
+               frozen: tab ? !!tab.frozen : null };
     }
-    case "attach":     await attach(); return { tabId: tabId, attached: attached };
+    case "attach": {
+      await attach();
+      // The URL is part of the answer, not a diagnostic: only the caller knows
+      // whether the page it got is the page it needed.
+      let url = null;
+      try { url = (await chrome.tabs.get(tabId)).url; } catch (e) {}
+      return { tabId: tabId, attached: attached, url: url };
+    }
     case "eval":       return { value: await evaluate(job.expr) };
     case "set_prompt": return await setPrompt(job.text, job.selector);
     case "set_image":  return await setImage(job.paths, job.selector);
     case "clear_images": return await clearImages(job.selector, job.clear_selector);
+    case "add_to_prompt": return await addToPrompt(job.key, job.selector);
+    case "clear_prompt_refs": return await clearPromptRefs(job.selector);
     case "click":      return await click(job.selector, { cdpClick: !!job.cdp, text: job.text || null });
     case "list_media": return { media: await listMedia() };
     case "download":   return await download(job.url, job.filename);
@@ -353,6 +726,7 @@ async function loop() {
   if (looping) return;
   looping = true;
   let quiet = 0;
+  try {
   for (;;) {
     let job = null;
     try {
@@ -369,7 +743,9 @@ async function loop() {
     }
     let payload;
     try {
-      payload = { id: job.id, ok: true, data: await handle(job) };
+      const cap = VERB_TIMEOUT[job.cmd] || DEFAULT_VERB_TIMEOUT;
+      payload = { id: job.id, ok: true,
+                  data: await withTimeout(handle(job), cap, job.cmd) };
     } catch (e) {
       payload = { id: job.id, ok: false, error: String((e && e.message) || e) };
     }
@@ -380,6 +756,12 @@ async function loop() {
         body: JSON.stringify(payload),
       });
     } catch (e) { /* bridge vanished mid-job; the next poll re-syncs */ }
+  }
+  } finally {
+    // The loop is not supposed to end, so if it does, the flag must not stay
+    // latched — it is what the recovery alarm checks, and a latched flag turns
+    // "the worker stopped" into "the worker can never be restarted".
+    looping = false;
   }
 }
 
