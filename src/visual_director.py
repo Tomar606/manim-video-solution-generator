@@ -160,14 +160,8 @@ def prompt_for(question: str) -> str:
                  .replace("<<STRATEGY>>", line))
 
 
-def parse(raw: str):
-    """The model's answer, validated. Anything malformed becomes no graphic."""
-    m = re.search(r"\{.*\}", raw, re.S)
-    if not m:
-        return None
-    try:
-        spec = json.loads(m.group(0))
-    except json.JSONDecodeError:
+def _validated(spec) -> dict | None:
+    if not isinstance(spec, dict):
         return None
     if spec.get("type") in (None, "none"):
         return None
@@ -183,6 +177,41 @@ def parse(raw: str):
     if spec["type"] == "points" and not spec.get("items"):
         return None
     return spec
+
+
+def parse(raw: str):
+    """The model's answer, validated. Anything malformed becomes no graphic.
+
+    Written against Claude, which reliably answers a window with exactly one
+    JSON object — the old `re.search(r"\\{.*\\}")` just grabbed everything
+    between the first `{` and the last `}`. GPT-4.1 answers the same prompt
+    with one object PER CAPTION LINE in the window instead of one verdict for
+    the window as a whole, which made that span invalid JSON and every window
+    silently became "no graphic". Decode every top-level object in the
+    response, in order, via raw_decode (objects may run together with no
+    separator) and use the first one that is an actual graphic decision, so a
+    real "points"/"formula" call later in the window is not lost just because
+    an earlier line was correctly "none".
+    """
+    start = raw.find("{")
+    if start < 0:
+        return None
+    dec = json.JSONDecoder()
+    i, n = start, len(raw)
+    while i < n:
+        i = raw.find("{", i)
+        if i < 0:
+            return None
+        try:
+            obj, end = dec.raw_decode(raw, i)
+        except json.JSONDecodeError:
+            i += 1
+            continue
+        spec = _validated(obj)
+        if spec is not None:
+            return spec
+        i = end
+    return None
 
 
 def with_build(spec, lo: int, hi: int):

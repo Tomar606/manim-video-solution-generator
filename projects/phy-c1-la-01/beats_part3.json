@@ -1,0 +1,24 @@
+[
+  {
+    "type": "formula",
+    "intent": "DERIVATION",
+    "reason": "closed surface integral dS का मान — गोले का पूरा पृष्ठीय क्षेत्रफल। यही Part 2 के अंत से चला आ रहा गैप भरता है।",
+    "label": "गोले का पृष्ठीय क्षेत्रफल",
+    "tex": [
+      "\\oint_S dS = 4\\pi r^2"
+    ],
+    "at": 7,
+    "presenter": "hidden"
+  },
+  {
+    "type": "formula",
+    "intent": "DERIVATION",
+    "reason": "मान रखने पर r² और 4π कट जाते हैं — यही अंतिम परिणाम है, गॉस का नियम। इसे आखिर तक स्क्रीन पर रहने देना है क्योंकि आगे की सारी बातचीत (answer likhna, Notes button) इसी पर टिकी है।",
+    "label": "गॉस का नियम",
+    "tex": [
+      "\\Phi_E = \\dfrac{1}{4\\pi\\varepsilon_0} \\dfrac{q}{r^2} \\cdot 4\\pi r^2 = \\dfrac{q}{\\varepsilon_0}"
+    ],
+    "at": 10,
+    "presenter": "hidden"
+  }
+]

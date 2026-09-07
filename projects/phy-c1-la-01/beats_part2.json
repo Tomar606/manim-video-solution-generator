@@ -1,0 +1,57 @@
+[
+  {
+    "type": "formula",
+    "intent": "DERIVATION",
+    "reason": "छोटे क्षेत्रफल अवयव से गुजरने वाला सूक्ष्म फ्लक्स — कोण सहित पूरा रूप, जिसे अगली दो लाइनों में समझाया जाता है।",
+    "label": "फ्लक्स तत्व",
+    "tex": [
+      "d\\Phi_E = E \\, dS \\cos\\theta"
+    ],
+    "at": 3,
+    "presenter": "hidden"
+  },
+  {
+    "type": "formula",
+    "intent": "DERIVATION",
+    "reason": "गोले पर थीटा शून्य डिग्री होने से cos वाला हिस्सा हट जाता है — यह सरलीकरण एग्जाम में सबसे ज़्यादा भुलाया जाने वाला कदम है।",
+    "label": "सरलीकरण (θ = 0°)",
+    "tex": [
+      "d\\Phi_E = E \\, dS"
+    ],
+    "at": 7,
+    "presenter": "hidden"
+  },
+  {
+    "type": "formula",
+    "intent": "DERIVATION",
+    "reason": "समीकरण एक से E का मान रखने पर बना समीकरण दो — अगले चरण (समाकल) की नींव।",
+    "label": "समीकरण 2",
+    "tex": [
+      "d\\Phi_E = \\dfrac{1}{4\\pi\\varepsilon_0} \\dfrac{q}{r^2} \\, dS"
+    ],
+    "at": 10,
+    "presenter": "hidden"
+  },
+  {
+    "type": "formula",
+    "intent": "DERIVATION",
+    "reason": "पूरे गोले की सतह से गुजरने वाला कुल फ्लक्स — सारे छोटे-छोटे dΦ_E को जोड़ना, closed surface integral के रूप में।",
+    "label": "कुल फ्लक्स",
+    "tex": [
+      "\\Phi_E = \\oint_S d\\Phi_E = \\oint_S E \\, dS"
+    ],
+    "at": 16,
+    "presenter": "hidden"
+  },
+  {
+    "type": "formula",
+    "intent": "DERIVATION",
+    "reason": "गोलीय सममिति के कारण E हर बिंदु पर समान है, इसलिए इसे समाकल के बाहर निकाला जा सकता है — यही अगले भाग में ∮dS = 4πr² तक ले जाएगा।",
+    "label": "E अचर — समाकल के बाहर",
+    "tex": [
+      "\\Phi_E = \\dfrac{1}{4\\pi\\varepsilon_0} \\dfrac{q}{r^2} \\oint_S dS"
+    ],
+    "at": 19,
+    "presenter": "hidden"
+  }
+]

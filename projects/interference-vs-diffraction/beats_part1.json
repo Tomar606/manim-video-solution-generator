@@ -1,0 +1,18 @@
+[
+ {
+  "type": "compare",
+  "at": 2,
+  "left": ["Interference", ["2 coherent sources", "waves overlap (superpose)"]],
+  "right": ["Diffraction", ["1 obstacle", "light bends & spreads"]]
+ },
+ {
+  "type": "fringes",
+  "at": 5
+ },
+ {
+  "type": "compare",
+  "at": 10,
+  "left": ["Interference", ["2 coherent sources", "waves overlap (superpose)"]],
+  "right": ["Diffraction", ["1 obstacle", "light bends & spreads"]]
+ }
+]

@@ -44,12 +44,7 @@
     "t_in": 2.64,
     "t_out": 4.31
    }
-  ]
- },
- {
-  "seg_id": 2,
-  "duration": 1.94,
-  "type": "TEXT_ONLY",
+  ],
   "timing": "transcript",
   "type": "TEXT_ONLY",
   "labels": []
@@ -634,6 +629,9 @@
     "t_in": 9.1,
     "t_out": 12.28
    }
-  ]
+  ],
+  "timing": "transcript",
+  "type": "TEXT_ONLY",
+  "labels": []
  }
 ]

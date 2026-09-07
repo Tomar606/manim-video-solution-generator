@@ -1,0 +1,56 @@
+[
+  {
+    "type": "formula",
+    "intent": "DERIVATION",
+    "reason": "गौस के नियम का सूत्र और उसके सभी घटकों के स्पष्टीकरण के लिए उपयुक्त है।",
+    "label": "गौस का नियम",
+    "tex": [
+      "\\Phi_E = \\frac{q_{in}}{\\varepsilon_0}"
+    ],
+    "at": 10,
+    "presenter": "hidden"
+  },
+  {
+    "type": "formula",
+    "intent": "DERIVATION",
+    "reason": "चित्रित समीकरण step-by-step derivation में मदद करता है।",
+    "label": "विद्युत् क्षेत्र तीव्रता (E)",
+    "tex": [
+      "E = \\dfrac{1}{4\\pi\\epsilon_0} \\dfrac{q}{r^2}"
+    ],
+    "at": 25,
+    "presenter": "hidden"
+  },
+  {
+    "type": "points",
+    "intent": "DERIVATION",
+    "reason": "यहाँ derivation की प्रक्रिया आरंभ होती है — सतह पर छोटे भाग को चिह्नित करना महत्त्वपूर्ण है।",
+    "title": "सतह का छोटा क्षेत्र",
+    "items": [
+      "क्षेत्रफल: dS"
+    ],
+    "reveal": "progressive",
+    "at": 30,
+    "reveal_at": [
+      30
+    ],
+    "presenter": "hidden"
+  },
+  {
+    "type": "points",
+    "intent": "DERIVATION",
+    "reason": "अब अगले स्टेप के लिए स्पष्ट करना जरूरी है, 'विद्युत् फ्लक्स कैसे निकालेंगे' इसके लिए अगले फ्रेम में छोटा टाइटल और दो स्टेप दिखाए जा सकते हैं।",
+    "title": "फ्लक्स निकालना",
+    "items": [
+      "छोटा क्षेत्रफल चुनें",
+      "फ्लक्स की गणना करें"
+    ],
+    "reveal": "progressive",
+    "at": 40,
+    "reveal_at": [
+      40,
+      42
+    ],
+    "presenter": "hidden"
+  }
+]

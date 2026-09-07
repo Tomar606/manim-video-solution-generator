@@ -333,8 +333,6 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
     cbox = crop or {}
     cw, ch = int(cbox.get("w") or 650), int(cbox.get("h") or 930)
     cx, cy = int(cbox.get("x") or 650), int(cbox.get("y") or 150)
-    # keep the crop's own y: `cy` is rebound to the card's ease expression below,
-    # and the geometry sidecar was recording that expression as the crop offset
     crop_y = cy
     # Size from the SUBJECT, crop from the padded box. The padding exists so a
     # gesture is never sliced; counting it as part of him would shrink him.
@@ -403,8 +401,11 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
 
     FULL_W_C, SMALL_W_C = capped(FULL_W, "FULL_W"), capped(SMALL_W, "SMALL_W")
     BIG_W_C, CARD_W_C = capped(BIG_W, "BIG_W"), capped(CARD_W, "CARD_W")
-    full_y, small_y, big_y = top_for(FULL_W_C), top_for(SMALL_W_C), top_for(BIG_W_C)
-    card_y = top_for(CARD_W_C)
+    # Only full_y survives. small_y/big_y/card_y existed to drive a per-frame
+    # `y` for the overlay, and that whole second clock is gone — see the comment
+    # on `pan` below. It is the CAPPED width, so the half-screen rule governs
+    # where he is PLACED as well as how far he zooms.
+    full_y = top_for(FULL_W_C)
     # The canvas holds the SMALL-scaled avatar and zoompan zooms out from it, so
     # it must be at least that big. It used to be a fixed 800x1150, sized for the
     # old narrow crop; a padded crop scales to more than that and ffmpeg refuses
@@ -491,15 +492,12 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
         big_ratio = (BIG_W_C * pad_k) / (SMALL_W_C * pad_k)
         T = f"(on/{FPS})"                       # zoompan's only usable clock
         ease_z = _ease_expr(windows, T) if windows else "0"
-        ease_y = _ease_expr(windows, "t") if windows else "0"
         # three sizes on one curve: small inside a shrink window, full normally,
         # big inside a `big` window. The two eases never overlap in practice —
         # a shrink window means content is on the stage, a big window means it
         # is empty — so adding them is safe.
         bz = _ease_expr(big, T) if big else "0"
-        by = _ease_expr(big, "t") if big else "0"
         cz = _ease_expr(card, T) if card else "0"
-        cy = _ease_expr(card, "t") if card else "0"
         card_ratio = (CARD_W_C * pad_k) / (SMALL_W_C * pad_k)
         pz = _ease_expr(panel_spans, T) if panel_spans else "0"
         panel_ratio = (panel_w * pad_k) / (SMALL_W_C * pad_k)
@@ -510,26 +508,27 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
         # zoompan zooms about x=0,y=0 unless told otherwise, which walks the
         # presenter left as he scales — the off-centre drift the manager spotted.
         # Anchoring x to the canvas centre keeps him centred at every zoom level.
-        # ANCHORED BY CONSTRUCTION, not by two expressions agreeing.
         #
-        # The feet used to be held down by moving the overlay: y ramped from
-        # full_y to small_y on the same curve the zoom used. It is the same
-        # curve, but NOT the same clock — zoompan's `z` can only read `on`, its
-        # own output frame counter, while overlay's `y` reads `t`. One frame of
-        # disagreement between them is ~19px of avatar height mid-ramp, and the
-        # presenter measurably lifted off the bottom edge: 30px of daylight
-        # under his feet at 123.2s of part 1, for about 0.8s, every time the
-        # stage cleared. Both endpoints were correct, which is why the geometry
-        # sidecar said "anchored" and the output gate passed it.
+        # BOTH axes are now anchored to the CANVAS's own edges, not to a
+        # separately-computed offset. Vertical position used to be a second
+        # expression (`y`, below) driven by the OVERLAY filter's own clock
+        # (`t`, the BACKGROUND stream's timeline) while zoom is driven by THIS
+        # filter's clock (`on`, the AVATAR stream's timeline) — two clocks that
+        # only stay in step if the avatar's 25->30fps conversion introduces no
+        # rounding drift, which over a long clip it does. Any drift showed up
+        # as the presenter floating clear of the bottom edge for the length of
+        # a resize ramp, because the size had already changed on one clock
+        # before the position caught up on the other.
         #
-        # So: bottom-align the avatar in the canvas and zoom about the canvas
-        # BOTTOM instead of its top. His feet are then on the canvas floor at
-        # EVERY zoom level, the overlay never moves, and the second clock is
-        # gone rather than corrected. `ease_y`/`by`/`cy` are no longer needed.
-        pan = (f"pad={canvas_w}:{canvas_h}:(ow-iw)/2:oh-ih:%s,"
+        # Padding the avatar to the BOTTOM of the canvas (not the top, `oh-ih`
+        # instead of `0`) and zooming from the bottom (`ih-ih/zoom` instead of
+        # `0`) makes his feet land on the canvas's own last row at EVERY zoom
+        # level, using nothing but `zoom` itself. There is no second clock left
+        # to drift against, so the overlay below can place this canvas with a
+        # plain constant instead of a per-frame expression.
+        pan = (f"pad={canvas_w}:{canvas_h}:(ow-iw)/2:(oh-ih):%s,"
                f"zoompan=z='{z}':d=1:s={canvas_w}x{canvas_h}:fps={FPS}"
                f":x='iw/2-(iw/zoom/2)':y='ih-ih/zoom'")
-        y = f"{FRAME_H - canvas_h}"
         fc = (head +
               f"[cc][al]alphamerge,split=2[colr][alph];"
               f"[colr]scale={int(SMALL_W_C * pad_k)}:-2:flags=lanczos,{pan % 'black@0'}[zc];"
@@ -537,8 +536,12 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
               f"{pan % 'black'}[za];"
               f"[zc][za]alphamerge[av];"
               f"{BG}format=rgba[bg];"
-              f"[bg][av]overlay=x=(W-w)/2+({dx_out}):y='{y}':eval=frame:"
-              f"eof_action=pass,format=yuv420p[v]")
+              # the canvas's bottom row IS the avatar's feet at every zoom level
+              # by construction (see `pan`, above) — so anchoring it to the
+              # frame's bottom is a plain constant, evaluated once, not a
+              # per-frame expression with a clock that could drift.
+              f"[bg][av]overlay=x=(W-w)/2+({dx_out}):y={FRAME_H - canvas_h}:"
+              f"eval=init:eof_action=pass,format=yuv420p[v]")
 
     else:
         fc = (head +
