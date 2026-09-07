@@ -23,6 +23,8 @@ SYNC_TOL = 0.30       # seconds of audio/video duration difference allowed
 BOTTOM_TOL = 6        # px the silhouette may stop short of the frame bottom
 CENTRE_TOL = 20       # px off horizontal centre
 HEAD_MIN = 0.50       # top of head must be at or below this while graphics show
+HALF_SCREEN = 0.50    # HOUSE RULE: the presenter never takes more than half the
+                      # frame, in any mode. See tools/composite.py's `capped()`.
 
 
 def _probe(v: Path, stream: str, field: str) -> float | None:
@@ -103,8 +105,17 @@ def check(video: Path, graphics_from: float | None) -> list[str]:
         if full and full["head"] < HEAD_MIN:
             bad.append(f"HEAD TOO HIGH with graphics: {full['head']:.3f} of frame, "
                        f"must be >= {HEAD_MIN}")
-        if big and big["head"] < 0.38:
-            bad.append(f"GROWN HEAD TOO HIGH: {big['head']:.3f}, must be >= 0.38")
+        # THE HOUSE RULE: the presenter never occupies more than half the
+        # screen, in ANY mode. `big` used to be allowed up to 0.38 — 62% of the
+        # picture is presenter at that size, and with a panel above him he runs
+        # straight into it. tools/composite.py now caps every width so this
+        # holds by construction; this is the check that says so.
+        for mode in ("card", "full", "big", "small"):
+            m = geom.get(mode)
+            if m and m["head"] < HALF_SCREEN:
+                bad.append(f"PRESENTER OVER HALF THE SCREEN in {mode} mode: "
+                           f"head at {m['head']:.3f} of frame, must be "
+                           f">= {HALF_SCREEN}")
         if abs(geom.get("dx_out", 0)) > 140:
             bad.append(f"CENTRING SHIFT LOOKS WRONG: {geom['dx_out']}px")
     else:

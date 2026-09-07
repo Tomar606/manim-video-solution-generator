@@ -46,6 +46,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from src import panel_layout as PL          # noqa: E402
+
 # Where the presenter sits. Measured off the reference stills, not guessed:
 # the presenter is 56-66% of frame width there, against 96% in our first cut —
 # he was half again too big and crowding every diagram.
@@ -82,7 +85,12 @@ BIG_W, BIG_Y = 780, 800
 # this one still cannot cross its line.
 HEAD_TARGET = 0.51
 FULL_W, FULL_Y = 645, 966          # 66% of 1080
-SMALL_W, SMALL_Y = 420, 1245        # a 6% step, not 15% — just enough
+# THESE ARE WATCHED ON A PHONE. The shrink size is only used while content is
+# on the stage, so making it smaller costs nothing when the presenter is alone
+# and buys the diagram ~150px of height — measured: 420px puts his head at 0.707
+# of frame, 340px puts it at 0.765. On a 6in screen an orbital box at the old
+# size is about 3mm across; the diagram has to win that trade, not the framing.
+SMALL_W, SMALL_Y = 340, 1245        # a 6% step, not 15% — just enough
                                     # to clear content that stops at 60%       # 56% of 1080
 EASE = 0.75                         # seconds, the ramp at each edge
 PRESENTER_FADE = 0.75               # the brief: fade the presenter out over
@@ -107,6 +115,12 @@ CANVAS_W, CANVAS_H = 800, 1150      # holds the small avatar; zoom reaches full
 # STAGE_TOP of 0.290. If either of those moves, this moves with it.
 VEO_CUT = 500
 VEO_FADE = 0.30                    # softens the two cuts; cheap, unlike a blend expr
+
+# How a generated clip is laid in when the beat does not say. `panel` keeps the
+# clip whole under a torn-paper divider (src/panel_layout.py); `full` is the
+# older full-bleed crop that VEO_CUT describes, kept so an existing project can
+# be re-rendered exactly as it shipped by setting "layout": "full" on the beat.
+DEFAULT_VEO_LAYOUT = "panel"
 
 
 def _ease_expr(windows, var="t") -> str:
@@ -153,18 +167,75 @@ def _veo_chain(clips, first_input):
     for i, c in enumerate(clips):
         start, end = float(c["start"]), float(c["end"])
         fade_out = max(start, end - VEO_FADE)
-        parts.append(
-            f"[{n}:v]fps={FPS},scale=1080:1920:flags=lanczos,"
-            f"crop=1080:{1920 - VEO_CUT}:0:{VEO_CUT},format=rgba,"
-            f"tpad=start_duration={start:.2f}:start_mode=add:color=black@0,"
-            f"fade=t=in:st={start:.2f}:d={VEO_FADE}:alpha=1,"
-            f"fade=t=out:st={fade_out:.2f}:d={VEO_FADE}:alpha=1[vc{i}];")
-        parts.append(
-            f"{base}[vc{i}]overlay=x=0:y={VEO_CUT}:"
-            f"enable='between(t,{start:.2f},{end:.2f})':"
-            f"eof_action=pass:repeatlast=0[vb{i}];")
-        base = f"[vb{i}]"
-        n += 1
+        if c.get("layout", DEFAULT_VEO_LAYOUT) == "panel":
+            # PANEL: the clip keeps its own shape and is laid in whole, with a
+            # torn-paper divider closing the bottom of it. See src/panel_layout.
+            g = c["panel"]
+            gw, gh, gx, gy = g["crop"]
+            parts.append(
+                f"[{n}:v]fps={FPS},crop={gw}:{gh}:{gx}:{gy},"
+                f"scale={g['panel_w']}:{g['panel_h']}:flags=lanczos,format=rgba,"
+                f"tpad=start_duration={start:.2f}:start_mode=add:color=black@0,"
+                f"split=2[pc{i}][pm{i}];")
+            # THE MASK IS BUILT ON ONE ROW AND STRETCHED.
+            #
+            # Alpha here is the rip travelling across TIMES the top edge
+            # dissolving into the plate. The rip is a function of X and T only —
+            # it is identical down every column — and the dissolve is a function
+            # of Y only, so it is a cached picture (panel_fade_*.png). Asking
+            # geq for the whole 1080x810 plane evaluates 875,000 pixels a frame
+            # to produce 1080 distinct values, and it made a 14-second composite
+            # take over ten minutes. One row, then `neighbor` upscale, is the
+            # same output for ~1/800th of the work.
+            parts.append(
+                f"[pm{i}]crop={PL.FRAME_W}:1:0:0,format=gray,"
+                f"geq=lum='255*{PL.wipe_expr(start, end, PL.LEAD)}',"
+                f"scale={PL.FRAME_W}:{g['panel_h']}:flags=neighbor,setsar=1[pw{i}];")
+            parts.append(f"[{n + 1}:v]format=gray,setsar=1[pf{i}];")
+            parts.append(f"[pw{i}][pf{i}]blend=all_mode=multiply:shortest=1[pk{i}];")
+            parts.append(f"[pc{i}][pk{i}]alphamerge[vc{i}];")
+            parts.append(
+                f"{base}[vc{i}]overlay=x=0:y={g['top']}:"
+                f"enable='between(t,{start:.2f},{end:.2f})':"
+                f"eof_action=pass:repeatlast=0[vb{i}];")
+            base = f"[vb{i}]"
+            n += 2                     # the clip and its fade mask
+            # The divider, on the same clock as the clip it closes. Cropped to
+            # the rows it actually occupies first: the rip travels on a
+            # per-pixel expression, and the full canvas is 92% transparent.
+            # SPLIT, not two references to the same input — an input pad can
+            # only be consumed once, and using it twice does not error, it
+            # deadlocks the graph.
+            by, bh = c["tear_band"]
+            parts.append(
+                f"[{n}:v]format=rgba,crop={PL.FRAME_W}:{bh}:0:{by},"
+                f"split=2[tc{i}][tm{i}];")
+            parts.append(f"[tm{i}]alphaextract,setsar=1,split=2[ta{i}][tz{i}];")
+            parts.append(
+                f"[tz{i}]crop={PL.FRAME_W}:1:0:0,"
+                f"geq=lum='255*{PL.wipe_expr(start, end)}',"
+                f"scale={PL.FRAME_W}:{bh}:flags=neighbor,setsar=1[tw{i}];")
+            parts.append(f"[ta{i}][tw{i}]blend=all_mode=multiply:shortest=1[tk{i}];")
+            parts.append(f"[tc{i}][tk{i}]alphamerge[tr{i}];")
+            parts.append(
+                f"{base}[tr{i}]overlay=x=0:y={by}:"
+                f"enable='between(t,{start:.2f},{end:.2f})':"
+                f"eof_action=pass:repeatlast=0[tb{i}];")
+            base = f"[tb{i}]"
+            n += 1
+        else:
+            parts.append(
+                f"[{n}:v]fps={FPS},scale=1080:1920:flags=lanczos,"
+                f"crop=1080:{1920 - VEO_CUT}:0:{VEO_CUT},format=rgba,"
+                f"tpad=start_duration={start:.2f}:start_mode=add:color=black@0,"
+                f"fade=t=in:st={start:.2f}:d={VEO_FADE}:alpha=1,"
+                f"fade=t=out:st={fade_out:.2f}:d={VEO_FADE}:alpha=1[vc{i}];")
+            parts.append(
+                f"{base}[vc{i}]overlay=x=0:y={VEO_CUT}:"
+                f"enable='between(t,{start:.2f},{end:.2f})':"
+                f"eof_action=pass:repeatlast=0[vb{i}];")
+            base = f"[vb{i}]"
+            n += 1
 
         # The labels go over their own clip and nothing else — they are the one
         # thing besides the animation allowed on screen, and they are typeset by
@@ -198,6 +269,11 @@ def _inputs(clips):
     args = []
     for c in clips or []:
         args += ["-i", str(c["path"])]
+        if c.get("layout", DEFAULT_VEO_LAYOUT) == "panel":
+            # ORDER MATTERS: _veo_chain consumes the fade mask and then the
+            # divider straight after the clip, before that clip's labels.
+            args += ["-loop", "1", "-i", str(c["fade"])]
+            args += ["-loop", "1", "-i", str(c["tear"])]
         for lab in c.get("labels") or []:
             args += ["-loop", "1", "-i", str(lab["png"])]
     return args
@@ -307,22 +383,42 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
         # width_px is the SUBJECT's intended on-screen width; the rendered image
         # is the padded crop, so it is wider by pad_k.
         return int(FRAME_H - ch * ((width_px * pad_k) / max(cw, 1)))
-    full_y, small_y, big_y = top_for(FULL_W), top_for(SMALL_W), top_for(BIG_W)
-    card_y = top_for(CARD_W)
+    # HOUSE RULE: THE PRESENTER NEVER OCCUPIES MORE THAN HALF THE SCREEN.
+    # BIG_W was chosen to put his head at 41% of frame — 59% of the picture is
+    # then presenter, and with a panel above him he runs into it. The rule is
+    # enforced here, on the WIDTH, so every size in every layout obeys it rather
+    # than each caller remembering: shrink any width whose top would sit above
+    # the half-way line. Derived from the measured crop, so a taller presenter
+    # in some future clip is caught too.
+    def capped(width_px, name):
+        if top_for(width_px) >= PL.AVATAR_CAP:
+            return width_px
+        w = int(width_px * (FRAME_H - PL.AVATAR_CAP) / max(FRAME_H - top_for(width_px), 1))
+        while w > 1 and top_for(w) < PL.AVATAR_CAP:
+            w -= 2
+        print(f"  {name} {width_px}px would put his head at "
+              f"{top_for(width_px) / FRAME_H:.0%} of frame — capped to {w}px "
+              f"({top_for(w) / FRAME_H:.0%}), the half-screen limit")
+        return w
+
+    FULL_W_C, SMALL_W_C = capped(FULL_W, "FULL_W"), capped(SMALL_W, "SMALL_W")
+    BIG_W_C, CARD_W_C = capped(BIG_W, "BIG_W"), capped(CARD_W, "CARD_W")
+    full_y, small_y, big_y = top_for(FULL_W_C), top_for(SMALL_W_C), top_for(BIG_W_C)
+    card_y = top_for(CARD_W_C)
     # The canvas holds the SMALL-scaled avatar and zoompan zooms out from it, so
     # it must be at least that big. It used to be a fixed 800x1150, sized for the
     # old narrow crop; a padded crop scales to more than that and ffmpeg refuses
     # to `pad` an image to smaller than itself. Derive it instead.
     # the shift, expressed in OUTPUT pixels at the working scale
-    dx_out = int(round(dx_src * (FULL_W * pad_k) / max(cw, 1)))
-    base_w = int(SMALL_W * pad_k)
+    dx_out = int(round(dx_src * (FULL_W_C * pad_k) / max(cw, 1)))
+    base_w = int(SMALL_W_C * pad_k)
     base_h = int(ch * base_w / max(cw, 1))
     # zoompan MAGNIFIES A REGION of the canvas — anything outside that region is
     # cut, it is not revealed. So the canvas must be big enough to still hold the
     # avatar at the LARGEST zoom used, or his legs are sliced off mid-torso while
     # the background behind him still reaches the bottom edge. That is what a
     # canvas sized for the smallest state produced.
-    max_ratio = max(FULL_W, BIG_W, CARD_W, SMALL_W) / max(SMALL_W, 1)
+    max_ratio = max(FULL_W_C, BIG_W_C, CARD_W_C, SMALL_W_C) / max(SMALL_W_C, 1)
     canvas_w = int(max(CANVAS_W, base_w * max_ratio + 24)) // 2 * 2
     canvas_h = int(max(CANVAS_H, base_h * max_ratio + 24)) // 2 * 2
     # Assert it rather than trust it. The crop always runs to the bottom of the
@@ -334,7 +430,44 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
                          f"{max_ratio:.2f}x zoom (needs {need_h:.0f}px) — "
                          f"he would be cut off at the bottom")
 
-    if windows or big or card:
+    # A PANEL ON SCREEN IS CONTENT ON SCREEN — but only shrink him if he would
+    # actually be in its way. The shrink windows come from the rendered Manim
+    # frames, and a Veo clip is composited afterwards, so Manim never sees one
+    # and nothing else would add the window; doing it here means it cannot be
+    # forgotten for one part out of three.
+    #
+    # It is CONDITIONAL because shrinking regardless looks wrong: a 4:3 panel
+    # ends at 49% of frame and the working size already puts his head below
+    # that, so forcing the small size just opens a band of empty plate between
+    # the divider and his head. Compared against the paper's real bottom edge
+    # (its shadow included), not against the seam.
+    # A PANEL GETS ITS OWN SIZE, derived from where the paper actually ends.
+    #
+    # Reusing SMALL here was the obvious move and it is wrong: SMALL is tuned
+    # for the older layout where Manim content runs down to 60% of frame, so
+    # under a 4:3 panel that ends at 49% it cuts the presenter roughly in half
+    # to solve an overlap of a few pixels, and opens a band of empty plate
+    # between the divider and his head. So: the widest he can be while his head
+    # still clears the paper's shadow, never wider than his working size.
+    panel_spans, panel_w = [], FULL_W_C
+    panel_clips = [c for c in (clips or [])
+                   if c.get("layout", DEFAULT_VEO_LAYOUT) == "panel"]
+    if panel_clips:
+        floor = max(sum(c["tear_band"]) for c in panel_clips) + PL.AVATAR_CLEAR
+        if full_y < floor:
+            w = FULL_W_C
+            while w > SMALL_W_C and top_for(w) < floor:
+                w -= 2
+            panel_w = w
+            panel_spans = [[float(c["start"]), float(c["end"])] for c in panel_clips]
+            print(f"  panel: his head reaches {full_y} and the paper needs {floor} "
+                  f"— {len(panel_spans)} window(s) at {panel_w}px "
+                  f"(head {top_for(panel_w)}), not the {SMALL_W_C}px shrink size")
+        else:
+            print(f"  panel clears the presenter at his working size "
+                  f"(head {full_y}, paper needs {floor}) — no resize")
+
+    if windows or big or card or panel_spans:
         # The size change RAMPS over EASE seconds — a true scale, per frame.
         #
         # Five attempts got here; recorded so nobody repeats them:
@@ -354,8 +487,8 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
         #
         # zoompan only zooms IN, so the canvas carries the presenter at his
         # SMALL size and zooms out to full when nothing is behind him.
-        ratio = (FULL_W * pad_k) / (SMALL_W * pad_k)
-        big_ratio = (BIG_W * pad_k) / (SMALL_W * pad_k)
+        ratio = (FULL_W_C * pad_k) / (SMALL_W_C * pad_k)
+        big_ratio = (BIG_W_C * pad_k) / (SMALL_W_C * pad_k)
         T = f"(on/{FPS})"                       # zoompan's only usable clock
         ease_z = _ease_expr(windows, T) if windows else "0"
         ease_y = _ease_expr(windows, "t") if windows else "0"
@@ -367,23 +500,40 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
         by = _ease_expr(big, "t") if big else "0"
         cz = _ease_expr(card, T) if card else "0"
         cy = _ease_expr(card, "t") if card else "0"
-        card_ratio = (CARD_W * pad_k) / (SMALL_W * pad_k)
+        card_ratio = (CARD_W_C * pad_k) / (SMALL_W_C * pad_k)
+        pz = _ease_expr(panel_spans, T) if panel_spans else "0"
+        panel_ratio = (panel_w * pad_k) / (SMALL_W_C * pad_k)
         z = (f"1+{ratio - 1:.4f}*(1-({ease_z}))"
              f"+{big_ratio - ratio:.4f}*({bz})"
-             f"+{card_ratio - ratio:.4f}*({cz})")
+             f"+{card_ratio - ratio:.4f}*({cz})"
+             f"+{panel_ratio - ratio:.4f}*({pz})")
         # zoompan zooms about x=0,y=0 unless told otherwise, which walks the
         # presenter left as he scales — the off-centre drift the manager spotted.
         # Anchoring x to the canvas centre keeps him centred at every zoom level.
-        pan = (f"pad={canvas_w}:{canvas_h}:(ow-iw)/2:0:%s,"
+        # ANCHORED BY CONSTRUCTION, not by two expressions agreeing.
+        #
+        # The feet used to be held down by moving the overlay: y ramped from
+        # full_y to small_y on the same curve the zoom used. It is the same
+        # curve, but NOT the same clock — zoompan's `z` can only read `on`, its
+        # own output frame counter, while overlay's `y` reads `t`. One frame of
+        # disagreement between them is ~19px of avatar height mid-ramp, and the
+        # presenter measurably lifted off the bottom edge: 30px of daylight
+        # under his feet at 123.2s of part 1, for about 0.8s, every time the
+        # stage cleared. Both endpoints were correct, which is why the geometry
+        # sidecar said "anchored" and the output gate passed it.
+        #
+        # So: bottom-align the avatar in the canvas and zoom about the canvas
+        # BOTTOM instead of its top. His feet are then on the canvas floor at
+        # EVERY zoom level, the overlay never moves, and the second clock is
+        # gone rather than corrected. `ease_y`/`by`/`cy` are no longer needed.
+        pan = (f"pad={canvas_w}:{canvas_h}:(ow-iw)/2:oh-ih:%s,"
                f"zoompan=z='{z}':d=1:s={canvas_w}x{canvas_h}:fps={FPS}"
-               f":x='iw/2-(iw/zoom/2)':y='0'")
-        y = (f"{full_y}+({small_y - full_y})*({ease_y})"
-             f"+({big_y - full_y})*({by})"
-             f"+({card_y - full_y})*({cy})")
+               f":x='iw/2-(iw/zoom/2)':y='ih-ih/zoom'")
+        y = f"{FRAME_H - canvas_h}"
         fc = (head +
               f"[cc][al]alphamerge,split=2[colr][alph];"
-              f"[colr]scale={int(SMALL_W * pad_k)}:-2:flags=lanczos,{pan % 'black@0'}[zc];"
-              f"[alph]alphaextract,scale={int(SMALL_W * pad_k)}:-2:flags=lanczos,"
+              f"[colr]scale={int(SMALL_W_C * pad_k)}:-2:flags=lanczos,{pan % 'black@0'}[zc];"
+              f"[alph]alphaextract,scale={int(SMALL_W_C * pad_k)}:-2:flags=lanczos,"
               f"{pan % 'black'}[za];"
               f"[zc][za]alphamerge[av];"
               f"{BG}format=rgba[bg];"
@@ -392,7 +542,7 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
 
     else:
         fc = (head +
-              f"[cc][al]alphamerge,scale={int(FULL_W * pad_k)}:-2:flags=lanczos[av];"
+              f"[cc][al]alphamerge,scale={int(FULL_W_C * pad_k)}:-2:flags=lanczos[av];"
               f"{BG}format=rgba[bg];"
               f"[bg][av]overlay=x=(W-w)/2+({dx_out}):y={full_y}:eval=init:eof_action=pass,format=yuv420p[v]")
 
@@ -403,7 +553,10 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
     from tools.avatar_crop import MARGIN as _M
     _geom = {"crop": [cw, ch, cx, crop_y], "pad_k": round(pad_k, 4),
              "canvas": [locals().get("canvas_w"), locals().get("canvas_h")], "dx_out": dx_out}
-    for _n, _W in (("card", CARD_W), ("full", FULL_W), ("big", BIG_W), ("small", SMALL_W)):
+    # the CAPPED widths — the sidecar is what the gates read, so it has to
+    # describe the presenter that was actually drawn, not the one asked for
+    for _n, _W in (("card", CARD_W_C), ("full", FULL_W_C),
+                   ("big", BIG_W_C), ("small", SMALL_W_C)):
         _sc = (_W * pad_k) / max(cw, 1)
         _top = FRAME_H - ch * _sc
         _geom[_n] = {"width": _W, "top": round(_top, 1),
@@ -488,8 +641,26 @@ def load_clips(path, root=None):
         labels = []
         for lab in c.get("labels") or []:
             labels.append(dict(lab, png=root / lab["png"]))
-        out.append(dict(c, path=root / c["src"], labels=labels))
+        rec = dict(c, path=root / c["src"], labels=labels)
+        if rec.get("layout", DEFAULT_VEO_LAYOUT) == "panel":
+            # Derived from the CLIP, here rather than at generation time, so a
+            # clips_part file written before this existed still works and a clip
+            # regenerated at a different size is laid in correctly.
+            rec["panel"] = PL.geometry(*_dims(rec["path"]))
+            rec["tear"] = PL.tear(rec["panel"]["seam"])
+            rec["tear_band"] = PL.tear_band(rec["panel"]["seam"])
+            rec["fade"] = PL.fade_mask(rec["panel"]["panel_h"])
+        out.append(rec)
     return out
+
+
+def _dims(path):
+    """(width, height) of a video, from ffprobe."""
+    r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0",
+                        "-show_entries", "stream=width,height", "-of", "csv=p=0:s=x",
+                        str(path)], capture_output=True, text=True, check=True)
+    w, h = r.stdout.strip().split("x")[:2]
+    return int(w), int(h)
 
 
 if __name__ == "__main__":

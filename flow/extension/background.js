@@ -43,7 +43,7 @@ const BRIDGE = "http://127.0.0.1:8765";
  * thing to chase. Twice in one session a "the picker will not open" hunt turned
  * out to be code that was simply never reloaded. `ping` reports this and
  * src/flow_bridge.py refuses to run against a mismatch. */
-const BRIDGE_BUILD = 8;
+const BRIDGE_BUILD = 9;
 const FLOW_URL_RE = /^https:\/\/(labs\.google\/fx\/.*tools\/flow|flow\.google)/i;
 
 let looping = false;      // false again whenever the worker is restarted
@@ -621,8 +621,17 @@ async function listMedia() {
     for (const e of document.querySelectorAll("*")) {
       for (const a of attrs) {
         var v = e.getAttribute && e.getAttribute(a);
-        if (v && v.indexOf("getMediaUrlRedirect") >= 0 && v.indexOf("MEDIA_URL_TYPE_THUMBNAIL") < 0) {
-          var m = v.match(/name=([0-9a-fA-F-]{8,})/);
+        // TWO URL FORMS. Flow used to embed every clip as
+        // /fx/api/trpc/media.getMediaUrlRedirect?name=<uuid>; it now serves them
+        // from /asb/<token> instead. Matching only the old form made listMedia
+        // return an empty set on a project full of clips, and because
+        // generate_one identifies a new clip by diffing this set before and
+        // after, every generation hung waiting for a key that could never
+        // arrive. Both forms are accepted; the token is the key for the new one.
+        var isMedia = v && v.indexOf("MEDIA_URL_TYPE_THUMBNAIL") < 0 &&
+                      (v.indexOf("getMediaUrlRedirect") >= 0 || v.indexOf("/asb/") >= 0);
+        if (isMedia) {
+          var m = v.match(/name=([0-9a-fA-F-]{8,})/) || v.match(/\/asb\/([A-Za-z0-9_\-]{12,})/);
           var key = m ? m[1] : v;
           if (!seen.has(key)) {
             seen.add(key);

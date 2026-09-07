@@ -126,3 +126,10 @@ texts/
 Tex/
 __pycache__/
 .DS_Store
+
+# Divider assets are DERIVED from assets/dividers/paper_tear_texture.jpg by
+# tools/make_tear.py, keyed by the seam they are cut for. src/panel_layout.py
+# builds whichever one a panel needs on first use, so they are build output.
+assets/dividers/paper_tear_[0-9]*.png
+assets/dividers/paper_tear_[0-9]*.json
+assets/dividers/panel_fade_[0-9]*.png

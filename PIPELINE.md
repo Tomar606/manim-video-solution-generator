@@ -217,6 +217,87 @@ Four things are worth knowing before using it:
   question with no useful answer.
 - **`reference` attaches the book's own figure.** See below.
 
+### The green route: generate on chroma, key it, composite it ourselves
+
+**This is now the preferred way to get a generated clip, and it replaces
+uploading the background plate.** A beat opts in with `"background": "green"`.
+
+The plate route asked Veo to generate ON the background Manim renders, so the
+clip could be spliced in invisibly. Attaching does genuinely condition the
+generation — that was verified — but Veo does not preserve the plate. It
+regenerates a plausible imitation and ADDS to it. Measured on a real run: a plate
+carrying one flask and one molecule came back carrying four molecules, a benzene
+ring, a DNA helix and two chemical formulae written in text. It also composes to
+fill the frame, so the band is fought rather than obeyed.
+
+So the background stops being Veo's problem:
+
+| | plate route | green route |
+|---|---|---|
+| background | Veo generates it, imperfectly | ours, exact — it never goes near Veo |
+| placement | asked for, often ignored | a compositing parameter |
+| reference upload | required, and the most fragile step | not needed at all |
+| contract length | ~7,500 chars | ~4,500 |
+
+`tools/composite.py` already carries the keyer, built for the HeyGen presenter
+against an unevenly-lit real screen. A synthetic field is flatter than that and
+easier to key: measured spread across the frame was R21 G29 B21, which keys clean
+at similarity 0.18 with no visible fringing, and Veo's own corner watermark is
+semi-transparent so it disappears with the background.
+
+**Two rules INVERT between the routes.** Confusing them is expensive:
+
+- plate route — the subject is SMALL and sits inside a band
+- green route — the subject is as LARGE as it can be while still complete,
+  because it is scaled down afterwards and every unoccupied pixel is resolution
+  thrown away. Measured: a subject filling 4% of the frame needed a 1.4x
+  enlargement to fill its slot, and softened.
+
+**Do not argue with Veo about the background.** The green clause is three
+sentences where the plate clause was three paragraphs, and that is deliberate:
+the bug ledger's §16 rule is that naming a thing in a prompt is a signal to draw
+it, so an emphatic "do not change the background" makes changes MORE likely.
+Asking for a flat green field is something Veo is happy to do, and there is
+nothing to protect.
+
+**What keys badly:** anything transparent. Clear glass and clear liquid show the
+green through them, and despill does not help — it only handles green bouncing
+onto edges. Prefer opaque subjects, or let Manim draw the glassware and send Veo
+only the part that has to move.
+
+### How much of the frame a beat may use
+
+Three settings, chosen per beat by the `presenter` key. The narrow default is
+not a style preference — the presenter is on screen and he is the clock — but
+some ideas genuinely do not fit above the middle line, and squeezing a tall
+apparatus into the band makes it too small to read. That fails the student more
+quietly than a layout error does, so there is a middle setting.
+
+| `presenter` | draws down to | the presenter |
+|---|---|---|
+| *(omitted)* | the middle of the frame | fully visible |
+| `partial` | roughly two thirds down, bottom third kept clear | visible, upper body overlapped |
+| `hidden` | a margin above the bottom edge | faded out for this beat |
+
+`partial` is the one to reach for when the subject is vertical — a rod standing
+in a vessel, a column, a process that runs top to bottom. It buys real height
+while keeping the bottom of the frame empty so the presenter still reads as
+present. It is a trade-off and never the default.
+
+Label placement is checked against the same floor, so a label that would be
+hidden behind the presenter is reported with the setting that would fix it.
+`clips_part<N>.json` records the mode as `frame`; older files that only carry
+`full` are still read correctly.
+
+**No numbers reach the prompt.** The floors above are fractions in
+`veo_prompts.LAYOUT`, and they drive the WORDING only — the prompt describes two
+invisible guide lines and where the subject sits between them. The first entry
+in the video-prompt bug ledger is a clip that rendered `12-30%` and `Band D` as
+visible text because the layout instructions contained percentages and a zone
+name. This track cannot absorb that at all, since its whole contract is that the
+frame carries the animation and not one character, so `audit()` now REFUSES a
+prompt containing a percentage, a pixel count or a zone name.
+
 ### `reference`: the figure as the student's book prints it
 
 A generated apparatus is a plausible apparatus, and plausible is not what this
@@ -641,3 +722,55 @@ the student; pace around 10-15s per step.
 - **A question printed into the sheet PNG can overflow the paper.** The shrink
   loop stops at a legibility floor and used to print anyway, running off the torn
   edge onto the background. It now truncates with an ellipsis.
+
+### The split-screen panel: how a generated clip is laid in now
+
+A `type: video` beat is composited as a PANEL by default — the clip whole in a
+4:3 band at the top, a torn-paper divider closing it, the presenter working
+below. `src/panel_layout.py` holds the geometry; `tools/composite.py` draws it.
+
+**The panel takes the CLIP's shape, not a round percentage.** The old layout
+scaled a clip to full frame and cut its top off, so a 16:9 generation lost a
+quarter of its width and the composition Veo built was thrown away. Worth
+knowing the limit: a 9:16 clip can never fill a full-width panel smaller than
+the whole frame — at 1080 wide it needs all 1920 rows — so "a 60/40 split" and
+"an uncropped portrait clip" are not both achievable. The panel gives way.
+
+**Flow's video generation offers only 16:9 and 9:16.** 4:3 exists for IMAGE
+generation, not video (both rows are in the settings panel; only one applies).
+So a 4:3 panel is reached by composing the subject inside the middle of a 16:9
+frame and cropping to it centred — and the prompt must ask for that by
+describing the SUBJECT, never the empty space. See the bug ledger: asking for
+"a wide band of empty background" at each edge produced literal black pillarbox
+bars.
+
+**Set `"layout": "full"` on a beat** to get the older full-bleed crop back, for
+re-rendering a project exactly as it shipped.
+
+| beat field | what it does |
+|---|---|
+| `layout` | `panel` (default) or `full` |
+| `labels[].hold` | seconds to FREEZE the clip when this label arrives |
+
+**A label with `hold` stops the picture so the label can be read.** The window
+is fixed by the narration, so the pause comes out of the motion, not out of the
+window: the clip is conformed to `window - total holds` and the freezes are then
+inserted, giving the window back exactly. Insert first and conform after and the
+conform speeds the freezes up along with everything else. `src/veo_holds.py`.
+
+**The presenter never occupies more than half the screen.** `tools/composite.py`
+caps every size so his head cannot rise above the half-way line — the old `big`
+size put it at 41%, which is 59% presenter — and under a panel he takes a size
+derived from where the paper actually ends, rather than the generic shrink size,
+which would cut him in half to solve an overlap of a few pixels.
+
+### Gates added with it
+
+| gate | refuses |
+|---|---|
+| `tools/dash_gate.py <project>` | an em/en dash in any text that reaches the SCREEN — titles, list items, table cells, diagram labels, captions. Notes and Veo briefs are ignored. `--fix` swaps them for commas. Runs automatically inside `preflight_beats.py`. |
+| `tools/preflight_beats.py` | an unknown `layout`, a hold shorter than 0.25s, holds totalling more than the beat, a `hold` with no `at` |
+| `tools/output_gate.py` | a finished file whose presenter crosses the half-way line in any mode |
+
+Existing videos are NOT retro-fixed; the dash gate blocks the next build of a
+project, which is where the rule can still be applied for free.

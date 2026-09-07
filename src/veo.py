@@ -42,8 +42,10 @@ import shutil
 import time
 from pathlib import Path
 
-from src import veo_sequence, veo_conform, veo_labels, veo_prompts, veo_qc
-from src.flow_bridge import FlowBridge, FlowError, inbox_dir, inbox_rel, settled
+from src import (veo_sequence, veo_conform, veo_holds, veo_labels,
+                 veo_prompts, veo_qc)
+from src.flow_bridge import (DOWNLOAD_DIR, FlowBridge, FlowError, inbox_dir,
+                             inbox_rel, settled)
 
 ROOT = Path(__file__).resolve().parent.parent
 SELECTORS = ROOT / "flow" / "selectors.json"
@@ -57,6 +59,8 @@ MAX_ON_SCREEN = 25.0      # one generated clip held longer than this stops being
 GENERATE_TIMEOUT = 900.0  # Flow takes minutes; a stuck queue takes forever
 POLL_EVERY = 10.0
 SETTLE_AFTER_SUBMIT = 3.0
+UPLOAD_TIMEOUT = 120.0    # an upload has to become Flow media before it can be
+                          # picked from the tray and added to the prompt
 
 
 class VeoError(RuntimeError):
@@ -78,7 +82,7 @@ def _rel(p: Path) -> str:
         return str(p)
 
 
-def label_faults(labels: list[dict], *, full: bool) -> list[str]:
+def label_faults(labels: list[dict], *, frame: str = "presenter") -> list[str]:
     """Labels that would land somewhere the frame is not theirs to use.
 
     Warnings rather than errors: the clip is already generated and paid for, and
@@ -86,7 +90,7 @@ def label_faults(labels: list[dict], *, full: bool) -> list[str]:
     reason to throw the run away. `tools/preflight.py` reports the same thing
     before the render, which is where it can still be acted on cheaply.
     """
-    from src.veo_prompts import LAYOUT
+    from src.veo_prompts import LAYOUT, floor_for
 
     top = LAYOUT["caption_cut"] * veo_labels.FRAME_H
     # The floor depends on whether the presenter is there. With him on screen a
@@ -94,7 +98,7 @@ def label_faults(labels: list[dict], *, full: bool) -> list[str]:
     # and invisible in a way no frame check downstream would catch, because the
     # label really was composited, just underneath. Only a beat that fades him
     # out gets the rest of the frame.
-    floor = (LAYOUT["full_bottom"] if full else LAYOUT["presenter_top"]) * veo_labels.FRAME_H
+    floor = floor_for(frame) * veo_labels.FRAME_H
     out = []
     for a in labels:
         if a["y"] < top:
@@ -104,9 +108,11 @@ def label_faults(labels: list[dict], *, full: bool) -> list[str]:
             out.append(
                 f"label {a['text']!r} reaches past the usable floor "
                 f"(y={a['y'] + a['h']}, floor {int(floor)})"
-                + ("" if full else " — the presenter is on screen for this beat, "
-                                  "so it would be hidden behind him. Either raise "
-                                  "it or set `presenter: hidden` on the beat."))
+                + ("" if frame == "full" else
+                   " — the presenter is on screen for this beat, so it would be "
+                   "hidden behind him. Raise it, or give the beat more room with "
+                   "`presenter: partial` (bottom third stays clear) or "
+                   "`presenter: hidden`."))
         if a["x"] < 0 or a["x"] + a["w"] > veo_labels.FRAME_W:
             out.append(f"label {a['text']!r} runs off the side of the frame")
     for i, a in enumerate(labels):
@@ -193,6 +199,32 @@ def _media_keys(bridge: FlowBridge) -> set[str]:
     return {m["key"] for m in bridge.call("list_media", timeout=60).get("media", [])}
 
 
+def _new_media(bridge: FlowBridge, before: set[str]) -> tuple[list[str], list[str]]:
+    """The keys that appeared since `before`, split into videos and stills.
+
+    Two DIFFERENT things make a key that is not a clip, and both were found the
+    expensive way:
+
+      an upload   the plate and the textbook figure attached moments ago are
+                  Flow media too, with a URL of exactly the same shape.
+                  `generate_one` keeps those out by snapshotting after the
+                  uploads settle.
+      a placeholder
+                  Flow mints a key as soon as a generation is QUEUED and renders
+                  it as an <img> while the render runs. It appeared 23 seconds
+                  after submit in the first real run — far too fast to be a
+                  finished clip. Treating "a new key" as "the clip" therefore
+                  does not merely risk the wrong file, it reliably returns a
+                  still of a video that has not been made yet.
+
+    So the wait is for a key rendered by a <video>, not for any key at all.
+    """
+    media = bridge.call("list_media", timeout=60).get("media", [])
+    fresh = [m for m in media if m["key"] not in before]
+    return (sorted(m["key"] for m in fresh if m.get("video")),
+            sorted(m["key"] for m in fresh if not m.get("video")))
+
+
 def _media_url(bridge: FlowBridge, key: str) -> str:
     for m in bridge.call("list_media", timeout=60).get("media", []):
         if m["key"] == key:
@@ -214,23 +246,79 @@ def generate_one(bridge: FlowBridge, spec: dict, *, images: list[Path],
     as well. See `clearImages` in flow/extension/background.js.
     """
     bridge.call("attach", timeout=60)
-    before = _media_keys(bridge)
 
     if images:
-        bridge.set_status(stage="attaching reference images",
+        # TWO STEPS, and skipping the second is silent. `set_image` drives
+        # Flow's global uploader, which puts the file in the PROJECT LIBRARY;
+        # it does not reference it from the prompt. Uploading alone therefore
+        # looks completely successful and generates a clip with no reference at
+        # all — Veo invents its own background and discards the plate, which is
+        # exactly what §15 exists to prevent and exactly what shipped the first
+        # time this ran. The asset has to be picked from the tray and added to
+        # the prompt, and the proof is a chip on the prompt bar.
+        # Clear FIRST. Attaching is additive, so anything already on the prompt
+        # bar — a chip left by a previous beat, or by somebody testing by hand —
+        # rides along into this generation as a second reference, and Veo blends
+        # them. Nothing in the logs would say so; the run just quietly makes a
+        # clip from two pictures.
+        bridge.set_status(stage="clearing old references", detail=label)
+        try:
+            gone = bridge.call("clear_prompt_refs",
+                               selector=sel.get("reference_chip_clear"), timeout=120)
+            if gone.get("removed"):
+                print(f"  cleared {gone['removed']} stale reference chip(s)")
+            if gone.get("left"):
+                print(f"  ⚠ {gone['left']} chip(s) would not clear — this clip is "
+                      f"generated from more than its own reference")
+        except FlowError as exc:
+            print(f"  ⚠ could not clear old references: {exc}")
+
+        bridge.set_status(stage="uploading reference images",
                           detail=", ".join(p.name for p in images))
-        bridge.call("clear_images", selector=sel["plate_input"],
-                    clear_selector=sel.get("reference_clear"), timeout=120)
-        got = bridge.call("set_image", paths=[str(p) for p in images],
-                          selector=sel["plate_input"], timeout=120)
-        # Flow taking only one file is not a crash and must not be treated as
-        # one — the clip still generates. But it generates without whichever
-        # reference was dropped, and a chained clip silently missing its carry
-        # frame is precisely the defect that looks fine in isolation.
-        for name in got.get("dropped") or []:
-            print(f"  ⚠ Flow's reference control took only {got.get('used', 1)} "
-                  f"image, so {Path(name).name} was NOT attached to this "
-                  f"generation")
+        before = _media_keys(bridge)
+        # ONE AT A TIME, deliberately. Uploading several and diffing the media
+        # set afterwards leaves no way to say which key is which — the keys are
+        # UUIDs, so ordering them is a coin flip, and attaching the wrong
+        # picture looks exactly like attaching the right one.
+        for img in images:
+            bridge.call("set_image", paths=[str(img)],
+                        selector=sel["plate_input"], timeout=180)
+            time.sleep(2.0)
+
+        # Wait for the uploads to become media, then attach each in the order
+        # veo_sequence.uploads() chose — Flow shows the chips in that order.
+        deadline = time.time() + UPLOAD_TIMEOUT
+        fresh: list[str] = []
+        while time.time() < deadline and len(fresh) < len(images):
+            fresh = sorted(_media_keys(bridge) - before)
+            if len(fresh) >= len(images):
+                break
+            time.sleep(2.0)
+        if not fresh:
+            raise VeoError(
+                f"none of the {len(images)} reference image(s) became Flow media "
+                f"within {UPLOAD_TIMEOUT:.0f}s. Without a reference the clip is "
+                f"generated on an invented background and cannot be spliced.")
+        if len(fresh) < len(images):
+            print(f"  ⚠ only {len(fresh)} of {len(images)} uploads became media; "
+                  f"attaching what arrived")
+
+        for k in fresh:
+            bridge.set_status(stage="attaching to the prompt", detail=k[:12])
+            got = bridge.call("add_to_prompt", key=k,
+                              selector=sel.get("reference_open"), timeout=180)
+            print(f"  attached reference {k[:12]}… "
+                  f"({got.get('chips')} chip(s) on the prompt)")
+
+    # AFTER the uploads, never before. Every image attached above becomes Flow
+    # media with a URL shaped exactly like a finished clip's, so a snapshot taken
+    # earlier would leave the plate sitting in the "new since we started" set —
+    # and the very first poll below would return it, download a PNG named .mp4,
+    # and fail the visual review on a file that will not decode. That happens on
+    # every beat that attaches anything, which since the plate is attached by
+    # default is every beat.
+    time.sleep(1.5)
+    before = _media_keys(bridge)
 
     text = spec["prompt"]
     if spec.get("negative"):
@@ -251,16 +339,27 @@ def generate_one(bridge: FlowBridge, spec: dict, *, images: list[Path],
 
     time.sleep(SETTLE_AFTER_SUBMIT)
     deadline = time.time() + GENERATE_TIMEOUT
+    stills: list[str] = []
     while time.time() < deadline:
         left = int(deadline - time.time())
         bridge.set_status(stage="waiting for Flow to render",
                           detail=f"{label} — up to {left // 60}m {left % 60}s left")
-        new = _media_keys(bridge) - before
-        if new:
-            # If Flow emitted several at once (it sometimes returns variants),
-            # take the first — they are all this prompt's output.
-            return sorted(new)[0]
+        vids, stills = _new_media(bridge, before)
+        if vids:
+            # Several at once means Flow returned variants; they are all this
+            # prompt's output, so the first is as good as any.
+            return vids[0]
         time.sleep(POLL_EVERY)
+
+    if stills:
+        # The generation was accepted — a placeholder exists — but no playable
+        # clip ever appeared. Falling back to the still would download a picture
+        # named .mp4; saying so is more useful than either hanging or lying.
+        raise VeoError(
+            f"Flow queued {label} but never produced a playable clip within "
+            f"{GENERATE_TIMEOUT / 60:.0f} minutes — {len(stills)} placeholder(s) "
+            f"appeared and none became a video. Check the tab: a generation that "
+            f"fails part-way leaves its placeholder behind.")
     raise VeoError(
         f"Flow produced nothing for {label} within {GENERATE_TIMEOUT / 60:.0f} minutes. "
         f"Check the tab: a generation that failed its own safety or quota check "
@@ -277,15 +376,28 @@ def fetch(bridge: FlowBridge, key: str, dest: Path) -> Path:
     url = _media_url(bridge, key)
     name = f"{dest.stem}.mp4"
     bridge.set_status(stage="downloading", detail=name)
-    bridge.call("download", url=url, filename=inbox_rel(name), timeout=600)
+    got = bridge.call("download", url=url, filename=inbox_rel(name), timeout=600)
 
-    src = inbox_dir() / name
+    # Where the browser says it put the file beats where we asked it to. Chrome
+    # drops the subdirectory from `filename` some of the time — the same
+    # relative path landed in the inbox on one call and in ~/Downloads on the
+    # next — and waiting at the path we asked for turns a download that
+    # completed perfectly into "the download never landed".
+    candidates = []
+    if got.get("path"):
+        candidates.append(Path(got["path"]))
+    candidates += [inbox_dir() / name, DOWNLOAD_DIR / name]
+
+    src = None
     for _ in range(30):
-        if src.is_file() and settled(src):
+        src = next((c for c in candidates if c.is_file() and settled(c)), None)
+        if src is not None:
             break
         time.sleep(1.0)
-    else:
-        raise VeoError(f"the download never landed at {src}")
+    if src is None:
+        raise VeoError(
+            "the download never landed. Looked in:\n  "
+            + "\n  ".join(str(c) for c in candidates))
     dest.parent.mkdir(parents=True, exist_ok=True)
     shutil.move(str(src), str(dest))
     return dest
@@ -372,7 +484,9 @@ def run(project: str, part: int, *, attempts: int = MAX_ATTEMPTS,
                 b.set_status(run=root.name, scene=label, stage="writing the prompt")
                 print(f"\n=== {label} ===\n{beat['brief']}")
 
-                full = beat.get("presenter") == "hidden"
+                frame = veo_prompts.frame_of(beat)
+                green = veo_prompts.is_green(beat)
+                full = frame == "full"          # kept for clips_part<N>.json
 
                 # What this generation is built from. A standalone beat resolves
                 # to exactly what it always did — plate, no carry, no reference —
@@ -400,14 +514,14 @@ def run(project: str, part: int, *, attempts: int = MAX_ATTEMPTS,
                 spec = veo_prompts.write_prompt(
                     brief=beat["brief"], lines=lines, at=int(beat["at"]),
                     subject=meta.get("subject", ""), question=question,
-                    accuracy=accuracy, full_frame=full,
+                    accuracy=accuracy, frame=frame, green=green,
                     script=script, duration=GEN_SECONDS, provider=provider,
                     carried=carried, referenced=ref is not None,
                     previous=prev_spec, position=position)
 
                 history, clip, review, cont = [], None, None, None
                 for attempt in range(1, attempts + 1):
-                    bad = veo_prompts.audit(spec, carried=carried)
+                    bad = veo_prompts.audit(spec, carried=carried, green=green)
                     if bad:
                         # Fixed before a credit is spent: these are the failures
                         # we already know the shape of, so paying Veo to
@@ -418,15 +532,24 @@ def run(project: str, part: int, *, attempts: int = MAX_ATTEMPTS,
                         spec = veo_prompts.revise_prompt(spec, bad, provider=provider)
 
                     print(f"  attempt {attempt}/{attempts}: submitting")
-                    images = veo_sequence.uploads(plate=plate, reference=ref,
-                                               carry=carry.frame)
+                    # A keyed clip needs NO reference at all — no plate, and no
+                    # carry frame either, because continuity across a sequence
+                    # comes from compositing onto the same rendered background
+                    # rather than from Veo remembering anything. That removes the
+                    # upload-and-attach path, which is the most fragile thing in
+                    # this route and the source of most of its failures.
+                    images = ([] if green else
+                              veo_sequence.uploads(plate=plate, reference=ref,
+                                                   carry=carry.frame))
                     key = generate_one(b, spec, images=images, sel=sel, label=label)
                     dest = out_dir / f"part{part}_at{beat['at']:03d}_try{attempt}.mp4"
                     clip = fetch(b, key, dest)
 
                     b.set_status(stage="reviewing the frames", detail=dest.name)
                     review = veo_qc.review(clip, spec, work=work, brief=beat["brief"],
-                                           full_frame=full, provider=provider)
+                                           frame=frame,
+                                           plate=None if green else plate,
+                                           green=green, provider=provider)
                     review.update(attempt=attempt, clip=str(clip.relative_to(root)),
                                   at=int(beat["at"]), prompt=spec["prompt"],
                                   negative=spec.get("negative", ""))
@@ -478,9 +601,27 @@ def run(project: str, part: int, *, attempts: int = MAX_ATTEMPTS,
                 good = review.get("good_until")
                 b.set_status(stage="fitting the clip to the window", detail=label)
                 fitted = out_dir / f"part{part}_at{beat['at']:03d}.mp4"
+                # A LABEL THAT ASKS FOR A PAUSE TAKES ITS TIME FROM THE MOTION,
+                # not from the window: conform to what is left, then freeze. Fit
+                # the other way round and the conform speeds the freezes up
+                # along with everything else, undoing them. src/veo_holds.py.
+                try:
+                    holds = veo_holds.plan(beat, lines, start, end)
+                except ValueError as exc:
+                    print(f"  ⚠ {exc} — the pauses are dropped for this beat")
+                    holds = []
+                need = veo_holds.content_seconds(end - start, holds)
+                if holds:
+                    print(f"  {len(holds)} label pause(s): {need:.1f}s of motion "
+                          f"+ {sum(h['hold'] for h in holds):.1f}s frozen "
+                          f"= {end - start:.1f}s on screen")
                 try:
                     fit = veo_conform.conform(clip, fitted, good_until=good,
-                                              need=end - start, strategy=motion)
+                                              need=need, strategy=motion)
+                    if holds:
+                        veo_holds.apply_holds(fitted, holds,
+                                              fitted.with_name(fitted.stem + "_held.mp4"))
+                        fitted.with_name(fitted.stem + "_held.mp4").replace(fitted)
                     print(f"  fitted: {fit['had']}s generated, {fit['usable']}s usable"
                           + (f" ({fit['trimmed']}s of tail cut)" if fit["trimmed"] > 0.05
                              else "")
@@ -527,7 +668,7 @@ def run(project: str, part: int, *, attempts: int = MAX_ATTEMPTS,
                     # Stored project-relative, like `src`, so the project survives
                     # being moved or rendered on another machine.
                     a["png"] = str(Path(a["png"]).relative_to(root))
-                for bad in label_faults(labels, full=full):
+                for bad in label_faults(labels, frame=frame):
                     print(f"  ⚠ {bad}")
                 results.append({
                     "at": int(beat["at"]),
@@ -536,6 +677,7 @@ def run(project: str, part: int, *, attempts: int = MAX_ATTEMPTS,
                     "src": str(fitted.relative_to(root)),
                     "raw": str(clip.relative_to(root)),
                     "full": full,
+                    "frame": frame,
                     "labels": labels,
                     "fit": fit,
                     "verdict": review["verdict"],

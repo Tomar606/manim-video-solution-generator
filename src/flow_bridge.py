@@ -45,6 +45,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 PORT = int(os.environ.get("FLOW_BRIDGE_PORT", "8765"))
+EXPECTED_BUILD = 8       # must match BRIDGE_BUILD in flow/extension/background.js
 LONGPOLL = 25.0          # seconds a /job request parks before answering 204
 DOWNLOAD_DIR = Path(os.environ.get(
     "FLOW_DOWNLOAD_DIR", str(Path.home() / "Downloads"))).expanduser()
@@ -53,6 +54,12 @@ INBOX_NAME = "pyq_flow_inbox"       # a subfolder of DOWNLOAD_DIR, per Chrome's 
 
 class FlowError(RuntimeError):
     """The extension reported a failure, or never answered."""
+
+
+class StaleExtension(FlowError):
+    """The extension answered, but it is not the build this code was written
+    against. Deliberately a distinct type: `wait_for_worker` retries FlowError,
+    and retrying this one only delays the report."""
 
 
 @dataclass
@@ -144,7 +151,28 @@ class FlowBridge:
                         cmd.done.set()
                 self._send(200, {"ok": True})
 
-        self._httpd = ThreadingHTTPServer(("127.0.0.1", self.port), Handler)
+        class QuietServer(ThreadingHTTPServer):
+            """Same server, without the traceback for a dropped long poll.
+
+            The extension parks a GET /job for 25 seconds at a time, so its
+            connection is routinely still open when the service worker is
+            recycled or the tab is reloaded — and every one of those prints a
+            full ConnectionResetError traceback to stderr. Nothing is wrong and
+            nothing is lost: the worker reconnects on its next poll. But the
+            tracebacks land in the middle of a run's progress output and read
+            exactly like a crash, which is worse than useless during a stage
+            that legitimately takes twenty minutes.
+            """
+
+            def handle_error(self, request, client_address):
+                import sys as _sys
+                exc = _sys.exc_info()[1]
+                if isinstance(exc, (ConnectionResetError, BrokenPipeError,
+                                    ConnectionAbortedError)):
+                    return
+                super().handle_error(request, client_address)
+
+        self._httpd = QuietServer(("127.0.0.1", self.port), Handler)
         self._httpd.daemon_threads = True
         self._thread = threading.Thread(target=self._httpd.serve_forever,
                                         name="flow-bridge", daemon=True)
@@ -182,19 +210,79 @@ class FlowBridge:
         return c.result or {}
 
     def wait_for_worker(self, timeout: float = 60.0) -> dict:
-        """Block until the extension answers a ping, then report the Flow tab."""
+        """Block until the extension answers a ping, then report the Flow tab.
+
+        Also checks the build. An unpacked extension has no hot reload, and a
+        stale one does not announce itself — it fails later, somewhere else,
+        looking exactly like Flow having changed its UI. Saying so here costs
+        one comparison and has already saved two wrong investigations.
+        """
         deadline = time.time() + timeout
         last: Exception | None = None
         while time.time() < deadline:
             try:
-                return self.call("ping", timeout=min(20.0, deadline - time.time()))
+                info = self.call("ping", timeout=min(20.0, deadline - time.time()))
             except FlowError as e:
                 last = e
+                continue
+            # OUTSIDE the retry. A build mismatch is not a transient failure and
+            # retrying it just burns the timeout before reporting the one thing
+            # that was actually wrong.
+            got = info.get("build")
+            if got != EXPECTED_BUILD:
+                raise StaleExtension(
+                    f"the loaded extension is build {got!r} but this code expects "
+                    f"{EXPECTED_BUILD}. Reload it — chrome://extensions (or "
+                    f"brave://extensions) -> reload on the Flow bridge -> then "
+                    f"hard-reload the Flow tab. There is no hot reload, and a "
+                    f"stale build fails like a Flow redesign rather than like "
+                    f"stale code, so nothing below here is worth debugging until "
+                    f"the builds match.")
+            return info
         raise FlowError(
             "the PYQ Flow Bridge extension never answered.\n"
             "  1. chrome://extensions -> Developer mode -> Load unpacked -> flow/extension\n"
             "  2. open your Google Flow project in a tab (it may stay in the background)\n"
             f"  last error: {last}")
+
+    def set_prompt(self, text: str, *, selector: str = ".ProseMirror",
+                   timeout: float = 60.0) -> int:
+        """Put `text` in Flow's prompt box and prove it landed. Returns its length.
+
+        The extension's own set_prompt types into a Slate editor. Flow has since
+        migrated the prompt box to ProseMirror, and typing no longer lands: the
+        readback returns the PLACEHOLDER ("What do you want to create?", 27
+        chars) and the run aborts claiming the prompt did not land — which was
+        true, but for a reason the message did not name.
+
+        A paste event is the one insertion path both editors honour, so this
+        goes through `eval` and dispatches one. It also selects the existing
+        contents first, so a leftover prompt is REPLACED rather than appended;
+        appending silently generates from two prompts at once.
+        """
+        js_sel, js_txt = json.dumps(selector), json.dumps(text)
+        set_js = (
+            f"const el=document.querySelector({js_sel});"
+            "if(!el) return 'NO_EDITOR';"
+            "el.focus();"
+            "const s=window.getSelection(), r=document.createRange();"
+            "r.selectNodeContents(el); s.removeAllRanges(); s.addRange(r);"
+            "const dt=new DataTransfer(); dt.setData('text/plain', " + js_txt + ");"
+            "el.dispatchEvent(new ClipboardEvent('paste',"
+            "  {clipboardData:dt, bubbles:true, cancelable:true}));"
+            "return 'ok';"
+        )
+        if self.call("eval", expr=set_js, timeout=timeout)["value"] == "NO_EDITOR":
+            raise FlowError(f"set_prompt: no prompt box matched {selector!r} — "
+                            "Flow has moved it again; fix flow/selectors.json")
+        time.sleep(1.0)
+        read = f"const el=document.querySelector({js_sel}); return el?String(el.innerText.length):'0';"
+        got = int(self.call("eval", expr=read, timeout=timeout)["value"])
+        # Compare on a floor, not equality: the editor normalises whitespace and
+        # trailing newlines, so an exact match never holds.
+        if got < len(text) * 0.9:
+            raise FlowError(f"set_prompt: only {got} of {len(text)} chars landed")
+        return got
 
     def set_status(self, **kw) -> None:
         self.status.update(kw)

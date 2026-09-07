@@ -15,7 +15,10 @@ import sys
 from pathlib import Path
 
 DEV = re.compile(r"[ऀ-ॿ]")
-FIGURES = {"berkeley", "dry_cell", "boiling"}      # what actually exists
+FIGURES = {"berkeley", "dry_cell", "boiling", "daniell"}
+CELL_PARTS = {"zn_rod", "cu_rod", "bridge", "anode", "cathode", "anode2", "cathode2", "zn_sol", "cu_sol"}
+FLOWS = {"electrons", "zn_ions", "cu_ions", "no3", "k"}
+SHAPES = {"tetra", "octa"}      # what actually exists
 MOTIONS = {"one_way", "cyclic", "settling"}        # src/veo_conform.STRATEGIES
 MIN_GAP = 3                                        # captions between two beats
 
@@ -33,6 +36,16 @@ def check(root: Path, batch: str = "") -> list[str]:
     bad: list[str] = []
     pat = f"beats_b2_part[0-9].json" if batch == "b2" else "beats_part[0-9].json"
     meta = json.loads((root / "meta.json").read_text(encoding="utf-8"))
+    # THE MARKS STICKER IS NOT OPTIONAL. src/manim_helpers.py draws it on the
+    # question card's top-right corner, but only `if marks:` — so a meta.json
+    # without the field renders a card with no marks on it and nothing fails.
+    # Ten of the thirteen videos shipped that way before anyone noticed: the
+    # student picks what to revise by what the question is worth, so the number
+    # is part of the answer, not decoration. MP Board long-answer rows are 4.
+    if not meta.get("marks"):
+        bad.append("meta.json has no 'marks' — the question card renders "
+                   "without the marks sticker, and nothing downstream catches "
+                   "it. MP Board long-answer rows are 4")
     for bf in sorted(root.glob(pat)):
         part = bf.stem[-1]
         lf = root / f"lines_part{part}.json"
@@ -142,6 +155,35 @@ def check(root: Path, batch: str = "") -> list[str]:
                 if b.get("sequence") is not None and not isinstance(b["sequence"], str):
                     bad.append(f"{where}: 'sequence' must be a string id shared "
                                f"with the neighbouring video beats")
+                if b.get("layout", "panel") not in ("panel", "full"):
+                    bad.append(f"{where}: layout {b['layout']!r} is not 'panel' "
+                               f"or 'full' — tools/composite.py would silently "
+                               f"fall back to the full-bleed crop")
+
+                # LABEL PAUSES ARE CHECKED HERE, where it costs nothing. The
+                # window is fixed by the narration, so holds come OUT of the
+                # motion; ask for more freezing than the beat has and there is
+                # no clip left to show. src/veo.py raises on this, but only
+                # after every clip has been generated and paid for.
+                holds = [float(x.get("hold", 0) or 0)
+                         for x in (b.get("labels") or [])]
+                slot = b.get("seconds")
+                if any(0 < h < 0.25 for h in holds):
+                    bad.append(f"{where}: a label hold under 0.25s reads as a "
+                               f"stutter, not a pause")
+                if slot and sum(holds) >= float(slot):
+                    bad.append(f"{where}: label holds total {sum(holds):.1f}s but "
+                               f"the beat is {float(slot):.1f}s — no motion "
+                               f"would be left to hold")
+                if slot and float(slot) and sum(holds) > float(slot) * 0.6:
+                    print(f"   note: {where}: {sum(holds):.1f}s of the beat's "
+                          f"{float(slot):.1f}s is frozen — that is a still "
+                          f"picture with a pause in it more than an animation")
+                for x in (b.get("labels") or []):
+                    if x.get("hold") and x.get("at") is None:
+                        bad.append(f"{where}: a label with a 'hold' needs an "
+                                   f"'at' — without it the pause has no moment "
+                                   f"to land on")
 
             for r in b.get("reveal_at", []):
                 if int(r) >= len(L):
@@ -171,6 +213,15 @@ def check(root: Path, batch: str = "") -> list[str]:
                 if a < card_end:
                     bad.append(f"p{part}: presenter grows at {a}s while the "
                                f"card is up until {card_end:.1f}s")
+    # NO AI DASH ON SCREEN. Standing house style, broken repeatedly because
+    # nothing checked it — a dash arrives with a rewritten caption and nobody
+    # re-reads sixty strings. tools/dash_gate.py can also be run on its own.
+    try:
+        from dash_gate import check as _dash_check
+    except ImportError:                                   # running as a module
+        from tools.dash_gate import check as _dash_check
+    bad += _dash_check(root)
+
     return bad
 
 
