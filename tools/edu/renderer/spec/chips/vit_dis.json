@@ -1,0 +1,58 @@
+[
+ {
+  "slug": "d-k",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-02/assets/photos/dis-k.png",
+  "vit": "K",
+  "num": 1,
+  "tag": "खून का थक्का न जमना"
+ },
+ {
+  "slug": "d-a",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-02/assets/photos/dis-a.png",
+  "vit": "A",
+  "num": 2,
+  "tag": "रतौंधी"
+ },
+ {
+  "slug": "d-b12",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-02/assets/photos/dis-b12.png",
+  "vit": "B12",
+  "num": 3,
+  "tag": "प्रणाशी रक्ताल्पता"
+ },
+ {
+  "slug": "d-d",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-02/assets/photos/dis-d.png",
+  "vit": "D",
+  "num": 4,
+  "tag": "सूखा रोग — रिकेट्स"
+ },
+ {
+  "slug": "d-c",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-02/assets/photos/dis-c.png",
+  "vit": "C",
+  "num": 5,
+  "tag": "पायरिया — स्कर्वी"
+ },
+ {
+  "slug": "d-e",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-02/assets/photos/src-e.png",
+  "vit": "E",
+  "num": 6,
+  "tag": "बन्ध्यता"
+ },
+ {
+  "slug": "d-folic",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-02/assets/photos/dis-folic.png",
+  "vit": "B9",
+  "num": 7,
+  "tag": "अरक्तता"
+ }
+]

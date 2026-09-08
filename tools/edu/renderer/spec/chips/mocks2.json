@@ -1,0 +1,8 @@
+[
+ {"slug":"fe","photo":"/projects/sanksharan/assets/photos/rust-macro.png","cap":"इसका सबसे आसान उदाहरण है — लोहे में जंग लगना।","gold":"जंग","tag":"जंग = Fe₂O₃·xH₂O","el":"Fe"},
+ {"slug":"cu","photo":"/projects/sanksharan/assets/photos/noble-copper.png","cap":"कम क्रियाशील धातु पर संक्षारण धीरे होता है।","gold":"","tag":"ताँबा — कम क्रियाशील","el":"Cu"},
+ {"slug":"zn","photo":"/projects/sanksharan/assets/photos/galvanised.png","cap":"गैल्वेनीकरण — लोहे पर जिंक की तह चढ़ाई जाती है।","gold":"गैल्वेनीकरण","tag":"लोहे से अधिक क्रियाशील","el":"Zn"},
+ {"slug":"cr","photo":"/projects/sanksharan/assets/photos/chrome.png","cap":"विद्युत् प्लेटिंग — जिंक, निकिल या क्रोमियम की परत।","gold":"","tag":"क्रोमियम प्लेटिंग","el":"Cr"},
+ {"slug":"grease","photo":"/projects/sanksharan/assets/photos/grease.png","cap":"लोहे पर पेंट, ग्रीस या तेल की परत लगाकर।","gold":"ग्रीस","tag":"ग्रीस की परत"},
+ {"slug":"oil","photo":"/projects/sanksharan/assets/photos/oil-film.png","cap":"हवा और नमी से बचाना।","gold":"","tag":"तेल की परत"}
+]

@@ -41,7 +41,7 @@ for (const { id, t } of want) {
     document.body.style.background = '#000'; }, 'assets/chalk-background.png');
   await page.evaluate(t => window.RENDER.setTime(t), t);
   await page.waitForTimeout(350);
-  const f = `out/shot-${id}-${String(t).replace('.', '_')}.png`;
+  const f = `out/review/shot-${id}-${String(t).replace('.', '_')}.png`;
   await page.screenshot({ path: f });
   await page.close();
   out.push(f);

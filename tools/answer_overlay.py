@@ -46,7 +46,12 @@ import sys
 from pathlib import Path
 
 MIN_PAGE = 3.0          # a page shown for less than this cannot be read
-CUE = re.compile(r"स्क्रीन\s*पर\s*आ")
+# The cue is wherever the presenter hands the answer over. Two phrasings so far:
+# "इसका पूरा उत्तर आपकी स्क्रीन पर आ जाएगा", and — on the vitamins clips — "इसका
+# पूरा आंसर राइट साइड में दिये नोट्स बटन में मिल जाएगा". The second one points at
+# the notes button rather than the screen, but it is the same moment in the video:
+# he has finished teaching and is handing over the written answer.
+CUE = re.compile(r"स्क्रीन\s*पर\s*आ|नोट्स\s*बटन|आंसर\s+राइट\s*साइड")
 
 
 def _has_writing(path: Path, floor: float = 0.8) -> bool:

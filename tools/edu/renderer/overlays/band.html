@@ -1,0 +1,357 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>band chip</title>
+<!-- ONE BAND, TRANSPARENT: 1080x470, dropped at y=380 onto a finished video.
+     Same stylesheet, fonts and palette as the renderer, so a chip cannot drift
+     from the video it lands on. Nothing here is ever taller than the band --
+     its floor is y=850 and the presenter's head starts around y=1000.
+
+     ?mode=photo    &photo=/path &el=Fe &tag=... &num=1
+     ?mode=triptych &photos=a,b,c &tags=x,y,z &show=2   (fills in left to right)
+     ?mode=compare  &photos=a,b &els=Fe,Cu &verdict=...  (both, then the conclusion)
+     ?mode=equation &terms=धातु,गैसें,नमी &result=संक्षारण &show=2
+     ?mode=points   &title=... &items=a,b,c &show=2      (numbered 1 2 3)
+     ?mode=table    &head=a|b &rows=A|आँख;D|हड्डियाँ &show=3   (';' between rows)
+     ?mode=svg      &svg=assets/x.svg &hide=id1,id2 &labels=[[text,x,y],...] -->
+<link rel="stylesheet" href="../renderer/style.css">
+<style>
+  html,body{margin:0;padding:0;background:transparent}
+  #band{position:relative;width:1080px;height:540px;
+        font-family:Poppins,Mukta,sans-serif;color:var(--ink)}
+  .hide{display:none}
+
+  /* ---- a photograph, set as a specimen rather than a backdrop ---- */
+  #card{position:absolute;top:15px;left:50%;transform:translateX(-50%);
+        width:720px;height:440px;border-radius:22px;overflow:hidden;
+        box-shadow:0 18px 48px rgba(0,0,0,.75), 0 0 0 3px rgba(127,212,255,.55)}
+  #card img{width:100%;height:100%;object-fit:cover;display:block}
+  body.el #card{width:620px;left:56px;transform:none}
+  #tag{position:absolute;left:50%;transform:translateX(-50%);top:476px;
+       font-weight:800;font-size:40px;text-shadow:var(--shadow);white-space:nowrap}
+  body.el #tag{left:56px;width:620px;transform:none;text-align:center}
+  /* the factor/remedy this photograph belongs to, so the count is never lost */
+  /* z-index because the layout blocks come after it in the DOM: in compare
+     mode the pair painted straight over the badge and the digit vanished. */
+  #num{position:absolute;z-index:5;left:26px;top:30px;width:66px;height:66px;
+       border-radius:50%;background:var(--gold);color:#12283A;
+       font-weight:900;font-size:42px;line-height:66px;text-align:center;
+       box-shadow:0 8px 20px rgba(0,0,0,.6)}
+
+  /* ---- the element, drawn as the periodic table draws it ---- */
+  #tile{position:absolute;top:26px;left:730px;width:270px;height:300px;
+        border-radius:18px;background:rgba(127,212,255,.10);
+        border:4px solid #7FD4FF;box-shadow:0 14px 36px rgba(0,0,0,.7);
+        text-shadow:var(--shadow)}
+  #tile .z{position:absolute;left:0;top:10px;width:100%;text-align:center;
+           font-size:34px;font-weight:800;opacity:.9}
+  #tile .sym{position:absolute;left:0;top:62px;width:100%;text-align:center;
+             font-size:104px;font-weight:900;line-height:1}
+  #tile .nm{position:absolute;left:0;top:190px;width:100%;text-align:center;
+            font-size:38px;font-weight:800;line-height:1.12;padding:0 6px;
+            box-sizing:border-box}
+  #tile .ms{position:absolute;left:0;top:230px;width:100%;text-align:center;
+            font-size:28px;font-weight:700;opacity:.85}
+  #blk{position:absolute;left:730px;width:270px;top:340px;text-align:center;
+       font-weight:800;font-size:26px;color:#7FD4FF;text-shadow:var(--shadow);
+       white-space:nowrap}
+
+  /* ---- three photographs that fill in as they are named ---- */
+  #trip{position:absolute;top:20px;left:0;width:1080px;display:flex;
+        justify-content:center;gap:26px}
+  #trip .cell{width:330px}
+  #trip .cell.off{opacity:.16}
+  #trip .ph{width:330px;height:330px;border-radius:18px;overflow:hidden;
+            box-shadow:0 14px 36px rgba(0,0,0,.7), 0 0 0 3px rgba(127,212,255,.5)}
+  #trip .ph img{width:100%;height:100%;object-fit:cover;display:block}
+  #trip .cp{margin-top:14px;text-align:center;font-weight:800;font-size:34px;
+            text-shadow:var(--shadow)}
+
+  /* ---- two specimens judged against each other ----
+     A comparison needs both things in the eye at once, and the line underneath
+     is the CONCLUSION rather than two separate descriptions. Writing "अधिक
+     क्रियाशील" under one and "कम क्रियाशील" under the other made the student
+     hold two facts and do the comparing; the statement does it for them. */
+  #cmp{position:absolute;top:0;left:0;width:1080px;height:540px;
+       display:flex;flex-direction:column;align-items:center;gap:16px}
+  #cmp .pair{display:flex;gap:40px;margin-top:8px}
+  #cmp .one{width:470px}
+  #cmp .ph{width:470px;height:290px;border-radius:18px;overflow:hidden;
+           box-shadow:0 14px 36px rgba(0,0,0,.7), 0 0 0 3px rgba(127,212,255,.55)}
+  #cmp .ph img{width:100%;height:100%;object-fit:cover;display:block}
+  #cmp .mini{margin-top:12px;display:flex;align-items:center;justify-content:center;
+             gap:14px;border:3px solid #7FD4FF;border-radius:14px;
+             background:rgba(127,212,255,.10);padding:8px 16px}
+  #cmp .mini .z{font-size:26px;font-weight:800;opacity:.85}
+  #cmp .mini .sy{font-size:46px;font-weight:900;line-height:1}
+  #cmp .mini .nm{font-size:28px;font-weight:800}
+  #cmp .verdict{font-size:46px;font-weight:900;text-shadow:var(--shadow);
+                white-space:nowrap;color:var(--ink)}
+  #cmp .verdict b{color:var(--gold)}
+
+  /* ---- the definition, as a word equation ---- */
+  #eqn{position:absolute;top:0;left:0;width:1080px;height:540px;
+       display:flex;flex-direction:column;align-items:center;
+       justify-content:center;gap:30px}
+  #eqn .row{display:flex;align-items:center;gap:24px}
+  #eqn .term{padding:16px 30px;border-radius:16px;border:3px solid #7FD4FF;
+             background:rgba(127,212,255,.10);font-weight:800;font-size:46px;
+             text-shadow:var(--shadow)}
+  #eqn .op{font-weight:900;font-size:48px;color:#7FD4FF}
+  #eqn .res{padding:18px 44px;border-radius:16px;border:4px solid var(--gold);
+            background:rgba(255,197,61,.12);font-weight:900;font-size:56px;
+            color:var(--gold);text-shadow:var(--shadow)}
+  #eqn .down{font-size:52px;color:#7FD4FF;line-height:1}
+  .dim{opacity:.18}
+
+  /* ---- a counted list: DIGITS, because the numbering is part of the mark ---- */
+  #pts{position:absolute;top:0;left:0;width:1080px;height:540px;padding:0 90px;
+       box-sizing:border-box;display:flex;flex-direction:column;
+       justify-content:center;gap:22px}
+  #pts .h{font-weight:900;font-size:50px;color:var(--gold);
+          text-shadow:var(--shadow);margin-bottom:6px}
+  #pts .it{display:flex;align-items:center;gap:26px;font-weight:800;
+           font-size:48px;text-shadow:var(--shadow)}
+  #pts .n{flex:0 0 64px;height:64px;border-radius:50%;border:3px solid #7FD4FF;
+          color:#7FD4FF;font-weight:900;font-size:38px;line-height:58px;
+          text-align:center}
+
+  /* ---- the summary table ----
+     Seven pairs, filling in as he counts them off. Two columns because that is
+     the shape the student copies into the answer: the vitamin on the left, the
+     condition it prevents on the right. Rows not yet reached stay on screen but
+     quiet, so the whole map is visible while it is being filled. */
+  #tbl{position:absolute;top:0;left:0;width:1080px;height:640px;padding:14px 70px;
+       box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}
+  #tbl .hd{display:flex;font-weight:900;font-size:34px;color:var(--gold);
+           text-shadow:var(--shadow);padding:0 0 10px 0;
+           border-bottom:3px solid rgba(255,197,61,.55)}
+  #tbl .r{display:flex;align-items:center;font-weight:800;font-size:38px;
+          text-shadow:var(--shadow);padding:9px 0;
+          border-bottom:2px solid rgba(127,212,255,.22)}
+  #tbl .r:last-child{border-bottom:none}
+  #tbl .c1{flex:0 0 300px}
+  #tbl .c2{flex:1}
+  /* THREE columns and no more. Nine rows of four collided into each other and
+     wrapped -- and the per-vitamin frames already carry the disease, so the
+     table only has to close the gap the narration leaves: the sources. */
+  #tbl.wide .hd, #tbl.wide .r{font-size:31px}
+  #tbl.wide .r{padding:7px 0}
+  #tbl.wide .c1{flex:0 0 130px}
+  #tbl.wide .c2{flex:0 0 290px}
+  #tbl.wide .c3{flex:1}
+  #tbl .r.off{opacity:.22}
+  #tbl .v{color:#7FD4FF;font-weight:900}
+
+  /* ---- a definition, set as the line the student writes ----
+     Not a list: the exam answer is one sentence and breaking it into bullets
+     teaches them to write it as bullets. Clauses are separate lines only so it
+     can arrive a clause at a time. */
+  #def{position:absolute;top:0;left:0;width:1080px;height:540px;padding:0 80px;
+       box-sizing:border-box;display:flex;flex-direction:column;
+       justify-content:center;gap:14px}
+  #def .h{font-weight:900;font-size:40px;color:var(--gold);
+          text-shadow:var(--shadow);margin-bottom:8px}
+  #def .l{font-weight:800;font-size:44px;line-height:1.22;
+          text-shadow:var(--shadow)}
+
+  /* ---- two headed columns, for a classification ---- */
+  #cols{position:absolute;top:0;left:0;width:1080px;height:540px;padding:0 60px;
+        box-sizing:border-box;display:flex;align-items:center;gap:40px}
+  #cols .col{flex:1;border:3px solid #7FD4FF;border-radius:18px;
+             background:rgba(127,212,255,.08);padding:22px 20px}
+  #cols .ch{text-align:center;font-weight:900;font-size:38px;color:var(--gold);
+            text-shadow:var(--shadow);padding-bottom:14px;
+            border-bottom:2px solid rgba(255,197,61,.45);margin-bottom:16px}
+  #cols .ci{text-align:center;font-weight:800;font-size:56px;
+            text-shadow:var(--shadow);letter-spacing:1px}
+  #cols .col.off{opacity:.2}
+
+  /* ---- a diagram, with its labels placed as fractions of the band ---- */
+  #svg{position:absolute;left:0;top:0;width:1080px;height:470px}
+  #svg svg{width:100%;height:100%;overflow:visible}
+  .lbl{position:absolute;transform:translate(-50%,-50%);font-weight:800;
+       font-size:38px;text-shadow:var(--shadow);white-space:nowrap}
+</style>
+
+<div id="band">
+  <div id="card" class="hide"><img id="img"></div>
+  <div id="num" class="hide"></div>
+  <div id="tile" class="hide"><div class="z"></div><div class="sym"></div>
+       <div class="nm"></div><div class="ms"></div></div>
+  <div id="blk" class="hide"></div>
+  <div id="tag" class="hide"></div>
+  <div id="trip" class="hide"></div>
+  <div id="cmp" class="hide"></div>
+  <div id="eqn" class="hide"></div>
+  <div id="pts" class="hide"></div>
+  <div id="tbl" class="hide"></div>
+  <div id="def" class="hide"></div>
+  <div id="cols" class="hide"></div>
+  <div id="svg" class="hide"></div>
+</div>
+
+<script>
+const q = new URLSearchParams(location.search);
+const mode = q.get('mode') || 'photo';
+const $ = id => document.getElementById(id);
+const show = el => el.classList.remove('hide');
+const esc = s => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const list = k => (q.get(k) || '').split(',').filter(Boolean);
+
+// Every metal this answer names sits in the 3d row of period 4.
+const EL = {
+  Cr:[24,'क्रोमियम','52.00',6], Fe:[26,'लोहा','55.85',8], Ni:[28,'निकिल','58.69',10],
+  Cu:[29,'ताँबा','63.55',11],   Zn:[30,'जिंक','65.38',12],
+};
+// letter -> chemical name, solubility. The chemical name is the half students
+// drop, and it is exactly what "विटामिन्स क्या हैं" questions ask back.
+const VIT = {
+  A:   ['रेटिनॉल',        'वसा में विलेय'],
+  D:   ['कैल्सिफेरॉल',    'वसा में विलेय'],
+  E:   ['टोकोफेरॉल',      'वसा में विलेय'],
+  K:   ['फिल्लोक्विनोन',  'वसा में विलेय'],
+  C:   ['ऐस्कॉर्बिक अम्ल','जल में विलेय'],
+  B12: ['सायनोकोबालामिन', 'जल में विलेय'],
+  B9:  ['फोलिक अम्ल',     'जल में विलेय'],
+  B1:  ['थायमीन',         'जल में विलेय'],
+  B2:  ['राइबोफ्लेविन',   'जल में विलेय'],
+  B3:  ['निकोटिनिक अम्ल', 'जल में विलेय'],
+};
+
+let pending = 0;
+const track = img => { pending++; img.onload = img.onerror = () => {
+  if (--pending === 0) document.fonts.ready.then(() => { window.READY = true; }); }; };
+
+if (mode === 'photo') {
+  show($('card'));
+  const im = $('img'); track(im); im.src = q.get('photo');
+  const el = q.get('el');
+  if (el && EL[el]) {
+    const [z, nm, ms, g] = EL[el];
+    document.body.classList.add('el');
+    show($('tile')); show($('blk'));
+    $('tile').querySelector('.z').textContent = z;
+    $('tile').querySelector('.sym').textContent = el;
+    $('tile').querySelector('.nm').textContent = nm;
+    $('tile').querySelector('.ms').textContent = ms;
+    $('blk').textContent = `d-ब्लॉक · आवर्त 4 · वर्ग ${g}`;
+  }
+  const vit = q.get('vit');
+  if (vit && VIT[vit]) {
+    const [chem, sol] = VIT[vit];
+    document.body.classList.add('el');
+    show($('tile'));
+    $('tile').querySelector('.z').textContent = 'विटामिन';
+    $('tile').querySelector('.sym').textContent = vit;
+    $('tile').querySelector('.nm').textContent = chem;
+    $('tile').querySelector('.ms').textContent = '';
+    // the solubility strip is dropped: part 1 already teaches the classification
+    // as its own block, and repeating it under every disease was noise
+    void sol;
+  }
+  if (q.get('tag')) { show($('tag')); $('tag').textContent = q.get('tag'); }
+  if (q.get('num')) { show($('num')); $('num').textContent = q.get('num'); }
+
+} else if (mode === 'triptych') {
+  show($('trip'));
+  const ph = list('photos'), tg = list('tags'), n = Number(q.get('show') || ph.length);
+  $('trip').innerHTML = ph.map((p, i) =>
+    `<div class="cell${i < n ? '' : ' off'}"><div class="ph"><img src="${p}"></div>
+     <div class="cp">${esc(tg[i] || '')}</div></div>`).join('');
+  $('trip').querySelectorAll('img').forEach(track);
+
+} else if (mode === 'compare') {
+  show($('cmp'));
+  const ph = list('photos'), els = list('els');
+  const cell = (p, e) => {
+    const [z, nm] = EL[e] || [ '', e ];
+    return `<div class="one"><div class="ph"><img src="${p}"></div>
+      <div class="mini"><span class="z">${z}</span><span class="sy">${e}</span>
+      <span class="nm">${esc(nm)}</span></div></div>`;
+  };
+  $('cmp').innerHTML = `<div class="pair">${ph.map((p, i) => cell(p, els[i])).join('')}</div>
+    <div class="verdict">${(q.get('verdict') || '')
+        .replace(/</g, '&lt;').replace(/>/g, ' <b>&gt;</b> ')}</div>`;
+  $('cmp').querySelectorAll('img').forEach(track);
+  // The count carries across a comparison too: factors 2 and 3 wear their
+  // number, so factor 1 has to, or the list reads as starting at two.
+  if (q.get('num')) { show($('num')); $('num').textContent = q.get('num'); }
+
+} else if (mode === 'equation') {
+  show($('eqn'));
+  const t = list('terms'), n = Number(q.get('show') || t.length);
+  const row = t.map((x, i) =>
+    `<span class="term${i < n ? '' : ' dim'}">${esc(x)}</span>`).join('<span class="op">+</span>');
+  $('eqn').innerHTML = `<div class="row">${row}</div>
+    <div class="down${n > t.length ? '' : ' dim'}">⇓</div>
+    <div class="res${n > t.length ? '' : ' dim'}">${esc(q.get('result') || '')}</div>`;
+  document.fonts.ready.then(() => { window.READY = true; });
+
+} else if (mode === 'points') {
+  show($('pts'));
+  const it = list('items'), n = Number(q.get('show') || it.length);
+  $('pts').innerHTML = (q.get('title') ? `<div class="h">${esc(q.get('title'))}</div>` : '')
+    + it.map((x, i) => `<div class="it${i < n ? '' : ' dim'}">
+         <span class="n">${i + 1}</span><span>${esc(x)}</span></div>`).join('');
+  document.fonts.ready.then(() => { window.READY = true; });
+
+} else if (mode === 'table') {
+  show($('tbl'));
+  // the table is the one block that earns the taller band: the presenter's head
+  // on this clip starts at 1058, and 380 + 640 = 1020 still clears it
+  $('band').style.height = '640px';
+  // ROWS ARE SEPARATED BY ';', NOT ','. A source column reads "अंडा, दूध, मछली
+  // का तेल" and a comma separator split every one of those into its own row,
+  // which blew the row height and overflowed the band. Comma still works for
+  // specs that have no commas inside a cell.
+  const raw = q.get('rows') || '';
+  const rows = raw.split(raw.includes(';') ? ';' : ',')
+                  .filter(Boolean).map(r => r.split('|'));
+  const n = Number(q.get('show') || rows.length);
+  const hd = (q.get('head') || '').split('|');
+  if (hd.length > 2) $('tbl').classList.add('wide');
+  const cell = (t, i) => `<span class="c${i + 1}${i === 0 ? ' v' : ''}">${esc(t || '')}</span>`;
+  $('tbl').innerHTML =
+    `<div class="hd">${hd.map((h, i) => `<span class="c${i + 1}">${esc(h)}</span>`).join('')}</div>` +
+    rows.map((cols, i) => `<div class="r${i < n ? '' : ' off'}">` +
+      hd.map((_, j) => cell(cols[j], j)).join('') + `</div>`).join('');
+  document.fonts.ready.then(() => { window.READY = true; });
+
+} else if (mode === 'define') {
+  show($('def'));
+  const ls = (q.get('lines') || '').split('|').filter(Boolean);
+  const n = Number(q.get('show') || ls.length);
+  $('def').innerHTML = (q.get('title') ? `<div class="h">${esc(q.get('title'))}</div>` : '')
+    + ls.map((l, i) => `<div class="l${i < n ? '' : ' dim'}">${esc(l)}</div>`).join('');
+  document.fonts.ready.then(() => { window.READY = true; });
+
+} else if (mode === 'cols') {
+  show($('cols'));
+  const heads = (q.get('heads') || '').split('|');
+  const items = (q.get('items') || '').split('|');
+  const n = Number(q.get('show') || heads.length);
+  $('cols').innerHTML = heads.map((h, i) =>
+    `<div class="col${i < n ? '' : ' off'}"><div class="ch">${esc(h)}</div>
+     <div class="ci">${esc(items[i] || '')}</div></div>`).join('');
+  document.fonts.ready.then(() => { window.READY = true; });
+
+} else if (mode === 'svg') {
+  show($('svg'));
+  fetch('../' + q.get('svg')).then(r => r.text()).then(txt => {
+    $('svg').insertAdjacentHTML('afterbegin', txt);
+    for (const id of list('hide')) {
+      const el = $('svg').querySelector('#' + CSS.escape(id));
+      if (el) el.style.display = 'none';
+    }
+    for (const [text, x, y] of JSON.parse(q.get('labels') || '[]')) {
+      const d = document.createElement('div');
+      d.className = 'lbl'; d.textContent = text;
+      d.style.left = (x * 1080) + 'px'; d.style.top = (y * 470) + 'px';
+      $('band').appendChild(d);
+    }
+    document.fonts.ready.then(() => { window.READY = true; });
+  });
+}
+if (mode !== 'svg' && pending === 0 && !['equation', 'points', 'table', 'define', 'cols'].includes(mode))
+  document.fonts.ready.then(() => { window.READY = true; });
+</script>

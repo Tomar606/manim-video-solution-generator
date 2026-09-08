@@ -1,0 +1,160 @@
+[
+ {
+  "slug": "eq1",
+  "mode": "equation",
+  "terms": "धातु,गैसें,नमी",
+  "result": "संक्षारण",
+  "show": 1
+ },
+ {
+  "slug": "eq2",
+  "mode": "equation",
+  "terms": "धातु,गैसें,नमी",
+  "result": "संक्षारण",
+  "show": 2
+ },
+ {
+  "slug": "eq3",
+  "mode": "equation",
+  "terms": "धातु,गैसें,नमी",
+  "result": "संक्षारण",
+  "show": 3
+ },
+ {
+  "slug": "eq4",
+  "mode": "equation",
+  "terms": "धातु,गैसें,नमी",
+  "result": "संक्षारण",
+  "show": 4
+ },
+ {
+  "slug": "rust",
+  "mode": "photo",
+  "photo": "/projects/sanksharan/assets/photos/rust-macro.png",
+  "el": "Fe",
+  "tag": "जंग = Fe₂O₃·xH₂O"
+ },
+ {
+  "slug": "f1a",
+  "mode": "photo",
+  "photo": "/projects/sanksharan/assets/photos/reactive-iron.png",
+  "el": "Fe",
+  "tag": "अधिक क्रियाशील",
+  "num": 1
+ },
+ {
+  "slug": "f1b",
+  "mode": "photo",
+  "photo": "/projects/sanksharan/assets/photos/noble-copper.png",
+  "el": "Cu",
+  "tag": "कम क्रियाशील",
+  "num": 1
+ },
+ {
+  "slug": "f2",
+  "mode": "photo",
+  "photo": "/projects/sanksharan/assets/photos/pitting.png",
+  "tag": "अशुद्धि = स्थानीय सेल",
+  "num": 2
+ },
+ {
+  "slug": "f3",
+  "mode": "photo",
+  "photo": "/projects/sanksharan/assets/photos/salt-air.png",
+  "tag": "लवण + नमी",
+  "num": 3
+ },
+ {
+  "slug": "rec1",
+  "mode": "points",
+  "title": "तीन कारक",
+  "items": "धातु की प्रकृति,अशुद्धियाँ,वातावरण",
+  "show": 1
+ },
+ {
+  "slug": "rec2",
+  "mode": "points",
+  "title": "तीन कारक",
+  "items": "धातु की प्रकृति,अशुद्धियाँ,वातावरण",
+  "show": 2
+ },
+ {
+  "slug": "rec3",
+  "mode": "points",
+  "title": "तीन कारक",
+  "items": "धातु की प्रकृति,अशुद्धियाँ,वातावरण",
+  "show": 3
+ },
+ {
+  "slug": "bar1",
+  "mode": "triptych",
+  "photos": "/projects/sanksharan/assets/photos/paint-coat.png,/projects/sanksharan/assets/photos/grease.png,/projects/sanksharan/assets/photos/oil-film.png",
+  "tags": "पेंट,ग्रीस,तेल",
+  "show": 1
+ },
+ {
+  "slug": "bar2",
+  "mode": "triptych",
+  "photos": "/projects/sanksharan/assets/photos/paint-coat.png,/projects/sanksharan/assets/photos/grease.png,/projects/sanksharan/assets/photos/oil-film.png",
+  "tags": "पेंट,ग्रीस,तेल",
+  "show": 2
+ },
+ {
+  "slug": "bar3",
+  "mode": "triptych",
+  "photos": "/projects/sanksharan/assets/photos/paint-coat.png,/projects/sanksharan/assets/photos/grease.png,/projects/sanksharan/assets/photos/oil-film.png",
+  "tags": "पेंट,ग्रीस,तेल",
+  "show": 3
+ },
+ {
+  "slug": "galv",
+  "mode": "photo",
+  "photo": "/projects/sanksharan/assets/photos/galvanised.png",
+  "el": "Zn",
+  "tag": "लोहे से अधिक क्रियाशील",
+  "num": 2
+ },
+ {
+  "slug": "chrome",
+  "mode": "photo",
+  "photo": "/projects/sanksharan/assets/photos/chrome.png",
+  "el": "Cr",
+  "tag": "क्रोमियम की परत",
+  "num": 3
+ },
+ {
+  "slug": "epA",
+  "mode": "svg",
+  "svg": "assets/electroplating.svg",
+  "hide": "ep_ions,ep_deposit",
+  "labels": "[[\"ऐनोड (+)\", 0.135, 0.2], [\"कैथोड (−)\", 0.875, 0.2], [\"बैटरी\", 0.5, 0.045], [\"विद्युत्-अपघट्य\", 0.5, 0.945], [\"वस्तु\", 0.7, 0.885]]"
+ },
+ {
+  "slug": "epB",
+  "mode": "svg",
+  "svg": "assets/electroplating.svg",
+  "hide": "",
+  "labels": "[[\"ऐनोड (+)\", 0.135, 0.2], [\"कैथोड (−)\", 0.875, 0.2], [\"बैटरी\", 0.5, 0.045], [\"विद्युत्-अपघट्य\", 0.5, 0.945], [\"वस्तु\", 0.7, 0.885], [\"धातु आयन\", 0.25, 0.66]]"
+ },
+ {
+  "slug": "sum1",
+  "mode": "points",
+  "title": "तीन उपाय",
+  "items": "रोधिका,समर्पित बचाव,विद्युत् प्लेटिंग",
+  "show": 1
+ },
+ {
+  "slug": "sum2",
+  "mode": "points",
+  "title": "तीन उपाय",
+  "items": "रोधिका,समर्पित बचाव,विद्युत् प्लेटिंग",
+  "show": 2
+ },
+ {
+  "slug": "sum3",
+  "mode": "points",
+  "title": "तीन उपाय",
+  "items": "रोधिका,समर्पित बचाव,विद्युत् प्लेटिंग",
+  "show": 3
+ }
+]
