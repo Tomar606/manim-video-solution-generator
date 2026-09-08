@@ -77,6 +77,12 @@ JOBS = [
     ("projects/che-c4-la-02/manim_code/pyq.py",
      "projects/che-c4-la-02/manim_code/pyq_composed.py",
      "projects/faraday-electrolysis/script.md"),
+    ("projects/phy-c5-la-01/manim_code/pyq.py",
+     "projects/phy-c5-la-01/manim_code/pyq_composed.py",
+     "projects/faraday-electrolysis/script.md"),
+    ("projects/phy-c1-la-02/manim_code/pyq.py",
+     "projects/phy-c1-la-02/manim_code/pyq_composed.py",
+     "projects/faraday-electrolysis/script.md"),
 ]
 
 # A parenthesised import spans several lines; stripping only the first left the

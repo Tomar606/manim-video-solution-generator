@@ -94,11 +94,19 @@ def _chroma_literal(settings: RenderSettings) -> str:
     })
 
 
-def _asset_root() -> str:
-    """Project root, used by the scaffolding to resolve bundled assets
+def _asset_root_expr() -> str:
+    """Repo root, used by the scaffolding to resolve bundled assets
     (background artwork, fonts) regardless of where the composed scene file
-    ends up on disk."""
-    return str(Path(_helpers_file).resolve().parents[1])
+    ends up on disk.
+
+    This must be a RUNTIME expression, not a baked-in string: a compose-time
+    absolute path (e.g. computed from this process's cwd) is specific to the
+    machine that ran `recompose.py`, and silently wrong wherever the composed
+    file is actually rendered — a bind-mounted Docker container in particular,
+    since the host and container see the repo at different absolute paths.
+    Composed files live at <repo>/projects/<slug>/manim_code/<name>.py, three
+    directories below the repo root."""
+    return "str(__import__('pathlib').Path(__file__).resolve().parents[3])"
 
 
 def _images_literal(seg: DialogueSegment | None) -> str:
@@ -133,7 +141,7 @@ def build_header(script: VideoScript, seg: DialogueSegment | None = None,
         f"THEME = {_theme_literal(script)}\n"
         f'ORIENTATION = "{settings.orientation.value}"\n'
         f"CHROMA = {_chroma_literal(settings)}\n"
-        f"ASSET_ROOT = {_asset_root()!r}\n"
+        f"ASSET_ROOT = {_asset_root_expr()}\n"
         f"IMAGES = {_images_literal(seg)}\n"
         f"CUES_PATH = {cues_path or ''!r}\n\n"
     )

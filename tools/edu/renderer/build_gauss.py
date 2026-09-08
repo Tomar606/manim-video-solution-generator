@@ -49,10 +49,12 @@ P1 = [
              (53.1, "radius", "draw", 0.6),       # 52.702 "त्रिज्या r है"
          ],
          labels=[
-             (48.9, "q", 0.50, 0.36, None),
-             (50.5, "O", 0.50, 0.60, None),
-             (53.1, "r", 0.62, 0.40, None),
-             (56.6, "P", 0.72, 0.42, None),       # 56.164 "बिंदु P पर"
+             (48.9, "q", 0.500, 0.404, None),
+             (50.5, "O", 0.500, 0.596, None),
+             (53.1, "r", 0.419, 0.523, None),  # nudged off the radius line
+             # itself (qa.mjs's ON_LINE check caught it sitting on the line
+             # after the radius angle changed in the geometry fix)
+             (56.6, "P", 0.343, 0.683, None),      # 56.164 "बिंदु P पर"
          ]),
 
     # E at that point — cut to a clean equation-only frame
@@ -74,9 +76,14 @@ P1 = [
              (82.4, "dA_patch", "fade_in", 0.6),   # 81.866 "dS है"
          ],
          labels=[
-             (73.9, "E", 0.50, 0.045, None),
-             (82.4, "dS", 0.56, 0.34, None),
-             (94.2, "θ = 0°", 0.78, 0.13, None),  # 93.766 "zero degree"
+             (73.9, "E", 0.634, 0.026, None),
+             (82.4, "dS", 0.549, 0.177, None),
+             (94.2, "θ = 0°", 0.694, 0.319, None),  # 93.766 "zero degree" -- moved
+             # clear of the circle entirely (open canvas to its right) rather
+             # than threaded between the cone lines: any position "between"
+             # two converging lines is one geometry tweak away from landing
+             # back on one of them, which is exactly what happened here twice.
+             # Verified by qa.mjs's ON_LINE check, not by eye.
          ]),
 
     # wrap part 1, tee up part 2

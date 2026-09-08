@@ -1,8 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 480">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
   <!-- Arivihan diagram asset. RULES:
        1. No <text> anywhere. All wording comes from the segment spec.
        2. Every part that ever animates has an id.
-       3. data-optional = engine hides it unless the spec references it. -->
+       3. data-optional = engine hides it unless the spec references it.
+
+       Redrawn to match NCERT Physics Part 1, Figure 1.22 (flux through a
+       sphere enclosing a point charge q at its centre) instead of an
+       invented globe: one closed 2D surface (not a 3D wireframe globe),
+       one representative area element dS drawn as a cone with an
+       elliptical cap and dashed axis (not a flat floating square), one
+       outward field arrow E at that element (not eight radiating arrows),
+       and the radius r landing on its own point of the surface, distinct
+       from dS: same layout the book prints, traced from a scan at
+       projects/phy-c1-la-01/assets/figures/gauss_sphere_scan.png. -->
   <defs>
     <radialGradient id="gSphere" cx="38%" cy="30%">
       <stop offset="0%"  stop-color="#BDEBFF" stop-opacity=".55"/>
@@ -16,41 +26,67 @@
             markerWidth="5" markerHeight="5" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#7FD4FF"/>
     </marker>
+    <linearGradient id="gCone" x1="540" y1="235" x2="628" y2="108"
+                    gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E5A85" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#BFE6FF" stop-opacity=".75"/>
+    </linearGradient>
   </defs>
 
-  <!-- closed gaussian surface -->
+  <!-- closed gaussian surface: a flat shaded disc, the way the book draws
+       it, NOT a 3D wireframe globe with latitude/longitude rings. -->
   <g id="sphere" data-optional>
-    <circle cx="540" cy="240" r="172" fill="url(#gSphere)" stroke="#7FD4FF" stroke-width="4"/>
-    <ellipse cx="540" cy="240" rx="172" ry="46" fill="none"
-             stroke="#7FD4FF" stroke-width="2.5" stroke-opacity=".5"/>
-    <ellipse cx="540" cy="240" rx="46" ry="172" fill="none"
-             stroke="#7FD4FF" stroke-width="2.5" stroke-opacity=".28"/>
+    <circle cx="540" cy="235" r="165" fill="url(#gSphere)" stroke="#7FD4FF" stroke-width="3.5"/>
   </g>
 
   <!-- point charge at centre (the plus is a path, never a glyph) -->
   <g id="charge" data-optional>
-    <circle cx="540" cy="240" r="26" fill="url(#gCharge)"/>
-    <path d="M540 226 V254 M526 240 H554" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="540" cy="235" r="11" fill="url(#gCharge)"/>
+    <path d="M540 229 V241 M534 235 H546" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
   </g>
 
-  <!-- radius -->
-  <path id="radius" data-optional d="M540 240 L712 240"
-        stroke="#FFC53D" stroke-width="4" stroke-linecap="round" stroke-dasharray="0"/>
+  <!-- radius, landing on its own point of the surface (down-left),
+       distinct from the area element, exactly as Figure 1.22 separates
+       "a point on the surface" from "the area element at that point". -->
+  <path id="radius" data-optional d="M540 235 L393 310"
+        stroke="#FFC53D" stroke-width="4" stroke-linecap="round"/>
 
-  <!-- outward field lines -->
-  <g id="field" data-optional stroke="#7FD4FF" stroke-width="4" stroke-linecap="round"
-     marker-end="url(#arrow)" fill="none">
-    <path d="M540 240 L540 22"/>   <path d="M540 240 L540 458"/>
-    <path d="M540 240 L790 240"/>  <path d="M540 240 L290 240"/>
-    <path d="M540 240 L717 63"/>   <path d="M540 240 L363 63"/>
-    <path d="M540 240 L717 417"/>  <path d="M540 240 L363 417"/>
-  </g>
-
-  <!-- small area element on the surface -->
+  <!-- the area element dS: a narrow solid-angle cone from the centre to a
+       small patch of the surface (up-right), with an elliptical cap and a
+       dashed axis: the book's own way of drawing "a small area element",
+       not a flat square glued onto the sphere. -->
   <g id="dA_patch" data-optional>
-    <path d="M672 158 l52 -14 l14 52 l-52 14 z" fill="#FFC53D" fill-opacity=".85"
-          stroke="#FFE9A8" stroke-width="3"/>
-    <path d="M711 175 L790 96" stroke="#FFC53D" stroke-width="4"
-          marker-end="url(#arrow)" fill="none"/>
+    <!-- side-lines and cap land at ~0.93R, not R: the reference shows the
+         patch's own centre sitting slightly INSIDE the surface, with only
+         its outer sliver crossing the boundary. Centring it exactly on R
+         (the first draft's mistake) reads as the patch floating outside the
+         sphere instead of being a piece of it. Only the field vector (below)
+         starts from the true surface point, r=R. -->
+    <!-- solid cone BODY, not just its two edge lines: the reference draws
+         this as a shaded 3D cone/tube, and a bare wireframe (two strokes +
+         a hollow ring) read as thin and flat next to it. -->
+    <!-- r=148, not R=165: the cap must sit CLEARLY inside the surface (the
+         reference has it fully within the shaded disc, only the field
+         vector crosses the boundary) with real margin, not just barely
+         inside: the previous value left only ~1-2 units of clearance,
+         which a bug in the rotation sign then blew straight through. -->
+    <path d="M540 235 L653 139 L604 102 Z" fill="url(#gCone)" stroke="none"/>
+    <path d="M540 235 L653 139 M540 235 L604 102" stroke="#FFC53D" stroke-width="3"
+          stroke-linecap="round" fill="none"/>
+    <path d="M540 235 L622 129" stroke="#FFC53D" stroke-width="2.5"
+          stroke-linecap="round" stroke-dasharray="6 7" fill="none"/>
+    <!-- rotate(+34.6), not -34.6: SVG's rotate() turns CLOCKWISE for a
+         positive angle, opposite the counter-clockwise convention this
+         file's angles were measured in everywhere else. The negative sign
+         put the ellipse's LONG axis (rx=30) pointing mostly radially
+         instead of tangentially: that, not the center position, was why
+         it kept blowing out past the boundary through two prior fixes. -->
+    <ellipse cx="624" cy="113" rx="30" ry="12" transform="rotate(34.6 624 113)"
+             fill="#BFE6FF" fill-opacity=".8" stroke="#FFC53D" stroke-width="3"/>
   </g>
+
+  <!-- outward field vector at that same patch -->
+  <path id="field" data-optional d="M634 99 L685 25"
+        stroke="#7FD4FF" stroke-width="4" stroke-linecap="round"
+        marker-end="url(#arrow)" fill="none"/>
 </svg>

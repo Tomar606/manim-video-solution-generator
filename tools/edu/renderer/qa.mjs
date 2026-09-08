@@ -13,6 +13,13 @@
  *               (classic cause: its only action is `draw`)
  *   OVERFLOW    a label is wider/taller than the shape it sits in
  *   OVERLAP     two labels collide
+ *   ON_LINE     a label sits on top of drawn artwork (a circle, a cone edge,
+ *               an arrow) -- checked against the actual stroked path, not
+ *               its bounding box, since a diagonal line's bbox is mostly
+ *               empty space. This is DIFFERENT from OVERLAP (label vs label)
+ *               and shipped twice before this check existed, because moving
+ *               a label clear of every OTHER label says nothing about
+ *               whether it is still sitting on the diagram itself.
  *   OUTSIDE     a label leaves the stage, or anything crosses y=960
  *   EMPTY_BOX   a container shape sits empty for over 1.5 s while other
  *               labels are already up — looks broken on screen
@@ -85,10 +92,40 @@ for (const seg of specs) {
                  // a "container" is a big rounded shape meant to hold a label
                  box: (e.tagName === 'rect' || e.tagName === 'g') && r.width > 140 && r.height > 50 };
       }) : [];
+      // Sample points ALONG every visible stroke (not just its bbox) so a
+      // label can be checked against the line itself. A diagonal line's
+      // bounding box is mostly empty space, so bbox-vs-bbox here would miss
+      // real crossings and flag harmless nearby labels alike -- only actual
+      // points on the drawn path answer "does the label sit on the ink".
+      const strokePoints = [];
+      if (svg) {
+        for (const el of svg.querySelectorAll('path, line, polyline')) {
+          if (!vis(el)) continue;
+          if (!el.getAttribute('stroke') || el.getAttribute('stroke') === 'none') continue;
+          let len; try { len = el.getTotalLength(); } catch { continue; }
+          if (!len) continue;
+          // A label anchored AT a line's endpoint (E at an arrow's tip, dS at
+          // a cone's cap) is normal diagram labelling, not the bug -- only
+          // the MIDDLE of a line is artwork a label has no business crossing.
+          // Skip the outer 20% at each end so only interior hits count.
+          const n = Math.max(6, Math.min(40, Math.round(len / 8)));
+          for (let i = 0; i <= n; i++) {
+            const frac = i / n;
+            if (frac < 0.2 || frac > 0.8) continue;
+            const p = el.getPointAtLength(frac * len);
+            const svgRect = svg.getBoundingClientRect();
+            const ctm = el.getScreenCTM();
+            if (!ctm) continue;
+            const pt = svg.createSVGPoint(); pt.x = p.x; pt.y = p.y;
+            const screen = pt.matrixTransform(ctm);
+            strokePoints.push({ x: screen.x, y: screen.y });
+          }
+        }
+      }
       const caption = [...document.querySelectorAll('#caption .phrase')]
         .filter(vis).map(e => { const r = e.getBoundingClientRect();
           return { text: e.textContent, bottom: r.bottom, right: r.right, x: r.x }; });
-      return { t: time, labels, shapes, caption };
+      return { t: time, labels, shapes, caption, strokePoints };
     }, t));
   }
 
@@ -133,6 +170,21 @@ for (const seg of specs) {
                        l.y + l.h / 2 > s.y && l.y + l.h / 2 < s.bottom;
         if (inside && (l.w > s.w - 16 || l.h > s.h - 8))
           F(sid, 'OVERFLOW', `label "${l.text}" (${Math.round(l.w)}px) does not fit shape "${s.id}" (${Math.round(s.w)}px) at ${f.t}s`);
+      }
+    }
+    // ON_LINE: a label sitting on top of drawn artwork (a circle, a cone
+    // edge, an arrow shaft) reads as illegible even though it never
+    // collides with another LABEL -- the bug this exists for shipped twice
+    // because only label-vs-label was ever checked.
+    const PAD = 3;   // shrink the label box slightly; a stroke merely
+                     // grazing its edge is not the same as crossing the text
+    for (const l of f.labels) {
+      for (const p of f.strokePoints) {
+        if (p.x > l.x + PAD && p.x < l.right - PAD &&
+            p.y > l.y + PAD && p.y < l.bottom - PAD) {
+          F(sid, 'ON_LINE', `label "${l.text}" sits on top of drawn artwork at ${f.t}s`);
+          break;
+        }
       }
     }
     for (let i = 0; i < f.labels.length; i++)
