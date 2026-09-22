@@ -138,9 +138,8 @@ map_engine/output/
 map_engine/cache/
 map_engine/node_modules
 
-# Veo character kit: reference photos of a real person never go in a public repo
-# (veo_kit/SETUP.md, step 3), and generated clips are build output.
-assets/character/**/*.png
-assets/character/**/*.jpg
-assets/character/**/*.jpeg
+# Veo character kit: generated clips are build output, and the contact sheets
+# make_refset.py writes beside the references are for looking at, not keeping.
 veo_kit/example/*/clips/
+assets/character/**/_sheet.png
+assets/character/**/_chest_*.png

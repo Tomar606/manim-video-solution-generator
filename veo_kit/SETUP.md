@@ -29,9 +29,10 @@ a wasted afternoon:
    A measurement in a generation prompt gets drawn. The aspect is set in Flow's
    settings, and the prompt says "a tall vertical frame".
 6. **Spoken lines hold no digits.** Write "दो हज़ार पच्चीस", never "2025".
-7. **The reference photos are never committed.** The repo is public and they
-   are photographs of a real person. `.gitignore` covers
-   `assets/character/**/*.png|jpg|jpeg`; keep it that way.
+7. **The reference photos are the only ones to use.** They are committed in
+   `assets/character/` so every machine attaches the identical set. Do not
+   swap in other photos of him ad hoc; rebuild the set with `make_refset.py`
+   and check it (Step 3), or the face gate and the clips drift apart.
 8. **Every clip goes through `face_gate.py` and `speech_qc.py`** before anyone
    uses it. A clip that passes its own look can still show a different man.
 9. **Queue two test scenes before a whole video.** Each clip costs credits
@@ -68,7 +69,7 @@ outside the kit, used by it:
   flow/selectors.json every Flow UI selector in one file
   src/flow_bridge.py  the Python half of the bridge (stdlib only), port 8765
   tools/flow_probe.py free step-by-step check of the bridge
-  assets/character/   reference photos (NOT in git) + ritesh.md (his looks, measured)
+  assets/character/   reference photos (both sets) + ritesh.md (his looks, measured)
   docs/veo-prompt-research.md   why the prompts look the way they do, with sources
 ```
 
@@ -122,13 +123,11 @@ The kit needs, for each presenter:
 | `assets/character/refset/ritesh_ref_{1_front_face,2_turned,3_waist_up}.png` | landscape set, 1920x1080 |
 | `assets/character/refset_vertical/ritesh_vref_{1_front_face,2_turned,3_waist_up}.png` | vertical set, 1080x1920 |
 
-They are **not in git**. There are two ways to get them.
+**They are in the repo**, so after cloning there is nothing to fetch: go
+straight to the check at the end of this step.
 
-**A. From the team.** Ask for the reference-image zip and unpack it at the repo
-root so the paths above exist.
-
-**B. Rebuild them from a HeyGen take.** Any green-screen HeyGen clip of him
-works. The set in use was made from `inbox/che-c3-sa-10/heygen_full.mp4`, and
+**Rebuilding them** (for a new presenter, or a better take). Any green-screen
+HeyGen clip of him works. The set in use was made from `inbox/che-c3-sa-10/heygen_full.mp4`, and
 `characters/ritesh.json` records exactly how (the `source` block):
 
 ```bash
@@ -155,10 +154,10 @@ What the builder does, and why:
 - It gives the two sets **different filenames**. Flow attaches uploads by name,
   so two sets with the same names in one project would be a coin flip.
 
-**Check:** open `assets/character/refset/_sheet.png` and
-`assets/character/refset_vertical/_sheet.png`. You should see three views of
-him on grey, with no lettering or badge on the shirt. Then score each image
-against the face photo:
+**Check:** look at the six images (after a rebuild, `make_refset.py` also
+writes a `_sheet.png` contact sheet beside each set). You should see three
+views of him on grey, with no lettering or badge on the shirt. Then score each
+image against the face photo:
 
 ```bash
 .venv-tools/bin/python - <<'PY'

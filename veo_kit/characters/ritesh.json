@@ -2,10 +2,9 @@
  "_comment": [
   "One presenter, everything the kit needs to generate him and to check the result.",
   "",
-  "PATHS ARE REPO-RELATIVE and the images are NOT in git: the repo is public, and",
-  "these are photographs of a real person. Get them from the team's shared folder,",
-  "or rebuild them from any HeyGen green-screen take with make_refset.py (the",
-  "`source` block below is exactly how the current set was made).",
+  "PATHS ARE REPO-RELATIVE. The images are committed; rebuild them from any HeyGen",
+  "green-screen take with make_refset.py (the `source` block below is exactly how",
+  "the current set was made).",
   "",
   "FILENAMES MUST DIFFER between the two sets. Flow attaches an upload BY NAME,",
   "so a landscape and a vertical file with the same name in one Flow project is a",

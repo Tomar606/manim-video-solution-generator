@@ -103,7 +103,7 @@ def main() -> int:
     refs = [fk.ROOT / p for p in ch["refs"][a.aspect]]
     missing = [str(p.relative_to(fk.ROOT)) for p in refs if not p.is_file()]
     if missing:
-        print("  missing reference images (they are not in git — SETUP.md step 3):")
+        print("  missing reference images (SETUP.md step 3):")
         for m in missing:
             print(f"    {m}")
         return 1

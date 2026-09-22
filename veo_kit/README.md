@@ -6,7 +6,7 @@ automatically.
 
 **Start with [SETUP.md](SETUP.md).** It is written so that a Claude Code
 instance on a fresh machine can set everything up and run it: prerequisites,
-the Chrome extension, the reference images (not in git), prompt rules,
+the Chrome extension, the reference images, prompt rules,
 generating, downloading, QC and troubleshooting.
 
 The short version, once set up:

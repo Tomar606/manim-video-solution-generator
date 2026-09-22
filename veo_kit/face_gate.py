@@ -139,7 +139,7 @@ def main() -> int:
     if a.min is None:
         a.min = floor
     if not reference.is_file():
-        print(f"  ! no reference at {reference} — the photos are not in git; "
+        print(f"  ! no reference at {reference} — "
               f"see veo_kit/SETUP.md, step 3")
         return 1
     ref = embed(Image.open(reference))
