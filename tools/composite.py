@@ -122,6 +122,13 @@ VEO_FADE = 0.30                    # softens the two cuts; cheap, unlike a blend
 # be re-rendered exactly as it shipped by setting "layout": "full" on the beat.
 DEFAULT_VEO_LAYOUT = "panel"
 
+# The key for a clip GENERATED on chroma, as opposed to the presenter's, which
+# is measured per shoot by tools/calibrate_key.py. Veo is asked for one flat
+# even #00B140 with no lighting falloff and it delivers exactly that, so there
+# is nothing to calibrate against — a fixed key is honest here in a way it
+# would not be for a real green screen lit by a real lamp.
+DEFAULT_VEO_KEY = {"hue": 141.7, "sat": 0.55, "v1": 0.30, "v2": 0.95, "sim": 0.28}
+
 
 def _ease_expr(windows, var="t") -> str:
     """0 outside every window, 1 inside, easing across EASE seconds at each edge.
@@ -172,9 +179,18 @@ def _veo_chain(clips, first_input):
             # torn-paper divider closing the bottom of it. See src/panel_layout.
             g = c["panel"]
             gw, gh, gx, gy = g["crop"]
+            # A PORTRAIT GENERATION NARROWS THE PANEL instead of being cropped
+            # to a letterbox (see src/panel_layout.geometry). It is scaled to the
+            # band's height and padded out to the full width with transparency,
+            # so everything downstream — the mask, the divider, the labels —
+            # still works on a 1080-wide plane and needs no special case.
+            pad = ("" if g["panel_w"] >= PL.FRAME_W else
+                   f"pad={PL.FRAME_W}:{g['panel_h']}:{g.get('panel_x', 0)}:0"
+                   f":color=black@0,")
             parts.append(
                 f"[{n}:v]fps={FPS},crop={gw}:{gh}:{gx}:{gy},"
                 f"scale={g['panel_w']}:{g['panel_h']}:flags=lanczos,format=rgba,"
+                f"{pad}"
                 f"tpad=start_duration={start:.2f}:start_mode=add:color=black@0,"
                 f"split=2[pc{i}][pm{i}];")
             # THE MASK IS BUILT ON ONE ROW AND STRETCHED.
@@ -189,11 +205,47 @@ def _veo_chain(clips, first_input):
             # same output for ~1/800th of the work.
             parts.append(
                 f"[pm{i}]crop={PL.FRAME_W}:1:0:0,format=gray,"
-                f"geq=lum='255*{PL.wipe_expr(start, end, PL.LEAD)}',"
+                f"geq=lum='255*{PL.wipe_expr(start, end, PL.LEAD)}"
+                f"*{PL.side_expr(g)}',"
                 f"scale={PL.FRAME_W}:{g['panel_h']}:flags=neighbor,setsar=1[pw{i}];")
             parts.append(f"[{n + 1}:v]format=gray,setsar=1[pf{i}];")
             parts.append(f"[pw{i}][pf{i}]blend=all_mode=multiply:shortest=1[pk{i}];")
-            parts.append(f"[pc{i}][pk{i}]alphamerge[vc{i}];")
+
+            # A GREEN-SCREEN CLIP IS KEYED, AND ITS KEY IS MULTIPLIED IN.
+            #
+            # A beat generated on chroma carries no background of its own: what
+            # goes behind it is the plate this very render already drew, which
+            # is a better match than any uploaded reference because it IS the
+            # same pixels. It also removes the upload-and-attach path, the most
+            # fragile thing in the Flow route.
+            #
+            # `alphamerge` REPLACES alpha, so keying and then alphamerging would
+            # throw the key away and put the green back. The two have to be
+            # multiplied: the clip is transparent where the key says green OR
+            # where the rip has not arrived. Same two-threshold idiom as the
+            # presenter, and despill on the colour branch only — despilling
+            # before the key turns the screen brown and hsvkey then finds
+            # nothing to remove.
+            mask = f"pk{i}"
+            if c.get("green"):
+                gk = c.get("key") or DEFAULT_VEO_KEY
+                vk = (f"hsvkey=hue={gk['hue']}:sat={gk['sat']}:val=%s:"
+                      f"similarity={gk['sim']}:blend=0.05,format=rgba,alphaextract")
+                parts.append(f"[pc{i}]split=3[pcc{i}][pv1{i}][pv2{i}];")
+                parts.append(f"[pv1{i}]{vk % gk['v1']}[pa1{i}];")
+                parts.append(f"[pv2{i}]{vk % gk['v2']}[pa2{i}];")
+                parts.append(
+                    f"[pa1{i}][pa2{i}]blend=all_mode=darken,"
+                    f"eq=contrast=2.2:brightness=-0.10,gblur=sigma=1.0,"
+                    f"setsar=1[pga{i}];")
+                parts.append(
+                    f"[pga{i}][pk{i}]blend=all_mode=multiply:shortest=1[pkm{i}];")
+                parts.append(
+                    f"[pcc{i}]despill=type=green:mix=0.7:expand=0.5[pcd{i}];")
+                mask = f"pkm{i}"
+                parts.append(f"[pcd{i}][{mask}]alphamerge[vc{i}];")
+            else:
+                parts.append(f"[pc{i}][{mask}]alphamerge[vc{i}];")
             parts.append(
                 f"{base}[vc{i}]overlay=x=0:y={g['top']}:"
                 f"enable='between(t,{start:.2f},{end:.2f})':"
@@ -412,6 +464,22 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
     # to `pad` an image to smaller than itself. Derive it instead.
     # the shift, expressed in OUTPUT pixels at the working scale
     dx_out = int(round(dx_src * (FULL_W_C * pad_k) / max(cw, 1)))
+    # THE SAME SHIFT AT THE CANVAS'S OWN SCALE.
+    #
+    # dx_out is the correction in OUTPUT pixels at FULL size, and the overlay
+    # adds it as a constant. That is exact at full size and wrong at every other
+    # zoom: zoompan scales about the canvas centre, so the body's offset from
+    # that centre scales with `zoom` while a constant correction does not. The
+    # presenter therefore drifts sideways exactly when he shrinks — measured at
+    # 42px left of centre on CHE-C2-SA-03 while he was at 292px wide, and
+    # invisible on CHE-C2-SA-01 only because that take is already centred and
+    # its dx_src is near zero.
+    #
+    # The fix is to stop correcting at the overlay and correct in the PAD: shift
+    # the avatar inside its canvas so the BODY sits on the canvas centre. Zoom
+    # then preserves the centring for free at every level, and the overlay goes
+    # back to a plain (W-w)/2.
+    dx_canvas = int(round(dx_src * (SMALL_W_C * pad_k) / max(cw, 1)))
     base_w = int(SMALL_W_C * pad_k)
     base_h = int(ch * base_w / max(cw, 1))
     # zoompan MAGNIFIES A REGION of the canvas — anything outside that region is
@@ -526,7 +594,7 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
         # level, using nothing but `zoom` itself. There is no second clock left
         # to drift against, so the overlay below can place this canvas with a
         # plain constant instead of a per-frame expression.
-        pan = (f"pad={canvas_w}:{canvas_h}:(ow-iw)/2:(oh-ih):%s,"
+        pan = (f"pad={canvas_w}:{canvas_h}:(ow-iw)/2+({dx_canvas}):(oh-ih):%s,"
                f"zoompan=z='{z}':d=1:s={canvas_w}x{canvas_h}:fps={FPS}"
                f":x='iw/2-(iw/zoom/2)':y='ih-ih/zoom'")
         fc = (head +
@@ -540,7 +608,9 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
               # by construction (see `pan`, above) — so anchoring it to the
               # frame's bottom is a plain constant, evaluated once, not a
               # per-frame expression with a clock that could drift.
-              f"[bg][av]overlay=x=(W-w)/2+({dx_out}):y={FRAME_H - canvas_h}:"
+              # no dx here: the body is already on the canvas's centre line,
+              # so this is a plain centre at every zoom level
+              f"[bg][av]overlay=x=(W-w)/2:y={FRAME_H - canvas_h}:"
               f"eval=init:eof_action=pass,format=yuv420p[v]")
 
     else:
@@ -645,11 +715,24 @@ def load_clips(path, root=None):
         for lab in c.get("labels") or []:
             labels.append(dict(lab, png=root / lab["png"]))
         rec = dict(c, path=root / c["src"], labels=labels)
+        rec["green"] = bool(c.get("green"))
         if rec.get("layout", DEFAULT_VEO_LAYOUT) == "panel":
             # Derived from the CLIP, here rather than at generation time, so a
             # clips_part file written before this existed still works and a clip
             # regenerated at a different size is laid in correctly.
-            rec["panel"] = PL.geometry(*_dims(rec["path"]))
+            # `panel_ar`/`panel_top` are per-beat because the caption band is
+            # a property of the renderer underneath. The Manim template's
+            # caption ends high enough for the 84px default; the HTML band
+            # renderer's runs to y=252, and a panel there has to start below it
+            # or it wipes the line the student is reading.
+            kw = {}
+            if rec.get("panel_ar"):
+                kw["panel_ar"] = float(rec["panel_ar"])
+            if rec.get("panel_top") is not None:
+                kw["top_margin"] = int(rec["panel_top"])
+            if rec.get("panel_crop"):
+                kw["crop"] = tuple(rec["panel_crop"])
+            rec["panel"] = PL.geometry(*_dims(rec["path"]), **kw)
             rec["tear"] = PL.tear(rec["panel"]["seam"])
             rec["tear_band"] = PL.tear_band(rec["panel"]["seam"])
             rec["fade"] = PL.fade_mask(rec["panel"]["panel_h"])

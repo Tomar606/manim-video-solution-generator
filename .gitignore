@@ -35,14 +35,24 @@ projects/*/avatar/*.webm
 projects/*/assets/_cache/
 media/
 
-# Sound effects are synthesized locally (video sfx) — deterministic, so there's
-# nothing to gain from committing the binaries.
-assets/sfx/
-
 *.mp4
 *.mp3
 *.wav
 !projects/*/assets/**
+
+# THE SOUND LIBRARY IS COMMITTED (assets/sfx/README.md). It used to be ignored
+# as "synthesized locally, deterministic" — but the live sounds are now supplied
+# recordings and curated picks (the page swoosh, the camera shutter), which
+# nothing can regenerate. Only the synth defaults src/sfx.py rebuilds on demand,
+# and the rejected files, stay out.
+!assets/sfx/**/*.wav
+assets/sfx/_rejected/*.wav
+assets/sfx/*.bak
+assets/sfx/pop.wav
+assets/sfx/ding.wav
+assets/sfx/click.wav
+assets/sfx/write.wav
+assets/sfx/reveal.wav
 
 # IDE
 .vscode/

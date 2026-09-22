@@ -51,19 +51,86 @@ SOFT = 26               # px of softness on the travelling edge
 OVER = 40               # px the finished wipe reaches PAST the frame edge
 
 
+SIDE_FADE = 80          # px each side, where a NARROW panel meets the plate
+
+
 def geometry(clip_w: int, clip_h: int, *, panel_ar: float = PANEL_AR,
-             top_margin: int = TOP_MARGIN) -> dict:
-    """Where everything sits, derived from the clip's own size."""
+             top_margin: int = TOP_MARGIN, crop: tuple | None = None) -> dict:
+    """Where everything sits, derived from the clip's own size.
+
+    A PORTRAIT GENERATION DOES NOT GET CROPPED TO A LETTERBOX. Flow offers 16:9
+    and 9:16, and which one comes back is not always the one the prompt asked
+    for — the raisin clip was ordered 16:9 and arrived 720x1280. Cropping that
+    centred to a full-width 16:9 panel keeps a 720x404 strip: 68% of the picture
+    thrown away, and the tumbler cut through its rim and its base, which is
+    exactly the failure this module was written to stop.
+
+    So when the clip is TALLER than the panel's aspect, the panel narrows
+    instead. The clip is fitted to the band's height, centred, and `panel_x`
+    says where it starts; the divider and the top dissolve stay full width,
+    because they belong to the FRAME and not to the picture. A narrow panel has
+    two side edges a full-width one does not, so `SIDE_FADE` ramps them into the
+    plate — without it the clip's own ground meets ours at a hard vertical line.
+
+    `crop` is an explicit (x, y, w, h) into the source, for trimming dead space
+    a generation left around the subject. It is given per beat rather than
+    guessed, because "empty" is a judgement about the picture.
+    """
     panel_h = int(round(FRAME_W / panel_ar)) // 2 * 2
-    # centred crop of the generation down to the panel's aspect
-    src_w = min(clip_w, int(round(clip_h * panel_ar))) // 2 * 2
-    src_h = min(clip_h, int(round(clip_w / panel_ar))) // 2 * 2
+    if crop:
+        cx, cy, cw, ch = (int(v) for v in crop)
+    else:
+        cx = cy = 0
+        cw, ch = clip_w, clip_h
+    if cw * panel_h >= ch * FRAME_W:
+        # WIDE ENOUGH: fill the frame's width and take a centred crop down to
+        # the panel's aspect, which is the original behaviour.
+        src_w = min(cw, int(round(ch * panel_ar))) // 2 * 2
+        src_h = min(ch, int(round(cw / panel_ar))) // 2 * 2
+        return {
+            "panel_w": FRAME_W, "panel_h": panel_h, "panel_x": 0,
+            "top": top_margin, "seam": top_margin + panel_h,
+            "crop": (src_w, src_h, cx + (cw - src_w) // 2, cy + (ch - src_h) // 2),
+            "fade": TOP_FADE, "side_fade": 0,
+        }
+    # TALLER THAN THE BAND: keep the whole picture and narrow the panel.
+    panel_w = max(2, int(round(panel_h * cw / ch)) // 2 * 2)
     return {
-        "panel_w": FRAME_W, "panel_h": panel_h,
+        "panel_w": panel_w, "panel_h": panel_h,
+        "panel_x": (FRAME_W - panel_w) // 2,
         "top": top_margin, "seam": top_margin + panel_h,
-        "crop": (src_w, src_h, (clip_w - src_w) // 2, (clip_h - src_h) // 2),
-        "fade": TOP_FADE,
+        "crop": (cw // 2 * 2, ch // 2 * 2, cx, cy),
+        "fade": TOP_FADE, "side_fade": min(SIDE_FADE, panel_w // 3),
     }
+
+
+def plate_band(plate: Path, g: dict, gen_w: int = 1920) -> Path:
+    """The part of the background plate a PANEL clip is generated on.
+
+    src/veo.py uploads the plate so the clip is built on the same picture Manim
+    renders and can be cut into the middle of it invisibly. Under `full` that is
+    the whole portrait plate, because the generated frame IS the video frame.
+    Under `panel` it is not: the clip occupies rows `top`..`seam` and is
+    generated in landscape, so uploading the portrait plate hands Veo a picture
+    of a different shape showing mostly parts of the frame the clip never
+    covers — and Flow fits it to the generation however it likes.
+
+    So the band is cut out and scaled to the generation's size. The round trip
+    (up here, back down in the compositor) costs a little grain and nothing
+    else: the band is already the panel's aspect, and the panel's only hard
+    edges are the frame's own sides.
+    """
+    from PIL import Image
+    out = Path("assets/backgrounds/panel") / (
+        f"{Path(plate).stem}_{g['top']}_{g['panel_h']}_{gen_w}.png")
+    if out.is_file():
+        return out
+    out.parent.mkdir(parents=True, exist_ok=True)
+    im = Image.open(plate).convert("RGB")
+    band = im.crop((0, g["top"], im.width, g["top"] + g["panel_h"]))
+    gen_h = int(round(gen_w * g["panel_h"] / g["panel_w"])) // 2 * 2
+    band.resize((gen_w, gen_h), Image.LANCZOS).save(out)
+    return out
 
 
 def avatar_limits(paper_bottom: int) -> tuple[int, int]:
@@ -124,3 +191,19 @@ def wipe_expr(start: float, end: float, lead: int = 0) -> str:
     span = FRAME_W + lead + OVER
     return (f"clip((({span}*{draw})-{lead}-X)/{SOFT},0,1)"
             f"*clip((X-(({span}*{erase})-{lead}))/{SOFT},0,1)")
+
+
+def side_expr(g: dict) -> str:
+    """Alpha multiplier for a NARROW panel's two side edges, in geq's X.
+
+    Zero outside the panel, ramping in over `side_fade` px each side. A
+    full-width panel has no such edges and returns a constant 1, so the caller
+    does not have to care which kind it has. Like the rip this is a function of
+    X alone, so it multiplies into the same one-row mask and costs nothing.
+    """
+    f = int(g.get("side_fade") or 0)
+    if not f:
+        return "1"
+    x0 = int(g.get("panel_x", 0))
+    x1 = x0 + int(g["panel_w"])
+    return f"clip((X-{x0})/{f},0,1)*clip(({x1}-X)/{f},0,1)"

@@ -30,7 +30,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageChops, ImageFilter
 
-SRC = Path("assets/dividers/paper_tear_texture.jpg")
+SRC = Path("assets/transitions/divider/paper_tear_texture.jpg")
 W, H = 1080, 1920
 UPSCALE = 1.30          # so the fibre detail still reads at 1080 wide
 TONE = (244, 241, 232)  # warm off-white; pure white glares against the plate

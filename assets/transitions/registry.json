@@ -1,0 +1,8 @@
+{
+ "divider": {
+  "use": "the edge between an animation panel and the presenter",
+  "files": [
+   "assets/transitions/divider/paper_tear_texture.jpg"
+  ]
+ }
+}

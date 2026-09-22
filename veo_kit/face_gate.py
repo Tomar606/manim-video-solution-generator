@@ -1,6 +1,7 @@
 """Refuse a video whose presenter is not the real man, by measured face similarity.
 
     python veo_kit/face_gate.py <video.mp4> [--at 2 6 10] [--min 0.90]
+    python veo_kit/face_gate.py <final.mp4> --spread 7     # 7 frames, 12%-88% of it
     python veo_kit/face_gate.py <clip.mp4> --character veo_kit/characters/ritesh.json
     python veo_kit/face_gate.py --calibrate            # show the separation
 
@@ -121,6 +122,9 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("video", nargs="?")
     ap.add_argument("--at", type=float, nargs="*", default=[2.0, 6.0, 10.0])
+    ap.add_argument("--spread", type=int, default=0,
+                    help="sample N frames evenly from 12%% to 88%% of the video "
+                         "(what tools/gates.py does on a finished video); overrides --at")
     ap.add_argument("--min", type=float, default=None,
                     help="default: the character's face_min, else 0.90")
     ap.add_argument("--character", default=str(DEFAULT_CHARACTER),
@@ -166,6 +170,12 @@ def main() -> int:
 
     if not a.video:
         ap.error("give a video, or --calibrate")
+    if a.spread:
+        dur = float(subprocess.run(
+            ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+             "-of", "csv=p=0", a.video], capture_output=True, text=True).stdout or 0)
+        n = max(3, a.spread)
+        a.at = [round(dur * (0.12 + 0.76 * i / (n - 1)), 1) for i in range(n)]
     rows = score_video(a.video, a.at, ref)
     seen = [s for _, s in rows if s is not None]
     print(f"  {Path(a.video).name}  (threshold {a.min:.2f} on the median)")

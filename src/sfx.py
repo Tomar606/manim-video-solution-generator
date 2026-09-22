@@ -123,12 +123,41 @@ def ensure_library(asset_root: str | Path, *, force: bool = False) -> list[Path]
 
 
 def resolve(name: str, asset_root: str | Path) -> Path | None:
-    """Find the file for a cue name. User-supplied files win over defaults."""
+    """Find the file for a cue name.
+
+    THE REGISTRY IS THE SOURCE OF TRUTH. Sounds are filed by the MOMENT they
+    mark — `assets/sfx/label-lands/`, `assets/sfx/page-arrives/` — so a cue name
+    is a moment, not a filename, and `assets/sfx/registry.json` (written by
+    tools/sfx_registry.py) says which file currently fills it. That indirection
+    is the point: swapping a sound is dropping a file in a folder, not editing
+    code, and the file that gets used is one that passed the ingest checks.
+
+    The flat lookup below it is kept so an older cue file naming a bare sound
+    still plays instead of silently going missing.
+    """
+    root = Path(asset_root)
+    registry = sfx_dir(asset_root) / "registry.json"
+    if registry.is_file():
+        try:
+            entry = json.loads(registry.read_text(encoding="utf-8")).get(name)
+        except (OSError, json.JSONDecodeError):
+            entry = None
+        if isinstance(entry, dict) and entry.get("file"):
+            candidate = root / entry["file"]
+            if candidate.is_file():
+                return candidate
+
     directory = sfx_dir(asset_root)
     for suffix in (".wav", ".mp3", ".m4a", ".aac", ".ogg"):
         candidate = directory / f"{name}{suffix}"
         if candidate.is_file():
             return candidate
+        for sub in sorted(directory.glob("*/")):
+            if sub.name.startswith("_"):
+                continue
+            nested = sub / f"{name}{suffix}"
+            if nested.is_file():
+                return nested
     return None
 
 

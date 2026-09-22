@@ -1,0 +1,150 @@
+{
+ "label-lands": {
+  "file": "assets/sfx/label-lands/pop.wav",
+  "use": "a diagram label, list card or chip arrives",
+  "seconds": 0.17,
+  "peak_offset": 0.03,
+  "default_gain_db": -6.0,
+  "measured": {
+   "tonality": 0.029,
+   "sweep": 0.01,
+   "bursts": 1
+  },
+  "alternates": 0
+ },
+ "list-item": {
+  "file": "assets/sfx/list-item/click.wav",
+  "use": "one item of a counted list fills in",
+  "seconds": 0.05,
+  "peak_offset": 0.0,
+  "default_gain_db": -6.0,
+  "measured": {
+   "tonality": 0.006,
+   "sweep": 0.02,
+   "bursts": 1
+  },
+  "alternates": 0
+ },
+ "card-appears": {
+  "file": "assets/sfx/card-appears/reveal.wav",
+  "use": "the question card at the head of a part",
+  "seconds": 0.75,
+  "peak_offset": 0.349,
+  "default_gain_db": -6.0,
+  "measured": {
+   "tonality": 0.018,
+   "sweep": -0.02,
+   "bursts": 2
+  },
+  "alternates": 0
+ },
+ "panel-arrives": {
+  "file": "assets/sfx/panel-arrives/page_swoosh.wav",
+  "use": "an animation panel wipes in, or away",
+  "seconds": 1.08,
+  "peak_offset": 0.419,
+  "default_gain_db": -6.0,
+  "measured": {
+   "tonality": 0.129,
+   "sweep": 0.27,
+   "bursts": 2
+  },
+  "alternates": 0
+ },
+ "page-arrives": {
+  "file": "assets/sfx/page-arrives/page_swoosh.wav",
+  "use": "the handwritten answer page at the end",
+  "seconds": 1.08,
+  "peak_offset": 0.419,
+  "default_gain_db": -6.0,
+  "measured": {
+   "tonality": 0.129,
+   "sweep": 0.27,
+   "bursts": 2
+  },
+  "alternates": 0
+ },
+ "handwriting": {
+  "file": "assets/sfx/handwriting/write.wav",
+  "use": "texture under the answer page as it appears",
+  "seconds": 0.7,
+  "peak_offset": 0.239,
+  "default_gain_db": -6.0,
+  "measured": {
+   "tonality": 0.006,
+   "sweep": -0.01,
+   "bursts": 1
+  },
+  "alternates": 0
+ },
+ "pop": {
+  "file": "assets/sfx/label-lands/pop.wav",
+  "use": "a diagram label, list card or chip arrives",
+  "seconds": 0.17,
+  "peak_offset": 0.03,
+  "default_gain_db": -6.0,
+  "measured": {
+   "tonality": 0.029,
+   "sweep": 0.01,
+   "bursts": 1
+  },
+  "alternates": 0,
+  "alias_of": "label-lands"
+ },
+ "click": {
+  "file": "assets/sfx/list-item/click.wav",
+  "use": "one item of a counted list fills in",
+  "seconds": 0.05,
+  "peak_offset": 0.0,
+  "default_gain_db": -6.0,
+  "measured": {
+   "tonality": 0.006,
+   "sweep": 0.02,
+   "bursts": 1
+  },
+  "alternates": 0,
+  "alias_of": "list-item"
+ },
+ "reveal": {
+  "file": "assets/sfx/card-appears/reveal.wav",
+  "use": "the question card at the head of a part",
+  "seconds": 0.75,
+  "peak_offset": 0.349,
+  "default_gain_db": -6.0,
+  "measured": {
+   "tonality": 0.018,
+   "sweep": -0.02,
+   "bursts": 2
+  },
+  "alternates": 0,
+  "alias_of": "card-appears"
+ },
+ "page_swoosh": {
+  "file": "assets/sfx/panel-arrives/page_swoosh.wav",
+  "use": "an animation panel wipes in, or away",
+  "seconds": 1.08,
+  "peak_offset": 0.419,
+  "default_gain_db": -6.0,
+  "measured": {
+   "tonality": 0.129,
+   "sweep": 0.27,
+   "bursts": 2
+  },
+  "alternates": 0,
+  "alias_of": "panel-arrives"
+ },
+ "write": {
+  "file": "assets/sfx/handwriting/write.wav",
+  "use": "texture under the answer page as it appears",
+  "seconds": 0.7,
+  "peak_offset": 0.239,
+  "default_gain_db": -6.0,
+  "measured": {
+   "tonality": 0.006,
+   "sweep": -0.01,
+   "bursts": 1
+  },
+  "alternates": 0,
+  "alias_of": "handwriting"
+ }
+}
