@@ -84,6 +84,12 @@ def rung_connect(b: FlowBridge, sel: dict) -> bool:
                   "it may stay in the background.")
         return False
     note(OK, f"flow tab: {tab}")
+    print(f"     discarded={info.get('discarded')} status={info.get('status')} "
+          f"active={info.get('active')} frozen={info.get('frozen')}")
+    if info.get("discarded"):
+        note(WARN, "the tab has been DISCARDED by the browser's memory saver — "
+                   "it has no renderer to drive. attach() reloads it, but if "
+                   "this keeps happening, keep the tab pinned or foreground.")
     if "/project/" not in tab:
         note(WARN, "that tab is not inside a project, so it has no prompt box. "
                    "Open the project itself.")

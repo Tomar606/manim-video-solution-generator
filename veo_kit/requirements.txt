@@ -1,0 +1,16 @@
+# The Veo character kit — Python 3.11 (3.10-3.12 work; 3.13 has no torch 2.2 wheels).
+#
+# These pins are what ran on 22 Sept 2026, not a guess. facenet-pytorch 2.6.0
+# pins torch <2.3, torchvision <0.18, numpy <2 and Pillow <10.3, so the four
+# move together or not at all. Install into its own venv (the repo's
+# .venv-tools is the same set plus the PYQ tools); Manim cannot share it —
+# see requirements-tools.txt at the repo root for why.
+#
+# Also needed on the system, not pip: ffmpeg + ffprobe (brew install ffmpeg).
+
+facenet-pytorch==2.6.0      # face_gate: MTCNN + InceptionResnetV1 (VGGFace2)
+torch==2.2.2
+torchvision==0.17.2
+numpy>=1.24,<2
+pillow>=10.2,<10.3
+openai-whisper==20250625    # speech_qc: what the clip actually says

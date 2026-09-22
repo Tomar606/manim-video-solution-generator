@@ -133,3 +133,14 @@ __pycache__/
 assets/dividers/paper_tear_[0-9]*.png
 assets/dividers/paper_tear_[0-9]*.json
 assets/dividers/panel_fade_[0-9]*.png
+map_engine/data/natural_earth/
+map_engine/output/
+map_engine/cache/
+map_engine/node_modules
+
+# Veo character kit: reference photos of a real person never go in a public repo
+# (veo_kit/SETUP.md, step 3), and generated clips are build output.
+assets/character/**/*.png
+assets/character/**/*.jpg
+assets/character/**/*.jpeg
+veo_kit/example/*/clips/

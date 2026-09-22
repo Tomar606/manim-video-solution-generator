@@ -45,7 +45,13 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 PORT = int(os.environ.get("FLOW_BRIDGE_PORT", "8765"))
-EXPECTED_BUILD = 8       # must match BRIDGE_BUILD in flow/extension/background.js
+EXPECTED_BUILD = 14      # must match BRIDGE_BUILD in flow/extension/background.js
+# WHICH extension, not just which build. flow-animator ships a bridge speaking
+# this protocol on this port and it numbered its builds the same way, so it
+# answered every ping and drove Flow correctly while this repo's own extension
+# had never been loaded. Two builds' worth of fixes went into a file the browser
+# had never seen. A name is the only thing that separates them.
+EXPECTED_NAME = "PYQ Flow Bridge"
 LONGPOLL = 25.0          # seconds a /job request parks before answering 204
 DOWNLOAD_DIR = Path(os.environ.get(
     "FLOW_DOWNLOAD_DIR", str(Path.home() / "Downloads"))).expanduser()
@@ -228,11 +234,26 @@ class FlowBridge:
             # OUTSIDE the retry. A build mismatch is not a transient failure and
             # retrying it just burns the timeout before reporting the one thing
             # that was actually wrong.
+            name = info.get("name")
+            if name is not None and name != EXPECTED_NAME:
+                raise StaleExtension(
+                    f"the extension answering on port {self.port} is "
+                    f"{name!r} v{info.get('version')}, not {EXPECTED_NAME!r}. "
+                    f"It speaks the same protocol on the same port, so it drives "
+                    f"Flow and looks like it is working — but it is a different "
+                    f"codebase and none of this repo's fixes are in it. Disable "
+                    f"it in chrome://extensions and Load unpacked -> "
+                    f"flow/extension from this repo.")
             got = info.get("build")
             if got != EXPECTED_BUILD:
                 raise StaleExtension(
                     f"the loaded extension is build {got!r} but this code expects "
-                    f"{EXPECTED_BUILD}. Reload it — chrome://extensions (or "
+                    f"{EXPECTED_BUILD}"
+                    + ("" if name else
+                       " (and it is old enough not to report its name, so check "
+                       "it is this repo's flow/extension and not another "
+                       "project's bridge on the same port)")
+                    + ". Reload it — chrome://extensions (or "
                     f"brave://extensions) -> reload on the Flow bridge -> then "
                     f"hard-reload the Flow tab. There is no hot reload, and a "
                     f"stale build fails like a Flow redesign rather than like "

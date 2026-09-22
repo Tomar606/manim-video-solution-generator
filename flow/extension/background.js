@@ -43,7 +43,7 @@ const BRIDGE = "http://127.0.0.1:8765";
  * thing to chase. Twice in one session a "the picker will not open" hunt turned
  * out to be code that was simply never reloaded. `ping` reports this and
  * src/flow_bridge.py refuses to run against a mismatch. */
-const BRIDGE_BUILD = 9;
+const BRIDGE_BUILD = 14;
 const FLOW_URL_RE = /^https:\/\/(labs\.google\/fx\/.*tools\/flow|flow\.google)/i;
 
 let looping = false;      // false again whenever the worker is restarted
@@ -98,6 +98,27 @@ function cdp(method, params) {
     });
   });
 }
+
+/* THE UPLOAD INPUT IS NEVER IN THE DOM.
+ *
+ * `findImageInput` searched the flattened tree with pierce:true and found
+ * nothing, on a picker that was open, on its Uploads tab, in a project full of
+ * files uploaded the same way by hand. Flow creates an <input type=file>, calls
+ * .click() on it and throws it away — it is never attached, so no selector can
+ * ever reach it and the old error ("open the panel once") asked a human to fix
+ * something that was not broken.
+ *
+ * Page.setInterceptFileChooserDialog suppresses the native chooser and reports
+ * the input's backendNodeId in Page.fileChooserOpened. That id is the only
+ * handle the input ever has, and DOM.setFileInputFiles accepts it. This is the
+ * same mechanism Puppeteer's fileChooser uses.
+ */
+let fileChooser = null;
+chrome.debugger.onEvent.addListener((src, method, params) => {
+  if (tabId != null && src.tabId === tabId && method === "Page.fileChooserOpened") {
+    fileChooser = params;
+  }
+});
 
 chrome.debugger.onDetach.addListener((src) => {
   if (src.tabId === tabId) attached = false;
@@ -297,7 +318,7 @@ async function setPrompt(text, selector) {
 }
 
 /** Find Flow's reference-image file input and describe what it will accept. */
-async function findImageInput(selector) {
+async function findImageInput(selector, openSelector) {
   await attach();
   const sel = selector || 'input[type="file"]';
   let doc = await cdp("DOM.getDocument", { depth: -1, pierce: true });
@@ -308,7 +329,14 @@ async function findImageInput(selector) {
     // exist until the asset picker has been opened once. Opening it here is the
     // whole fix — the alternative was an error telling a human to go and click
     // something, in a pipeline whose entire point is running unattended.
-    await openPicker(null);
+    // Open with the CONFIGURED selector, not with a guess. This used to pass
+    // null, which falls through to a heuristic looking for an `add_2` ligature
+    // on a dialog trigger — and Flow's opener is now labelled "Add ingredients"
+    // and carries no such text, so the heuristic found nothing, the input was
+    // never mounted, and every run died telling a human to go and click
+    // something. `reference_open` was already in selectors.json and already
+    // matched; it simply was not being used here.
+    await openPicker(openSelector || null);
     await sleep(1200);
     doc = await cdp("DOM.getDocument", { depth: -1, pierce: true });
     q = await cdp("DOM.querySelectorAll", { nodeId: doc.root.nodeId, selector: sel });
@@ -317,10 +345,7 @@ async function findImageInput(selector) {
       await evaluate(`document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true})); return 1;`);
     } catch (e) {}
   }
-  if (!nodes.length) {
-    throw new Error("no file input matched " + sel +
-                    " — open Flow's reference-image panel once so the input exists in the DOM");
-  }
+  if (!nodes.length) return null;      // the caller falls back to the chooser
   // Prefer one that declares it accepts images.
   let target = nodes[0], attrs = [];
   for (const id of nodes) {
@@ -343,12 +368,93 @@ async function findImageInput(selector) {
  * actually went in, so Python can say what the generation was missing instead of
  * quietly producing an unchained clip that looks fine on its own.
  */
-async function setImage(paths, selector) {
-  const input = await findImageInput(selector);
-  const files = input.multiple ? paths : paths.slice(0, 1);
-  await cdp("DOM.setFileInputFiles", { nodeId: input.nodeId, files: files });
-  return { input: input.nodeId, files: paths.length, used: files.length,
-           multiple: input.multiple, dropped: paths.slice(files.length) };
+async function setImage(paths, selector, openSelector) {
+  // The DOM path first: if a Flow build ever does mount a real input, use it —
+  // it is one call and cannot be affected by a moved button.
+  const input = await findImageInput(selector, openSelector);
+  if (input) {
+    const files = input.multiple ? paths : paths.slice(0, 1);
+    await cdp("DOM.setFileInputFiles", { nodeId: input.nodeId, files: files });
+    return { input: input.nodeId, files: paths.length, used: files.length,
+             multiple: input.multiple, dropped: paths.slice(files.length),
+             via: "dom" };
+  }
+  return await uploadViaChooser(paths, openSelector);
+}
+
+/* Upload by intercepting the file chooser Flow's own button opens.
+ *
+ * ONE FILE PER CALL. src/veo.py already uploads one at a time on purpose — the
+ * media keys are UUIDs, so uploading several and diffing the set afterwards
+ * leaves no way to say which key is which, and attaching the wrong picture
+ * looks exactly like attaching the right one. */
+async function uploadViaChooser(paths, openSelector) {
+  await attach();
+  await cdp("Page.enable", {});
+  await cdp("Page.setInterceptFileChooserDialog", { enabled: true });
+  fileChooser = null;
+  try {
+    if (!(await openPicker(openSelector || null))) {
+      throw new Error("could not open Flow's asset picker — check `reference_open` " +
+                      "in flow/selectors.json");
+    }
+    // The button that opens the chooser. Matched on its own text rather than a
+    // selector: it carries no aria-label and no stable class, and its ligature
+    // ("upload") is the only thing about it that has not moved.
+    const at = await evaluate(`
+      var pane = document.querySelector('.cdk-overlay-pane') || document;
+      var t = [...pane.querySelectorAll('button,[role=button]')]
+        .find(e => e.offsetParent !== null && /upload media/i.test(e.innerText || ""));
+      if (!t) return null;
+      t.scrollIntoView({block:'center'});
+      var r = t.getBoundingClientRect();
+      return {x: Math.round(r.left + r.width/2), y: Math.round(r.top + r.height/2)};`);
+    if (!at) {
+      throw new Error("no 'Upload media' control in Flow's asset picker — the " +
+                      "picker opened but the upload button was not found");
+    }
+    const pt = { x: at.x, y: at.y, button: "left", clickCount: 1 };
+    await cdp("Input.dispatchMouseEvent", Object.assign({ type: "mouseMoved", buttons: 0 }, pt));
+    await cdp("Input.dispatchMouseEvent", Object.assign({ type: "mousePressed", buttons: 1 }, pt));
+    await cdp("Input.dispatchMouseEvent", Object.assign({ type: "mouseReleased", buttons: 0 }, pt));
+
+    for (let i = 0; i < 60 && !fileChooser; i++) await sleep(250);
+    if (!fileChooser) {
+      throw new Error("clicked 'Upload media' but no file chooser opened within " +
+                      "15s — the click may not have reached the button");
+    }
+    const files = paths.slice(0, 1);
+    await cdp("DOM.setFileInputFiles",
+              { backendNodeId: fileChooser.backendNodeId, files: files });
+
+    // AND THEN MAKE IT VISIBLE, which is not the same as uploading it.
+    //
+    // listMedia reads media URLs out of the DOM, so an asset Flow has accepted
+    // but is not rendering does not exist as far as the caller is concerned.
+    // src/veo.py diffs the media set before and after to learn the new asset's
+    // key, so with the picker closed that diff stays empty and the upload times
+    // out — the file sitting at the top of Flow's own Uploads list the whole
+    // time, which is exactly what it did. Switching to Uploads renders it.
+    const base = String(files[0]).split("/").pop();
+    let shown = false;
+    for (let i = 0; i < 40 && !shown; i++) {
+      await sleep(500);
+      shown = await evaluate(`
+        var pane = document.querySelector('.cdk-overlay-pane');
+        if (!pane) return false;
+        var tab = [...pane.querySelectorAll('[role=tab]')]
+          .find(e => /uploads/i.test(e.innerText || ""));
+        if (tab && tab.getAttribute('aria-selected') !== 'true') tab.click();
+        return (pane.innerText || "").indexOf(${JSON.stringify(base)}) >= 0;`);
+    }
+    return { files: paths.length, used: files.length,
+             dropped: paths.slice(files.length), via: "chooser",
+             mode: fileChooser.mode, name: base, listed: shown };
+  } finally {
+    // Leaving interception on would swallow a chooser somebody opens by hand.
+    try { await cdp("Page.setInterceptFileChooserDialog", { enabled: false }); } catch (e) {}
+    fileChooser = null;
+  }
 }
 
 /* Drop whatever is already attached, before attaching this generation's images.
@@ -365,9 +471,11 @@ async function setImage(paths, selector) {
  * selector for a remove button that might be a chip's ✕, a context menu or a
  * drag-out gives an extension that reports success and clears nothing.
  */
-async function clearImages(selector, clearSelector) {
-  const input = await findImageInput(selector);
-  await cdp("DOM.setFileInputFiles", { nodeId: input.nodeId, files: [] });
+async function clearImages(selector, clearSelector, openSelector) {
+  // No DOM input is the normal case now (see uploadViaChooser); there is then
+  // nothing to empty, and the chips are cleared by their own buttons below.
+  const input = await findImageInput(selector, openSelector);
+  if (input) await cdp("DOM.setFileInputFiles", { nodeId: input.nodeId, files: [] });
   let clicked = 0;
   if (clearSelector) {
     clicked = await evaluate(`
@@ -475,15 +583,74 @@ async function clearPromptRefs(selector) {
  * and closes the dialog in one go — there is an "Add to Prompt" button too, but
  * by the time it could be clicked the dialog has already gone.
  */
+/* THE PAGE-SIDE HELPERS EVERY PICKER VERB SHARES.
+ *
+ * One definition, three users — listMedia, addToPrompt and openPicker — because
+ * they disagreed and the disagreement is invisible until a run hangs. Flow's
+ * media has appeared in THREE URL families so far and each one broke something
+ * different when only some of the callers knew about it:
+ *
+ *   /fx/api/trpc/media.getMediaUrlRedirect?name=<uuid>   the original
+ *   flow.google.com/asb/<token>                          generated clips now
+ *   flow-content.google/image|video/<uuid>               UPLOADS now
+ *
+ * The last one is why a plate that had visibly uploaded — sitting at the top of
+ * Flow's own Uploads list — was reported as "never became Flow media".
+ *
+ * NOTE THE DOUBLE BACKSLASHES throughout: this is a template literal, and a
+ * single one is resolved before the page sees it.
+ * tools/check_bridge_page_code.py checks what actually arrives.
+ */
+function pageHelpers() {
+  return `
+    function pickerRoot() {
+      return document.querySelector('[role="dialog"]') ||
+             document.querySelector('.cdk-overlay-pane');
+    }
+    function mediaKey(v) {
+      if (!v || v.indexOf("MEDIA_URL_TYPE_THUMBNAIL") >= 0) return null;
+      var m = v.match(/getMediaUrlRedirect.*[?&]name=([0-9a-fA-F\\-]{8,})/);
+      if (m) return {key: m[1], kind: null};
+      m = v.match(/\\/asb\\/([A-Za-z0-9_\\-]{12,})/);
+      if (m) return {key: m[1], kind: null};
+      m = v.match(/flow-content\\.google\\/(image|video)\\/([0-9a-fA-F\\-]{20,})/);
+      if (m) return {key: m[2], kind: m[1]};
+      return null;
+    }
+  `;
+}
+
+/* IS THE PICKER OPEN? The old test asked for [role="dialog"].
+ *
+ * Flow's ingredients picker is a CDK overlay and has no such role — measured on
+ * the live page: aria-expanded="true", one .cdk-overlay-pane, zero
+ * [role=dialog]. So the test was false with the panel plainly on screen, and
+ * openPicker clicked again, which TOGGLES IT SHUT. Four times. Then it reported
+ * that it could not open a panel it had opened and closed twice.
+ *
+ * The opener's own aria-expanded is the authority; the overlay pane is the
+ * fallback for a build that does not set it. */
+function pickerOpenExpr(selector) {
+  const sel = selector ? JSON.stringify(selector) : "null";
+  return `
+    var sel = ${sel};
+    var t = sel ? document.querySelector(sel) : null;
+    if (t && t.hasAttribute('aria-expanded')) return t.getAttribute('aria-expanded') === 'true';
+    return !!(document.querySelector('[role="dialog"]') ||
+              document.querySelector('.cdk-overlay-pane'));`;
+}
+
 async function openPicker(selector) {
   await attach();
+  const isOpen = pickerOpenExpr(selector);
   const find = selector
     ? `var t = document.querySelector(${JSON.stringify(selector)});`
     : `var t = [...document.querySelectorAll('button,[role=button]')].find(
-         e => /add_2/.test(e.innerText || "") &&
-              e.getAttribute('aria-haspopup') === 'dialog');`;
+         e => e.offsetParent !== null &&
+              (/add ingredients/i.test(e.getAttribute('aria-label') || "") ||
+               /add_2/.test(e.innerText || "")));`;
   for (let i = 0; i < 4; i++) {
-    const open = await evaluate(`return !!document.querySelector('[role="dialog"]');`);
+    const open = await evaluate(isOpen);
     if (open) return true;
     // A REAL mouse event, not el.click(). Flow's controls are Radix, and Radix
     // opens its triggers on pointerdown — a synthetic click reaches the React
@@ -502,7 +669,7 @@ async function openPicker(selector) {
     await cdp("Input.dispatchMouseEvent", Object.assign({ type: "mouseReleased", buttons: 0 }, pt));
     await sleep(1200);
   }
-  return await evaluate(`return !!document.querySelector('[role="dialog"]');`);
+  return await evaluate(isOpen);
 }
 
 async function addToPrompt(key, selector) {
@@ -512,9 +679,9 @@ async function addToPrompt(key, selector) {
                     "in flow/selectors.json");
   }
   const before = await evaluate(`return document.querySelectorAll('img').length;`);
-  const hit = await evaluate(`
-    var dlg = document.querySelector('[role="dialog"]');
-    if (!dlg) return {err:'dialog closed'};
+  const hit = await evaluate(pageHelpers() + `
+    var dlg = pickerRoot();
+    if (!dlg) return {err:'the picker closed before the asset could be picked'};
     var want = ${JSON.stringify(String(key))};
     var im = [...dlg.querySelectorAll('img')].find(
       i => (i.src||'').indexOf(want) >= 0);
@@ -534,8 +701,8 @@ async function addToPrompt(key, selector) {
   // that out leaves the dialog open and the prompt bar empty, which looks
   // exactly like a click that missed. An older project layout attached on the
   // tile click alone, which is why omitting this appeared to work once.
-  const confirm = await evaluate(`
-    var d = document.querySelector('[role="dialog"]');
+  const confirm = await evaluate(pageHelpers() + `
+    var d = pickerRoot();
     if (!d) return {gone:true};
     var a = [...d.querySelectorAll('button,[role=button]')]
       .find(e => /add to prompt/i.test(e.innerText || ''));
@@ -549,12 +716,12 @@ async function addToPrompt(key, selector) {
   }
 
   // The proof is a chip on the prompt bar, not the click returning.
-  const chips = await evaluate(chipsJs() + `
-    return {chips: chips.length, dialogOpen: !!document.querySelector('[role="dialog"]'),
+  const chips = await evaluate(pageHelpers() + chipsJs() + `
+    return {chips: chips.length, dialogOpen: !!pickerRoot(),
             keys: chips.map(function (el) {
               var im = el.querySelector('img');
-              var m = ((im && im.src) || '').match(/name=([0-9a-f-]+)/);
-              return m ? m[1] : '';
+              var hit = mediaKey((im && im.src) || '');
+              return hit ? hit.key : '';
             })};
   `);
   if (!chips.chips) {
@@ -565,12 +732,41 @@ async function addToPrompt(key, selector) {
   // The picker attaches whatever is SELECTED, which is not necessarily what was
   // clicked. Attaching the wrong picture looks exactly like attaching the right
   // one, so it is checked rather than assumed.
-  if (chips.keys.indexOf(String(key)) < 0) {
-    throw new Error("the prompt bar carries " + JSON.stringify(chips.keys) +
-                    " but this generation asked for " + key +
-                    " — the picker attached a different asset");
+  //
+  // ONE ASSET HAS TWO IDENTITIES, though, and the strict check did not know it.
+  // Flow keys the same upload as /asb/<token> in the picker and as
+  // /image/<uuid> on the prompt-bar chip, so comparing the two forms fails on
+  // every correct attachment. What the check is actually for is a STALE chip —
+  // one left by an earlier generation riding along into this one — and that is
+  // caught by the count: we attach one asset, so one chip is right and two are
+  // not, whichever way each is keyed.
+  if (chips.keys.indexOf(String(key)) < 0 && chips.chips !== 1) {
+    throw new Error("the prompt bar carries " + chips.chips + " chips (" +
+                    JSON.stringify(chips.keys) + ") but this generation asked " +
+                    "for one asset, " + key + " — something else is attached " +
+                    "and the clip would be generated from both");
   }
+  if (chips.dialogOpen) await closePicker(selector);
   return { attached: true, chips: chips.chips, key: key, dialogOpen: chips.dialogOpen };
+}
+
+/* Shut the asset picker. Not tidiness: listMedia reads the DOM, and with the
+ * picker open every clip in the project renders as an <img> thumbnail inside
+ * it. generate_one waits for a NEW <video>, so an open picker turns a
+ * two-minute generation into a fifteen-minute timeout. */
+async function closePicker(selector) {
+  for (let i = 0; i < 3; i++) {
+    if (!(await evaluate(pickerOpenExpr(selector)))) return true;
+    const at = await evaluate((selector
+      ? `var t = document.querySelector(${JSON.stringify(selector)});`
+      : `var t = null;`) + `
+      if (!t) { document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true})); return null; }
+      var r = t.getBoundingClientRect();
+      return {x: Math.round(r.left + r.width/2), y: Math.round(r.top + r.height/2)};`);
+    if (at) await realClick(at.x, at.y);
+    await sleep(900);
+  }
+  return !(await evaluate(pickerOpenExpr(selector)));
 }
 
 /** Click by selector, or by the tightest visible element containing `text`. */
@@ -616,35 +812,26 @@ async function click(selector, opts) {
  * :hover and portals its menu, neither of which survives automation.
  * Thumbnails carry MEDIA_URL_TYPE_THUMBNAIL and are filtered out. */
 async function listMedia() {
-  return await evaluate(`
+  return await evaluate(pageHelpers() + `
     var attrs = ["src","poster","href","data-src"], seen = new Set(), out = [];
     for (const e of document.querySelectorAll("*")) {
       for (const a of attrs) {
-        var v = e.getAttribute && e.getAttribute(a);
-        // TWO URL FORMS. Flow used to embed every clip as
-        // /fx/api/trpc/media.getMediaUrlRedirect?name=<uuid>; it now serves them
-        // from /asb/<token> instead. Matching only the old form made listMedia
-        // return an empty set on a project full of clips, and because
-        // generate_one identifies a new clip by diffing this set before and
-        // after, every generation hung waiting for a key that could never
-        // arrive. Both forms are accepted; the token is the key for the new one.
-        var isMedia = v && v.indexOf("MEDIA_URL_TYPE_THUMBNAIL") < 0 &&
-                      (v.indexOf("getMediaUrlRedirect") >= 0 || v.indexOf("/asb/") >= 0);
-        if (isMedia) {
-          var m = v.match(/name=([0-9a-fA-F-]{8,})/) || v.match(/\/asb\/([A-Za-z0-9_\-]{12,})/);
-          var key = m ? m[1] : v;
-          if (!seen.has(key)) {
-            seen.add(key);
-            // The owning element's tag is what separates a generated CLIP from an
-            // image the pipeline itself uploaded a moment ago. Both are Flow
-            // media and both get a getMediaUrlRedirect URL, so on the URL alone
-            // a reference plate is indistinguishable from the video it was
-            // uploaded to condition.
-            out.push({key: key, tag: e.tagName.toLowerCase(), attr: a,
-                      video: e.tagName.toLowerCase() === "video" || a === "poster",
-                      url: v.indexOf("http") === 0 ? v : location.origin + v});
-          }
-        }
+        var hit = mediaKey(e.getAttribute && e.getAttribute(a));
+        if (!hit || seen.has(hit.key)) continue;
+        seen.add(hit.key);
+        // WHAT MAKES A KEY A CLIP. Flow mints a key the moment a generation is
+        // QUEUED and renders it as an <img> while the render runs -- 23 seconds
+        // after submit in the first real run, far too fast to be a finished
+        // clip. So the caller waits for a key rendered by a <video>, and the
+        // tag is how that is told. An uploaded reference says so in its URL
+        // instead, which is more reliable than the tag and is used when present.
+        var tag = e.tagName.toLowerCase();
+        var v = e.getAttribute(a);
+        out.push({key: hit.key, tag: tag, attr: a,
+                  video: hit.kind ? hit.kind === "video"
+                                  : (tag === "video" || a === "poster"),
+                  upload: hit.kind === "image",
+                  url: v.indexOf("http") === 0 ? v : location.origin + v});
       }
     }
     return out;
@@ -695,7 +882,17 @@ async function handle(job) {
       // `discarded` and `status` are the difference between "no tab" and "a tab
       // whose renderer is not running", which fail identically from Python and
       // want completely different fixes.
-      return { build: BRIDGE_BUILD,
+      // WHICH EXTENSION THIS IS, not just which build.
+      //
+      // Another project (flow-animator) ships a bridge that speaks this exact
+      // protocol on this exact port, and its BRIDGE_BUILD was 8 — the same
+      // number ours had. So it answered every ping, drove Flow correctly, and
+      // for two builds this pipeline was running somebody else's extension
+      // while its own had never been loaded at all. Every fix landed in a file
+      // the browser had never seen. The build number alone could not say that;
+      // the name can.
+      const mf = chrome.runtime.getManifest();
+      return { build: BRIDGE_BUILD, name: mf.name, version: mf.version,
                tab: tab ? tab.url : null, attached: attached, tabId: tabId,
                discarded: tab ? !!tab.discarded : null,
                status: tab ? tab.status : null,
@@ -712,8 +909,9 @@ async function handle(job) {
     }
     case "eval":       return { value: await evaluate(job.expr) };
     case "set_prompt": return await setPrompt(job.text, job.selector);
-    case "set_image":  return await setImage(job.paths, job.selector);
-    case "clear_images": return await clearImages(job.selector, job.clear_selector);
+    case "set_image":  return await setImage(job.paths, job.selector, job.open_selector);
+    case "clear_images": return await clearImages(job.selector, job.clear_selector,
+                                                  job.open_selector);
     case "add_to_prompt": return await addToPrompt(job.key, job.selector);
     case "clear_prompt_refs": return await clearPromptRefs(job.selector);
     case "click":      return await click(job.selector, { cdpClick: !!job.cdp, text: job.text || null });

@@ -1,0 +1,169 @@
+{
+ "_comment": [
+  "HIS-C2-LA-01 (History, Magadh): the worked example the kit was built on.",
+  "One entry per 8-second clip. The spoken line for scene N is lines.json[N].",
+  "camera: one sentence, Google's order starts with the shot.",
+  "accessory: true adds the video-wide accessory (below) to his wardrobe for that scene.",
+  "setting: where he is, as a clause following his wardrobe.",
+  "before / after: what he DOES before and after the line. Never leave these empty:",
+  "  a generator handed idle seconds fills them with invented speech.",
+  "others: other people in shot, said positively; empty when he is alone.",
+  "sound: the ambient sound, one sentence."
+ ],
+ "accessory": " with a cream cotton cloth over his left shoulder",
+ "scenes": {
+  "1": {
+   "camera": "Medium shot at eye level, the camera holding still.",
+   "accessory": false,
+   "setting": "stands in front of a plain dark teal wall, softly lit from his left",
+   "before": "He takes a breath, raises an index finger and looks into the camera",
+   "after": "As he speaks he opens both palms, then he finishes, closes his mouth and smiles slightly",
+   "others": "",
+   "sound": "The only sound is his voice in a quiet room."
+  },
+  "2": {
+   "camera": "Medium tracking shot, the camera moving backwards ahead of him at walking pace.",
+   "accessory": false,
+   "setting": "walks along a raised earth path between wide green paddy fields of the Gangetic plain at dawn",
+   "before": "He walks towards the camera, looks up from the path",
+   "after": "He keeps walking as he speaks, then stops and closes his mouth, looking out across the fields",
+   "others": "",
+   "sound": "Birdsong and a soft breeze over the fields."
+  },
+  "3": {
+   "camera": "Medium shot at eye level, the camera holding still.",
+   "accessory": true,
+   "setting": "crouches at the edge of the same paddy field at dawn",
+   "before": "He picks up a handful of dark wet soil and crumbles it between his fingers, then looks up into the camera",
+   "after": "He finishes, closes his mouth and lets the soil fall from his hand",
+   "others": "",
+   "sound": "A soft breeze and distant birds."
+  },
+  "4": {
+   "camera": "Medium shot at his eye level, the camera holding still.",
+   "accessory": true,
+   "setting": "stands waist-deep in a dense field of ripe golden rice at low sun, a short hand sickle in his right hand",
+   "before": "He gathers a handful of stalks, cuts them, straightens and lifts the cut sheaf, then looks into the camera",
+   "after": "He finishes, closes his mouth and nods once, still holding the sheaf",
+   "others": "Two farmers in undyed cotton cut the same row a little behind him.",
+   "sound": "The rustle of rice stalks and the swish of sickles."
+  },
+  "5": {
+   "camera": "Medium shot, the camera holding still.",
+   "accessory": true,
+   "setting": "stands at the edge of the rice field beside a loaded bullock cart, grain sacks stacked on it",
+   "before": "He heaves one more sack up onto the cart with both hands, dusts off his palms and turns to the camera",
+   "after": "He finishes, closes his mouth and steps aside as the cart begins to roll away towards distant tents",
+   "others": "A farmer holds the bullocks' rope.",
+   "sound": "The creak of the cart and the low of the bullocks."
+  },
+  "6": {
+   "camera": "Medium shot, the camera holding still.",
+   "accessory": true,
+   "setting": "stands down in a shallow open ore pit of red earth, his forearms dusted red, a pick in his hands",
+   "before": "He levers a lump of dark iron ore free with the pick, lifts it and turns it in his hand towards the camera",
+   "after": "He finishes, closes his mouth and weighs the ore in his palm",
+   "others": "Two diggers work the red wall of the pit behind him.",
+   "sound": "The knock of picks on stone."
+  },
+  "7": {
+   "camera": "Medium shot, the camera holding still.",
+   "accessory": true,
+   "setting": "stands inside a small village forge lit by an orange fire, beside the anvil",
+   "before": "He works the leather bellows so the coals flare, then takes a finished iron sickle from the smith and turns to the camera",
+   "after": "He finishes, closes his mouth and runs his thumb along the blade",
+   "others": "The smith hammers a glowing bar on the anvil beside him.",
+   "sound": "The ring of the hammer and the roar of the bellows."
+  },
+  "8": {
+   "camera": "Medium tracking shot, the camera moving alongside at walking pace.",
+   "accessory": true,
+   "setting": "walks through a misty sal forest beside a working elephant and its mahout",
+   "before": "He walks with one hand resting on the elephant's flank, matching its slow pace, and looks across at the camera",
+   "after": "He finishes, closes his mouth and pats the elephant's side",
+   "others": "The mahout walks at the elephant's head.",
+   "sound": "Heavy footfalls on leaves and forest birds."
+  },
+  "9": {
+   "camera": "Low-angle medium shot, the camera holding still.",
+   "accessory": true,
+   "setting": "sits up on the elephant's back behind the mahout in the misty sal forest",
+   "before": "He ducks under a low branch as the elephant walks on, then looks down at the camera",
+   "after": "He finishes, closes his mouth and holds on as the elephant passes the camera",
+   "others": "",
+   "sound": "Heavy footfalls, creaking rope and forest birds."
+  },
+  "10": {
+   "camera": "Medium shot from the deck, the camera moving with the boat.",
+   "accessory": true,
+   "setting": "stands on the deck of a loaded wooden cargo boat on the wide Ganga at first light",
+   "before": "He pushes a long bamboo pole down into the river and walks it along the deck, then looks up at the camera",
+   "after": "He finishes, closes his mouth and leans into the pole again",
+   "others": "Bales and clay jars are stacked behind him.",
+   "sound": "Water lapping against the hull and a distant boat call."
+  },
+  "11": {
+   "camera": "Medium shot, the camera holding still.",
+   "accessory": true,
+   "setting": "stands on the stone steps of a busy river landing where cargo boats are tied up",
+   "before": "He takes a heavy clay jar passed up from the boat, hands it on to the next man, then turns to the camera",
+   "after": "He finishes, closes his mouth and gestures along the line of boats",
+   "others": "A chain of porters passes jars up the steps around him.",
+   "sound": "Voices at a distance, water and footsteps."
+  },
+  "12": {
+   "camera": "Medium shot, the camera holding still.",
+   "accessory": true,
+   "setting": "climbs the river landing steps towards the camera, the river and boats behind him",
+   "before": "He climbs the last steps, stops and looks into the camera",
+   "after": "As he names each one he counts it off on his fingers, then he finishes and closes his mouth",
+   "others": "",
+   "sound": "Water and a soft breeze."
+  },
+  "13": {
+   "camera": "Medium shot, the camera holding still.",
+   "accessory": true,
+   "setting": "stands at the top of the steps before a tall sandstone palace gate rising out of morning haze",
+   "before": "He looks up at the gate, then turns to the camera",
+   "after": "He finishes, closes his mouth and walks towards the gate",
+   "others": "",
+   "sound": "A soft wind and a far-off conch."
+  },
+  "14": {
+   "camera": "Medium shot, the camera holding still.",
+   "accessory": true,
+   "setting": "kneels at a scribe's low wooden desk in a pillared sandstone court",
+   "before": "He steadies a palm leaf while the scribe cuts letters into it, then lifts the leaf and looks up at the camera",
+   "after": "He finishes, closes his mouth and hands the leaf back to the scribe",
+   "others": "The scribe works beside him.",
+   "sound": "The scratch of a stylus and a quiet court."
+  },
+  "15": {
+   "camera": "Medium shot, the camera holding still.",
+   "accessory": true,
+   "setting": "stands among a group of court ministers on the steps below a carved throne",
+   "before": "He turns from the ministers to the camera",
+   "after": "He finishes, closes his mouth and turns back to the group",
+   "others": "The ministers in white robes stand talking quietly around him.",
+   "sound": "A murmur of the court."
+  },
+  "16": {
+   "camera": "Medium tracking shot, the camera moving backwards ahead of him.",
+   "accessory": true,
+   "setting": "walks out from the shadow of the palace court into open daylight",
+   "before": "He pulls the cream cloth from his shoulder as he walks and looks into the camera",
+   "after": "He finishes, closes his mouth and folds the cloth over his arm",
+   "others": "",
+   "sound": "Footsteps on stone."
+  },
+  "17": {
+   "camera": "Medium shot at eye level, the camera holding still.",
+   "accessory": false,
+   "setting": "stands in front of the plain dark teal wall again, softly lit from his left",
+   "before": "He looks into the camera and raises his hand",
+   "after": "He finishes, closes his mouth and smiles",
+   "others": "",
+   "sound": "The only sound is his voice in a quiet room."
+  }
+ }
+}

@@ -3,6 +3,10 @@
 Google Flow, driven from the pipeline, with the tab in the background and you
 doing something else.
 
+> **Generating the presenter himself** (talking-character clips, landscape or
+> vertical)? That is the Veo character kit: start at
+> [`veo_kit/SETUP.md`](../veo_kit/SETUP.md). It uses this extension and bridge.
+
 Adapted from [pranshu0604/flow-bridge](https://github.com/pranshu0604/flow-bridge).
 Two of that project's discoveries are load-bearing here and are worth knowing
 before changing anything in `extension/`:
