@@ -21,7 +21,12 @@ TEXT_ON_TEXT_MAX = 0.02
 
 
 def check(root: Path, part: int) -> list[str]:
-    f = root / "manim_code" / "layout_violations.json"
+    # PER PART when the build kept one: a two-part question renders twice and
+    # manim_code/layout_violations.json only ever holds the LAST render, so
+    # part 1 was being graded on part 2's report.
+    f = root / "work" / f"layout_violations_part{part}.json"
+    if not f.is_file():
+        f = root / "manim_code" / "layout_violations.json"
     if not f.is_file():
         return []
     data = json.loads(f.read_text(encoding="utf-8"))

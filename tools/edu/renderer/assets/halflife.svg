@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- WHAT HALF-LIFE MEANS, as a picture. The bar is the reactant; it starts
+       full and the video is about the moment it is half gone. The bracket
+       underneath is the thing being named: t½ is a LENGTH OF TIME, not a
+       concentration, and students routinely mix the two up.
+       No text: every label comes from the spec. -->
+  <line x1="120" y1="392" x2="980" y2="392" stroke="#9FB6CC" stroke-width="5"/>
+
+  <g id="hl_full">
+    <rect x="210" y="96" width="120" height="296" rx="6"
+          fill="#7FD4FF" fill-opacity="0.30" stroke="#7FD4FF" stroke-width="6"/>
+    <line x1="196" y1="96" x2="344" y2="96" stroke="#7FD4FF" stroke-width="5"
+          stroke-dasharray="12 10"/>
+  </g>
+
+  <g id="hl_half">
+    <rect x="726" y="244" width="120" height="148" rx="6"
+          fill="#FFC53D" fill-opacity="0.30" stroke="#FFC53D" stroke-width="6"/>
+    <line x1="712" y1="244" x2="860" y2="244" stroke="#FFC53D" stroke-width="5"
+          stroke-dasharray="12 10"/>
+    <!-- the half that has reacted, drawn hollow so the drop is visible -->
+    <rect x="726" y="96" width="120" height="148" rx="6"
+          fill="none" stroke="#7FD4FF" stroke-width="3" stroke-dasharray="9 9"
+          stroke-opacity="0.55"/>
+  </g>
+
+  <g id="hl_time">
+    <path d="M270 428 L786 428" stroke="#7BE3A0" stroke-width="6"
+          stroke-linecap="round"/>
+    <path d="M270 428 L292 416 L292 440 Z" fill="#7BE3A0"/>
+    <path d="M786 428 L764 416 L764 440 Z" fill="#7BE3A0"/>
+    <line x1="270" y1="404" x2="270" y2="452" stroke="#7BE3A0" stroke-width="4"/>
+    <line x1="786" y1="404" x2="786" y2="452" stroke="#7BE3A0" stroke-width="4"/>
+  </g>
+</svg>

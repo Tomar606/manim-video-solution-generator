@@ -1,0 +1,202 @@
+[
+ {
+  "seg_id": 1,
+  "duration": 10.92,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "बस इतना याद रखो Helicase DNA खोलता है और Topoisomerase अतिकुण्डलन को दूर करता है। अब अगला पद प्राइमर का, बनना और इसे बहुत ध्यान से सुनना।",
+  "phrases": [
+   {
+    "text": "बस इतना याद रखो Helicase DNA खोलता है और Topoisomerase",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 4.42
+   },
+   {
+    "text": "अतिकुण्डलन को दूर करता है।",
+    "golden": "अतिकुण्डलन",
+    "t_in": 4.42,
+    "t_out": 5.82
+   },
+   {
+    "text": "अब अगला पद प्राइमर का, बनना और",
+    "golden": "प्राइमर",
+    "t_in": 5.82,
+    "t_out": 8.88
+   },
+   {
+    "text": "इसे बहुत ध्यान से सुनना।",
+    "golden": null,
+    "t_in": 8.88,
+    "t_out": 10.92
+   }
+  ]
+ },
+ {
+  "seg_id": 2,
+  "duration": 16.44,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "RNA का एक छोटा-सा खण्ड एक RNA प्राइमर की भाति कार्य करता है। यह DNA प्रतिकृति के प्रारम्भ हेतु आवश्यक होता है, क्योंकि DNA पॉलीमरेज स्वयं संश्लेषण प्रारम्भ नहीं कर सकता उसे एक मुक्त थ्री प्राइम ओ एच सिरा चाहिए,",
+  "phrases": []
+ },
+ {
+  "seg_id": 3,
+  "duration": 12.1,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "जो प्राइमर उपलब्ध कराता है। इसी से DNA अणु का नव संश्लेषण प्रारम्भ होता है। इसे आसान तरीके से याद रखो DNA polymerase खुद से synthesis शुरू नहीं कर सकता।",
+  "phrases": []
+ },
+ {
+  "seg_id": 4,
+  "duration": 11.8,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "उसे एक मुक्त थ्री प्राइम ओ एच सिरा चाहिए और ये प्राइमर उपलब्ध कराता है, इसलिए प्राइमर शुरुआत करवाता है, DNA polymerase आगे नई DNA लड़ी बनाता है।",
+  "phrases": []
+ },
+ {
+  "seg_id": 5,
+  "duration": 10.7,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "अब आते हैं replication के सबसे important हिस्से पर नए स्ट्रैण्ड का बढ़ना। यहाँ direction में बिल्कुल गलती मत करना। DNA प्रतिकृति में DNA के दोनों स्ट्रैण्ड भाग लेते हैं।",
+  "phrases": [
+   {
+    "text": "अब आते हैं replication के सबसे important हिस्से पर नए स्ट्रैण्ड का बढ़ना।",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 5.16
+   },
+   {
+    "text": "यहाँ direction में बिल्कुल गलती मत करना।",
+    "golden": null,
+    "t_in": 5.16,
+    "t_out": 6.54
+   },
+   {
+    "text": "DNA प्रतिकृति में DNA के दोनों स्ट्रैण्ड भाग लेते हैं।",
+    "golden": "प्रतिकृति",
+    "t_in": 6.54,
+    "t_out": 10.7
+   }
+  ]
+ },
+ {
+  "seg_id": 6,
+  "duration": 11.1,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "DNA पॉलीमरेज एंजाइम केवल 5' 3' दिशा में न्यूक्लियोटाइड जोड़ता है। इस line को एकदम दिमाग में बिठा लो DNA polymerase केवल 5′ से 3′ दिशा में nucleotide जोड़ता है,",
+  "phrases": []
+ },
+ {
+  "seg_id": 7,
+  "duration": 5.88,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "चूँकि DNA के दोनों स्ट्रैण्ड प्रतिसमानांतर होते हैं, इसलिए दोनों पर संश्लेषण एक जैसा नहीं होता।",
+  "phrases": [
+   {
+    "text": "चूँकि DNA के दोनों स्ट्रैण्ड प्रतिसमानांतर होते हैं,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 3.04
+   },
+   {
+    "text": "इसलिए दोनों पर संश्लेषण एक जैसा नहीं होता।",
+    "golden": null,
+    "t_in": 3.04,
+    "t_out": 5.88
+   }
+  ]
+ },
+ {
+  "seg_id": 8,
+  "duration": 12.26,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "जिस टेम्पलेट स्ट्रैण्ड की ध्रुवता 3' 5' होती है उस पर संश्लेषण सतत रूप से होता है, और इस पर बना नव संश्लेषित स्ट्रैण्ड (5' 3') सतत भुजा अर्थात लीडिंग स्ट्रैण्ड कहलाता है।",
+  "phrases": []
+ },
+ {
+  "seg_id": 9,
+  "duration": 10.08,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "सिर्फ इतना दिमाग में बिठा लो जिस template strand की दिशा 3′ से 5′ है, उस पर नई strand लगातार बनती है। इसीलिए इसे Leading strand कहते हैं।",
+  "phrases": []
+ },
+ {
+  "seg_id": 10,
+  "duration": 9.28,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "अब DNA खुल गया, primer तैयार है और Leading strand भी clear हो गया। लेकिन दूसरी तरफ निर्माण लगातार नहीं होता। Part three में असतत भुजा",
+  "phrases": [
+   {
+    "text": "अब DNA खुल गया,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.32
+   },
+   {
+    "text": "primer तैयार है और Leading strand भी clear हो गया।",
+    "golden": null,
+    "t_in": 1.32,
+    "t_out": 4.64
+   },
+   {
+    "text": "लेकिन दूसरी तरफ निर्माण लगातार नहीं होता।",
+    "golden": null,
+    "t_in": 4.64,
+    "t_out": 7.53
+   },
+   {
+    "text": "Part three में असतत भुजा",
+    "golden": "असतत",
+    "t_in": 7.53,
+    "t_out": 9.28
+   }
+  ]
+ },
+ {
+  "seg_id": 11,
+  "duration": 6.47,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "Lagging strand, Okazaki fragments, DNA ligase और बाकी बचे important points पूरे करेंगे।",
+  "phrases": [
+   {
+    "text": "Lagging strand, Okazaki fragments,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 4.04
+   },
+   {
+    "text": "DNA ligase और बाकी बचे important points पूरे करेंगे।",
+    "golden": null,
+    "t_in": 4.04,
+    "t_out": 6.47
+   }
+  ]
+ }
+]

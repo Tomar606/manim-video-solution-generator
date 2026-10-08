@@ -195,9 +195,26 @@ def _open_uploads(b: FlowBridge, sel: dict) -> None:
 
 
 def _listed(b: FlowBridge, name: str) -> bool:
-    return bool(ev(b, "var want = " + json.dumps(name) + ";"
+    """Whether Flow's Uploads shows this file.
+
+    THE FILENAME MOVED, 2026-09. It used to sit in the tile's own text, so an
+    innerText search found it. On the current build a tile renders as
+    <flow-grid-tile-container aria-label="<filename>"> wrapping a
+    <flow-image-tile> whose only text is "Favourite" — nothing in the pane's
+    innerText carries the name, and no element has role=option any more.
+    Against that build the old check answered False for files that were sitting
+    right there, so every run tried to upload them again.
+
+    Both are tried: the aria-label first, the old text search after it, so this
+    keeps working if Flow moves the name back.
+    """
+    want = json.dumps(name)
+    return bool(ev(b, "var want = " + want + ";"
                       "var pane = document.querySelector('.cdk-overlay-pane') || document;"
-                      "return (pane.innerText || '').indexOf(want) >= 0;"))
+                      "var byLabel = [].slice.call("
+                      "  pane.querySelectorAll('[aria-label]')).some(function (e) {"
+                      "  return (e.getAttribute('aria-label') || '').indexOf(want) >= 0; });"
+                      "return byLabel || (pane.innerText || '').indexOf(want) >= 0;"))
 
 
 def already_uploaded(b: FlowBridge, sel: dict, name: str) -> bool:
@@ -234,11 +251,21 @@ def attach_by_name(b: FlowBridge, sel: dict, name: str) -> int:
     mark_js = (
         "var want = " + json.dumps(name) + ";"
         "var pane = document.querySelector('.cdk-overlay-pane') || document;"
+        # 2026-09 build: the tile is <flow-grid-tile-container aria-label=NAME>
+        # and carries the filename nowhere else — no role=option, and the only
+        # text inside it is "Favourite". Tried first; the older strategies
+        # below still run if this finds nothing.
+        "var lab = [].slice.call(pane.querySelectorAll('[aria-label]'))"
+        "  .filter(function (e) {"
+        "    return (e.getAttribute('aria-label') || '').indexOf(want) >= 0; });"
+        "var hit = lab.length ? lab[lab.length - 1] : null;"
         # the SELECTABLE tile (role=option), and the LAST match: a retry that
         # re-uploaded leaves an older twin that may be scrolled out of reach
-        "var all = [].slice.call(pane.querySelectorAll('[role=option]'))"
-        "  .filter(function (e) { return (e.innerText || '').indexOf(want) >= 0; });"
-        "var hit = all.length ? all[all.length - 1] : null;"
+        "if (!hit) {"
+        "  var all = [].slice.call(pane.querySelectorAll('[role=option]'))"
+        "    .filter(function (e) { return (e.innerText || '').indexOf(want) >= 0; });"
+        "  hit = all.length ? all[all.length - 1] : null;"
+        "}"
         # older layouts had no role=option: climb from the filename's text to
         # the row that holds the thumbnail
         "if (!hit) {"
@@ -319,9 +346,50 @@ def set_prompt(b: FlowBridge, sel: dict, text: str) -> int:
         return int(ev(b, probe) or 0)
 
 
+def wait_for_submit(b: FlowBridge, sel: dict, budget: float = 900.0) -> bool:
+    """Wait until Flow will accept another generation; True if it will.
+
+    THE MISSING BUTTON IS A QUEUE, NOT A GLITCH. Flow runs at most two
+    generations at once, and while both slots are full it does not disable the
+    submit arrow — it REMOVES it from the prompt bar. So a third submission
+    dies on 'click target not found' with the prompt sitting typed and ready,
+    which reads like a selector that went stale and is nothing of the kind.
+    Waiting is the whole fix: a slot opens when a clip finishes, typically
+    within a couple of minutes, and the button comes back on its own."""
+    js = (f"return document.querySelector({json.dumps(sel['generate_selector'])}) "
+          f"? 1 : 0;")
+    end = time.time() + budget
+    said = False
+    while time.time() < end:
+        if int(ev(b, js) or 0):
+            return True
+        if not said:
+            pct = (tab_state(b).get("progress") or [""])[0]
+            print(f"    waiting for a free slot — Flow is at capacity"
+                  + (f" ({pct} on the clip in front)" if pct else ""))
+            said = True
+        time.sleep(15.0)
+    return False
+
+
 def start_generation(b: FlowBridge, sel: dict) -> str:
-    """Press the submit arrow and confirm Flow took it; return what was seen."""
-    b.call("click", selector=sel["generate_selector"], cdp=True, timeout=60)
+    """Press the submit arrow and confirm Flow took it; return what was seen.
+
+    THE BUTTON CAN BE MISSING FOR A MOMENT. Queueing a third clip while two
+    were rendering, the submit arrow was absent when the click fired and present
+    a few seconds later: Flow re-renders the prompt bar as the previous
+    submission's chat message lands. One retry after a pause, then a real error.
+    Under that, wait_for_submit sits out Flow's two-at-a-time limit."""
+    if not wait_for_submit(b, sel):
+        raise KitError("Flow's submit arrow never came back — it has been at "
+                       "capacity for fifteen minutes. Look at the tab.")
+    try:
+        b.call("click", selector=sel["generate_selector"], cdp=True, timeout=60)
+    except FlowError:
+        time.sleep(5.0)
+        if not wait_for_submit(b, sel, budget=120.0):
+            raise
+        b.call("click", selector=sel["generate_selector"], cdp=True, timeout=60)
     time.sleep(SETTLE_AFTER_SUBMIT)
     for _ in range(10):
         st = tab_state(b)

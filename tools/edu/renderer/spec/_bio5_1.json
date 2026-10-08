@@ -1,0 +1,198 @@
+[
+ {
+  "seg_id": 1,
+  "duration": 6.76,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "चलो बच्चों, अब इसकी विशेषताएँ एक-एक करके समझते हैं, और सबसे पहले देखते हैं, पॉलीन्यूक्लियोटाइड शृंखला।",
+  "phrases": [
+   {
+    "text": "चलो बच्चों, अब इसकी विशेषताएँ एक-एक करके समझते हैं,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 3.1
+   },
+   {
+    "text": "और सबसे पहले देखते हैं, पॉलीन्यूक्लियोटाइड शृंखला।",
+    "golden": "पॉलीन्यूक्लियोटाइड",
+    "t_in": 3.1,
+    "t_out": 6.76
+   }
+  ]
+ },
+ {
+  "seg_id": 2,
+  "duration": 12.76,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "प्रत्येक डी एन ए अणु, दो पॉलीन्यूक्लियोटाइड शृंखलाओं से मिलकर बना होता है। इस शृंखला में रीढ़, फॉस्फेट, शर्करा, फॉस्फेट,अणुओं की बनी होती है,",
+  "phrases": []
+ },
+ {
+  "seg_id": 3,
+  "duration": 11.06,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "तथा क्षारक दोनों के बीच में अन्दर की ओर निकले रहते हैं, किसी सीढ़ी की तरह। अब इसे simple भाषा में समझो, DNA की संरचना दो पॉलीन्यूक्लियोटाइड श्रृंखलाओं से बनी होती है।",
+  "phrases": []
+ },
+ {
+  "seg_id": 4,
+  "duration": 11.98,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "बाहर की ओर शर्करा और फॉस्फेट की रीढ़, backbone होती है, जबकि नाइट्रोजनी क्षार अंदर की ओर रहते हैं। ये क्षार सीढ़ी की पायदानों की तरह दिखाई देते हैं।",
+  "phrases": []
+ },
+ {
+  "seg_id": 5,
+  "duration": 6.56,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "बच्चों, पहली विशेषता हो गई। अब आते हैं दूसरी पर, समानान्तरता का विपरीत होना।",
+  "phrases": [
+   {
+    "text": "बच्चों, पहली विशेषता हो गई।",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.26
+   },
+   {
+    "text": "अब आते हैं दूसरी पर, समानान्तरता का विपरीत होना।",
+    "golden": null,
+    "t_in": 2.26,
+    "t_out": 6.56
+   }
+  ]
+ },
+ {
+  "seg_id": 6,
+  "duration": 16.0,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "इसमें दोनों शृंखलाएँ, एक-दूसरे के प्रति समानान्तर, Antiparallel, होती हैं। इसका अर्थ यह है कि, एक शृंखला की ध्रुवता यदि 5 प्राइम से 3 प्राइम है, तो दूसरी की 3 प्राइम से 5 प्राइम होती है,",
+  "phrases": []
+ },
+ {
+  "seg_id": 7,
+  "duration": 11.3,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "दोनों शृंखलाओं की दिशा विपरीत होती है,,अब ध्यान दो, दोनों strands साथ-साथ जरूर हैं, लेकिन उनकी direction opposite होती है। एक 5 प्राइम से 3 प्राइम,",
+  "phrases": []
+ },
+ {
+  "seg_id": 8,
+  "duration": 2.76,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "तो दूसरी 3 प्राइम से 5 प्राइम।",
+  "phrases": []
+ },
+ {
+  "seg_id": 9,
+  "duration": 4.74,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "तो यहाँ तक दूसरी विशेषता भी clear है। अब तीसरी पर आते हैं, कुण्डलन।",
+  "phrases": [
+   {
+    "text": "तो यहाँ तक दूसरी विशेषता भी clear है।",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.88
+   },
+   {
+    "text": "अब तीसरी पर आते हैं, कुण्डलन।",
+    "golden": "कुण्डलन",
+    "t_in": 2.88,
+    "t_out": 4.74
+   }
+  ]
+ },
+ {
+  "seg_id": 10,
+  "duration": 14.06,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "इसमें दोनों शृंखलाएँ आपस में कुण्डलित होकर, द्विकुण्डली बनाती हैं, जिनमें प्रत्येक शृंखला, दक्षिणावर्ती, right handed, कुण्डलित होती है। मतलब दोनों strands आपस में twist होकर, दोहरी कुंडली बनाती हैं,",
+  "phrases": []
+ },
+ {
+  "seg_id": 11,
+  "duration": 2.94,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "और दोनों की winding right handed होती है।",
+  "phrases": []
+ },
+ {
+  "seg_id": 12,
+  "duration": 10.82,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "बच्चों, यहाँ तक DNA की तीन विशेषताएँ हो गईं, लेकिन answer अभी पूरा नहीं हुआ है। अब next part में इसके कुछ important points समझेंगे, जैसे, base pairing और DNA की मापन।",
+  "phrases": [
+   {
+    "text": "बच्चों, यहाँ तक DNA की तीन विशेषताएँ हो गईं,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 3.42
+   },
+   {
+    "text": "लेकिन answer अभी पूरा नहीं हुआ है।",
+    "golden": null,
+    "t_in": 3.42,
+    "t_out": 5.0
+   },
+   {
+    "text": "अब next part में इसके कुछ important points समझेंगे,",
+    "golden": null,
+    "t_in": 5.0,
+    "t_out": 7.96
+   },
+   {
+    "text": "जैसे, base pairing और DNA की मापन।",
+    "golden": null,
+    "t_in": 7.96,
+    "t_out": 10.82
+   }
+  ]
+ },
+ {
+  "seg_id": 13,
+  "duration": 3.0,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "इसलिए Part two को बिल्कुल भी miss मत करना।",
+  "phrases": [
+   {
+    "text": "इसलिए Part two को बिल्कुल भी miss मत करना।",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 3.0
+   }
+  ]
+ }
+]

@@ -5,12 +5,57 @@ muxing behave identically wherever ffmpeg is installed.
 """
 from __future__ import annotations
 
+import functools
+import os
 import subprocess
 from pathlib import Path
 
 
 class MediaError(RuntimeError):
     pass
+
+
+
+def video_codec(final: bool = True) -> list[str]:
+    """ffmpeg's output-codec arguments, for a FINAL file or a scratch one.
+
+    A part is encoded end to end four times — background concat, composite,
+    chips, answer card — and only the last of those is delivered. The other
+    three do almost no work per pixel and still paid a full x264 `medium`
+    encode, which is the bulk of a build's wall clock.
+
+    The scratch passes now go to the hardware encoder when one exists.
+    Measured on 300 frames against a lossless reference:
+
+        x264 medium crf18   12.2s   3.0 MB   PSNR 36.65   SSIM 0.9932
+        videotoolbox 12M     5.3s  11.3 MB   PSNR 36.62   SSIM 0.9925
+
+    — a difference of 0.04 dB and 0.0007 SSIM, far below anything visible, for
+    a third of the time. It costs file SIZE, which is why it is not used for
+    the delivered file: x264 is much more bit-efficient, and the master should
+    stay small as well as clean.
+
+    `preset veryfast` was measured too and is NOT used: at 0.9904 SSIM it loses
+    real quality, and a loss taken on a scratch pass is carried by every pass
+    after it.
+
+    FAST_INTERMEDIATE=0 forces software everywhere, for a like-for-like check.
+    """
+    if final or os.environ.get("FAST_INTERMEDIATE") == "0":
+        return ["-c:v", "libx264", "-preset", "medium", "-crf", "18"]
+    if not _has_videotoolbox():
+        return ["-c:v", "libx264", "-preset", "medium", "-crf", "18"]
+    return ["-c:v", "h264_videotoolbox", "-b:v", "12M"]
+
+
+@functools.lru_cache(maxsize=1)
+def _has_videotoolbox() -> bool:
+    try:
+        out = subprocess.run(["ffmpeg", "-hide_banner", "-encoders"],
+                             capture_output=True, text=True, timeout=20).stdout
+    except (OSError, subprocess.SubprocessError):
+        return False
+    return "h264_videotoolbox" in out
 
 
 def _run(cmd: list[str]) -> subprocess.CompletedProcess:

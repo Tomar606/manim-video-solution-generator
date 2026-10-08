@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- WHAT THE FIRST LAW IS ABOUT. A cell with current i flowing for time t,
+       and matter piling up on the cathode. W, Q, i and t are all abstractions
+       until you can see the thing they measure: charge going round and metal
+       arriving on a plate. No text -- labels come from the spec. -->
+  <g id="el_tank">
+    <path d="M250 130 L250 396 Q250 414 268 414 L812 414 Q830 414 830 396 L830 130"
+          fill="none" stroke="#7FD4FF" stroke-width="9" stroke-linejoin="round"/>
+    <path d="M262 196 L262 392 Q262 402 272 402 L808 402 Q818 402 818 392 L818 196 Z"
+          fill="#7FD4FF" fill-opacity="0.13" stroke="#7FD4FF" stroke-width="5"/>
+    <path d="M262 196 L818 196" stroke="#7FD4FF" stroke-width="5"/>
+  </g>
+  <g id="el_anode">
+    <rect x="336" y="142" width="42" height="228" rx="5"
+          fill="#7FD4FF" fill-opacity="0.28" stroke="#7FD4FF" stroke-width="7"/>
+  </g>
+  <g id="el_cathode">
+    <rect x="702" y="142" width="42" height="228" rx="5"
+          fill="#FFC53D" fill-opacity="0.22" stroke="#FFC53D" stroke-width="7"/>
+  </g>
+  <!-- the metal arriving: this is W -->
+  <g id="el_deposit" data-optional>
+    <rect x="686" y="238" width="16" height="132" rx="3" fill="#7BE3A0" fill-opacity="0.85"/>
+    <rect x="744" y="238" width="16" height="132" rx="3" fill="#7BE3A0" fill-opacity="0.85"/>
+  </g>
+  <g id="el_circuit">
+    <path d="M357 142 L357 70 L470 70" fill="none" stroke="#9FB6CC"
+          stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M723 142 L723 70 L616 70" fill="none" stroke="#9FB6CC"
+          stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M508 40 L508 100" stroke="#FF5A5A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M534 54 L534 86" stroke="#7FD4FF" stroke-width="9" stroke-linecap="round"/>
+    <path d="M470 70 L508 70" stroke="#9FB6CC" stroke-width="8" stroke-linecap="round"/>
+    <path d="M534 70 L578 70" stroke="#9FB6CC" stroke-width="8" stroke-linecap="round"/>
+    <path d="M578 40 L578 100" stroke="#FF5A5A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M604 54 L604 86" stroke="#7FD4FF" stroke-width="9" stroke-linecap="round"/>
+    <path d="M604 70 L616 70" stroke="#9FB6CC" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <!-- the current itself, which is i -->
+  <g id="el_current" data-optional>
+    <path d="M400 70 L452 70" stroke="#7BE3A0" stroke-width="7" stroke-linecap="round"/>
+    <path d="M470 70 L444 57 L444 83 Z" fill="#7BE3A0"/>
+    <path d="M680 70 L628 70" stroke="#7BE3A0" stroke-width="7" stroke-linecap="round"/>
+    <path d="M610 70 L636 57 L636 83 Z" fill="#7BE3A0"/>
+  </g>
+</svg>

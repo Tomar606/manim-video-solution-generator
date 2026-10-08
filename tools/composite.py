@@ -92,6 +92,13 @@ FULL_W, FULL_Y = 645, 966          # 66% of 1080
 # size is about 3mm across; the diagram has to win that trade, not the framing.
 SMALL_W, SMALL_Y = 340, 1245        # a 6% step, not 15% — just enough
                                     # to clear content that stops at 60%       # 56% of 1080
+# THE REFERENCE LOOK (22 Sept 2026): ONE presenter size for the whole video.
+# The user's reference reel never zooms him — head at ~0.65 of the frame,
+# shoulders ~0.39 of its width, card or no card, graphic or none. Setting
+# PRESENTER_ONE_SIZE=<width px> makes every size the same, so the eased
+# windows (card, shrink, grow) still run but change nothing.
+if os.environ.get("PRESENTER_ONE_SIZE"):
+    CARD_W = FULL_W = SMALL_W = BIG_W = int(os.environ["PRESENTER_ONE_SIZE"])
 EASE = 0.75                         # seconds, the ramp at each edge
 PRESENTER_FADE = 0.75               # the brief: fade the presenter out over
                                     # three quarters of a second when a diagram

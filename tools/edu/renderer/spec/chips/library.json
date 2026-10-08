@@ -1,0 +1,66 @@
+[
+ {
+  "slug": "CHE-C1-LA-02_boiling-point-elevation",
+  "mode": "svg",
+  "h": 700,
+  "svg": "assets/library/CHE-C1-LA-02_boiling-point-elevation.svg",
+  "hide": "",
+  "labels": "[]"
+ },
+ {
+  "slug": "CHE-C5-LA-01_hybridisation-geometry",
+  "mode": "svg",
+  "h": 700,
+  "svg": "assets/library/CHE-C5-LA-01_hybridisation-geometry.svg",
+  "hide": "",
+  "labels": "[]"
+ },
+ {
+  "slug": "CHE-C4-LA-02_kmno4-three-media",
+  "mode": "svg",
+  "h": 700,
+  "svg": "assets/library/CHE-C4-LA-02_kmno4-three-media.svg",
+  "hide": "",
+  "labels": "[]"
+ },
+ {
+  "slug": "PHY-C5-LA-01_magnetic-materials",
+  "mode": "svg",
+  "h": 700,
+  "svg": "assets/library/PHY-C5-LA-01_magnetic-materials.svg",
+  "hide": "",
+  "labels": "[]"
+ },
+ {
+  "slug": "PHY-C1-LA-01_gauss-law",
+  "mode": "svg",
+  "h": 700,
+  "svg": "assets/library/PHY-C1-LA-01_gauss-law.svg",
+  "hide": "",
+  "labels": "[]"
+ },
+ {
+  "slug": "PHY-C1-LA-02_coulomb-from-gauss",
+  "mode": "svg",
+  "h": 700,
+  "svg": "assets/library/PHY-C1-LA-02_coulomb-from-gauss.svg",
+  "hide": "",
+  "labels": "[]"
+ },
+ {
+  "slug": "CHE-C4-LA-01_dichromate-manufacture",
+  "mode": "svg",
+  "h": 700,
+  "svg": "assets/library/CHE-C4-LA-01_dichromate-manufacture.svg",
+  "hide": "",
+  "labels": "[]"
+ },
+ {
+  "slug": "CHE-C4-LA-03_3d-trends",
+  "mode": "svg",
+  "h": 700,
+  "svg": "assets/library/CHE-C4-LA-03_3d-trends.svg",
+  "hide": "",
+  "labels": "[]"
+ }
+]

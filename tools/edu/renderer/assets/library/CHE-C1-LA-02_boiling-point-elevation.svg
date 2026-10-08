@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 700">
+  <!-- क्वथनांक में उन्नयन. Checked against the team's answer page and against
+       Raoult: a solution's vapour pressure is LOWER than the pure solvent's, so
+       it must be heated FURTHER to reach 1 atm. Therefore the solvent curve is
+       the UPPER one and crosses 1 atm FIRST (at Tb0), and the solution curve is
+       the LOWER one and crosses LATER (at Tb). Getting these two the wrong way
+       round is the classic error and it inverts the whole answer. -->
+  <g id="bp_axes">
+    <line x1="150" y1="60" x2="150" y2="470" stroke="#9FB6CC" stroke-width="5"/>
+    <line x1="150" y1="470" x2="1000" y2="470" stroke="#9FB6CC" stroke-width="5"/>
+    <path d="M150 50 L142 74 L158 74 Z" fill="#9FB6CC"/>
+    <path d="M1010 470 L986 462 L986 478 Z" fill="#9FB6CC"/>
+  </g>
+  <!-- 1 atm -->
+  <g id="bp_atm">
+    <line x1="150" y1="150" x2="900" y2="150" stroke="#FFC53D" stroke-width="4"
+          stroke-dasharray="14 12"/>
+  </g>
+  <!-- solvent: higher vapour pressure, reaches 1 atm sooner -->
+  <g id="bp_solvent">
+    <path d="M190 400 C 360 380, 520 300, 620 150 L 660 96" fill="none"
+          stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="620" cy="150" r="10" fill="#7FD4FF"/>
+    <line x1="620" y1="150" x2="620" y2="470" stroke="#7FD4FF" stroke-width="3"
+          stroke-dasharray="10 9"/>
+  </g>
+  <!-- solution: lower vapour pressure throughout, reaches 1 atm later -->
+  <g id="bp_solution">
+    <path d="M190 452 C 380 440, 560 380, 700 150 L 736 96" fill="none"
+          stroke="#7BE3A0" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="700" cy="150" r="10" fill="#7BE3A0"/>
+    <line x1="700" y1="150" x2="700" y2="470" stroke="#7BE3A0" stroke-width="3"
+          stroke-dasharray="10 9"/>
+  </g>
+  <!-- the elevation itself -->
+  <g id="bp_delta">
+    <path d="M622 262 L698 262" stroke="#FFC53D" stroke-width="5" stroke-linecap="round"/>
+    <path d="M620 262 L640 252 L640 272 Z" fill="#FFC53D"/>
+    <path d="M700 262 L680 252 L680 272 Z" fill="#FFC53D"/>
+  </g>
+<style>
+    text{font-family:Poppins,Mukta,'Noto Sans Devanagari',sans-serif;font-weight:800;
+         fill:#FFFFFF;paint-order:stroke;stroke:#0B1220;stroke-width:7px;
+         stroke-linejoin:round;text-anchor:middle}
+    .t{font-size:36px} .s{font-size:29px} .g{fill:#FFC53D} .b{fill:#7FD4FF}
+    .n{fill:#7BE3A0} .d{font-size:25px;fill:#9FB6CC}
+  </style>
+  <text class="s b" x="150" y="44" text-anchor="start">वाष्पदाब ↑</text>
+  <text class="t" x="930" y="516" >परम ताप</text>
+  <text class="s g" x="96" y="142" >1 atm</text>
+  <text class="t b" x="392" y="300" >विलायक</text>
+  <text class="t n" x="556" y="392" >विलयन</text>
+  <text class="s" x="520" y="58" >विलायक का क्वथनांक</text>
+  <text class="s" x="880" y="58" >विलयन का क्वथनांक</text>
+  <text class="t g" x="660" y="240" >ΔTb</text>
+  <text class="s b" x="606" y="500" >T⁰b</text>
+  <text class="s n" x="714" y="500" >Tb</text>
+  <text class="d" x="540" y="660" >शुद्ध विलायक ऊपर · विलयन नीचे</text>
+</svg>

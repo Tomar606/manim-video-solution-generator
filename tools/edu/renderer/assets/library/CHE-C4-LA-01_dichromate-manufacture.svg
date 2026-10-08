@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 700">
+  <!-- K2Cr2O7 from chromite ore, as four stages. The chemistry, NCERT:
+       1  4FeCr2O4 + 8Na2CO3 + 7O2  ->  8Na2CrO4 + 2Fe2O3 + 8CO2   (fused in air)
+       2  2Na2CrO4 + H2SO4          ->  Na2Cr2O7 + Na2SO4 + H2O    (acidified)
+       3  Na2Cr2O7 + 2KCl           ->  K2Cr2O7 + 2NaCl            (KCl added)
+       The last step works because K2Cr2O7 is the LEAST soluble of them and
+       crystallises out -- that is why KCl is used and why the step is last.
+       Colour carries the story: chromate is yellow, dichromate orange. -->
+  <g id="dm_ore">
+    <rect x="40" y="230" width="190" height="140" rx="14" fill="#9FB6CC"
+          fill-opacity="0.16" stroke="#9FB6CC" stroke-width="5"/>
+  </g>
+  <g id="dm_arrow1">
+    <path d="M240 300 L316 300" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M336 300 L306 285 L306 315 Z" fill="#7FD4FF"/>
+  </g>
+  <g id="dm_chromate">
+    <rect x="346" y="230" width="190" height="140" rx="14" fill="#FFC53D"
+          fill-opacity="0.30" stroke="#FFC53D" stroke-width="5"/>
+  </g>
+  <g id="dm_arrow2">
+    <path d="M546 300 L622 300" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M642 300 L612 285 L612 315 Z" fill="#7FD4FF"/>
+  </g>
+  <g id="dm_dichromate">
+    <rect x="652" y="230" width="190" height="140" rx="14" fill="#E8703A"
+          fill-opacity="0.42" stroke="#E8703A" stroke-width="5"/>
+  </g>
+  <g id="dm_arrow3">
+    <path d="M852 300 L928 300" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M948 300 L918 285 L918 315 Z" fill="#7FD4FF"/>
+  </g>
+  <!-- the product, crystallising because it is the least soluble -->
+  <g id="dm_product">
+    <rect x="958" y="230" width="100" height="140" rx="14" fill="#E8703A"
+          fill-opacity="0.75" stroke="#FFC53D" stroke-width="6"/>
+    <g fill="#FFC53D">
+      <path d="M984 300 l14 -22 l14 22 l-14 22 Z"/>
+      <path d="M1016 342 l11 -17 l11 17 l-11 17 Z"/>
+      <path d="M986 356 l10 -15 l10 15 l-10 15 Z"/>
+    </g>
+  </g>
+<style>
+    text{font-family:Poppins,Mukta,'Noto Sans Devanagari',sans-serif;font-weight:800;
+         fill:#FFFFFF;paint-order:stroke;stroke:#0B1220;stroke-width:7px;
+         stroke-linejoin:round;text-anchor:middle}
+    .t{font-size:36px} .s{font-size:29px} .g{fill:#FFC53D} .b{fill:#7FD4FF}
+    .n{fill:#7BE3A0} .d{font-size:25px;fill:#9FB6CC}
+  </style>
+  <text class="s" x="135" y="186" >क्रोमाइट अयस्क</text>
+  <text class="t" x="135" y="300" >FeCr₂O₄</text>
+  <text class="t g" x="441" y="186" >Na₂CrO₄</text>
+  <text class="s" x="441" y="300" >पीला</text>
+  <text class="t g" x="747" y="186" >Na₂Cr₂O₇</text>
+  <text class="s" x="747" y="300" >नारंगी</text>
+  <text class="t g" x="1006" y="186" >K₂Cr₂O₇</text>
+  <text class="s" x="1006" y="410" >क्रिस्टल</text>
+  <text class="s b" x="288" y="438" >Na₂CO₃ + O₂</text>
+  <text class="s b" x="594" y="438" >H₂SO₄</text>
+  <text class="s b" x="900" y="438" >KCl</text>
+  <text class="d" x="540" y="662" >K₂Cr₂O₇ सबसे कम विलेय — इसलिए क्रिस्टलित होता है</text>
+</svg>

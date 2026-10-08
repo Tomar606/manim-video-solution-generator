@@ -1,0 +1,178 @@
+[
+ {
+  "seg_id": 1,
+  "duration": 3.98,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "दो निकटवर्ती क्षारक युग्मों के बीच की दूरी कितनी होती है।",
+  "phrases": [
+   {
+    "text": "दो निकटवर्ती क्षारक युग्मों के बीच की दूरी कितनी होती है।",
+    "golden": "क्षारक",
+    "t_in": 0.0,
+    "t_out": 3.98
+   }
+  ]
+ },
+ {
+  "seg_id": 2,
+  "duration": 10.3,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "दो निकटवर्ती क्षारकयुग्मों के बीच की दूरी, 0.34 nm होती है। 1 nm बराबर, 10 की घात माइनस 9 मीटर। अब ध्यान से सुनो,",
+  "phrases": []
+ },
+ {
+  "seg_id": 3,
+  "duration": 11.25,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "एक base pair से अगले base pair के बीच की दूरी, 0.34 nm होती है। इसे 3.4 nm से mix मत करना। 3.4 nm बराबर, एक complete turn की length,",
+  "phrases": []
+ },
+ {
+  "seg_id": 4,
+  "duration": 10.34,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "और 0.34 nm बराबर, दो पास-पास के base pairs के बीच की दूरी। यह difference एकदम दिमाग में छाप लो।",
+  "phrases": []
+ },
+ {
+  "seg_id": 5,
+  "duration": 2.37,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "बच्चों, यहाँ तक हो गया तो अब अगले point पर आते हैं, पूरकता।",
+  "phrases": [
+   {
+    "text": "बच्चों, यहाँ तक हो गया तो अब अगले point पर आते हैं, पूरकता।",
+    "golden": "पूरकता",
+    "t_in": 0.0,
+    "t_out": 2.37
+   }
+  ]
+ },
+ {
+  "seg_id": 6,
+  "duration": 13.54,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "इसमें प्रत्येक रज्जुक, दूसरे रज्जुक का पूरक होता है। मतलब एक strand पर जो bases हैं, दूसरे strand पर उनके complementary bases होंगे। यानी, A के सामने T और C के सामने G।",
+  "phrases": []
+ },
+ {
+  "seg_id": 7,
+  "duration": 2.76,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "ये point छोटा है, लेकिन बहुत important है।",
+  "phrases": []
+ },
+ {
+  "seg_id": 8,
+  "duration": 7.12,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "अब आखिरी point, द्वि-कुण्डली की स्थिरता, इसे exam में conclusion की तरह जरूर लिखना।",
+  "phrases": [
+   {
+    "text": "अब आखिरी point, द्वि-कुण्डली की स्थिरता,",
+    "golden": "स्थिरता",
+    "t_in": 0.0,
+    "t_out": 3.66
+   },
+   {
+    "text": "इसे exam में conclusion की तरह जरूर लिखना।",
+    "golden": null,
+    "t_in": 3.66,
+    "t_out": 7.12
+   }
+  ]
+ },
+ {
+  "seg_id": 9,
+  "duration": 14.8,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "DNA की द्वि-कुण्डली को स्थिर रखने में दो चीजें महत्वपूर्ण हैं, क्षारकों के बीच हाइड्रोजन बंध, और क्षारकों का एक के ऊपर एक व्यवस्थित होना। ये दोनों मिलकर, DNA की संरचना को मजबूत और स्थिर बनाए रखते हैं।",
+  "phrases": []
+ },
+ {
+  "seg_id": 10,
+  "duration": 13.28,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "तो बच्चों, अब हमारे पूरे 9 points पक्के हो गए हैं। अब exact answer परीक्षा में कैसे लिखना है, और diagram में इन सारे parts को कहाँ label करना है, वो आपकी screen के right side में दिए Notes button पर मिल जाएगा।",
+  "phrases": [
+   {
+    "text": "तो बच्चों, अब हमारे पूरे 9 points पक्के हो गए हैं।",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 0.84
+   },
+   {
+    "text": "अब exact answer परीक्षा में कैसे लिखना है,",
+    "golden": null,
+    "t_in": 0.84,
+    "t_out": 6.02
+   },
+   {
+    "text": "और diagram में इन सारे parts को कहाँ label करना है,",
+    "golden": null,
+    "t_in": 6.02,
+    "t_out": 9.6
+   },
+   {
+    "text": "वो आपकी screen के right side में दिए Notes button पर मिल जाएगा।",
+    "golden": null,
+    "t_in": 9.6,
+    "t_out": 13.28
+   }
+  ]
+ },
+ {
+  "seg_id": 11,
+  "duration": 7.96,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "ये चार नंबर वाला question तो पक्का कर लिया, अब आगे की पढ़ाई वाली reels से ऐसे ही एक-एक सवाल करते जाओ, सिलेबस भी complete करते जाओ।",
+  "phrases": [
+   {
+    "text": "ये चार नंबर वाला question तो पक्का कर लिया,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.82
+   },
+   {
+    "text": "अब आगे की पढ़ाई वाली reels से ऐसे ही एक-एक सवाल करते जाओ,",
+    "golden": null,
+    "t_in": 2.82,
+    "t_out": 6.3
+   },
+   {
+    "text": "सिलेबस भी complete करते जाओ।",
+    "golden": null,
+    "t_in": 6.3,
+    "t_out": 7.96
+   }
+  ]
+ }
+]

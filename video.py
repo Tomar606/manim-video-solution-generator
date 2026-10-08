@@ -23,6 +23,7 @@ from __future__ import annotations
 import argparse
 import os
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -800,15 +801,37 @@ def cmd_beats(args) -> int:
     return 0
 
 
+def _unbuffer() -> None:
+    """A stage that runs for twenty minutes is watched through a log file, and
+    Python only line-buffers to a tty — so piping a run anywhere hides every
+    line of its progress until it exits."""
+    try:
+        sys.stdout.reconfigure(line_buffering=True)
+    except AttributeError:
+        pass
+
+
 def cmd_veo(args) -> int:
     """Fill every `type: video` beat with a checked, downloaded Flow clip.
 
     The stage is a no-op on a part with no video beats, which is most of them —
     see the routing table in PIPELINE.md. It is safe to leave in a build script.
     """
+    _unbuffer()
     from src import veo
     from src.veo_sequence import SequenceError
     from src.flow_bridge import FlowError
+
+    # The page code the bridge ships is a STRING to the extension, so a broken
+    # one loads cleanly and fails only when it is used — build 9's listMedia fix
+    # was a syntax error on the page and shipped unexecuted. Checking it here
+    # costs a second and happens before anything is paid for.
+    chk = subprocess.run([sys.executable, "tools/check_bridge_page_code.py"],
+                         capture_output=True, text=True)
+    if chk.returncode:
+        print(chk.stdout + chk.stderr)
+        print("❌ the Flow bridge would send broken JavaScript to the page")
+        return 2
 
     root = Path(args.projects_dir or DEFAULT_PROJECTS_DIR) / args.project
     if not root.is_dir():
@@ -825,7 +848,9 @@ def cmd_veo(args) -> int:
     for part in parts:
         try:
             out = veo.run(str(root), int(part), attempts=args.attempts,
-                          use_plate=not args.no_plate, provider=args.provider)
+                          dry_run=args.dry_run,
+                          use_plate=not args.no_plate, provider=args.provider,
+                          regenerate=args.regenerate)
         except (veo.VeoError, FlowError, SequenceError, FileNotFoundError) as exc:
             print(f"❌ part {part}: {exc}")
             return 1
@@ -838,7 +863,8 @@ def cmd_veo(args) -> int:
 
 def cmd_flow(args) -> int:
     """Run the bridge on its own, or say whether the browser half is alive."""
-    from src.flow_bridge import FlowBridge, FlowError, serve_forever
+    from src.flow_bridge import (FlowBridge, FlowError, StaleExtension,
+                                 serve_forever)
 
     if args.serve:
         return serve_forever(args.port)
@@ -846,6 +872,11 @@ def cmd_flow(args) -> int:
     b = FlowBridge(args.port).start()
     try:
         info = b.wait_for_worker(timeout=args.timeout)
+    except StaleExtension as exc:
+        # Its own case: this is the one failure with a one-step fix, and it is
+        # the failure most likely to be mistaken for something else.
+        print(f"⚠  {exc}")
+        return 3
     except FlowError as exc:
         print(f"❌ {exc}")
         return 1
@@ -853,6 +884,7 @@ def cmd_flow(args) -> int:
         b.stop()
     tab = info.get("tab")
     print("✅ extension connected")
+    print(f"   extension build: {info.get('build')}")
     print(f"   flow tab: {tab or '— none open. Open your Flow project in any tab.'}")
     return 0 if tab else 2
 
@@ -1153,6 +1185,13 @@ def build_parser() -> argparse.ArgumentParser:
                         "Only for debugging — without it the clip carries a "
                         "background of Veo's invention and cannot be spliced in.")
     p.add_argument("--provider", help="override the LLM backend for the prompt writer")
+    p.add_argument("--dry-run", action="store_true",
+                   help="write and audit the prompts, print them, and stop "
+                        "before generating. A generation costs credits; the "
+                        "prompt is the whole job on this route.")
+    p.add_argument("--regenerate", action="store_true",
+                   help="generate every beat again, even ones with a clip that "
+                        "already passed its review")
     p.set_defaults(func=cmd_veo)
 
     p = sub.add_parser("flow", help="the browser bridge Veo generation runs through")

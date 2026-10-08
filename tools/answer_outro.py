@@ -100,7 +100,23 @@ def written_bottom(grey) -> int | None:
     profile = (grey < INK_LEVEL).sum(axis=1) / w
     window = max(9, h // 50)
     smooth = np.convolve(profile, np.ones(window) / window, mode="same")
-    rows = np.nonzero(smooth > INK_FLOOR)[0]
+    # THE FLOOR IS RELATIVE TO THIS SHEET'S OWN BLANK PAPER, not a constant.
+    # A fixed 0.025 is the coverage of a line of HANDWRITING across the sheet.
+    # A diagram is not writing: its lower reaches — the vagina tube and its one
+    # label on BIO-C2-SA-02 — are a narrow column of thin pencil covering 0.9%
+    # of the row, so the constant floor declared the answer finished 6% of the
+    # page early. The band of "blank" paper taken from below that point still
+    # had the drawing in it, and tiling it to extend the sheet printed the
+    # vagina and योनि THREE TIMES down the finished frame.
+    #
+    # Blank paper on these sheets is not zero either — the red margin rule runs
+    # down every row — so the baseline is measured rather than assumed: the
+    # tenth percentile is paper plus margin, and anything appreciably above it
+    # is content. Capped at the old constant so this can only ever find MORE
+    # of the answer than before, never less.
+    baseline = float(np.percentile(smooth, 10))
+    floor = min(INK_FLOOR, baseline + 0.004)
+    rows = np.nonzero(smooth > floor)[0]
     return int(rows.max()) if len(rows) else None
 
 
@@ -222,8 +238,60 @@ def to_full_page(card: Path, frame_w: int, frame_h: int, dest: Path) -> Path:
             if n >= 1:
                 band = im.crop((0, band_top, frame_w, band_top + n * pitch))
 
+    start_y = rows[-1] + pitch if rows else im.height
+
+    # NO HORIZONTAL RULING AT ALL. Some house sheets have none — just a red
+    # margin rule down the left and a drawn table — so rule_rows finds nothing
+    # and the fallback above fills the extension with FLAT paper colour. That
+    # is paper, so it passes the check below, but it drops the MARGIN rule:
+    # the red lines stop dead partway down the finished frame, and the join is
+    # the first thing the eye goes to.
+    #
+    # Same principle as the ruled path — copy the sheet's own paper rather than
+    # draw a substitute — but tile a blank STRIP instead of a ruled band. A
+    # strip carries the margin rule and the grain, so the page just continues.
+    #
+    # It also cuts the sheet at its last clean row. A photographed sheet ends
+    # on its physical corner, and that dark wedge sat in the middle of the
+    # frame with paper below it.
+    if band is None:
+        g = np.asarray(im.convert("L")).astype(int)
+        paper_lum = float(np.median(g))
+        mid = slice(int(frame_w * 0.25), int(frame_w * 0.95))
+        # The far left is checked TOO, and separately. A sheet's bottom corner
+        # is rounded, so its last few rows are clean across the middle and dark
+        # only at x=0 — they passed a middle-only test, went into the tiled
+        # strip, and printed a little dark notch down the left edge once per
+        # tile. The margin rule itself sits further in, so this narrow band is
+        # blank paper on a good row.
+        edge = slice(0, max(4, int(frame_w * 0.037)))
+        clear = np.array([g[y, mid].min() > paper_lum - 40
+                          and g[y, edge].min() > paper_lum - 40
+                          for y in range(g.shape[0])])
+        # The LAST long run of blank paper, found by scanning the sheet itself.
+        #
+        # `written_bottom` cannot be used to locate it: a photographed sheet
+        # ends on a dark physical EDGE, which reads as writing, so it returned
+        # 1504 of 1505 and every search below it came back empty. Runs of clear
+        # paper are immune to that — the edge simply is not one.
+        runs, start = [], None
+        for y, v in enumerate(clear):
+            if v and start is None:
+                start = y
+            elif not v and start is not None:
+                if y - start >= 12:
+                    runs.append((start, y - 1))
+                start = None
+        if start is not None and len(clear) - start >= 12:
+            runs.append((start, len(clear) - 1))
+        if runs:
+            top, bot = runs[-1]
+            page.paste(im.crop((0, 0, frame_w, bot)), (0, 0))   # drop the edge
+            band = im.crop((0, top, frame_w, min(bot, top + 200)))
+            start_y = bot
+
     if band is not None and band.height > 0:
-        y = rows[-1] + pitch
+        y = start_y
         while y < frame_h:
             page.paste(band, (0, y))
             y += band.height
@@ -243,32 +311,62 @@ def to_full_page(card: Path, frame_w: int, frame_h: int, dest: Path) -> Path:
 
 
 def build(video: Path, card: Path, out: Path, hold: float, fade: float,
-          plate: str | None = None) -> None:
+          plate: str | None = None, card2: Path | None = None,
+          hold2: float | None = None, in_fade: float | None = None) -> None:
+    """One card, or two shown in turn.
+
+    A long answer runs to two sheets, and a student cannot read the second if it
+    never appears. With `card2` the first page holds, cross-fades to the second,
+    and only the second fades to black — one ending, not two.
+    """
     v = probe(video)
     w, h, fps, dur = v["w"], v["h"], v["fps"], v["dur"]
     if dur <= fade:
         raise SystemExit(f"❌ {video.name} is shorter than the fade ({dur:.1f}s)")
 
     plate = plate or plate_colour(video, dur - 2.0)
-    card_dur = fade + hold + fade        # fade up, hold, fade to black
-    total = dur - fade + card_dur
+    hold2 = hold if hold2 is None else hold2
+    ifade = fade if in_fade is None else in_fade
 
-    # The page already fills the frame exactly (to_full_page), so the plate is
-    # only there as a ground in case a caller passes an odd-sized image.
-    tail = (
-        f"color=c={plate}:s={w}x{h}:r={fps}:d={card_dur}[plate];"
-        f"[2:v]scale={w}:{h}:force_original_aspect_ratio=increase,"
-        f"crop={w}:{h}[card];"
-        f"[plate][card]overlay=(W-w)/2:(H-h)/2:format=auto[tail0];"
-        # black at the very end, not a dissolve back to the plate
-        f"[tail0]fade=t=out:st={fade + hold}:d={fade}:color=black,"
-        f"format=yuv420p[tail];"
-    )
+    def page(idx: int, seconds: float, tag: str) -> str:
+        # The page already fills the frame exactly (to_full_page), so the plate
+        # is only there as a ground for an odd-sized image.
+        return (f"color=c={plate}:s={w}x{h}:r={fps}:d={seconds}[pl{tag}];"
+                f"[{idx}:v]scale={w}:{h}:force_original_aspect_ratio=increase,"
+                f"crop={w}:{h}[cd{tag}];"
+                f"[pl{tag}][cd{tag}]overlay=(W-w)/2:(H-h)/2:format=auto[{tag}];")
+
+    if card2 is None:
+        card_dur = fade + hold + fade    # fade up, hold, fade to black
+        tail = (page(2, card_dur, "t0") +
+                # black at the very end, not a dissolve back to the plate
+                f"[t0]fade=t=out:st={fade + hold}:d={fade}:color=black,"
+                f"format=yuv420p[tail];")
+    else:
+        # ALL BUT A CUT BETWEEN PAGES. These are two dense sheets of
+        # handwriting: cross-faded over a second, both sets of text are legible
+        # at once and the result is mud. A page turn is a cut.
+        #
+        # Done with a very short xfade rather than `concat`, which returned
+        # exit 234 here — concat demands identical stream properties from both
+        # sides and the two `color` sources differ in duration. xfade is the
+        # path already proven in this graph, and at 0.08s reads as a cut.
+        cut = 0.08
+        a_dur = ifade + hold + cut
+        b_dur = cut + hold2 + fade
+        card_dur = ifade + hold + cut + hold2 + fade
+        tail = (page(2, a_dur, "ta") + page(3, b_dur, "tb") +
+                f"[ta][tb]xfade=transition=fade:duration={cut}"
+                f":offset={ifade + hold}[t0];"
+                # only page two fades to black, so the ending happens once
+                f"[t0]fade=t=out:st={ifade + hold + cut + hold2}:d={fade}:color=black,"
+                f"format=yuv420p[tail];")
+    total = dur - ifade + card_dur
     chain = (
         tail +
         f"[0:v]fps={fps},format=yuv420p[main];"
-        f"[main][tail]xfade=transition=fade:duration={fade}"
-        f":offset={dur - fade}[v];"
+        f"[main][tail]xfade=transition=fade:duration={ifade}"
+        f":offset={dur - ifade}[v];"
         # the card runs past the narration, so the audio is padded rather than
         # the video being cut back to it
         f"[1:a]apad=whole_dur={total}[a]"
@@ -276,9 +374,11 @@ def build(video: Path, card: Path, out: Path, hold: float, fade: float,
 
     partial = out.with_suffix(".partial.mp4")
     partial.parent.mkdir(parents=True, exist_ok=True)
+    ins = ["-i", str(video), "-i", str(video), "-loop", "1", "-i", str(card)]
+    if card2 is not None:
+        ins += ["-loop", "1", "-i", str(card2)]
     subprocess.run(
-        ["ffmpeg", "-y", "-v", "error",
-         "-i", str(video), "-i", str(video), "-loop", "1", "-i", str(card),
+        ["ffmpeg", "-y", "-v", "error", *ins,
          "-filter_complex", chain, "-map", "[v]", "-map", "[a]",
          "-c:v", "libx264", "-crf", "18", "-preset", "medium", "-pix_fmt", "yuv420p",
          "-c:a", "aac", "-b:a", "192k", "-t", f"{total:.3f}", str(partial)],
@@ -301,10 +401,19 @@ def main() -> int:
                                    "(default: sampled from the video)")
     p.add_argument("--no-trim", action="store_true",
                    help="place the whole sheet, blank rows and all")
+    p.add_argument("--then", help="a SECOND page, shown after the first")
+    p.add_argument("--then-hold", type=float,
+                   help="seconds the second page holds (default: same as --hold)")
+    p.add_argument("--in-fade", type=float,
+                   help="seconds for the page to ARRIVE (default: same as --fade). "
+                        "A one-second dissolve has no single moment of arrival, so a "
+                        "sound effect can never line up with it; 0.4 gives the page a "
+                        "definite instant to land on.")
     a = p.parse_args()
 
     video, card, out = Path(a.video), Path(a.card), Path(a.out)
-    for path in (video, card):
+    card2 = Path(a.then) if a.then else None
+    for path in [video, card] + ([card2] if card2 else []):
         if not path.exists():
             raise SystemExit(f"❌ not found: {path}")
     print(f"🎬 answer outro -> {out}")
@@ -313,7 +422,11 @@ def main() -> int:
     # extension needs to carry the ruling down the page.
     v = probe(video)
     card = to_full_page(card, v["w"], v["h"], card.with_name(f"{card.stem}_page.png"))
-    build(video, card, out, a.hold, a.fade, a.plate)
+    if card2 is not None:
+        card2 = to_full_page(card2, v["w"], v["h"],
+                             card2.with_name(f"{card2.stem}_page.png"))
+    build(video, card, out, a.hold, a.fade, a.plate, card2, a.then_hold,
+          in_fade=a.in_fade)
     return 0
 
 

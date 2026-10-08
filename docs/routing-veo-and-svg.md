@@ -140,16 +140,50 @@ that cost a cycle when broken — all from the bug ledger:
 
 ## Worked example — BIO-C5-LA-04, DNA replication
 
-| beat | route | why |
-|---|---|---|
-| opener: nucleus → chromosome → DNA | **veo** | no marked fact at all; pure engagement |
-| helicase unzipping, fork opens | **veo** + labels | the verb; Y label composited |
-| topoisomerase relieving supercoils | **veo** | manner, not quantity |
-| semiconservative: one old + one new | manim | `pairing` |
-| *ori*: one site vs many | svg | `quantity` — the contrast is the mark |
-| 5′→3′ only | manim | `direction`; the script itself warns about it |
-| leading vs lagging | manim | `direction`, `order` |
-| Okazaki + ligase | manim | `quantity` |
-| two phosphate bonds, once per cycle | chip | `quantity` |
+| part | beat | route | why |
+|---|---|---|---|
+| 1 | the definition, as the exam wants it | chip | `reproduce` |
+| 1 | semiconservative: one old + one new | manim | `pairing` |
+| 1 | the four steps, numbered | chip | `order` |
+| 1 | *ori*: one site vs many | svg | `quantity` — the contrast is the mark |
+| 1 | helicase unzipping, fork opens | **veo** + labels | the verb; two labels composited |
+| 1 | topoisomerase relieving supercoils | **veo** + label | manner, not quantity |
+| 2 | RNA primer gives the free 3′ OH | chip | `reproduce` |
+| 2 | polymerase cannot start alone | chip | `order` |
+| 2 | 5′→3′ only | manim | `direction`; the script itself warns about it |
+| 2 | leading strand, continuous | manim | `direction` |
+| 2 | the primer settling, synthesis starting | **veo** + label | the verb |
+| 3 | lagging strand, discontinuous | manim | `direction` |
+| 3 | Okazaki fragments | manim | `quantity` |
+| 3 | leading vs lagging | chip | `order` |
+| 3 | the last two phosphate bonds | chip | `quantity` |
+| 3 | once per cycle, in S phase | chip | `quantity` |
+| 3 | ligase sealing two ends into one | **veo** + label | the verb |
 
-Three generated, above the target of two, and every one of them a verb.
+Four generated across three parts (2 / 1 / 1), above the floor everywhere, and
+every one of them a verb. Parts 2 and 3 sit at the minimum rather than the
+target: the gate warns, and the warning is the right outcome — there is no
+second generatable moment in either part that is not a count or a direction.
+
+**Every one carries a Devanagari label, so every one is a hybrid.** That is not
+a coincidence. A generated clip good enough to keep is almost always a clip
+whose parts want naming, and Veo cannot name them — see *Labels are never
+generated* above.
+
+### What the panel cost
+
+These were the first clips laid in as panels rather than full-bleed, and three
+things downstream still assumed the old layout. All three were silent:
+
+- the **prompt** still asked for the subject squeezed between two guide lines
+  into the top of the picture — under a panel that is the strip the band
+  dissolves into, and it throws away most of the generation;
+- the panel's default top margin is 84px, and the HTML renderer's caption ink
+  runs to y=252, so the panel would have **erased the line being read**;
+- the **plate** uploaded to Flow was the portrait frame, while a panel clip is
+  generated landscape — so the clip would have been built on a differently
+  shaped picture and the splice would have read as a cut.
+
+A new layout mode touches the prompt wording, the label placement and the frame
+review, exactly as CLAUDE.md says a new frame mode does. Add one and check all
+three.

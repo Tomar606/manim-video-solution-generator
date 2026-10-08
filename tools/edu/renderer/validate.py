@@ -28,8 +28,18 @@ err, warn = [], []
 for i, s in enumerate(S):
     sid = s.get("seg_id", f"#{i}")
     ph = s.get("phrases", [])
+    # A segment may legitimately carry NO caption: when a diagram is on screen
+    # the words step aside, because a caption under a figure is a second thing
+    # to read at the same moment and the figure is the one that teaches. Such a
+    # segment declares `"captions": "off"` so a genuinely forgotten phrase is
+    # still an error.
+    if s.get("captions") == "off":
+        if ph:
+            err.append(f"seg{sid}: captions are off but {len(ph)} phrase(s) present")
+        continue
     if not ph:
-        err.append(f"seg{sid}: no phrases"); continue
+        err.append(f"seg{sid}: no phrases (say \"captions\": \"off\" if deliberate)")
+        continue
 
     # A spec built from the presenter's own word timings does not get to choose
     # how long a phrase is on screen or how the phrases are spaced -- the
@@ -63,10 +73,13 @@ for i, s in enumerate(S):
         if abs(gap - want) > 0.001:
             err.append(f"seg{sid}: gap {gap}s between phrases (need exactly {want})")
 
-    if ph[0]["t_in"] != 0.0:
-        err.append(f"seg{sid}: first phrase must start at 0.0")
-    if ph[-1]["t_out"] != s["duration"]:
-        err.append(f"seg{sid}: last phrase must end at {s['duration']}")
+    # Only a segment that carries its captions end to end must fill its span.
+    # Where a diagram takes over part-way, the captions stop where it starts.
+    if not s.get("captions_partial"):
+        if ph[0]["t_in"] != 0.0:
+            err.append(f"seg{sid}: first phrase must start at 0.0")
+        if ph[-1]["t_out"] != s["duration"]:
+            err.append(f"seg{sid}: last phrase must end at {s['duration']}")
 
     words = len(s["voiceover"].split())
     wps = words / s["duration"]

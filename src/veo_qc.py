@@ -163,10 +163,12 @@ def duration(video: Path) -> float:
 
 
 def review(video: Path, spec: dict, *, work: Path,
-           brief: str = "", full_frame: bool = True,
+           brief: str = "", frame: str = "presenter", plate: Path | None = None,
+           green: bool = False, layout: str = "full",
+           backdrop: str = "plate", style: str | None = None,
            provider: str | None = None) -> dict:
     """Grade one clip. Returns the review as a plain dict, `frames` included."""
-    from src.veo_prompts import LAYOUT
+    from src.veo_prompts import LAYOUT, floor_for
 
     shots = frames(video, work)
     if not shots:
@@ -177,12 +179,125 @@ def review(video: Path, spec: dict, *, work: Path,
 
     paths = [p for p, _ in shots]
     stamps = [t for _, t in shots]
+    # The plate goes in FIRST, and check B below is written against it.
+    #
+    # Without it the review can only ask whether the background DRIFTS between
+    # the first frame and the last — which a clip generated on a completely
+    # invented background passes cleanly, because its invented background is
+    # perfectly consistent with itself. That shipped: a clip came back on a
+    # plain white vignette when the plate is dark navy with line art, and every
+    # check passed. Comparing against the plate is the only way to see it.
+    if plate is not None and Path(plate).is_file():
+        paths = [str(plate)] + paths
     roll = "\n".join(f"  frame {i + 1}: {t:.1f}s" for i, t in enumerate(stamps))
 
-    bottom = LAYOUT["full_bottom"] if full_frame else LAYOUT["presenter_top"]
+    bottom = floor_for(frame)
+    # WHERE THE SUBJECT HAS TO SIT depends on how the clip is laid in, and this
+    # is the third place that decision is enforced — prompt wording and label
+    # placement are the other two (CLAUDE.md). Under `panel` the whole picture
+    # becomes a band of its own with the caption above it and the presenter
+    # below, so grading it against a reserved top and bottom would fail every
+    # correctly-composed clip.
+    band_check = (
+        "The subject is complete and centred inside the picture, with clear "
+        "background margin on all four sides. Nothing runs off any edge and "
+        "nothing is cut through by the side of the picture."
+        if layout == "panel" else
+        f"Every drawn element sits between {int(LAYOUT['caption_cut'] * 100)}% "
+        f"and {int(bottom * 100)}% of the frame height. Nothing is drawn in the "
+        f"top {int(LAYOUT['caption_cut'] * 100)}% (a Hindi caption goes there) "
+        f"or below {int(bottom * 100)}%.")
+    # A keyed clip is graded against completely different background rules, and
+    # against no band at all — it is scaled and positioned at composite time, so
+    # where the subject sits in THIS frame carries no information.
+    if backdrop == "own":
+        # WHAT COUNTS AS A GOOD BACKGROUND DEPENDS ON THE LOOK.
+        # A drawn clip wants a flat card. A realistic one wants defocused depth
+        # — that blur is most of why it reads as real rather than as a cut-out,
+        # so grading it against "flat, no gradient" fails every correct clip.
+        # What both forbid is the same thing: anything you can NAME.
+        ground = ("""THE BACKGROUND IS SOFT, OUT-OF-FOCUS DEPTH and nothing else.
+     Nothing behind the subject is sharp and nothing in it is identifiable — no
+     leaf, branch, wall, floor, table, horizon, room, window or instrument.
+     Blur and gentle tone are expected and correct; a recognisable object, a
+     sharp edge, or the background pulling into focus is a `fail`."""
+                  if style == "realistic" else
+                  """THE BACKGROUND IS ONE PLAIN, EVEN, DARK GROUND, the same colour edge to
+     edge and the same in the first frame as in the last. No floor, wall,
+     tabletop, horizon, room or scenery; no gradient, texture, pattern or
+     vignette; no second colour and no artwork. Any of those is a `fail`.""")
+        contract = f"""  A. The frame carries the animation and NOTHING else — no text of any kind
+     anywhere (A1), and no decoration, border, vignette, panel, title card,
+     flare or interface element (A2). Do NOT report the small four-pointed
+     sparkle Flow stamps into every clip: it is removed by src/veo_delogo.py
+     before this clip is used, and reporting it costs a regeneration that
+     cannot fix it.
+  B. {ground}
+     This clip is laid into a panel of its own in the finished video, so its
+     background is not compared against anything else.
+  C. {band_check}
+  D. The camera never moves.
+  E. Whatever change the clip depicts has finished by the last frame — it is not
+     cut off mid-motion. A clip that completes its change early and then HOLDS
+     the finished state, still and unchanged, satisfies this: the held state is
+     the answer, and the pipeline holds it anyway to fill the window. Do not
+     report a hold as a stall."""
+    elif green:
+        contract = """  A. The frame carries the animation and NOTHING else — no text of any kind
+     anywhere (A1), and no decoration, border, vignette, panel, title card,
+     sparkle, flare or interface element (A2).
+  B. THE BACKGROUND IS ONE FLAT CHROMA GREEN, edge to edge, in every frame.
+     It is a field to be removed, so it must be even: no gradient, no texture,
+     no vignette, no lighting falloff, no shadow cast onto it, and no scenery,
+     floor, wall, table or horizon anywhere. Any of those is a `fail`.
+  C. NOTHING IN THE SUBJECT IS GREEN, and nothing in it is transparent enough
+     to show the green through it. Green in the subject disappears when the
+     background is removed, leaving a hole, so report any green or see-through
+     part of the subject as a `fail` and say which part.
+  D. The subject is COMPLETE and clear of every edge, with green all around it,
+     so it can be scaled and placed afterwards. A subject touching or running
+     off any edge cannot be repositioned and is a `fail`.
+  E. The camera never moves, and whatever change the clip depicts has finished
+     by the last frame."""
+    else:
+        contract = f"""
+  A. The frame carries the animation and NOTHING else. Two separate fails:
+     A1. No text anywhere in any frame — no words, no letters in any script, no
+         numerals, no equations, no units, no axis numbers, no legend, no
+         caption. Any letterform at all is a fail, however small or blurred.
+     A2. No decoration anywhere — no border, no frame, no vignette, no split
+         panel, no title or end card, no sparkle, no glint, no lens flare, no
+         floating particle, no interface element. Anything a student could not
+         name a teaching purpose for is a fail.
+  B0. THE BACKGROUND IS THE SUPPLIED PLATE. Compare the clip's frames against
+     image 1. The colour, the tone, the texture and any artwork on it must be
+     the SAME BACKGROUND — not a similar one, and not a plausible substitute.
+     A clip on an invented background cannot be used at all, however good the
+     animation on it is, because it is spliced into a render of the plate and
+     the join would be a hard cut. If the background is a different colour or
+     carries different artwork, that is a `fail` on its own, and it is the
+     first thing to report.
+  B. The background is byte-for-byte the same idea in the first and last frame:
+     same colour, same texture, same brightness, same border art, nothing added
+     to it, nothing removed, no seam or band across the middle. Compare frame 1
+     with the last frame directly and say if it drifted.
+  C. {band_check}
+  D. The camera never moves.
+  E. Whatever change the clip depicts has finished by the last frame — it is not
+     cut off mid-motion. A clip that completes its change early and then HOLDS
+     the finished state, still and unchanged, satisfies this: the held state is
+     the answer, and the pipeline holds it anyway to fill the window. Do not
+     report a hold as a stall."""
     checks = spec.get("checks") or []
-    prompt = f"""There are {len(shots)} frames below, in order from the first frame of
-the clip to the last. They are evenly spaced through it:
+    plate_note = ("""IMAGE 1 IS NOT FROM THE CLIP. It is the background plate the clip was
+supposed to be generated ON — the same picture the rest of the video renders, so
+the clip can be cut into the middle of it without a visible join. The clip's own
+frames follow it.
+
+"""
+                  if plate is not None and Path(plate).is_file() else "")
+    prompt = f"""{plate_note}There are {len(shots)} frames from the clip below, in order from its
+first frame to its last. They are evenly spaced through it:
 
 {roll}
 
@@ -194,25 +309,7 @@ frames do not support:
 {chr(10).join(f'  {i + 1}. {c}' for i, c in enumerate(checks)) or '  (none supplied)'}
 
 THE CONTRACT EVERY CLIP IN THIS TRACK MUST SATISFY — grade these too:
-  A. The frame carries the animation and NOTHING else. Two separate fails:
-     A1. No text anywhere in any frame — no words, no letters in any script, no
-         numerals, no equations, no units, no axis numbers, no legend, no
-         caption. Any letterform at all is a fail, however small or blurred.
-     A2. No decoration anywhere — no border, no frame, no vignette, no split
-         panel, no title or end card, no sparkle, no glint, no lens flare, no
-         floating particle, no interface element. Anything a student could not
-         name a teaching purpose for is a fail.
-  B. The background is byte-for-byte the same idea in the first and last frame:
-     same colour, same texture, same brightness, same border art, nothing added
-     to it, nothing removed, no seam or band across the middle. Compare frame 1
-     with the last frame directly and say if it drifted.
-  C. Every drawn element sits between {int(LAYOUT['caption_cut'] * 100)}% and
-     {int(bottom * 100)}% of the frame height. Nothing is drawn in the top
-     {int(LAYOUT['caption_cut'] * 100)}% (a Hindi caption goes there) or below
-     {int(bottom * 100)}%.
-  D. The camera never moves.
-  E. Whatever change the clip depicts has finished by the last frame — it is not
-     cut off mid-motion.
+{contract}
 
 WHERE THE CLIP STOPS BEING USABLE — answer this even when the verdict is `pass`.
 These clips are typically right at the start and drift later: the process

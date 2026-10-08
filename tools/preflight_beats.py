@@ -2,6 +2,11 @@
 
     python tools/preflight_beats.py projects/<slug> [--batch b2]
 
+The BACKDROP is checked here too (tools/plate_gate.py), because the plate is
+chosen when the scene is composed — so a video about to be rendered on another
+subject's artwork is knowable now, minutes before the render rather than an
+hour after the build.
+
 Every rule here exists because the defect shipped and cost a render to find.
 Checking the finished video is too late: a part takes minutes to render and
 composite, and the same fault then has to be found by eye. These are all static
@@ -26,7 +31,13 @@ MIN_GAP = 3                                        # captions between two beats
 def _reference_exists(root: Path, name: str) -> bool:
     """Mirror of `veo_prompts.reference_for`, without importing it — this tool
     runs on machines that have no LLM stack installed, and veo_prompts pulls one
-    in through src.llm."""
+    in through src.llm.
+
+    A MIRROR HAS TO BE KEPT IN STEP, and this one was not: references/ was added
+    to reference_for and not here, so preflight refused four beats whose
+    pictures were sitting on disk. If you add a location there, add it here."""
+    if (root / "assets" / "references" / f"{name}.png").is_file():
+        return True
     figs = root / "assets" / "figures"
     return any((figs / f"{name}{sfx}").is_file()
                for sfx in ("_scan.png", "_preview.png"))
@@ -130,7 +141,17 @@ def check(root: Path, batch: str = "") -> list[str]:
                 if DEV.search(str(tex)):
                     bad.append(f"{where}: Devanagari inside maths: {str(tex)[:40]}")
 
-            if t in ("figure", "scan_figure") and b.get("name") not in FIGURES:
+            # AN IMAGE FIGURE IS NOT ONE OF THE BUILDERS. `draw: "image"` loads
+            # assets/<name>.png — artwork checked against the textbook scan —
+            # so the name it carries is a FILE, and testing it against the list
+            # of hand-drawn figures refused it out of hand. The file existing is
+            # the stronger check anyway: a missing PNG is a render crash.
+            if t == "figure" and b.get("draw") == "image":
+                art = root / "assets" / f"{b.get('name')}.png"
+                if not art.is_file():
+                    bad.append(f"{where}: image figure {b.get('name')!r} has no "
+                               f"artwork at {art.relative_to(root)}")
+            elif t in ("figure", "scan_figure") and b.get("name") not in FIGURES:
                 bad.append(f"{where}: no such figure {b.get('name')!r} — "
                            f"have {sorted(FIGURES)}")
 
@@ -150,8 +171,9 @@ def check(root: Path, batch: str = "") -> list[str]:
                 if b.get("reference") and not _reference_exists(root, b["reference"]):
                     bad.append(
                         f"{where}: reference figure {b['reference']!r} has no "
-                        f"image in assets/figures/ — crop it out of the book scan "
-                        f"with tools/figure_from_scan.py first")
+                        f"image. Put a still at assets/references/{b['reference']}.png "
+                        f"(tools/veo_reference.py), or crop the book's own "
+                        f"figure into assets/figures/ with figure_from_scan.py")
                 if b.get("sequence") is not None and not isinstance(b["sequence"], str):
                     bad.append(f"{where}: 'sequence' must be a string id shared "
                                f"with the neighbouring video beats")

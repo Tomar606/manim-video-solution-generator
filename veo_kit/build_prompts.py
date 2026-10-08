@@ -71,7 +71,8 @@ def build(sc: dict, line: str, ch: dict, accessory: str, aspect: str) -> str:
     cam = sc["camera"].strip()
     if aspect == "vertical":
         # A lateral tracking shot in a tall frame is mostly empty sides.
-        cam = cam.replace("Medium tracking shot", "Medium tracking shot, framed tall")
+        if "framed tall" not in cam:
+            cam = cam.replace("Medium tracking shot", "Medium tracking shot, framed tall")
     wear = ch["wardrobe"] + (accessory if sc.get("accessory") else "")
     others = (sc.get("others") or "").strip()
     return (f"{cam} The man from the reference images, {wear}, {sc['setting']}. "

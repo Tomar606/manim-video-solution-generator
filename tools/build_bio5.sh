@@ -20,6 +20,8 @@ CLIP=inbox/bio5/part${PART}.mp4
 SP="${SCRATCH:-/tmp}/bio5_${PART}"; mkdir -p "$SP"
 log () { echo "[$(date +%H:%M:%S)] part$PART: $*"; }
 
+
+
 TOTAL=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$CLIP")
 CARDEND=$($PY -c "import json;print(json.load(open('$P/card_part${PART}.json'))[0][1])")
 
@@ -85,7 +87,7 @@ $PY tools/fit_clips.py "$SP/prechip.mp4" "$SP/bg.mp4" \
 # an artefact is older than the spec that defines it. The second check is the
 # one that matters: BIO-C1-LA-01's chip spec was de-dashed and the PNGs were
 # never re-rendered, so two delivered parts kept showing an em dash.
-$PY tools/dash_gate.py "$P" - "$P/plan_part${PART}.json" \
+$PY tools/dash_gate.py "$P" \
   || { log "!! dash gate failed - refusing to burn"; exit 1; }
 
 log "animations"

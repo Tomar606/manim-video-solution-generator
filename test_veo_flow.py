@@ -47,9 +47,14 @@ def ffmpeg(*args):
 
 # --------------------------------------------------------------------------- #
 def test_bridge():
-    from src.flow_bridge import FlowBridge, FlowError
+    from src import flow_bridge
+    from src.flow_bridge import FlowBridge, FlowError, StaleExtension
 
     print("\nbridge protocol")
+    # What the stand-in worker claims to be. A list so the test can age it
+    # without restarting the thread — a stale extension reports an OLD build,
+    # which is the direction that actually happens.
+    worker_build = [flow_bridge.EXPECTED_BUILD]
     port = 8791
     b = FlowBridge(port).start()
     stop = threading.Event()
@@ -69,7 +74,11 @@ def test_bridge():
             if job["cmd"] == "set_image":
                 out = {"ok": False, "error": "simulated failure"}
             elif job["cmd"] == "ping":
-                out = {"ok": True, "data": {"tab": "https://labs.google/fx/tools/flow/project/x"}}
+                # Reports its build, like the real worker — wait_for_worker
+                # refuses anything else, and that refusal is itself under test.
+                out = {"ok": True, "data": {
+                    "build": worker_build[0],
+                    "tab": "https://labs.google/fx/tools/flow/project/x"}}
             else:
                 out = {"ok": True, "data": {"echo": job["cmd"]}}
             req = urllib.request.Request(
@@ -90,6 +99,22 @@ def test_bridge():
             check("a worker error becomes FlowError", False)
         except FlowError as e:
             check("a worker error becomes FlowError", "simulated failure" in str(e))
+
+        # The guard that stops a stale extension being investigated as a Flow
+        # redesign. There is no hot reload, so this WILL happen again.
+        try:
+            worker_build[0] = flow_bridge.EXPECTED_BUILD - 1
+            try:
+                b.wait_for_worker(timeout=8)
+                check("a stale extension build is refused", False)
+            except StaleExtension as e:
+                check("a stale extension build is refused, and says to reload",
+                      "reload" in str(e).lower())
+            except FlowError:
+                check("a stale build raises StaleExtension, not a bare FlowError",
+                      False)
+        finally:
+            worker_build[0] = flow_bridge.EXPECTED_BUILD
     finally:
         stop.set()
         b.stop()
@@ -150,7 +175,8 @@ def test_orchestration(tmp: Path):
     }
     calls = {"revise": 0, "review": 0, "submits": 0}
 
-    def fake_review(video, s, *, work, brief="", full_frame=True, provider=None):
+    def fake_review(video, s, *, work, brief="", frame="presenter",
+                    plate=None, green=False, provider=None):
         calls["review"] += 1
         # beat@5 fails once then recovers; beat@9 never does.
         bad = "electrode" in brief or calls["review"] == 1
@@ -172,10 +198,20 @@ def test_orchestration(tmp: Path):
     veo.SETTLE_AFTER_SUBMIT, veo.POLL_EVERY = 0.0, 0.01
 
     class FakeBridge:
-        """Mirrors the extension's contract, including the one that matters:
-        a new media key appears only after a submit."""
+        """Mirrors the extension's contract, including the two that matter:
+        a CLIP key appears only after a submit — and an UPLOAD mints a media key
+        of its own, indistinguishable by URL from a clip's. Flow really does
+        this, and a fake that did not cost a whole run: `before` was snapshotted
+        ahead of the upload, so the first poll returned the plate, downloaded a
+        PNG named .mp4, and failed the review on a file that would not decode."""
         def __init__(self):
-            self.keys = []
+            self.keys = []          # playable clips
+            self.uploads = []       # images: attached plates AND Flow placeholders
+            self.pending = []       # queued, not yet playable
+            self.unattached = []    # uploaded but not yet added to the prompt
+            self.chips = ["stale"]  # a leftover chip, as a real prompt bar has
+            self.per_beat = 1       # images this beat attaches
+            self.polls = 0
 
         def start(self):
             return self
@@ -192,20 +228,74 @@ def test_orchestration(tmp: Path):
         def call(self, cmd, timeout=None, **kw):
             if cmd == "set_image":
                 assert Path(kw["paths"][0]).is_file(), "the plate must be a real file"
+                assert Path(kw["paths"][0]).is_absolute(), \
+                    "Chrome resolves nothing; a relative path attaches no file"
+                for _ in kw["paths"]:
+                    self.uploads.append(f"img{len(self.uploads) + 1}")
+                    self.unattached.append(self.uploads[-1])
+                return {"files": len(kw["paths"]), "used": len(kw["paths"]),
+                        "multiple": True, "dropped": []}
             elif cmd == "set_prompt":
                 assert "NEGATIVE:" in kw["text"], "the negative list must ride along"
                 calls["submits"] += 1
+            elif cmd == "clear_prompt_refs":
+                n = len(self.chips)
+                self.chips = []
+                return {"removed": n, "left": 0}
+            elif cmd == "add_to_prompt":
+                # Flow attaches by media key, so a run that guesses the key
+                # attaches the wrong picture — which looks fine and is wrong.
+                assert kw.get("key") in self.uploads, \
+                    f"add_to_prompt got {kw.get('key')!r}, not an uploaded asset"
+                if kw["key"] in self.unattached:
+                    self.unattached.remove(kw["key"])
+                self.chips.append(kw["key"])
+                return {"attached": True, "chips": len(self.chips)}
             elif cmd == "click":
-                self.keys.append(f"key{len(self.keys) + 1}")
+                # THE regression this exists for: uploading is not attaching.
+                # A generation submitted while an upload is still unattached
+                # runs with no reference, and Veo invents its own background.
+                assert not self.unattached, (
+                    f"generated with {len(self.unattached)} uploaded image(s) "
+                    f"never added to the prompt — the clip would be made on an "
+                    f"invented background")
+                # Attaching is additive: one chip per image this beat uploaded,
+                # never a leftover from the last one.
+                assert len(self.chips) == self.per_beat, (
+                    f"generated with {len(self.chips)} reference chip(s) but this "
+                    f"beat attached {self.per_beat} — stale references stack and "
+                    f"Veo blends them")
+                # Flow mints a PLACEHOLDER first, as an <img>, and the playable
+                # clip arrives later under a DIFFERENT key. Measured live: the
+                # placeholder appeared 23s after submit, the clip minutes later.
+                # A fake that hands back a video immediately cannot catch the run
+                # downloading that placeholder — a JPEG, which Chrome then saves
+                # under a name of its own, so the run reports "the download never
+                # landed" and points nowhere useful.
+                n = len(self.keys) + len(self.pending) + 1
+                self.uploads.append(f"placeholder{n}")
+                self.pending.append(f"key{n}")
             elif cmd == "list_media":
-                return {"media": [{"key": k, "url": f"https://x/{k}"} for k in self.keys]}
+                # One poll of grace, so the wait loop must genuinely skip past
+                # the placeholder rather than take the first new key it sees.
+                if self.pending and self.polls >= 1:
+                    self.keys.append(self.pending.pop(0)); self.polls = 0
+                elif self.pending:
+                    self.polls += 1
+                return {"media":
+                        [{"key": k, "url": f"https://x/{k}", "video": True} for k in self.keys]
+                        + [{"key": k, "url": f"https://x/{k}", "video": False} for k in self.uploads]}
             elif cmd == "download":
+                assert kw["url"].rsplit("/", 1)[-1].startswith("key"), \
+                    f"downloaded {kw['url']} — that is an uploaded image, not a clip"
                 shutil.copy(sample, inbox_dir() / Path(kw["filename"]).name)
             return {}
 
     clips = veo.run(str(proj), 1, attempts=3, bridge=FakeBridge())["clips"]
 
     check("one entry per video beat", len(clips) == 2, str([c["at"] for c in clips]))
+    check("an uploaded plate is never mistaken for the generated clip",
+          all(Path(c["raw"]).is_file() or (proj / c["raw"]).is_file() for c in clips))
     check("a beat recovers on a revision",
           clips[0]["verdict"] == "pass" and clips[0]["attempts"] == 2)
     check("a beat that never passes is marked unusable",
@@ -219,7 +309,20 @@ def test_orchestration(tmp: Path):
     check("the window is clipped by the next beat", clips[0]["end"] == 23.0,
           str(clips[0]["end"]))
     check("presenter:hidden becomes a full-frame clip",
-          clips[0]["full"] is True and clips[1]["full"] is False)
+          clips[0]["frame"] == "full" and clips[1]["frame"] == "presenter",
+          str([c["frame"] for c in clips]))
+    # The middle setting: more room than the band, bottom third still clear.
+    from src.veo_prompts import floor_for
+    check("the three frame modes are ordered and distinct",
+          floor_for("presenter") < floor_for("partial") < floor_for("full"),
+          f'{floor_for("presenter")} < {floor_for("partial")} < {floor_for("full")}')
+    lab = [{"text": "x", "x": 100, "y": 1150, "w": 200, "h": 60,
+            "start": 1.0, "end": 2.0}]
+    check("a label below the band is caught for a presenter beat",
+          veo.label_faults(lab, frame="presenter") != [])
+    check("the same label is fine once the beat takes the middle setting",
+          veo.label_faults(lab, frame="partial") == [],
+          str(veo.label_faults(lab, frame="partial")))
     check("paths are project-relative",
           all(not Path(c["src"]).is_absolute() and (proj / c["src"]).is_file()
               for c in clips))
@@ -240,11 +343,11 @@ def test_orchestration(tmp: Path):
           (proj / lab["png"]).is_file() and lab["text"] == "जंग की परत")
     check("a label arrives on the caption that names it", lab["start"] == 18.0)
     check("a label never outlives its clip", lab["end"] <= clips[0]["end"])
-    faults = veo.label_faults(clips[1]["labels"], full=clips[1]["full"])
+    faults = veo.label_faults(clips[1]["labels"], frame=clips[1]["frame"])
     check("a label behind the presenter is caught",
           any("hidden behind him" in f for f in faults), str(faults))
     check("the same label is fine once he steps aside",
-          veo.label_faults(clips[1]["labels"], full=True) == [])
+          veo.label_faults(clips[1]["labels"], frame="full") == [])
 
     import preflight as pf
     rep = pf.Report()
@@ -592,7 +695,8 @@ def test_sequence(tmp: Path):
         return dict(spec)
 
     # The middle clip is rejected however many times it is tried.
-    def fake_review(video, s, *, work, brief="", full_frame=True, provider=None):
+    def fake_review(video, s, *, work, brief="", frame="presenter",
+                    plate=None, green=False, provider=None):
         bad = "stage 2" in brief
         return {"verdict": "fail" if bad else "pass", "summary": "stubbed",
                 "failed_checks": ["nope"] if bad else [], "defects": [],
@@ -611,6 +715,12 @@ def test_sequence(tmp: Path):
     class SeqBridge:
         def __init__(self):
             self.keys = []
+            self.uploads = []
+            self.pending = []
+            self.unattached = []
+            self.chips = ["stale"]
+            self.per_beat = 1
+            self.polls = 0
 
         def start(self):
             return self
@@ -627,13 +737,62 @@ def test_sequence(tmp: Path):
         def call(self, cmd, timeout=None, **kw):
             if cmd == "set_image":
                 seen["uploads"].append([Path(p).name for p in kw["paths"]])
+                # Every attached image becomes Flow media, like the real thing.
+                for _ in kw["paths"]:
+                    self.uploads.append(f"img{len(self.uploads) + 1}")
+                    self.unattached.append(self.uploads[-1])
                 return {"files": len(kw["paths"]), "used": len(kw["paths"]),
                         "multiple": True, "dropped": []}
-            if cmd == "click":
-                self.keys.append(f"key{len(self.keys) + 1}")
+            if cmd == "clear_prompt_refs":
+                n = len(self.chips)
+                self.chips = []
+                return {"removed": n, "left": 0}
+            elif cmd == "add_to_prompt":
+                # Flow attaches by media key, so a run that guesses the key
+                # attaches the wrong picture — which looks fine and is wrong.
+                assert kw.get("key") in self.uploads, \
+                    f"add_to_prompt got {kw.get('key')!r}, not an uploaded asset"
+                if kw["key"] in self.unattached:
+                    self.unattached.remove(kw["key"])
+                self.chips.append(kw["key"])
+                return {"attached": True, "chips": len(self.chips)}
+            elif cmd == "click":
+                # THE regression this exists for: uploading is not attaching.
+                # A generation submitted while an upload is still unattached
+                # runs with no reference, and Veo invents its own background.
+                assert not self.unattached, (
+                    f"generated with {len(self.unattached)} uploaded image(s) "
+                    f"never added to the prompt — the clip would be made on an "
+                    f"invented background")
+                # Attaching is additive: one chip per image this beat uploaded,
+                # never a leftover from the last one.
+                assert len(self.chips) == self.per_beat, (
+                    f"generated with {len(self.chips)} reference chip(s) but this "
+                    f"beat attached {self.per_beat} — stale references stack and "
+                    f"Veo blends them")
+                # Flow mints a PLACEHOLDER first, as an <img>, and the playable
+                # clip arrives later under a DIFFERENT key. Measured live: the
+                # placeholder appeared 23s after submit, the clip minutes later.
+                # A fake that hands back a video immediately cannot catch the run
+                # downloading that placeholder — a JPEG, which Chrome then saves
+                # under a name of its own, so the run reports "the download never
+                # landed" and points nowhere useful.
+                n = len(self.keys) + len(self.pending) + 1
+                self.uploads.append(f"placeholder{n}")
+                self.pending.append(f"key{n}")
             elif cmd == "list_media":
-                return {"media": [{"key": k, "url": f"https://x/{k}"} for k in self.keys]}
+                # One poll of grace, so the wait loop must genuinely skip past
+                # the placeholder rather than take the first new key it sees.
+                if self.pending and self.polls >= 1:
+                    self.keys.append(self.pending.pop(0)); self.polls = 0
+                elif self.pending:
+                    self.polls += 1
+                return {"media":
+                        [{"key": k, "url": f"https://x/{k}", "video": True} for k in self.keys]
+                        + [{"key": k, "url": f"https://x/{k}", "video": False} for k in self.uploads]}
             elif cmd == "download":
+                assert kw["url"].rsplit("/", 1)[-1].startswith("key"), \
+                    f"downloaded {kw['url']} — a carry frame is not a clip"
                 shutil.copy(sample, inbox_dir() / Path(kw["filename"]).name)
             return {}
 

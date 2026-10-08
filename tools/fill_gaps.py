@@ -19,11 +19,24 @@ import tempfile
 from pathlib import Path
 
 MIN_GAP = 3.0        # shorter than this is a breath, not a dropped sentence
+# A SINGLE WORD IS NEVER THIS LONG. Whisper does not always leave a dropped
+# stretch as a hole BETWEEN words — on BIO-C2-SA-02 part 2 it stretched the last
+# word it heard over the stretch it lost, giving "पूरा" a duration of 11.6
+# seconds and "गया" 4.7, with no inter-word gap anywhere. find_gaps saw a
+# continuous word list and reported nothing, while three caption lines had been
+# pushed past the end of the audio — one of them with an end time BEFORE its own
+# start. So an over-long word is treated as a hole too: the word keeps a
+# plausible head and the rest of its span is re-transcribed.
+MAX_WORD = 2.5       # seconds; longer than this is a collapsed dropped stretch
+WORD_HEAD = 0.6      # how much of an over-long word is kept as the word itself
 PAD = 0.35           # a little context each side so the model has a run-up
 
 
 def find_gaps(words, dur=None):
     gaps = []
+    for w in words:
+        if w["e"] - w["s"] > MAX_WORD:
+            gaps.append((round(w["s"] + WORD_HEAD, 3), w["e"]))
     if words and words[0]["s"] > MIN_GAP:
         gaps.append((0.0, words[0]["s"]))
     for i in range(len(words) - 1):
@@ -44,7 +57,16 @@ def fill(clip, words_path, model="medium"):
         ["ffprobe", "-v", "error", "-show_entries", "format=duration",
          "-of", "csv=p=0", str(clip)], capture_output=True, text=True).stdout.strip())
 
-    gaps = find_gaps(words, dur)
+    # Clamp the over-long words FIRST, so the stretch they were covering is free
+    # for the words recovered from it — otherwise the bogus word still spans the
+    # whole hole and every caption built from it inherits the bad timing.
+    for w in words:
+        if w["e"] - w["s"] > MAX_WORD:
+            print(f"   over-long word {w['w']!r} "
+                  f"({w['s']:.2f}-{w['e']:.2f}) clamped")
+            w["e"] = round(w["s"] + WORD_HEAD, 3)
+
+    gaps = sorted(set(find_gaps(words, dur)))
     if not gaps:
         print(f"{words_path.name}: no gaps")
         return words

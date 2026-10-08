@@ -19,6 +19,10 @@ import sys
 from pathlib import Path
 
 OK, WARN, FAIL = "ok", "warn", "FAIL"
+# A CHECK THAT DOES NOT APPLY IS NOT A PASS. Printing it as "ok" hides the fact
+# that nothing was verified, which is the failure mode CLAUDE.md records: a gate
+# that quietly did not apply looked exactly like one that passed.
+SKIP = "skip"
 CLIP_TAIL = 2.5          # a caption may not start this close to the end
 MAX_GAP = 4.0            # transcript hole worth reporting
 CAPTION_MIN_MARGIN = 0.03   # of frame width, each side
@@ -130,6 +134,16 @@ def check_captions(root: Path, rep: Report):
         if not lines:
             rep.add(FAIL, f"{lines_f.name} non-empty")
             continue
+        # THE ALL-VEO ROUTE KEEPS LINES AS A MAP — {"1": "<line>"}, one per
+        # generated clip — and has no beats, no parts and no panel geometry.
+        # Every check below is written for the PYQ route and indexes lines[i]
+        # straight into a KeyError on it. Say so and move on: a gate that dies
+        # looks exactly like a gate that found something.
+        if isinstance(lines, dict):
+            rep.add(SKIP, f"{lines_f.name} is the all-Veo route",
+                    "a map of clip -> line; preflight's beat and part checks "
+                    "do not apply")
+            continue
 
         if any("end" not in l for l in lines):
             rep.add(FAIL, f"{lines_f.name} has end times",
@@ -148,6 +162,29 @@ def check_captions(root: Path, rep: Report):
         if words_f.exists():
             words = json.loads(words_f.read_text(encoding="utf-8"))
             audio_end = words[-1]["e"]
+            # WHISPER CAN DROP THE LAST SENTENCE. On CHE-C4-SA-04 it stopped at
+            # 102.98s while the presenter spoke to 109.9s (mean -19 dB, no
+            # silence), and this check FAILED four real captions. The clip's own
+            # audio says where speech ends; the transcript is only a floor.
+            try:
+                import subprocess as _sp
+                part = "".join(c for c in lines_f.stem if c.isdigit()) or "1"
+                inbox = root.parent.parent / "inbox" / root.name
+                clip = next((c for c in (inbox / f"part{part}.mp4", inbox / "heygen_full.mp4")
+                             if c.is_file()), None)
+                if clip is not None:
+                    log = _sp.run(["ffmpeg", "-hide_banner", "-i", str(clip), "-vn", "-af",
+                                   "silencedetect=noise=-35dB:d=0.4", "-f", "null", "-"],
+                                  capture_output=True, text=True).stderr
+                    dur = float(_sp.run(["ffprobe", "-v", "error", "-show_entries",
+                                         "format=duration", "-of", "csv=p=0", str(clip)],
+                                        capture_output=True, text=True).stdout or 0)
+                    starts = [float(x) for x in re.findall(r"silence_start: ([\d.]+)", log)]
+                    ends = [float(x) for x in re.findall(r"silence_end: ([\d.]+)", log)]
+                    speech_end = starts[-1] if starts and (not ends or starts[-1] > ends[-1]) else dur
+                    audio_end = max(audio_end, speech_end)
+            except Exception:                              # noqa: BLE001
+                pass
             over = [l for l in lines if l["start"] > audio_end - 0.2]
             if over:
                 rep.add(FAIL, f"{lines_f.name} within audio",
@@ -577,8 +614,13 @@ def check_veo_clips(root: Path, rep: Report):
             # stage warns with — repeated here because this is the last point at
             # which a nudge in the beats file is still cheap.
             from src.veo import label_faults
-            for fault in label_faults(c.get("labels") or [],
-                                      full=bool(c.get("full"))):
+            # `frame` is written by newer runs; `full` is what older
+            # clips_part<N>.json files carry, and those are tracked, so a
+            # project generated before the middle setting existed still reports
+            # its label faults against the right floor rather than crashing.
+            for fault in label_faults(
+                    c.get("labels") or [],
+                    frame=c.get("frame") or ("full" if c.get("full") else "presenter")):
                 rep.add(WARN, f"{name} label placement", f"beat {b['at']}: {fault}")
             for lab in c.get("labels") or []:
                 if not (root / lab["png"]).is_file():

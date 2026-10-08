@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 700">
+  <!-- The four trends across the 3d series the question names. NCERT:
+       radius     falls Sc->Cr, then nearly FLAT Fe/Co/Ni as added d electrons
+                  screen the extra nuclear charge, then RISES at Cu/Zn
+       ionisation enthalpy rises across, but IRREGULARLY -- not a clean line
+       oxidation state peaks in the MIDDLE (Mn, +7) and falls off both sides
+       The middle peak and the flat-then-rise radius are the two shapes students
+       are marked on; a smooth monotonic curve for either would be wrong. -->
+  <g id="td_axes">
+    <line x1="120" y1="60" x2="120" y2="470" stroke="#9FB6CC" stroke-width="5"/>
+    <line x1="120" y1="470" x2="1000" y2="470" stroke="#9FB6CC" stroke-width="5"/>
+  </g>
+  <!-- atomic radius: down, flat, up -->
+  <g id="td_radius">
+    <path d="M170 190 L 260 232 L 350 264 L 440 286 L 530 300 L 620 306 L 710 308
+             L 800 306 L 890 288 L 960 250" fill="none" stroke="#7FD4FF"
+          stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <g fill="#7FD4FF">
+      <circle cx="170" cy="190" r="7"/><circle cx="440" cy="286" r="7"/>
+      <circle cx="710" cy="308" r="7"/><circle cx="960" cy="250" r="7"/>
+    </g>
+  </g>
+  <!-- oxidation state: peaks at Mn in the middle -->
+  <g id="td_oxid">
+    <path d="M170 430 L 260 402 L 350 372 L 440 344 L 530 316 L 620 348 L 710 372
+             L 800 398 L 890 424 L 960 448" fill="none" stroke="#FFC53D"
+          stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="530" cy="316" r="9" fill="#FFC53D"/>
+  </g>
+  <!-- ionisation enthalpy: upward but irregular -->
+  <g id="td_ie">
+    <path d="M170 386 L 260 372 L 350 362 L 440 336 L 530 348 L 620 322 L 710 312
+             L 800 300 L 890 276 L 960 292" fill="none" stroke="#7BE3A0"
+          stroke-width="6" stroke-linecap="round" stroke-linejoin="round"
+          stroke-dasharray="1 0"/>
+  </g>
+  <!-- the element row -->
+  <g id="td_row">
+    <g stroke="#9FB6CC" stroke-width="2" stroke-opacity="0.4">
+      <line x1="170" y1="470" x2="170" y2="482"/><line x1="260" y1="470" x2="260" y2="482"/>
+      <line x1="350" y1="470" x2="350" y2="482"/><line x1="440" y1="470" x2="440" y2="482"/>
+      <line x1="530" y1="470" x2="530" y2="482"/><line x1="620" y1="470" x2="620" y2="482"/>
+      <line x1="710" y1="470" x2="710" y2="482"/><line x1="800" y1="470" x2="800" y2="482"/>
+      <line x1="890" y1="470" x2="890" y2="482"/><line x1="960" y1="470" x2="960" y2="482"/>
+    </g>
+  </g>
+<style>
+    text{font-family:Poppins,Mukta,'Noto Sans Devanagari',sans-serif;font-weight:800;
+         fill:#FFFFFF;paint-order:stroke;stroke:#0B1220;stroke-width:7px;
+         stroke-linejoin:round;text-anchor:middle}
+    .t{font-size:36px} .s{font-size:29px} .g{fill:#FFC53D} .b{fill:#7FD4FF}
+    .n{fill:#7BE3A0} .d{font-size:25px;fill:#9FB6CC}
+  </style>
+  <text class="s b" x="250" y="150" >परमाणु त्रिज्या</text>
+  <text class="s n" x="872" y="246" >आयनन एन्थैल्पी</text>
+  <text class="s g" x="470" y="266" >ऑक्सीकरण अवस्था</text>
+  <text class="s" x="170" y="506" >Sc</text>
+  <text class="s" x="530" y="506" >Mn</text>
+  <text class="s" x="960" y="506" >Zn</text>
+  <text class="d" x="560" y="552" >3d श्रेणी →</text>
+  <text class="d" x="540" y="662" >त्रिज्या: घटती → लगभग स्थिर → बढ़ती   ·   ऑक्सीकरण अवस्था Mn पर उच्चतम</text>
+</svg>

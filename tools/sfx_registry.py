@@ -167,17 +167,55 @@ def scan_sfx(root: Path, verbose: bool) -> tuple[dict, int]:
 
 
 def scan_transitions(root: Path) -> dict:
+    """Index every transition folder on disk, MERGING with what is already there.
+
+    Two things here are deliberate, and both exist because this file is not the
+    only writer. `tools/import_transitions.py` populates `overlay/` and `wipe/`
+    and writes the same registry.
+
+    FOLDERS ARE DISCOVERED, not listed in code. A hardcoded role list meant a
+    folder somebody else added — `wipe/`, four green-screen shape wipes — was
+    not scanned, so regenerating the registry would have DELETED that key while
+    reporting success.
+
+    EXISTING DESCRIPTIONS WIN. Whoever created a role wrote the one-line `use`
+    that says what goes in it; this only fills one in for a role it knows and
+    that has none. Rewriting someone else's description is how the contract in
+    the README quietly stops matching the registry.
+    """
+    dest = root / "assets" / "transitions" / "registry.json"
+    existing = {}
+    if dest.is_file():
+        try:
+            existing = json.loads(dest.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            existing = {}
+
     reg = {}
-    for role, use in TRANSITION_ROLES.items():
-        folder = root / "assets" / "transitions" / role
+    folders = sorted(p for p in (root / "assets" / "transitions").iterdir()
+                     if p.is_dir() and not p.name.startswith("_"))
+    for folder in folders:
+        role = folder.name
         files = sorted(p for p in folder.glob("*")
                        if p.suffix.lower() in IMAGE + VIDEO)
+        use = (existing.get(role, {}).get("use")
+               or TRANSITION_ROLES.get(role, "(no description yet)"))
         if files:
             reg[role] = {"use": use,
                          "files": [str(p.relative_to(root)) for p in files]}
-            print(f"  ✓ {role}: {len(files)} file(s)")
+            known = len(existing.get(role, {}).get("files", []))
+            delta = "" if known == len(files) else f"  (was {known})"
+            print(f"  ✓ {role}: {len(files)} file(s){delta}")
         else:
             print(f"  — {role}: empty ({use})")
+
+    # A key whose folder has gone is KEPT, not dropped: another tool may have
+    # written it, and silently losing it is the failure this function is
+    # guarding against in the first place.
+    for role, entry in existing.items():
+        if role not in reg and role not in {f.name for f in folders}:
+            reg[role] = entry
+            print(f"  · {role}: kept (no folder on disk, written elsewhere)")
     return reg
 
 

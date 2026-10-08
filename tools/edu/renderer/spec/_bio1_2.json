@@ -1,0 +1,154 @@
+[
+ {
+  "seg_id": 1,
+  "duration": 8.12,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "अब आता है बीजाण्डद्वार, यानी Micropyle। यहाँ बच्चे अक्सर गलती करते हैं, Micropyle को सिर्फ छेद लिखकर छोड़ देते हैं, लेकिन...",
+  "phrases": [
+   {
+    "text": "अब आता है बीजाण्डद्वार, यानी Micropyle।",
+    "golden": "बीजाण्डद्वार",
+    "t_in": 0.0,
+    "t_out": 2.62
+   },
+   {
+    "text": "यहाँ बच्चे अक्सर गलती करते हैं,",
+    "golden": null,
+    "t_in": 2.62,
+    "t_out": 5.3
+   },
+   {
+    "text": "Micropyle को सिर्फ छेद लिखकर छोड़ देते हैं, लेकिन...",
+    "golden": null,
+    "t_in": 5.3,
+    "t_out": 8.12
+   }
+  ]
+ },
+ {
+  "seg_id": 2,
+  "duration": 9.38,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "यह बीजाण्ड का वह भाग है, जो अध्यावरण से ढका नहीं होता। यह एक छोटे से छिद्र के रूप में पाया जाता है, जो बीजाण्डद्वार कहलाता है।",
+  "phrases": []
+ },
+ {
+  "seg_id": 3,
+  "duration": 6.16,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "और सामान्यतः पराग नलिका, बीजाण्डद्वार से ही बीजाण्ड में प्रवेश करती है।",
+  "phrases": []
+ },
+ {
+  "seg_id": 4,
+  "duration": 10.4,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "तो Micropyle को एकदम दिमाग में बिठा लो, छोटा pore, और pollen tube की entry। अब चौथा part, बीजाण्डकाय यानी Nucellus।",
+  "phrases": [
+   {
+    "text": "तो Micropyle को एकदम दिमाग में बिठा लो,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 3.68
+   },
+   {
+    "text": "छोटा pore, और pollen tube की entry।",
+    "golden": null,
+    "t_in": 3.68,
+    "t_out": 6.4
+   },
+   {
+    "text": "अब चौथा part, बीजाण्डकाय यानी Nucellus।",
+    "golden": "बीजाण्डकाय",
+    "t_in": 6.4,
+    "t_out": 10.4
+   }
+  ]
+ },
+ {
+  "seg_id": 5,
+  "duration": 18.3,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "बीजाण्ड के अंदर मृदूतकी कोशिकाओं से बना मुख्य भाग, बीजाण्डकाय कहलाता है। इसके एक सिरे पर बीजाण्डद्वार यानी Micropyle होता है, और इसके दूसरे, विपरीत सिरे को निभाग यानी Chalaza कहते हैं। यहाँ Micropyle और Chalaza को उल्टा मत कर देना,",
+  "phrases": []
+ },
+ {
+  "seg_id": 6,
+  "duration": 3.86,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "एक तरफ Micropyle, उसके opposite side पर Chalaza।",
+  "phrases": []
+ },
+ {
+  "seg_id": 7,
+  "duration": 8.35,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "अब तक बीजाण्ड के चार मुख्य भाग हो गए। लेकिन सबसे जरूरी भाग अभी बाकी है, और वो समझेंगे next part में। और वही सबसे important है।",
+  "phrases": [
+   {
+    "text": "अब तक बीजाण्ड के चार मुख्य भाग हो गए।",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.14
+   },
+   {
+    "text": "लेकिन सबसे जरूरी भाग अभी बाकी है,",
+    "golden": null,
+    "t_in": 2.14,
+    "t_out": 4.28
+   },
+   {
+    "text": "और वो समझेंगे next part में।",
+    "golden": null,
+    "t_in": 4.28,
+    "t_out": 5.8
+   },
+   {
+    "text": "और वही सबसे important है।",
+    "golden": null,
+    "t_in": 5.8,
+    "t_out": 8.35
+   }
+  ]
+ },
+ {
+  "seg_id": 8,
+  "duration": 7.23,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "तो Part three में समझेंगे, भ्रूण कोष क्या होता है, और इसे 7 कोशिकीय और 8 केन्द्रकीय क्यों कहा जाता है।",
+  "phrases": [
+   {
+    "text": "तो Part three में समझेंगे, भ्रूण कोष क्या होता है,",
+    "golden": "भ्रूण",
+    "t_in": 0.0,
+    "t_out": 3.61
+   },
+   {
+    "text": "और इसे 7 कोशिकीय और 8 केन्द्रकीय क्यों कहा जाता है।",
+    "golden": null,
+    "t_in": 3.61,
+    "t_out": 7.23
+   }
+  ]
+ }
+]

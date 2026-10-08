@@ -140,9 +140,12 @@ ph.build("biology", Path("projects/<slug>/assets/design/question_sheet.png"),
   question use the latest — a paper header can only be one year.
 - The **subject separator is a plain hyphen**: `जीव विज्ञान - BIOLOGY`. It was an
   en dash (U+2013) in the design, which a search for `—` will never find.
-- If `inbox/sticky_note_design.png` is missing, a **finished sheet can stand in**
-  — but only one whose own question fits inside the erase band, or the widened
-  erase flattens the paper's diagonal fold into a pale block.
+- **`inbox/sticky_note_design.png` is retired and will not come back.** It was
+  the blank the subject line used to be rewritten into; the card in the videos
+  now IS the design and is not a stand-in for anything. Build a new one from a
+  FINISHED sheet — any project's `assets/design/question_sheet.png` — choosing
+  one whose own question fits inside the erase band, or the widened erase
+  flattens the paper's diagonal fold into a pale block.
 
 **The question text is baked into the PNG.** Editing `meta.json` afterwards
 changes nothing on screen. Re-render the sheet, then re-render the card.

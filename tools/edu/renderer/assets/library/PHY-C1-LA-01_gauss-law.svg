@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 700">
+  <!-- Gauss's law: the flux through ANY closed surface depends only on the charge
+       INSIDE it. Two things must be visible or the statement is not proved:
+       (1) an irregular closed surface, not just a sphere, so "any" is credible
+       (2) a charge OUTSIDE whose lines enter and leave again, contributing zero
+       The concentric sphere is what the proof is actually carried out on, since
+       there E is constant over the surface and normal to it. -->
+  <g id="gl_surface">
+    <path d="M300 130 C 470 90, 690 130, 760 250 C 830 370, 740 500, 560 520
+             C 380 540, 250 460, 240 340 C 232 250, 250 160, 300 130 Z"
+          fill="#7FD4FF" fill-opacity="0.07" stroke="#7FD4FF" stroke-width="6"
+          stroke-dasharray="18 12"/>
+  </g>
+  <g id="gl_sphere" data-optional>
+    <circle cx="500" cy="320" r="150" fill="none" stroke="#FFC53D"
+            stroke-width="4" stroke-dasharray="12 10"/>
+    <line x1="500" y1="320" x2="606" y2="214" stroke="#FFC53D" stroke-width="4"/>
+  </g>
+  <g id="gl_charge">
+    <circle cx="500" cy="320" r="26" fill="#FF5A5A"/>
+    <path d="M486 320 L514 320" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    <path d="M500 306 L500 334" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <!-- lines from the enclosed charge: every one crosses the surface once, outward -->
+  <g id="gl_lines">
+    <g stroke="#7BE3A0" stroke-width="4" fill="#7BE3A0" stroke-linecap="round">
+      <path d="M526 320 L742 320"/><path d="M762 320 L734 306 L734 334 Z"/>
+      <path d="M519 297 L672 175"/><path d="M688 162 L658 172 L676 190 Z"/>
+      <path d="M519 343 L664 462"/><path d="M680 475 L652 466 L666 448 Z"/>
+      <path d="M481 297 L330 176"/><path d="M314 163 L344 172 L326 190 Z"/>
+      <path d="M481 343 L344 458"/><path d="M328 471 L356 462 L342 444 Z"/>
+      <path d="M500 294 L500 152"/><path d="M500 132 L486 160 L514 160 Z"/>
+      <path d="M500 346 L500 492"/><path d="M500 512 L486 484 L514 484 Z"/>
+    </g>
+  </g>
+  <!-- a charge OUTSIDE: its line enters and leaves, so it adds nothing -->
+  <g id="gl_outside" data-optional>
+    <circle cx="930" cy="150" r="22" fill="#9FB6CC"/>
+    <path d="M930 172 C 880 300, 700 300, 560 250" fill="none" stroke="#9FB6CC"
+          stroke-width="4" stroke-dasharray="10 8"/>
+    <path d="M560 250 C 430 210, 330 300, 300 420" fill="none" stroke="#9FB6CC"
+          stroke-width="4" stroke-dasharray="10 8"/>
+  </g>
+<style>
+    text{font-family:Poppins,Mukta,'Noto Sans Devanagari',sans-serif;font-weight:800;
+         fill:#FFFFFF;paint-order:stroke;stroke:#0B1220;stroke-width:7px;
+         stroke-linejoin:round;text-anchor:middle}
+    .t{font-size:36px} .s{font-size:29px} .g{fill:#FFC53D} .b{fill:#7FD4FF}
+    .n{fill:#7BE3A0} .d{font-size:25px;fill:#9FB6CC}
+  </style>
+  <text class="t b" x="250" y="86" >बंद पृष्ठ S</text>
+  <text class="t g" x="462" y="296" >q</text>
+  <text class="s g" x="376" y="206" >गॉसीय गोला</text>
+  <text class="s g" x="566" y="250" >r</text>
+  <text class="t" x="180" y="560" >φ = q / ε₀</text>
+  <text class="s d" x="930" y="110" >बाहरी आवेश</text>
+  <text class="s d" x="930" y="146" >योगदान = 0</text>
+  <text class="d" x="540" y="662" >फ्लक्स केवल भीतर के आवेश पर निर्भर</text>
+</svg>

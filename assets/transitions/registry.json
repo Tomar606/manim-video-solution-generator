@@ -4,5 +4,58 @@
   "files": [
    "assets/transitions/divider/paper_tear_texture.jpg"
   ]
+ },
+ "overlay": {
+  "use": "screened over a cut — light leak, film burn, flare",
+  "files": [
+   "assets/transitions/overlay/film_burn_corner.mp4",
+   "assets/transitions/overlay/filmsri_1790165101_01.mp4",
+   "assets/transitions/overlay/filmsri_1790165101_02.mp4",
+   "assets/transitions/overlay/filmsri_1790165101_03.mp4",
+   "assets/transitions/overlay/filmsri_1790165101_04.mp4",
+   "assets/transitions/overlay/filmsri_1790165101_05.mp4",
+   "assets/transitions/overlay/filmsri_1790165101_06.mp4",
+   "assets/transitions/overlay/filmsri_1790165101_07.mp4",
+   "assets/transitions/overlay/filmsri_1790165101_08.mp4",
+   "assets/transitions/overlay/halation_flash.mp4",
+   "assets/transitions/overlay/leak_warm_sweep.mp4",
+   "assets/transitions/overlay/wnebe1_1790165069_01.mp4",
+   "assets/transitions/overlay/wnebe1_1790165069_02.mp4",
+   "assets/transitions/overlay/wnebe1_1790165069_03.mp4",
+   "assets/transitions/overlay/wnebe1_1790165069_04.mp4",
+   "assets/transitions/overlay/wnebe1_1790165069_05.mp4",
+   "assets/transitions/overlay/wnebe1_1790165069_06.mp4",
+   "assets/transitions/overlay/wnebe1_1790165069_07.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_01.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_02.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_03.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_04.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_05.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_06.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_07.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_08.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_09.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_10.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_11.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_12.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_13.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_14.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_15.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_16.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_17.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_18.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_19.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_20.mp4",
+   "assets/transitions/overlay/wnebe1_1790165135_21.mp4"
+  ]
+ },
+ "wipe": {
+  "use": "a bright shape on chroma green; keyed, it covers the cut",
+  "files": [
+   "assets/transitions/wipe/adiofficial99_1790164689.mp4",
+   "assets/transitions/wipe/anetaprorost_1790164751.mp4",
+   "assets/transitions/wipe/ar_preset_14_1790164788.mp4",
+   "assets/transitions/wipe/thuynguyen_1012_1790164986.mp4"
+  ]
  }
 }

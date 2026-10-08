@@ -1,0 +1,180 @@
+[
+ {
+  "seg_id": 1,
+  "duration": 4.7,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "इसे ज़रा ध्यान से समझना। क्योंकि सौ में से अस्सी बच्चे यहीं गलती करते हैं।",
+  "phrases": [
+   {
+    "text": "इसे ज़रा ध्यान से समझना।",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.62
+   },
+   {
+    "text": "क्योंकि सौ में से अस्सी बच्चे",
+    "golden": null,
+    "t_in": 1.62,
+    "t_out": 3.2
+   },
+   {
+    "text": "यहीं गलती करते हैं।",
+    "golden": null,
+    "t_in": 3.2,
+    "t_out": 4.7
+   }
+  ]
+ },
+ {
+  "seg_id": 2,
+  "duration": 3.58,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "(graphic only)",
+  "phrases": [],
+  "captions": "off"
+ },
+ {
+  "seg_id": 3,
+  "duration": 9.24,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "(graphic only)",
+  "phrases": [],
+  "captions": "off"
+ },
+ {
+  "seg_id": 4,
+  "duration": 6.24,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "(graphic only)",
+  "phrases": [],
+  "captions": "off"
+ },
+ {
+  "seg_id": 5,
+  "duration": 6.22,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "(graphic only)",
+  "phrases": [],
+  "captions": "off"
+ },
+ {
+  "seg_id": 6,
+  "duration": 9.66,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "(graphic only)",
+  "phrases": [],
+  "captions": "off"
+ },
+ {
+  "seg_id": 7,
+  "duration": 9.62,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "(graphic only)",
+  "phrases": [],
+  "captions": "off"
+ },
+ {
+  "seg_id": 8,
+  "duration": 4.14,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "बच्चों, बस इतना समझ आ गया तो परीक्षा में ये नम्बर पक्के।",
+  "phrases": [
+   {
+    "text": "बच्चों, बस इतना समझ आ गया",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.22
+   },
+   {
+    "text": "तो परीक्षा में ये नम्बर पक्के।",
+    "golden": null,
+    "t_in": 2.22,
+    "t_out": 4.14
+   }
+  ]
+ },
+ {
+  "seg_id": 9,
+  "duration": 7.88,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "अब इसे परीक्षा में कैसे लिखना है, इसका उत्तर आपकी स्क्रीन पर आ जाएगा। इसे save कर लेना और screenshot लेना मत भूलना।",
+  "phrases": [
+   {
+    "text": "अब इसे परीक्षा में कैसे लिखना है,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.26
+   },
+   {
+    "text": "इसका उत्तर आपकी स्क्रीन पर आ जाएगा।",
+    "golden": null,
+    "t_in": 2.26,
+    "t_out": 4.58
+   },
+   {
+    "text": "इसे save कर लेना और",
+    "golden": null,
+    "t_in": 4.58,
+    "t_out": 6.08
+   },
+   {
+    "text": "screenshot लेना मत भूलना।",
+    "golden": null,
+    "t_in": 6.08,
+    "t_out": 7.88
+   }
+  ]
+ },
+ {
+  "seg_id": 10,
+  "duration": 9.18,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "और ऐसे ही महत्वपूर्ण सवालों को आसान तरीके से समझने और परीक्षा की तैयारी करने के लिए, आज ही अरिविहान के उन्नति बैच से जुड़ें।",
+  "phrases": [
+   {
+    "text": "और ऐसे ही महत्वपूर्ण सवालों को",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.28
+   },
+   {
+    "text": "आसान तरीके से समझने और",
+    "golden": null,
+    "t_in": 2.28,
+    "t_out": 3.82
+   },
+   {
+    "text": "परीक्षा की तैयारी करने के लिए,",
+    "golden": null,
+    "t_in": 3.82,
+    "t_out": 6.12
+   },
+   {
+    "text": "आज ही अरिविहान के उन्नति बैच से जुड़ें।",
+    "golden": null,
+    "t_in": 6.12,
+    "t_out": 9.18
+   }
+  ]
+ }
+]

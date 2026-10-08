@@ -1,0 +1,120 @@
+[
+ {
+  "slug": "portrait",
+  "mode": "photo",
+  "photo": "/projects/che-c2-la-01/assets/photos/faraday.png",
+  "h": 750,
+  "tag": "माइकल फैराडे (1791–1867)",
+  "shape": "portrait",
+  "ar": "0.76"
+ },
+ {
+  "slug": "lab",
+  "mode": "photo",
+  "photo": "/projects/che-c2-la-01/assets/photos/electrolysis-lab.png",
+  "h": 750,
+  "tag": "विद्युत्-अपघटन"
+ },
+ {
+  "slug": "law1",
+  "mode": "define",
+  "h": 750,
+  "title": "फैराडे का पहला नियम",
+  "lines": "इलेक्ट्रोड पर मुक्त होने वाले|पदार्थ की मात्रा, प्रवाहित विद्युत्|आवेश की मात्रा के समानुपाती होती है",
+  "show": 3
+ },
+ {
+  "slug": "law2",
+  "mode": "define",
+  "h": 750,
+  "title": "फैराडे का दूसरा नियम",
+  "lines": "समान विद्युत् प्रवाहित करने पर|मुक्त पदार्थों की मात्राएँ उनके|तुल्यांकी भार के समानुपाती होती हैं",
+  "show": 3
+ },
+ {
+  "slug": "twocell",
+  "mode": "svg",
+  "svg": "assets/two-cells.svg",
+  "hide": "",
+  "h": 660,
+  "labels": "[[\"समान विद्युत् i\", 0.5, 0.045], [\"W₁\", 0.318, 0.6], [\"E₁\", 0.318, 0.9], [\"W₂\", 0.828, 0.47], [\"E₂\", 0.828, 0.9]]"
+ },
+ {
+  "slug": "a1",
+  "mode": "math",
+  "h": 750,
+  "lines": "W \\propto Q@@Q = i \\times t@@W \\propto i \\times t@@\\boxed{\\,W = Z\\,i\\,t\\,}",
+  "from": 1,
+  "show": 1,
+  "lead": "पहला नियम"
+ },
+ {
+  "slug": "a2",
+  "mode": "math",
+  "h": 750,
+  "lines": "W \\propto Q@@Q = i \\times t@@W \\propto i \\times t@@\\boxed{\\,W = Z\\,i\\,t\\,}",
+  "from": 1,
+  "show": 2,
+  "lead": "विद्युत् की मात्रा"
+ },
+ {
+  "slug": "a3",
+  "mode": "math",
+  "h": 750,
+  "lines": "W \\propto Q@@Q = i \\times t@@W \\propto i \\times t@@\\boxed{\\,W = Z\\,i\\,t\\,}",
+  "from": 1,
+  "show": 3,
+  "lead": "Q का मान रखने पर"
+ },
+ {
+  "slug": "a4",
+  "mode": "math",
+  "h": 750,
+  "lines": "W \\propto Q@@Q = i \\times t@@W \\propto i \\times t@@\\boxed{\\,W = Z\\,i\\,t\\,}",
+  "from": 1,
+  "show": 4,
+  "lead": "समानुपाती हटाने पर"
+ },
+ {
+  "slug": "b1",
+  "mode": "math",
+  "h": 750,
+  "lines": "W \\propto E@@W_1 \\propto E_1\\ ,\\qquad W_2 \\propto E_2@@\\boxed{\\ \\dfrac{W_1}{W_2} = \\dfrac{E_1}{E_2}\\ }",
+  "from": 1,
+  "show": 1,
+  "lead": "दूसरा नियम"
+ },
+ {
+  "slug": "b2",
+  "mode": "math",
+  "h": 750,
+  "lines": "W \\propto E@@W_1 \\propto E_1\\ ,\\qquad W_2 \\propto E_2@@\\boxed{\\ \\dfrac{W_1}{W_2} = \\dfrac{E_1}{E_2}\\ }",
+  "from": 1,
+  "show": 2,
+  "lead": "दो पदार्थों के लिए"
+ },
+ {
+  "slug": "b3",
+  "mode": "math",
+  "h": 750,
+  "lines": "W \\propto E@@W_1 \\propto E_1\\ ,\\qquad W_2 \\propto E_2@@\\boxed{\\ \\dfrac{W_1}{W_2} = \\dfrac{E_1}{E_2}\\ }",
+  "from": 1,
+  "show": 3,
+  "lead": "अनुपात लेने पर"
+ },
+ {
+  "slug": "compare",
+  "mode": "table",
+  "h": 750,
+  "head": "नियम|क्या बदलता है|सूत्र",
+  "rows": "पहला|विद्युत् आवेश की मात्रा|W = Z i t;दूसरा|तुल्यांकी भार|W₁/W₂ = E₁/E₂"
+ },
+ {
+  "slug": "cell",
+  "mode": "photo",
+  "photo": "/projects/che-c2-la-01/assets/photos/electrolysis-lab.png",
+  "h": 750,
+  "tag": "विद्युत्-अपघटन सेल",
+  "pins": "[[\"ऐनोड\", 0.105, 0.74, 0.252, 0.44], [\"कैथोड\", 0.545, 0.24, 0.378, 0.4], [\"विद्युत् स्रोत\", 0.815, 0.62, 0.755, 0.5]]"
+ }
+]

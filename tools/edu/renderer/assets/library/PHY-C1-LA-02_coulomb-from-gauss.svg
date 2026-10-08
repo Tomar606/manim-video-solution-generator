@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 700">
+  <!-- Coulomb from Gauss. The Gaussian surface must be a SPHERE centred on the
+       charge, because only then is E the same magnitude everywhere on it and
+       everywhere normal to it -- which is what lets flux = E x 4(pi)r^2 be
+       written down at all. Then E = q/(4 pi eps0 r^2), and a second charge q0
+       placed on the surface feels F = q0 E. The area element dS is drawn with
+       its outward normal parallel to E, since that is the step being used. -->
+  <g id="cg_sphere">
+    <circle cx="430" cy="310" r="210" fill="#7FD4FF" fill-opacity="0.06"
+            stroke="#FFC53D" stroke-width="5" stroke-dasharray="16 12"/>
+    <line x1="430" y1="310" x2="578" y2="162" stroke="#FFC53D" stroke-width="4"/>
+  </g>
+  <g id="cg_charge">
+    <circle cx="430" cy="310" r="26" fill="#FF5A5A"/>
+    <path d="M416 310 L444 310" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    <path d="M430 296 L430 324" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <g id="cg_lines">
+    <g stroke="#7BE3A0" stroke-width="4" fill="#7BE3A0" stroke-linecap="round">
+      <path d="M456 310 L636 310"/><path d="M656 310 L628 296 L628 324 Z"/>
+      <path d="M430 284 L430 122"/><path d="M430 102 L416 130 L444 130 Z"/>
+      <path d="M430 336 L430 498"/><path d="M430 518 L416 490 L444 490 Z"/>
+      <path d="M404 310 L224 310"/><path d="M204 310 L232 296 L232 324 Z"/>
+      <path d="M449 291 L570 170"/><path d="M584 156 L554 166 L574 186 Z"/>
+      <path d="M411 329 L290 450"/><path d="M276 464 L306 454 L286 434 Z"/>
+    </g>
+  </g>
+  <!-- the patch of surface, and its outward normal parallel to E -->
+  <g id="cg_ds" data-optional>
+    <path d="M604 250 L666 214 L690 256 L628 292 Z" fill="#FFC53D"
+          fill-opacity="0.45" stroke="#FFC53D" stroke-width="4"/>
+    <path d="M652 258 L716 220" stroke="#fff" stroke-width="4"/>
+    <path d="M732 210 L700 216 L714 240 Z" fill="#fff"/>
+  </g>
+  <!-- the second charge, which is what turns a field into a force -->
+  <g id="cg_q0" data-optional>
+    <circle cx="640" cy="310" r="20" fill="#8B3FBF"/>
+  </g>
+<style>
+    text{font-family:Poppins,Mukta,'Noto Sans Devanagari',sans-serif;font-weight:800;
+         fill:#FFFFFF;paint-order:stroke;stroke:#0B1220;stroke-width:7px;
+         stroke-linejoin:round;text-anchor:middle}
+    .t{font-size:36px} .s{font-size:29px} .g{fill:#FFC53D} .b{fill:#7FD4FF}
+    .n{fill:#7BE3A0} .d{font-size:25px;fill:#9FB6CC}
+  </style>
+  <text class="t g" x="250" y="80" >गॉसीय गोला</text>
+  <text class="t g" x="394" y="286" >q</text>
+  <text class="s g" x="516" y="218" >r</text>
+  <text class="s" x="636" y="198" >dS</text>
+  <text class="s" x="764" y="190" >E</text>
+  <text class="s" x="644" y="356" >q₀</text>
+  <text class="t" x="862" y="468" >E = q / 4πε₀r²</text>
+  <text class="t" x="862" y="530" >F = q₀E</text>
+  <text class="d" x="540" y="662" >गोले पर E हर जगह समान और अभिलंबवत</text>
+</svg>

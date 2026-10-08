@@ -18,6 +18,7 @@ linting/tests. Globals resolve at call time, so the header's assignments win.
 from __future__ import annotations
 
 from manim import *  # noqa: F401,F403
+import re
 import json as _json
 import os as _os
 import numpy as np
@@ -681,6 +682,7 @@ class ThemedScene(Scene):
     # Set by a scene that reserves bands: (top, bottom) as fractions of the
     # frame height from the top. Content outside this is reported.
     STAGE_BAND: tuple[float, float] | None = None
+    TABLE_PAD_W = 1.05        # 0.86 band * 1.05 = 90% of the frame
     OVERLAP_TOL = 0.22        # ignore touching; flag real occlusion
     AUDIT_LAYOUT = True
 
@@ -820,13 +822,105 @@ class ThemedScene(Scene):
                 m.scale(ref_t.height / max(ref_m.height, 1e-6))
                 rows.add(m)
                 continue
+            # INLINE MATHS INSIDE A SENTENCE. A whole line as `$...$` was
+            # already handled; a line that is mostly Hindi with one symbol in it
+            # was not, so "1/ε₀ गुना होता है" could only be written by spelling
+            # the symbol out as "एप्सिलॉन नॉट" — which is not what the student
+            # has to recognise. Devanagari still never goes INSIDE the maths:
+            # the line is split and each piece set by its own renderer.
+            if "$" in t:
+                parts = re.split(r"(\$[^$]*\$)", t)
+                line = VGroup()
+                ref = Text("H", font=ui_font(), font_size=size, weight="MEDIUM")
+                for seg in parts:
+                    if not seg:
+                        continue
+                    if seg.startswith("$") and seg.endswith("$"):
+                        m = MathTex(seg[1:-1], color="#FFC15C")
+                        m.scale(ref.height / max(MathTex("H").height, 1e-6))
+                        line.add(m)
+                    else:
+                        line.add(Text(seg, font=ui_font(), font_size=size,
+                                      color="#FFFFFF", weight="MEDIUM"))
+                rows.add(line.arrange(RIGHT, buff=0.12))
+                continue
             t2c = {hi: "#FFC15C"} if hi and hi in t else {}
             rows.add(Text(t, font=ui_font(), font_size=size,
                           color="#FFFFFF", weight="MEDIUM", t2c=t2c))
         rows.arrange(DOWN, buff=0.34, aligned_edge=LEFT)
         return self.place(rows)
 
-    def beat_formula(self, tex, label=None, size=1.15, colour="#FFFFFF"):
+    def beat_cube(self, spec):
+        """A one-centimetre cube of solution between two electrodes.
+
+        WHY A PICTURE AND NOT AN EQUATION. Specific conductance was being put on
+        screen as two stacked fragments — "\\kappa" on one line and "1 cm^3" on
+        the next — which is not an equation and does not read as one. It was
+        meant to say "the conductance of one cubic centimetre of solution", and
+        the faculty's note was that a student cannot get that from those pieces.
+
+        What the definition actually describes is a shape: a cube of solution one
+        centimetre on every side, with the current crossing between two opposite
+        faces. Drawn, it carries its own meaning — and it is the same l and A
+        that appear in kappa = (1/R)(l/A) three beats later, so the derivation
+        stops being an unrelated formula and becomes this picture measured.
+
+        The dimensions are in Latin ("1 cm") and the caption in Devanagari, kept
+        as separate mobjects: LaTeX has no Devanagari and the Devanagari face has
+        no maths, so a glued string is tofu one way and a LaTeX failure the other
+        (CLAUDE.md).
+        """
+        side = spec.get("side", 2.6)
+        dx, dy = side * 0.42, side * 0.30          # the depth offset, isometric
+        sol = spec.get("solution", "#2E6EA6")
+        plate = spec.get("plate", "#C6D3E4")
+        front = Polygon([0, 0, 0], [side, 0, 0], [side, side, 0], [0, side, 0])
+        top = Polygon([0, side, 0], [dx, side + dy, 0],
+                      [side + dx, side + dy, 0], [side, side, 0])
+        right = Polygon([side, 0, 0], [side + dx, dy, 0],
+                        [side + dx, side + dy, 0], [side, side, 0])
+        for f, op in ((front, 0.30), (top, 0.16), (right, 0.22)):
+            f.set_fill(sol, op).set_stroke("#8FB6DD", 2.2)
+        # the two faces the current crosses, drawn as plates
+        lplate = Line([0, 0, 0], [0, side, 0]).set_stroke(plate, 9)
+        rplate = Line([side + dx, dy, 0], [side + dx, side + dy, 0]).set_stroke(plate, 9)
+        body = VGroup(top, right, front, lplate, rplate)
+
+        def dim(p0, p1, text, shift):
+            ln = Line(p0, p1).set_stroke("#FFD479", 2)
+            t1 = Line(p0 + shift * 0.18, p0 - shift * 0.18).set_stroke("#FFD479", 2)
+            t2 = Line(p1 + shift * 0.18, p1 - shift * 0.18).set_stroke("#FFD479", 2)
+            lab = Text(text, font=ui_font(), font_size=26, color="#FFD479")
+            lab.next_to(ln.get_center(), shift, buff=0.16)
+            return VGroup(ln, t1, t2, lab)
+
+        marks = VGroup(
+            dim(np.array([0, -0.34, 0]), np.array([side, -0.34, 0]), "1 cm", DOWN),
+            dim(np.array([-0.40, 0, 0]), np.array([-0.40, side, 0]), "1 cm", LEFT),
+        )
+        g = VGroup(body, marks)
+        cap = spec.get("caption")
+        if cap:
+            note = Text(str(cap), font=ui_font(), font_size=32,
+                        color="#D7E2F2", weight="MEDIUM")
+            g = VGroup(g, note).arrange(DOWN, buff=0.52)
+        if spec.get("label"):
+            head = Text(str(spec["label"]), font=ui_font(), font_size=40,
+                        color="#7CE0B0", weight="BOLD")
+            g = VGroup(head, g).arrange(DOWN, buff=0.40)
+        # the same band beat_formula uses, so the presenter stays full size
+        TOPR, BOTR = 300, 930
+        k = config.frame_height / config.pixel_height
+        top_y = (config.pixel_height / 2 - TOPR) * k
+        bot_y = (config.pixel_height / 2 - BOTR) * k
+        ah, aw = (top_y - bot_y) * 0.96, config.frame_width * 0.86
+        sc = min(aw / max(g.width, 1e-6), ah / max(g.height, 1e-6))
+        g.scale(min(sc, 1.9))
+        g.move_to([0, (top_y + bot_y) / 2, 0])
+        return g
+
+    def beat_formula(self, tex, label=None, size=1.15, colour="#FFFFFF",
+                     terms=None):
         """One or more equations, large, boxed if labelled.
 
         Equations are the part of an answer a student copies verbatim, so they
@@ -856,13 +950,55 @@ class ThemedScene(Scene):
 
         eqs = VGroup(*[MathTex(t).scale(size).set_color(colour) for t in lines])
         eqs.arrange(DOWN, buff=0.34, aligned_edge=LEFT)
+        # WHAT THE SYMBOLS MEAN, under the equation that uses them.
+        #
+        # An equation a student is copying is useless if he cannot say what R
+        # and A stand for, and the narration names them once, in passing. The
+        # legend keeps them on screen for as long as the formula is up, set
+        # smaller than the equation so the equation stays the subject.
+        #
+        # Each term is its own row: a MathTex symbol, then Devanagari. They are
+        # NOT one string — Poppins has no Greek and LaTeX has no Devanagari, so
+        # a glued "\rho = प्रतिरोधकता" is tofu one way and a LaTeX failure the
+        # other. The equals sign is drawn as text between them.
+        if terms:
+            rows = VGroup()
+            for sym, mean in terms:
+                rows.add(VGroup(
+                    MathTex(str(sym)).scale(0.62).set_color("#FFD479"),
+                    Text("=", font=ui_font(), font_size=26, color="#B9C6DC"),
+                    Text(str(mean), font=ui_font(), font_size=26,
+                         color="#D7E2F2")).arrange(RIGHT, buff=0.18))
+            rows.arrange(DOWN, buff=0.20, aligned_edge=LEFT)
+            eqs = VGroup(eqs, rows).arrange(DOWN, buff=0.52)
         if label:
             # sized like a `compare` column heading, which is the size the user
             # picked out as right; place() then grows the whole block together
             cap = Text(str(label), font=ui_font(), font_size=40,
                        color="#7CE0B0", weight="BOLD")
             eqs = VGroup(cap, eqs).arrange(DOWN, buff=0.40)
-        return self.place(eqs)
+        # KEEP THE EQUATION ABOVE THE PRESENTER.
+        #
+        # place() fits a beat to CELL_TOP..CELL_FLOOR (rows 288..1382) because
+        # a beat on the stage means the compositor shrinks the presenter out of
+        # the way. With a symbol legend under it the block really does reach row
+        # 1348, so avatar_windows finds content behind him for 54 seconds at a
+        # stretch and he spends most of the video at 292px — the "avatar is too
+        # small at places" the user reported.
+        #
+        # An equation does not need that depth. Fitting it to the band that ENDS
+        # above his box keeps it large and keeps him full size, so neither has
+        # to give way to the other.
+        TOPR, BOTR = 300, 930
+        k = config.frame_height / config.pixel_height
+        top_y = (config.pixel_height / 2 - TOPR) * k
+        bot_y = (config.pixel_height / 2 - BOTR) * k
+        ah, aw = (top_y - bot_y) * 0.96, config.frame_width * 0.86
+        sc = min(aw / max(eqs.width, 1e-6), ah / max(eqs.height, 1e-6))
+        if sc < 1.0 or sc > 1.0:
+            eqs.scale(min(sc, 1.9))
+        eqs.move_to([0, (top_y + bot_y) / 2, 0])
+        return eqs
 
     def beat_flow(self, items, size=30):
         """a -> b -> c, wrapped to two rows if it will not fit one."""
@@ -882,7 +1018,7 @@ class ThemedScene(Scene):
                            ).arrange(DOWN, buff=0.34)
         return self.place(chain)
 
-    def beat_table(self, cols, rows, size=26):
+    def beat_table(self, cols, rows, size=26, col_tones=None, font=None):
         """An N-column table whose rows arrive one at a time.
 
         `compare` covers two columns of loose lines. This covers what most of
@@ -894,24 +1030,50 @@ class ThemedScene(Scene):
         Returns (group, row_groups) so the scene can reveal rows on their own
         caption, exactly as a progressive list does.
         """
-        colour_of = {"warn": "#FF8A7A", "ok": "#7BE3A0", "accent": "#FFC15C"}
+        colour_of = {"warn": "#FF8A7A", "ok": "#7BE3A0", "accent": "#FFC15C",
+                     "dia": "#5BC8F9", "para": "#FFC15C", "ferro": "#8FE3B0",
+                     "ink": "#FFFFFF"}
+        # COLUMN COLOURS. A comparison table's whole failure mode is the student
+        # writing the right fact in the wrong column — the script for the
+        # magnetism question says so out loud. Locking each column to the colour
+        # its material carries everywhere else in the video is what stops that;
+        # a row tone still wins where one is given.
+        ctone = list(col_tones or [])
+
+        # A caller may override the face. The theme face (Poppins) mis-sets a
+        # reph over a following i-matra — आकर्षित comes out आकषित at cell size —
+        # so a table whose cells carry those words asks for a Devanagari face.
+        face = font or ui_font()
 
         def cell(text, fs, colour, weight):
             t = str(text)
             if t.startswith("$") and t.endswith("$"):
                 m = MathTex(t[1:-1], color=colour)
-                ref_t = Text("H", font=ui_font(), font_size=fs, weight=weight)
+                ref_t = Text("H", font=face, font_size=fs, weight=weight)
                 m.scale(ref_t.height / max(MathTex("H").height, 1e-6))
+                # MATCH THE WEIGHT, not just the height. LaTeX sets a thin
+                # italic; beside BOLD Devanagari at the same optical size it
+                # reads a shade dimmer — which put sp3 and d2sp3, the actual
+                # answer to a "state the hybridisation" question, as the
+                # faintest thing on their own row. A hairline stroke in the
+                # cell's own colour evens them up without changing the glyphs.
+                m.set_stroke(colour, width=1.1, opacity=1.0, background=True)
                 return m
-            return Text(t, font=ui_font(), font_size=fs, color=colour,
+            return Text(t, font=face, font_size=fs, color=colour,
                         weight=weight)
 
-        head = VGroup(*[cell(c, size + 2, "#FFC15C", "BOLD") for c in cols])
+        def col_colour(i, fallback):
+            if i < len(ctone) and ctone[i]:
+                return colour_of.get(ctone[i], fallback)
+            return fallback
+
+        head = VGroup(*[cell(c, size + 2, col_colour(i, "#FFC15C"), "BOLD")
+                        for i, c in enumerate(cols)])
         body = []
         for r in rows:
             cells = []
             for i, c in enumerate(r if isinstance(r, list) else r["cells"]):
-                tone = "#FFFFFF"
+                tone = col_colour(i, "#FFFFFF")
                 if isinstance(r, dict) and r.get("tone"):
                     tone = colour_of.get(r["tone"], "#FFFFFF")
                 cells.append(cell(c, size, tone, "MEDIUM"))
@@ -935,12 +1097,40 @@ class ThemedScene(Scene):
         lay(head)
         for b in body:
             lay(b)
-        grid = VGroup(head, *body).arrange(DOWN, buff=0.30, aligned_edge=LEFT)
-        rule = Line(grid.get_left(), grid.get_right(),
-                    stroke_width=2, color="#9FB6CC").set_opacity(0.5)
-        rule.next_to(head, DOWN, buff=0.14).align_to(grid, LEFT)
-        whole = VGroup(grid, rule)
-        return self.place(whole), body
+        # STACK ON THE SHARED X-GRID, do not arrange(aligned_edge=LEFT). lay()
+        # has already put every cell at its column's absolute x; arranging then
+        # aligned each row's BOUNDING BOX, and a header whose first cell is ""
+        # has no width there — so the whole header row slid one column left and
+        # sat over the wrong columns. Shifting by row index keeps the grid.
+        show_head = any(str(c).strip() for c in cols)
+        stack = ([head] if show_head else []) + body
+        pitch = max(r.height for r in stack) + 0.30
+        for i, r in enumerate(stack):
+            r.shift(DOWN * i * pitch)
+        grid = VGroup(*stack)
+        parts = [grid]
+        if show_head:
+            rule = Line(grid.get_left(), grid.get_right(),
+                        stroke_width=2, color="#9FB6CC").set_opacity(0.5)
+            rule.next_to(head, DOWN, buff=0.14).align_to(grid, LEFT)
+            parts.append(rule)
+        # A BACKING PLATE UNDER THE TABLE. The theme background is not flat —
+        # it carries faint line art (flasks, test tubes, molecules), and a wide
+        # table's outer columns land right on top of it: a test tube ran through
+        # "≫ 1" and "धनात्मक, बहुत" in the magnetism comparison, which the layout
+        # guard cannot see because it checks content against CONTENT, never
+        # against the backdrop. The plate is the theme's own base colour, so it
+        # reads as the page rather than as a box drawn round the table.
+        table = VGroup(*parts)
+        plate = RoundedRectangle(corner_radius=0.16,
+                                 width=table.width + 0.42,
+                                 height=table.height + 0.36)
+        plate.set_fill(THEME["background"], 0.88).set_stroke(width=0)
+        plate.move_to(table.get_center())
+        whole = VGroup(plate, table)
+        # pad_w is lower than the band allows on purpose: at 1.11 the ink came
+        # within 20px of the frame edge, which is not a margin on a phone.
+        return self.place(whole, pad_w=self.TABLE_PAD_W), body
 
     def beat_chain(self, items, direction="down", size=28, title=None):
         """Boxes joined by arrows, arriving one at a time.
@@ -979,7 +1169,19 @@ class ThemedScene(Scene):
             head = Text(str(title), font=ui_font(), font_size=size + 6,
                         color="#FFC15C", weight="BOLD")
             whole = VGroup(head, whole).arrange(DOWN, buff=0.34)
-        return self.place(whole), boxes
+        # EACH ARROW TRAVELS WITH THE BOX IT POINTS AT. The boxes are revealed
+        # one per caption but the arrows were built visible, so before the later
+        # boxes arrived their connectors hung in empty space and read as bare
+        # lines between nothing — which is exactly what a viewer reported.
+        links = [boxes[0]]
+        for i in range(len(arrows)):
+            g = VGroup(arrows[i], boxes[i + 1])
+            # the connector LEADS its box by a beat: an arrow that lands at the
+            # same instant reads as decoration, one that lands just before reads
+            # as "and therefore". The scene checks this flag when it reveals.
+            g.arrow_first = True
+            links.append(g)
+        return self.place(whole), links
 
     def beat_compare(self, left, right, size=28):
         """Two labelled columns — the shape most 'compare these' answers want.
@@ -988,6 +1190,11 @@ class ThemedScene(Scene):
         spaced apart and hoped over: with a rule there, a long line on one side
         reads as belonging to that side even when it runs close to the middle.
         """
+        # A caller may override the face. The theme face (Poppins) mis-sets a
+        # reph over a following i-matra — आकर्षित comes out आकषित at cell size —
+        # so a table whose cells carry those words asks for a Devanagari face.
+        face = font or ui_font()
+
         def cell(text, fs, colour, weight):
             """`$...$` sets the line as maths instead of as text.
 
@@ -1005,11 +1212,11 @@ class ThemedScene(Scene):
                 # this item's own height: a formula carrying a superscript is
                 # taller, so height-matching shrank MnO_4^{2-} below MnO_2 and
                 # the column came out in three different sizes.
-                ref_t = Text("H", font=ui_font(), font_size=fs, weight=weight)
+                ref_t = Text("H", font=face, font_size=fs, weight=weight)
                 ref_m = MathTex("H")
                 m.scale(ref_t.height / max(ref_m.height, 1e-6))
                 return m
-            return Text(t, font=ui_font(), font_size=fs, color=colour,
+            return Text(t, font=face, font_size=fs, color=colour,
                         weight=weight)
 
         def col(spec):

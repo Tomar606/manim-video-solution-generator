@@ -118,6 +118,14 @@ def check(video: Path, graphics_from: float | None) -> list[str]:
                            f">= {HALF_SCREEN}")
         if abs(geom.get("dx_out", 0)) > 140:
             bad.append(f"CENTRING SHIFT LOOKS WRONG: {geom['dx_out']}px")
+    elif (video.parent.parent / "reel.json").is_file():
+        # THE ALL-VEO ROUTE HAS NO PLACEMENT TO VERIFY. The sidecar is written
+        # by tools/composite.py when it keys a presenter into a panel above him.
+        # On this route the scenes ARE the presenter, full frame, so there is no
+        # panel and no placement — reel.json beside the output is what says so.
+        # Reported, not silently passed: nothing here was checked.
+        print("   skip  all-Veo route (reel.json present) — no panel placement "
+              "to verify, so the geometry sidecar is not expected")
     else:
         bad.append("no geometry sidecar — cannot verify placement")
 

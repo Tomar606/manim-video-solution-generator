@@ -1,638 +1,269 @@
 [
  {
   "seg_id": 1,
-  "duration": 7.85,
-  "voiceover": "MP बोर्ड कक्षा barvi के बच्चों! ये सवाल 2019 में आ चुका है, और इस साल भी आपकी त्रैमासिक परीक्षा में आ सकता है।",
-  "phrases": [
-   {
-    "text": "MP बोर्ड कक्षा barvi के बच्चों!",
-    "golden": null,
-    "t_in": 0.0,
-    "t_out": 2.81
-   },
-   {
-    "text": "ये सवाल 2019 में आ चुका है,",
-    "golden": null,
-    "t_in": 2.81,
-    "t_out": 4.23
-   },
-   {
-    "text": "और इस साल भी आपकी त्रैमासिक परीक्षा में आ सकता है।",
-    "golden": null,
-    "t_in": 4.23,
-    "t_out": 7.85
-   }
-  ],
-  "timing": "transcript",
-  "type": "TEXT_ONLY",
-  "labels": []
- },
- {
-  "seg_id": 2,
-  "duration": 4.31,
-  "voiceover": "तो सबसे पहले समझते हैं कि गॉस का नियम क्या कहता है?",
-  "phrases": [
-   {
-    "text": "तो सबसे पहले समझते हैं कि गॉस का नियम",
-    "golden": "गॉस का नियम",
-    "t_in": 0.0,
-    "t_out": 2.64
-   },
-   {
-    "text": "क्या कहता है?",
-    "golden": null,
-    "t_in": 2.64,
-    "t_out": 4.31
-   }
-  ]
- },
- {
-  "seg_id": 2,
-  "duration": 1.94,
+  "duration": 11.24,
   "type": "TEXT_ONLY",
   "timing": "transcript",
-  "type": "TEXT_ONLY",
-  "labels": []
- },
- {
-  "seg_id": 3,
-  "duration": 5.68,
-  "voiceover": "इसे ध्यान से समझ लो, क्योंकि exam में बिल्कुल इसी तरह लिख दिया, तो आपके 4 नंबर पक्के।",
+  "labels": [],
+  "voiceover": "और पहले वो सवाल जो Part two के आखिर में छोड़ा था - लाल और सफेद घुलकर गुलाबी बन गए। तो क्या रंग आपस में मिल गए? क्या ये मिश्रित वंशागति है?",
   "phrases": [
    {
-    "text": "इसे ध्यान से समझ लो,",
-    "golden": null,
-    "t_in": 0.0,
-    "t_out": 1.46
-   },
-   {
-    "text": "क्योंकि exam में बिल्कुल इसी तरह लिख दिया,",
-    "golden": null,
-    "t_in": 1.46,
-    "t_out": 4.22
-   },
-   {
-    "text": "तो आपके 4 नंबर पक्के।",
-    "golden": null,
-    "t_in": 4.22,
-    "t_out": 5.68
-   }
-  ],
-  "timing": "transcript",
-  "type": "TEXT_ONLY",
-  "labels": []
- },
- {
-  "seg_id": 4,
-  "duration": 11.14,
-  "voiceover": "गॉस के नियम के अनुसार, किसी बंद पृष्ठ से गुजरने वाला कुल विद्युत् फ्लक्स, उस पृष्ठ के अंदर उपस्थित कुल आवेश का one by epsilon naught गुना होता है।",
-  "phrases": [
-   {
-    "text": "गॉस के नियम के अनुसार,",
-    "golden": null,
-    "t_in": 0.0,
-    "t_out": 1.82
-   },
-   {
-    "text": "किसी बंद पृष्ठ से गुजरने वाला कुल विद्युत् फ्लक्स,",
-    "golden": "विद्युत् फ्लक्स",
-    "t_in": 1.82,
-    "t_out": 4.96
-   },
-   {
-    "text": "उस पृष्ठ के अंदर उपस्थित कुल आवेश का one",
-    "golden": "आवेश",
-    "t_in": 4.96,
-    "t_out": 8.26
-   },
-   {
-    "text": "by epsilon naught गुना होता है।",
-    "golden": "epsilon naught",
-    "t_in": 8.26,
-    "t_out": 11.14
-   }
-  ],
-  "timing": "transcript",
-  "type": "EQUATION",
-  "equation": {
-   "latex": "\\Phi_E = \\dfrac{q}{\\varepsilon_0}",
-   "t_in": 0.26
-  },
-  "labels": []
- },
- {
-  "seg_id": 5,
-  "duration": 7.72,
-  "voiceover": "यहाँ फाई E है कुल विद्युत् फ्लक्स, q है बंद पृष्ठ के अंदर का कुल आवेश और epsilon naught है निर्वात की विद्युतशीलता।",
-  "phrases": [
-   {
-    "text": "यहाँ फाई E है कुल विद्युत् फ्लक्स,",
-    "golden": "विद्युत् फ्लक्स",
-    "t_in": 0.0,
-    "t_out": 2.1
-   },
-   {
-    "text": "q है बंद पृष्ठ के अंदर का कुल आवेश",
-    "golden": "आवेश",
-    "t_in": 2.1,
-    "t_out": 4.74
-   },
-   {
-    "text": "और epsilon naught है निर्वात की विद्युतशीलता।",
-    "golden": "epsilon naught",
-    "t_in": 4.74,
-    "t_out": 7.72
-   }
-  ],
-  "timing": "transcript",
-  "type": "EQUATION",
-  "equation": {
-   "latex": "\\Phi_E = \\dfrac{q}{\\varepsilon_0}",
-   "t_in": -0.6
-  },
-  "labels": []
- },
- {
-  "seg_id": 6,
-  "duration": 11.31,
-  "voiceover": "लेकिन बच्चों, सिर्फ ये सूत्र याद कर लेना काफी नहीं है। इस सूत्र में विद्युत् फ्लक्स आया कहाँ से और ये q by epsilon naught कैसे मिला, अब इसे समझते हैं।",
-  "phrases": [
-   {
-    "text": "लेकिन बच्चों, सिर्फ ये सूत्र याद कर लेना काफी",
-    "golden": null,
-    "t_in": 0.0,
-    "t_out": 3.24
-   },
-   {
-    "text": "नहीं है। इस सूत्र में विद्युत् फ्लक्स आया कहाँ",
-    "golden": "विद्युत् फ्लक्स",
-    "t_in": 3.24,
-    "t_out": 6.12
-   },
-   {
-    "text": "से और ये q by epsilon naught कैसे मिला,",
-    "golden": "epsilon naught",
-    "t_in": 6.12,
-    "t_out": 8.29
-   },
-   {
-    "text": "अब इसे समझते हैं।",
-    "golden": null,
-    "t_in": 8.29,
-    "t_out": 11.31
-   }
-  ],
-  "timing": "transcript",
-  "type": "TEXT_ONLY",
-  "labels": []
- },
- {
-  "seg_id": 7,
-  "duration": 11.88,
-  "voiceover": "मान लो q धन आवेश को एक गोले के केंद्र O पर रखा गया है और गोले की अब इस आवेश के कारण गोले की सतह पर किसी बिंदु P पर विद्युत् क्षेत्र की तीव्रता होगी—",
-  "phrases": [
-   {
-    "text": "मान लो q धन आवेश को एक गोले के",
-    "golden": "आवेश",
-    "t_in": 0.0,
-    "t_out": 2.17
-   },
-   {
-    "text": "केंद्र O पर रखा गया है और गोले की",
-    "golden": null,
-    "t_in": 2.17,
-    "t_out": 4.95
-   },
-   {
-    "text": "अब इस आवेश के कारण गोले की सतह पर",
-    "golden": "आवेश",
-    "t_in": 4.95,
-    "t_out": 7.95
-   },
-   {
-    "text": "किसी बिंदु P पर विद्युत् क्षेत्र की तीव्रता होगी—",
-    "golden": null,
-    "t_in": 7.95,
-    "t_out": 11.88
-   }
-  ],
-  "timing": "transcript",
-  "type": "DIAGRAM",
-  "diagram": {
-   "asset": "assets/gauss-sphere.svg",
-   "carry_over": [],
-   "timeline": [
-    {
-     "id": "charge",
-     "action": "pop_in",
-     "t": 0.69,
-     "dur": 0.45
-    },
-    {
-     "id": "sphere",
-     "action": "fade_in",
-     "t": 2.29,
-     "dur": 0.8
-    },
-    {
-     "id": "radius",
-     "action": "draw",
-     "t": 4.89,
-     "dur": 0.6
-    }
-   ]
-  },
-  "end_state": [
-   "charge",
-   "radius",
-   "sphere"
-  ],
-  "labels": [
-   {
-    "text": "q",
-    "x": 0.5,
-    "y": 0.36,
-    "t_in": 0.69,
-    "accent": false
-   },
-   {
-    "text": "O",
-    "x": 0.5,
-    "y": 0.6,
-    "t_in": 2.29,
-    "accent": false
-   },
-   {
-    "text": "r",
-    "x": 0.62,
-    "y": 0.4,
-    "t_in": 4.89,
-    "accent": false
-   },
-   {
-    "text": "P",
-    "x": 0.72,
-    "y": 0.42,
-    "t_in": 8.39,
-    "accent": false
-   }
-  ]
- },
- {
-  "seg_id": 8,
-  "duration": 5.77,
-  "voiceover": "यहाँ E विद्युत् क्षेत्र की तीव्रता का मान, q आवेश और r गोले की त्रिज्या को दर्शाता है।",
-  "phrases": [
-   {
-    "text": "यहाँ E विद्युत् क्षेत्र की तीव्रता का मान,",
-    "golden": null,
-    "t_in": 0.0,
-    "t_out": 2.78
-   },
-   {
-    "text": "q आवेश और r गोले की त्रिज्या को दर्शाता है।",
-    "golden": "आवेश",
-    "t_in": 2.78,
-    "t_out": 5.77
-   }
-  ],
-  "timing": "transcript",
-  "type": "EQUATION",
-  "equation": {
-   "latex": "E = \\dfrac{1}{4\\pi\\varepsilon_0}\\dfrac{q}{r^2}",
-   "t_in": 0.31
-  },
-  "labels": []
- },
- {
-  "seg_id": 9,
-  "duration": 5.04,
-  "voiceover": "इसे समीकरण one मान लो और दिमाग में बैठा लो, क्योंकि आगे इसकी जरूरत पड़ेगी।",
-  "phrases": [
-   {
-    "text": "इसे समीकरण one मान लो और दिमाग में बैठा",
+    "text": "और पहले वो सवाल जो Part two के आखिर में",
     "golden": null,
     "t_in": 0.0,
     "t_out": 2.88
    },
    {
-    "text": "लो, क्योंकि आगे इसकी जरूरत पड़ेगी।",
-    "golden": null,
+    "text": "छोड़ा था - लाल और सफेद घुलकर गुलाबी बन गए।",
+    "golden": "गुलाबी",
     "t_in": 2.88,
-    "t_out": 5.04
+    "t_out": 5.97
+   },
+   {
+    "text": "तो क्या रंग आपस में मिल गए?",
+    "golden": null,
+    "t_in": 5.97,
+    "t_out": 8.16
+   },
+   {
+    "text": "क्या ये मिश्रित वंशागति है?",
+    "golden": "मिश्रित",
+    "t_in": 8.16,
+    "t_out": 11.24
    }
-  ],
+  ]
+ },
+ {
+  "seg_id": 2,
+  "duration": 6.87,
+  "type": "TEXT_ONLY",
   "timing": "transcript",
-  "type": "EQUATION",
-  "equation": {
-   "latex": "E = \\dfrac{1}{4\\pi\\varepsilon_0}\\dfrac{q}{r^2}",
-   "t_in": -0.6
-  },
-  "labels": []
+  "labels": [],
+  "voiceover": "जवाब है नहीं और अब देखो क्यों नहीं है, क्योंकि परीक्षा में यही कारण पूछा जाता है।",
+  "phrases": [
+   {
+    "text": "जवाब है नहीं",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.65
+   },
+   {
+    "text": "और अब देखो क्यों नहीं है,",
+    "golden": null,
+    "t_in": 1.65,
+    "t_out": 3.6
+   },
+   {
+    "text": "क्योंकि परीक्षा में यही कारण पूछा जाता है।",
+    "golden": null,
+    "t_in": 3.6,
+    "t_out": 6.87
+   }
+  ]
+ },
+ {
+  "seg_id": 3,
+  "duration": 12.3,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "क्योंकि F₁ पौधों को स्वपरागित करने पर F₂ पीढ़ी में फीनोटिपिक अनुपात 1 : 2 : 1 प्राप्त होता है। और यही अनुपात जीनोटिपिक अनुपात को भी दर्शाता है।",
+  "phrases": []
+ },
+ {
+  "seg_id": 4,
+  "duration": 9.58,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "अब सोचो - अगर रंग सच में घुल गए होते, तो लाल वापस कैसे आता? पर F₂ में लाल भी आता है और सफेद भी। मतलब रंग घुले नहीं थे, बस छुपे हुए थे।",
+  "phrases": [
+   {
+    "text": "अब सोचो - अगर रंग सच में घुल गए होते,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.73
+   },
+   {
+    "text": "तो लाल वापस कैसे आता?",
+    "golden": null,
+    "t_in": 2.73,
+    "t_out": 4.27
+   },
+   {
+    "text": "पर F₂ में लाल भी आता है और सफेद भी।",
+    "golden": null,
+    "t_in": 4.27,
+    "t_out": 6.82
+   },
+   {
+    "text": "मतलब रंग घुले नहीं थे, बस छुपे हुए थे।",
+    "golden": null,
+    "t_in": 6.82,
+    "t_out": 9.58
+   }
+  ]
+ },
+ {
+  "seg_id": 5,
+  "duration": 3.79,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "यही एक तर्क पूरे सवाल का जवाब है। इसे गाँठ बाँध लो।",
+  "phrases": [
+   {
+    "text": "यही एक तर्क पूरे सवाल का जवाब है।",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.5
+   },
+   {
+    "text": "इसे गाँठ बाँध लो।",
+    "golden": null,
+    "t_in": 2.5,
+    "t_out": 3.79
+   }
+  ]
+ },
+ {
+  "seg_id": 6,
+  "duration": 10.53,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "और ये अनुपात मुह ज़ुबानी याद कर लो - दोनों अनुपात एक ही हैं, 1 : 2 : 1। साधारण प्रभाविता में फीनोटिपिक 3 : 1 होता, यहाँ नहीं होता। यही अंतर है।",
+  "phrases": []
+ },
+ {
+  "seg_id": 7,
+  "duration": 2.65,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "अब एक आखिरी बात जो अक्सर छूट जाती है",
+  "phrases": [
+   {
+    "text": "अब एक आखिरी बात जो अक्सर छूट जाती है",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.65
+   }
+  ]
+ },
+ {
+  "seg_id": 8,
+  "duration": 14.29,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "अपूर्ण प्रभाविता में लाल रंग के निर्माण से सम्बन्धित एलील के किसी परिवर्तन यानी त्रुटि के कारण, इससे बना एंजाइम पूर्ण रूप से क्रियाशील नहीं होता। यानी जीन में गड़बड़ी है,",
+  "phrases": []
+ },
+ {
+  "seg_id": 9,
+  "duration": 9.46,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "इसलिए एंजाइम पूरी तरह काम नहीं करता। और एंजाइम आधा काम करेगा तो रंग भी आधा ही बनेगा - इसीलिए पूरा लाल नहीं, गुलाबी।",
+  "phrases": []
  },
  {
   "seg_id": 10,
-  "duration": 7.9,
-  "voiceover": "अब क्योंकि आवेश गोले के केंद्र में है, इसलिए विद्युत् क्षेत्र की दिशा केंद्र से बाहर की ओर होगी।",
+  "duration": 2.19,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "और अगर सब कुछ याद न भी रहे,",
   "phrases": [
    {
-    "text": "अब क्योंकि आवेश गोले के केंद्र में है,",
-    "golden": "आवेश",
-    "t_in": 0.0,
-    "t_out": 2.53
-   },
-   {
-    "text": "इसलिए विद्युत् क्षेत्र की दिशा केंद्र से बाहर की ओर होगी।",
+    "text": "और अगर सब कुछ याद न भी रहे,",
     "golden": null,
-    "t_in": 2.53,
-    "t_out": 7.9
-   }
-  ],
-  "timing": "transcript",
-  "type": "DIAGRAM",
-  "diagram": {
-   "asset": "assets/gauss-sphere.svg",
-   "carry_over": [],
-   "timeline": [
-    {
-     "id": "charge",
-     "action": "fade_in",
-     "t": 0.06,
-     "dur": 0.25
-    },
-    {
-     "id": "sphere",
-     "action": "fade_in",
-     "t": 0.06,
-     "dur": 0.25
-    },
-    {
-     "id": "radius",
-     "action": "fade_in",
-     "t": 0.06,
-     "dur": 0.25
-    },
-    {
-     "id": "field",
-     "action": "fade_in",
-     "t": 3.01,
-     "dur": 0.9
-    }
-   ]
-  },
-  "end_state": [
-   "charge",
-   "field",
-   "radius",
-   "sphere"
-  ],
-  "labels": [
-   {
-    "text": "E",
-    "x": 0.5,
-    "y": 0.045,
-    "t_in": 3.01,
-    "accent": false
+    "t_in": 0.0,
+    "t_out": 2.19
    }
   ]
  },
  {
   "seg_id": 11,
-  "duration": 10.67,
-  "voiceover": "अब गोले की सतह पर एक बहुत छोटा क्षेत्रफल लेते हैं जिसका मान dS है। इसे थोड़ा ध्यान से समझना, क्योंकि सौ में से 80 बच्चे यहीं गलती करते हैं।",
-  "phrases": [
-   {
-    "text": "अब गोले की सतह पर एक बहुत छोटा क्षेत्रफल",
-    "golden": null,
-    "t_in": 0.0,
-    "t_out": 3.07
-   },
-   {
-    "text": "लेते हैं जिसका मान dS है।",
-    "golden": null,
-    "t_in": 3.07,
-    "t_out": 4.39
-   },
-   {
-    "text": "इसे थोड़ा ध्यान से समझना,",
-    "golden": null,
-    "t_in": 4.39,
-    "t_out": 6.38
-   },
-   {
-    "text": "क्योंकि सौ में से 80 बच्चे यहीं गलती करते हैं।",
-    "golden": null,
-    "t_in": 6.38,
-    "t_out": 10.67
-   }
-  ],
+  "duration": 8.76,
+  "type": "TEXT_ONLY",
   "timing": "transcript",
-  "type": "DIAGRAM",
-  "diagram": {
-   "asset": "assets/gauss-sphere.svg",
-   "carry_over": [
-    "charge",
-    "field",
-    "radius",
-    "sphere"
-   ],
-   "timeline": [
-    {
-     "id": "dA_patch",
-     "action": "fade_in",
-     "t": 3.61,
-     "dur": 0.6
-    }
-   ]
-  },
-  "end_state": [
-   "charge",
-   "dA_patch",
-   "field",
-   "radius",
-   "sphere"
-  ],
-  "labels": [
-   {
-    "text": "E",
-    "x": 0.5,
-    "y": 0.045,
-    "t_in": -0.6,
-    "accent": false
-   },
-   {
-    "text": "dS",
-    "x": 0.56,
-    "y": 0.34,
-    "t_in": 3.61,
-    "accent": false
-   }
-  ]
+  "labels": [],
+  "captions": "off",
+  "voiceover": "तो ये एक लाइन पक्की कर लो - सह-प्रभाविता में दोनों अलग अलग दिखते हैं अपूर्ण प्रभाविता में बीच का नया बनता है।",
+  "phrases": []
  },
  {
   "seg_id": 12,
-  "duration": 7.15,
-  "voiceover": "यहाँ dS की दिशा भी सतह के बाहर की ओर है और E की दिशा भी बाहर की ओर है। इसलिए E और dS के बीच कोण zero degree होगा।",
+  "duration": 12.34,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "बस यही एक लाइन आपको उस गलती से बचा लेगी जिसकी बात मैंने शुरू में की थी। तो पूरा आंसर हो गया अब इसे एग्जाम में कैसे लिखना है वो आपकी स्क्रीन",
   "phrases": [
    {
-    "text": "यहाँ dS की दिशा भी सतह के बाहर की",
+    "text": "बस यही एक लाइन आपको उस गलती से बचा लेगी",
     "golden": null,
     "t_in": 0.0,
-    "t_out": 1.94
+    "t_out": 3.13
    },
    {
-    "text": "ओर है और E की दिशा भी बाहर की ओर है।",
+    "text": "जिसकी बात मैंने शुरू में की थी।",
     "golden": null,
-    "t_in": 1.94,
-    "t_out": 4.31
+    "t_in": 3.13,
+    "t_out": 5.83
    },
    {
-    "text": "इसलिए E और dS के बीच कोण zero degree होगा।",
+    "text": "तो पूरा आंसर हो गया",
     "golden": null,
-    "t_in": 4.31,
-    "t_out": 7.15
-   }
-  ],
-  "timing": "transcript",
-  "type": "DIAGRAM",
-  "diagram": {
-   "asset": "assets/gauss-sphere.svg",
-   "carry_over": [
-    "charge",
-    "dA_patch",
-    "field",
-    "radius",
-    "sphere"
-   ],
-   "timeline": []
-  },
-  "end_state": [
-   "charge",
-   "dA_patch",
-   "field",
-   "radius",
-   "sphere"
-  ],
-  "labels": [
-   {
-    "text": "E",
-    "x": 0.5,
-    "y": 0.045,
-    "t_in": -0.6,
-    "accent": false
+    "t_in": 5.83,
+    "t_out": 8.27
    },
    {
-    "text": "dS",
-    "x": 0.56,
-    "y": 0.34,
-    "t_in": -0.6,
-    "accent": false
-   },
-   {
-    "text": "θ = 0°",
-    "x": 0.78,
-    "y": 0.13,
-    "t_in": 4.74,
-    "accent": false
+    "text": "अब इसे एग्जाम में कैसे लिखना है वो आपकी स्क्रीन",
+    "golden": null,
+    "t_in": 8.27,
+    "t_out": 12.34
    }
   ]
  },
  {
   "seg_id": 13,
-  "duration": 4.91,
-  "voiceover": "और इस बात को मन में छाप लो — दोनों की दिशा एक ही है, इसीलिए कोण शून्य आया।",
-  "phrases": [
-   {
-    "text": "और इस बात को मन में छाप लो —",
-    "golden": null,
-    "t_in": 0.0,
-    "t_out": 1.92
-   },
-   {
-    "text": "दोनों की दिशा एक ही है,",
-    "golden": null,
-    "t_in": 1.92,
-    "t_out": 3.24
-   },
-   {
-    "text": "इसीलिए कोण शून्य आया।",
-    "golden": null,
-    "t_in": 3.24,
-    "t_out": 4.91
-   }
-  ],
+  "duration": 14.26,
+  "type": "TEXT_ONLY",
   "timing": "transcript",
-  "type": "DIAGRAM",
-  "diagram": {
-   "asset": "assets/gauss-sphere.svg",
-   "carry_over": [
-    "charge",
-    "dA_patch",
-    "field",
-    "radius",
-    "sphere"
-   ],
-   "timeline": []
-  },
-  "end_state": [
-   "charge",
-   "dA_patch",
-   "field",
-   "radius",
-   "sphere"
-  ],
-  "labels": [
-   {
-    "text": "E",
-    "x": 0.5,
-    "y": 0.045,
-    "t_in": -0.6,
-    "accent": false
-   },
-   {
-    "text": "dS",
-    "x": 0.56,
-    "y": 0.34,
-    "t_in": -0.6,
-    "accent": false
-   },
-   {
-    "text": "θ = 0°",
-    "x": 0.78,
-    "y": 0.13,
-    "t_in": -0.6,
-    "accent": false
-   }
-  ]
- },
- {
-  "seg_id": 14,
-  "duration": 12.28,
-  "voiceover": "तो बच्चों, यहाँ तक तो हो गया। अब इसी छोटे क्षेत्रफल से गुजरने वाला विद्युत् फ्लक्स निकालेंगे। और ये फ्लक्स कैसे निकलता है, वो देखने के लिए पार्ट two बिल्कुल miss मत करना।",
+  "labels": [],
+  "voiceover": "के राइट साइड में दिए नोट्स बटन पर मिल जाएगा। तुम बच्चों ये सवाल भी हो गया - अब आगे की पढ़ाई वाली reels से एक-एक topic करते जाओ, सिलेबस भी पूरा होगा और 90% लाने का target भी |",
   "phrases": [
    {
-    "text": "तो बच्चों, यहाँ तक तो हो गया।",
+    "text": "के राइट साइड में दिए नोट्स बटन पर मिल जाएगा।",
     "golden": null,
     "t_in": 0.0,
-    "t_out": 2.57
+    "t_out": 3.81
    },
    {
-    "text": "अब इसी छोटे क्षेत्रफल से गुजरने वाला विद्युत् फ्लक्स निकालेंगे।",
-    "golden": "विद्युत् फ्लक्स",
-    "t_in": 2.57,
-    "t_out": 7.12
-   },
-   {
-    "text": "और ये फ्लक्स कैसे निकलता है,",
+    "text": "तुम बच्चों ये सवाल भी हो गया - अब आगे",
     "golden": null,
-    "t_in": 7.12,
-    "t_out": 9.1
+    "t_in": 3.81,
+    "t_out": 6.85
    },
    {
-    "text": "वो देखने के लिए पार्ट two बिल्कुल miss मत करना।",
+    "text": "की पढ़ाई वाली reels से एक-एक topic करते जाओ,",
     "golden": null,
-    "t_in": 9.1,
-    "t_out": 12.28
+    "t_in": 6.85,
+    "t_out": 10.47
+   },
+   {
+    "text": "सिलेबस भी पूरा होगा और 90% लाने का target भी |",
+    "golden": null,
+    "t_in": 10.47,
+    "t_out": 14.26
    }
   ]
  }

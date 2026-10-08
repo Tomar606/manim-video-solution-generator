@@ -46,8 +46,15 @@ def main():
         print("  chip        window            chip bottom   head top   clearance")
         for c in plan:
             name = Path(c["png"]).stem
-            h = Image.open(c["png"]).height
-            bottom = c.get("top", BAND_TOP) + h
+            # THE INK, NOT THE BOX. A chip PNG is a fixed-height band and most
+            # of them leave transparent space under the drawing, so measuring
+            # to the bottom of the file reported an overlap for every chip in
+            # the project — including ones sitting two hundred pixels clear.
+            # A gate that fires on everything is one nobody can read, and it
+            # would have hidden the ovule, which really was on his head.
+            im = np.asarray(Image.open(c["png"]).convert("RGBA"))[:, :, 3] > 30
+            rows = np.nonzero(im.any(axis=1))[0]
+            bottom = c.get("top", BAND_TOP) + (int(rows.max()) if len(rows) else 0)
             ts = np.linspace(c["start"] + 0.3, c["end"] - 0.3, 5)
             head = min(head_top(pre, bg, round(float(t), 2), td) for t in ts)
             gap = head - bottom

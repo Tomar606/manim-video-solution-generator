@@ -33,16 +33,38 @@ PER_MINUTE = 2                          # at most this many moves per minute
 
 
 def windows(video, dur, step=0.5):
+    # ONE DECODE, NOT ONE PER SAMPLE.
+    #
+    # This used to spawn an ffmpeg per 0.5s sample — about 300 process launches
+    # for a 150-second part, each re-opening and seeking the file. Two builds in
+    # parallel took SEVENTY-FIVE MINUTES here, with the composite not yet
+    # started, and it reads as a hung build because the stage prints nothing.
+    # Decoding the whole video once at the sample rate and walking the pipe is
+    # the same measurement in seconds. The frames are cropped to the
+    # presenter's rectangle in the filter graph, so only the pixels that matter
+    # are carried across the pipe.
+    fps = 1.0 / step
+    w, h = AV_R - AV_L, None
+    proc = subprocess.run(
+        ["ffmpeg", "-v", "error", "-i", str(video),
+         "-vf", f"fps={fps:g},crop={w}:in_h-{AV_TOP}:{AV_L}:{AV_TOP},format=gray",
+         "-f", "rawvideo", "-pix_fmt", "gray", "-"],
+        capture_output=True)
+    buf = np.frombuffer(proc.stdout, dtype=np.uint8)
+    probe = subprocess.run(
+        ["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
+         "stream=height", "-of", "csv=p=0", str(video)],
+        capture_output=True, text=True).stdout.strip()
+    ih = int(probe or 1920)
+    h = ih - AV_TOP
+    n = buf.size // (w * h) if w and h else 0
+    frames = buf[:n * w * h].reshape(n, h, w).astype(int)
     hits = []
-    for t in np.arange(step, dur, step):
-        raw = subprocess.run(
-            ["ffmpeg", "-v", "error", "-ss", f"{t:.1f}", "-i", str(video),
-             "-frames:v", "1", "-f", "image2pipe", "-vcodec", "png", "-"],
-            capture_output=True).stdout
-        if not raw:
-            continue
-        a = np.asarray(Image.open(io.BytesIO(raw)).convert("L")).astype(int)
-        if (a[AV_TOP:, AV_L:AV_R] > 140).sum() > INK:
+    for i in range(n):
+        t = (i + 1) * step
+        if t >= dur:
+            break
+        if (frames[i] > 140).sum() > INK:
             hits.append(round(float(t), 1))
 
     runs = []

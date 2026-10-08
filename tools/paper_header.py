@@ -3,8 +3,15 @@
     python tools/paper_header.py                       # all four subjects
     python tools/paper_header.py --subject physics
 
-The approved design (`inbox/sticky_note_design.png`) is a torn corner of the
-real Higher Secondary paper: roll-number box, printed-pages and marks, a QR
+RETIRED SOURCE. `inbox/sticky_note_design.png` no longer exists and is not
+coming back: the card as it appears in the delivered videos is the approved
+design, not a stand-in for it. Point `DESIGN` at a finished
+`assets/design/question_sheet.png` instead — the rewrite works the same way,
+because what it edits is the subject line, the question and the year, all of
+which any finished sheet also has.
+
+The design it was built from is a torn corner of the real Higher Secondary
+paper: roll-number box, printed-pages and marks, a QR
 code, the paper serial, the SET stamp, the board line, the year, then the
 subject, then the question. Everything on it is fixed across the batch EXCEPT
 the subject line and the question, so this rewrites the subject line in place
@@ -38,6 +45,7 @@ the row below it, which follows the shading instead of flattening it.
 from __future__ import annotations
 
 import argparse
+import re
 from pathlib import Path
 
 import numpy as np
@@ -58,6 +66,12 @@ BAND = (290, 558, 950, 641)       # the rectangle the subject line may occupy
 CENTRE_X = 612                    # the line is centred on this
 BASELINE_Y = 625                  # where the glyphs sit at CENTRE_X
 TILT_DEG = -2.70                  # the sheet's rotation, so every line follows it.
+# The design's header reads "वर्ष / Year - 2026" and every card built from it
+# therefore claims 2026, whatever year the question was actually set. YEAR_INK
+# is where those four digits sit; YEAR_BAND is the paper cleared around them.
+# Measured, not guessed: the digits' own ink box is x 730..789, y 511..535.
+YEAR_INK  = (730, 511, 789, 535)
+YEAR_BAND = (724, 505, 796, 542)
                                   # Median of the printed lines that fit cleanly
                                   # (board -2.38, year -3.23, subject -2.06,
                                   # marks -3.07). The sheet is CRUMPLED, so no two
@@ -73,6 +87,8 @@ SUBJECTS = {
     "chemistry": ("रसायन शास्त्र", "CHEMISTRY"),
     "biology":   ("जीव विज्ञान", "BIOLOGY"),
     "maths":     ("गणित", "MATHEMATICS"),
+    "history":   ("इतिहास", "HISTORY"),
+    "political": ("राजनीति विज्ञान", "POLITICAL SCIENCE"),
 }
 
 # The question the sample card carries. Chemistry keeps the one the design was
@@ -83,11 +99,19 @@ QUESTIONS = {
     "chemistry": "फैराडे के विद्युत्-अपघटन के नियम लिखिए।",
     "biology":   "मेण्डल के आनुवंशिकता के नियम लिखिए।",
     "maths":     "समाकलन विधि से वृत्त का क्षेत्रफल ज्ञात कीजिए।",
+    "history":   "मौर्य साम्राज्य के कोई पाँच प्रमुख राजनीतिक केंद्रों के नाम लिखिए।",
+    "political": "नेपाल में लोकतंत्र कैसे स्थापित हुआ? विस्तारपूर्वक समझाइए।",
 }
 
 # The question is set in a Devanagari SANS, not the serif of the header above it.
 Q_FONT   = str(Path.home() / "Library/Fonts/NotoSansDevanagari.ttf")
 Q_BAND   = (345, 815, 1020, 1032)   # ONLY where the design's question ink sits.
+# A FINISHED sheet is not the design: its question has already been rewritten
+# and may run to three lines, the third sitting below Q_BAND entirely. Erasing
+# only Q_BAND left "(b) अपूर्ण प्रभाविता ।" from the biology sheet printed under
+# the new history question. This is the band to clear when rewriting one of
+# those — same x as Q_BAND, down to the last row the paper can carry text on.
+Q_BAND_FULL = (345, 815, 1020, Q_BOTTOM + 8) if False else None  # set below
                                     # Clearing further right and further down
                                     # flattened the sheet's diagonal fold and its
                                     # torn corner into a pale block. A replacement
@@ -103,6 +127,14 @@ Q_BOTTOM = 1112                     # last row the paper can carry text on.
                                     # 1168 put the closing line of the two
                                     # longest questions ON the torn edge.
 Q_INK_H  = 98                       # measured height of one line's ink
+# THE ERASE MUST COVER WHERE THE TEXT IS DRAWN, NOT WHERE THE DESIGN'S TEXT WAS.
+# Q_BAND starts at x=345 but lines are laid from Q_LEFT=330 — and the tilt moves
+# each successive line further left still. The 15px strip between them was never
+# cleared, so the PREVIOUS question's ink survived at the start of every line and
+# read as small black marks, like a broken closing bracket down the left edge.
+_Q_LEFT_MARGIN = 14
+Q_BAND_FULL = (min(Q_BAND[0], Q_LEFT) - _Q_LEFT_MARGIN, Q_BAND[1],
+               Q_BAND[2], Q_BOTTOM + 8)
 
 
 def inpaint_band(im: Image.Image, band) -> Image.Image:
@@ -191,9 +223,9 @@ def inpaint_band(im: Image.Image, band) -> Image.Image:
     return Image.fromarray(out, "RGBA")
 
 
-def measure_original() -> tuple[int, int, int, int]:
+def measure_original(design: Path | None = None) -> tuple[int, int, int, int]:
     """Ink bounding box of the subject line as the design sets it."""
-    im = Image.open(DESIGN).convert("L")
+    im = Image.open(design or DESIGN).convert("L")
     g = np.asarray(im).astype(int)
     x0, y0, x1, y1 = BAND
     ink = g[y0:y1, x0:x1] < 110
@@ -215,7 +247,9 @@ def subject_line(hindi: str, english: str, target_h: int,
     """
     size = target_h
     probe = ImageDraw.Draw(Image.new("L", (1, 1)))
-    joiner = "  –  "
+    # a PLAIN hyphen, not the design's en dash: no screen text in the
+    # series carries a long dash any more, and the card is screen text
+    joiner = "  -  "
 
     def render(px: int) -> Image.Image:
         dev = ImageFont.truetype(DEV_FONT, px, index=DEV_INDEX)
@@ -283,10 +317,30 @@ def question_block(text: str, ink_h: int, max_w: int,
         fixed pitch aligns their BASELINES, which is what leading means.
         """
         f = font(px)
-        w = int(probe.textlength(line, font=f)) + px * 2
+        # SUPERSCRIPTS: an ion is written Fe^{2+} and printed with the charge
+        # raised and smaller, as a textbook sets it. The question face has no
+        # "⁺", so the unicode form would print a tofu box.
+        import re as _re
+        runs = [(t, False) for t in [line]]
+        if "^{" in line:
+            runs, pos = [], 0
+            for m in _re.finditer(r"\^\{([^}]*)\}", line):
+                if m.start() > pos:
+                    runs.append((line[pos:m.start()], False))
+                runs.append((m.group(1), True))
+                pos = m.end()
+            if pos < len(line):
+                runs.append((line[pos:], False))
+        fs = font(max(8, int(px * 0.62)))
+        w = int(sum(probe.textlength(t, font=fs if sup else f) for t, sup in runs)) + px * 2
         img = Image.new("RGBA", (w, px * 3), (0, 0, 0, 0))
-        ImageDraw.Draw(img).text((px, px * 2), line, font=f,
-                                 fill=INK + (255,), anchor="ls")
+        d = ImageDraw.Draw(img)
+        x = px
+        for t, sup in runs:
+            ff = fs if sup else f
+            d.text((x, px * 2 - (int(px * 0.42) if sup else 0)), t, font=ff,
+                   fill=INK + (255,), anchor="ls")
+            x += probe.textlength(t, font=ff)
         a = np.asarray(img)[..., 3] > 40
         cols = np.nonzero(a.any(axis=0))[0]
         return img.crop((int(cols.min()), 0, int(cols.max()) + 1, img.height))
@@ -295,9 +349,14 @@ def question_block(text: str, ink_h: int, max_w: int,
         return probe.textbbox((0, 0), line, font=font(px))[2]
 
     def wrap(px):
+        # SPLIT ON REAL SPACES ONLY. str.split() treats U+00A0 as whitespace, so
+        # a caller cannot use a no-break space to keep a token with its word —
+        # and Hindi exam papers write "कहते हैं ?" with a space before the mark,
+        # which then wraps onto a line of its own as an orphan "?".
+        import re as _re
         f = font(px)
         lines, cur = [], ""
-        for word in text.split():
+        for word in _re.split(r"[ \t\n\r]+", text.strip()):
             trial = f"{cur} {word}".strip()
             if cur and probe.textlength(trial, font=f) > max_w:
                 lines.append(cur); cur = word
@@ -329,10 +388,33 @@ def question_block(text: str, ink_h: int, max_w: int,
         # baseline whatever the size.
         return max(1, round(Q_LINE_H * (px / base_size) * 1.10))
 
-    floor = max(16, int(base_size * 0.55))
+    def measured_pitch(lines, px):
+        """Leading taken from what the lines actually DRAW.
+
+        pitch_for() scales the design's pitch by the type size, and the type
+        size is fitted to the longest word BY CHARACTER COUNT. That word is not
+        the tallest thing on the page: a line carrying a matra above the
+        headline and a conjunct below the baseline is taller than a long word
+        with neither. On "मौर्य साम्राज्य के कोई पाँच प्रमुख राजनीतिक केंद्रों
+        के नाम लिखिए।" the fitted pitch came out 72px for lines whose own ink
+        was 88 to 111px, and the four lines were printed through each other.
+        So the pitch is never allowed below the tallest line that will be set.
+        """
+        hs = []
+        for line in lines:
+            a = np.asarray(draw(line, px))[..., 3] > 40
+            ys = np.nonzero(a.any(axis=1))[0]
+            hs.append(int(ys.max() - ys.min() + 1) if len(ys) else px)
+        return max(pitch_for(px), int(max(hs) * 1.06)) if hs else pitch_for(px)
+
+    # 0.55 of the fitted size truncated "मौर्य साम्राज्य के कोई पाँच प्रमुख
+    # राजनीतिक केंद्रों के नाम लिखिए।" at two lines: three lines wanted 306px of
+    # a 292px well, and the loop gave up 14px short. 0.50 costs a couple of
+    # pixels of type and prints the whole question.
+    floor = max(16, int(base_size * 0.50))
     while size > floor:
         lines = wrap(size)
-        if avail_h is None or len(lines) * pitch_for(size) <= avail_h:
+        if avail_h is None or len(lines) * measured_pitch(lines, size) <= avail_h:
             break
         size -= 2
     lines = wrap(size)
@@ -344,7 +426,7 @@ def question_block(text: str, ink_h: int, max_w: int,
     # at the last line that fits and ends in an ellipsis; the card is a hook, and
     # the full question is on screen in the caption and on the answer page.
     if avail_h is not None:
-        pitch = pitch_for(size)
+        pitch = measured_pitch(lines, size)
         keep = max(1, int(avail_h // pitch))
         if len(lines) > keep:
             lines = lines[:keep]
@@ -353,14 +435,90 @@ def question_block(text: str, ink_h: int, max_w: int,
             while tail and draw_width(tail + " ...", size) > max_w:
                 tail = " ".join(tail.split(" ")[:-1]).rstrip(" ।,;:-")
             lines[-1] = (tail + " ...") if tail else "..."
-    return [draw(l, size) for l in lines], pitch_for(size), size * 2
+    return [draw(l, size) for l in lines], measured_pitch(lines, size), size * 2
 
 
-def build(subject: str, dest: Path, question: str | None = None) -> Path:
-    """One sheet. `question` overrides the sample question for that subject."""
+def latest_year(year: str) -> str:
+    """The most recent year in the string — which is all the SHEET shows.
+
+    A question asked in several sessions used to print every year on the paper
+    ("वर्ष / Year - 2018 और 2022"), which is not how a real question paper reads:
+    a paper carries the year IT was set. The full history belongs to the gold
+    pill under the card, which still names them all (memory:
+    pyq-year-line-format). So the sheet takes the latest and the pill keeps the
+    rest.
+
+    Two-digit years are the shorthand the pill uses for middle years — "2019,
+    21 और 2023" — and expand to 20xx so they sort correctly.
+    """
+    found = []
+    for tok in re.findall(r"\d{2,4}", year):
+        n = int(tok)
+        found.append(n if n > 100 else 2000 + n)
+    return str(max(found)) if found else year.strip()
+
+
+def year_line(year: str, target_h: int) -> Image.Image:
+    """The year the question was asked, set the way the design sets it.
+
+    Sized by MEASURING the rendered ink and scaling to the height the design
+    uses, exactly as subject_line does -- a chosen point size matches the
+    design on one font install and not on the next.
+
+    A YEAR IS NOT ALWAYS DIGITS. A question asked in more than one session
+    reads "2019 और 2023" (memory: pyq-year-line-format), and the Latin serif
+    this line is set in has no Devanagari: it drew two tofu boxes where "और"
+    belonged, on a card that had already passed every gate, because nothing
+    here looks at the glyphs. So the string is split into Devanagari and
+    non-Devanagari runs and each run is set in the face that has it, sharing
+    one baseline -- the same two-font trick as the subject line.
+    """
+    runs = [(s, bool(re.match(r"[ऀ-ॿ]", s)))
+            for s in re.findall(r"[ऀ-ॿ]+|[^ऀ-ॿ]+", year) if s]
+    if not runs:
+        raise SystemExit(f"nothing to set for year {year!r}")
+    probe = ImageDraw.Draw(Image.new("L", (1, 1)))
+
+    def render(px: int) -> Image.Image:
+        fonts = [(s, ImageFont.truetype(DEV_FONT, px, index=DEV_INDEX) if dev
+                  else ImageFont.truetype(LAT_FONT, px)) for s, dev in runs]
+        w = sum(probe.textlength(s, font=f) for s, f in fonts)
+        im = Image.new("L", (int(w) + px * 2, px * 4), 0)
+        d = ImageDraw.Draw(im)
+        x, base = px, px * 3               # one shared baseline for every run
+        for s, f in fonts:
+            d.text((x, base), s, font=f, fill=255, anchor="ls")
+            x += probe.textlength(s, font=f)
+        return im
+
+    px = 64
+    while True:
+        im = render(px)
+        box = im.getbbox()
+        if box is None:
+            raise SystemExit(f"nothing rendered for year {year!r}")
+        h = box[3] - box[1]
+        if h <= target_h or px <= 8:
+            break
+        px -= 1
+    crop = im.crop(box)
+    out = Image.new("RGBA", crop.size, (0, 0, 0, 0))
+    out.putalpha(crop)
+    ink = Image.new("RGBA", crop.size, (20, 20, 20, 255))
+    ink.putalpha(crop)
+    return ink
+
+
+def build(subject: str, dest: Path, question: str | None = None,
+          year: str | None = None, design: Path | None = None) -> Path:
+    """One sheet. `question` overrides the sample question for that subject;
+    `year` overrides the design's printed 2026 with the year it was asked;
+    `design` is the sheet to rewrite — `inbox/sticky_note_design.png` is retired,
+    so a caller passes a finished `assets/design/question_sheet.png` instead."""
     hindi, english = SUBJECTS[subject]
-    ox0, oy0, ox1, oy1 = measure_original()
-    sheet = inpaint_band(Image.open(DESIGN).convert("RGBA"), BAND)
+    src = design or DESIGN
+    ox0, oy0, ox1, oy1 = measure_original(src)
+    sheet = inpaint_band(Image.open(src).convert("RGBA"), BAND)
 
     line = subject_line(hindi, english, oy1 - oy0, BAND[2] - BAND[0] - 20)
     line = line.rotate(-TILT_DEG, expand=True, resample=Image.BICUBIC)
@@ -376,7 +534,7 @@ def build(subject: str, dest: Path, question: str | None = None) -> Path:
     # "प्रश्न –" and "(1)" are fixed furniture and stay; only the sentence to
     # the right of them is replaced, so each sample carries its own subject's
     # question instead of borrowing chemistry's.
-    sheet = inpaint_band(sheet, Q_BAND)
+    sheet = inpaint_band(sheet, Q_BAND_FULL if design else Q_BAND)
     rows, pitch, baseline = question_block(question or QUESTIONS[subject],
                                            Q_INK_H, Q_BAND[2] - Q_LEFT - 10,
                                            avail_h=Q_BOTTOM - Q_TOP)
@@ -389,6 +547,17 @@ def build(subject: str, dest: Path, question: str | None = None) -> Path:
         x = Q_LEFT - int(i * pitch * np.tan(np.radians(-TILT_DEG)))
         sheet.alpha_composite(row, (x, y))
 
+    # ---- the year the question was actually asked ---------------------- #
+    if year:
+        sheet = inpaint_band(sheet, YEAR_BAND)
+        yx0, yy0, yx1, yy1 = YEAR_INK
+        # a single digit is 22px tall; the 25px box height includes the tilt
+        blk = year_line(latest_year(year), 22).rotate(-TILT_DEG, expand=True,
+                                         resample=Image.BICUBIC)
+        # left edge and BOTTOM, same anchoring as the subject line: the four
+        # digits are the same font at the same size, so the boxes coincide
+        sheet.alpha_composite(blk, (yx0, yy1 - blk.height))
+
     dest.parent.mkdir(parents=True, exist_ok=True)
     sheet.save(dest)
     return dest
@@ -400,15 +569,29 @@ def main() -> int:
     p.add_argument("--out", default=str(OUT))
     p.add_argument("--question", help="override the sample question")
     p.add_argument("--name", help="output filename stem")
+    p.add_argument("--design", help="the finished question_sheet.png to rewrite")
+    p.add_argument("--year", help="the year the question was actually asked")
     a = p.parse_args()
     todo = [a.subject] if a.subject else sorted(SUBJECTS)
     for s in todo:
         stem = a.name or f"paper_header_{s}"
         dest = Path(a.out) / f"{stem}.png"
-        build(s, dest, question=a.question)
+        build(s, dest, question=a.question, year=a.year,
+              design=Path(a.design) if a.design else None)
         print(f"   {SUBJECTS[s][0]} – {SUBJECTS[s][1]:12} -> {dest}")
     return 0
 
 
 if __name__ == "__main__":
+    # NO SHAPING, NO CARD. Without raqm Pillow draws Devanagari in storage
+    # order — "त्रिज्या" comes out "त्रज्यिा" — and nothing errors. It happened on
+    # 22 Sept 2026: installing facenet-pytorch pulled Pillow back to 10.2.0,
+    # whose bundled raqm needs Homebrew's FriBiDi on the library path.
+    from PIL import features as _features
+    if not _features.check("raqm"):
+        raise SystemExit("Pillow has no complex-script shaping (raqm), so every "
+                         "Devanagari line would print with its matras misplaced.\n"
+                         "Run with DYLD_LIBRARY_PATH=/opt/homebrew/lib (brew "
+                         "install fribidi libraqm first), then check "
+                         "PIL.features.check('raqm').")
     raise SystemExit(main())

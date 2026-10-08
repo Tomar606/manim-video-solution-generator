@@ -128,7 +128,8 @@ def check(beats: list[dict], *, explain: bool = False) -> list[str]:
             try:
                 from src.veo_prompts import audit
                 for line in audit({"prompt": b["prompt"],
-                                   "negative": b.get("negative", "")}):
+                                   "negative": b.get("negative", "")},
+                                  backdrop=b.get("background") or "own"):
                     fails.append(f"{slug}: {line}")
             except Exception as exc:                      # noqa: BLE001
                 warns.append(f"{slug}: prompt audit unavailable ({exc})")

@@ -1,0 +1,47 @@
+[
+ {
+  "slug": "m1",
+  "mode": "math",
+  "lines": "t = \\frac{1}{k}\\left([A]_0 - [A]\\right)@@t = t_{1/2}\\ ,\\qquad [A] = \\frac{[A]_0}{2}@@t_{1/2} = \\frac{1}{k}\\left([A]_0 - \\frac{[A]_0}{2}\\right)@@t_{1/2} = \\frac{1}{k}\\cdot\\frac{[A]_0}{2} = \\frac{[A]_0}{2k}@@\\boxed{\\,t_{1/2} \\propto [A]_0\\,}",
+  "from": 1,
+  "show": 1,
+  "lead": "शून्य कोटि अभिक्रिया के समीकरण से",
+  "h": 840
+ },
+ {
+  "slug": "m2",
+  "mode": "math",
+  "lines": "t = \\frac{1}{k}\\left([A]_0 - [A]\\right)@@t = t_{1/2}\\ ,\\qquad [A] = \\frac{[A]_0}{2}@@t_{1/2} = \\frac{1}{k}\\left([A]_0 - \\frac{[A]_0}{2}\\right)@@t_{1/2} = \\frac{1}{k}\\cdot\\frac{[A]_0}{2} = \\frac{[A]_0}{2k}@@\\boxed{\\,t_{1/2} \\propto [A]_0\\,}",
+  "from": 1,
+  "show": 2,
+  "lead": "अभिक्रिया अर्द्धपूर्ण होने पर",
+  "h": 840
+ },
+ {
+  "slug": "m3",
+  "mode": "math",
+  "lines": "t = \\frac{1}{k}\\left([A]_0 - [A]\\right)@@t = t_{1/2}\\ ,\\qquad [A] = \\frac{[A]_0}{2}@@t_{1/2} = \\frac{1}{k}\\left([A]_0 - \\frac{[A]_0}{2}\\right)@@t_{1/2} = \\frac{1}{k}\\cdot\\frac{[A]_0}{2} = \\frac{[A]_0}{2k}@@\\boxed{\\,t_{1/2} \\propto [A]_0\\,}",
+  "from": 1,
+  "show": 3,
+  "lead": "मान रखने पर",
+  "h": 840
+ },
+ {
+  "slug": "m4",
+  "mode": "math",
+  "lines": "t = \\frac{1}{k}\\left([A]_0 - [A]\\right)@@t = t_{1/2}\\ ,\\qquad [A] = \\frac{[A]_0}{2}@@t_{1/2} = \\frac{1}{k}\\left([A]_0 - \\frac{[A]_0}{2}\\right)@@t_{1/2} = \\frac{1}{k}\\cdot\\frac{[A]_0}{2} = \\frac{[A]_0}{2k}@@\\boxed{\\,t_{1/2} \\propto [A]_0\\,}",
+  "from": 3,
+  "show": 4,
+  "lead": "हल करने पर",
+  "h": 840
+ },
+ {
+  "slug": "m5",
+  "mode": "math",
+  "lines": "t = \\frac{1}{k}\\left([A]_0 - [A]\\right)@@t = t_{1/2}\\ ,\\qquad [A] = \\frac{[A]_0}{2}@@t_{1/2} = \\frac{1}{k}\\left([A]_0 - \\frac{[A]_0}{2}\\right)@@t_{1/2} = \\frac{1}{k}\\cdot\\frac{[A]_0}{2} = \\frac{[A]_0}{2k}@@\\boxed{\\,t_{1/2} \\propto [A]_0\\,}",
+  "from": 3,
+  "show": 5,
+  "lead": "k नियत है, अतः",
+  "h": 840
+ }
+]

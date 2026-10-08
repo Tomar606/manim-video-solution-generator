@@ -143,6 +143,18 @@ THEMES: dict[str, Theme] = {
         accent="#57D9A3", accent_2="#FFC15C", line="#145043",
         font="Poppins", is_dark=True,
     ),
+    # Arts. The plate is the history data-screen background the map engine
+    # already draws its window on, so a card and a map segment sit in the same
+    # world instead of two. Warm sepia rather than the sciences' cool teals.
+    "history-bg": Theme(
+        name="history-bg",
+        background="#2B2117",
+        background_style=BackgroundStyle.IMAGE,
+        background_image="map_engine/assets/history_bg.png",
+        primary="#FFFFFF", secondary="#E8D6BC", muted="#A08B72",
+        accent="#E8A33D", accent_2="#5FA8D3", line="#4A3826",
+        font="Poppins", is_dark=True,
+    ),
     "maths-bg": Theme(
         name="maths-bg",
         background="#1E1836",

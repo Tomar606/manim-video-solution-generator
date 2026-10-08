@@ -120,6 +120,13 @@ intent इनमें से चुनो:
 - दो चीज़ों की तुलना -> compare
 - क्रम/प्रक्रिया/कारण-परिणाम -> flow
 - समीकरण या सूत्र -> formula (LaTeX में देवनागरी कभी नहीं; वह label में)
+  * हर formula के साथ "terms" दो: [[प्रतीक, अर्थ], ...] — जैसे
+    [["R","प्रतिरोध"],["l","दूरी"],["A","क्षेत्रफल"]]. प्रतीक LaTeX में,
+    अर्थ देवनागरी में, अलग-अलग — कभी एक ही स्ट्रिंग में नहीं.
+    छात्र सूत्र उतारता है; प्रतीकों का अर्थ स्क्रीन पर रहना चाहिए.
+  * अगर एक ही राशि को बार-बार दूसरे रूप में लिखा जा रहा है (इकाई के तीन रूप,
+    या सूत्र का पुनर्लेखन) तो "build":"morph" दो और "tex" में क्रम से चरण —
+    हर चरण अगले में बदलेगा. तीन अलग पंक्तियाँ छापना तीन अलग तथ्य जैसा लगता है.
 - परिभाषा/मुख्य शब्द -> points, अधिकतम 2 बिंदु
 - सिर्फ़ जोड़ने वाला वाक्य, प्रेरणा, दोहराव, "आगे देखेंगे" -> none
 
@@ -128,7 +135,10 @@ intent इनमें से चुनो:
 सिर्फ़ JSON लौटाओ:
 {"type":"points","intent":"...","reason":"...","title":"...","items":["..."],
  "reveal":"progressive"}
-{"type":"formula","intent":"...","reason":"...","label":"...","tex":["..."]}
+{"type":"formula","intent":"...","reason":"...","label":"...","tex":["..."],
+ "terms":[["R","प्रतिरोध"],["A","क्षेत्रफल"]]}
+{"type":"formula","intent":"...","reason":"...","label":"...","build":"morph",
+ "tex":["\\Omega^{-1}","\\frac{1}{\\Omega}","\\mathrm{S}"]}
 {"type":"compare","intent":"...","reason":"...","left":["शीर्षक",["..."]],
  "right":["शीर्षक",["..."]]}
 {"type":"flow","intent":"...","reason":"...","items":["...","..."]}
@@ -168,6 +178,14 @@ def _validated(spec) -> dict | None:
     if spec["type"] not in {"points", "formula", "compare", "flow"}:
         return None
     if spec["type"] == "formula":
+        # `terms` and `build` are part of the formula contract now — see the
+        # rules text. A legend whose meaning is empty is dropped rather than
+        # rendered as a dangling equals sign.
+        if spec.get("terms"):
+            spec["terms"] = [[str(a), str(b)] for a, b in spec["terms"]
+                             if str(a).strip() and str(b).strip()]
+        if spec.get("build") not in (None, "progressive", "morph"):
+            spec.pop("build")
         # Devanagari inside MathTex kills the whole render with a LaTeX Unicode
         # error. Stripped here rather than trusted to the prompt.
         keep = [t for t in spec.get("tex", []) if not DEV.search(t)]

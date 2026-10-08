@@ -38,6 +38,16 @@ for (const c of chips) {
   await page.waitForFunction(() => window.READY === true, null, { timeout: 20000 })
             .catch(() => console.error(`${slug}: never became ready`));
   await page.waitForTimeout(200);
+  // refuse to write a chip whose content is taller than the band: the crop is
+  // silent and it takes the bottom, which is where the answer sits
+  const over = await page.evaluate(() => window.OVERFLOW);
+  if (over) {
+    console.error(`${slug}: CLIPPED — content overflows the band by ${over}px. `
+                  + `Split it, shrink it, or raise the band height.`);
+    await page.close();
+    process.exitCode = 1;
+    continue;
+  }
   await page.locator('#band').screenshot({ path: `${outDir}/${slug}.png`,
                                            omitBackground: true });
   await page.close();

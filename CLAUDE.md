@@ -157,7 +157,23 @@ login and the host has no Manim, but the repair loop needs both. So
   `brew install libraqm` then `pip install --force-reinstall --no-binary Pillow
   --no-build-isolation pillow` (Pillow 12 also needs `pybind11` present first,
   and `--no-binary :all:` instead of `--no-binary Pillow` will sit for half an
-  hour building every build dependency from source).
+  hour building every build dependency from source). **Remembering the env var is
+  itself the bug** — it reached a delivered cut a second time, with "रियासत"
+  drawn as "रयिासत". A Pillow entry point must re-exec itself with the variable
+  set and refuse to run if shaping is still missing, the way
+  `projects/pol-c3-la-01/work/look2.py` does; do not just document it again.
+- **A box the presenter must fill is a stretch waiting to happen.** He is
+  composited as a free-standing bottom-anchored cutout and is never placed
+  inside a circle, ring or card. A box has a width *and* a height, so filling it
+  resizes him on both axes: POL-C3-LA-01 shipped with a 760x620 keyed crop
+  resized into a 640x640 circle and a 400x500 card, squeezing him to 82% and 65%
+  of his true width, and the circle sliced his head because it centred on the
+  crop rectangle rather than his face. It reads as "he looks compressed" and is
+  nearly invisible frame by frame, because every frame is wrong by the same
+  amount and nothing in shot is a known shape. Place him from a target HEIGHT
+  only. Two gates hold the line and both must stay: `scale_log_gate` asserts the
+  code applied one scale factor, `tools/avatar_shape_gate.py` compares his face
+  geometry in the finished video against the source plate.
 - **Never write "logo", "watermark", "badge" or "wordmark" into a generation
   prompt — not even as a negative.** Naming a thing is a signal to draw it; a
   block that said "logo" five times while asking for empty corners produced a
@@ -173,6 +189,24 @@ login and the host has no Manim, but the repair loop needs both. So
   into Flow itself, so the clip is generated on the same picture Manim renders
   and can be spliced into the middle of a part invisibly. Describe a background
   and Veo builds its own, discards ours, and the splice reads as a jump cut.
+- **A measurement in a generation prompt is a thing that gets drawn.** The
+  video-prompt bug ledger's first entry is a clip that rendered `12-30%` and
+  `Band D` as visible text, because the layout instructions contained
+  percentages and a zone name. The PYQ contract reintroduced exactly that — it
+  said "between 26% and 50% of the frame height" — in the one track whose whole
+  contract is that the frame carries the animation and NOT ONE character. The
+  floors still live in `veo_prompts.LAYOUT`, but they only drive the wording:
+  the prompt describes two invisible guide lines and where the subject sits
+  between them, and `audit()` refuses a prompt containing a percentage, a pixel
+  count or a zone name. Same family as the logo rule — naming a thing in the
+  positive section is a signal to draw it.
+- **How much of the frame a beat may use is a per-beat decision, not a
+  constant.** `presenter` omitted keeps content above the middle; `partial`
+  draws down to about two thirds with the bottom third kept clear, for a tall
+  subject that would be unreadable at band size; `hidden` fades him out. See
+  the table in PIPELINE.md — and note the floor is checked in three places
+  (prompt wording, label placement, frame review), so adding a mode means
+  touching all three.
 - **Consecutive generated clips do not match unless you make them.** Veo
   remembers nothing between generations, so the same prompt on the same plate
   builds a slightly different apparatus every time — a shade greener, two
@@ -252,6 +286,19 @@ ran out of disk mid-build.
 
 ## Conventions
 
+- **Every video ends with `tools/gates.py <slug> <final.mp4>`.** It is the last
+  line of each build script, not a thing to remember. Three failures made it
+  necessary: a video built off the pipeline never met a gate at all; a wrong
+  invocation looked like a pass (`preflight.py` prepends `projects/` itself, so
+  passing it a path checks a directory that does not exist and reports almost
+  nothing); and a gate that quietly did not apply looked the same as one that
+  passed. The runner normalises the argument, prints skips with their reason,
+  and exits non-zero on any failure.
+- **Never trust a by-eye colour measurement.** Checking which typeface shipped
+  with a ±60 RGB tolerance swept in a neighbouring colour and produced a
+  confident, wrong answer. `tools/font_gate.py` settles that question instead:
+  a named font that Pango cannot resolve FAILS, because `Text(font="Khand")`
+  silently substitutes a system face rather than erroring.
 - Don't hand-edit `manim_code/`, `work/`, `media/`, `final/` — build output.
 - Don't commit `.env`, rendered media, or `projects/*/` output.
 - New stages go through `video.py` so the CLI, dashboard and Claude Code skills

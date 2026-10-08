@@ -1,0 +1,50 @@
+[
+ {
+  "slug": "v-k",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-02/assets/photos/src-k.png",
+  "vit": "K",
+  "num": 1,
+  "tag": "हरी पत्तेदार सब्ज़ियाँ"
+ },
+ {
+  "slug": "v-a",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-02/assets/photos/src-a.png",
+  "vit": "A",
+  "num": 2,
+  "tag": "गाजर, हरी सब्ज़ियाँ"
+ },
+ {
+  "slug": "v-b12",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-02/assets/photos/src-b12.png",
+  "vit": "B12",
+  "num": 3,
+  "tag": "दूध, अंडा, पनीर"
+ },
+ {
+  "slug": "v-d",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-02/assets/photos/src-d.png",
+  "vit": "D",
+  "num": 4,
+  "tag": "धूप, मछली का तेल"
+ },
+ {
+  "slug": "v-c",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-02/assets/photos/src-c.png",
+  "vit": "C",
+  "num": 5,
+  "tag": "नींबू, आँवला, संतरा"
+ },
+ {
+  "slug": "v-e",
+  "mode": "photo",
+  "photo": "/projects/che-c10-la-02/assets/photos/src-e.png",
+  "vit": "E",
+  "num": 6,
+  "tag": "बादाम, बीज, गेहूँ"
+ }
+]

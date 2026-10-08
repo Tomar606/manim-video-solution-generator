@@ -56,6 +56,8 @@ def skel(word: str) -> str:
 
 PASS_COVERAGE = 0.75      # of the line's consonants, heard in order
 MAX_INVENTED = 0.25       # heard consonants not in the line, as a share of it
+QUIET_DB = 10.0           # a heard "word" this far under the clip's own speech
+                          # level is ambience Whisper turned into words
 
 # Whisper writes a spoken number as DIGITS: "दो हज़ार पच्चीस" comes back "2025".
 # Compared as written, every year in an intro line reads as three missing words
@@ -106,6 +108,22 @@ def loose(text: str) -> str:
     return out
 
 
+def word_levels(clip: str, words: list) -> list[float]:
+    """dBFS of the audio under each heard word."""
+    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", clip, "-ac", "1", "-ar", "16000",
+                          "-f", "s16le", "-"], capture_output=True).stdout
+    if not raw:
+        return [0.0] * len(words)
+    import numpy as np
+    a = np.frombuffer(raw, np.int16).astype(np.float32) / 32768
+    out = []
+    for w in words:
+        seg = a[int(float(w.get("start", 0)) * 16000):int(float(w.get("end", 0)) * 16000)]
+        out.append(20 * float(np.log10(max(1e-6, float(np.sqrt((seg ** 2).mean())))))
+                   if len(seg) else -120.0)
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("clip")
@@ -114,21 +132,58 @@ def main() -> int:
     ap.add_argument("--n")
     ap.add_argument("--model", default="small")
     ap.add_argument("--lang", default="hi", help="Whisper language code")
+    # WHISPER IS NOT DETERMINISTIC ON THIS AUDIO, and the spread is not small:
+    # one clip of POL-C1-LA-01 read 63%, then 22%, then 59% on three passes of
+    # the SAME file, and another read 26% on one pass and near-perfect on the
+    # next. A single pass can therefore condemn a clip that says its line
+    # correctly — which is the opposite of what this gate is for. Transcribing
+    # more than once and keeping the BEST reading costs a few seconds and makes
+    # the verdict repeatable; the spread is printed, because a WIDE spread is
+    # itself worth knowing (it means mumbled or noisy audio even when the best
+    # pass looks fine).
+    ap.add_argument("--passes", type=int, default=3,
+                    help="transcribe this many times and keep the best reading")
     a = ap.parse_args()
     line = a.line or json.loads(Path(a.line_file).read_text(encoding="utf-8"))[str(a.n)]
 
     import whisper
     m = whisper.load_model(a.model)
-    r = m.transcribe(a.clip, language=a.lang, condition_on_previous_text=False,
-                     word_timestamps=True, fp16=False)
-    heard = " ".join(s["text"] for s in r["segments"]).strip()
-    words = [w for s in r["segments"] for w in s.get("words", [])]
+    want = loose(line)
+    readings = []
+    for _ in range(max(1, a.passes)):
+        r = m.transcribe(a.clip, language=a.lang, condition_on_previous_text=False,
+                         word_timestamps=True, fp16=False)
+        h = " ".join(s["text"] for s in r["segments"]).strip()
+        got = loose(h)
+        sm = SequenceMatcher(a=want, b=got, autojunk=False)
+        matched = sum(b.size for b in sm.get_matching_blocks())
+        readings.append((matched / max(1, len(want)),
+                         max(0, len(got) - matched) / max(1, len(want)),
+                         h, [w for s in r["segments"] for w in s.get("words", [])]))
+    readings.sort(key=lambda t: -t[0])
+    coverage, invented, heard, words = readings[0]
+    spread = readings[0][0] - readings[-1][0]
 
-    want, got = loose(line), loose(heard)
-    sm = SequenceMatcher(a=want, b=got, autojunk=False)
-    matched = sum(b.size for b in sm.get_matching_blocks())
-    coverage = matched / max(1, len(want))
-    invented = max(0, len(got) - matched) / max(1, len(want))
+    # AMBIENCE IS NOT INVENTED SPEECH. Whisper turns crowd noise and room tone
+    # into words: on POL-C1-LA-01 s04 it produced four of them over a lead-in
+    # measured 16 dB BELOW the spoken line, and the clip was reshot over it —
+    # the reshoot came back worse. So each heard word is measured against the
+    # clip's own speech level, and anything far below it is dropped before the
+    # invented-speech count. The dropped words are named, because a clip really
+    # muttering under its breath should not disappear silently either.
+    quiet = []
+    if words:
+        lv = word_levels(a.clip, words)
+        ref = sorted(lv)[int(0.75 * (len(lv) - 1))]
+        keep = [w for w, l in zip(words, lv) if l >= ref - QUIET_DB]
+        quiet = [w.get("word", "").strip() for w, l in zip(words, lv) if l < ref - QUIET_DB]
+        if keep and len(keep) != len(words):
+            got = loose(" ".join(w.get("word", "") for w in keep))
+            sm = SequenceMatcher(a=want, b=got, autojunk=False)
+            matched = sum(b.size for b in sm.get_matching_blocks())
+            coverage = max(coverage, matched / max(1, len(want)))
+            invented = max(0, len(got) - matched) / max(1, len(want))
+            words = keep
 
     dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries",
                                 "format=duration", "-of", "csv=p=0", a.clip],
@@ -141,8 +196,12 @@ def main() -> int:
     print(f"  {Path(a.clip).name}")
     print(f"    scripted : {line}")
     print(f"    heard    : {heard}")
-    print(f"    coverage : {coverage:.0%} of the line's sounds, in order")
-    print(f"    extra    : {invented:.0%} (heard, not in the line)")
+    print(f"    coverage : {coverage:.0%} of the line's sounds, in order"
+          + (f"   (best of {len(readings)}, spread {spread:.0%})"
+             if len(readings) > 1 else ""))
+    print(f"    extra    : {invented:.0%} (heard, not in the line)"
+          + (f"   [{len(quiet)} quiet word(s) dropped as ambience: "
+             f"{' '.join(quiet[:6])}]" if quiet else ""))
     print(f"    speech   : {first:.2f}s -> {last:.2f}s of {dur:.2f}s "
           f"(lead-in {first:.2f}s, after {dur - last:.2f}s)")
     bad, note = [], []

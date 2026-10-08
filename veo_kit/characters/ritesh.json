@@ -36,18 +36,84 @@
   ]
  },
  "wardrobe": "in his plain black short-sleeve polo shirt",
- "voice": "in a warm, clear, unhurried teacher's voice",
- "face_min": 0.90,
+ "voice": "in a warm, clear teacher's voice, speaking briskly and keeping going — he runs one sentence straight into the next and does not pause between them",
+ "face_min": 0.9,
  "source": {
   "clip": "inbox/che-c3-sa-10/heygen_full.mp4",
-  "grey": [128, 128, 128],
+  "grey": [
+   128,
+   128,
+   128
+  ],
   "shots": [
-   {"name": "1_front_face", "t": 4.5,  "kind": "head",
-    "paint": [[952, 640, 993, 680], [1034, 647, 1134, 677]]},
-   {"name": "2_turned",     "t": 96.0, "kind": "head",
-    "paint": [[929, 647, 969, 686], [1006, 650, 1054, 680]]},
-   {"name": "3_waist_up",   "t": 57.0, "kind": "body",
-    "paint": [[954, 643, 995, 683], [1034, 648, 1137, 682]]}
+   {
+    "name": "1_front_face",
+    "t": 4.5,
+    "kind": "head",
+    "paint": [
+     [
+      952,
+      640,
+      993,
+      680
+     ],
+     [
+      1034,
+      647,
+      1134,
+      677
+     ]
+    ]
+   },
+   {
+    "name": "2_turned",
+    "t": 96.0,
+    "kind": "head",
+    "paint": [
+     [
+      929,
+      647,
+      969,
+      686
+     ],
+     [
+      1006,
+      650,
+      1054,
+      680
+     ]
+    ]
+   },
+   {
+    "name": "3_waist_up",
+    "t": 57.0,
+    "kind": "body",
+    "paint": [
+     [
+      954,
+      643,
+      995,
+      683
+     ],
+     [
+      1034,
+      648,
+      1137,
+      682
+     ]
+    ]
+   }
   ]
- }
+ },
+ "_voice_note": [
+  "WAS: in a warm, clear, unhurried teacher's voice",
+  "That one word put 'unhurried' into all 23 presenter prompts of POL-C2-LA-01,",
+  "and the build came back at 31.2 pauses/min against the house 23.6, with 30%",
+  "dead air against 16% — measured acoustically, not judged by ear. Veo did",
+  "exactly as the kit told it. On any route where the voice is later replaced in",
+  "ElevenLabs this is not a style preference: a slow take holds the mouth open",
+  "longer than the dub needs and the lip sync drifts across the whole clip.",
+  "Target, from the delivered science videos: ~175 wpm while speaking, 84% speech,",
+  "~24 pauses a minute, none longer than half a second."
+ ]
 }

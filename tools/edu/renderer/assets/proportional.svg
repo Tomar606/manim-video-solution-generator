@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- THE PROOF, SEEN. Two runs of the same reaction started at different
+       concentrations: the taller one takes proportionally longer to reach half.
+       Same slope on both lines, because k does not change -- which is exactly
+       what "k नियत है" means, drawn. -->
+  <g id="pr_axes">
+    <line x1="150" y1="50" x2="150" y2="400" stroke="#9FB6CC" stroke-width="5"/>
+    <line x1="150" y1="400" x2="980" y2="400" stroke="#9FB6CC" stroke-width="5"/>
+    <path d="M150 42 L142 64 L158 64 Z" fill="#9FB6CC"/>
+    <path d="M988 400 L966 392 L966 408 Z" fill="#9FB6CC"/>
+  </g>
+  <!-- the smaller start -->
+  <g id="pr_low">
+    <line x1="150" y1="248" x2="450" y2="400" stroke="#7FD4FF" stroke-width="7"
+          stroke-linecap="round"/>
+    <circle cx="150" cy="248" r="9" fill="#7FD4FF"/>
+    <line x1="150" y1="324" x2="300" y2="324" stroke="#7FD4FF" stroke-width="4"
+          stroke-dasharray="10 9"/>
+    <line x1="300" y1="324" x2="300" y2="400" stroke="#7FD4FF" stroke-width="4"
+          stroke-dasharray="10 9"/>
+    <circle cx="300" cy="324" r="8" fill="#7FD4FF"/>
+  </g>
+  <!-- twice the start, same slope, twice the half-life -->
+  <g id="pr_high">
+    <line x1="150" y1="96" x2="750" y2="400" stroke="#FFC53D" stroke-width="7"
+          stroke-linecap="round"/>
+    <circle cx="150" cy="96" r="9" fill="#FFC53D"/>
+    <line x1="150" y1="248" x2="450" y2="248" stroke="#FFC53D" stroke-width="4"
+          stroke-dasharray="10 9"/>
+    <line x1="450" y1="248" x2="450" y2="400" stroke="#FFC53D" stroke-width="4"
+          stroke-dasharray="10 9"/>
+    <circle cx="450" cy="248" r="8" fill="#FFC53D"/>
+  </g>
+</svg>

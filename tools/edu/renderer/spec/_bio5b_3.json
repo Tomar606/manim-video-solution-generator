@@ -1,0 +1,232 @@
+[
+ {
+  "seg_id": 1,
+  "duration": 4.34,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "और यहाँ सबसे ज्यादा direction वाली गलती होती है, इसलिए ध्यान से सुनना।",
+  "phrases": [
+   {
+    "text": "और यहाँ सबसे ज्यादा direction वाली गलती होती है,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 3.26
+   },
+   {
+    "text": "इसलिए ध्यान से सुनना।",
+    "golden": null,
+    "t_in": 3.26,
+    "t_out": 4.34
+   }
+  ]
+ },
+ {
+  "seg_id": 2,
+  "duration": 10.82,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "जिस टेम्पलेट स्ट्रैण्ड की ध्रुवता, five prime से three prime होती है, उस पर संश्लेषण असतत होता है, और इस पर बना नव संश्लेषित स्ट्रैण्ड,",
+  "phrases": []
+ },
+ {
+  "seg_id": 3,
+  "duration": 9.53,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "लैगिंग स्ट्रैण्ड कहलाता है। मतलब दूसरी तरफ नई DNA लड़ी लगातार नहीं, बल्कि टुकड़ों में बनती है। इसे असतत भुजा अर्थात, Lagging strand कहते हैं।",
+  "phrases": []
+ },
+ {
+  "seg_id": 4,
+  "duration": 4.99,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "और इन्हीं छोटे छोटे टुकड़ों को, ओकाज़ाकी फ्रेग्मेंटस कहते हैं।",
+  "phrases": []
+ },
+ {
+  "seg_id": 5,
+  "duration": 7.42,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "यहाँ एक बात बहुत ध्यान रखना,",
+  "phrases": [
+   {
+    "text": "यहाँ एक बात बहुत ध्यान रखना,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 7.42
+   }
+  ]
+ },
+ {
+  "seg_id": 6,
+  "duration": 1.5,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "leading strand सतत बनती है, जबकि Lagging strand असतत बनती है।",
+  "phrases": []
+ },
+ {
+  "seg_id": 7,
+  "duration": 12.68,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "और Lagging strand में, अनेक RNA प्राइमर की आवश्यकता होती है। छोटे-छोटे ओकाजाकी खण्ड, DNA लाइगेज की सहायता से जुड़ जाते हैं। मतलब Lagging strand पर बने छोटे-छोटे Okazaki fragments को,",
+  "phrases": [
+   {
+    "text": "और Lagging strand में,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.74
+   },
+   {
+    "text": "अनेक RNA प्राइमर की आवश्यकता होती है।",
+    "golden": "प्राइमर",
+    "t_in": 1.74,
+    "t_out": 2.99
+   },
+   {
+    "text": "छोटे-छोटे ओकाजाकी खण्ड, DNA लाइगेज की सहायता से जुड़ जाते हैं।",
+    "golden": "लाइगेज",
+    "t_in": 2.99,
+    "t_out": 7.69
+   },
+   {
+    "text": "मतलब Lagging strand पर बने छोटे-छोटे Okazaki fragments को,",
+    "golden": null,
+    "t_in": 7.69,
+    "t_out": 12.68
+   }
+  ]
+ },
+ {
+  "seg_id": 8,
+  "duration": 6.92,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "DNA ligase आपस में जोड़ता है। अब energy वाला point, इसे भी answer में छोड़ना मत।",
+  "phrases": [
+   {
+    "text": "DNA ligase आपस में जोड़ता है।",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.6
+   },
+   {
+    "text": "अब energy वाला point, इसे भी answer में छोड़ना मत।",
+    "golden": null,
+    "t_in": 1.6,
+    "t_out": 6.92
+   }
+  ]
+ },
+ {
+  "seg_id": 9,
+  "duration": 8.7,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "संश्लेषण में प्रयुक्त डीऑक्सीराइबोन्यूक्लियोside ट्राइफॉस्फेट के, अंतिम दो उच्च-ऊर्जा फॉस्फेट बंध, आवश्यक ऊर्जा प्रदान करते हैं।",
+  "phrases": []
+ },
+ {
+  "seg_id": 10,
+  "duration": 3.24,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "अब एक कोशिका-चक्र से जुड़ी बात,",
+  "phrases": [
+   {
+    "text": "अब एक कोशिका-चक्र से जुड़ी बात,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 3.24
+   }
+  ]
+ },
+ {
+  "seg_id": 11,
+  "duration": 11.97,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "एक कोशिका-चक्र में पूरे जीनोम की प्रतिकृति केवल एक बार होती है, यूकैरियोट्स में एस प्रावस्था के दौरान। और आखिरी point, DNA पॉलीमरेज, प्रूफ रीडिंग का भी कार्य स्वयं करता है।",
+  "phrases": []
+ },
+ {
+  "seg_id": 12,
+  "duration": 8.2,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "अब आती है सबसे important बात, DNA replication अर्धसंरक्षी है, और DNA polymerase इसमें महत्वपूर्ण काम करता है।",
+  "phrases": []
+ },
+ {
+  "seg_id": 13,
+  "duration": 12.43,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "तो बच्चों, पूरा DNA replication हो गया। अब परीक्षा में इसका answer कैसे लिखना है, वो आपकी screen के right side में दिए Notes button पर मिल जाएगा। और ऐसे ही आगे की पढ़ाई वाली reels देखते रहो,",
+  "phrases": [
+   {
+    "text": "तो बच्चों, पूरा DNA replication हो गया।",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 3.61
+   },
+   {
+    "text": "अब परीक्षा में इसका answer कैसे लिखना है,",
+    "golden": null,
+    "t_in": 3.61,
+    "t_out": 5.95
+   },
+   {
+    "text": "वो आपकी screen के right side में दिए Notes button पर मिल जाएगा।",
+    "golden": null,
+    "t_in": 5.95,
+    "t_out": 9.69
+   },
+   {
+    "text": "और ऐसे ही आगे की पढ़ाई वाली reels देखते रहो,",
+    "golden": null,
+    "t_in": 9.69,
+    "t_out": 12.43
+   }
+  ]
+ },
+ {
+  "seg_id": 14,
+  "duration": 2.74,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "और exam से पहले अपना सिलेबस खत्म करो।",
+  "phrases": [
+   {
+    "text": "और exam से पहले अपना सिलेबस खत्म करो।",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.74
+   }
+  ]
+ }
+]

@@ -1,0 +1,164 @@
+[
+ {
+  "seg_id": 1,
+  "duration": 2.69,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "तो सबसे पहले समझ लो,",
+  "phrases": [
+   {
+    "text": "तो सबसे पहले समझ लो,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.69
+   }
+  ]
+ },
+ {
+  "seg_id": 2,
+  "duration": 10.59,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "आवृतबीजियों में, प्रतीप बीजाण्ड, सबसे सामान्य प्रकार का बीजाण्ड होता है। जिसे एनाट्रोपस बीजाण्ड भी कहते हैं। अण्डाशय में एक या अधिक बीजाण्ड,",
+  "phrases": []
+ },
+ {
+  "seg_id": 3,
+  "duration": 0.8,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "बीजाण्डासन से जुड़े होते हैं।",
+  "phrases": []
+ },
+ {
+  "seg_id": 4,
+  "duration": 6.62,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "अब बीजाण्ड के parts एक-एक करके देखते हैं। तो चलो, सबसे पहला part बीजाण्ड-वृन्त होता है।",
+  "phrases": [
+   {
+    "text": "अब बीजाण्ड के parts एक-एक करके देखते हैं।",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.56
+   },
+   {
+    "text": "तो चलो, सबसे पहला part बीजाण्ड-वृन्त",
+    "golden": null,
+    "t_in": 2.56,
+    "t_out": 4.9
+   },
+   {
+    "text": "होता है।",
+    "golden": null,
+    "t_in": 4.9,
+    "t_out": 6.62
+   }
+  ]
+ },
+ {
+  "seg_id": 5,
+  "duration": 12.3,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "बीजाण्ड एक छोटे डंठल जैसी संरचना द्वारा बीजाण्डासन से जुड़ा रहता है इस डंठल को बीजाण्डवृन्त कहते हैं बीजाण्डवृन्त जिस स्थान पर बीजाण्ड से जुड़ता है, उस स्थान को हाइलम अर्थात, नाभिका कहते हैं।",
+  "phrases": []
+ },
+ {
+  "seg_id": 6,
+  "duration": 8.94,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "चलो, एक हो गया? अब दूसरा part, अध्यावरण यानी, Integuments। इसकी भी definition ध्यान से सुनना, क्योंकि answer में यही line लिखनी है।",
+  "phrases": [
+   {
+    "text": "चलो, एक हो गया?",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.14
+   },
+   {
+    "text": "अब दूसरा part, अध्यावरण यानी, Integuments।",
+    "golden": "अध्यावरण",
+    "t_in": 1.14,
+    "t_out": 4.06
+   },
+   {
+    "text": "इसकी भी definition ध्यान से सुनना,",
+    "golden": null,
+    "t_in": 4.06,
+    "t_out": 5.74
+   },
+   {
+    "text": "क्योंकि answer में यही line लिखनी है।",
+    "golden": null,
+    "t_in": 5.74,
+    "t_out": 8.94
+   }
+  ]
+ },
+ {
+  "seg_id": 7,
+  "duration": 14.66,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "प्रत्येक बीजाण्ड प्रायः दो, सुरक्षात्मक आवरणों से घिरा रहता है। यह आवरण ही, अध्यावरण कहलाते हैं। अध्यावरण क्रमशः, बीजाण्ड के चारों ओर पाए जाने वाले, एक या दो सुरक्षात्मक आवरण होते हैं।",
+  "phrases": []
+ },
+ {
+  "seg_id": 8,
+  "duration": 5.54,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "ये बीजाण्ड के अंदर स्थित ऊतकों की सुरक्षा करते हैं। मतलब, ये बीजाण्ड के protective covering हैं।",
+  "phrases": []
+ },
+ {
+  "seg_id": 9,
+  "duration": 11.46,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "तो बच्चों, यहाँ तक बीजाण्ड के दो main parts, बीजाण्डवृन्त और अध्यावरण, समझ लिए। अब बीजाण्डद्वार और बीजाण्डकाय क्या होते हैं, ये देखेंगे Part two में।",
+  "phrases": [
+   {
+    "text": "तो बच्चों, यहाँ तक बीजाण्ड के दो main parts,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 4.98
+   },
+   {
+    "text": "बीजाण्डवृन्त और अध्यावरण, समझ लिए।",
+    "golden": "बीजाण्डवृन्त",
+    "t_in": 4.98,
+    "t_out": 6.88
+   },
+   {
+    "text": "अब बीजाण्डद्वार और बीजाण्डकाय क्या होते हैं,",
+    "golden": "बीजाण्डद्वार",
+    "t_in": 6.88,
+    "t_out": 9.86
+   },
+   {
+    "text": "ये देखेंगे Part two में।",
+    "golden": null,
+    "t_in": 9.86,
+    "t_out": 11.46
+   }
+  ]
+ }
+]

@@ -55,7 +55,16 @@ def main() -> int:
     if len(sys.argv) < 3:
         sys.exit(__doc__)
     root, part = Path(sys.argv[1]), sys.argv[2]
-    beats = json.loads((root / f"beats_part{part}.json").read_text(encoding="utf-8"))
+    # THE BATCH-2 BEATS FILE IS beats_b2_part<N>.json. Only the batch-1 name was
+    # looked up here, so on every b2 project this raised FileNotFoundError —
+    # and build_one.sh runs it with `|| true` and stdout suppressed, so it
+    # failed silently and presenter_part<N>.json was never written. A beat
+    # asking for `presenter: hidden` or `partial` therefore never reached the
+    # compositor: the presenter stood in front of the diagram and nothing said so.
+    bf = root / f"beats_b2_part{part}.json"
+    if not bf.is_file():
+        bf = root / f"beats_part{part}.json"
+    beats = json.loads(bf.read_text(encoding="utf-8"))
     lines = json.loads((root / f"lines_part{part}.json").read_text(encoding="utf-8"))
     meta = json.loads((root / "meta.json").read_text(encoding="utf-8"))
     clip_end = float(meta["clip_end"][str(part)])

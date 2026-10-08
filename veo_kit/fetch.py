@@ -121,8 +121,14 @@ QUOTED = re.compile(r'["“”]([^"“”]*[ऀ-ॿ][^"“”]*)["“”]')
 
 
 def _norm(t: str) -> str:
-    """Letters only: the agent re-punctuates and re-spaces, never re-words."""
-    return re.sub(r"[\W_]+", "", t.lower())
+    """The Devanagari only.
+
+    The agent re-punctuates and re-spaces but never re-words, so the letters of
+    the spoken line identify the clip — as long as what is compared is only
+    those letters. Flow's page prints an em dash inside a prompt as the literal
+    text "\u2014", and keeping the Latin in the comparison put "u2014" in the
+    middle of the line, so the probe no longer matched its own clip."""
+    return "".join(c for c in t if "\u0900" <= c <= "\u097f")
 
 
 def spoken(prompt: str) -> list[str]:
@@ -169,7 +175,7 @@ def identify(page: str, known: dict[str, str]) -> str | None:
 
 # What the agent actually sent to the model sits between the player controls
 # and the timeline on the clip page.
-SENT_RE = re.compile(r"\brepeat\s+add\s+(.*?)\s+keyboard_return\b", re.S)
+SENT_RE = re.compile(r"\brepeat\s+(?:add\s+)*(.*?)\s+keyboard_return\b", re.S)
 
 
 def sent_prompt(raw_page: str) -> str:
@@ -192,9 +198,19 @@ def _to_top(b) -> None:
     time.sleep(2.0)
 
 
-def tile_count(b) -> int:
-    _to_top(b)
-    return int(_eval(b, TILES_JS) or 0)
+def tile_count(b, tries: int = 4) -> int:
+    """How many clip tiles the grid shows, WAITING for it to draw them.
+
+    back_to_grid returns as soon as the prompt box exists, and the tile list is
+    rendered after that: a count taken immediately reported "0 clip(s) in the
+    project" on a project holding twelve."""
+    for k in range(tries):
+        _to_top(b)
+        n = int(_eval(b, TILES_JS) or 0)
+        if n:
+            return n
+        time.sleep(3.0)
+    return 0
 
 
 def open_nth(b, n: int) -> bool | str:
@@ -329,7 +345,15 @@ def main() -> int:
     ap.add_argument("--out", default="", help="where to save (default: each project's veo/)")
     ap.add_argument("--quality", default=QUALITY)
     ap.add_argument("--max", type=int, default=40, help="how many grid tiles to open at most")
+    ap.add_argument("--have", default="",
+                    help="comma-separated clip-key prefixes already downloaded; their "
+                         "tiles are skipped without being opened, which is the whole "
+                         "cost of a tile")
     ap.add_argument("--list", action="store_true", help="identify the clips and stop")
+    ap.add_argument("--not-these", default="",
+                    help="comma-separated clip-key prefixes already in the project; "
+                         "a tile outside this set is taken as the one just made. For "
+                         "prompts with no spoken line, where identify() cannot work.")
     ap.add_argument("--expect", type=int, default=0,
                     help="wait until this many clips exist before fetching")
     ap.add_argument("--wait", type=float, default=900.0,
@@ -362,18 +386,58 @@ def main() -> int:
                 print(f"   {n}/{a.expect}")
         print(f"{n} clip(s) in the project\n")
 
+        have = {k.strip() for k in a.have.split(",") if k.strip()}
+        known_new = {k.strip() for k in a.not_these.split(",") if k.strip()}
+        if known_new and len(known) != 1:
+            print("  --not-these needs exactly one prompt to attribute the new clip to")
+            return 2
         seen, bad, got = set(), 0, 0
         for i in range(min(n, a.max)):
+            # STOP WHEN THE ASK IS SATISFIED. Walking on to --max costs a page
+            # navigation and a full-page read per tile for nothing.
+            if not a.list and len(seen) >= len(known):
+                print(f"  all {len(known)} clip(s) in hand — {n - i} tile(s) left unopened")
+                break
             back_to_grid(b, project_url)
             opened = open_nth(b, i)
+            if have:
+                k = (_tab_state(b).get("url") or "").rsplit("/", 1)[-1][:12]
+                if k in have:
+                    print(f"[{i + 1}/{n}] {k}… already on disk — skipped")
+                    continue
             if opened == "character":
                 print(f"[{i + 1}] a Flow Character card, not a clip — skipped"); continue
             if not opened:
                 print(f"[{i + 1}] could not open tile"); bad += 1; continue
-            raw = _eval(b, "return document.body.innerText || '';") or ""
-            page = " ".join(raw.split()).lower()
-            slug = identify(page, known)
+            # THE PROMPT TEXT ARRIVES AFTER THE PAGE DOES. Read once and a clip
+            # whose Hindi line has not rendered yet identifies as `unknown` and
+            # is skipped — the clip is finished and paid for, and the run
+            # reports nothing downloaded. Seen on a freshly generated clip that
+            # matched perfectly when the same page was read a moment later.
+            # So: re-read until the line shows up, and only then give up.
+            # ONE re-read, not six. The race this guards against is a clip
+            # page that has not painted its prompt yet, which resolves in about
+            # a second. Six attempts at 2s each added 12s to every tile that was
+            # never going to match — and when fetching b-roll, that is every
+            # presenter clip in the project.
+            for attempt in range(2):
+                raw = _eval(b, "return document.body.innerText || '';") or ""
+                page = " ".join(raw.split()).lower()
+                slug = identify(page, known)
+                if slug or attempt:
+                    break
+                time.sleep(1.2)
             url = (_tab_state(b).get("url") or "").rsplit("/", 1)[-1][:12]
+            # B-ROLL HAS NO SPOKEN LINE TO IDENTIFY BY. identify() anchors on
+            # the quoted Hindi, which Flow's agent keeps verbatim; a prompt with
+            # no dialogue falls back to matching slices of an agent REWRITE and
+            # that is too weak to trust. When the caller can say which clips were
+            # already in the project, the new one is simply the tile that is not
+            # among them — which is exact, not fuzzy. Only safe because the
+            # build loop generates one clip at a time.
+            if not slug and known_new and url and url not in known_new:
+                slug = next(iter(known))
+                print(f"   - not in the project before this run -> {slug}")
             print(f"[{i + 1}/{n}] {slug or 'unknown'}  ({url}…)")
             if not slug:
                 print("   - not one of these prompts, skipping"); continue

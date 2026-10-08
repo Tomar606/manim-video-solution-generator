@@ -6,26 +6,43 @@
      from the video it lands on. Nothing here is ever taller than the band --
      its floor is y=850 and the presenter's head starts around y=1000.
 
-     ?mode=photo    &photo=/path &el=Fe &tag=... &num=1
+     ?mode=photo    &photo=/path &el=Fe &tag=... &num=1 &pins=[[text,x,y],...]
+     &shape=portrait &ar=0.81   — a tall picture keeps its own proportions
      ?mode=triptych &photos=a,b,c &tags=x,y,z &show=2   (fills in left to right)
      ?mode=compare  &photos=a,b &els=Fe,Cu &verdict=...  (both, then the conclusion)
      ?mode=equation &terms=धातु,गैसें,नमी &result=संक्षारण &show=2
      ?mode=points   &title=... &items=a,b,c &show=2      (numbered 1 2 3)
      ?mode=table    &head=a|b &rows=A|आँख;D|हड्डियाँ &show=3   (';' between rows)
+     ?mode=math     &lines=<tex>;<tex> &show=2 &lead=शून्य कोटि... (builds)
      ?mode=svg      &svg=assets/x.svg &hide=id1,id2 &labels=[[text,x,y],...] -->
 <link rel="stylesheet" href="../renderer/style.css">
+<link rel="stylesheet" href="../renderer/vendor/katex/katex.min.css">
+<script src="../renderer/vendor/katex/katex.min.js"></script>
 <style>
   html,body{margin:0;padding:0;background:transparent}
-  #band{position:relative;width:1080px;height:540px;
+  #band{position:relative;width:1080px;height:540px;--k:1;
         font-family:Poppins,Mukta,sans-serif;color:var(--ink)}
   .hide{display:none}
 
   /* ---- a photograph, set as a specimen rather than a backdrop ---- */
-  #card{position:absolute;top:15px;left:50%;transform:translateX(-50%);
-        width:720px;height:440px;border-radius:22px;overflow:hidden;
+  #card{position:absolute;top:calc(var(--k) * 15px);left:50%;transform:translateX(-50%);
+        width:calc(var(--k) * 720px);height:calc(var(--k) * 440px);
+        border-radius:22px;overflow:hidden;
         box-shadow:0 18px 48px rgba(0,0,0,.75), 0 0 0 3px rgba(127,212,255,.55)}
   #card img{width:100%;height:100%;object-fit:cover;display:block}
-  body.el #card{width:620px;left:56px;transform:none}
+  body.el #card{width:calc(var(--k) * 620px);left:56px;transform:none}
+  /* ?shape=portrait — the card takes the picture's own proportions instead of
+     cropping it to a landscape box. A tall painting in a wide card loses half
+     its height to `cover`, and on a portrait that is the face. */
+  body.tall #card{width:auto;height:calc(100% - var(--k) * 110px);
+                  aspect-ratio:var(--ar, 0.81);left:50%;transform:translateX(-50%)}
+  body.tall #card img{width:100%;height:100%;object-fit:cover}
+  body.tall #tag{top:auto;bottom:calc(var(--k) * 24px)}
+  /* labels ON the photograph — a real photo can be named part by part the same
+     way a diagram is, which is the only thing a diagram had over it */
+  #card .pin{position:absolute;transform:translate(-50%,-50%);font-weight:800;
+             font-size:calc(var(--k) * 34px);color:#fff;white-space:nowrap;
+             text-shadow:0 0 10px #000, 0 0 22px #000, 0 2px 4px #000}
   #tag{position:absolute;left:50%;transform:translateX(-50%);top:476px;
        font-weight:800;font-size:40px;text-shadow:var(--shadow);white-space:nowrap}
   body.el #tag{left:56px;width:620px;transform:none;text-align:center}
@@ -134,11 +151,21 @@
   /* THREE columns and no more. Nine rows of four collided into each other and
      wrapped -- and the per-vitamin frames already carry the disease, so the
      table only has to close the gap the narration leaves: the sources. */
-  #tbl.wide .hd, #tbl.wide .r{font-size:31px}
-  #tbl.wide .r{padding:7px 0}
-  #tbl.wide .c1{flex:0 0 130px}
-  #tbl.wide .c2{flex:0 0 290px}
+  /* the wide table scales with the band like everything else, and a short table
+     is not obliged to use nine-row type */
+  #tbl.wide .hd, #tbl.wide .r{font-size:calc(var(--k) * 31px)}
+  #tbl.wide .r{padding:calc(var(--k) * 9px) 0}
+  #tbl.wide .c1{flex:0 0 calc(var(--k) * 130px)}
+  #tbl.wide .c2{flex:0 0 calc(var(--k) * 290px)}
   #tbl.wide .c3{flex:1}
+  #tbl.big .hd, #tbl.big .r{font-size:calc(var(--k) * 40px)}
+  #tbl.big .r{padding:calc(var(--k) * 20px) 0}
+  /* ...and a table of ten rows is not obliged to use nine-row type either.
+     Raising ?h is NOT the fix for a long table: --k scales the type with the
+     band, so a taller band grows the content faster than it grows the room
+     (760px overflowed by 158, 940px by 467). Density is the only lever. */
+  #tbl.dense .hd, #tbl.dense .r{font-size:calc(var(--k) * 27px)}
+  #tbl.dense .r{padding:calc(var(--k) * 5px) 0}
   #tbl .r.off{opacity:.22}
   #tbl .v{color:#7FD4FF;font-weight:900}
 
@@ -146,12 +173,21 @@
      Not a list: the exam answer is one sentence and breaking it into bullets
      teaches them to write it as bullets. Clauses are separate lines only so it
      can arrive a clause at a time. */
-  #def{position:absolute;top:0;left:0;width:1080px;height:540px;padding:0 80px;
+  /* The define chip sits in a 1080-wide band, so 40/44px type left the right
+     half of the frame empty and read as an afterthought rather than as the
+     point of the shot. It gets the room it is standing in. */
+  #def{position:absolute;top:0;left:0;width:1080px;height:540px;padding:0 76px;
        box-sizing:border-box;display:flex;flex-direction:column;
-       justify-content:center;gap:14px}
-  #def .h{font-weight:900;font-size:40px;color:var(--gold);
-          text-shadow:var(--shadow);margin-bottom:8px}
-  #def .l{font-weight:800;font-size:44px;line-height:1.22;
+       justify-content:center;gap:calc(var(--k) * 16px)}
+  #def .h{font-weight:900;color:var(--gold);font-size:calc(var(--k) * 58px);
+          text-shadow:var(--shadow);margin-bottom:calc(var(--k) * 8px)}
+  /* One line gets the whole band; a three-line statement of a law cannot.
+     Raising the single-line size for the vitamin cards immediately overflowed
+     both Faraday law chips, so the size follows the line count the way the
+     table's density follows its row count. */
+  #def.many .h{font-size:calc(var(--k) * 44px)}
+  #def.many .l{font-size:calc(var(--k) * 50px);line-height:1.24}
+  #def .l{font-weight:800;line-height:1.20;font-size:calc(var(--k) * 74px);
           text-shadow:var(--shadow)}
 
   /* ---- two headed columns, for a classification ---- */
@@ -166,11 +202,39 @@
             text-shadow:var(--shadow);letter-spacing:1px}
   #cols .col.off{opacity:.2}
 
+  /* ---- a derivation, built one line at a time ----
+     A "सिद्ध कीजिए" answer is not a fact to display, it is a sequence to follow:
+     the student has to be able to answer "what changed?" between one line and
+     the next. So earlier lines stay on screen and quiet, and only the line just
+     spoken is lit. Never show the finished result from the start. */
+  /* 600px, not 540: four display-mode lines with nested fractions overflowed the
+     band and were clipped at BOTH ends -- the lead off the top, the result off
+     the bottom. 380 + 600 = 980, and this presenter's head starts at 992. */
+  /* TOP-ANCHORED, not centred. Centring moves every existing line when a new
+     one is added, so a cross-fade between two steps shows two offset copies of
+     the same equations — read as ghosting. Anchored, line 1 is always in the
+     same place and the fade only ever reveals the NEW line. */
+  #math{position:absolute;top:0;left:0;width:1080px;height:600px;
+        padding:calc(var(--k) * 78px) 70px 0;
+        box-sizing:border-box;display:flex;flex-direction:column;
+        justify-content:flex-start;gap:calc(var(--k) * 14px)}
+  #math .ln{text-align:center;color:var(--ink);
+            filter:drop-shadow(0 3px 10px rgba(0,0,0,.95))}
+  #math .ln .katex{font-size:calc(var(--k) * 40px)}
+  #math .ln.past{opacity:.78}
+  #math .ln.now .katex{color:var(--gold);font-size:calc(var(--k) * 47px)}
+  #math .ln.off{opacity:0}
+  #math .cap{text-align:center;font-weight:800;color:#7FD4FF;
+             font-size:calc(var(--k) * 32px);
+             text-shadow:var(--shadow);margin-bottom:4px}
+
   /* ---- a diagram, with its labels placed as fractions of the band ---- */
   #svg{position:absolute;left:0;top:0;width:1080px;height:470px}
-  #svg svg{width:100%;height:100%;overflow:visible}
+  /* display:block — an inline <svg> sits on a text baseline and the descender
+     space under it reads as 7px of overflow that is not really there */
+  #svg svg{width:100%;height:100%;overflow:visible;display:block}
   .lbl{position:absolute;transform:translate(-50%,-50%);font-weight:800;
-       font-size:38px;text-shadow:var(--shadow);white-space:nowrap}
+       font-size:42px;text-shadow:var(--shadow);white-space:nowrap}
 </style>
 
 <div id="band">
@@ -187,10 +251,47 @@
   <div id="tbl" class="hide"></div>
   <div id="def" class="hide"></div>
   <div id="cols" class="hide"></div>
+  <div id="math" class="hide"></div>
   <div id="svg" class="hide"></div>
 </div>
 
 <script>
+// EVERY CHIP IS CHECKED FOR OVERFLOW BEFORE IT IS SAVED. A block that is
+// taller than the band is silently cropped by the screenshot, and the loss is
+// at the BOTTOM -- which is where a derivation's answer lives. This is reported
+// on window.OVERFLOW and bands.mjs refuses to write the file.
+// ?h=<px> — a taller band for the stretches where the captions are off, so the
+// graphic gets the room they were using. --k scales the type with it rather
+// than leaving a bigger box round the same small text.
+function applyHeight() {
+  const h = Number(new URLSearchParams(location.search).get('h') || 0);
+  if (!h) return;
+  const band = document.getElementById('band');
+  band.style.height = h + 'px';
+  band.style.setProperty('--k', (h / 540).toFixed(3));
+  for (const id of ['math','tbl','pts','def','cols','eqn','cmp','svg'])
+    { const el = document.getElementById(id); if (el) el.style.height = h + 'px'; }
+}
+
+function checkOverflow() {
+  // Measure the LAYOUT BOX, not every descendant. KaTeX builds hidden strut
+  // spans that stick out past the visible ink, so walking all children reported
+  // overflow on blocks that plainly fit. scrollHeight against clientHeight is
+  // the question actually being asked: is the content taller than its box?
+  for (const id of ['math','tbl','pts','def','cols','eqn','cmp','trip','svg','card']) {
+    const el = document.getElementById(id);
+    if (!el || el.classList.contains('hide')) continue;
+    // against the BAND, which is what gets screenshotted -- not against the
+    // container. A block may sit in a box smaller than the band and spill a few
+    // pixels past it without anything being lost.
+    const band = document.getElementById('band').getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    const over = Math.round((r.top + el.scrollHeight) - band.bottom);
+    if (over > 2) return over;
+  }
+  return null;
+}
+
 const q = new URLSearchParams(location.search);
 const mode = q.get('mode') || 'photo';
 const $ = id => document.getElementById(id);
@@ -216,15 +317,21 @@ const VIT = {
   B1:  ['थायमीन',         'जल में विलेय'],
   B2:  ['राइबोफ्लेविन',   'जल में विलेय'],
   B3:  ['निकोटिनिक अम्ल', 'जल में विलेय'],
+  B6:  ['पाइरिडोक्सिन',   'जल में विलेय'],
 };
 
 let pending = 0;
 const track = img => { pending++; img.onload = img.onerror = () => {
-  if (--pending === 0) document.fonts.ready.then(() => { window.READY = true; }); }; };
+  if (--pending === 0) applyHeight();
+  document.fonts.ready.then(() => { window.OVERFLOW = checkOverflow(); window.READY = true; }); }; };
 
 if (mode === 'photo') {
   show($('card'));
   const im = $('img'); track(im); im.src = q.get('photo');
+  if (q.get('shape') === 'portrait') {
+    document.body.classList.add('tall');
+    if (q.get('ar')) $('band').style.setProperty('--ar', q.get('ar'));
+  }
   const el = q.get('el');
   if (el && EL[el]) {
     const [z, nm, ms, g] = EL[el];
@@ -248,6 +355,33 @@ if (mode === 'photo') {
     // the solubility strip is dropped: part 1 already teaches the classification
     // as its own block, and repeating it under every disease was noise
     void sol;
+  }
+  // pins: [text, x, y] places the label; [text, x, y, tx, ty] also draws a
+  // leader from the label to the part it names, because a label floating near a
+  // photograph is a guess and a leader is an answer.
+  const pins = JSON.parse(q.get('pins') || '[]');
+  if (pins.some(p => p.length > 3)) {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 100 100');
+    svg.setAttribute('preserveAspectRatio', 'none');
+    svg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none';
+    for (const [, x, y, tx, ty] of pins) {
+      if (tx === undefined) continue;
+      const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      l.setAttribute('x1', x * 100); l.setAttribute('y1', y * 100);
+      l.setAttribute('x2', tx * 100); l.setAttribute('y2', ty * 100);
+      l.setAttribute('stroke', '#fff'); l.setAttribute('stroke-width', '2');
+      l.setAttribute('vector-effect', 'non-scaling-stroke');
+      l.setAttribute('opacity', '0.85');
+      svg.appendChild(l);
+    }
+    $('card').appendChild(svg);
+  }
+  for (const [text, x, y] of pins) {
+    const d = document.createElement('div');
+    d.className = 'pin'; d.textContent = text;
+    d.style.left = (x * 100) + '%'; d.style.top = (y * 100) + '%';
+    $('card').appendChild(d);
   }
   if (q.get('tag')) { show($('tag')); $('tag').textContent = q.get('tag'); }
   if (q.get('num')) { show($('num')); $('num').textContent = q.get('num'); }
@@ -285,7 +419,8 @@ if (mode === 'photo') {
   $('eqn').innerHTML = `<div class="row">${row}</div>
     <div class="down${n > t.length ? '' : ' dim'}">⇓</div>
     <div class="res${n > t.length ? '' : ' dim'}">${esc(q.get('result') || '')}</div>`;
-  document.fonts.ready.then(() => { window.READY = true; });
+  applyHeight();
+  document.fonts.ready.then(() => { window.OVERFLOW = checkOverflow(); window.READY = true; });
 
 } else if (mode === 'points') {
   show($('pts'));
@@ -293,7 +428,8 @@ if (mode === 'photo') {
   $('pts').innerHTML = (q.get('title') ? `<div class="h">${esc(q.get('title'))}</div>` : '')
     + it.map((x, i) => `<div class="it${i < n ? '' : ' dim'}">
          <span class="n">${i + 1}</span><span>${esc(x)}</span></div>`).join('');
-  document.fonts.ready.then(() => { window.READY = true; });
+  applyHeight();
+  document.fonts.ready.then(() => { window.OVERFLOW = checkOverflow(); window.READY = true; });
 
 } else if (mode === 'table') {
   show($('tbl'));
@@ -310,20 +446,25 @@ if (mode === 'photo') {
   const n = Number(q.get('show') || rows.length);
   const hd = (q.get('head') || '').split('|');
   if (hd.length > 2) $('tbl').classList.add('wide');
+  if (rows.length <= 3) $('tbl').classList.add('big');
+  if (rows.length >= 9) $('tbl').classList.add('dense');
   const cell = (t, i) => `<span class="c${i + 1}${i === 0 ? ' v' : ''}">${esc(t || '')}</span>`;
   $('tbl').innerHTML =
     `<div class="hd">${hd.map((h, i) => `<span class="c${i + 1}">${esc(h)}</span>`).join('')}</div>` +
     rows.map((cols, i) => `<div class="r${i < n ? '' : ' off'}">` +
       hd.map((_, j) => cell(cols[j], j)).join('') + `</div>`).join('');
-  document.fonts.ready.then(() => { window.READY = true; });
+  applyHeight();
+  document.fonts.ready.then(() => { window.OVERFLOW = checkOverflow(); window.READY = true; });
 
 } else if (mode === 'define') {
   show($('def'));
   const ls = (q.get('lines') || '').split('|').filter(Boolean);
   const n = Number(q.get('show') || ls.length);
+  if (ls.length >= 3) $('def').classList.add('many');
   $('def').innerHTML = (q.get('title') ? `<div class="h">${esc(q.get('title'))}</div>` : '')
     + ls.map((l, i) => `<div class="l${i < n ? '' : ' dim'}">${esc(l)}</div>`).join('');
-  document.fonts.ready.then(() => { window.READY = true; });
+  applyHeight();
+  document.fonts.ready.then(() => { window.OVERFLOW = checkOverflow(); window.READY = true; });
 
 } else if (mode === 'cols') {
   show($('cols'));
@@ -333,7 +474,40 @@ if (mode === 'photo') {
   $('cols').innerHTML = heads.map((h, i) =>
     `<div class="col${i < n ? '' : ' off'}"><div class="ch">${esc(h)}</div>
      <div class="ci">${esc(items[i] || '')}</div></div>`).join('');
-  document.fonts.ready.then(() => { window.READY = true; });
+  applyHeight();
+  document.fonts.ready.then(() => { window.OVERFLOW = checkOverflow(); window.READY = true; });
+
+} else if (mode === 'math') {
+  show($('math'));
+  // the band is 600 here, not the default 540 — set it before anything is
+  // laid out, or the last line of the derivation is clipped away
+  $('band').style.height = '600px';
+  // '@@' between lines, not ';' — LaTeX uses ';' for spacing (the \; family)
+  // and a semicolon separator chopped "\;\propto\;" into fragments that
+  // would not parse.
+  const all = (q.get('lines') || '').split('@@').filter(Boolean);
+  const n = Number(q.get('show') || all.length);
+  // A DERIVATION SCROLLS. Five display-mode lines with fractions do not fit
+  // above the presenter's head, and shrinking them to fit makes the maths
+  // unreadable on a phone. `from` carries the last line of the previous screen
+  // forward as the first line of the next -- which is what a teacher does with
+  // a blackboard, and it keeps at most three lines on screen at a readable size.
+  const from = Number(q.get('from') || 1);
+  const tex = all.slice(from - 1, n);
+  const lead = q.get('lead');
+  if (lead) {
+    const d = document.createElement('div');
+    d.className = 'cap'; d.textContent = lead; $('math').appendChild(d);
+  }
+  tex.forEach((t, i) => {
+    const d = document.createElement('div');
+    d.className = 'ln ' + (i === tex.length - 1 ? 'now' : 'past');
+    try { katex.render(t, d, { displayMode: true, throwOnError: true }); }
+    catch (e) { console.error('katex: ' + e.message); d.textContent = t; }
+    $('math').appendChild(d);
+  });
+  applyHeight();
+  document.fonts.ready.then(() => { window.OVERFLOW = checkOverflow(); window.READY = true; });
 
 } else if (mode === 'svg') {
   show($('svg'));
@@ -343,15 +517,50 @@ if (mode === 'photo') {
       const el = $('svg').querySelector('#' + CSS.escape(id));
       if (el) el.style.display = 'none';
     }
-    for (const [text, x, y] of JSON.parse(q.get('labels') || '[]')) {
+    // A named part needs a LINE to the part, not just a word floating near it.
+    // Labels may be [text, x, y] or [text, x, y, tx, ty]; the second form draws
+    // a leader from the label to (tx,ty), which is how the textbook does it and
+    // the only way a label on a crowded figure is unambiguous.
+    const L = JSON.parse(q.get('labels') || '[]');
+    if (L.some(p => p.length > 3)) {
+      const ov = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      ov.setAttribute('viewBox', '0 0 100 100');
+      ov.setAttribute('preserveAspectRatio', 'none');
+      ov.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;'
+                       + 'pointer-events:none;overflow:visible';
+      for (const [, x, y, tx, ty] of L) {
+        if (tx === undefined) continue;
+        const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        l.setAttribute('x1', x * 100); l.setAttribute('y1', y * 100);
+        l.setAttribute('x2', tx * 100); l.setAttribute('y2', ty * 100);
+        // Drawn twice. A leader crosses BOTH the dark plate and the pale figure,
+        // so one colour disappears against one of them -- a white line vanished
+        // the moment it reached the ovule. Dark underneath, light on top, and it
+        // reads over anything.
+        const under = l.cloneNode();
+        under.setAttribute('stroke', '#1A1A1A');
+        under.setAttribute('stroke-width', '5');
+        under.setAttribute('vector-effect', 'non-scaling-stroke');
+        under.setAttribute('opacity', '0.55');
+        ov.appendChild(under);
+        l.setAttribute('stroke', '#FFFFFF'); l.setAttribute('stroke-width', '2');
+        l.setAttribute('vector-effect', 'non-scaling-stroke');
+        l.setAttribute('opacity', '0.95');
+        ov.appendChild(l);
+      }
+      $('band').appendChild(ov);
+    }
+    for (const [text, x, y] of L) {
       const d = document.createElement('div');
       d.className = 'lbl'; d.textContent = text;
-      d.style.left = (x * 1080) + 'px'; d.style.top = (y * 470) + 'px';
+      d.style.left = (x * 100) + '%'; d.style.top = (y * 100) + '%';
       $('band').appendChild(d);
     }
-    document.fonts.ready.then(() => { window.READY = true; });
+    applyHeight();
+  document.fonts.ready.then(() => { window.OVERFLOW = checkOverflow(); window.READY = true; });
   });
 }
-if (mode !== 'svg' && pending === 0 && !['equation', 'points', 'table', 'define', 'cols'].includes(mode))
-  document.fonts.ready.then(() => { window.READY = true; });
+if (mode !== 'svg' && pending === 0 && !['equation', 'points', 'table', 'define', 'cols', 'math'].includes(mode))
+  applyHeight();
+  document.fonts.ready.then(() => { window.OVERFLOW = checkOverflow(); window.READY = true; });
 </script>

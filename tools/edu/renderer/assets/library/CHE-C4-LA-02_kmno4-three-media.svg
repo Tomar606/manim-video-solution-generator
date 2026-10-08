@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 700">
+  <!-- KMnO4 as an oxidant in three media. What changes is how far Mn is reduced,
+       and the colour is the tell:
+         acidic          MnO4- + 8H+ + 5e-  -> Mn2+      purple  -> colourless   (Mn +7 -> +2)
+         neutral/weakly alkaline  MnO4- + 2H2O + 3e- -> MnO2   purple -> brown   (+7 -> +4)
+         strongly alkaline        MnO4- + e-       -> MnO4^2-  purple -> green   (+7 -> +6)
+       Electrons gained are 5, 3, 1 in that order -- the number students most
+       often mix up, so each tube carries its own. -->
+  <g id="km_acid">
+    <path d="M120 120 L120 400 Q120 452 172 452 Q224 452 224 400 L224 120" fill="none"
+          stroke="#7FD4FF" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M130 250 L130 400 Q130 442 172 442 Q214 442 214 400 L214 250 Z"
+          fill="#E8E8F0" fill-opacity="0.30"/>
+    <line x1="112" y1="120" x2="232" y2="120" stroke="#7FD4FF" stroke-width="7"/>
+  </g>
+  <g id="km_neutral">
+    <path d="M478 120 L478 400 Q478 452 530 452 Q582 452 582 400 L582 120" fill="none"
+          stroke="#7FD4FF" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M488 250 L488 400 Q488 442 530 442 Q572 442 572 400 L572 250 Z"
+          fill="#8A5A2B" fill-opacity="0.75"/>
+    <line x1="470" y1="120" x2="590" y2="120" stroke="#7FD4FF" stroke-width="7"/>
+  </g>
+  <g id="km_alkali">
+    <path d="M836 120 L836 400 Q836 452 888 452 Q940 452 940 400 L940 120" fill="none"
+          stroke="#7FD4FF" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M846 250 L846 400 Q846 442 888 442 Q930 442 930 400 L930 250 Z"
+          fill="#1F9E5A" fill-opacity="0.80"/>
+    <line x1="828" y1="120" x2="948" y2="120" stroke="#7FD4FF" stroke-width="7"/>
+  </g>
+  <!-- the purple it starts from, above each tube -->
+  <g id="km_start">
+    <circle cx="172" cy="76" r="22" fill="#8B3FBF"/>
+    <circle cx="530" cy="76" r="22" fill="#8B3FBF"/>
+    <circle cx="888" cy="76" r="22" fill="#8B3FBF"/>
+    <path d="M172 104 L172 132" stroke="#9FB6CC" stroke-width="4"/>
+    <path d="M530 104 L530 132" stroke="#9FB6CC" stroke-width="4"/>
+    <path d="M888 104 L888 132" stroke="#9FB6CC" stroke-width="4"/>
+  </g>
+<style>
+    text{font-family:Poppins,Mukta,'Noto Sans Devanagari',sans-serif;font-weight:800;
+         fill:#FFFFFF;paint-order:stroke;stroke:#0B1220;stroke-width:7px;
+         stroke-linejoin:round;text-anchor:middle}
+    .t{font-size:36px} .s{font-size:29px} .g{fill:#FFC53D} .b{fill:#7FD4FF}
+    .n{fill:#7BE3A0} .d{font-size:25px;fill:#9FB6CC}
+  </style>
+  <text class="t g" x="530" y="40" >MnO₄⁻ (बैंगनी)</text>
+  <text class="t b" x="172" y="196" >अम्लीय</text>
+  <text class="t b" x="530" y="196" >उदासीन</text>
+  <text class="t b" x="888" y="196" >क्षारीय</text>
+  <text class="s" x="172" y="506" >Mn²⁺ रंगहीन</text>
+  <text class="s" x="530" y="506" >MnO₂ भूरा</text>
+  <text class="s" x="888" y="506" >MnO₄²⁻ हरा</text>
+  <text class="s g" x="172" y="552" >+5e⁻</text>
+  <text class="s g" x="530" y="552" >+3e⁻</text>
+  <text class="s g" x="888" y="552" >+1e⁻</text>
+  <text class="d" x="172" y="600" >Mn: +7 → +2</text>
+  <text class="d" x="530" y="600" >Mn: +7 → +4</text>
+  <text class="d" x="888" y="600" >Mn: +7 → +6</text>
+</svg>

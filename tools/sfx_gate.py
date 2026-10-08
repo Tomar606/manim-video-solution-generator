@@ -85,11 +85,28 @@ def stage_change(video: Path, band: tuple[int, int] = (BAND_TOP, BAND_H)) -> tup
     return np.abs(np.diff(a, axis=0)).mean(axis=(1, 2)), FPS
 
 
-def events(diff: np.ndarray, fps: float) -> list[float]:
+def events(diff: np.ndarray, fps: float, win: float = 3.0) -> list[float]:
+    """Local maxima that stand out GLOBALLY or against their own neighbourhood.
+
+    One global floor (the 92nd percentile) is blind wherever the picture is
+    already busy: on BIO-C4-SA-01 two Veo panels wiping in and out raised the
+    floor so far that a definition line arriving, and a whole list arriving,
+    both registered as "marks NOTHING" — while the frames either side differ by
+    a mean of 1.9 and 9.8 grey levels. This is the failure the module's own
+    notes predicted. So a peak now qualifies if it clears the global floor OR
+    stands out from the three seconds around it.
+    """
     floor = max(0.25, float(np.percentile(diff, 92)))
+    w = max(3, int(win * fps))
     out: list[float] = []
     for i in range(1, len(diff) - 1):
-        if diff[i] >= floor and diff[i] >= diff[i-1] and diff[i] >= diff[i+1]:
+        if not (diff[i] >= diff[i - 1] and diff[i] >= diff[i + 1]):
+            continue
+        local = diff[max(0, i - w):min(len(diff), i + w + 1)]
+        med = float(np.median(local))
+        mad = 1.4826 * float(np.median(np.abs(local - med)))
+        local_floor = max(0.25, med + 3.0 * mad)
+        if diff[i] >= floor or diff[i] >= local_floor:
             t = (i + 1) / fps
             if not out or t - out[-1] > 0.8:
                 out.append(round(t, 2))

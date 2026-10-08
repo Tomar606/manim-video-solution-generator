@@ -55,6 +55,11 @@ def submit_one(b, sel: dict, project: str, refs: list[Path], text: str,
     fk.back_to_grid(b, project)
     if "/edit/" in (fk.tab_state(b).get("url") or ""):
         raise fk.KitError("still on a clip editor after going back to the grid")
+    # Flow takes two generations at a time and hides the submit arrow while both
+    # slots are full. Wait for one HERE, before the chips and the prompt go in,
+    # so nothing sits typed in a bar Flow may re-render while we wait.
+    if not fk.wait_for_submit(b, sel):
+        raise fk.KitError("Flow has been at capacity for fifteen minutes")
 
     b.call("attach", timeout=60)
     left = fk.clear_chips(b, sel)
@@ -93,6 +98,17 @@ def main() -> int:
     ap.add_argument("prompts", nargs="+", help="prompt .txt files, one per clip")
     ap.add_argument("--character", default=str(DEFAULT_CHARACTER))
     ap.add_argument("--aspect", choices=("landscape", "vertical"), required=True)
+    ap.add_argument("--no-refs", action="store_true",
+                    help="b-roll with no presenter: attach nothing, and prove the bar is empty")
+    # A BACKGROUND IS UPLOADED, NOT DESCRIBED (CLAUDE.md) — and for this kit
+    # that is not only about matching a plate. Asking Veo for a "chroma green
+    # wall" gets a PALE, unevenly lit green: measured at RGB 125,192,138, which
+    # in chroma space sits nearer his skin and black polo than it does to a
+    # real key colour. Neither chromakey nor colorkey can separate him from it
+    # — every setting either leaves the wall or eats his face and hands. So a
+    # scene that needs a particular background is GENERATED on it.
+    ap.add_argument("--plate", default="",
+                    help="an image to attach as the scene's background, after the refs")
     ap.add_argument("--check", action="store_true",
                     help="do everything except press submit (costs nothing)")
     ap.add_argument("--gap", type=float, default=8.0,
@@ -100,8 +116,12 @@ def main() -> int:
     a = ap.parse_args()
 
     ch = json.loads(Path(a.character).read_text(encoding="utf-8"))
-    refs = [fk.ROOT / p for p in ch["refs"][a.aspect]]
-    missing = [str(p.relative_to(fk.ROOT)) for p in refs if not p.is_file()]
+    refs = [] if a.no_refs else [fk.ROOT / p for p in ch["refs"][a.aspect]]
+    if a.plate:
+        # LAST, on purpose: Flow weights earlier ingredients more, and what must
+        # survive is his face. The plate only has to set the room.
+        refs = refs + [Path(a.plate).resolve()]
+    missing = [str(p) for p in refs if not p.is_file()]
     if missing:
         print("  missing reference images (SETUP.md step 3):")
         for m in missing:

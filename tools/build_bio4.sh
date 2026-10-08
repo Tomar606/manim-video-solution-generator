@@ -1,7 +1,7 @@
 #!/bin/bash
-# Build one part of BIO-C1-LA-01 against its HeyGen clip.
+# Build one part of BIO-C4-LA-01 against its HeyGen clip.
 #
-#   bash tools/build_bio1.sh <part>
+#   bash tools/build_bio4.sh <part>
 #
 # Same shape as rebuild_faraday.sh. Two differences worth knowing:
 #   * the clock is the HeyGen srt, unrepaired — all four files end within 0.04s
@@ -19,6 +19,8 @@ P=projects/bio-c4-la-01
 CLIP=inbox/bio4/part${PART}.mp4
 SP="${SCRATCH:-/tmp}/bio4_${PART}"; mkdir -p "$SP"
 log () { echo "[$(date +%H:%M:%S)] part$PART: $*"; }
+
+
 
 TOTAL=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$CLIP")
 CARDEND=$($PY -c "import json;print(json.load(open('$P/card_part${PART}.json'))[0][1])")
@@ -87,7 +89,7 @@ grep -q "every chip clears the presenter" "$SP/clear.log" \
 # an artefact is older than the spec that defines it. The second check is the
 # one that matters: BIO-C1-LA-01's chip spec was de-dashed and the PNGs were
 # never re-rendered, so two delivered parts kept showing an em dash.
-$PY tools/dash_gate.py "$P" tools/edu/renderer/spec/chips/bio4.json "$P/plan_part${PART}.json" \
+$PY tools/dash_gate.py "$P" \
   || { log "!! dash gate failed - refusing to burn"; exit 1; }
 
 log "chips"

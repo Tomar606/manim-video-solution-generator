@@ -1,0 +1,129 @@
+[
+ {
+  "seg_id": 1,
+  "duration": 10.44,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "(graphic only)",
+  "phrases": [],
+  "captions": "off"
+ },
+ {
+  "seg_id": 2,
+  "duration": 8.9,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "(graphic only)",
+  "phrases": [],
+  "captions": "off"
+ },
+ {
+  "seg_id": 3,
+  "duration": 6.28,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "(graphic only)",
+  "phrases": [],
+  "captions": "off"
+ },
+ {
+  "seg_id": 4,
+  "duration": 5.0,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "(graphic only)",
+  "phrases": [],
+  "captions": "off"
+ },
+ {
+  "seg_id": 5,
+  "duration": 9.68,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "और t है समय",
+  "phrases": [
+   {
+    "text": "और t है समय",
+    "golden": null,
+    "t_in": 8.56,
+    "t_out": 9.68
+   }
+  ],
+  "captions_partial": true
+ },
+ {
+  "seg_id": 6,
+  "duration": 5.87,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "(graphic only)",
+  "phrases": [],
+  "captions": "off"
+ },
+ {
+  "seg_id": 7,
+  "duration": 7.94,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "(graphic only)",
+  "phrases": [],
+  "captions": "off"
+ },
+ {
+  "seg_id": 8,
+  "duration": 10.09,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "(graphic only)",
+  "phrases": [],
+  "captions": "off"
+ },
+ {
+  "seg_id": 9,
+  "duration": 12.57,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "तो बच्चों आपने फैराडे का पहला नियम तो समझ लिया लेकिन अब दूसरा नियम क्या कहता है? और दोनों नियमों का पूरा उत्तर परीक्षा में कैसे लिखना है ये समझेंगे अगले पार्ट में",
+  "phrases": [
+   {
+    "text": "तो बच्चों आपने फैराडे का पहला नियम तो समझ लिया",
+    "golden": "फैराडे",
+    "t_in": 0.0,
+    "t_out": 3.86
+   },
+   {
+    "text": "लेकिन अब दूसरा नियम क्या कहता है?",
+    "golden": "नियम",
+    "t_in": 3.86,
+    "t_out": 6.0
+   },
+   {
+    "text": "और दोनों नियमों का पूरा उत्तर",
+    "golden": null,
+    "t_in": 6.0,
+    "t_out": 8.28
+   },
+   {
+    "text": "परीक्षा में कैसे लिखना है",
+    "golden": null,
+    "t_in": 8.28,
+    "t_out": 10.64
+   },
+   {
+    "text": "ये समझेंगे अगले पार्ट में",
+    "golden": null,
+    "t_in": 10.64,
+    "t_out": 12.57
+   }
+  ]
+ }
+]

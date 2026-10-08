@@ -1,0 +1,264 @@
+[
+ {
+  "seg_id": 1,
+  "duration": 6.02,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "अब ये थोड़ा ध्यान से समझना, क्योंकि गिनती और स्थान में बच्चे अक्सर गलती करते हैं।",
+  "phrases": [
+   {
+    "text": "अब ये थोड़ा ध्यान से समझना,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.7
+   },
+   {
+    "text": "क्योंकि गिनती और स्थान में बच्चे अक्सर गलती करते हैं।",
+    "golden": null,
+    "t_in": 1.7,
+    "t_out": 6.02
+   }
+  ]
+ },
+ {
+  "seg_id": 2,
+  "duration": 8.66,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "सबसे पहले बीजाण्डद्वार के सिरे की ओर, अण्ड उपकरण यानी Egg Apparatus स्थित होता है। और ये बना होता है, एक अण्ड कोशिका और दो सहाय कोशिकाओं से।",
+  "phrases": []
+ },
+ {
+  "seg_id": 3,
+  "duration": 5.38,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "तो बीजाण्डद्वार वाले सिरे पर याद रखो, एक अण्ड कोशिका और दो सहायक कोशिकाएँ।",
+  "phrases": []
+ },
+ {
+  "seg_id": 4,
+  "duration": 1.02,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "अब दूसरा।",
+  "phrases": [
+   {
+    "text": "अब दूसरा।",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.02
+   }
+  ]
+ },
+ {
+  "seg_id": 5,
+  "duration": 8.9,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "इसके बिल्कुल विपरीत, यानी निभागी सिरे की ओर, तीन प्रतिव्यासांत कोशिकाएँ यानी Antipodal cells स्थित होती हैं।",
+  "phrases": []
+ },
+ {
+  "seg_id": 6,
+  "duration": 4.42,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "और अब बीच में क्या है? यहीं पर सबसे ज्यादा बच्चे उलझते हैं।",
+  "phrases": [
+   {
+    "text": "और अब बीच में क्या है?",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.18
+   },
+   {
+    "text": "यहीं पर सबसे ज्यादा बच्चे उलझते हैं।",
+    "golden": null,
+    "t_in": 1.18,
+    "t_out": 4.42
+   }
+  ]
+ },
+ {
+  "seg_id": 7,
+  "duration": 14.07,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "भ्रूणकोष के बीच में, एक बड़ी केन्द्रीय कोशिका यानी Central Cell उपस्थित होती है, जिसमें दो ध्रुवीय केन्द्रक यानी Polar Nuclei पाए जाते हैं।",
+  "phrases": []
+ },
+ {
+  "seg_id": 8,
+  "duration": 4.43,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "अब एक और जरूरी बात, ये दोनों ध्रुवीय केन्द्रक निषेचन से पहले अलग-अलग रहते हैं।",
+  "phrases": [
+   {
+    "text": "अब एक और जरूरी बात,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.35
+   },
+   {
+    "text": "ये दोनों ध्रुवीय केन्द्रक निषेचन से पहले अलग-अलग रहते हैं।",
+    "golden": "ध्रुवीय",
+    "t_in": 1.35,
+    "t_out": 4.43
+   }
+  ]
+ },
+ {
+  "seg_id": 9,
+  "duration": 14.73,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "द्विनिषेचन के समय, भ्रूणकोष में मौजूद दो ध्रुवीय केन्द्रक Polar nuclei आपस में मिलकर, द्वितीयक केन्द्रक बनाते हैं। इसके बाद यह द्वितीयक केन्द्रक, एक नर युग्मक Male gamete के साथ मिल जाता है,",
+  "phrases": []
+ },
+ {
+  "seg_id": 10,
+  "duration": 13.75,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "और प्राथमिक भ्रूणपोष केन्द्रक Primary Endosperm Nucleus PEN बनता है। ये पूरी line गाँठ बाँध लो और परीक्षा में ऐसे ही लिखना, द्विनिषेचन के समय ध्रुवीय केन्द्रक और नर युग्मक के मिलने से PEN बनता है।",
+  "phrases": []
+ },
+ {
+  "seg_id": 11,
+  "duration": 1.96,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "अब समझ आया कि इसे 7 कोशिकीय और 8 केन्द्रकीय क्यों कहते हैं?",
+  "phrases": [
+   {
+    "text": "अब समझ आया कि इसे 7 कोशिकीय और 8 केन्द्रकीय क्यों कहते हैं?",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.96
+   }
+  ]
+ },
+ {
+  "seg_id": 12,
+  "duration": 14.86,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "एक अण्ड कोशिका + दो सहायक कोशिकाएँ + तीन प्रतिमुख कोशिकाएँ + एक केन्द्रीय कोशिका, बराबर 7 कोशिकाएँ। और केन्द्रीय कोशिका में, दो ध्रुवीय केन्द्रक होने की वजह से,",
+  "phrases": []
+ },
+ {
+  "seg_id": 13,
+  "duration": 2.36,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "कुल 8 केन्द्रक हो जाते हैं।",
+  "phrases": []
+ },
+ {
+  "seg_id": 14,
+  "duration": 9.02,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "ये गिनती वाली बात ज़ुबानी याद कर लो, क्योंकि परीक्षा में सीधे भी पूछ सकते हैं। तो बच्चों, यहाँ तक कर लिया, अब इसका answer परीक्षा में कैसे लिखना है और",
+  "phrases": [
+   {
+    "text": "ये गिनती वाली बात ज़ुबानी याद कर लो,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.86
+   },
+   {
+    "text": "क्योंकि परीक्षा में सीधे भी पूछ सकते हैं।",
+    "golden": null,
+    "t_in": 1.86,
+    "t_out": 3.98
+   },
+   {
+    "text": "तो बच्चों, यहाँ तक कर लिया,",
+    "golden": null,
+    "t_in": 3.98,
+    "t_out": 5.64
+   },
+   {
+    "text": "अब इसका answer परीक्षा में कैसे लिखना है और",
+    "golden": null,
+    "t_in": 5.64,
+    "t_out": 9.02
+   }
+  ]
+ },
+ {
+  "seg_id": 15,
+  "duration": 10.14,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "साफ-सुथरा diagram कैसे बनाना है, वो आपकी screen के right side में दिए Notes button पर मिल जाएगा। अब ये सवाल हो गया, ऐसे ही आगे की पढ़ाई वाली reels देखो,",
+  "phrases": [
+   {
+    "text": "साफ-सुथरा diagram कैसे बनाना है,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.62
+   },
+   {
+    "text": "वो आपकी screen के right side में दिए Notes button पर मिल जाएगा।",
+    "golden": null,
+    "t_in": 1.62,
+    "t_out": 5.84
+   },
+   {
+    "text": "अब ये सवाल हो गया,",
+    "golden": null,
+    "t_in": 5.84,
+    "t_out": 7.28
+   },
+   {
+    "text": "ऐसे ही आगे की पढ़ाई वाली reels देखो,",
+    "golden": null,
+    "t_in": 7.28,
+    "t_out": 10.14
+   }
+  ]
+ },
+ {
+  "seg_id": 16,
+  "duration": 3.6,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "एक-एक करके सिलेबस पूरा करो और 90% की तैयारी मजबूत करो।",
+  "phrases": [
+   {
+    "text": "एक-एक करके सिलेबस पूरा करो और 90% की तैयारी मजबूत करो।",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 3.6
+   }
+  ]
+ }
+]

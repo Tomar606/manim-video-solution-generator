@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- THE SIGNATURE OF ZERO ORDER: concentration falls in a STRAIGHT line, so
+       the rate never changes. That flat slope is the whole reason the algebra
+       comes out as it does, and it is what separates zero order from first. -->
+  <g id="zo_axes">
+    <line x1="170" y1="60" x2="170" y2="400" stroke="#9FB6CC" stroke-width="5"/>
+    <line x1="170" y1="400" x2="960" y2="400" stroke="#9FB6CC" stroke-width="5"/>
+    <path d="M170 52 L162 74 L178 74 Z" fill="#9FB6CC"/>
+    <path d="M968 400 L946 392 L946 408 Z" fill="#9FB6CC"/>
+  </g>
+  <g id="zo_line">
+    <line x1="170" y1="96" x2="770" y2="400" stroke="#7FD4FF" stroke-width="8"
+          stroke-linecap="round"/>
+    <circle cx="170" cy="96" r="10" fill="#7FD4FF"/>
+  </g>
+  <g id="zo_half" data-optional>
+    <line x1="170" y1="248" x2="470" y2="248" stroke="#FFC53D" stroke-width="4"
+          stroke-dasharray="12 10"/>
+    <line x1="470" y1="248" x2="470" y2="400" stroke="#FFC53D" stroke-width="4"
+          stroke-dasharray="12 10"/>
+    <circle cx="470" cy="248" r="9" fill="#FFC53D"/>
+  </g>
+</svg>

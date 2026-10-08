@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 700">
+  <!-- How each kind of material treats an external field, which is the whole
+       comparison the question asks for:
+         diamagnetic   field lines are PUSHED OUT, fewer inside   mu_r < 1
+         paramagnetic  slightly drawn in, a few more inside       mu_r > 1 (just)
+         ferromagnetic strongly drawn in, crowded inside          mu_r >> 1
+       Drawn as line DENSITY inside the slab, because that is what the words
+       "repelled" and "concentrated" actually mean. -->
+  <g id="mm_dia">
+    <rect x="70" y="150" width="250" height="300" rx="10" fill="#7FD4FF"
+          fill-opacity="0.10" stroke="#7FD4FF" stroke-width="5"/>
+    <g stroke="#7BE3A0" stroke-width="4" fill="none" stroke-linecap="round">
+      <path d="M40 190 C 120 190, 120 150, 195 150"/>
+      <path d="M40 300 L 90 300"/><path d="M300 300 L350 300"/>
+      <path d="M40 410 C 120 410, 120 450, 195 450"/>
+      <path d="M195 150 C 270 150, 270 190, 350 190"/>
+      <path d="M195 450 C 270 450, 270 410, 350 410"/>
+    </g>
+  </g>
+  <g id="mm_para">
+    <rect x="415" y="150" width="250" height="300" rx="10" fill="#7FD4FF"
+          fill-opacity="0.10" stroke="#7FD4FF" stroke-width="5"/>
+    <g stroke="#7BE3A0" stroke-width="4" fill="none" stroke-linecap="round">
+      <path d="M385 230 L695 230"/><path d="M385 300 L695 300"/>
+      <path d="M385 370 L695 370"/>
+      <path d="M470 265 L610 265"/>
+    </g>
+  </g>
+  <g id="mm_ferro">
+    <rect x="760" y="150" width="250" height="300" rx="10" fill="#7FD4FF"
+          fill-opacity="0.10" stroke="#7FD4FF" stroke-width="5"/>
+    <g stroke="#7BE3A0" stroke-width="4" fill="none" stroke-linecap="round">
+      <path d="M730 200 C 810 200, 810 240, 885 240"/>
+      <path d="M730 300 L1040 300"/>
+      <path d="M730 400 C 810 400, 810 360, 885 360"/>
+      <path d="M885 240 C 960 240, 960 200, 1040 200"/>
+      <path d="M885 360 C 960 360, 960 400, 1040 400"/>
+      <path d="M790 270 L980 270"/><path d="M790 330 L980 330"/>
+      <path d="M810 250 L960 250"/><path d="M810 350 L960 350"/>
+    </g>
+  </g>
+<style>
+    text{font-family:Poppins,Mukta,'Noto Sans Devanagari',sans-serif;font-weight:800;
+         fill:#FFFFFF;paint-order:stroke;stroke:#0B1220;stroke-width:7px;
+         stroke-linejoin:round;text-anchor:middle}
+    .t{font-size:36px} .s{font-size:29px} .g{fill:#FFC53D} .b{fill:#7FD4FF}
+    .n{fill:#7BE3A0} .d{font-size:25px;fill:#9FB6CC}
+  </style>
+  <text class="t" x="195" y="96" >प्रतिचुम्बकीय</text>
+  <text class="t" x="540" y="96" >अनुचुम्बकीय</text>
+  <text class="t" x="885" y="96" >लौह-चुम्बकीय</text>
+  <text class="s g" x="195" y="516" >μᵣ < 1</text>
+  <text class="s g" x="540" y="516" >μᵣ > 1</text>
+  <text class="s g" x="885" y="516" >μᵣ ≫ 1</text>
+  <text class="s n" x="195" y="562" >Bi, Cu, जल</text>
+  <text class="s n" x="540" y="562" >Al, Na, O₂</text>
+  <text class="s n" x="885" y="562" >Fe, Co, Ni</text>
+  <text class="d" x="195" y="606" >रेखाएँ बाहर धकेली</text>
+  <text class="d" x="540" y="606" >थोड़ी सघन</text>
+  <text class="d" x="885" y="606" >अत्यधिक सघन</text>
+</svg>

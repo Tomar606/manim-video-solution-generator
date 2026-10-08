@@ -120,7 +120,19 @@ def run(subjects: list[dict], out_dir: Path) -> None:
         credits[slug] = kept
         need = sum(1 for k in kept if k["credit_required"])
         print(f"  {slug}: {len(kept)} candidate(s), {need} need a credit line")
-    (out_dir / "credits.json").write_text(
+    # MERGE, never clobber. A second fetch into the same folder used to
+    # overwrite credits.json wholesale, so the first batch's images stayed on
+    # disk with their attribution deleted — and a CC-BY file with no author
+    # recorded is one we are no longer allowed to ship.
+    dest = out_dir / "credits.json"
+    if dest.exists():
+        try:
+            merged = json.loads(dest.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            merged = {}
+        merged.update(credits)
+        credits = merged
+    dest.write_text(
         json.dumps(credits, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"\ncredits -> {out_dir / 'credits.json'}")
 

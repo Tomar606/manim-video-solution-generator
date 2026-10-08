@@ -30,11 +30,40 @@ import sys
 from pathlib import Path
 
 BAND_TOP = 380       # the stage band: diagrams and equations already live here
+# A chip may override it with "top": <px>. Where the captions are suppressed the
+# band starts higher, because the room they were using is the graphic's now.
 FADE = 0.35
 FPS = 30
 
 
+def check_overlaps(plan: list[dict]) -> None:
+    """Two DIFFERENT graphics must never be on screen together.
+
+    Each overlay fades in over FADE seconds and out over the last FADE, both
+    inside its own window. So two windows that overlap put two pictures on
+    screen at once, cross-faded -- which reads as ghosting, not as a
+    transition. It looked like doubled equations on the zero-order derivation.
+
+    Overlap is legitimate in exactly one case: the next chip is the SAME block
+    with one more line, drawn top-anchored so nothing already on screen moves.
+    That chip says `"over": true`. Anything else must butt -- the earlier chip's
+    end IS the later one's start, so one fades out before the other fades in.
+    """
+    bad = []
+    for a, b in zip(plan, plan[1:]):
+        if b["start"] < a["end"] - 1e-6 and not b.get("over"):
+            bad.append(f'  {Path(a["png"]).stem} ends {a["end"]:.2f} but '
+                       f'{Path(b["png"]).stem} starts {b["start"]:.2f} '
+                       f'({a["end"] - b["start"]:.2f}s of both on screen)')
+    if bad:
+        raise SystemExit("two graphics would be on screen at once:\n"
+                         + "\n".join(bad)
+                         + '\n\nButt them (end == next start), or mark the later '
+                           'one "over": true if it is the same block growing.')
+
+
 def burn(src: Path, out: Path, plan: list[dict]) -> None:
+    check_overlaps(plan)
     inputs: list[str] = []
     parts: list[str] = []
     for i, c in enumerate(plan, start=1):
@@ -53,7 +82,8 @@ def burn(src: Path, out: Path, plan: list[dict]) -> None:
     chain, last = [], "0:v"
     for i, c in enumerate(plan, start=1):
         lbl = f"v{i}"
-        chain.append(f"[{last}][c{i}]overlay=0:{BAND_TOP}:eof_action=pass:"
+        top = int(c.get("top", BAND_TOP))
+        chain.append(f"[{last}][c{i}]overlay=0:{top}:eof_action=pass:"
                      f"enable='between(t,{c['start']:.3f},{c['end']:.3f})'[{lbl}]")
         last = lbl
     fc = ";".join(parts + chain)

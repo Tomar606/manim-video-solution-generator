@@ -1,0 +1,188 @@
+[
+ {
+  "seg_id": 1,
+  "duration": 13.38,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "अब ये ध्यान से समझो, कि भ्रूण कोष 7 कोशिकीय और 8 केन्द्रकीय क्यों होता है। इस हिस्से को हल्के में मत लेना, exam में इसकी cells और nuclei दोनों पूछे जा सकते हैं।",
+  "phrases": [
+   {
+    "text": "अब ये ध्यान से समझो,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 1.44
+   },
+   {
+    "text": "कि भ्रूण कोष 7 कोशिकीय और 8 केन्द्रकीय क्यों होता है।",
+    "golden": "भ्रूण",
+    "t_in": 1.44,
+    "t_out": 5.7
+   },
+   {
+    "text": "इस हिस्से को हल्के में मत लेना,",
+    "golden": null,
+    "t_in": 5.7,
+    "t_out": 8.68
+   },
+   {
+    "text": "exam में इसकी cells और nuclei दोनों पूछे जा सकते हैं।",
+    "golden": null,
+    "t_in": 8.68,
+    "t_out": 13.38
+   }
+  ]
+ },
+ {
+  "seg_id": 2,
+  "duration": 13.72,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "बीजाण्डकाय यानी Nucellus के अंदर, लगभग बीच में, लेकिन थोड़ा-सा बीजाण्डद्वार यानी Micropyle की ओर, मादा युग्मकोद्भिद् यानी Female gametophyte पाया जाता है। इसे ही भ्रूण कोष, यानी Embryo sac कहते हैं।",
+  "phrases": []
+ },
+ {
+  "seg_id": 3,
+  "duration": 7.19,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "अब सबसे जरूरी बात, भ्रूण कोष 7 कोशिकीय और 8 केन्द्रकीय क्यों?",
+  "phrases": [
+   {
+    "text": "अब सबसे जरूरी बात,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 5.9
+   },
+   {
+    "text": "भ्रूण कोष 7 कोशिकीय और 8 केन्द्रकीय क्यों?",
+    "golden": "भ्रूण",
+    "t_in": 5.9,
+    "t_out": 7.19
+   }
+  ]
+ },
+ {
+  "seg_id": 4,
+  "duration": 13.12,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "एक सामान्य भ्रूण कोष में कुल 7 कोशिकाएँ होती हैं, लेकिन इनमें कुल 8 केन्द्रक, यानी Nuclei होते हैं। भ्रूण कोष में एक अंड कोशिका होती है, जिसमें एक केन्द्रक होता है।",
+  "phrases": []
+ },
+ {
+  "seg_id": 5,
+  "duration": 8.22,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "इसके साथ दो सहायक कोशिकाएँ होती हैं, जिनमें दो केन्द्रक होते हैं। विपरीत सिरे पर तीन प्रतिव्यासांत कोशिकाएँ होती हैं, जिनमें तीन केन्द्रक होते हैं।",
+  "phrases": []
+ },
+ {
+  "seg_id": 6,
+  "duration": 12.97,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "और बीच में एक केंद्रीय कोशिका होती है, जिसमें दो ध्रुवीय केन्द्रक पाए जाते हैं। इसलिए 7 कोशिकाएँ, लेकिन 8 केन्द्रक। बस ये number एकदम पक्का कर लो, 7 cells, 8 nuclei।",
+  "phrases": []
+ },
+ {
+  "seg_id": 7,
+  "duration": 9.58,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "तो यहाँ तक तो बेटा कर लिया, मतलब, बीजाण्ड के main parts, और भ्रूण कोष की basic structure समझ आ गई। लेकिन अभी भ्रूणकोष के अंदर के जरूरी भाग,",
+  "phrases": [
+   {
+    "text": "तो यहाँ तक तो बेटा कर लिया, मतलब,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.33
+   },
+   {
+    "text": "बीजाण्ड के main parts,",
+    "golden": null,
+    "t_in": 2.33,
+    "t_out": 3.88
+   },
+   {
+    "text": "और भ्रूण कोष की basic structure समझ आ गई।",
+    "golden": "भ्रूण",
+    "t_in": 3.88,
+    "t_out": 6.73
+   },
+   {
+    "text": "लेकिन अभी भ्रूणकोष के अंदर के जरूरी भाग,",
+    "golden": "भ्रूणकोष",
+    "t_in": 6.73,
+    "t_out": 9.58
+   }
+  ]
+ },
+ {
+  "seg_id": 8,
+  "duration": 11.54,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "अंड उपकरण, प्रतिव्यासांत कोशिकाएँ और ध्रुवीय केन्द्रक, कहाँ स्थित होते हैं, ये समझना बाकी है। Next part में इन्हें समझेंगे,",
+  "phrases": [
+   {
+    "text": "अंड उपकरण, प्रतिव्यासांत कोशिकाएँ और ध्रुवीय केन्द्रक,",
+    "golden": "प्रतिव्यासांत",
+    "t_in": 0.0,
+    "t_out": 4.1
+   },
+   {
+    "text": "कहाँ स्थित होते हैं,",
+    "golden": null,
+    "t_in": 4.1,
+    "t_out": 5.81
+   },
+   {
+    "text": "ये समझना बाकी है।",
+    "golden": null,
+    "t_in": 5.81,
+    "t_out": 7.72
+   },
+   {
+    "text": "Next part में इन्हें समझेंगे,",
+    "golden": null,
+    "t_in": 7.72,
+    "t_out": 11.54
+   }
+  ]
+ },
+ {
+  "seg_id": 9,
+  "duration": 3.94,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "और पूरा arrangement भी clear करेंगे, तो Part four देखना मत भूलना।",
+  "phrases": [
+   {
+    "text": "और पूरा arrangement भी clear करेंगे,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.22
+   },
+   {
+    "text": "तो Part four देखना मत भूलना।",
+    "golden": null,
+    "t_in": 2.22,
+    "t_out": 3.94
+   }
+  ]
+ }
+]

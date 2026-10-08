@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- THE SECOND LAW, WIRED IN SERIES. The whole law rests on the SAME charge
+       passing through both cells, and series is the only wiring that guarantees
+       it -- so the circuit has to be readable as series or the picture argues
+       against the law it is illustrating.
+       The earlier version dropped its wires beside the electrodes instead of
+       onto them, so nothing connected to anything. Every lead now lands on an
+       electrode that stands ABOVE the liquid, where a real one is clipped. -->
+
+  <!-- beaker A -->
+  <g id="tc_a">
+    <path d="M96 168 L96 380 Q96 396 112 396 L446 396 Q462 396 462 380 L462 168"
+          fill="none" stroke="#7FD4FF" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M108 214 L108 376 Q108 384 116 384 L442 384 Q450 384 450 376 L450 214 Z"
+          fill="#7FD4FF" fill-opacity="0.13" stroke="#7FD4FF" stroke-width="4"/>
+    <rect x="160" y="120" width="34" height="230" rx="4"
+          fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+    <rect x="356" y="120" width="34" height="230" rx="4"
+          fill="#12283A" stroke="#FFC53D" stroke-width="6"/>
+    <rect x="344" y="248" width="12" height="102" fill="#7BE3A0" fill-opacity="0.9"/>
+    <rect x="390" y="248" width="12" height="102" fill="#7BE3A0" fill-opacity="0.9"/>
+  </g>
+  <!-- beaker B: same current, more deposited -->
+  <g id="tc_b">
+    <path d="M618 168 L618 380 Q618 396 634 396 L968 396 Q984 396 984 380 L984 168"
+          fill="none" stroke="#7FD4FF" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M630 214 L630 376 Q630 384 638 384 L964 384 Q972 384 972 376 L972 214 Z"
+          fill="#7FD4FF" fill-opacity="0.13" stroke="#7FD4FF" stroke-width="4"/>
+    <rect x="682" y="120" width="34" height="230" rx="4"
+          fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+    <rect x="878" y="120" width="34" height="230" rx="4"
+          fill="#12283A" stroke="#FFC53D" stroke-width="6"/>
+    <rect x="866" y="192" width="12" height="158" fill="#7BE3A0" fill-opacity="0.9"/>
+    <rect x="912" y="192" width="12" height="158" fill="#7BE3A0" fill-opacity="0.9"/>
+  </g>
+
+  <!-- the circuit: battery + -> A's left, A's right -> B's left, B's right -> battery - -->
+  <g id="tc_wire">
+    <path d="M520 46 L177 46 L177 120" fill="none" stroke="#9FB6CC"
+          stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M373 120 L373 92 L699 92 L699 120" fill="none" stroke="#9FB6CC"
+          stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M895 120 L895 46 L556 46" fill="none" stroke="#9FB6CC"
+          stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M520 18 L520 74" stroke="#FF5A5A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M544 32 L544 60" stroke="#7FD4FF" stroke-width="9" stroke-linecap="round"/>
+    <path d="M544 46 L556 46" stroke="#9FB6CC" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <!-- the same current everywhere, which is the point -->
+  <g id="tc_i" data-optional>
+    <path d="M300 46 L250 46" stroke="#7BE3A0" stroke-width="6" stroke-linecap="round"/>
+    <path d="M232 46 L258 34 L258 58 Z" fill="#7BE3A0"/>
+    <path d="M500 92 L556 92" stroke="#7BE3A0" stroke-width="6" stroke-linecap="round"/>
+    <path d="M574 92 L548 80 L548 104 Z" fill="#7BE3A0"/>
+  </g>
+</svg>

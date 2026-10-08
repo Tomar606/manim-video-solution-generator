@@ -1,0 +1,206 @@
+[
+ {
+  "seg_id": 1,
+  "duration": 2.3,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "यहाँ थोड़ा ध्यान से समझना, क्योंकि इसमें",
+  "phrases": [
+   {
+    "text": "यहाँ थोड़ा ध्यान से समझना, क्योंकि इसमें",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 2.3
+   }
+  ]
+ },
+ {
+  "seg_id": 2,
+  "duration": 14.68,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "दोनों शृंखलाओं के क्षारक आपस में हाइड्रोजन बन्ध द्वारा जुड़े होते हैं। प्रत्येक क्षारक युग्म में एक प्यूरीन व एक पिरीमिडीन होता है। एक रज्जुक का एडिनीन दूसरे रज्जुक के थायमीन के साथ दो हाइड्रोजन बन्ध द्वारा तथा ग्वानीन,",
+  "phrases": []
+ },
+ {
+  "seg_id": 3,
+  "duration": 14.72,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "साइटोसीन के साथ तीन हाइड्रोजन बन्धों द्वारा जुड़ा होता है। और इसे बस ऐसे रखो A equals T में दो hydrogen bonds और C equals G में तीन hydrogen bonds। मतलब, हाइड्रोजन बन्ध हमेशा किस रूप में पाए जाते हैं?",
+  "phrases": []
+ },
+ {
+  "seg_id": 4,
+  "duration": 11.12,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "A equals T, T equals A, C equals G, G equals C। अब ये line एकदम दिमाग में बैठा लो A dash T में 2 और C dash G में 3 हाइड्रोजन बन्ध। इसमें गलती नहीं होनी चाहिए।",
+  "phrases": []
+ },
+ {
+  "seg_id": 5,
+  "duration": 10.24,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "और यही complementary base pairing दोनों strands के बीच की दूरी को समान बनाए रखती है। अब DNA की चौड़ाई का point देखो इसका number भूलना मत",
+  "phrases": [
+   {
+    "text": "और यही complementary base pairing दोनों strands के बीच की",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 4.58
+   },
+   {
+    "text": "दूरी को समान बनाए रखती है।",
+    "golden": null,
+    "t_in": 4.58,
+    "t_out": 6.98
+   },
+   {
+    "text": "अब DNA की चौड़ाई का point देखो",
+    "golden": null,
+    "t_in": 6.98,
+    "t_out": 8.76
+   },
+   {
+    "text": "इसका number भूलना मत",
+    "golden": null,
+    "t_in": 8.76,
+    "t_out": 10.24
+   }
+  ]
+ },
+ {
+  "seg_id": 6,
+  "duration": 11.42,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "DNA अणु की चौड़ाई हमेशा स्थिर तथा एक क्षारक युग्म (एक प्यूरीन + एक पिरीमिडीन) की चौड़ाई के बराबर होती है। यह चौड़ाई अर्थात् द्विकुण्डली का व्यास डायमीटर 2 nm नैनोमीटर होता है।",
+  "phrases": []
+ },
+ {
+  "seg_id": 7,
+  "duration": 13.0,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "बस इतना याद रखो DNA की width हमेशा constant रहती है, क्योंकि हर base pair में एक purine और एक पिरीमिडीन होता है। तो बच्चों, बस ये number याद रखना DNA का व्यास 2 nm होता है",
+  "phrases": []
+ },
+ {
+  "seg_id": 8,
+  "duration": 9.22,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "चलो, यहाँ तक हो गया आगे बढ़ते हैं अब एक पूर्ण मोड़ वाले point पर आते हैं, इसे भी exam में exact लिखना।",
+  "phrases": [
+   {
+    "text": "चलो, यहाँ तक हो गया आगे बढ़ते हैं",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 3.02
+   },
+   {
+    "text": "अब एक पूर्ण मोड़ वाले point पर आते हैं,",
+    "golden": null,
+    "t_in": 3.02,
+    "t_out": 4.4
+   },
+   {
+    "text": "इसे भी exam में exact लिखना।",
+    "golden": null,
+    "t_in": 4.4,
+    "t_out": 9.22
+   }
+  ]
+ },
+ {
+  "seg_id": 9,
+  "duration": 18.88,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "DNA की द्विकुंडली में एक पूरा घुमाव 3.4 nm का होता है। एक पूरे घुमाव में 10 क्षारक युग्म (base pairs) पाए जाते हैं। DNA की चौड़ाई लगभग 2 nm होती है। और इसे याद रखने की trick - DNA की चौड़ाई 2 nm,",
+  "phrases": []
+ },
+ {
+  "seg_id": 10,
+  "duration": 0.35,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "captions": "off",
+  "voiceover": "एक पूरा घुमाव 3.4 nm और 10 क्षारक युग्म।",
+  "phrases": []
+ },
+ {
+  "seg_id": 11,
+  "duration": 12.05,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "तो बच्चों अभी भी एक और number बचा है 0.34 nm, और ये 3.4 nm वाला नहीं है। यहाँ भी बच्चे गड़बड़ करते हैं। Part three में 0.34 nm,",
+  "phrases": [
+   {
+    "text": "तो बच्चों अभी भी एक और number बचा है 0.34 nm,",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 3.35
+   },
+   {
+    "text": "और ये 3.4 nm वाला नहीं है।",
+    "golden": null,
+    "t_in": 3.35,
+    "t_out": 6.97
+   },
+   {
+    "text": "यहाँ भी बच्चे गड़बड़ करते हैं।",
+    "golden": null,
+    "t_in": 6.97,
+    "t_out": 9.31
+   },
+   {
+    "text": "Part three में 0.34 nm,",
+    "golden": null,
+    "t_in": 9.31,
+    "t_out": 12.05
+   }
+  ]
+ },
+ {
+  "seg_id": 12,
+  "duration": 7.9,
+  "type": "TEXT_ONLY",
+  "timing": "transcript",
+  "labels": [],
+  "voiceover": "complementary strands और DNA को stability देने वाले hydrogen bonds वाला हिस्सा करेंगे। तो part three जरूर देखना",
+  "phrases": [
+   {
+    "text": "complementary strands और DNA को stability देने वाले hydrogen bonds वाला हिस्सा करेंगे।",
+    "golden": null,
+    "t_in": 0.0,
+    "t_out": 5.92
+   },
+   {
+    "text": "तो part three जरूर देखना",
+    "golden": null,
+    "t_in": 5.92,
+    "t_out": 7.9
+   }
+  ]
+ }
+]
