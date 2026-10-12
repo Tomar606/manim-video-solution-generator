@@ -1,0 +1,77 @@
+“संक्रमण तत्व किसे कहते हैं? इनका इलेक्ट्रॉनिक विन्यास लिखिए। ये धात्विक गुण प्रदर्शित करते हैं, क्यों?”
+Part 1
+MP Board कक्षा 12वीं के बच्चों!
+आज का सवाल है— “संक्रमण तत्व किसे कहते हैं? इनका इलेक्ट्रॉनिक विन्यास लिखिए। ये धात्विक गुण प्रदर्शित करते हैं, क्यों?”
+ये सवाल important है, क्योंकि इसमें definition, electronic configuration और metallic nature का reason तीनों पूछे गए हैं। तो इसे step by step समझते हैं।
+सबसे पहले जानते हैं कि संक्रमण तत्व किसे कहते हैं।
+वे तत्व जिनके परमाणु अथवा साधारण आयनों के electronic configuration में भीतरी d-कक्षक अपूर्ण रूप से भरे होते हैं, उन्हें संक्रमण तत्व कहते हैं।
+आसान भाषा में कहें, तो जिन elements में d-orbital partially filled रहता है, वे transition elements कहलाते हैं।
+ये elements periodic table में group two और group thirteen के बीच पाए जाते हैं।
+इनके कुछ examples हैं—
+On Screen:
+Fe, Ni, Co
+“F e, N i और C o।”
+अब समझते हैं इनका general electronic configuration।
+On Screen:
+(n−1)¹⁻¹⁰ ns¹⁻²
+“Open bracket n minus one close bracket की power one to ten, n s की power one to two।”
+इसका मतलब है कि n minus one वाली shell के d-subshell में one से ten तक electrons हो सकते हैं और outermost n s orbital में generally one या two electrons होते हैं।
+अब question का अगला हिस्सा है— ये धात्विक गुण क्यों प्रदर्शित करते हैं?
+किसी element का metallic nature इस बात पर depend करता है कि वह अपने atom से one या more electrons lose करके positive ion, यानी cation, कितनी आसानी से बना सकता है।
+Transition elements की outermost shell में generally one या two electrons होते हैं।
+ये electrons relatively आसानी से बाहर निकल सकते हैं, क्योंकि transition elements की ionisation energy comparatively low होती है।
+इसलिए ये आसानी से electrons lose करके positive ions बनाते हैं।
+और इसी कारण transition elements metallic nature यानी धात्विक गुण प्रदर्शित करते हैं।
+तो Part 1 में हमने तीन important चीजें समझ लीं—
+transition elements की definition, उनका general electronic configuration और metallic nature का reason।
+लेकिन इस question में एक और बड़ा हिस्सा है— संक्रमण तत्वों के चार अभिलाक्षणिक गुण।
+इन properties को सिर्फ नाम से नहीं, बल्कि उनके पीछे का reason समझकर याद करेंगे, ताकि exam में answer properly लिखा जा सके।
+ये चारों characteristic properties हम Part 2 में समझेंगे।
+
+
+
+
+
+
+
+
+प्रश्न:
+“संक्रमण तत्वों का सामान्य इलेक्ट्रॉनिक विन्यास लिखिए एवं संक्रमण तत्वों के कोई चार अभिलाक्षणिक गुणों को समझाइए।”
+Part 2
+MP Board कक्षा 12वीं के बच्चों!
+Part 1 में हमने समझा था कि जिन elements के atoms या सामान्य ions में भीतरी d-कक्षक अपूर्ण रूप से भरे होते हैं, उन्हें संक्रमण तत्व कहते हैं।
+हमने इनके examples Fe, Ni और Co देखे थे और general electronic configuration भी समझा था—
+On Screen:
+(n−1)¹⁻¹⁰ ns¹⁻²
+“Open bracket n minus one close bracket की power one to ten, n s की power one to two।”
+साथ ही हमने ये भी समझा था कि outermost shell में one या two electrons होने और comparatively low ionisation energy के कारण ये आसानी से electrons lose करते हैं, इसलिए metallic nature दिखाते हैं।
+अब question का अगला important हिस्सा है— संक्रमण तत्वों के चार अभिलाक्षणिक गुण।
+तो चलो, इन्हें एक-एक करके समझते हैं।
+पहला — परिवर्ती ऑक्सीकरण अवस्थाएँ
+Transition elements की एक important property है कि ये एक से अधिक oxidation states प्रदर्शित कर सकते हैं।
+ऐसा इसलिए होता है क्योंकि इनके n s और (n minus one) d orbitals की energy में बहुत अधिक difference नहीं होता।
+इसलिए bonding के समय इन दोनों orbitals के electrons participate कर सकते हैं और अलग-अलग oxidation states बन सकते हैं।
+दूसरा — रंगीन आयन और यौगिक
+कई transition elements के ions और compounds रंगीन होते हैं।
+इसका मुख्य कारण इनके partially filled d-orbitals होते हैं।
+जब d-orbital का electron एक energy level से दूसरे energy level पर जाता है, तो energy का absorption होता है। इस process को d-d transition कहते हैं।
+इसी कारण कई transition metal ions के compounds coloured दिखाई देते हैं।
+तीसरा — संकुल यौगिक बनाने की प्रवृत्ति
+Transition elements की एक और important property है कि ये complex या coordination compounds आसानी से बनाते हैं।
+इनके ions छोटे होते हैं और इनके पास vacant orbitals भी उपलब्ध हो सकते हैं। इसलिए ये दूसरे ions या molecules के साथ coordinate bonds बनाकर complex compounds बना सकते हैं।
+चौथा — उत्प्रेरकीय गुण
+कई transition elements और उनके compounds catalyst की तरह काम करते हैं।
+इसका एक कारण इनकी variable oxidation states हैं।
+ये reaction के दौरान reactants के साथ intermediate compounds बना सकते हैं और reaction के लिए एक alternate pathway उपलब्ध करा सकते हैं, जिससे reaction की rate बढ़ सकती है।
+तो exam में अगर पूछा जाए— “संक्रमण तत्वों के कोई चार अभिलाक्षणिक गुण समझाइए”, तो इन चारों को अच्छे से reason के साथ लिख सकते हो।
+अब पूरे question को एक बार final revision से पक्का कर लेते हैं।
+Transition elements वे elements हैं जिनके atoms या सामान्य ions में भीतरी d-कक्षक partially filled होते हैं।
+इनका general electronic configuration है—
+On Screen:
+(n−1)¹⁻¹⁰ ns¹⁻²
+“Open bracket n minus one close bracket की power one to ten, n s की power one to two।”
+ये metallic nature प्रदर्शित करते हैं क्योंकि इनके outermost shell में one या two electrons होते हैं, जिन्हें ये relatively आसानी से lose कर सकते हैं।
+और इनके चार important characteristic properties हैं—
+परिवर्ती oxidation states, coloured ions और compounds, complex compounds बनाने की प्रवृत्ति और catalytic properties।
+बस, अब संक्रमण तत्वों का ये पूरा question concept के साथ clear है।
+अब इसका exact answer exam में किस तरह लिखना है, वो आपको Notes button पर click करके मिल जाएगा। ऐसे ही important Chemistry questions को concept के साथ तैयार करते जाओ, ताकि exam में answer लिखते समय कोई confusion न रहे।

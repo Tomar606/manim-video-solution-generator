@@ -1,0 +1,107 @@
+आन्तरिक संक्रमण तत्व क्या होते हैं ?
+अथवा, अन्तर संक्रमण तत्व क्या है ? दिये गये निम्न परमाणु संख्याओं में से अन्तर संक्रमण तत्वों की परमाणु संख्या का निर्धारण कीजिए- 
+MP Board कक्षा 12वीं के बच्चों!
+आज का question बहुत important है, क्योंकि इसमें आपसे आंतरिक संक्रमण तत्वों की definition, electronic configuration और दिए गए atomic numbers में से सही elements की पहचान पूछी गई है।
+प्रश्न:
+“आन्तरिक संक्रमण तत्व क्या होते हैं?
+अथवा, अन्तर संक्रमण तत्व क्या है?
+दिये गये निम्न परमाणु संख्याओं में से अन्तर संक्रमण तत्वों की परमाणु संख्या का निर्धारण कीजिए—
+25, 59, 74, 95, 102, 04।”
+चलिए इसे step by step समझते हैं।
+Part 1 — आंतरिक संक्रमण तत्व क्या होते हैं?
+सबसे पहले समझते हैं कि आंतरिक संक्रमण तत्व, यानी Inner Transition Elements, किसे कहते हैं।
+वे तत्व जिनमें अंतिम electron, बाहरीतम कोश से दो कोश अंदर, अर्थात n minus two shell के f subshell में प्रवेश करता है, उन्हें आंतरिक संक्रमण तत्व कहते हैं।
+On Screen:
+अंतिम electron → (n−2)f orbital
+“अंतिम electron, open bracket n minus two close bracket f orbital में प्रवेश करता है।”
+इसी वजह से इन्हें f-block elements भी कहा जाता है।
+On Screen:
+Inner Transition Elements = f-block Elements
+“Inner transition elements are equal to f-block elements.”
+इन elements में अंतिम electron four f या five f subshell में प्रवेश करता है।
+On Screen:
+Lanthanides → 4f filling
+Actinides → 5f filling
+“Lanthanides में four f subshell में filling होती है, और actinides में five f subshell में filling होती है।”
+इनका सामान्य electronic configuration इस प्रकार होता है—
+On Screen:
+(n−2)f¹⁻¹⁴ (n−1)d⁰⁻¹ ns²
+“Open bracket n minus two close bracket f की power one to fourteen, open bracket n minus one close bracket d की power zero to one, n s square।”
+अब इन elements को दो मुख्य series में बाँटा जाता है।
+On Screen:
+1. Lanthanide series
+2. Actinide series
+“Number one, lanthanide series. Number two, actinide series।”
+पहली है Lanthanide series।
+Lanthanum की atomic number 57 है। इसके बाद आने वाले fourteen elements, यानी Cerium से Lutetium तक, lanthanides कहलाते हैं।
+On Screen:
+La₅₇ → Ce₅₈ to Lu₇₁
+“L A, atomic number fifty-seven, के बाद Cerium, atomic number fifty-eight, से Lutetium, atomic number seventy-one, तक के fourteen elements lanthanides कहलाते हैं।”
+दूसरी है Actinide series।
+Actinium की atomic number 89 है। इसके बाद आने वाले fourteen elements, यानी Thorium से Lawrencium तक, actinides कहलाते हैं।
+On Screen:
+Ac₈₉ → Th₉₀ to Lr₁₀₃
+“A C, atomic number eighty-nine, के बाद Thorium, atomic number ninety, से Lawrencium, atomic number one hundred three, तक के fourteen elements actinides कहलाते हैं।”
+तो यहाँ एक बात बहुत clearly याद रखिए—
+On Screen:
+Lanthanides → 4f series → 58–71
+Actinides → 5f series → 90–103
+“Lanthanides, four f series के elements हैं, जिनकी atomic numbers fifty-eight to seventy-one होती हैं। और actinides, five f series के elements हैं, जिनकी atomic numbers ninety to one hundred three होती हैं।”
+अब definition और classification clear हो गया।
+लेकिन question में दिए गए atomic numbers में से कौन-कौन से inner transition elements हैं, ये identify करना बाकी है।
+इसे अब Part 2 में check करते हैं।
+________________
+
+
+Part 2 — दिए गए Atomic Numbers की पहचान
+तो बच्चों, Part 1 में हमने समझा कि जिन elements में अंतिम electron n minus two f subshell में प्रवेश करता है, वे inner transition elements कहलाते हैं।
+और इनके लिए हमें दो ranges याद रखनी हैं—
+On Screen:
+Lanthanides → 58–71
+Actinides → 90–103
+“Lanthanides की atomic number range fifty-eight to seventy-one है, और actinides की atomic number range ninety to one hundred three है।”
+अब दिए गए numbers को एक-एक करके check करते हैं।
+सबसे पहले है 25।
+On Screen:
+25 ❌
+“Twenty-five, inner transition element नहीं है, क्योंकि यह f-block में नहीं आता।”
+अब देखते हैं 59।
+On Screen:
+59 → Lanthanide → ✅
+“Fifty-nine, lanthanide series में आता है, क्योंकि यह fifty-eight to seventy-one की range में है। इसलिए fifty-nine एक inner transition element है।”
+अब अगला है 74।
+On Screen:
+74 ❌
+“Seventy-four, inner transition element नहीं है, क्योंकि यह f-block की range में नहीं आता।”
+अब आता है 95।
+On Screen:
+95 → Actinide → ✅
+“Ninety-five, actinide series में आता है, क्योंकि यह ninety to one hundred three की range में है। इसलिए ninety-five एक inner transition element है।”
+अब देखते हैं 102।
+On Screen:
+102 → Actinide → ✅
+“One hundred two, actinide series में आता है। इसलिए one hundred two भी एक inner transition element है।”
+और आखिर में दिया है 04, अर्थात atomic number 4।
+On Screen:
+4 ❌
+“Atomic number four, inner transition element नहीं है, क्योंकि यह f-block element नहीं है।”
+अब पूरे question का final answer देख लेते हैं।
+On Screen:
+25 ❌
+59 ✅
+74 ❌
+95 ✅
+102 ✅
+4 ❌
+“Twenty-five, not an inner transition element. Fifty-nine, inner transition element. Seventy-four, not an inner transition element. Ninety-five, inner transition element. One hundred two, inner transition element. And four, not an inner transition element।”
+तो दिए गए atomic numbers में 59, 95 और 102 आंतरिक संक्रमण तत्वों की atomic numbers हैं।
+On Screen:
+Final Answer: 59, 95 और 102
+“Final answer है—fifty-nine, ninety-five और one hundred two।”
+तो बच्चों, इस question को solve करने के लिए बस दो ranges याद रखिए—
+On Screen:
+Lanthanides → 58–71
+Actinides → 90–103
+“Lanthanides की range fifty-eight to seventy-one, और actinides की range ninety to one hundred three।”
+बस इन दो ranges की मदद से आप दिए गए atomic numbers में से inner transition elements को तुरंत identify कर सकते हैं।
+अब इसका exact answer exam में किस तरह लिखना है, वो आपको Notes button पर click करके मिल जाएगा।

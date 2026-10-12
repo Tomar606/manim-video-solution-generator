@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Two panels, one experiment each. A tube shows the reactant concentration,
+       a dial shows the quantity being watched. Left: raising the concentration
+       swings the RATE dial. Right: raising it leaves the k dial where it was,
+       locked. The only difference between the panels is that outcome.
+       No text elements: every word comes from the spec. -->
+  <g id="divider" data-optional>
+    <line x1="540" y1="84" x2="540" y2="450" stroke="#DCE6EE" stroke-opacity="0.35" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <circle id="badge" data-optional cx="540" cy="42" r="28" fill="#0B1D24" stroke="#E8C25A" stroke-width="6"/>
+
+  <!-- ===== left: rate of reaction ===== -->
+  <rect id="tube_l" data-optional x="60" y="120" width="60" height="280" rx="16"
+        fill="#0B1D24" fill-opacity="0.5" stroke="#DCE6EE" stroke-width="6"/>
+  <rect id="fill_low_l" data-optional x="67" y="330" width="46" height="63" rx="10"
+        fill="#5FA3CF"/>
+  <rect id="fill_high_l" data-optional x="67" y="170" width="46" height="223" rx="10"
+        fill="#5FA3CF"/>
+  <g id="link_l" data-optional>
+    <line x1="138" y1="262" x2="200" y2="262" stroke="#E8C25A" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <polygon id="link_l_head" data-optional points="228,262 200,248 200,276" fill="#E8C25A"/>
+  <g id="gauge_l" data-optional>
+    <path d="M250,330 A110,110 0 0 1 470,330" fill="none" stroke="#DCE6EE" stroke-width="8" stroke-linecap="round"/>
+    <path d="M250,330 A110,110 0 0 1 305,234.7" fill="none" stroke="#78C0F0" stroke-width="14" stroke-linecap="butt"/>
+    <path d="M415,234.7 A110,110 0 0 1 470,330" fill="none" stroke="#FF5A5A" stroke-width="14" stroke-linecap="butt"/>
+  </g>
+  <line id="needle_low_l" data-optional x1="360" y1="330" x2="283" y2="286"
+        stroke="#F2F2F2" stroke-width="9" stroke-linecap="round"/>
+  <line id="needle_high_l" data-optional x1="360" y1="330" x2="437" y2="274"
+        stroke="#F2F2F2" stroke-width="9" stroke-linecap="round"/>
+  <circle id="hub_l" data-optional cx="360" cy="330" r="15" fill="#F2F2F2"/>
+
+  <!-- ===== right: rate constant ===== -->
+  <rect id="tube_r" data-optional x="580" y="120" width="60" height="280" rx="16"
+        fill="#0B1D24" fill-opacity="0.5" stroke="#DCE6EE" stroke-width="6"/>
+  <rect id="fill_low_r" data-optional x="587" y="330" width="46" height="63" rx="10"
+        fill="#5FA3CF"/>
+  <rect id="fill_high_r" data-optional x="587" y="170" width="46" height="223" rx="10"
+        fill="#5FA3CF"/>
+  <g id="link_r" data-optional>
+    <line x1="658" y1="262" x2="746" y2="262" style="stroke:#DCE6EE;stroke-opacity:0.6" stroke-width="7" stroke-linecap="round" stroke-dasharray="4 16"/>
+  </g>
+  <g id="cross_r" data-optional>
+    <line x1="686" y1="238" x2="718" y2="286" stroke="#FF5A5A" stroke-width="9" stroke-linecap="round"/>
+    <line x1="718" y1="238" x2="686" y2="286" stroke="#FF5A5A" stroke-width="9" stroke-linecap="round"/>
+  </g>
+  <g id="gauge_r" data-optional>
+    <path d="M770,330 A110,110 0 0 1 990,330" fill="none" stroke="#DCE6EE" stroke-width="8" stroke-linecap="round"/>
+    <path d="M770,330 A110,110 0 0 1 825,234.7" fill="none" stroke="#78C0F0" stroke-width="14" stroke-linecap="butt"/>
+    <path d="M935,234.7 A110,110 0 0 1 990,330" fill="none" stroke="#FF5A5A" stroke-width="14" stroke-linecap="butt"/>
+  </g>
+  <line id="needle_r" data-optional x1="880" y1="330" x2="880" y2="240"
+        stroke="#E8C25A" stroke-width="9" stroke-linecap="round"/>
+  <circle id="hub_r" data-optional cx="880" cy="330" r="15" fill="#E8C25A"/>
+  <!-- the lock: the needle cannot move -->
+  <g id="lock_r" data-optional>
+    <path d="M866,382 L866,370 A14,14 0 0 1 894,370 L894,382" fill="none" stroke="#E8C25A" stroke-width="6"/>
+    <rect x="857" y="380" width="46" height="32" rx="7" fill="#E8C25A"/>
+  </g>
+</svg>

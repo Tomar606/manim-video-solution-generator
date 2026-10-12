@@ -1,7 +1,14 @@
 """Key the presenter onto the Manim background and write the final video.
 
     python tools/composite.py bg.mp4 avatar.mp4 key.json out.mp4 \
-        [windows.json] [presenter.json] [clips_part1.json]
+        [windows.json] [presenter.json] [clips_part1.json] \
+        [big.json] [crop.json] [card.json] [layout.json]
+
+`layout.json` states the THEME's geometry so the presenter can be framed to it:
+`{"busy_w": 600, "floor": 1240}` — how wide he is while content is on the stage,
+and the row his head must not rise above (the caption band's bottom edge, plus
+clearance). Given both, he is pushed in on and cut off at the frame's bottom
+edge instead of being shrunk. Omit it and the framing is exactly what it was.
 
 `key.json` comes from tools/calibrate_key.py. `windows.json` is the optional
 output of tools/avatar_windows.py: the times when Manim content sits behind the
@@ -123,6 +130,30 @@ VEO_FADE = 0.30                    # softens the two cuts; cheap, unlike a blend
 DEFAULT_VEO_LAYOUT = "panel"
 
 
+def _coalesce(windows, eps=0.001):
+    """Merge spans that touch or overlap. TWO TOUCHING WINDOWS ARE ONE STATE.
+
+    Built separately they are not. At a shared boundary the outgoing window's
+    closing ease and the incoming window's opening ease are each exactly
+    half-done, `max` of the two is 0.5, and the presenter swells half-way to
+    his OTHER size and drops back inside a second — a twitch at a moment when
+    nothing about the frame has changed.
+
+    BIO-C5-LA-01 part 1 did it at 24.96s, the seam between two adjacent shrink
+    windows: 273px wide at 24.4, 443px at the seam, 289px again by 25.5. Every
+    touching pair in every part had one. The windows come from a segment list,
+    and consecutive segments share a boundary by construction, so this is the
+    normal case rather than a corner one.
+    """
+    out = []
+    for a, b in sorted((float(a), float(b)) for a, b in windows):
+        if out and a <= out[-1][1] + eps:
+            out[-1][1] = max(out[-1][1], b)
+        else:
+            out.append([a, b])
+    return out
+
+
 def _ease_expr(windows, var="t") -> str:
     """0 outside every window, 1 inside, easing across EASE seconds at each edge.
 
@@ -133,6 +164,7 @@ def _ease_expr(windows, var="t") -> str:
     while overlay uses `t`. Passing `t` to zoompan makes the expression evaluate
     to a constant, and the resize becomes the hard cut this exists to avoid.
     """
+    windows = _coalesce(windows)
     h = EASE / 2
 
     def one(a, b):
@@ -280,7 +312,7 @@ def _inputs(clips):
 
 
 def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
-              big=None, crop=None, card=None):
+              big=None, crop=None, card=None, layout=None):
     k = (f"hsvkey=hue={key['hue']}:sat={key['sat']}:val=%s:"
          f"similarity={key['sim']}:blend=0.05,format=rgba,alphaextract")
     alpha = ("[a1][a2]blend=all_mode=darken,dilation,dilation,erosion,erosion,"
@@ -365,8 +397,21 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
     dx_src = crop_cx - body_cx                       # source px to shift right
     if not crop:
         print("  ! no measured crop — legacy window, limbs may clip")
+    # HOLD HIS LAST FRAME TO THE END OF THE BODY.
+    # The render is laid out on the 30fps grid and rounded UP so it is never
+    # shorter than the audio, so it outlasts the 25fps clip by a frame or two;
+    # and the 25->30 conversion drops the clip's last picture early. With
+    # `eof_action=pass` he simply vanished for those frames - PHY-C1-SA-01 lost
+    # him at 99.44s of a 99.50s body - and answer_outro.py then froze THAT
+    # frame and dissolved it into the answer page: a bare plate with the last
+    # caption left hanging over the incoming page. Only a SHORT shortfall is
+    # filled; a background that deliberately runs on past him (an end card
+    # inside the body) still lets him go.
+    tail = _length(bg) - _length(avatar)
+    hold = (f"tpad=stop_mode=clone:stop_duration={tail + 0.2:.3f},"
+            if 0 < tail <= 0.6 else "")
     head = (veo_fc +
-            f"[1:v]fps={FPS},crop={cw}:{ch}:{cx}:{cy},format=rgba,split=3[c][d1][d2];"
+            f"[1:v]fps={FPS},{hold}crop={cw}:{ch}:{cx}:{cy},format=rgba,split=3[c][d1][d2];"
             f"[d1]{k % key['v1']}[a1];[d2]{k % key['v2']}[a2];{alpha}{hide}[al];"
             f"[c]despill=type=green:mix=0.7:expand=0.5[cc];")
 
@@ -419,7 +464,8 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
     # avatar at the LARGEST zoom used, or his legs are sliced off mid-torso while
     # the background behind him still reaches the bottom edge. That is what a
     # canvas sized for the smallest state produced.
-    max_ratio = max(FULL_W_C, BIG_W_C, CARD_W_C, SMALL_W_C) / max(SMALL_W_C, 1)
+    max_ratio = max(FULL_W_C, BIG_W_C, CARD_W_C, SMALL_W_C,
+                    (layout or {}).get("busy_w", 0)) / max(SMALL_W_C, 1)
     canvas_w = int(max(CANVAS_W, base_w * max_ratio + 24)) // 2 * 2
     canvas_h = int(max(CANVAS_H, base_h * max_ratio + 24)) // 2 * 2
     # Assert it rather than trust it. The crop always runs to the bottom of the
@@ -442,31 +488,91 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
     # that, so forcing the small size just opens a band of empty plate between
     # the divider and his head. Compared against the paper's real bottom edge
     # (its shadow included), not against the seam.
-    # A PANEL GETS ITS OWN SIZE, derived from where the paper actually ends.
     #
     # Reusing SMALL here was the obvious move and it is wrong: SMALL is tuned
     # for the older layout where Manim content runs down to 60% of frame, so
     # under a 4:3 panel that ends at 49% it cuts the presenter roughly in half
     # to solve an overlap of a few pixels, and opens a band of empty plate
-    # between the divider and his head. So: the widest he can be while his head
-    # still clears the paper's shadow, never wider than his working size.
+    # between the divider and his head.
+    # HOW BIG HE IS WHILE CONTENT IS UP, and how much of him is cut off at the
+    # bottom to get there.
+    #
+    # His height is not free: the crop runs to the bottom of the source, so his
+    # feet land on the frame's last row and the ONLY way to raise his head is
+    # to make him smaller. That is why the shrink size ended up at 340px — 31%
+    # of frame width against the 56% the reference stills use — and why he
+    # reads as a doll standing under the diagram.
+    #
+    # Cutting rows off the BOTTOM breaks that link. Take `cut` rows away below
+    # his waist and the same head position buys a much wider picture: 340px
+    # becomes 600px at a floor of 1240. It is the ordinary television answer —
+    # when a talking head has to share the frame, you push in on him, you do
+    # not shrink him.
+    #
+    # `floor` is the theme's, not a guess: the row its caption band ends at,
+    # plus clearance. Passing it is what turns this on, so a project whose
+    # theme still puts captions at 1178 keeps the framing it shipped with.
+    from tools.avatar_crop import MARGIN as _MARGIN   # top of head below the pad
+    busy_w, busy_cut = SMALL_W_C, 0.0
+    floor = (layout or {}).get("floor")
+    if floor:
+        busy_w = capped(int((layout or {}).get("busy_w", SMALL_W_C)), "busy_w")
+
+    def cut_for(width_px, head_floor):
+        """Rows off the canvas bottom that put his head exactly on `head_floor`.
+
+        Solved, not tuned: on screen he is `(base_h - cut) * width/SMALL` tall
+        with his feet on the last row, and his hair starts MARGIN*scale below
+        the padded top.
+        """
+        sc = (width_px * pad_k) / max(cw, 1)
+        visible = (FRAME_H - head_floor) + _MARGIN * sc
+        return max(0.0, base_h - visible * SMALL_W_C / max(width_px, 1))
+
     panel_spans, panel_w = [], FULL_W_C
     panel_clips = [c for c in (clips or [])
                    if c.get("layout", DEFAULT_VEO_LAYOUT) == "panel"]
-    if panel_clips:
-        floor = max(sum(c["tear_band"]) for c in panel_clips) + PL.AVATAR_CLEAR
-        if full_y < floor:
+    if panel_clips and floor:
+        # ONE BUSY SIZE. The panel used to get its own, derived from the
+        # paper's bottom edge — but the caption band now sits BELOW the paper,
+        # so the caption is the lowest thing on screen in every busy frame and
+        # the floor already covers this case. Check it rather than assume it.
+        paper = max(sum(c["tear_band"]) for c in panel_clips) + PL.AVATAR_CLEAR
+        # NOT `head` — that name is the filter-chain prefix further down
+        busy_head = FRAME_H - (base_h - cut_for(busy_w, floor)) * busy_w / SMALL_W_C \
+            + _MARGIN * (busy_w * pad_k) / max(cw, 1)
+        if busy_head < paper:
+            raise SystemExit(f"busy_w {busy_w}px puts his head at {busy_head:.0f} "
+                             f"and the paper needs {paper} — raise the floor or "
+                             f"narrow busy_w")
+        print(f"  panel: one busy size, {busy_w}px (head {busy_head:.0f}), "
+              f"clearing the paper at {paper} by {busy_head - paper:.0f}px")
+    elif panel_clips:
+        # LEGACY, for a theme that states no floor: the panel gets its own size,
+        # derived from where the paper actually ends — the widest he can be with
+        # his head still clear of the paper's shadow, never wider than his
+        # working size.
+        paper = max(sum(c["tear_band"]) for c in panel_clips) + PL.AVATAR_CLEAR
+        if full_y < paper:
             w = FULL_W_C
-            while w > SMALL_W_C and top_for(w) < floor:
+            while w > SMALL_W_C and top_for(w) < paper:
                 w -= 2
             panel_w = w
             panel_spans = [[float(c["start"]), float(c["end"])] for c in panel_clips]
-            print(f"  panel: his head reaches {full_y} and the paper needs {floor} "
+            print(f"  panel: his head reaches {full_y} and the paper needs {paper} "
                   f"— {len(panel_spans)} window(s) at {panel_w}px "
                   f"(head {top_for(panel_w)}), not the {SMALL_W_C}px shrink size")
         else:
             print(f"  panel clears the presenter at his working size "
-                  f"(head {full_y}, paper needs {floor}) — no resize")
+                  f"(head {full_y}, paper needs {paper}) — no resize")
+    if floor:
+        busy_cut = cut_for(busy_w, floor)
+        _head = FRAME_H - (base_h - busy_cut) * busy_w / SMALL_W_C \
+            + _MARGIN * (busy_w * pad_k) / max(cw, 1)
+        print(f"  busy: {busy_w}px wide ({busy_w / PL.FRAME_W:.0%} of frame), "
+              f"head {_head:.0f} on a floor of {floor}, "
+              f"{busy_cut:.0f} of {base_h} canvas rows cut from the bottom "
+              f"({busy_cut / max(base_h, 1):.0%} of him)")
 
     if windows or big or card or panel_spans:
         # The size change RAMPS over EASE seconds — a true scale, per frame.
@@ -488,23 +594,42 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
         #
         # zoompan only zooms IN, so the canvas carries the presenter at his
         # SMALL size and zooms out to full when nothing is behind him.
-        ratio = (FULL_W_C * pad_k) / (SMALL_W_C * pad_k)
-        big_ratio = (BIG_W_C * pad_k) / (SMALL_W_C * pad_k)
         T = f"(on/{FPS})"                       # zoompan's only usable clock
-        ease_z = _ease_expr(windows, T) if windows else "0"
-        # three sizes on one curve: small inside a shrink window, full normally,
-        # big inside a `big` window. The two eases never overlap in practice —
-        # a shrink window means content is on the stage, a big window means it
-        # is empty — so adding them is safe.
-        bz = _ease_expr(big, T) if big else "0"
-        cz = _ease_expr(card, T) if card else "0"
-        card_ratio = (CARD_W_C * pad_k) / (SMALL_W_C * pad_k)
-        pz = _ease_expr(panel_spans, T) if panel_spans else "0"
-        panel_ratio = (panel_w * pad_k) / (SMALL_W_C * pad_k)
-        z = (f"1+{ratio - 1:.4f}*(1-({ease_z}))"
-             f"+{big_ratio - ratio:.4f}*({bz})"
-             f"+{card_ratio - ratio:.4f}*({cz})"
-             f"+{panel_ratio - ratio:.4f}*({pz})")
+        ease_z = _ease_expr(windows, T) if windows else None
+        bz = _ease_expr(big, T) if big else None
+        cz = _ease_expr(card, T) if card else None
+        pz = _ease_expr(panel_spans, T) if panel_spans else None
+
+        def _lerp(a, b, w):
+            """`a` when the weight is 0, `b` when it is 1, eased between."""
+            return f"({a}+(({b})-({a}))*({w}))"
+
+        # STATES ARE RESOLVED BY PRIORITY, NOT ADDED TOGETHER.
+        #
+        # They used to be summed as offsets from the default, on the reasoning
+        # that a shrink window and a grow window never overlap. Two of them DO:
+        # a panel span is always inside a shrink window, since a panel is
+        # content on the stage. Summing there gave
+        #   z = 1 + (panel_ratio - ratio) = 1 + (593 - 645)/340 = 0.85
+        # and zoompan cannot zoom below 1, so it clamped — the panel size was
+        # computed, printed, and then silently discarded, and the presenter
+        # played every generated clip at the 340px shrink size. Which is why he
+        # looked smallest exactly where the animation was.
+        #
+        # A lerp chain has no such failure: each state is its own ABSOLUTE
+        # zoom, and a state later in the list wins wherever its weight is 1.
+        # Both curves are driven off `on`, this filter's own frame counter, so
+        # size and crop cannot drift apart the way two clocks did.
+        states = [(ease_z, busy_w / SMALL_W_C, busy_cut),      # content up
+                  (pz, panel_w / SMALL_W_C, 0.0),              # legacy panel
+                  (bz, BIG_W_C / SMALL_W_C, 0.0),              # stage empty
+                  (cz, CARD_W_C / SMALL_W_C, 0.0)]             # under the card
+        z, cut = f"{FULL_W_C / SMALL_W_C:.4f}", "0"
+        for _w, _zk, _dk in states:
+            if _w is None:
+                continue
+            z = _lerp(z, f"{_zk:.4f}", _w)
+            cut = _lerp(cut, f"{_dk:.2f}", _w)
         # zoompan zooms about x=0,y=0 unless told otherwise, which walks the
         # presenter left as he scales — the off-centre drift the manager spotted.
         # Anchoring x to the canvas centre keeps him centred at every zoom level.
@@ -526,9 +651,15 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
         # level, using nothing but `zoom` itself. There is no second clock left
         # to drift against, so the overlay below can place this canvas with a
         # plain constant instead of a per-frame expression.
+        # `y` carries the bottom cut. Region bottom = ih - cut, so `cut` canvas
+        # rows below his waist are outside the magnified region and never
+        # reach the frame; what remains still lands on the canvas's last row,
+        # which is the frame's last row. His feet are cut by the FRAME EDGE,
+        # exactly as a camera push-in would cut them — no second clock, no
+        # per-frame overlay position, `zoom` and `cut` share `on`.
         pan = (f"pad={canvas_w}:{canvas_h}:(ow-iw)/2:(oh-ih):%s,"
                f"zoompan=z='{z}':d=1:s={canvas_w}x{canvas_h}:fps={FPS}"
-               f":x='iw/2-(iw/zoom/2)':y='ih-ih/zoom'")
+               f":x='iw/2-(iw/zoom/2)':y='ih-({cut})-ih/zoom'")
         fc = (head +
               f"[cc][al]alphamerge,split=2[colr][alph];"
               f"[colr]scale={int(SMALL_W_C * pad_k)}:-2:flags=lanczos,{pan % 'black@0'}[zc];"
@@ -553,7 +684,6 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
     # finished frame is unreliable here: a dark shirt on a dark plate reads as
     # background, which made the gate report a cut-off presenter on a video that
     # was correct. The geometry is exact and knowable.
-    from tools.avatar_crop import MARGIN as _M
     _geom = {"crop": [cw, ch, cx, crop_y], "pad_k": round(pad_k, 4),
              "canvas": [locals().get("canvas_w"), locals().get("canvas_h")], "dx_out": dx_out}
     # the CAPPED widths — the sidecar is what the gates read, so it has to
@@ -563,8 +693,17 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
         _sc = (_W * pad_k) / max(cw, 1)
         _top = FRAME_H - ch * _sc
         _geom[_n] = {"width": _W, "top": round(_top, 1),
-                     "head": round((_top + _M * _sc) / FRAME_H, 4),
+                     "head": round((_top + _MARGIN * _sc) / FRAME_H, 4),
                      "bottom": round(_top + ch * _sc, 1)}
+    if floor:
+        # the busy state is the only one with a cut, so it cannot be described
+        # by the width alone — the gates read this file, so it says both
+        _sc = (busy_w * pad_k) / max(cw, 1)
+        _top = FRAME_H - (base_h - busy_cut) * busy_w / SMALL_W_C
+        _geom["busy"] = {"width": busy_w, "cut": round(busy_cut, 1),
+                         "top": round(_top, 1), "floor": floor,
+                         "head": round((_top + _MARGIN * _sc) / FRAME_H, 4),
+                         "bottom": FRAME_H}
     try:
         Path(str(out) + ".geom.json").write_text(json.dumps(_geom, indent=1))
     except OSError:
@@ -602,6 +741,11 @@ def composite(bg, avatar, key, out, windows=None, presenter=None, clips=None,
            *_inputs(clips),
            "-filter_complex", fc, "-map", "[v]", "-map", "1:a",
            "-fps_mode", "cfr", "-r", str(FPS),
+           # libx264, measured against the M2's hardware encoder on 2026-09-21
+           # (CHE-C3-SA-04 part 1): x264 at these two threads encodes the part
+           # in 45s of the ~5 min a composite takes — the keying filters are the
+           # rest — and h264_videotoolbox saved 27s of it at SSIM 0.993 against
+           # x264's 0.998, in a file three times the size. Not worth it.
            "-c:v", "libx264", "-preset", "medium", "-crf", "19",
            "-threads", threads, "-x264-params", f"threads={threads}:lookahead-threads=1",
            "-pix_fmt", "yuv420p", "-af", "aresample=async=1:first_pts=0",
@@ -657,6 +801,14 @@ def load_clips(path, root=None):
     return out
 
 
+def _length(path) -> float:
+    """Container duration in seconds, from ffprobe."""
+    r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                        "-of", "csv=p=0", str(path)], capture_output=True, text=True,
+                       check=True)
+    return float(r.stdout.strip())
+
+
 def _dims(path):
     """(width, height) of a video, from ffprobe."""
     r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0",
@@ -702,5 +854,6 @@ if __name__ == "__main__":
         except Exception as e:                      # noqa: BLE001
             print(f"  ! crop measurement failed ({type(e).__name__}); legacy window")
     cardw = json.loads(Path(opt(10)).read_text()) if opt(10) else None
+    lay = json.loads(Path(opt(11)).read_text()) if opt(11) else None
     composite(bg, av, json.loads(Path(keyf).read_text()), out, wins, pres, clips,
-              big=bigw, crop=cbox, card=cardw)
+              big=bigw, crop=cbox, card=cardw, layout=lay)

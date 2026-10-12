@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- THE HIDDEN GENERATION. Three generations left to right, each as its
+       sex-chromosome pair in the same picture language as parts 1 and 2:
+       X blue, Y warm and shorter, disease band red, normal band white.
+
+       पिता (X^h Y, affected)  ->  पुत्री (X^H X^h, carrier, gold ring)
+       ->  her son (X^h Y, affected again, red glow on the band).
+
+       The arrows are RED because what travels along them is the h band:
+       father's X^h goes into the daughter, and the daughter's X^h comes out
+       in her son. Labels come from the spec, under each figure. -->
+  <style>
+    .ch-x  { fill:#246574; stroke:#78C0F0; stroke-width:7; stroke-linejoin:round }
+    .ch-y  { fill:#5A4632; stroke:#F0A860; stroke-width:7; stroke-linejoin:round }
+    .ch-yf { fill:#5A4632 }
+    .ch-bh { fill:#FF5A5A }
+    .ch-bn { fill:#F2F2F2 }
+    .ch-ring { fill:#E8C25A; fill-opacity:.08; stroke:#E8C25A; stroke-opacity:.8; stroke-width:6 }
+    .ch-glow { fill:none; stroke:#FF5A5A; stroke-width:6 }
+  </style>
+  <g id="ch_father" data-optional><g transform="translate(175 200)"><rect class="ch-x" x="-12" y="-70.0" width="24" height="140" rx="12" transform="rotate(22)"/><rect class="ch-x" x="-12" y="-70.0" width="24" height="140" rx="12" transform="rotate(-22)"/><rect class="ch-bh" x="-19" y="-52.0" width="38" height="17" rx="4" transform="rotate(22)"/></g><g transform="translate(260 214) scale(1.35)"><rect class="ch-y" x="-9.9" y="-40.9" width="19.8" height="42.9" rx="9.9" transform="rotate(32 0 -7.9)"/><rect class="ch-y" x="-9.9" y="-40.9" width="19.8" height="42.9" rx="9.9" transform="rotate(-32 0 -7.9)"/><rect class="ch-y" x="-9.9" y="-17.8" width="19.8" height="50.8" rx="9.9"/><rect class="ch-yf" x="-7" y="-15" width="14" height="45" rx="7"/></g><circle class="ch-glow" cx="191.3" cy="159.7" r="31"/></g>
+  <g id="ch_daughter" data-optional><ellipse class="ch-ring" cx="540" cy="200" rx="118" ry="104"/><g transform="translate(498 200)"><rect class="ch-x" x="-12" y="-70.0" width="24" height="140" rx="12" transform="rotate(22)"/><rect class="ch-x" x="-12" y="-70.0" width="24" height="140" rx="12" transform="rotate(-22)"/><rect class="ch-bn" x="-19" y="-52.0" width="38" height="17" rx="4" transform="rotate(22)"/></g><g transform="translate(582 200)"><rect class="ch-x" x="-12" y="-70.0" width="24" height="140" rx="12" transform="rotate(22)"/><rect class="ch-x" x="-12" y="-70.0" width="24" height="140" rx="12" transform="rotate(-22)"/><rect class="ch-bh" x="-19" y="-52.0" width="38" height="17" rx="4" transform="rotate(22)"/></g></g>
+  <g id="ch_son" data-optional><g transform="translate(855 200)"><rect class="ch-x" x="-12" y="-70.0" width="24" height="140" rx="12" transform="rotate(22)"/><rect class="ch-x" x="-12" y="-70.0" width="24" height="140" rx="12" transform="rotate(-22)"/><rect class="ch-bh" x="-19" y="-52.0" width="38" height="17" rx="4" transform="rotate(22)"/></g><g transform="translate(940 214) scale(1.35)"><rect class="ch-y" x="-9.9" y="-40.9" width="19.8" height="42.9" rx="9.9" transform="rotate(32 0 -7.9)"/><rect class="ch-y" x="-9.9" y="-40.9" width="19.8" height="42.9" rx="9.9" transform="rotate(-32 0 -7.9)"/><rect class="ch-y" x="-9.9" y="-17.8" width="19.8" height="50.8" rx="9.9"/><rect class="ch-yf" x="-7" y="-15" width="14" height="45" rx="7"/></g></g>
+  <g id="ch_glow" data-optional><circle class="ch-glow" cx="871.3" cy="159.7" r="31"/></g>
+  <g id="ch_ar1" data-optional><path d="M310 200 L402 200 L384 189 L402 200 L384 211" fill="none" stroke="#FF5A5A" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g id="ch_ar2" data-optional><path d="M678 200 L790 200 L772 189 L790 200 L772 211" fill="none" stroke="#FF5A5A" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+</svg>

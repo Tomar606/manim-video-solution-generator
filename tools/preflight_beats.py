@@ -204,10 +204,11 @@ def check(root: Path, batch: str = "") -> list[str]:
                 bad.append(f"p{part}: beats at {a} and {z} are {z-a} captions "
                            f"apart — the second wipes the first")
 
-        # the enlarged presenter must never reach the question card
+        # the enlarged presenter must never reach the question card —
+        # moot for a part that never shows one
         cw = root / f"biggrow_part{part}.json"
         cl = (meta.get("card_lines") or {}).get(part)
-        if cw.is_file() and cl is not None:
+        if cw.is_file() and cl is not None and part not in set(meta.get("no_card", [])):
             card_end = float(L[min(int(cl), len(L) - 1)]["start"])
             for a, _ in json.loads(cw.read_text(encoding="utf-8")):
                 if a < card_end:

@@ -35,6 +35,28 @@ time.
 Veo renders MANNER reliably. It knows what unzipping looks like, what a phage
 does, what a pond contains. Ask it for the verb; ask Manim for the number.
 
+OPTING OUT, EXPLICITLY
+----------------------
+The minimum is a default, not a law: someone may ask for a video with no
+generated clip at all (PHY-C1-SA-01: "dont add veo clips in it. only composite
+svg"). That is said IN THE ROUTE FILE, so the decision is written down where
+the gate reads it rather than being a gate somebody skipped:
+
+    {"no_veo": "<who asked, and why>", "beats": [ ...the usual beats... ]}
+
+With `no_veo` set, zero Veo beats passes and the reason is printed; a beat
+routed to Veo anyway is a contradiction and FAILS. A bare list keeps the old
+behaviour exactly.
+
+CHEMISTRY AND PHYSICS NEVER USE FLOW
+------------------------------------
+Standing rule from the user, 2026-09-17: "we dont have to use flow for chem
+and phy. we have to make all the animations using composite svg only!" So a
+route file under a `che-c…` or `phy-c…` video folder is SVG-only whatever it
+says: the Veo minimum does not apply and any Veo beat FAILS. The subject is
+read off the slug in the path, so no video has to remember to opt out.
+Biology keeps the Veo default.
+
 WHY THE DEFAULT IS VEO
 ----------------------
 Where a beat could go either way, it goes to Veo. Not because the drawing is
@@ -46,6 +68,7 @@ anyway — that is a choice someone should have to justify.
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -70,7 +93,8 @@ VEO_ROUTES = {"veo"}
 DRAWN_ROUTES = {"manim", "svg", "chip"}
 
 
-def check(beats: list[dict], *, explain: bool = False) -> list[str]:
+def check(beats: list[dict], *, explain: bool = False,
+          no_veo: str | None = None) -> list[str]:
     fails: list[str] = []
     warns: list[str] = []
     veo = [b for b in beats if b.get("route") in VEO_ROUTES]
@@ -127,8 +151,15 @@ def check(beats: list[dict], *, explain: bool = False) -> list[str]:
         if route in VEO_ROUTES and b.get("prompt"):
             try:
                 from src.veo_prompts import audit
+                # `checks` MUST travel with the prompt. This passed only prompt
+                # and negative, and audit() fails any spec whose checks are
+                # empty — so every Veo beat in every route file reported "no
+                # checks were written" while carrying five of them, and the
+                # gate could not go green for any video that generates a clip.
                 for line in audit({"prompt": b["prompt"],
-                                   "negative": b.get("negative", "")}):
+                                   "negative": b.get("negative", ""),
+                                   "checks": b.get("checks") or [],
+                                   "layout": b.get("layout", "plate")}):
                     fails.append(f"{slug}: {line}")
             except Exception as exc:                      # noqa: BLE001
                 warns.append(f"{slug}: prompt audit unavailable ({exc})")
@@ -138,7 +169,12 @@ def check(beats: list[dict], *, explain: bool = False) -> list[str]:
             why = ", ".join(sorted(marked)) or "no marked fact"
             print(f"  {tag} {slug:22s} {why}")
 
-    if len(veo) < MIN_VEO:
+    if no_veo:
+        for b in veo:
+            fails.append(f"{b.get('slug', '?')}: routed to Veo, but this video "
+                         f"declares no_veo ({no_veo})")
+        print(f"  note: no generated clips, by explicit instruction: {no_veo}")
+    elif len(veo) < MIN_VEO:
         fails.append(f"only {len(veo)} beat(s) routed to Veo; every video carries "
                      f"at least {MIN_VEO}. If nothing here can be generated, say "
                      f"so explicitly rather than letting it default to none")
@@ -150,12 +186,33 @@ def check(beats: list[dict], *, explain: bool = False) -> list[str]:
     return fails
 
 
+SVG_ONLY_SLUG = re.compile(r"^(che|phy)-c\d", re.IGNORECASE)
+SVG_ONLY_RULE = ("chemistry and physics are SVG-only, never Flow (standing rule "
+                 "from the user, 2026-09-17)")
+
+
+def svg_only_subject(path: Path) -> bool:
+    """True when the route file belongs to a chemistry or physics video."""
+    return any(SVG_ONLY_SLUG.match(part) for part in path.resolve().parts)
+
+
 def main() -> int:
     if len(sys.argv) < 2:
         sys.exit(__doc__)
     path = Path(sys.argv[1])
-    beats = json.loads(path.read_text())
-    fails = check(beats, explain="--explain" in sys.argv)
+    data = json.loads(path.read_text())
+    no_veo = None
+    if isinstance(data, dict):
+        no_veo = (data.get("no_veo") or "").strip() or None
+        if "no_veo" in data and not no_veo:
+            print("ROUTE GATE FAILED:\n  no_veo is set but gives no reason")
+            return 1
+        beats = data["beats"]
+    else:
+        beats = data
+    if svg_only_subject(path):
+        no_veo = SVG_ONLY_RULE + (f"; this video also says: {no_veo}" if no_veo else "")
+    fails = check(beats, explain="--explain" in sys.argv, no_veo=no_veo)
     if fails:
         print("ROUTE GATE FAILED:")
         for f in fails:

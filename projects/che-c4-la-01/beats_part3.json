@@ -1,22 +1,49 @@
 [
  {
-  "at": 6,
-  "type": "formula",
-  "build": "progressive",
-  "intent": "FORMULA",
-  "label": "अम्लीय फेरस सल्फेट के साथ",
-  "reason": "पहली अभिक्रिया — Fe²⁺ का Fe³⁺ में ऑक्सीकरण",
-  "tex": [
-   "K_2Cr_2O_7 + 4H_2SO_4 \\longrightarrow K_2SO_4 + Cr_2(SO_4)_3 + 4H_2O + 3[O]",
-   "Fe^{2+} \\longrightarrow Fe^{3+}"
-  ],
-  "reveal_at": [
-   7,
-   9
+  "at": 1,
+  "type": "flow",
+  "intent": "SUMMARY",
+  "reason": "पार्ट 2 की पूरी विधि का रीकैप — यही वो चीज़ है जो अभी 'समझ ली' बोली जा रही है, इसलिए एक साथ पूरी दिखे, पहली बार सीखने जैसी नहीं",
+  "items": [
+   "क्रोमाइट अयस्क",
+   "सोडियम क्रोमेट",
+   "सोडियम डाइक्रोमेट",
+   "पोटैशियम डाइक्रोमेट"
   ]
  },
  {
-  "at": 14,
+  "at": 6,
+  "type": "formula",
+  "intent": "FORMULA",
+  "label": "अम्लीय फेरस सल्फेट के साथ",
+  "reason": "पहला तथ्य — पूरा संतुलित समीकरण, अकेला और बड़ा",
+  "tex": [
+   "K_2Cr_2O_7 + 4H_2SO_4 \\longrightarrow K_2SO_4 + Cr_2(SO_4)_3 + 4H_2O + 3[O]"
+  ]
+ },
+ {
+  "at": 8,
+  "type": "formula",
+  "intent": "FORMULA",
+  "label": "अम्लीय फेरस सल्फेट के साथ",
+  "reason": "दूसरा तथ्य — नतीजा, पहले वाले समीकरण को हटाकर अकेला दिखे",
+  "tex": [
+   "Fe^{2+} \\longrightarrow Fe^{3+}"
+  ]
+ },
+ {
+  "at": 9,
+  "type": "formula",
+  "intent": "FORMULA",
+  "label": "अम्लीय फेरस सल्फेट के साथ",
+  "reason": "तीसरा तथ्य — नवजात ऑक्सीजन का तंत्र, अकेला दिखे; caption 10-14 KI का जल्दी ज़िक्र है, इसलिए t_out",
+  "tex": [
+   "[2FeSO_4 + H_2SO_4 + [O] \\longrightarrow Fe_2(SO_4)_3 + H_2O] \\times 3"
+  ],
+  "t_out": 10
+ },
+ {
+  "at": 15,
   "type": "formula",
   "build": "progressive",
   "intent": "FORMULA",
@@ -27,12 +54,12 @@
    "4K_2SO_4 + Cr_2(SO_4)_3 + 7H_2O + 3I_2"
   ],
   "reveal_at": [
-   15,
-   18
+   17,
+   19
   ]
  },
  {
-  "at": 19,
+  "at": 20,
   "type": "formula",
   "build": "progressive",
   "intent": "FORMULA",
@@ -43,12 +70,12 @@
    "K_2SO_4 + Cr_2(SO_4)_3 + 7H_2O + 3S"
   ],
   "reveal_at": [
-   20,
-   22
+   22,
+   24
   ]
  },
  {
-  "at": 23,
+  "at": 25,
   "type": "compare",
   "intent": "SUMMARY",
   "reason": "शिक्षक तीनों को एक पंक्ति में दोहरा रहा है — वही तुलना स्क्रीन पर",
@@ -67,6 +94,7 @@
     "$I_2$",
     "$S$"
    ]
-  ]
+  ],
+  "t_out": 29
  }
 ]

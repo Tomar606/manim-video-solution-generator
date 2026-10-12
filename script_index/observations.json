@@ -1,0 +1,277 @@
+{
+ "note": "Raw observations from the four cataloguing passes, unedited. RULES.md is the curated version.",
+ "observations": [
+  {
+   "group": 1,
+   "text": "The ON SCREEN marker is not one token. Across my 28 files it appears as 'ON SCREEN:' (159), 'On Screen:' (75) and 'On SCREEN' (2), sometimes with no colon, sometimes wrapped in square brackets INLINE inside a sentence ('[On Screen: वाष्पदाब बनाम तापमान का ग्राफ]'), and once opened on one line and closed three lines later. A parser must accept all of these; a generator should emit exactly one form."
+  },
+  {
+   "group": 1,
+   "text": "Part markers are equally unstable: '🎬 PART 1', 'PART 1', 'Part 1', '🎬 Part 1', 'PART 1 — <subtitle>', 'Part 1 — Script', and 'Part 1 Ending:'. 17 of 28 files are multi-part; the other 11 have no part marker at all and are one continuous script."
+  },
+  {
+   "group": 1,
+   "text": "The speaker tag varies too: 'शिक्षक:' (16 files), 'Ritesh Sir:' (1 file), none at all (11 files). Where it appears it is sometimes once per part and sometimes once per beat — in BIO-C2-SA-04 it is used as a beat separator, eight times in 96 lines."
+  },
+  {
+   "group": 1,
+   "text": "Three files carry live Google-Docs comment anchors ([a], [b] …) inside spoken lines, with the comment BODIES appended after the sign-off. CHE-C10-LA-01 has nine, all reading 'स्रोत: गाजर, दूध, अंडा, लीवर ऑयल / image lagana hai' — production TODOs, not narration. BIO-C1-LA-01's say 'heygen' and 'rework'. CHE-C2-LA-03's are reviewer questions ('tremasik kha hein??', 'judein'). All of this must be stripped before TTS and none of it should be generated."
+  },
+  {
+   "group": 1,
+   "text": "Spoken lines are full of digits, superscripts and symbols: '7 कोशिकीय और 8 केन्द्रकीय', '100 degree celsious', 'Tb > Tb⁰', '³²P', 'Iᴬ Iᴮ', 'F₂', '1 : 2 : 1', '+2', '³ᵟ²'. These scripts were written for a HUMAN presenter to read, so the repo's no-digits-in-spoken-lines rule was never applied to them. Anything generated in this style and sent to TTS will be read wrong. The corpus's own solution is visible in the Physics and numerical Chemistry files: write the symbols on screen and a separate words-only line for the voice."
+  },
+  {
+   "group": 1,
+   "text": "There are two incompatible conventions for speaking a formula and a script must pick one. (a) PHY-C2-NM-02 / PHY-C2-SA-01 put a literal 'स्पोकन:' label under the ON SCREEN block and transliterate everything into Devanagari ('वी बराबर एक बटा चार पाई एप्सिलॉन नॉट'). (b) Everything else uses an unlabelled quoted line mixing Devanagari connectives with Romanised English maths ('E one बराबर है one by four pi epsilon naught into q by r minus l whole square'). Both exist for the SAME derivation topic in two different files."
+  },
+  {
+   "group": 1,
+   "text": "Numbers on screen and numbers in the voice are two tracks. On screen: '25', '26', 'EAN = 26 − 2 + 12'. In the voice: 'twenty five', 'twenty six', 'EAN equals twenty-six minus two plus twelve'. Chemical formulae are spoken bracket by bracket ('Potassium four, open bracket Fe, open bracket C N, close bracket six, close bracket'). Devanagari number words appear only for small counts in ordinary prose ('तीन चीजें', 'बारहवीं')."
+  },
+  {
+   "group": 1,
+   "text": "Two of 28 scripts (CHE-C3-SA-05, PHY-C3-SA-01) have NO ON SCREEN blocks at all and BIO-C5-LA-02 has exactly one. They are not shorter or simpler than the others — they are just unfinished on the visual side. A generator should treat the absence of screen text on a difference/process question as a defect, not a style."
+  },
+  {
+   "group": 1,
+   "text": "Screen text is not caption text, and the corpus mostly gets this right: the ON SCREEN block is a heading, a labelled pair, a numbered card or an arrow chain, while the narration is a sentence. The exceptions are instructive — BIO-C1-LA-01 puts 'अध्यावरण  Integuments' on screen and then speaks that line verbatim, and CHE-C10-SA-04's table read-out repeats the screen word for word. Both read as padding."
+  },
+  {
+   "group": 1,
+   "text": "The Hindi/English split is systematic. Exam and meta vocabulary is always English (exam, answer, definition, important, confusion, point, part, revise, trick, order, unit, concentration). Textbook terms are Devanagari-first with the English after 'यानी' ('अध्यावरण यानी Integuments'). In the plain-language gloss the English noun leads instead. Three files leak Romanised Hindi ('to bacho itna ho gaya', 'samjhenge', 'dekhna bhulna mat'), which is authoring noise — do not reproduce it."
+  },
+  {
+   "group": 1,
+   "text": "Registers do not mix. 23 files use the बच्चों / tum-form / mistake-hook register; 5 (CHE-C10-SA-04, CHE-C10-SA-08, CHE-C4-SA-08, CHE-C5-SA-03, CHE-C5-SA-07) use a formal आप-form register with a chapter-frame opener, no mistake hooks, no memory metaphors, no keep-watching sign-off, and 'On Screen:' in title case. Pick one per script and hold it to the end."
+  },
+  {
+   "group": 1,
+   "text": "The question header often carries 'अथवा' variants (CHE-C10-LA-01 has three, CHE-C4-LA-03 two, PHY-C1-NM-01 two, BIO-C5-SA-03 two). The script answers the UNION of the variants — CHE-C10-LA-01 is asked for four vitamins and covers nine — and the spoken restatement uses whichever wording is most speakable. A generator must read all variants before deciding scope."
+  },
+  {
+   "group": 1,
+   "text": "The number in the roadmap is a contract. If the opener says 'तीनों चीजें' or 'चार अलग-अलग कारणों से', exactly that many items follow, a progress count is spoken between them, and the end recap replays them in the same order. Breaking the count is the most visible possible error."
+  },
+  {
+   "group": 1,
+   "text": "Part boundaries are chosen by content type, not by length. In Biology they fall at a cliffhanger question; in Physics and numerical Chemistry they fall immediately BEFORE a simplification step and the next part opens by re-rendering the last equation. A derivation part must never end mid-substitution. Part lengths are very uneven as a result (BIO-C5-SA-03 gives three features to Part 1 and one to Part 2)."
+  },
+  {
+   "group": 1,
+   "text": "Only Part 1 carries the board/year opener and only the FINAL part carries the sign-off stack. The sign-off stack is itself ordered and near-fixed: [question_done] -> notes_button -> keep_watching -> goal. The two oldest Chemistry scripts use a different, deprecated stack: answer-on-screen -> screenshot -> Unnati batch."
+  },
+  {
+   "group": 1,
+   "text": "Tables and Punnett squares pasted from Google Docs arrive flattened — one cell per line, tab-indented, with the FOLLOWING narration line swallowed into the last cell (BIO-C4-SA-02 lines 74-81, CHE-C10-SA-04 lines 12-17 and 50-62). Any parser that splits on newlines will mis-attribute a 'शिक्षक:' tag or lose a spoken line here."
+  },
+  {
+   "group": 1,
+   "text": "Decoration is inconsistent and unclosed: '**' opened and never closed (BIO-C12-LA-03), '★' prefixing every rewritten line (BIO-C4-LA-01), '═══', '───', '________________' and '🎬' as separators, curly quotes opened and not closed (BIO-C1-LA-01 Part 3, PHY-C3-SA-01's last line), and straight vs curly quotes mixed across files. None of it is semantic."
+  },
+  {
+   "group": 1,
+   "text": "The corpus contains real source errors that survived review: 'उदारहण' for उदाहरण and 'celsious' for Celsius (CHE-C1-LA-02), 'तंथा' for तथा (CHE-C3-SA-05), a duplicated clause in BIO-C5-LA-02's Part 2 handoff, and 'chemistry ka topic हर को पक्का करते जाओ' (CHE-C2-SA-06). Quote them verbatim when cataloguing, but do not learn them as style."
+  },
+  {
+   "group": 1,
+   "text": "Physics scripts spell Latin variables as Devanagari words in narration while keeping them Latin on screen ('एल' for l, 'क्यू' for q, 'एप्सिलॉन नॉट' for ε₀, 'सिग्मा' for σ). Greek letters are always introduced by name before use ('κ यानी Kappa'). This is the corpus's answer to the repo's Poppins-has-no-Greek problem and it should be preserved."
+  },
+  {
+   "group": 1,
+   "text": "Some scripts teach MORE than the question asks (PHY-C4-NM-01 adds the n-turn coil and the field at the centre; PHY-C2-SA-01 adds the physical reading of C = Kε₀A/d; CHE-C10-LA-01 covers nine vitamins for a four-vitamin question). The extra is always exam-adjacent and is introduced by a forward question, never dumped. This is a deliberate habit, not scope creep."
+  },
+  {
+   "group": 1,
+   "text": "A cliffhanger posed in a handoff is usually never re-asked — seven scripts pose one, only BIO-C4-LA-01 reopens it at the top of the next part and answers it explicitly. Pairing handoff.open_question with bridge.recap_question should be the default, not the exception."
+  },
+  {
+   "group": 2,
+   "text": "There is no single house format. Eight distinct on-screen cue spellings appear across 28 files — 'ON SCREEN:', 'ON SCREEN' (no colon), 'On Screen:', 'On scrEEN', 'ON SCREEN-', 'ON SCREEN :', '[ON SCREEN: …]' inline in brackets, and 'स्क्रीन पर:' — and CHE-C2-LA-04 uses four of them in one file. A parser must accept all of them case-insensitively, with or without colon and with or without surrounding brackets."
+  },
+  {
+   "group": 2,
+   "text": "Part dividers are equally unstable: 'PART 1', 'Part 1', '🎬 Part 1', 'PART 1 — <उपशीर्षक>', and in CHE-C3-SA-02 'Tab 1' / 'Tab 2'. Separator rows are '________________', '════════════════════════════════════════', or nothing at all. Two scripts (BIO-C1-LA-02, CHE-C10-SA-05) also carry a leftover 'Tab N' line at the very top from the source spreadsheet."
+  },
+  {
+   "group": 2,
+   "text": "Speaker tagging is inconsistent in a way that matters for parsing: some scripts tag 'शिक्षक:' once per part, some (BIO-C12-SA-01, BIO-C5-SA-04) tag it before EVERY paragraph, and eight scripts never tag it at all. CHE-C1-NM-02 has the typo 'Yशिक्षक:'. A '★' prefix marks teacher asides in four biology/chemistry LA scripts and is absent everywhere else."
+  },
+  {
+   "group": 2,
+   "text": "Quotation marks are not a reliable signal of what is spoken. Some scripts quote every spoken line, some quote nothing, and several (BIO-C4-LA-02, CHE-C2-LA-04) quote inconsistently within one paragraph and leave stray opening quotes with no close. Markdown bold (**0.34 nm**) survives inside spoken lines in BIO-C5-LA-03 and would be read aloud by a naive TTS."
+  },
+  {
+   "group": 2,
+   "text": "Digits and symbols are everywhere in lines that go straight to TTS, in direct conflict with the repo's no-digits rule: '9 : 3 : 3 : 1', 'F₁', '2 nm', '400 by 100', '60 से 80 हजार', '90%', 'B₁₂', '[A]₀'. The physics scripts solve this properly with an explicit 'स्पोकन:' line per equation; the chemistry ones solve it half the time and in three different conventions; the biology ones do not solve it at all."
+  },
+  {
+   "group": 2,
+   "text": "The same equation gloss uses 'बटा', 'बटे' and 'upon' for division, sometimes in the same file, and reads formulae letter by letter ('C o three plus', 'N H three'). Capital and small letters that differ only in case become homophones in Devanagari — PHY-C3-SA-02's 'वी आर प्लस वी आर बराबर ई आर' is VR + Vr = ER, and is genuinely ambiguous when spoken. Any generator producing a spoken gloss must add a disambiguator ('छोटा आर') whenever a formula contains both cases of one letter."
+  },
+  {
+   "group": 2,
+   "text": "Question type drives the part count far more than length does. Derivations get 3 parts with PART 3 as a pure replay of PARTS 1-2 (all four physics scripts); difference and list questions get 2-3 parts split by item count; definitions get 1-2. A generator should decide the part split from the question's demands, the way BIO-C4-LA-02 does explicitly ('सवाल हमसे दो चीजें पूछ रहा है — क्रॉस और नियम'), not from a word count."
+  },
+  {
+   "group": 2,
+   "text": "Roughly a third of a physics video is deliberate repetition — the final part re-shows every equation with its spoken gloss before the one-line flow summary. Two scripts take this too far: CHE-C5-SA-08's Part 2 is a near-verbatim repeat of Part 1 with no new content, and PHY-C2-NM-03 stretches nine algebraic steps across three parts."
+  },
+  {
+   "group": 2,
+   "text": "Two incompatible voices coexist. The default is an intimate तुम-form teacher with ★ asides, mistake flags, warmth beats and romanised Hindi. Four late chemistry SA scripts (CHE-C10-SA-05, CHE-C10-SA-09, CHE-C5-SA-04, CHE-C5-SA-08) are formal आप-form narration with no teacher tags, no hooks, no warmth, a bilingual echo after every point, and no keep-watching close. Averaging the two would produce an incoherent script; pick one register per video and hold it."
+  },
+  {
+   "group": 2,
+   "text": "The closing CTA is near-fixed and should be treated as a template, not generated: Notes button (27/28) → keep watching (23/28) → 90% goal (13/28). The single exception, CHE-C1-NM-02, ends with 'answer आपकी स्क्रीन पर आ जाएगा, SAVE कर लेना और स्क्रीनशॉट लेना मत भूलना' plus the उन्नति बैच pitch — a different product assumption (answer card in the video vs behind a button) that must not be mixed with the Notes-button line."
+  },
+  {
+   "group": 2,
+   "text": "Figures are the weakest link. Only CHE-C2-LA-04 carries an explicit figure placeholder and names its four required labels. PHY-C1-NM-02 says 'diagram को ध्यान से समझना' and supplies none, leaving the renderer to invent the geometry. BIO-C5-LA-03 answers a 'चित्र सहित' question by deferring the figure to the Notes button. CHE-C5-LA-01 leaves reviewer comments in the file asking for diagrams that were never added ('विन्यास ko diagram se explain karne ka try kijiyega')."
+  },
+  {
+   "group": 2,
+   "text": "On-screen blocks organise rather than transcribe — arrow chains, two-line A/B pairs, numbered lists, a final revision table — and typically compress a 25-word spoken sentence into 3-6 words per node. Tables are encoded three incompatible ways: a markdown pipe table (BIO-C4-LA-02's Punnett square), tab-indented single-column lines (CHE-C10-SA-05, CHE-C10-SA-09) and asterisk-delimited pipe rows (CHE-C10-LA-02). Only the first will render as a table without re-parsing."
+  },
+  {
+   "group": 2,
+   "text": "Hindi technical term always comes first, English gloss second, joined by यानी or in brackets (उल्बवेधन यानी Amniocentesis, अपरद या डेट्रीटस (Detritus)) — never the reverse. The exception is inorganic chemistry (CHE-C4-SA-01, CHE-C4-SA-05), which runs mostly-English sentences with Hindi connectives because the NCERT Hindi terms for d-orbitals and shielding are unfamiliar to students."
+  },
+  {
+   "group": 2,
+   "text": "The most transferable move in the corpus is NEW.teach.question_wording_callback: quoting the question's own word (सचित्र, महत्वपूर्ण लक्षण, व्युत्पत्ति, कौन सा विभाजन, कारण सहित) and stating the obligation it creates. It decides whether a figure is needed, whether steps can be skipped, how many parts the video has, and what must not be left out of the answer — and it is the one move that cannot be faked from the topic alone."
+  },
+  {
+   "group": 3,
+   "text": "There are TWO generations of script in this group and they must never be blended. The older one (CHE-C2-LA-01, CHE-C2-NM-01, and PHY-C1-LA-01's second tab) says 'एमपी बोर्ड' in Devanagari, promises the answer will appear ON SCREEN, asks for a screenshot, and closes on the उन्नति बैच. The newer one says 'MP Board' in Latin, sends the student to the Notes button on the right of the screen, and closes on 'reels देखते रहो / syllabus / 90%'. Pick one template per script."
+  },
+  {
+   "group": 3,
+   "text": "Three of the twenty-eight files are not clean single scripts and would poison a training set read naively. CHE-C2-LA-01 contains two complete drafts of the same video back to back plus five Google-Docs comment footnotes [a]–[e] of Hinglish production feedback. PHY-C1-LA-01 contains 'Tab 1' (complete, with equations) and 'Tab 2' (the same script with every ON SCREEN equation deleted) plus three editor footnotes ('remove', 'NUMBER KAT SAKTE'). PHY-C5-LA-01 has an orphaned Part-1 handoff pasted above its own title. PHY-C3-SA-03 simply stops mid-derivation with no result and no CTA."
+  },
+  {
+   "group": 3,
+   "text": "Nothing on screen is ever left unspoken. Every formula, equation, chemical name and symbol has a companion line that reads it in words — sometimes labelled 'स्पोकन:' explicitly. This is what keeps the narration free of digits and symbols, and a generator that emits an ON SCREEN equation without its readout has produced an unusable script. Three readout dialects exist (full Devanagari transliteration, full English, hybrid) and a script uses exactly one."
+  },
+  {
+   "group": 3,
+   "text": "The reverse is not true: the scripts routinely write digits, %, °C and primes in the SPOKEN lines ('3 से 5 दिन', '95.6%', '78.13°C', '4 नंबर पक्के', \"5'→3'\"). Every one of these must be expanded to words before TTS. The corpus is a source of structure, not of TTS-ready text."
+  },
+  {
+   "group": 3,
+   "text": "'ON SCREEN' appears in at least five spellings across the group — 'ON SCREEN:', 'ON SCREEN', 'On Screen:', '[ON SCREEN: …]' inline in square brackets, and 'स्पोकन:' for the readout that follows. A parser must accept all of them, and must not treat the inline bracketed form as narration."
+  },
+  {
+   "group": 3,
+   "text": "'Part' is overloaded. In BIO-C12-LA-01, BIO-C2-LA-02, PHY-C1-LA-01 etc. a PART is a separate reel with its own recap and handoff. In CHE-C5-SA-01, CHE-C5-SA-05 and CHE-C4-SA-06 'Part 1 —' is just a section heading inside one video (one intro, one CTA, no bridge). The reliable test is whether the part opens with a recap of the previous part and the previous part ends with a handoff — not the label."
+  },
+  {
+   "group": 3,
+   "text": "A part boundary is always earned, never arbitrary: the part ends on a named remainder ('अब आखिरी दो differences बचे हैं—कर्कट-अपरद और प्राथमिक-द्वितीयक उत्पादकता') and the next part opens by naming what was established. Counted questions carry a running tally across parts. Split by content weight, not by equal duration — BIO-C12-LA-01 puts 1, 2, 1 and 2 of its six differences in its four parts."
+  },
+  {
+   "group": 3,
+   "text": "NOT ONE of the twenty-eight scripts uses a real-life analogy. There is no 'जैसे तुम्हारे घर में…', no cricket, no kitchen. Every example is the textbook's own (Bi/Sb/Hg for diamagnetic, CH₃COOH for Kohlrausch, NH₄NO₂ for first order). The only intuition devices used are decoding the term's name, a scale/reference-point framing ('पहले नंबर 1 को reference मानिए'), and compressing a sentence into a shorter one. A generator that invents everyday analogies will not sound like this corpus."
+  },
+  {
+   "group": 3,
+   "text": "The teaching unit is a PAIR: the textbook sentence exactly as it must be written, then its plain-Hinglish restatement. The order never inverts, and the gloss is always shorter and drops the qualifiers. The on-screen card belongs to the gloss, not to the book sentence — except where the book sentence IS the thing to copy, in which case it must stay up long enough to write."
+  },
+  {
+   "group": 3,
+   "text": "Register splits by subject cluster, not by subject. CHE-C10-*, CHE-C5-* and (weakly) CHE-C4-SA-02/06 are आप-form and formal (लिखिए, समझिए, याद रखिए) with no vocatives beyond the opening 'बच्चों'; everything else is तुम-form with heavy vocative use. PHY-C5-LA-01 mixes the two and is the only register wobble. Physics scripts are the most equation-dense and the least warm; biology scripts are the warmest and use ★ markers to separate the teacher's voice from the key."
+  },
+  {
+   "group": 3,
+   "text": "Roman Hinglish appears mid-sentence and is not an error to normalise away — it clusters exactly where the tone gets informal (handoffs, mistake warnings, encouragement): 'toh bacho part 3 bilkul bhi miss mat karna', 'dhyan do', 'yaad rakho', 'kahate hain'. It must be transliterated before narration, but the SWITCH POINT is a stylistic signal worth preserving."
+  },
+  {
+   "group": 3,
+   "text": "The question's own verb drives the whole script shape, exactly as the repo's visual-director rule says: 'अन्तर स्पष्ट कीजिए' produces a fixed-order two- or three-column comparison where the sides never swap; 'सिद्ध कीजिए / व्यंजक ज्ञात कीजिए' produces numbered equations that are called back by number; 'विधि का वर्णन कीजिए' produces a named, ordered step list announced whole before it is filled in; 'उदाहरण दीजिए' produces a longer-than-needed example list plus 'कोई भी दो लिख देना'."
+  },
+  {
+   "group": 3,
+   "text": "Several files carry content defects that a generator must not learn: CHE-C4-LA-01 Part 3 attaches the KI equation to the ferrous-sulphate reaction and omits the Fe²⁺→Fe³⁺ equation; CHE-C4-SA-02 puts '(n−1)¹⁻¹⁰ ns¹⁻²' on screen (missing the d) and reads the error aloud twice; CHE-C5-SA-05 reads SCN⁻ as 'C S N minus'; CHE-C2-SA-08 uses ⇌ for the one-way galvanic conversion; CHE-C2-NM-01 misspells the brand as 'अरिहान'. Spelling wobbles ('defination', 'एसा', 'जेसा', 'बैठो लो') are pervasive and are transcription noise, not style."
+  },
+  {
+   "group": 3,
+   "text": "Roughly one line in four is meta — about the exam, the answer sheet, the marks or what to write — rather than about the subject. That ratio is the house voice. The meta lines cluster at the section seams (before a definition, after a compressed summary, at every part boundary) and are what a visual director should leave quiet, since they have nothing to draw."
+  },
+  {
+   "group": 3,
+   "text": "The closing is a fixed four-beat block and every complete script has it in this order: the question is done → (optional) remember-this-and-you-won't-forget → the exact answer is on the Notes button → keep watching, finish the syllabus, 90%. Only the two older scripts substitute screen-answer + screenshot + उन्नति बैच for beats three and four."
+  },
+  {
+   "group": 4,
+   "text": "The file format is NOT a format. Across 27 files the question header appears as a bare first line, as ‘प्रश्न:’, ‘Question:’, ‘Question :-’, ‘Qsn-’, or a title line followed by ‘प्रश्न:’; part dividers appear as ‘PART 1’, ‘Part 1’, ‘🎬 Part 1’, ‘PART 1 — <subtitle>’ and ‘भाग 1 — <subtitle> 🎙️’; separators as ‘________________’, ‘════…’, ‘────…’. The on-screen marker has four spellings (‘ON SCREEN:’, ‘ON SCREEN’, ‘On Screen:’, ‘ON SCREEN - ’). A generator should emit ONE canonical form; a parser must accept all of them."
+  },
+  {
+   "group": 4,
+   "text": "‘भाग N’ is not ‘PART N’. CHE-C2-LA-02 has five भाग headings but is one video with one intro and one closing block. Counting भाग headings as parts would split a 47-line script into five reels."
+  },
+  {
+   "group": 4,
+   "text": "The ‘शिक्षक:’ tag is a BEAT separator, not a speaker change. BIO-C12-SA-03 repeats it nine times in a single-speaker script; it marks where the presenter resumes after an ON SCREEN card. Five chemistry files omit it entirely."
+  },
+  {
+   "group": 4,
+   "text": "Spoken lines in this corpus DO contain digits, units and symbols — ‘4 नंबर’, ‘74 दिन’, ‘46 गुणसूत्र’, ‘8.85 × 10⁻¹² C² N⁻¹ m⁻²’, ‘mol L⁻¹ sec⁻¹’. These are source drafts, not TTS-ready text. Anything generated from them must be re-spelled in words before narration (the repo's own rule), and the equation-readout lines show exactly how the house does it."
+  },
+  {
+   "group": 4,
+   "text": "Every symbolic line has a twin: the screen line and the spoken readout. Three mutually incompatible readout dialects exist (Devanagari transliteration, English symbol names in a Hindi frame, full English spell-out with bracket structure). Pick ONE per script. PHY-C1-LA-02 mixes two and reads as two different presenters."
+  },
+  {
+   "group": 4,
+   "text": "Quote marks are unbalanced almost everywhere: lines open with “ and never close, or close without opening. Any parser that strips or balances quotes will eat text. Treat “ ” \" as decoration."
+  },
+  {
+   "group": 4,
+   "text": "The counted list is the spine of the corpus. If the intro says three, exactly three get counted out with hook.progress_count, and the recap lists three. The one script that breaks this (CHE-C2-SA-01 teaches three functions for a question asking two) is a defect, not a style — check the count in the question before choosing the count in the script."
+  },
+  {
+   "group": 4,
+   "text": "The question's own verb sets the script's shape, exactly as the repo's question_strategy() expects: ‘सिद्ध कीजिए / निगमन कीजिए / व्यंजक स्थापित कीजिए’ → step-by-step equations with a final flow recap; ‘अन्तर लिखिए / तुलना कीजिए’ → fixed headings run through both sides in the same order; ‘उदाहरण सहित समझाइए’ → definition then worked examples; ‘लाभ / कारक / उपाय / क्षेत्र’ → a numbered list with a Quick Revision card; ‘क्यों’ → cause chain closing on ‘यही कारण है कि’. Roman numerals in the question become the headings AND the part split."
+  },
+  {
+   "group": 4,
+   "text": "ON SCREEN text organises, it does not echo. In the biology batch the blocks are arrow flows and label→value maps (‘MMR ↓ / मातृ मृत्यु-दर में कमी’), never the caption sentence retyped. The one thing to watch: ↑ and ↓ are used both as flow arrows and as value arrows inside the same block, which is genuinely ambiguous on screen."
+  },
+  {
+   "group": 4,
+   "text": "Two closing blocks exist and they are mutually exclusive. NEW (22 files): question_closed → Notes button (right side of screen) → keep watching → 90%. OLD ‘Unnati batch’ (CHE-C1-LA-01, CHE-C2-LA-02): memory promise → ‘पूरा उत्तर आपकी स्क्रीन पर आ जाएगा’ → screenshot → join the उन्नति बैच. The old block also promises the त्रैमासिक exam rather than the board exam. Never mix them."
+  },
+  {
+   "group": 4,
+   "text": "Register splits cleanly by batch, not by subject. Biology + physics + older chemistry: तुम-form (समझ लो, याद रखो, लिखना), with ‘शिक्षक:’ tags. The five newer chemistry files (CHE-C4-SA-07, CHE-C5-SA-06, CHE-C10-SA-03, CHE-C10-SA-07, CHE-C5-SA-02) use आप-form -इए imperatives with a तुम-vocative (‘बच्चों’) and no speaker tag. Do not mix inside one script."
+  },
+  {
+   "group": 4,
+   "text": "English is used for the discourse layer and Hindi for the content layer: important, definition, exam, concept, clear, revise, step, formula, point, answer, syllabus are always Latin script inside Devanagari sentences, while the teachable noun is given in Hindi first and glossed with ‘यानी <English>’. The gloss runs the other way (English first) only when the English acronym is what the student knows — GPP, NPP, MMR, IMR, DNA, STD."
+  },
+  {
+   "group": 4,
+   "text": "Romanised Hindi (‘Ise’, ‘tarika’, ‘kyoki’, ‘aasani se लिख paoge’, ‘hi number milenge’, ‘इस bar भी’, ‘मजेदार तारिका’) appears in four files. It is a typing artefact, not house style — the same presenter writes the same words in Devanagari elsewhere in the same file. Generate Devanagari."
+  },
+  {
+   "group": 4,
+   "text": "Known content defects to not copy: CHE-C4-LA-02 states the alkaline product as MnO₄²⁻ but gives a neutral-medium reaction (→ MnO₂) as the alkaline worked example, and asserts ‘उदासीन माध्यम में भी MnO₂ बनता है’ out of position; CHE-C10-SA-07's closing mnemonic drops the D- prefixes the correct answer needs; CHE-C2-SA-01 answers three functions to a two-function question; CHE-C3-SA-04 leaks LaTeX as ‘EaE_a’ and ends on 100% instead of 90%; PHY-C1-LA-02 has ‘dSdS’ (collapsed $dS$) twice, including inside a part-bridge line."
+  },
+  {
+   "group": 4,
+   "text": "A part is a reel and must stand alone. Every non-first part opens with a one-sentence recap of the previous part's RESULT (and, in derivations, re-prints the equation reached), and every non-final part closes by naming both what is done and what is owed. A part boundary never falls mid-substitution — it falls at a completed equation or a completed numbered item."
+  },
+  {
+   "group": 4,
+   "text": "Repetition is the point, not padding. The running order is re-spoken after nearly every step (BIO-C5-LA-01 states the growing chain three times), and CHE-C5-SA-06's and PHY-C2-NM-05's final parts are almost pure re-statement. For a reel where viewers join mid-way, near-duplication is intended — but vary the framing verb (‘समझते हैं’ → ‘लिखेंगे’ → ‘recall कर लेते हैं’) or it reads as a copy-paste error."
+  },
+  {
+   "group": 4,
+   "text": "Marks are a loop, not a decoration. Where the intro promises ‘4 नंबर पक्के’, the closing says ‘अब यहाँ के 4 नंबर तो पक्के हो गए’ with the same number, and the mid-video handoff reminds them (‘isliye पूरे 4 नंबर चाहिए ना? तो Part 2 जरूर देखना’). 4 for LA/derivation, 3 for SA. If the mark value is unknown, use NEW.intro.outcome_promise instead and never mention marks at the end."
+  },
+  {
+   "group": 4,
+   "text": "Examples come from the book, not from imagination. Only 2 of 27 scripts invent an everyday example (boiling egg, rusting iron); biology always uses the textbook's own instance (ocean biomass, insects on one tree, tongue-rolling) because that instance is what earns the mark. The one invented-number case (BIO-C12-SA-03's GPP 100 / R 30 / NPP 70) uses 100 as the base so the arithmetic is trivial."
+  }
+ ]
+}

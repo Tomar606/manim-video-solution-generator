@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Energy conversion, two rows. Row 1 = Galvanic (chemical -> electrical),
+       Row 2 = Electrolytic (electrical -> chemical). Each box carries its own
+       id so QA can measure whether its label actually fits inside it.
+       No text elements: every word comes from the spec. -->
+
+  <g id="g_box_in" data-optional>
+    <rect x="18" y="86" width="474" height="104" rx="22" fill="#12283A" stroke="#7FD4FF" stroke-width="7"/>
+  </g>
+  <g id="g_box_out" data-optional>
+    <rect x="588" y="86" width="474" height="104" rx="22" fill="#2A1E05" stroke="#FFC53D" stroke-width="7"/>
+  </g>
+  <g id="g_arrow" data-optional>
+    <path d="M506 138 H544" stroke="#FFC53D" stroke-width="12" stroke-linecap="round"/>
+    <path d="M574 138 l-34 -19 v38 z" fill="#FFC53D"/>
+  </g>
+
+  <g id="e_box_in" data-optional>
+    <rect x="18" y="296" width="474" height="104" rx="22" fill="#2A1E05" stroke="#FFC53D" stroke-width="7"/>
+  </g>
+  <g id="e_box_out" data-optional>
+    <rect x="588" y="296" width="474" height="104" rx="22" fill="#12283A" stroke="#7FD4FF" stroke-width="7"/>
+  </g>
+  <g id="e_arrow" data-optional>
+    <path d="M506 348 H544" stroke="#7FD4FF" stroke-width="12" stroke-linecap="round"/>
+    <path d="M574 348 l-34 -19 v38 z" fill="#7FD4FF"/>
+  </g>
+</svg>

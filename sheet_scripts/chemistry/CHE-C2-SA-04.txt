@@ -1,0 +1,37 @@
+Question: तुल्यांकी चालकता किसे कहते हैं?
+MP Board कक्षा 12वीं के बच्चों!  ये सवाल 2018 और 2022 में Board Exam में पूछा गया है, और इस बार भी आपकी परीक्षा में आ सकता है
+तो सबसे पहले समझते हैं कि तुल्यांकी चालकता होती क्या है?
+किसी विलयन की तुल्यांकी चालकता, उस चालकता को कहते हैं जो एक ग्राम-तुल्यांक विद्युत्-अपघट्य को V ml विलयन में विलेय करने से उत्पन्न सभी आयनों की चालकता के बराबर होती है।
+इसे Lambda (λ) से प्रदर्शित करते हैं।
+[ON SCREEN: तुल्यांकी चालकता = Λeq]
+अब इसे आसान भाषा में समझो।
+अगर किसी विलयन  में एक ग्राम-तुल्यांक विद्युत् अपघट्य मौजूद है और वह V ml विलयन  में घुला हुआ है, तो उस पूरे solution से मिलने वाली कुल आयनिक चालकता को तुल्यांकी चालकता कहते हैं।
+अब तुल्यांकी चालकता का formula होता है—
+Lambda बराबर  k into V.
+[ON SCREEN: Λ = κ × V]
+यहाँ κ यानी कप्पा, विशिष्ट चालकता है और V यानी विलयन का volume है।
+अब बच्चों, यहाँ से calculation वाला important part शुरू होता है।
+मान लो C equivalent ग्राम-तुल्यांक विद्युत् अपघट्य , 1000 cubic centimetre विलयन  में घुला हुआ है
+तो 1 ग्राम-तुल्यांक electrolyte के लिए volume होगा—
+V equals 1000 upon C equivalent cubic centimetre.
+[ON SCREEN: V = 1000 / Ceq cm³]
+अब हमारे पास V की value आ गई है।
+इसे अपने formula में रख देते हैं—
+Lambda equals kappa into V.
+तो V की जगह 1000 upon C equivalent रखने पर मिलेगा—
+Lambda equals kappa into 1000 upon C equivalent.
+[ON SCREEN: Λeq = κ × 1000 / Ceq]
+अब यहाँ C equivalent को Normality यानी N भी कहा जाता है।
+इसलिए इसे ऐसे भी लिखा जा सकता है—
+[ON SCREEN: Λeq = κ × 1000 / N]
+अब आते हैं इसके सबसे important हिस्से पर—इसकी unit।
+विशिष्ट चालकता की unit होती है ohm inverse centimetre inverse और volume की unit होती है centimetre cube।
+इसलिए तुल्यांकी चालकता की unit होगी—
+Ohm inverse centimetre square per gram equivalent.
+इसे short में ऐसे लिख सकते हैं—
+[ON SCREEN: Unit = Ω⁻¹ cm² equivalent⁻¹]
+और इसकी SI unit Siemens metre square per gram equivalent होती है।
+[ON SCREEN: SI Unit = S m² g-eq⁻¹]
+तो बच्चों, ये तो ache से दिमाग में बैठ गया
+अब इसका exact answer exam में कैसे लिखना है, ये आपको Notes पर मिल जाएगा।
+और ऐसी ही reels के साथ एक-एक Chemistry topic clear करते जाओ और 90% के target की तरफ बढ़ते जाओ

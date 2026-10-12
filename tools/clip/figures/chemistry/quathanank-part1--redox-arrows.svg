@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Two rows, one reaction. Top row loses electrons (oxidation, gold),
+       bottom row gains them (reduction, cyan). Reading down the page is
+       the order the exam answer is written in. No text elements. -->
+
+  <rect id="ox_l" data-optional x="110" y="70" width="250" height="108" rx="18"
+        fill="#2A1E05" stroke="#FFC53D" stroke-width="8"/>
+  <g id="ox_arrow" data-optional>
+    <line x1="380" y1="124" x2="678" y2="124" stroke="#FFC53D" stroke-width="8" stroke-linecap="round"/>
+    <polygon points="700,124 672,110 672,138" fill="#FFC53D"/>
+  </g>
+  <rect id="ox_r" data-optional x="710" y="70" width="250" height="108" rx="18"
+        fill="#2A1E05" stroke="#FFC53D" stroke-width="8"/>
+
+  <rect id="red_l" data-optional x="110" y="290" width="250" height="108" rx="18"
+        fill="#12283A" stroke="#7FD4FF" stroke-width="8"/>
+  <g id="red_arrow" data-optional>
+    <line x1="380" y1="344" x2="678" y2="344" stroke="#7FD4FF" stroke-width="8" stroke-linecap="round"/>
+    <polygon points="700,344 672,330 672,358" fill="#7FD4FF"/>
+  </g>
+  <rect id="red_r" data-optional x="710" y="290" width="250" height="108" rx="18"
+        fill="#12283A" stroke="#7FD4FF" stroke-width="8"/>
+</svg>

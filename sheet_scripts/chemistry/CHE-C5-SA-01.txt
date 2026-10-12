@@ -1,0 +1,72 @@
+लिगैण्ड से आप क्या समझते हैं ? उदाहरण देकर समझाइए। 
+MP Board कक्षा 12वीं के बच्चों!
+आज का question बहुत important है, क्योंकि इसमें आपसे लिगैण्ड की definition, example और उसके प्रकार समझाने के लिए कहा गया है।
+प्रश्न:
+“लिगैण्ड से आप क्या समझते हैं? उदाहरण देकर समझाइए।”
+चलिए इसे बिल्कुल आसान भाषा में समझते हैं।
+Part 1 — लिगैण्ड क्या होता है?
+सबसे पहले समझते हैं कि लिगैण्ड, यानी Ligand, किसे कहते हैं।
+कोई भी परमाणु, आयन या अणु, जो केंद्रीय आयन को अपना electron pair देकर उप-सहसंयोजी बंध बनाने में समर्थ होता है, उसे लिगैण्ड कहते हैं।
+On Screen:
+Ligand → Electron pair donor → Central ion
+“लिगैण्ड अपना electron pair केंद्रीय आयन को देता है।”
+इसे एक example से समझते हैं।
+मान लीजिए हमारे पास complex है—
+On Screen:
+K₄[Fe(CN)₆]
+“Potassium four, open bracket Fe, open bracket C N, close bracket six, close bracket।”
+इस compound में C N लिगैण्ड है।
+On Screen:
+K₄[Fe(CN)₆]
+Ligand = CN⁻
+“इस complex में C N minus, लिगैण्ड है।”
+यह C N minus अपना electron pair केंद्रीय ion को देता है और उप-सहसंयोजी बंध बनाता है।
+अब लिगैण्ड में एक खास बात समझिए।
+लिगैण्ड का वह specific atom, जो वास्तव में electron pair देता है, उसे दाता परमाणु, यानी Donor Atom, कहते हैं।
+On Screen:
+Ligand → Donor Atom → Electron pair
+“लिगैण्ड का donor atom ही electron pair प्रदान करता है।”
+अब लिगैण्ड में उपस्थित donor atoms की संख्या के आधार पर इन्हें अलग-अलग प्रकारों में बाँटा जाता है।
+अगर किसी लिगैण्ड में एक donor atom है, तो उसे एकदन्तुर, यानी Monodentate ligand, कहते हैं।
+On Screen:
+1 Donor Atom → Monodentate
+“एक donor atom वाला ligand, monodentate ligand कहलाता है।”
+अगर किसी लिगैण्ड में दो donor atoms हैं, तो उसे द्विदन्तुर, यानी Bidentate ligand, कहते हैं।
+On Screen:
+2 Donor Atoms → Bidentate
+“दो donor atoms वाला ligand, bidentate ligand कहलाता है।”
+इसी तरह अगर तीन donor atoms हों, तो उसे त्रिदन्तुर, यानी Tridentate ligand कहते हैं।
+और अगर किसी ligand में एक से अधिक donor atoms, यानी कई donor atoms हों, तो उसे बहुदन्तुर, यानी Polydentate ligand, कहा जाता है।
+On Screen:
+3 Donor Atoms → Tridentate
+Many Donor Atoms → Polydentate
+“तीन donor atoms वाला ligand, tridentate ligand कहलाता है, और कई donor atoms वाला ligand, polydentate ligand कहलाता है।”
+अब इसे examples से समझते हैं।
+एकदन्तुर लिगैण्ड
+On Screen:
+N₃⁻ H₂O CN⁻
+“N three minus, H two O, और C N minus।”
+ये ऐसे ligands हैं जिनमें एक donor atom के माध्यम से central ion से bond बन सकता है।
+द्विदन्तुर लिगैण्ड
+अब एक important bidentate ligand का example है ethylene diamine।
+On Screen:
+H₂N−CH₂−CH₂−NH₂
+“यहाँ H two N, single bond C H two, single bond C H two, single bond N H two।”
+इस ligand में nitrogen के दो donor atoms होते हैं।
+On Screen:
+H₂N−CH₂−CH₂−NH₂
+2 Donor Atoms → Bidentate
+“Ethylene diamine में two nitrogen donor atoms होते हैं, इसलिए यह bidentate ligand है।”
+और एक बात हमेशा याद रखिए—किसी ligand के structure में जिस atom पर star, यानी तारांकित चिन्ह, लगा हो, वही donor atom होता है।
+On Screen:
+* → Donor Atom
+“Star लगा हुआ atom donor atom को दर्शाता है।”
+तो पूरे question का quick revision कर लेते हैं।
+On Screen:
+Ligand → Electron pair donor
+1 donor → Monodentate
+2 donors → Bidentate
+3 donors → Tridentate
+Many donors → Polydentate
+“Ligand electron pair donate करता है। One donor atom वाला monodentate, two donor atoms वाला bidentate, three donor atoms वाला tridentate और many donor atoms वाला polydentate ligand कहलाता है।”
+अब इसका exact answer exam में किस तरह लिखना है, वो आपको Notes button पर click करके मिल जाएगा।

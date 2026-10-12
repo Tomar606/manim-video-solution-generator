@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Ecological pyramid, UPRIGHT. THREE tiers: उत्पादक at the base, उपभोक्ता
+       above it, सर्वोच्च उपभोक्ता on top; the numbered pyramids are likewise
+       उत्पादक / शाकाहारी / मांसाहारी.
+
+       TRUNCATED, NOT POINTED, AND THAT IS THE WHOLE POINT.
+       A pointed apex is only ~133px wide at y=125, which is where the top
+       label sits — and "सर्वोच्च उपभोक्ता" needs about 380px. The label ran
+       off both sides of the tier it was naming and over the plate behind it.
+       Widening the font's tier instead of shrinking the text keeps every label
+       inside the shape that means it.
+
+       A flat top is also what the house answer sheet draws: its number and
+       biomass pyramids are stacked boxes, not triangles, so this now matches
+       the artefact the student copies into the answer book.
+
+       WIDTHS ARE CHOSEN FROM THE LABELS, measured at the tier's own centre:
+         y=125 (top)    280..800 = 520px   for "सर्वोच्च उपभोक्ता" (~380px)
+         y=235 (middle) 200..880 = 680px   for "शाकाहारी  2,00,000"
+         y=345 (base)   120..960 = 840px   for "उत्पादक  15,00,000"
+       The taper is still monotonic, so it reads as a pyramid rather than a
+       stack of equal bars — which is the one thing the shape has to say.
+
+       ids: tier_producer, tier_primary, tier_top
+       Everything sits inside x 24-1056 and y 18-452. Gold on the wide base is
+       what makes it read as upright. No text element — every word comes from
+       the spec, because Devanagari must never be set inside an SVG. -->
+
+  <g id="tier_producer" data-optional>
+    <path d="M160 290 L920 290 L1000 400 L80 400 Z"
+          fill="#2A1E05" stroke="#FFC53D" stroke-width="9" stroke-linejoin="round"/>
+  </g>
+  <g id="tier_primary" data-optional>
+    <path d="M240 180 L840 180 L920 290 L160 290 Z"
+          fill="#12283A" stroke="#7FD4FF" stroke-width="9" stroke-linejoin="round"/>
+  </g>
+  <g id="tier_top" data-optional>
+    <path d="M320 70 L760 70 L840 180 L240 180 Z"
+          fill="#12283A" stroke="#7FD4FF" stroke-width="9" stroke-linejoin="round"/>
+  </g>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Two kinds of flux: field lines going OUT of a closed surface (positive, warm) and coming IN to it (negative, cyan).
+       No text elements: every word comes from the spec. -->
+  <g id="surf_pos" data-optional>
+    <circle cx="290" cy="240" r="105" fill="#12283A" fill-opacity="0.55" stroke="#DCE6EE" stroke-width="6"/>
+  </g>
+  <g id="surf_neg" data-optional>
+    <circle cx="790" cy="240" r="105" fill="#12283A" fill-opacity="0.55" stroke="#DCE6EE" stroke-width="6"/>
+  </g>
+  <g id="out_lines" data-optional>
+    <line x1="338.0" y1="240.0" x2="434.0" y2="240.0" stroke="#FF7A45" stroke-width="7" stroke-linecap="round"/>
+    <line x1="314.0" y1="198.4" x2="362.0" y2="115.3" stroke="#FF7A45" stroke-width="7" stroke-linecap="round"/>
+    <line x1="266.0" y1="198.4" x2="218.0" y2="115.3" stroke="#FF7A45" stroke-width="7" stroke-linecap="round"/>
+    <line x1="242.0" y1="240.0" x2="146.0" y2="240.0" stroke="#FF7A45" stroke-width="7" stroke-linecap="round"/>
+    <line x1="266.0" y1="281.6" x2="218.0" y2="364.7" stroke="#FF7A45" stroke-width="7" stroke-linecap="round"/>
+    <line x1="314.0" y1="281.6" x2="362.0" y2="364.7" stroke="#FF7A45" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <g id="out_heads" data-optional>
+    <polygon points="458.0,240.0 428.0,254.0 428.0,226.0" fill="#FF7A45"/>
+    <polygon points="374.0,94.5 371.1,127.5 346.9,113.5" fill="#FF7A45"/>
+    <polygon points="206.0,94.5 233.1,113.5 208.9,127.5" fill="#FF7A45"/>
+    <polygon points="122.0,240.0 152.0,226.0 152.0,254.0" fill="#FF7A45"/>
+    <polygon points="206.0,385.5 208.9,352.5 233.1,366.5" fill="#FF7A45"/>
+    <polygon points="374.0,385.5 346.9,366.5 371.1,352.5" fill="#FF7A45"/>
+  </g>
+  <g id="in_lines" data-optional>
+    <line x1="968.0" y1="240.0" x2="876.0" y2="240.0" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <line x1="879.0" y1="85.8" x2="833.0" y2="165.5" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <line x1="701.0" y1="85.8" x2="747.0" y2="165.5" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <line x1="612.0" y1="240.0" x2="704.0" y2="240.0" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <line x1="701.0" y1="394.2" x2="747.0" y2="314.5" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <line x1="879.0" y1="394.2" x2="833.0" y2="314.5" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <g id="in_heads" data-optional>
+    <polygon points="852.0,240.0 882.0,226.0 882.0,254.0" fill="#7FD4FF"/>
+    <polygon points="821.0,186.3 823.9,153.3 848.1,167.3" fill="#7FD4FF"/>
+    <polygon points="759.0,186.3 731.9,167.3 756.1,153.3" fill="#7FD4FF"/>
+    <polygon points="728.0,240.0 698.0,254.0 698.0,226.0" fill="#7FD4FF"/>
+    <polygon points="759.0,293.7 756.1,326.7 731.9,312.7" fill="#7FD4FF"/>
+    <polygon points="821.0,293.7 848.1,312.7 823.9,326.7" fill="#7FD4FF"/>
+  </g>
+</svg>

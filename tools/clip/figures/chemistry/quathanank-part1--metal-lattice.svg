@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Metallic bonding: a lattice of positive metal ions sitting in a
+       sea of delocalised electrons. In d-block metals both ns and (n-1)d
+       electrons join that sea, so the bonding is unusually strong.
+       No text elements: any label comes from the spec. -->
+  <g id="e_sea" data-optional>
+    <rect x="150" y="70" width="810" height="330" rx="28" fill="#FFC53D" fill-opacity="0.06"
+          stroke="#FFC53D" stroke-width="3" stroke-dasharray="14 12"/>
+  </g>
+  <g id="ions" data-optional>
+    <circle cx="230" cy="130" r="34" fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+    <circle cx="390" cy="130" r="34" fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+    <circle cx="550" cy="130" r="34" fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+    <circle cx="710" cy="130" r="34" fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+    <circle cx="870" cy="130" r="34" fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+    <circle cx="230" cy="235" r="34" fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+    <circle cx="390" cy="235" r="34" fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+    <circle cx="550" cy="235" r="34" fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+    <circle cx="710" cy="235" r="34" fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+    <circle cx="870" cy="235" r="34" fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+    <circle cx="230" cy="340" r="34" fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+    <circle cx="390" cy="340" r="34" fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+    <circle cx="550" cy="340" r="34" fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+    <circle cx="710" cy="340" r="34" fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+    <circle cx="870" cy="340" r="34" fill="#12283A" stroke="#7FD4FF" stroke-width="6"/>
+  </g>
+  <g id="ion_charge" data-optional>
+    <path d="M216 130 h28 M230 116 v28" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M376 130 h28 M390 116 v28" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M536 130 h28 M550 116 v28" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M696 130 h28 M710 116 v28" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M856 130 h28 M870 116 v28" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M216 235 h28 M230 221 v28" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M376 235 h28 M390 221 v28" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M536 235 h28 M550 221 v28" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M696 235 h28 M710 221 v28" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M856 235 h28 M870 221 v28" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M216 340 h28 M230 326 v28" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M376 340 h28 M390 326 v28" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M536 340 h28 M550 326 v28" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M696 340 h28 M710 326 v28" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M856 340 h28 M870 326 v28" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g id="free_e" data-optional>
+    <circle cx="310" cy="78" r="11" fill="#FFC53D"/>
+    <circle cx="310" cy="182" r="11" fill="#FFC53D"/>
+    <circle cx="470" cy="78" r="11" fill="#FFC53D"/>
+    <circle cx="470" cy="182" r="11" fill="#FFC53D"/>
+    <circle cx="630" cy="78" r="11" fill="#FFC53D"/>
+    <circle cx="630" cy="182" r="11" fill="#FFC53D"/>
+    <circle cx="790" cy="78" r="11" fill="#FFC53D"/>
+    <circle cx="790" cy="182" r="11" fill="#FFC53D"/>
+    <circle cx="950" cy="78" r="11" fill="#FFC53D"/>
+    <circle cx="950" cy="182" r="11" fill="#FFC53D"/>
+    <circle cx="310" cy="183" r="11" fill="#FFC53D"/>
+    <circle cx="310" cy="287" r="11" fill="#FFC53D"/>
+    <circle cx="470" cy="183" r="11" fill="#FFC53D"/>
+    <circle cx="470" cy="287" r="11" fill="#FFC53D"/>
+    <circle cx="630" cy="183" r="11" fill="#FFC53D"/>
+    <circle cx="630" cy="287" r="11" fill="#FFC53D"/>
+    <circle cx="790" cy="183" r="11" fill="#FFC53D"/>
+    <circle cx="790" cy="287" r="11" fill="#FFC53D"/>
+    <circle cx="950" cy="183" r="11" fill="#FFC53D"/>
+    <circle cx="950" cy="287" r="11" fill="#FFC53D"/>
+    <circle cx="310" cy="288" r="11" fill="#FFC53D"/>
+    <circle cx="310" cy="392" r="11" fill="#FFC53D"/>
+    <circle cx="470" cy="288" r="11" fill="#FFC53D"/>
+    <circle cx="470" cy="392" r="11" fill="#FFC53D"/>
+    <circle cx="630" cy="288" r="11" fill="#FFC53D"/>
+    <circle cx="630" cy="392" r="11" fill="#FFC53D"/>
+    <circle cx="790" cy="288" r="11" fill="#FFC53D"/>
+    <circle cx="790" cy="392" r="11" fill="#FFC53D"/>
+    <circle cx="950" cy="288" r="11" fill="#FFC53D"/>
+    <circle cx="950" cy="392" r="11" fill="#FFC53D"/>
+  </g>
+  <g id="slip_layer" data-optional>
+    <path d="M170 287 H940" stroke="#FF9F43" stroke-width="5" stroke-dasharray="16 12" stroke-linecap="round"/>
+    <path d="M905 287 l-30 -16 v32 z" fill="#FF9F43"/>
+  </g>
+</svg>

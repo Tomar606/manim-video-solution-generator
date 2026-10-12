@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Half-life does not depend on the starting concentration. The SAME
+       concentration-time graph as p1-halflife (same axes, same cyan decay),
+       with a second run of the same first-order reaction started lower
+       (violet). Both curves halve at the same time: the one gold dashed drop
+       passes through both half points and lands on the one gold t-half
+       stretch. The gold bracket joins the two starting points on the y-axis.
+       Curves are the exact decay y = 385 - A*2^(-(x-300)/240) as cubic
+       Hermite segments with a node every 60px, so they pass exactly through
+       (540,247.5) and (540,288.75). No text elements: every word comes from
+       the spec. -->
+
+  <g id="axes" data-optional>
+    <line x1="300" y1="385" x2="300" y2="62" stroke="#F2F2F2" stroke-width="6" stroke-linecap="round"/>
+    <line x1="300" y1="385" x2="958" y2="385" stroke="#F2F2F2" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g id="axis_heads" data-optional>
+    <polygon points="300,48 289,68 311,68" fill="#F2F2F2"/>
+    <polygon points="972,385 952,374 952,396" fill="#F2F2F2"/>
+  </g>
+
+  <!-- the one half-life time, through BOTH half points; style= keeps the dashes -->
+  <line id="drop_line" data-optional x1="540" y1="232" x2="540" y2="385"
+        style="stroke:#E8C25A;stroke-opacity:0.9;stroke-width:6;stroke-dasharray:14 10"/>
+
+  <!-- run 1: the curve p1 drew (higher start) -->
+  <path id="curve_hi" data-optional d="M300,110 C320,125.88 340,140.4 360,153.75 C380,167.11 400,179.31 420,190.55 C440,201.78 460,212.04 480,221.48 C500,230.93 520,239.56 540,247.5 C560,255.44 580,262.7 600,269.38 C620,276.06 640,282.16 660,287.77 C680,293.39 700,298.52 720,303.24 C740,307.96 760,312.28 780,316.25 C800,320.22 820,323.85 840,327.19 C853.33,329.41 866.67,331.51 880,333.5"
+        fill="none" stroke="#4FC3F7" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- run 2: same reaction, lower start (A = 192.5 = 0.7 x 275) -->
+  <path id="curve_lo" data-optional d="M300,192.5 C320,203.62 340,213.78 360,223.13 C380,232.48 400,241.02 420,248.88 C440,256.74 460,263.93 480,270.54 C500,277.15 520,283.19 540,288.75 C560,294.31 580,299.39 600,304.06 C620,308.74 640,313.01 660,316.94 C680,320.87 700,324.46 720,327.77 C740,331.08 760,334.1 780,336.88 C800,339.65 820,342.19 840,344.53 C853.33,346.09 866.67,347.56 880,348.95"
+        fill="none" stroke="#C792EA" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- the stretch of time that is the half-life, over the x-axis -->
+  <line id="thalf_span" data-optional x1="300" y1="385" x2="540" y2="385"
+        stroke="#E8C25A" stroke-width="12" stroke-linecap="round"/>
+  <line id="thalf_tick" data-optional x1="540" y1="376" x2="540" y2="400"
+        stroke="#E8C25A" stroke-width="6"/>
+
+  <!-- bracket joining the two starting concentrations on the y-axis -->
+  <path id="a0_brace" data-optional d="M294,110 L280,110 L280,192.5 L294,192.5"
+        fill="none" stroke="#E8C25A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <circle id="hi_a0" data-optional cx="300" cy="110" r="12" fill="#4FC3F7"/>
+  <circle id="lo_a0" data-optional cx="300" cy="192.5" r="12" fill="#C792EA"/>
+
+  <circle id="hi_half" data-optional cx="540" cy="247.5" r="13" fill="#E8C25A"/>
+  <circle id="lo_half" data-optional cx="540" cy="288.75" r="13" fill="#E8C25A"/>
+</svg>

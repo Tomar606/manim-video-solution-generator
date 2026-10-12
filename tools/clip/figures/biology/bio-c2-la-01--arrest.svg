@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- THE ARREST. Meiosis I starts in the primary oocyte and then HALTS at
+       prophase-I, and stays halted for years. He flags this himself as what
+       students get wrong most.
+
+       The answer is a NEGATIVE - the thing that does not happen - which is
+       exactly why it is drawn and not generated. A generator draws what you
+       name, so "a division that stops" reliably produces one that continues;
+       the briefs for this video never mention stopping at all.
+
+       The dashed stretch must arrive AFTER the stop bars, or it reads as a
+       process still under way rather than one that never runs. -->
+  <style>
+    .cell  { fill:#78C0F0; fill-opacity:.14; stroke:#78C0F0; stroke-width:7 }
+    .ring  { fill:#78C0F0; fill-opacity:.35 }
+    .nuc   { fill:#0A1014; stroke:#F2F2F2; stroke-width:5 }
+    .chrom { stroke:#FF5A5A; stroke-width:6; fill:none; stroke-linecap:round }
+    .run   { stroke:#E8C25A; stroke-width:14; stroke-linecap:round }
+    .stop  { fill:#FF5A5A }
+    .never { stroke:#6E8A99; stroke-width:10; stroke-dasharray:16 16;
+             stroke-linecap:round }
+  </style>
+
+  <circle id="oocyte" data-optional class="cell" cx="265" cy="235" r="80"/>
+  <g id="follicle_ring" data-optional class="ring">
+    <circle cx="373" cy="235" r="15"/><circle cx="357" cy="180" r="15"/>
+    <circle cx="313" cy="143" r="15"/><circle cx="265" cy="130" r="15"/>
+    <circle cx="217" cy="143" r="15"/><circle cx="173" cy="180" r="15"/>
+    <circle cx="157" cy="235" r="15"/><circle cx="173" cy="290" r="15"/>
+    <circle cx="217" cy="327" r="15"/><circle cx="265" cy="340" r="15"/>
+    <circle cx="313" cy="327" r="15"/><circle cx="357" cy="290" r="15"/>
+  </g>
+  <circle id="nucleus" data-optional class="nuc" cx="265" cy="235" r="40"/>
+  <g id="chromosomes" data-optional class="chrom">
+    <path d="M247 218 q10 12 -2 24"/><path d="M270 214 q12 14 0 28"/>
+    <path d="M283 240 q-8 10 2 18"/>
+  </g>
+
+  <line id="div_bar" data-optional class="run" x1="420" y1="235" x2="648" y2="235"/>
+
+  <g id="stop_bars" data-optional class="stop">
+    <rect x="686" y="196" width="18" height="78" rx="6"/>
+    <rect x="716" y="196" width="18" height="78" rx="6"/>
+  </g>
+  <line id="never_runs" data-optional class="never" x1="770" y1="235" x2="940" y2="235"/>
+</svg>

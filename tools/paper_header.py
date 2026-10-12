@@ -73,6 +73,11 @@ SUBJECTS = {
     "chemistry": ("रसायन शास्त्र", "CHEMISTRY"),
     "biology":   ("जीव विज्ञान", "BIOLOGY"),
     "maths":     ("गणित", "MATHEMATICS"),
+    # arts track (PROCESS_ARTS.md), added 2026-10-07 for GEO-C2-LA-01
+    "geography": ("भूगोल", "GEOGRAPHY"),
+    "history":   ("इतिहास", "HISTORY"),
+    "polsci":    ("राजनीति विज्ञान", "POLITICAL SCIENCE"),
+    "economics": ("अर्थशास्त्र", "ECONOMICS"),
 }
 
 # The question the sample card carries. Chemistry keeps the one the design was
@@ -97,11 +102,34 @@ Q_LEFT   = 330                      # where the first line starts. '(1)' ends
                                     # at x=260, so this is as far left as the
                                     # question can begin — the extra width buys
                                     # a line back on the longest questions.
-Q_TOP    = 820                      # top of the first line's ink
+Q_TOP    = 806                      # top of the first line's ink. 820 until
+                                    # 2026-09-24: with the leading fix the type
+                                    # sets smaller, and a smaller first line
+                                    # hung visibly BELOW the printed "(1)"
+                                    # beside it. 806 lifts the block by 14px so
+                                    # the first line tops out level with that
+                                    # "(1)" (measured on the sheet, de-rotated:
+                                    # "(1)" ink starts at y 854). It also buys
+                                    # 14px more band, since avail_h is
+                                    # Q_BOTTOM - Q_TOP.
 Q_LINE_H = 105                      # measured line pitch at Q_INK_H
+Q_GAP    = 0.20                     # clear space between two lines, as a
+                                    # fraction of the type size. The pitch is
+                                    # MEASURED off the lines (see
+                                    # question_block) and this is the daylight
+                                    # added on top: 0.20 reproduces the
+                                    # approved sheets, whose two- and
+                                    # three-line questions sit 17-20px apart.
+Q_MIN_SIZE = 44                     # legibility floor, in type pixels (~50px
+                                    # of ink). ABSOLUTE, not a fraction of
+                                    # base_size: base_size is fitted to the
+                                    # longest WORD and is wrong by up to 80%
+                                    # on a question whose longest word happens
+                                    # to carry no matras.
 Q_BOTTOM = 1112                     # last row the paper can carry text on.
                                     # 1168 put the closing line of the two
                                     # longest questions ON the torn edge.
+Q_WEIGHT = 350                     # see question_block.font()
 Q_INK_H  = 98                       # measured height of one line's ink
 
 
@@ -265,7 +293,20 @@ def question_block(text: str, ink_h: int, max_w: int,
     probe = ImageDraw.Draw(Image.new("L", (1, 1)))
 
     def font(px):
-        return ImageFont.truetype(Q_FONT, px)
+        f = ImageFont.truetype(Q_FONT, px)
+        # The design was set with a STATIC Noto Sans Devanagari Regular. The file
+        # now installed is the VARIABLE build, whose default 400 sets ~20% more
+        # ink than the approved sheets. 350 was chosen by redrawing
+        # BIO-C12-LA-02's own question onto its own sheet: 26,818px of ink
+        # against the original's 26,697, identical line breaks, and the whole
+        # block within 1-2px of where the original sits.
+        try:
+            names = [a["name"] for a in f.get_variation_axes()]
+            f.set_variation_by_axes([Q_WEIGHT if n == b"Weight" else 100
+                                     for n in names])
+        except (OSError, AttributeError):
+            pass                      # a static font: nothing to set
+        return f
 
     def ink_of(img):
         a = np.asarray(img)[..., 3] > 40
@@ -323,19 +364,46 @@ def question_block(text: str, ink_h: int, max_w: int,
         size = max(8, round(size * ink_h / max(1, got)))
     base_size = size
 
-    def pitch_for(px):
-        # 1.10: a block set smaller needs proportionally MORE leading, because
-        # Devanagari carries matras above the headline and conjuncts below the
-        # baseline whatever the size.
-        return max(1, round(Q_LINE_H * (px / base_size) * 1.10))
+    def measure(lines, px):
+        """(rows, pitch, block height, per-line ink around the baseline).
 
-    floor = max(16, int(base_size * 0.55))
-    while size > floor:
+        THE PITCH IS MEASURED, NOT PREDICTED. It used to be Q_LINE_H scaled by
+        px/base_size, and base_size is fitted to the longest WORD — so on
+        BIO-C3-SA-03, whose longest word carries no matra, base_size came out
+        150 against 84 on the approved sheet, the predicted pitch was 63px for
+        lines whose ink is 86px tall, and the four lines of the question
+        OVERLAPPED each other by 10-22px on the delivered card.
+
+        A line's real height is only known once it is drawn: Devanagari puts
+        matras above the headline and conjuncts below the baseline, and which
+        line is tallest depends on the words that landed in it. So every line
+        is drawn, the ink above and below the baseline is measured, and the
+        pitch is whatever keeps the deepest descender clear of the highest
+        matra under it, plus Q_GAP of daylight.
+        """
+        rows = [draw(l, px) for l in lines]
+        bl = px * 2                               # draw() puts the baseline here
+        ext = []
+        for r in rows:
+            a = np.asarray(r)[..., 3] > 40
+            ys = np.nonzero(a.any(axis=1))[0]
+            ext.append((bl - int(ys.min()), int(ys.max()) - bl))
+        need = max([ext[i][1] + ext[i + 1][0] for i in range(len(ext) - 1)],
+                   default=0)
+        pitch = max(1, need + round(Q_GAP * px))
+        height = ext[0][0] + (len(rows) - 1) * pitch + ext[-1][1]
+        return rows, pitch, height, ext
+
+    # Shrink until the MEASURED block fits the paper. Smaller type also wraps
+    # into fewer lines, so this usually ends with the whole question on the
+    # sheet rather than an ellipsis: BIO-C3-SA-03 lands at size 50, four lines,
+    # 267px of the 292px band, complete.
+    while True:
         lines = wrap(size)
-        if avail_h is None or len(lines) * pitch_for(size) <= avail_h:
+        rows, pitch, height, ext = measure(lines, size)
+        if avail_h is None or height <= avail_h or size <= Q_MIN_SIZE:
             break
         size -= 2
-    lines = wrap(size)
 
     # Last resort: TRUNCATE. The loop above shrinks the type until the block
     # fits, but it stops at a legibility floor — and below that floor it used to
@@ -343,9 +411,12 @@ def question_block(text: str, ink_h: int, max_w: int,
     # onto the background. A question that cannot fit at a readable size is cut
     # at the last line that fits and ends in an ellipsis; the card is a hook, and
     # the full question is on screen in the caption and on the answer page.
-    if avail_h is not None:
-        pitch = pitch_for(size)
-        keep = max(1, int(avail_h // pitch))
+    if avail_h is not None and height > avail_h:
+        # How many of these lines the band can carry AT THE MEASURED PITCH.
+        keep = 1
+        while (keep < len(lines)
+               and ext[0][0] + keep * pitch + ext[keep][1] <= avail_h):
+            keep += 1
         if len(lines) > keep:
             lines = lines[:keep]
             tail = lines[-1].rstrip(" ।,;:-")
@@ -353,7 +424,9 @@ def question_block(text: str, ink_h: int, max_w: int,
             while tail and draw_width(tail + " ...", size) > max_w:
                 tail = " ".join(tail.split(" ")[:-1]).rstrip(" ।,;:-")
             lines[-1] = (tail + " ...") if tail else "..."
-    return [draw(l, size) for l in lines], pitch_for(size), size * 2
+            # re-measure: the ellipsis line has its own height
+            rows, pitch, height, ext = measure(lines, size)
+    return rows, pitch, size * 2
 
 
 def build(subject: str, dest: Path, question: str | None = None) -> Path:

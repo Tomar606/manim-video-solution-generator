@@ -43,6 +43,7 @@ from src.manim_helpers import (ThemedScene, fit_caption, keep_clear, mark_group,
 
 INK, DIM, GOLD = "#FFFFFF", "#B9C6DC", "#FFC15C"
 GREEN, VIOLET, CYAN = "#7CE0B0", "#C792EA", "#5BC8F9"
+ORANGE = "#FF8A3D"
 
 FONT, FONT_W = "Khand", "BOLD"
 CAPTION_SIZE, CAPTION_W, CAPTION_TOP = 55, 0.90, 0.090
@@ -620,6 +621,38 @@ class PyqPart(ThemedScene):
             b.set_opacity(0.0)
         return rows, bodies
 
+    def reveal_flow(self, spec, size=30):
+        """a -> b -> c that fills in one step at a time.
+
+        Same contract as `reveal_points`: this question is explicit that the
+        order has to be remembered ("क्रम बदला तो नंबर गया"), so the chain has
+        to arrive step by step as each is named, not land whole before the
+        second and third have even been spoken.
+        """
+        items = spec["items"]
+        units = []
+        for i, it in enumerate(items):
+            parts = []
+            if i:
+                parts.append(Text("→", font=FONT, font_size=size + 4, color=DIM))
+            parts.append(Text(str(it), font=FONT, font_size=size, color=INK,
+                              weight="MEDIUM"))
+            # arranged INTERNALLY first — a bare VGroup.add() leaves every new
+            # Text at the origin, so the outer arrange() below would then move
+            # arrow and label as one rigid, still-overlapping pair
+            units.append(VGroup(*parts).arrange(RIGHT, buff=0.22))
+        chain = VGroup(*units).arrange(RIGHT, buff=0.26)
+        _, w, _ = self.stage_box()
+        if chain.width > w:                     # wrap rather than shrink to fit
+            half = (len(units) + 1) // 2
+            chain = VGroup(VGroup(*units[:half]).arrange(RIGHT, buff=0.26),
+                           VGroup(*units[half:]).arrange(RIGHT, buff=0.26)
+                           ).arrange(DOWN, buff=0.34)
+        self.place(chain)
+        for u in units:
+            u.set_opacity(0.0)
+        return chain, units
+
     def build_formula_steps(self, spec):
         """A derivation the student watches being CONSTRUCTED, not one that
         arrives finished.
@@ -637,28 +670,77 @@ class PyqPart(ThemedScene):
         # at the arrow, the way it would be written on a board, and the block can
         # then be grown to fill the band instead.
         ARROWS = (r"\longrightarrow", r"\rightarrow", r"\to ")
-        lines = []
+        # One GROUP per authored `tex` entry — a group is 2 display lines when
+        # it has to be split to fit the stage, 1 otherwise. Flattening this
+        # into a single list of lines (the old approach) silently dropped
+        # content: `reveal_at` has one time per AUTHORED entry, so a long
+        # equation that split into 2 physical lines shifted every entry after
+        # it out of alignment, and the last authored line — here "Fe²⁺ →
+        # Fe³⁺" — never got a `reveal_at` pairing and never appeared at all.
+        groups = []
         for t in raw:
             arrow = next((a for a in ARROWS if a in t), None)
-            if arrow and len(t) > 34:
-                lhs, rhs = t.split(arrow, 1)
-                lines.append(lhs.strip())
-                lines.append(arrow.strip() + " " + rhs.strip())
+            lhs, rhs = t.split(arrow, 1) if arrow else (None, None)
+            lhs, rhs = (lhs.strip(), rhs.strip()) if arrow else (None, None)
+            # Only split when BOTH sides are real content. A beat that already
+            # hands us one line ending "... \longrightarrow" (reactants, arrow
+            # trailing so the next line can open on the products) has an empty
+            # rhs here — splitting it anyway inserted a third, arrow-only line
+            # that no `reveal_at` entry pointed at, so the products line behind
+            # it never got a reveal and silently never appeared on screen.
+            if arrow and len(t) > 34 and lhs and rhs:
+                groups.append([lhs, arrow.strip() + " " + rhs])
             else:
-                lines.append(t)
+                groups.append([t])
         rows = VGroup()
         if spec.get("label"):
             # sized like a compare-column heading, which reads correctly on a phone
             rows.add(Text(str(spec["label"]), font=FONT, font_size=40,
                           color=GREEN, weight="BOLD"))
-        eqs = [MathTex(t).scale(1.05).set_color(INK) for t in lines]
-        for e in eqs:
-            rows.add(e)
+        # A substance named by colour in the narration gets that colour here,
+        # not just white-on-dark like every other formula — "नारंगी बनता है"
+        # should land on an orange product, not text the student has to
+        # re-translate. Keyed to the AUTHORED tex entry (group index), so it
+        # survives the lhs/rhs split above.
+        #
+        # Coloured at CONSTRUCTION via tex_to_color_map, not a post-hoc
+        # set_color_by_tex: Manim splits an unbraced string like "Na_2Cr_2O_7"
+        # into several submobjects, so a call made after the fact searches for
+        # a substring no single submobject's tex string actually equals, and
+        # silently colours nothing. tex_to_color_map isolates the substring in
+        # the TeX source before compiling, so the subscripts survive.
+        cmaps = {}
+        for c in spec.get("colors", []):
+            cmaps.setdefault(int(c.get("group", 0)), {})[c["part"]] = c["color"]
+        eq_groups = []
+        for gi, g in enumerate(groups):
+            cmap = cmaps.get(gi)
+            row = []
+            for t in g:
+                # `color=INK` is the base every OTHER part keeps — passed into
+                # the constructor, not set afterward, because MathTex applies
+                # tex_to_color_map's per-substring colours during __init__;
+                # a set_color() call after the fact would paint over them.
+                m = MathTex(t, tex_to_color_map=cmap, color=INK).scale(1.05) if cmap \
+                    else MathTex(t).scale(1.05).set_color(INK)
+                row.append(m)
+            eq_groups.append(row)
+        for g in eq_groups:
+            for e in g:
+                rows.add(e)
         rows.arrange(DOWN, buff=0.38)
-        self.place(rows)
-        for e in eqs:
-            e.set_opacity(0.0)
-        return rows, eqs
+        # Less than place()'s usual 0.94: the focus box drawn around each
+        # step (SurroundingRectangle, buff=0.16) is built AFTER this fit, so
+        # place() has no way to know a box is coming. A 3-group derivation
+        # packed to 0.94 left no room for that box's own padding below the
+        # last line, so clamp_to_band pushed the box UP into the dimmed line
+        # above it — a box overlapping the very text it was drawn to
+        # highlight. This margin is reserved for exactly that padding.
+        self.place(rows, pad=0.84)
+        for g in eq_groups:
+            for e in g:
+                e.set_opacity(0.0)
+        return rows, eq_groups
 
     def build_beat(self, spec):
         t = spec["type"]
@@ -736,6 +818,7 @@ class PyqPart(ThemedScene):
         self.caption_mob = None
         self._wcache = {}
         self.stage_mobs = []
+        self._beat_t_out = None
 
         # cue 0 is always the question card; the sheet carries the question.
         # Except for a REPLACEMENT ENDING rendered as its own part: it is spliced
@@ -761,14 +844,35 @@ class PyqPart(ThemedScene):
             _cl[str(PART)] if isinstance(_cl, dict) else _cl)
         for i, line in enumerate(LINES):
             self.at(max(0.0, float(line["start"]) - 0.35))
+            if (self._beat_t_out is not None and i == self._beat_t_out
+                    and i not in beats):
+                # The active beat declared its own end (before the NEXT beat
+                # starts) — clear it so captions resume for whatever the
+                # teacher says after it, instead of leaving a stale box up as
+                # a silent backdrop for lines it never covered.
+                self.clear_stage()
+                self.stage_mobs = []
+                self._beat_t_out = None
             if i == card_until or i in beats:
                 self.clear_stage()          # the card goes here, and every beat
                                             # replaces the one before it
                 self.stage_mobs = []
+                self._beat_t_out = None
             if i in beats:
+                # A beat is about to own the stage, and a beat never shares the
+                # frame with a caption — the presenter is already speaking the
+                # line and the diagram is already organising it, so a caption
+                # on top is a third copy of the same information. Drop it
+                # BEFORE build_beat()/place() measure the band, or the diagram
+                # is laid out as if a caption still had to fit above it.
+                if getattr(self, "caption_mob", None) is not None:
+                    self.remove(self.caption_mob)
+                    self.caption_mob = None
                 spec = beats[i]
-                if spec.get("reveal") == "progressive" and spec["type"] == "points":
-                    rows, bodies = self.reveal_points(spec)
+                self._beat_t_out = spec.get("t_out")
+                if spec.get("reveal") == "progressive" and spec["type"] in ("points", "flow"):
+                    rows, bodies = (self.reveal_points(spec) if spec["type"] == "points"
+                                    else self.reveal_flow(spec))
                     self.stage_mobs.append(rows)
                     self.add(rows)
                     self._pending_reveal = list(zip(spec.get("reveal_at", []), bodies))
@@ -785,10 +889,10 @@ class PyqPart(ThemedScene):
                 elif spec["type"] == "formula" and spec.get("build") == "progressive":
                     self._pending_reveal = []
                     self._labels = []
-                    rows, eqs = self.build_formula_steps(spec)
+                    rows, eq_groups = self.build_formula_steps(spec)
                     self.stage_mobs.append(rows)
                     self.add(rows)
-                    self._pending_steps = list(zip(spec.get("reveal_at", []), eqs))
+                    self._pending_steps = list(zip(spec.get("reveal_at", []), eq_groups))
                     self._focus_box = None
                 else:
                     # Cleared BEFORE the build, never after: build_beat is what
@@ -830,20 +934,26 @@ class PyqPart(ThemedScene):
                     if gone:
                         self._layout_violations.append(
                             f"t={self.time:6.2f}s REVEALED ITEM VANISHED: {gone}")
-            # a derivation advances one line at a time, and the line just
-            # written is the one that is boxed
-            for at, eq in list(getattr(self, "_pending_steps", [])):
+            # a derivation advances one STEP at a time — a step is 1 or 2
+            # physical lines (2 when an equation had to split to fit), and
+            # they arrive and get boxed together, since they are one authored
+            # line the width guard broke apart, not two separate steps
+            for at, eq_group in list(getattr(self, "_pending_steps", [])):
                 if at == i:
-                    for _, other in self._pending_steps:
-                        if other is not eq and other.get_fill_opacity() > 0.5:
-                            other.set_opacity(0.45)
+                    for _, other_group in self._pending_steps:
+                        if other_group is eq_group:
+                            continue
+                        for other in other_group:
+                            if other.get_fill_opacity() > 0.5:
+                                other.set_opacity(0.45)
                     # set_opacity, not Write: the lines are pre-built at
                     # opacity 0 so the group can be laid out once, and Write
                     # animates a mobject that is still invisible — the first
                     # render showed the focus box around empty space.
-                    self.play(eq.animate.set_opacity(1.0), run_time=0.45)
+                    self.play(*[e.animate.set_opacity(1.0) for e in eq_group],
+                             run_time=0.45)
                     box = self.clamp_to_band(
-                        SurroundingRectangle(eq, color=GOLD, buff=0.16))
+                        SurroundingRectangle(VGroup(*eq_group), color=GOLD, buff=0.16))
                     box.set_stroke(width=3)
                     old = getattr(self, "_focus_box", None)
                     if old is not None:
@@ -856,8 +966,18 @@ class PyqPart(ThemedScene):
                     self.play(FadeIn(lab, shift=RIGHT * 0.10), run_time=0.30)
                     self.stage_mobs.append(lab)
             self.at(float(line["start"]))
-            if i >= card_until:
+            # Captions run ONLY when the stage is otherwise empty — nothing
+            # but the caption and the presenter. `stage_mobs` is exactly
+            # "what a beat put on the stage", and it only ever changes at a
+            # clear_stage() trigger above, so this is a per-BEAT decision,
+            # not a per-caption one: a beat's whole stretch of lines runs
+            # silent together rather than the band blinking on and off
+            # inside a sentence.
+            if i >= card_until and not self.stage_mobs:
                 self._line(line["text"], line.get("end"))
+            elif getattr(self, "caption_mob", None) is not None:
+                self.remove(self.caption_mob)
+                self.caption_mob = None
         self.at(CLIP_END)
         self.report_layout()
 

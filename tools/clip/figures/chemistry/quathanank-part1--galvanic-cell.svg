@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Galvanic cell: two half-cells joined by a salt bridge. Spontaneous redox:
+       anode (left, negative) oxidises, cathode (right, positive) reduces,
+       electrons flow anode->cathode through the external wire, bulb glows.
+       Signs are drawn as paths, never text. All words come from the spec. -->
+
+  <g id="beakers" data-optional>
+    <path d="M190 200 V400 q0 26 26 26 H404 q26 0 26 -26 V200" fill="none" stroke="#7FD4FF" stroke-width="7"/>
+    <rect x="196" y="268" width="228" height="152" rx="14" fill="#7FD4FF" fill-opacity="0.10"/>
+    <path d="M650 200 V400 q0 26 26 26 H864 q26 0 26 -26 V200" fill="none" stroke="#7FD4FF" stroke-width="7"/>
+    <rect x="656" y="268" width="228" height="152" rx="14" fill="#7FD4FF" fill-opacity="0.10"/>
+  </g>
+
+  <g id="electrode_L" data-optional>
+    <rect x="278" y="140" width="30" height="230" rx="6" fill="#12283A" stroke="#B8C6D4" stroke-width="6"/>
+  </g>
+  <g id="electrode_R" data-optional>
+    <rect x="772" y="140" width="30" height="230" rx="6" fill="#2A1E05" stroke="#FFC53D" stroke-width="6"/>
+  </g>
+
+  <g id="salt_bridge" data-optional>
+    <path d="M395 300 V190 q0 -34 34 -34 H651 q34 0 34 34 V300" fill="none"
+          stroke="#EDC68A" stroke-width="20" stroke-linecap="round"/>
+    <path d="M395 300 V190 q0 -34 34 -34 H651 q34 0 34 34 V300" fill="none"
+          stroke="#2A1E05" stroke-width="8" stroke-linecap="round" stroke-dasharray="2 20"/>
+  </g>
+
+  <g id="wire" data-optional>
+    <path d="M293 140 V70 H478" fill="none" stroke="#B8C6D4" stroke-width="7" stroke-linecap="round"/>
+    <path d="M602 70 H787 V140" fill="none" stroke="#B8C6D4" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <g id="bulb_glow" data-optional>
+    <circle cx="540" cy="70" r="52" fill="#FFC53D" fill-opacity="0.25"/>
+  </g>
+  <g id="bulb" data-optional>
+    <circle cx="540" cy="70" r="30" fill="#2A1E05" stroke="#FFC53D" stroke-width="7"/>
+    <path d="M526 84 q14 -26 28 0" fill="none" stroke="#FFC53D" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <g id="e_flow" data-optional>
+    <path d="M330 70 l26 0 m-10 -9 l12 9 l-12 9" fill="none" stroke="#FFC53D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M700 70 l26 0 m-10 -9 l12 9 l-12 9" fill="none" stroke="#FFC53D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g id="sign_minus" data-optional>
+    <circle cx="293" cy="112" r="22" fill="#12283A" stroke="#FF5A5A" stroke-width="6"/>
+    <path d="M281 112 h24" stroke="#FF5A5A" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <g id="sign_plus" data-optional>
+    <circle cx="787" cy="112" r="22" fill="#12283A" stroke="#7CE38B" stroke-width="6"/>
+    <path d="M775 112 h24 M787 100 v24" stroke="#7CE38B" stroke-width="7" stroke-linecap="round"/>
+  </g>
+</svg>

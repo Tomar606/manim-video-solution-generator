@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- A reversible reaction at equilibrium: the forward arrow and the backward
+       arrow are the SAME weight, and a stream of particles crosses each way at the same pace, so
+       "the two rates are equal" is what the eye sees. Forward cyan, backward
+       warm. No text elements: every word comes from the spec. -->
+  <circle id="badge" data-optional cx="360" cy="38" r="28" fill="#0B1D24" stroke="#E8C25A" stroke-width="6"/>
+
+  <rect id="box_r" data-optional x="70" y="160" width="300" height="120" rx="24"
+        fill="#0E2A3A" fill-opacity="0.62" stroke="#78C0F0" stroke-width="6"/>
+  <rect id="box_p" data-optional x="710" y="160" width="300" height="120" rx="24"
+        fill="#2E2012" fill-opacity="0.62" stroke="#F0A860" stroke-width="6"/>
+
+  <g id="arrow_f" data-optional>
+    <line x1="395" y1="195" x2="660" y2="195" stroke="#78C0F0" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <polygon id="head_f" data-optional points="690,195 656,177 656,213" fill="#78C0F0"/>
+  <g id="arrow_b" data-optional>
+    <line x1="685" y1="245" x2="420" y2="245" stroke="#F0A860" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <polygon id="head_b" data-optional points="390,245 424,227 424,263" fill="#F0A860"/>
+
+  <!-- a stream of particles each way, clipped to the arrow shafts. Each stream
+       shifts by exactly one spacing (80) per cycle and snaps back, so the
+       pattern repeats and reads as one continuous flow at equal speed both
+       ways. The clip sits on a STATIC parent: engine.js transforms the id'd
+       child, and a clip on the moving element would move with it. -->
+  <defs>
+    <clipPath id="clip_f"><rect x="405" y="175" width="250" height="40"/></clipPath>
+    <clipPath id="clip_b"><rect x="425" y="225" width="250" height="40"/></clipPath>
+  </defs>
+  <g clip-path="url(#clip_f)">
+    <g id="dots_f" data-optional>
+      <circle cx="380" cy="195" r="10" fill="#F2F2F2"/>
+      <circle cx="460" cy="195" r="10" fill="#F2F2F2"/>
+      <circle cx="540" cy="195" r="10" fill="#F2F2F2"/>
+      <circle cx="620" cy="195" r="10" fill="#F2F2F2"/>
+      <circle cx="700" cy="195" r="10" fill="#F2F2F2"/>
+    </g>
+  </g>
+  <g clip-path="url(#clip_b)">
+    <g id="dots_b" data-optional>
+      <circle cx="380" cy="245" r="10" fill="#F2F2F2"/>
+      <circle cx="460" cy="245" r="10" fill="#F2F2F2"/>
+      <circle cx="540" cy="245" r="10" fill="#F2F2F2"/>
+      <circle cx="620" cy="245" r="10" fill="#F2F2F2"/>
+      <circle cx="700" cy="245" r="10" fill="#F2F2F2"/>
+    </g>
+  </g>
+</svg>

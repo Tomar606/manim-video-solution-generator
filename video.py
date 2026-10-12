@@ -9,6 +9,7 @@
     video composite <project>                    key the presenter over it
     video qc <project>                           Claude reviews the frames
     video endscreenshot [project]                the hand-written Q&A end card
+    video poster <image>                         animate a still, region by region
     video build <project>                        everything, in order
     video status [project]                       where each stage stands
     video doctor                                 is this machine set up?
@@ -21,9 +22,11 @@ without duplicating logic.
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import shutil
 import sys
+from dataclasses import replace
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -962,6 +965,57 @@ def cmd_dashboard(args) -> int:
     return 0
 
 
+def cmd_poster(args) -> int:
+    """Animate a still image: hold on each region, glide to the next."""
+    from src import poster_zoom as pz
+
+    image = Path(args.image)
+    if not image.exists():
+        print(f"❌ no such image: {image}")
+        return 1
+    if args.spec:
+        spec = pz.load_spec(Path(args.spec))
+        base_dir = Path(args.spec).parent
+    else:
+        print("👀 finding the regions…")
+        spec = pz.Spec(points=pz.detect_points(image, args.auto or None))
+        print(f"   found {len(spec.points)}")
+        base_dir = image.parent
+
+    if args.orientation == "landscape":
+        spec.width, spec.height = 1920, 1080
+    elif args.orientation == "portrait":
+        spec.width, spec.height = 1080, 1920
+    for name in ("fps", "dwell", "transition", "pad"):
+        if getattr(args, name, None) is not None:
+            setattr(spec, name, getattr(args, name))
+    if args.dim is not None:
+        spec.glow = replace(spec.glow, dim=args.dim)
+    if args.no_glow:
+        spec.glow = replace(spec.glow, enabled=False)
+
+    out_dir = Path(args.out).parent if args.out else image.parent
+    if args.write_spec:
+        Path(args.write_spec).write_text(
+            json.dumps(pz.spec_to_dict(spec, image), indent=2, ensure_ascii=False),
+            encoding="utf-8")
+        print(f"✅ wrote {args.write_spec}")
+        return 0
+
+    print(pz.describe(image, spec))
+    if args.stills:
+        stills = pz.write_stills(image, spec, Path(args.stills))
+        sheet = pz.contact_sheet(stills, Path(args.stills) / "contact-sheet.png")
+        print(f"✅ {len(stills)} frames in {args.stills}")
+        print(f"   {sheet}")
+        return 0
+
+    out = Path(args.out) if args.out else out_dir / f"{image.stem}.zoom.mp4"
+    pz.render(image, spec, out, base_dir=base_dir)
+    print(f"✅ {out}")
+    return 0
+
+
 def cmd_sfx(args) -> int:
     from src import sfx
     root = Path(__file__).resolve().parent
@@ -1193,6 +1247,25 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--port", type=int, default=8000)
     p.add_argument("--no-browser", action="store_true")
     p.set_defaults(func=cmd_dashboard)
+
+    p = sub.add_parser("poster",
+                       help="Animate a still: hold on each region, glide on")
+    p.add_argument("image")
+    p.add_argument("--spec", help="JSON/YAML file of regions")
+    p.add_argument("--auto", nargs="?", type=int, const=0, metavar="N",
+                   help="find the regions with a vision pass")
+    p.add_argument("--write-spec", help="save the regions and stop")
+    p.add_argument("--stills", help="write one frame per region and stop")
+    p.add_argument("-o", "--out", help="output .mp4")
+    p.add_argument("--orientation", choices=["landscape", "portrait"])
+    p.add_argument("--fps", type=int)
+    p.add_argument("--dwell", type=float, help="seconds held on each region")
+    p.add_argument("--transition", type=float, help="seconds per move")
+    p.add_argument("--pad", type=float, help="margin around a region")
+    p.add_argument("--dim", type=float,
+                   help="darken everything outside the active region, 0..1")
+    p.add_argument("--no-glow", action="store_true")
+    p.set_defaults(func=cmd_poster)
 
     p = sub.add_parser("sfx", help="(Re)build the sound-effect library")
     p.add_argument("--force", action="store_true")

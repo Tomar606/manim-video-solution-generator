@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Ecological pyramid, INVERTED, TWO tiers — the BIOMASS pyramid of the sea.
+       उत्पादक 4 at the narrow base, शाकाहारी 21 wider above it.
+
+       Two tiers rather than three because that is what the answer sheet shows
+       for this example, and a third empty tier would invite a number nobody
+       wrote down.
+
+       TRUNCATED AT THE BOTTOM for the same reason as the other two: a pointed
+       base leaves no room for the label that carries the number. Widths taken
+       at the label rows the chip spec uses (y fractions 0.34 and 0.691):
+         y=160 (upper) 225..865 = 640px   "शाकाहारी  21"
+         y=325 (base)  340..740 = 400px   "उत्पादक  4"
+
+       Gold on the NARROW base again — the same visual grammar as the other
+       inverted pyramid, so the two examples read as the same idea twice rather
+       than as two unrelated diagrams.
+
+       ids: tier_top, tier_producer
+       Inside x 24-1056, y 18-452. No text element — Devanagari is composited. -->
+
+  <g id="tier_top" data-optional>
+    <path d="M150 70 L950 70 L780 250 L300 250 Z"
+          fill="#12283A" stroke="#7FD4FF" stroke-width="9" stroke-linejoin="round"/>
+  </g>
+  <g id="tier_producer" data-optional>
+    <path d="M300 250 L780 250 L700 400 L380 400 Z"
+          fill="#2A1E05" stroke="#FFC53D" stroke-width="9" stroke-linejoin="round"/>
+  </g>
+</svg>

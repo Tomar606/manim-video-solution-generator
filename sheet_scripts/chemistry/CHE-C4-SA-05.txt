@@ -1,0 +1,116 @@
+“कारण सहित समझाइए—
+(i) संक्रमण धातुओं एवं इनके अनेक यौगिक अनुचुम्बकीय व्यवहार दर्शाते हैं।
+(ii) संक्रमण धातुओं के परमाण्वीयकरण की एन्थैल्पी उच्च होती है।”
+Part 1
+MP Board कक्षा 12वीं के बच्चों!
+आज का सवाल है— “कारण सहित समझाइए”, और इसमें संक्रमण धातुओं के दो बहुत important properties पूछे गए हैं।
+इस तरह के questions में सिर्फ property का नाम लिखना enough नहीं है। Property के पीछे का proper reason लिखना होता है। तो चलो दोनों को concept के साथ समझते हैं।
+पहला— संक्रमण धातुएँ एवं इनके अनेक यौगिक अनुचुम्बकीय व्यवहार क्यों दर्शाते हैं?
+सबसे पहले समझो कि अनुचुम्बकीय यानी paramagnetic का मतलब क्या होता है।
+जिस substance में अयुग्मित electrons मौजूद होते हैं, वह बाहरी magnetic field की ओर आकर्षित होता है। ऐसे पदार्थों को अनुचुम्बकीय पदार्थ कहते हैं।
+अब transition elements को देखो।
+इनमें d-orbitals partially filled होते हैं। इसलिए इनके atoms या ions में अक्सर unpaired यानी अयुग्मित electrons मौजूद रहते हैं।
+On Screen:
+अयुग्मित electron → अनुचुम्बकीय व्यवहार
+“अयुग्मित electron होने के कारण transition elements paramagnetic behaviour यानी अनुचुम्बकीय व्यवहार दिखाते हैं।”
+और यहाँ एक important बात याद रखो— किसी substance में जितने अधिक unpaired electrons होंगे, उसका paramagnetic behaviour उतना ही अधिक होगा।
+इसलिए transition elements और इनके कई compounds में unpaired electrons होने के कारण ये paramagnetic behaviour प्रदर्शित करते हैं।
+अब आते हैं दूसरे point पर।
+दूसरा— संक्रमण धातुओं के परमाण्वीयकरण की एन्थैल्पी उच्च क्यों होती है?
+परमाण्वीयकरण की एन्थैल्पी का मतलब है— एक mole धातु को उसके gaseous atoms में बदलने के लिए required energy।
+Transition metals में effective nuclear charge अधिक होता है और इनके पास bonding में participate करने वाले valence electrons की संख्या भी अधिक होती है।
+इस कारण इनके atoms के बीच strong metallic bonding बनती है।
+अब जब metallic bond strong होगा, तो metal को अलग-अलग gaseous atoms में तोड़ने के लिए ज्यादा energy चाहिए होगी।
+इसीलिए transition metals की enthalpy of atomization generally high होती है।
+On Screen:
+Strong metallic bonding → अधिक energy required → उच्च परमाण्वीयकरण एन्थैल्पी
+“Strong metallic bonding के कारण ज्यादा energy required होती है, इसलिए enthalpy of atomization high होती है।”
+तो Part 1 में हमने दो reasons समझ लिए—
+Unpaired electrons → paramagnetic behaviour
+और
+Strong metallic bonding → high enthalpy of atomization.
+लेकिन अभी दो और बहुत important properties बाकी हैं— transition metal compounds coloured क्यों होते हैं और transition metals अच्छे catalysts क्यों होते हैं?
+इन दोनों को concept के साथ समझेंगे Part 2 में।
+
+
+
+
+प्रश्न:
+“कारण सहित समझाइए—
+(iii) संक्रमण धातुएँ सामान्यतः रंगीन यौगिक बनाते हैं।”
+Part 2
+MP Board कक्षा 12वीं के बच्चों!
+Part 1 में हमने transition metals के दो important properties के reasons समझे थे।
+पहला— unpaired electrons की वजह से transition metals और इनके कई compounds paramagnetic behaviour दिखाते हैं।
+दूसरा— strong metallic bonding की वजह से transition metals की enthalpy of atomization high होती है।
+अब चलते हैं तीसरे और बहुत important point पर—
+तीसरा— संक्रमण धातुएँ सामान्यतः रंगीन यौगिक क्यों बनाती हैं?
+इसका main reason है इनके partially filled d-orbitals।
+Transition metal ions में जब d-orbitals partially filled होते हैं, तो इनके d-electrons एक d-orbital से दूसरे d-orbital में transition कर सकते हैं।
+इसे d-d transition कहते हैं।
+On Screen:
+d-electron → d-orbital से दूसरे d-orbital में transition
+“d-electron एक d-orbital से दूसरे d-orbital में transition करता है।”
+इस transition के लिए energy required होती है।
+यह energy transition metal ion visible light से absorb कर सकता है।
+Visible light में अलग-अलग colours की radiation होती हैं। Transition metal ion इनमें से कुछ radiation absorb कर लेता है और जो colour absorb नहीं होता, उसका complementary colour हमें दिखाई देता है।
+यही वजह है कि कई transition metal compounds coloured दिखाई देते हैं।
+एक example देखते हैं।
+On Screen:
+[Cu(H₂O)₆]²⁺ → नीला
+“C u, open bracket H two O close bracket six, two plus ion नीला दिखाई देता है।”
+यह ion visible light के red region की radiation absorb करता है और उसका complementary colour blue दिखाई देता है।
+इसलिए यह ion blue दिखाई देता है।
+कुछ और examples भी याद रख सकते हो—
+On Screen:
+Cr²⁺ → नीला
+Cr³⁺ → बैंगनी
+Mn²⁺ → बैंगनी
+Mn³⁺ → गुलाबी
+Fe²⁺ → हरा
+Fe³⁺ → पीला
+“C r two plus blue, C r three plus purple, M n two plus purple, M n three plus pink, F e two plus green और F e three plus yellow।”
+अब यहाँ एक important point है— हर transition metal ion coloured नहीं होता।
+अगर d-subshell completely filled या completely empty हो, तो d-d transition संभव नहीं होता। इसलिए ऐसे ions colourless भी हो सकते हैं।
+तो इस पूरे point का main reason याद रखो—
+Partially filled d-orbitals → d-d transition → visible light का absorption → coloured appearance.
+अब तक हमने तीन properties cover कर ली हैं।
+लेकिन इस question का आखिरी और equally important point अभी बाकी है— transition metals और उनके कई compounds अच्छे catalysts क्यों होते हैं?
+इसका connection इनके variable oxidation states और reaction के दौरान intermediate species बनाने की ability से है।
+इसे detail में समझेंगे Part 3 में।
+
+
+प्रश्न:
+“कारण सहित समझाइए—
+(iv) संक्रमण धातुएँ एवं इनके अनेक यौगिक अच्छे उत्प्रेरक होते हैं।”
+Part 3
+MP Board कक्षा 12वीं के बच्चों!
+Part 1 और Part 2 में हमने transition metals की तीन important properties समझीं।
+Unpaired electrons के कारण paramagnetic behaviour,
+strong metallic bonding के कारण high enthalpy of atomization,
+और partially filled d-orbitals में d-d transition के कारण कई compounds का coloured होना।
+अब आते हैं आखिरी point पर—
+चौथा— संक्रमण धातुएँ एवं इनके अनेक यौगिक अच्छे उत्प्रेरक क्यों होते हैं?
+Transition metals की सबसे important properties में से एक है इनकी variable oxidation states।
+इनमें n s और (n minus one) d orbitals की energies में बहुत ज्यादा difference नहीं होता।
+इसलिए ये अलग-अलग oxidation states आसानी से प्रदर्शित कर सकते हैं।
+अब इसका catalyst के रूप में क्या फायदा है?
+Reaction के दौरान transition metal अपनी oxidation state को बदलकर intermediate compounds या intermediate species बना सकता है।
+इससे reaction के लिए एक ऐसा pathway मिल सकता है जिसमें activation energy कम होती है।
+और जब activation energy कम होती है, तो reaction की rate बढ़ सकती है।
+On Screen:
+Variable oxidation states → Intermediate formation → Reaction आसान → Catalyst
+“Variable oxidation states के कारण intermediate formation हो सकता है, जिससे reaction आसान होती है और catalyst की तरह काम करने में मदद मिलती है।”
+Transition metals की surface भी reactant molecules को adsorb कर सकती है। इससे reactant molecules के बीच reaction होने की possibility बढ़ती है।
+इसीलिए transition metals और उनके कई compounds अच्छे catalysts के रूप में काम करते हैं।
+अब पूरे question का final revision कर लेते हैं।
+पहला— Paramagnetic behaviour:
+Transition metals में unpaired electrons होते हैं, इसलिए वे और इनके कई compounds paramagnetic behaviour दिखाते हैं।
+दूसरा— High enthalpy of atomization:
+High effective nuclear charge और ज्यादा valence electrons के कारण strong metallic bonding होती है, इसलिए इन्हें gaseous atoms में बदलने के लिए ज्यादा energy चाहिए।
+तीसरा— Coloured compounds:
+Partially filled d-orbitals में d-d transition होता है, जिसके कारण visible light की कुछ radiation absorb होती है और complementary colour दिखाई देता है।
+चौथा— Catalytic properties:
+Variable oxidation states और intermediate species बनाने की ability के कारण transition metals और इनके कई compounds अच्छे catalysts होते हैं।
+बस, इन चारों properties के reason का logic याद रखो। केवल चार lines रटने की जरूरत नहीं है।
+अब इसका exact answer exam में किस तरह लिखना है, वो आपको Notes button पर click करके मिल जाएगा। ऐसे ही Chemistry के हर “कारण सहित समझाइए” वाले question को concept के साथ तैयार करते जाओ, ताकि exam में answer लिखते समय कोई confusion न रहे।

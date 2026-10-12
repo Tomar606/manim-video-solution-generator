@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- The answer's own shape: a two-column table of the four differences.
+       Rows fill in top to bottom. Left column cyan (rate), right column warm
+       (rate constant), as everywhere else in this video.
+       No text elements: every word comes from the spec. -->
+  <g id="head" data-optional>
+    <rect x="110" y="8" width="460" height="70" rx="18" fill="#0E2A3A" fill-opacity="0.8" stroke="#78C0F0" stroke-width="6"/>
+    <rect x="580" y="8" width="460" height="70" rx="18" fill="#2E2012" fill-opacity="0.8" stroke="#F0A860" stroke-width="6"/>
+  </g>
+  <g id="row1" data-optional>
+    <circle cx="70" cy="135" r="26" fill="#0B1D24" stroke="#DCE6EE" stroke-width="6"/>
+    <rect x="110" y="92" width="460" height="86" rx="16" fill="#0E2A3A" fill-opacity="0.55" stroke="#78C0F0" stroke-opacity="0.6" stroke-width="4"/>
+    <rect x="580" y="92" width="460" height="86" rx="16" fill="#2E2012" fill-opacity="0.55" stroke="#F0A860" stroke-opacity="0.6" stroke-width="4"/>
+  </g>
+  <g id="row2" data-optional>
+    <circle cx="70" cy="229" r="26" fill="#0B1D24" stroke="#DCE6EE" stroke-width="6"/>
+    <rect x="110" y="186" width="460" height="86" rx="16" fill="#0E2A3A" fill-opacity="0.55" stroke="#78C0F0" stroke-opacity="0.6" stroke-width="4"/>
+    <rect x="580" y="186" width="460" height="86" rx="16" fill="#2E2012" fill-opacity="0.55" stroke="#F0A860" stroke-opacity="0.6" stroke-width="4"/>
+  </g>
+  <g id="row3" data-optional>
+    <circle cx="70" cy="323" r="26" fill="#0B1D24" stroke="#DCE6EE" stroke-width="6"/>
+    <rect x="110" y="280" width="460" height="86" rx="16" fill="#0E2A3A" fill-opacity="0.55" stroke="#78C0F0" stroke-opacity="0.6" stroke-width="4"/>
+    <rect x="580" y="280" width="460" height="86" rx="16" fill="#2E2012" fill-opacity="0.55" stroke="#F0A860" stroke-opacity="0.6" stroke-width="4"/>
+  </g>
+  <g id="row4" data-optional>
+    <circle cx="70" cy="417" r="26" fill="#0B1D24" stroke="#DCE6EE" stroke-width="6"/>
+    <rect x="110" y="374" width="460" height="86" rx="16" fill="#0E2A3A" fill-opacity="0.55" stroke="#78C0F0" stroke-opacity="0.6" stroke-width="4"/>
+    <rect x="580" y="374" width="460" height="86" rx="16" fill="#2E2012" fill-opacity="0.55" stroke="#F0A860" stroke-opacity="0.6" stroke-width="4"/>
+  </g>
+</svg>

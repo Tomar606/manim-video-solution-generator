@@ -107,3 +107,15 @@ kiya: dono corners me logo bana diya.
 → Sabak (general): kisi cheez ka naam positive instructions me likhna — chahe
   "mat banao" ke saath — usko banane ka signal hai. Jo nahi chahiye uska naam
   sirf NEGATIVE list me aaye, aur wahan bhi kam se kam.
+
+## Magadha history POC (Sep 2026)
+
+**BUG: a place name in the prompt came back as TEXT in the clip.**
+V13 said "Dusk over Rajagriha: the massive wall…". The clip had "Rajagoriha"
+(misspelled) painted bottom-left and "Rajagriha" again bottom-right — while the
+NEGATIVE list banned text, letters and signs. The same batch's other 13 prompts
+named no place and came back clean.
+→ RULE: never put a proper name (city, king, river, kingdom) in the SCENE text.
+  Describe it ("an ancient Indian capital", "the broad river") and typeset the
+  name over the clip ourselves. Same lesson as the logo bug: naming a thing is a
+  signal to draw it, and a name is drawn as letters.

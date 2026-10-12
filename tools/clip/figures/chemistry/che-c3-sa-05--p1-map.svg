@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Dotted rows set their stroke in style=, not as an attribute: engine.js
+       dashes every id's stroke-ATTRIBUTE children for draw-on, which would
+       overwrite the dot pattern with one solid dash.
+       The map of the whole answer: the two quantities as column heads and four
+       numbered rows, one per difference, still empty. Row 1 lights up when he
+       says "पहला". No text elements: every word comes from the spec. -->
+  <rect id="hdr_l" data-optional x="70" y="30" width="430" height="116" rx="26"
+        fill="#0E2A3A" fill-opacity="0.62" stroke="#78C0F0" stroke-width="6"/>
+  <rect id="hdr_r" data-optional x="580" y="30" width="430" height="116" rx="26"
+        fill="#2E2012" fill-opacity="0.62" stroke="#F0A860" stroke-width="6"/>
+
+  <g id="row1" data-optional>
+    <line x1="110" y1="210" x2="490" y2="210" style="stroke:#78C0F0;stroke-opacity:0.45" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 18"/>
+    <line x1="590" y1="210" x2="970" y2="210" style="stroke:#F0A860;stroke-opacity:0.45" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 18"/>
+  </g>
+  <g id="row2" data-optional>
+    <line x1="110" y1="275" x2="490" y2="275" style="stroke:#78C0F0;stroke-opacity:0.45" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 18"/>
+    <line x1="590" y1="275" x2="970" y2="275" style="stroke:#F0A860;stroke-opacity:0.45" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 18"/>
+  </g>
+  <g id="row3" data-optional>
+    <line x1="110" y1="340" x2="490" y2="340" style="stroke:#78C0F0;stroke-opacity:0.45" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 18"/>
+    <line x1="590" y1="340" x2="970" y2="340" style="stroke:#F0A860;stroke-opacity:0.45" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 18"/>
+  </g>
+  <g id="row4" data-optional>
+    <line x1="110" y1="405" x2="490" y2="405" style="stroke:#78C0F0;stroke-opacity:0.45" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 18"/>
+    <line x1="590" y1="405" x2="970" y2="405" style="stroke:#F0A860;stroke-opacity:0.45" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 18"/>
+  </g>
+
+  <circle id="num1" data-optional cx="540" cy="210" r="27" fill="#0B1D24" stroke="#DCE6EE" stroke-width="6"/>
+  <circle id="num2" data-optional cx="540" cy="275" r="27" fill="#0B1D24" stroke="#DCE6EE" stroke-width="6"/>
+  <circle id="num3" data-optional cx="540" cy="340" r="27" fill="#0B1D24" stroke="#DCE6EE" stroke-width="6"/>
+  <circle id="num4" data-optional cx="540" cy="405" r="27" fill="#0B1D24" stroke="#DCE6EE" stroke-width="6"/>
+
+  <!-- row 1, lit: gold rules over the dotted ones and a ring round its number -->
+  <g id="row1_on" data-optional>
+    <line x1="110" y1="210" x2="490" y2="210" stroke="#E8C25A" stroke-width="8" stroke-linecap="round"/>
+    <line x1="590" y1="210" x2="970" y2="210" stroke="#E8C25A" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <circle id="ring1" data-optional cx="540" cy="210" r="38" fill="none" stroke="#E8C25A" stroke-width="7"/>
+</svg>

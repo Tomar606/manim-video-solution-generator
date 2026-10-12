@@ -1,0 +1,49 @@
+प्रश्न:
+सामर्थ्य 100 वाट एवं 400 वाट के दो बल्बों के प्रतिरोधों की तुलना कीजिए, यदि इनकी वोल्टता समान है।
+________________
+
+
+
+
+शिक्षक:
+“MP Board कक्षा 12वीं के बच्चों! ये सवाल 2023 में Board Exam पूछा गया है और इस साल भी आपकी परीक्षा के लिए important है। 
+इसे बहुत ध्यान से समझना, तो चलो, इसे एक simple formula से start करते हैं और देखते हैं कि समान voltage पर ज्यादा power वाले बल्ब का resistance कितना होगा।”
+“मान लेते हैं कि पहले बल्ब की power 100 वाट और दूसरे बल्ब की power 400 वाट है।”
+ON SCREEN
+P₁ = 100 W
+P₂ = 400 W
+“अब बच्चों, यहाँ दोनों बल्बों की voltage समान दी गई है। इसलिए power और resistance के बीच का relation इस्तेमाल करेंगे।”
+“हम जानते हैं कि—”
+ON SCREEN
+P = V²/R
+“P बराबर है V square by R।”
+“क्योंकि दोनों बल्बों की voltage समान है, इसलिए V square constant रहेगा और ऐसे में power, resistance के व्युत्क्रमानुपाती होगी।”
+ON SCREEN
+P ∝ 1/R
+“P is proportional to one by R, अर्थात power बढ़ने पर resistance कम होगा।”
+“चलो बच्चों अब दोनों बल्बों के लिए relation लिखते हैं—”
+ON SCREEN
+P₁/P₂ = R₂/R₁
+“P one by P two बराबर है R two by R one।”
+“हमें R one और R two की तुलना करनी है, इसलिए इसे उलटकर लिखेंगे—”
+ON SCREEN
+R₁/R₂ = P₂/P₁
+“R one by R two बराबर है P two by P one।”
+“अब दोनों बल्बों की power की values रख देते हैं।”
+ON SCREEN
+R₁/R₂ = 400/100
+“R one by R two बराबर है 400 by 100।”
+“और 400 को 100 से divide करने पर मिलेगा—”
+ON SCREEN
+R₁/R₂ = 4/1
+“R one by R two बराबर है four by one।”
+“इसलिए दोनों प्रतिरोधों का अनुपात होगा—”
+ON SCREEN
+R₁ : R₂ = 4 : 1
+“R one ratio R two बराबर है four ratio one।”
+“तो बच्चों, यहाँ एक बात खास ध्यान रखना—समान voltage पर 100 वाट वाले बल्ब का resistance 400 वाट वाले बल्ब से चार गुना है।”
+“इस पूरे सवाल का logic बस इतना है—power resistance के व्युत्क्रमानुपाती होती है। इसलिए जिसकी power ज्यादा होगी, उसका resistance कम होगा।
+तो 100 वाट और 400 वाट के बल्बों के प्रतिरोधों का अनुपात 4 ratio 1 आता है।
+बस इस relation को अच्छे से दिमाग में बिठा लिया तो Exam में आसानी से लिख पाओगे।  
+“अब इसका exact answer आपकी स्क्रीन के right side में दिए Notes button पर मिल जाएगा।”
+और ऐसे ही important questions को समझते जाओ और अपनी 90%+ की तैयारी को मजबूत करते जाओ।

@@ -1,0 +1,7 @@
+/* This video's design overrides, applied after tools/clip/engine/style.css.
+   Empty is the normal case. Only design goes here — colours, sizes, the scrim —
+   never a copy of the stylesheet: a copied stylesheet stops receiving fixes.
+
+   Example: a generated (Veo) background that goes bright needs the scrim back
+     :root{ --scrim: radial-gradient(...); }
+   The background image itself is NOT set here; it is video.json "background". */

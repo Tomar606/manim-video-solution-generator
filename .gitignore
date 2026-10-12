@@ -133,3 +133,10 @@ __pycache__/
 assets/dividers/paper_tear_[0-9]*.png
 assets/dividers/paper_tear_[0-9]*.json
 assets/dividers/panel_fade_[0-9]*.png
+
+# The clip renderer's dependencies (npm install in tools/clip). Per-video run
+# state and step logs are build output.
+tools/clip/node_modules/
+work/*/state.json
+work/*/state.lock
+work/*/out/logs/

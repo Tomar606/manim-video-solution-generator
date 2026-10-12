@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <style>
+    .s  { fill:none; stroke-linecap:round; stroke-linejoin:round }
+    .cy { stroke:#78C0F0; stroke-width:8 }
+    .gd { stroke:#E8C25A; stroke-width:8 }
+    .wm { stroke:#F0A860; stroke-width:8 }
+    .fcy{ fill:#78C0F0; fill-opacity:.92 }
+    .fgd{ fill:#E8C25A; fill-opacity:.92 }
+    .fwm{ fill:#F0A860; fill-opacity:.92 }
+    .plate { fill:#0E2E2C; fill-opacity:.55; stroke:#78C0F0; stroke-width:6 }
+  </style>
+  <rect id="membrane" data-optional class="plate" x="150" y="196" width="800" height="150" rx="14"/>
+  <rect id="frag_1" data-optional class="fcy" x="214" y="254" width="136" height="20" rx="6"/>
+  <rect id="frag_2" data-optional class="fcy" x="386" y="254" width="136" height="20" rx="6"/>
+  <rect id="frag_3" data-optional class="fgd" x="558" y="254" width="136" height="20" rx="6"/>
+  <rect id="frag_4" data-optional class="fcy" x="730" y="254" width="136" height="20" rx="6"/>
+  <g id="probe" data-optional>
+    <rect class="fgd" x="558" y="120" width="136" height="20" rx="6"/>
+    <path class="s gd" d="M576,120 L576,100 M676,120 L676,100"/>
+  </g>
+  <circle id="tag" data-optional class="fwm" cx="626" cy="86" r="20"/>
+  <path id="bond" data-optional class="s gd" d="M626,148 L626,246 M606,220 L626,252 L646,220"/>
+</svg>

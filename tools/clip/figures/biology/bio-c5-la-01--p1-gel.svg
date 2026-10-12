@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <style>
+    .s  { fill:none; stroke-linecap:round; stroke-linejoin:round }
+    .cy { stroke:#78C0F0; stroke-width:8 }
+    .wm { stroke:#F0A860; stroke-width:8 }
+    .lead { fill:none; stroke:#78C0F0; stroke-width:4; stroke-opacity:.75 }
+    .fcy{ fill:#78C0F0; fill-opacity:.92 }
+    .fgd{ fill:#E8C25A; fill-opacity:.92 }
+    .fwm{ fill:#F0A860; fill-opacity:.92 }
+    .plate { fill:#0E2E2C; fill-opacity:.55; stroke:#78C0F0; stroke-width:6 }
+  </style>
+  <rect id="gel" data-optional class="plate" x="300" y="80" width="400" height="330" rx="14"/>
+  <rect id="wells" data-optional class="fcy" x="336" y="96" width="328" height="22" rx="5"/>
+  <g id="pole_minus" data-optional>
+    <line class="s cy" x1="766" y1="104" x2="834" y2="104"/>
+  </g>
+  <g id="pole_plus" data-optional>
+    <line class="s wm" x1="766" y1="386" x2="834" y2="386"/>
+    <line class="s wm" x1="800" y1="352" x2="800" y2="420"/>
+  </g>
+  <path id="run_arrow" data-optional class="s wm" d="M800,140 L800,318 M776,290 L800,326 L824,290"/>
+  <rect id="frag_big" data-optional class="fgd" x="390" y="168" width="220" height="18" rx="6"/>
+  <rect id="frag_mid" data-optional class="fgd" x="424" y="256" width="152" height="18" rx="6"/>
+  <rect id="frag_small" data-optional class="fgd" x="452" y="352" width="96" height="18" rx="6"/>
+  <path id="lead_big" data-optional class="lead" d="M232,177 L378,177"/>
+  <path id="lead_small" data-optional class="lead" d="M232,361 L446,361"/>
+</svg>

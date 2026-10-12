@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- NCERT Fig 2.8 (ब) - अंडजनन का आरेखीय निरूपण - REDRAWN, not pasted.
+
+       This is the figure the exam asks students to draw: it is the diagram on
+       page 2 of this question's own answer sheet, hand-copied from the same
+       NCERT figure. It never appeared in the video. The extracted scan in
+       flow-animator/reference/ carries a "not to be republished" watermark, so
+       it is redrawn in this video's style instead, as the answer sheet does.
+
+       The textbook draws time running DOWN the page. The stage is landscape, so
+       time runs left to right here and the lineage runs with it - which makes
+       the one idea the vertical figure hides visible at a glance: the primary
+       oocyte is made BEFORE birth and simply WAITS, straight across जन्म and the
+       whole of childhood, until यौवनारंभ. That long straight line is the
+       arrest. Everything the figure encodes is kept: the three life stages,
+       mitosis before birth, meiosis I at puberty giving a secondary oocyte and
+       the first polar body, meiosis II giving the ovum and the second polar
+       body, and the chromosome count halving from 46 to 23.
+
+       Colours follow the rest of this video, not NCERT: oogonia warm, oocytes
+       blue, the ovum gold, polar bodies the small gold rings used in the
+       meiosis map. -->
+  <style>
+    .zone  { stroke:#6E8A99; stroke-width:4; stroke-dasharray:12 10 }
+    .edge  { stroke:#F2F2F2; stroke-width:4; stroke-linecap:round; fill:none }
+    .hold  { stroke:#78C0F0; stroke-width:6; stroke-linecap:round }
+    .oog   { fill:#F0A860; fill-opacity:.35; stroke:#F0A860; stroke-width:4 }
+    .po    { fill:#78C0F0; fill-opacity:.30; stroke:#78C0F0; stroke-width:5 }
+    .so    { fill:#B58BE8; fill-opacity:.30; stroke:#B58BE8; stroke-width:5 }
+    .ovum  { fill:#E8C25A; fill-opacity:.35; stroke:#E8C25A; stroke-width:5 }
+    .pb    { fill:#E8C25A; fill-opacity:.3; stroke:#E8C25A; stroke-width:4 }
+  </style>
+
+  <!-- life stages: the two boundaries -->
+  <g id="zones" data-optional>
+    <line class="zone" x1="400" y1="52" x2="400" y2="392"/>
+    <line class="zone" x1="640" y1="52" x2="640" y2="392"/>
+  </g>
+
+  <!-- before birth: an oogonium divides by mitosis -->
+  <g id="mitosis" data-optional>
+    <path class="edge" d="M70 235 L135 180 M70 235 L135 290 M135 180 L200 150 M135 180 L200 210 M135 290 L200 262 M135 290 L200 322"/>
+    <circle class="oog" cx="70"  cy="235" r="17"/>
+    <circle class="oog" cx="135" cy="180" r="15"/><circle class="oog" cx="135" cy="290" r="15"/>
+    <circle class="oog" cx="200" cy="150" r="13"/><circle class="oog" cx="200" cy="210" r="13"/>
+    <circle class="oog" cx="200" cy="262" r="13"/><circle class="oog" cx="200" cy="322" r="13"/>
+  </g>
+
+  <!-- the primary oocyte, made before birth -->
+  <g id="primary" data-optional>
+    <path class="edge" d="M213 262 L286 238"/>
+    <circle class="po" cx="318" cy="235" r="30"/>
+  </g>
+
+  <!-- ...and it WAITS: straight across birth and childhood to puberty -->
+  <line id="hold" data-optional class="hold" x1="350" y1="235" x2="690" y2="235"/>
+
+  <!-- puberty, meiosis I: secondary oocyte + first polar body -->
+  <g id="meiosis1" data-optional>
+    <path class="edge" d="M690 235 L752 235 M690 235 L728 168"/>
+    <circle class="so" cx="782" cy="235" r="28"/>
+    <circle class="pb" cx="736" cy="152" r="12"/>
+  </g>
+
+  <!-- meiosis II: the ovum + second polar body -->
+  <g id="meiosis2" data-optional>
+    <path class="edge" d="M810 235 L920 235 M810 235 L898 168"/>
+    <circle class="ovum" cx="956" cy="235" r="34"/>
+    <circle class="pb" cx="906" cy="152" r="12"/>
+  </g>
+</svg>

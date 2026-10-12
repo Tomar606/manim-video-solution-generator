@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Electric flux = number of field lines crossing a surface normally. Field lines (cyan) meet a plate (gold) that faces them; each crossing is counted.
+       No text elements: every word comes from the spec. -->
+  <g id="field_in" data-optional>
+    <line x1="160.0" y1="115.0" x2="540.0" y2="115.0" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <line x1="160.0" y1="175.0" x2="540.0" y2="175.0" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <line x1="160.0" y1="235.0" x2="540.0" y2="235.0" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <line x1="160.0" y1="295.0" x2="540.0" y2="295.0" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <line x1="160.0" y1="355.0" x2="540.0" y2="355.0" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <g id="plate" data-optional>
+    <polygon points="508,90 572,70 572,380 508,400" fill="#FFC53D" fill-opacity="0.16" stroke="#FFC53D" stroke-width="6" stroke-linejoin="round"/>
+  </g>
+  <g id="field_out" data-optional>
+    <line x1="540.0" y1="115.0" x2="896.0" y2="115.0" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <line x1="540.0" y1="175.0" x2="896.0" y2="175.0" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <line x1="540.0" y1="235.0" x2="896.0" y2="235.0" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <line x1="540.0" y1="295.0" x2="896.0" y2="295.0" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <line x1="540.0" y1="355.0" x2="896.0" y2="355.0" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <g id="field_heads" data-optional>
+    <polygon points="922.0,115.0 892.0,129.0 892.0,101.0" fill="#7FD4FF"/>
+    <polygon points="922.0,175.0 892.0,189.0 892.0,161.0" fill="#7FD4FF"/>
+    <polygon points="922.0,235.0 892.0,249.0 892.0,221.0" fill="#7FD4FF"/>
+    <polygon points="922.0,295.0 892.0,309.0 892.0,281.0" fill="#7FD4FF"/>
+    <polygon points="922.0,355.0 892.0,369.0 892.0,341.0" fill="#7FD4FF"/>
+  </g>
+  <g id="perp" data-optional>
+    <path d="M572,197 L610,197 L610,235" fill="none" stroke="#F2F2F2" stroke-width="5" stroke-linejoin="round"/>
+  </g>
+  <g id="cross_1" data-optional>
+    <circle cx="540" cy="115" r="15" fill="#FFC53D" stroke="#0B2322" stroke-width="4"/>
+  </g>
+  <g id="cross_2" data-optional>
+    <circle cx="540" cy="175" r="15" fill="#FFC53D" stroke="#0B2322" stroke-width="4"/>
+  </g>
+  <g id="cross_3" data-optional>
+    <circle cx="540" cy="235" r="15" fill="#FFC53D" stroke="#0B2322" stroke-width="4"/>
+  </g>
+  <g id="cross_4" data-optional>
+    <circle cx="540" cy="295" r="15" fill="#FFC53D" stroke="#0B2322" stroke-width="4"/>
+  </g>
+  <g id="cross_5" data-optional>
+    <circle cx="540" cy="355" r="15" fill="#FFC53D" stroke="#0B2322" stroke-width="4"/>
+  </g>
+</svg>

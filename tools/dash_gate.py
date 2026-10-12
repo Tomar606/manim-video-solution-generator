@@ -74,10 +74,35 @@ def _walk(node, path: str, on_screen: bool, hits: list):
             _walk(v, f"{path}.{k}" if path else str(k), child, hits)
 
 
+def _files(root: Path) -> list[Path]:
+    """Every file that can put a string on screen, in EITHER track's layout.
+
+    This globbed only `beats*.json`, `lines*.json` and `meta.json` — the old
+    projects/<slug> layout — so it was blind to the whole edu-video track, where
+    on-screen text lives in `spec/segments_part<N>.json` (captions, diagram
+    labels, list items, the panel kicker) and `spec/design.json`. Pointed at a
+    work/<slug> folder it found none of those files and printed "no AI dash on
+    screen", which is worse than not running: BIO-C2-LA-01 passed it with six
+    dash strings in its specs, three of them em dashes this session had just
+    written into a hormone list.
+
+    A gate that cannot see the files it is guarding is not a gate.
+    """
+    return sorted(
+        list(root.glob("beats*.json")) + list(root.glob("lines*.json"))
+        + [p for p in [root / "meta.json"] if p.is_file()]
+        # edu-video track
+        + list(root.glob("spec/segments*.json")) + list(root.glob("spec/design.json"))
+        + list(root.glob("out/lines_part*.json")))
+
+
 def check(root: Path) -> list[str]:
     bad: list[str] = []
-    files = sorted(list(root.glob("beats*.json")) + list(root.glob("lines*.json"))
-                   + [p for p in [root / "meta.json"] if p.is_file()])
+    files = _files(root)
+    if not files:
+        # Silence here reads exactly like a pass. Say so instead.
+        raise SystemExit(f"  DASH GATE: nothing to check under {root} — "
+                         f"expected a projects/<slug> or work/<slug> folder")
     for f in files:
         try:
             data = json.loads(f.read_text(encoding="utf-8"))

@@ -86,12 +86,96 @@ def check(root: Path, part: int) -> list[str]:
     return problems
 
 
+def _caption_at(lines: list, t: float) -> int:
+    """Index of the caption on screen at absolute time `t`."""
+    k = 0
+    for i, l in enumerate(lines):
+        if l["start"] <= t + 1e-6:
+            k = i
+    return k
+
+
+def check_work(root: Path, part: int) -> list[str]:
+    """The same check, for a video built on the headless-Chromium track.
+
+    That track has no beats_part<N>.json. A diagram's labels live in
+    spec/design.json with `t_in` in seconds from the start of their beat, and
+    the beat owns a run of caption lines named in spec/anchors.json. So the
+    label's caption index is not written down anywhere — it is RECOVERED: beat
+    start + the label's own time, looked up against the caption track. That is
+    also what makes the check honest rather than circular: it measures where the
+    label actually lands, not where somebody meant to put it.
+
+    Written because PROCESS.md step 5 names this file as its gate, and on
+    BIO-C12-LA-02 it could not open a single file — the gate existed, could not
+    run, and nothing said so.
+    """
+    lines = json.loads((root / "out" / f"lines_part{part}.json").read_text(encoding="utf-8"))
+    anchors = json.loads((root / "spec" / "anchors.json").read_text(encoding="utf-8"))
+    anchors = anchors.get(f"part{part}", {})
+    design = {d["type"]: d for d in
+              json.loads((root / "spec" / "design.json").read_text(encoding="utf-8"))}
+    texts = [_norm(l.get("text", "")) for l in lines]
+    wf = root / "out" / f"words_part{part}.json"
+    words = json.loads(wf.read_text(encoding="utf-8")) if wf.is_file() else None
+    problems = []
+    for beat, (i, j) in anchors.items():
+        d = design.get(beat, {})
+        if not d.get("labels"):
+            continue
+        s0 = 0.0 if i == 0 else lines[i]["start"]
+        end = lines[j + 1]["start"] if j + 1 < len(lines) else lines[j]["end"]
+        k = (end - s0) / max(d.get("duration", end - s0), 0.1)   # build_spec's scale
+        for lab in d["labels"]:
+            text = lab["text"]
+            # A WORD-ANCHORED label lands on that word's measured onset, which
+            # is exactly how build_spec.py places it. Reading only `t_in` here
+            # put every `wi` label at its beat's FIRST caption: labels named
+            # late in a beat failed while correctly synced, and labels named
+            # near the start passed without being checked at all.
+            if "wi" in lab and words is not None:
+                t = words[lab["wi"]]["s"] + float(lab.get("dt", 0.0))
+            else:
+                t = s0 + float(lab.get("t_in", 0.0)) * k
+            at = _caption_at(lines, t)
+            if lab.get("spoken") is False:
+                if not (i <= at <= j):
+                    problems.append(f"{beat}: {text!r} declared unspoken but lands at "
+                                    f"caption {at}, outside its figure's {i}-{j}")
+                continue
+            cue = cue_of(lab)
+            # the SAME ±WINDOW as the Manim-track check, not clamped to the
+            # beat: a label may land one caption after the word that names it,
+            # and that word is often the last line of the beat before.
+            lo, hi = max(0, at - WINDOW), min(len(texts) - 1, at + WINDOW)
+            if cue and cue in texts[at]:
+                continue
+            hit = next((n for n in range(lo, hi + 1) if cue and cue in texts[n]), None)
+            if hit is None:
+                near = " | ".join(texts[n][:40] for n in range(lo, hi + 1))
+                problems.append(f"{beat}: {text!r} cue {cue!r} is not spoken at "
+                                f"captions {lo}-{hi} ({near})")
+    return problems
+
+
 def main() -> int:
     if len(sys.argv) < 3:
         sys.exit(__doc__)
-    root = Path("projects") / sys.argv[1]
-    part = int(sys.argv[2])
-    problems = check(root, part)
+    # a slug (projects/<slug>, the Manim track) or a path to work/<slug>
+    arg, part = sys.argv[1], int(sys.argv[2])
+    work = Path(arg) if (Path(arg) / "spec" / "anchors.json").is_file() else None
+    if work is None and (Path("work") / arg / "spec" / "anchors.json").is_file():
+        work = Path("work") / arg
+    if work is not None:
+        problems = check_work(work, part)
+    else:
+        root = Path("projects") / arg
+        if not (root / f"beats_part{part}.json").is_file():
+            # never a silent pass: a gate that finds nothing to check has failed
+            print(f"[FAIL] {arg} part {part} — no beats_part{part}.json under "
+                  f"{root} and no spec/anchors.json under work/{arg}: nothing to check")
+            return 1
+        problems = check(root, part)
     if problems:
         print(f"[FAIL] {sys.argv[1]} part {part} — {len(problems)} label problem(s)")
         for p in problems:

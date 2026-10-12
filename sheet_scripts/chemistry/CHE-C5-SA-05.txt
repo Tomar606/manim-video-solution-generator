@@ -1,0 +1,67 @@
+“उप-सहसंयोजी यौगिक में बंधन समावयवता व आयनीकरण समावयवता को उदाहरण सहित समझाइए।”
+MP Board कक्षा 12वीं के बच्चों!
+आज का question बहुत important है, क्योंकि इसमें आपसे उप-सहसंयोजी यौगिक में बंधन समावयवता और आयनीकरण समावयवता, दोनों को example के साथ समझाने के लिए कहा गया है।
+
+
+चलिए दोनों को एक-एक करके आसान भाषा में समझते हैं।
+Part 1 — बंधन समावयवता
+सबसे पहले समझते हैं बंधन समावयवता, यानी Linkage Isomerism, क्या होती है।
+जब कोई एक ही ligand, केंद्रीय धातु आयन से अपने अलग-अलग donor atoms के माध्यम से जुड़ता है, तो अलग-अलग संरचनाएँ बनती हैं। ये संरचनाएँ एक-दूसरे की समावयवी होती हैं। इस घटना को बंधन समावयवता कहते हैं।
+ऐसे ligands, जो अलग-अलग atoms के माध्यम से central metal से जुड़ सकते हैं, उन्हें ambidentate ligands कहते हैं।
+अब इसे example से समझते हैं।
+On Screen:
+[Ni(NH₃)₅(SCN)]Cl
+[Ni(NH₃)₅(NCS)]Cl
+“Open bracket N i, open bracket N H three, close bracket five, open bracket S C N, close bracket, C l. और open bracket N i, open bracket N H three, close bracket five, open bracket N C S, close bracket, C l।”
+यहाँ SCN minus एक ambidentate ligand है, क्योंकि यह central metal से sulphur या nitrogen, दोनों में से किसी एक atom के द्वारा जुड़ सकता है।
+पहली structure में—
+On Screen:
+Ni²⁺ — S — C — N
+“Ni two plus, sulphur के माध्यम से S C N ligand से जुड़ा है।”
+और दूसरी structure में—
+On Screen:
+Ni²⁺ — N — C — S
+“Ni two plus, nitrogen के माध्यम से N C S ligand से जुड़ा है।”
+इसलिए दोनों compounds का composition समान होने के बावजूद ligand के जुड़ने का atom अलग है और अलग structures प्राप्त होती हैं।
+इसी को बंधन समावयवता कहते हैं।
+On Screen:
+SCN⁻ → S से जुड़ सकता है
+SCN⁻ → N से जुड़ सकता है
+“C S N minus ligand, sulphur या nitrogen के माध्यम से central metal से जुड़ सकता है।”
+अब बात करते हैं दूसरे type की—आयनीकरण समावयवता।
+________________
+
+
+Part 2 — आयनीकरण समावयवता
+आयनीकरण समावयवता में ऐसे compounds होते हैं जिनका molecular formula समान होता है, लेकिन पानी में घोलने पर ये अलग-अलग ions देते हैं।
+यह समावयवता complex sphere के अंदर और बाहर उपस्थित ligand या ion के आपस में स्थान बदलने के कारण उत्पन्न होती है।
+इसे example से समझते हैं।
+पहला compound है—
+On Screen:
+[Co(NH₃)₅Br]SO₄
+“Open bracket C o, open bracket N H three, close bracket five, B r, close bracket, S O four।”
+इस compound में SO₄ two minus complex sphere के बाहर है। इसलिए पानी में घोलने पर यह SO₄ two minus ion देता है।
+On Screen:
+[Co(NH₃)₅Br]SO₄ → SO₄²⁻
+“Open bracket C o, open bracket N H three, close bracket five, B r, close bracket, S O four, gives S O four two minus ion।”
+अब दूसरा compound देखिए—
+On Screen:
+[Co(NH₃)₅SO₄]Br
+“Open bracket C o, open bracket N H three, close bracket five, S O four, close bracket, B r।”
+यहाँ Br minus complex sphere के बाहर है। इसलिए पानी में घोलने पर यह Br minus ion देता है।
+On Screen:
+[Co(NH₃)₅SO₄]Br → Br⁻
+“Open bracket C o, open bracket N H three, close bracket five, S O four, close bracket, B r, gives B r minus ion।”
+ध्यान दीजिए, दोनों compounds में overall composition समान है, लेकिन complex sphere के अंदर और बाहर मौजूद species अलग-अलग हैं। इसलिए solution में मिलने वाले ions भी अलग हैं।
+On Screen:
+[Co(NH₃)₅Br]SO₄ → SO₄²⁻
+[Co(NH₃)₅SO₄]Br → Br⁻
+“पहला compound S O four two minus ion देता है, जबकि दूसरा compound B r minus ion देता है।”
+यही आयनीकरण समावयवता है।
+अब दोनों को एक साथ revise कर लेते हैं।
+On Screen:
+बंधन समावयवता → Ligand के जुड़ने वाला donor atom अलग
+आयनीकरण समावयवता → Solution में मिलने वाले ions अलग
+“बंधन समावयवता में ligand के central metal से जुड़ने वाला donor atom अलग होता है, जबकि आयनीकरण समावयवता में solution में मिलने वाले ions अलग होते हैं।”
+तो बच्चों, exam में दोनों की definition के साथ example और difference जरूर लिखिए।
+अब इसका exact answer exam में किस तरह लिखना है, वो आपको Notes button पर click करके मिल जाएगा।

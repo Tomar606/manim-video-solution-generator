@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- What boiling POINT means: the temperature at which the liquid's own
+       vapour pressure pushing up equals the atmosphere pushing down. The
+       balance on the right IS the definition; the beaker is what it is about.
+       The two arrows are the same length on purpose - that equality is the
+       whole sentence, so neither may look like it wins.
+       Cyan = the liquid's vapour pressure, gold = the atmosphere.
+       No word or number lives here: every label comes from the spec. -->
+
+  <path id="beaker" data-optional fill="none" stroke="#7FD4FF" stroke-width="9"
+        stroke-linecap="round" d="M170 120 V350 Q170 385 205 385 H385 Q420 385 420 350 V120"/>
+
+  <path id="liquid" data-optional stroke="none" fill="#7FD4FF" fill-opacity="0.32"
+        d="M179 240 V350 Q179 377 205 377 H385 Q411 377 411 350 V240 Z"/>
+
+  <g id="bubbles" data-optional>
+    <circle cx="228" cy="330" r="17" fill="none" stroke="#7FD4FF" stroke-width="5"/>
+    <circle cx="292" cy="296" r="13" fill="none" stroke="#7FD4FF" stroke-width="5"/>
+    <circle cx="356" cy="336" r="15" fill="none" stroke="#7FD4FF" stroke-width="5"/>
+    <circle cx="266" cy="262" r="11" fill="none" stroke="#7FD4FF" stroke-width="5"/>
+  </g>
+
+  <g id="vapour" data-optional>
+    <path d="M215 108 V54" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <path d="M215 40 l-16 28 h32 z" fill="#7FD4FF"/>
+    <path d="M295 108 V40" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <path d="M295 26 l-16 28 h32 z" fill="#7FD4FF"/>
+    <path d="M375 108 V54" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <path d="M375 40 l-16 28 h32 z" fill="#7FD4FF"/>
+  </g>
+
+  <!-- the balance: two equal pressures meeting head-on at the same bar -->
+  <g id="arrow_down" data-optional>
+    <path d="M770 70 V188" stroke="#FFC53D" stroke-width="11" stroke-linecap="round"/>
+    <path d="M770 208 l-22 -34 h44 z" fill="#FFC53D"/>
+  </g>
+  <path id="balance_bar" data-optional d="M620 228 H920"
+        stroke="#EDC68A" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <g id="arrow_up" data-optional>
+    <path d="M770 386 V268" stroke="#7FD4FF" stroke-width="11" stroke-linecap="round"/>
+    <path d="M770 248 l-22 34 h44 z" fill="#7FD4FF"/>
+  </g>
+</svg>

@@ -94,25 +94,34 @@ def check(video: Path, graphics_from: float | None) -> list[str]:
     if g.is_file():
         import json as _j
         geom = _j.loads(g.read_text())
-        for mode in ("card", "full", "big", "small"):
-            m = geom.get(mode)
-            if not m:
-                continue
+        # EVERY MODE THE SIDECAR DESCRIBES, not a list written down here.
+        # This was a hardcoded ("card", "full", "big", "small"), and when a
+        # `busy` mode was added — the state the presenter is in for most of
+        # the video, once his framing became a push-in rather than a shrink —
+        # neither rule below looked at it. A gate carrying its own list of
+        # what to check goes quiet exactly when something new is added, which
+        # is the moment it is most needed.
+        modes = {k: v for k, v in geom.items()
+                 if isinstance(v, dict) and "head" in v and "bottom" in v}
+        for mode, m in modes.items():
             if abs(m["bottom"] - 1920) > 2:
                 bad.append(f"NOT ANCHORED in {mode} mode: bottom at {m['bottom']}, "
                            f"should be 1920")
-        full, big = geom.get("full"), geom.get("big")
-        if full and full["head"] < HEAD_MIN:
-            bad.append(f"HEAD TOO HIGH with graphics: {full['head']:.3f} of frame, "
+        # WHICH MODE IS "WITH GRAPHICS" depends on the layout. `busy` is that
+        # state where a theme states a floor; `full` is it in the older one,
+        # where the working size ran under the content.
+        with_graphics = modes.get("busy") or modes.get("full")
+        if with_graphics and with_graphics["head"] < HEAD_MIN:
+            bad.append(f"HEAD TOO HIGH with graphics: "
+                       f"{with_graphics['head']:.3f} of frame, "
                        f"must be >= {HEAD_MIN}")
         # THE HOUSE RULE: the presenter never occupies more than half the
         # screen, in ANY mode. `big` used to be allowed up to 0.38 — 62% of the
         # picture is presenter at that size, and with a panel above him he runs
         # straight into it. tools/composite.py now caps every width so this
         # holds by construction; this is the check that says so.
-        for mode in ("card", "full", "big", "small"):
-            m = geom.get(mode)
-            if m and m["head"] < HALF_SCREEN:
+        for mode, m in modes.items():
+            if m["head"] < HALF_SCREEN:
                 bad.append(f"PRESENTER OVER HALF THE SCREEN in {mode} mode: "
                            f"head at {m['head']:.3f} of frame, must be "
                            f">= {HALF_SCREEN}")

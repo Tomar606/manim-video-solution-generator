@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- The same patch with the field running PARALLEL to it: E lies along the surface, the normal stands up, and the angle between them is a right angle.
+       No text elements: every word comes from the spec. -->
+  <g id="patch" data-optional>
+    <polygon points="250.0,348.0 670.0,348.0 754.0,264.0 334.0,264.0" fill="#FFC53D" fill-opacity="0.18" stroke="#FFC53D" stroke-width="6" stroke-linejoin="round"/>
+  </g>
+  <g id="field_lines" data-optional>
+    <line x1="170.0" y1="110.0" x2="902.0" y2="110.0" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <line x1="170.0" y1="388.0" x2="902.0" y2="388.0" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g id="field_heads" data-optional>
+    <polygon points="930.0,110.0 900.0,124.0 900.0,96.0" fill="#7FD4FF"/>
+    <polygon points="930.0,388.0 900.0,402.0 900.0,374.0" fill="#7FD4FF"/>
+  </g>
+  <g id="main_e" data-optional>
+    <line x1="430.0" y1="306.0" x2="852.0" y2="306.0" stroke="#FFC53D" stroke-width="9" stroke-linecap="round"/>
+  </g>
+  <g id="main_head" data-optional>
+    <polygon points="880.0,306.0 846.0,320.0 846.0,292.0" fill="#FFC53D"/>
+  </g>
+  <g id="normal" data-optional stroke="#F2F2F2" stroke-width="6" stroke-dasharray="16 12">
+    <line x1="430" y1="306" x2="430" y2="84" stroke-linecap="round"/>
+  </g>
+  <g id="normal_head" data-optional>
+    <polygon points="430.0,60.0 444.0,90.0 416.0,90.0" fill="#F2F2F2"/>
+  </g>
+  <g id="right_angle" data-optional>
+    <path d="M430,256 L480,256 L480,306" fill="none" stroke="#FFC53D" stroke-width="6" stroke-linejoin="round"/>
+  </g>
+  <g id="origin" data-optional>
+    <circle cx="430" cy="306" r="14" fill="#F2F2F2" stroke="#0B2322" stroke-width="4"/>
+  </g>
+</svg>

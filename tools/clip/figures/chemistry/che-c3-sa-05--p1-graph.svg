@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Concentration against time: the reactant curve falls and the product
+       curve rises, which is what "rate" measures. Reactant cyan, product warm,
+       the same pairing the map uses. No text elements: every word comes from
+       the spec. -->
+  <g id="axes" data-optional>
+    <path d="M230,110 L230,420 L930,420" fill="none" stroke="#DCE6EE" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g id="axis_heads" data-optional>
+    <polygon points="230,84 244,114 216,114" fill="#DCE6EE"/>
+    <polygon points="956,420 926,434 926,406" fill="#DCE6EE"/>
+  </g>
+
+  <path id="curve_r" data-optional d="M250,122 C390,300 590,372 900,394"
+        fill="none" stroke="#78C0F0" stroke-width="10" stroke-linecap="round"/>
+  <path id="curve_p" data-optional d="M250,416 C390,236 590,166 900,144"
+        fill="none" stroke="#F0A860" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- the direction of change, beside each curve's name -->
+  <g id="down_r" data-optional>
+    <line x1="990" y1="262" x2="990" y2="338" stroke="#78C0F0" stroke-width="9" stroke-linecap="round"/>
+    <polygon points="990,366 972,332 1008,332" fill="#78C0F0"/>
+  </g>
+  <g id="up_p" data-optional>
+    <line x1="990" y1="206" x2="990" y2="130" stroke="#F0A860" stroke-width="9" stroke-linecap="round"/>
+    <polygon points="990,102 972,136 1008,136" fill="#F0A860"/>
+  </g>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- A surface element ds (gold patch), its normal (dashed white) and the field E (gold arrow) making angle theta with that normal; cyan lines are the same field.
+       No text elements: every word comes from the spec. -->
+  <g id="patch" data-optional>
+    <polygon points="250.0,348.0 670.0,348.0 754.0,264.0 334.0,264.0" fill="#FFC53D" fill-opacity="0.18" stroke="#FFC53D" stroke-width="6" stroke-linejoin="round"/>
+  </g>
+  <g id="field_lines" data-optional>
+    <line x1="487.7" y1="378.3" x2="728.5" y2="161.5" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+    <line x1="619.7" y1="378.3" x2="833.8" y2="185.6" stroke="#7FD4FF" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g id="field_heads" data-optional>
+    <polygon points="746.4,145.4 733.4,175.9 714.7,155.1" fill="#7FD4FF"/>
+    <polygon points="851.6,169.5 838.7,200.0 819.9,179.2" fill="#7FD4FF"/>
+  </g>
+  <g id="main_e" data-optional>
+    <line x1="349.7" y1="378.3" x2="614.3" y2="140.1" stroke="#FFC53D" stroke-width="9" stroke-linecap="round"/>
+  </g>
+  <g id="main_head" data-optional>
+    <polygon points="635.1,121.3 619.2,154.5 600.5,133.7" fill="#FFC53D"/>
+  </g>
+  <g id="normal" data-optional stroke="#F2F2F2" stroke-width="6" stroke-dasharray="16 12">
+    <line x1="430" y1="306" x2="430" y2="84" stroke-linecap="round"/>
+  </g>
+  <g id="normal_head" data-optional>
+    <polygon points="430.0,60.0 444.0,90.0 416.0,90.0" fill="#F2F2F2"/>
+  </g>
+  <g id="theta_arc" data-optional>
+    <path d="M430,204.0 A102.0,102.0 0 0 1 505.8,237.7" fill="none" stroke="#FFC53D" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g id="origin" data-optional>
+    <circle cx="430" cy="306" r="14" fill="#F2F2F2" stroke="#0B2322" stroke-width="4"/>
+  </g>
+</svg>

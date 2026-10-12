@@ -1,0 +1,36 @@
+प्रश्न:
+प्रतिरोध तापमापी का 0°C पर प्रतिरोध 6 Ω है और 100°C पर प्रतिरोध 7 Ω है। अज्ञात ताप पर प्रतिरोध का मान 8 Ω है। अज्ञात ताप की गणना कीजिए।
+________________
+
+
+शिक्षक:
+“MP Board कक्षा 12वीं के बच्चों! ये सवाल 2020 में पूछा गया है और इस साल भी आपकी Board Exam के लिए important है। 
+चलो, अब इस concept को ऐसे समझो कि आगे सवाल किसी भी तरह आए, confusion न हो।
+“इसमें बस तीन values दी गई हैं 
+“तो पहले given values लिखते हैं।”
+ON SCREEN
+R₀ = 6 Ω
+R₁₀₀ = 7 Ω
+Rθ = 8 Ω
+θ = ?
+“R zero बराबर है 6 ohm, R hundred बराबर है 7 ohm और unknown temperature पर resistance R theta बराबर है 8 ohm।”
+“अब बच्चों, अज्ञात ताप निकालने के लिए हम प्रतिरोध तापमापी का formula इस्तेमाल करेंगे।”
+ON SCREEN
+θ = (Rθ − R₀)/(R₁₀₀ − R₀) × 100
+“थीटा बराबर है R theta minus R zero, divided by R hundred minus R zero, into hundred।”
+“अब इस formula में दी गई सभी values रख देते हैं।”
+ON SCREEN
+θ = (8 − 6)/(7 − 6) × 100
+“थीटा बराबर है 8 minus 6, divided by 7 minus 6, into hundred।”
+“अब numerator में 8 minus 6 बराबर 2 और denominator में 7 minus 6 बराबर 1 होगा।”
+ON SCREEN
+θ = 2/1 × 100
+“थीटा बराबर है two by one into hundred।”
+“इसलिए—”
+ON SCREEN
+θ = 200°C
+“थीटा बराबर है two hundred degree Celsius।”
+तो प्रतिरोध तापमापी का अज्ञात तापमान 200°C आता है। 
+“बच्चों, इस सवाल में सबसे important बात है कि 0°C और 100°C पर दिए गए resistance को formula में सही जगह रखना है।”
+“अब इसका exact answer आपकी स्क्रीन के right side में दिए Notes button पर मिल जाएगा।”
+और ऐसे ही important numericals को समझते जाओ—एक-एक सवाल करते हुए अपना syllabus cover करो और 90%+ की तैयारी को मजबूत करते जाओ।

@@ -471,7 +471,14 @@ def audit(spec: dict, *, carried: bool = False) -> list[str]:
     if not re.search(r"silent|no voiceover|no narration", low):
         bad.append("the prompt does not declare the clip silent (§17), so Veo "
                    "will generate a voice and burn in its own captions")
-    if not re.search(r"supplied|attached|uploaded", low):
+    # §15 guards a KEYED clip, which is generated on our plate and composited
+    # back over it: describe no background and Veo invents one. A PANEL clip is
+    # the opposite case — played whole inside a hole cut in the frame, keeping
+    # the ground it comes back with, which the brief deliberately specifies. It
+    # has no plate to discard, so asking it to mention one would push a panel
+    # prompt back towards the keyed layout it is not using.
+    if spec.get("layout", "plate") != "panel" and \
+            not re.search(r"supplied|attached|uploaded", low):
         bad.append("the prompt does not refer to the supplied background image "
                    "(§15), so Veo will generate its own and discard the plate")
     if carried and not re.search(

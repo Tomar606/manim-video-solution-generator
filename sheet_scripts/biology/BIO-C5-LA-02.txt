@@ -1,0 +1,122 @@
+हर्षे एवं चेज का प्रयोग DNA आनुवंशिक पदार्थ है
+प्रश्न: डी. एन. ए. आनुवंशिक पदार्थ है इसे सिद्ध करने हेतु अपने प्रयोग में हर्षे व चेज ने डी. एन. ए. व प्रोटीन के बीच अन्तर कैसे स्थापित किया?
+वर्ष: 2024 | MP Board कक्षा 12
+
+
+PART 1
+शिक्षक:
+“MP Board कक्षा 12वीं के बच्चों! ये सवाल **2024 में board exam में पूछा गया है** और इस saal फिर से पूछा जा सकता है
+तो इसके पीछे पूरा logic समझना बहुत जरूरी है। आज इसे ऐसे समझेंगे कि, ये पूरा experiment दिमाग में बैठ जाएगा।**”
+
+
+“सबसे पहले सवाल समझो हर्षे और चेज को DNA और protein में difference कैसे पता करना था? *
+*अब पहला important point ध्यान से समझो, क्योंकि exam में इसे ऐसे ही लिखना है।**”
+
+
+“हर्षे व चेज ने DNA व प्रोटीन में अन्तर स्पष्ट करने के लिए उनकी रासायनिक संरचना के अन्तर को आधार बनाया। फॉस्फोरस, DNA का अपरिहार्य घटक होता है लेकिन इसमें सल्फर नहीं पाया जाता। वहीं प्रोटीन में सल्फर उपस्थित होता है, फॉस्फोरस नहीं पाया जाता।”
+
+
+“अब इसे आसान तरीके से समझते हैं —DNA में **phosphorus है लेकिन sulfur नहीं**, जबकि protein में **sulfur है लेकिन phosphorus नहीं**। बस यही chemical difference आगे पूरे experiment का base है।”
+
+
+“और इसी difference की मदद से दोनों को अलग-अलग radioactive label करना था।”
+
+Itna samajh gaye अब next step -
+“अब इस प्रयोग को करने के लिए जीवाणुभोजियों (bacteriophages) के DNA को radioactive ³²P से चिह्नित किया गया।”
+अब सवाल आता है कि ³²P आखिर DNA तक पहुँचा कैसे? चलो, इसे भी समझ लेते हैं 
+
+
+“तो  ³²P से label करने के लिए bacteriophages को **radioactive phosphorus वाले जैविक माध्यम में संवर्धित किया गया।**”
+“Lekin यहाँ एक छोटी-सी बात याद रख लेना **विषाणुओं को कृत्रिम संश्लेषित माध्यम में संवर्धित नहीं किया जा सकता।**”
+अब इसी तरह दूसरी तरफ protein को label करना था। - कुछ bacteriophages को ³⁵S वाले जैविक माध्यम में संवर्धित किया गया, जिससे उनके protein coat में ³⁵S का label आ गया।”
+“तो अब picture एकदम clear है - हमारे पास दो तरह के bacteriophages हैं—एक में DNA पर ³²P का label, और दूसरे में protein coat पर ³⁵S का label।
+“ये difference एकदम दिमाग में बैठा लो, क्योंकि आगे result इसी से निकलेगा।”
+“और याद रखना—**radioactive isotopes को biological experiments में marker की तरह इस्तेमाल किया जाता है**, क्योंकि इनके द्वारा material को trace किया जा सकता है।”
+Toh bacho यहाँ तक हो गया, लेकिन असली proof अभी बाकी है, ki ye bacteriophage bacteria को infect कैसे करता है, और ये जानने के लिए part 2 जरूर देखना 
+
+
+
+
+PART 2
+शिक्षक:
+बच्चों! Part 1 में हमने दो अलग-अलग निशान वाले जीवाणुभोजी (bacteriophages) समझ लिए । अब देखते हैं कि संक्रमण के समय होता क्या है 
+
+
+“चलो, अब experiment के सबसे important part पर आते हैं और यहीं पूरा mechanism clear होगा 
+सबसे पहले ये समझो कि bacteriophage bacteria को infect करता कैसे है 
+“तो हर्षे और चेज के experiment का आधार bacteriophages द्वारा bacteria के infection का एक खास तरीका था।”
+“संक्रमण के समय जीवाणुभोजी जीवाणु कोशिका से चिपकते हैं तथा अपने आनुवंशिक पदार्थ को पुच्छ के माध्यम से जीवाणु कोशिका में प्रविष्ट करा देते हैं। जीवाणुभोजियों का आवरण यानी capsid बाहर ही रह जाता है।”
+“अब इसे एकदम simple तरीके से समझो—phage पहले bacteria की surface पर चिपकता है, फिर अपने genetic material को tail के through bacterial cell के अंदर भेज देता है, जबकि उसका protein coat बाहर रह जाता है।”
+“अब यहीं experiment का main सवाल aata hai ki - अंदर आखिर क्या गया? DNA या protein?”
+“और इसको पता करने के लिए radioactive labels काम आए।”
+
+
+तो bacho infection वाला mechanism clear हो गया। अब आते हैं experiment पर 
+
+
+तो पहले ³²P वाले experiment को समझते हैं और देखते हैं इसमें क्या किया गया 
+
+
+“जब ³²P से चिह्नित जीवाणुभोजी, जीवाणु का संक्रमण करते हैं तब DNA कोशिका में प्रवेश करता है।”
+“और इसके बाद - 
+“जीवाणुभोजी व जीवाणुओं को ब्लेंडर से अलग करने व सेन्ट्रीफ्यूज करने के बाद रेडियोएक्टिविटी पेलेट यानी नीचे बैठी भारी जीवाणु कोशिकाओं में मिलती है।
+“अब यहाँ एक बात साफ़ है। अगर radioactivity **pellet** में मिल रही है, और pellet में bacteria की cells बैठी हैं, तो ³²P वाला **DNA bacteria के अंदर गया।
+“बस इस connection को याद रखो—³²P मतलब DNA, DNA अंदर गया और आखिर में radioactivity pellet में मिली।” 
+और ये connection exam में काम आएगा तो इसे पक्का कर लेना 
+
+
+तो पहला experiment clear है। अब ³⁵S वाले experiment से को भी समझते हैं 
+“अब दूसरी तरफ ³⁵S से labelled bacteriophages हैं। चलो, देखते हैं इस बार क्या result आएगा।”
+
+
+“³⁵S चिह्नित जीवाणुभोजियों में सल्फरधारी प्रोटीन आवरण जीवाणु कोशिका से बाहर रह जाता है। अतः ब्लैंडिंग व सेन्ट्रीफ्यूज करने के बाद रेडियोएक्टिवता ऊपरी द्रव (Supernatant) में मिलती है, पेलेट में नहीं।”
+“अब इसे आसान तरीके से समझो —protein coat bacteria के अंदर गया ही नहीं, इसलिए ³⁵S वाली radioactivity **supernatant** में मिली, pellet में नहीं।”
+“तो इसे भी पक्का कर लो—³⁵S protein coat को दिखाता है, protein coat बाहर रहता है और इसलिए radioactivity supernatant में मिलती है .
+तो दूसरा case भी clear हो गया। अब experiment का पूरा proof हमारे सामने है 
+“**लेकिन final conclusion अभी बाकी है। तो दूसरा case भी clear हो गया। अब experiment का पूरा proof हमारे सामने है और  ये part छोड़ा तो question का सबसे important conclusion छूट जाएगा। इसलिए part 3 miss mat karna.
+
+
+
+
+PART 3
+शिक्षक:
+तो बच्चों! Part 2 में हमने देखा — ³²P नीचे पेलेट में मिला और ³⁵S ऊपरी द्रव में। अब इन्हीं दोनों को जोड़कर निष्कर्ष निकालते हैं। 
+“अब आखिरी और सबसे important हिस्सा—**इन दोनों results को जोड़कर conclusion निकालते हैं।**”
+“एक तरफ हमने देखा—**³²P labelled phage में radioactivity pellet यानी bacterial cells के अंदर मिली।**”
+“और दूसरी तरफ—**³⁵S labelled phage में radioactivity supernatant यानी बाहर वाले हिस्से में मिली।**”
+“अब यहाँ थोड़ा ध्यान देना, क्योंकि यही line exam में conclusion के रूप में लिखनी है।**”
+“और इसका मतलब है कि  कोशिका में प्रवेश करने वाला ³²P युक्त DNA ही आनुवंशिक पदार्थ है।**”
+“अब इसे आसान भाषा में समझो DNA bacteria के अंदर गया और उसके साथ ³²P की radioactivity भी cell के अंदर मिली। इसलिए जो material infection के दौरान cell के अंदर गया और आगे genetic information carry करता है, वह **DNA** है।”
+“वहीं protein coat बाहर रह गया और उसका ³⁵S label भी बाहर supernatant में मिला।”
+तो बच्चों, इस experiment से हमने DNA को आनुवंशिक पदार्थ सिद्ध कर लिया 
+
+
+“और अब पूरा experiment एक sequence में याद कर लो—”
+
+
+ON SCREEN:
+DNA → ³²P से label
+↓
+Bacteria को infect करता है
+↓
+DNA cell के अंदर
+↓
+Blending + Centrifugation
+↓
+³²P → Pellet
+
+“ पहले DNA को ³²P से label किया, फिर bacteriophage ने bacteria को infect किया और DNA cell के अंदर चला गया। Blending और centrifugation के बाद ³²P की radioactivity pellet में मिली। 
+
+Protein → ³⁵S से label
+↓
+Protein coat बाहर
+↓
+Blending + Centrifugation
+↓
+³⁵S → Supernatant
+
+
+“और दूसरी तरफ protein को ³⁵S से label किया गया। Infection के बाद protein coat बाहर ही रहा, इसलिए centrifugation के बाद ³⁵S की radioactivity supernatant में मिली।
+तो बच्चों, DNA वाला ये experiment भी हो गया
+अब परीक्षा में iska answer किस tarah लिखना है, वो Notes button पर click karke मिल जाएगा
+अब आगे की पढ़ाई वाली reels से एक-एक topic करते जाओ, syllabus भी complete होगा और 90% की तैयारी भी।”

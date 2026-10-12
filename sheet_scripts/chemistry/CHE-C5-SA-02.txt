@@ -1,0 +1,33 @@
+उप-सहसंयोजन संख्या क्या है ? दो उदांहरण दीजिए। 
+________________
+
+
+MP Board कक्षा 12वीं के बच्चों! ये सवाल 2020 और 2023 में पूछा जा चुका है, और इस बार भी आपकी board exam में आ सकता है।
+“ये question बहुत important है, और आसान भी—बस इसके सारे points clear कर लिए, तो 3 नंबर पक्के
+चलो सबसे पहले समझते हैं उप-सहसंयोजन संख्या 
+किसी complex compound में केंद्रीय धातु या धातु आयन से उप-सहसंयोजक बंध द्वारा सीधे जुड़े हुए ligands की संख्या, उस केंद्रीय धातु आयन की उप-सहसंयोजन संख्या कहलाती है।
+इसे एक example से समझते हैं।
+On Screen:
+[Co(NH₃)₆]³⁺
+“Open bracket C o, open bracket N H three, close bracket six, close bracket, three plus.”
+इस complex में central metal ion है Co³⁺, और इसके साथ NH₃ के six ligands सीधे जुड़े हुए हैं।
+On Screen:
+Co³⁺ → 6 NH₃ ligands
+उप-सहसंयोजन संख्या = 6
+“C o three plus से six N H three ligands सीधे जुड़े हैं, इसलिए Co three plus की उप-सहसंयोजन संख्या six है।”
+अब दूसरा example देखते हैं।
+On Screen:
+[Ag(CN)₂]⁻
+“Open bracket A g, open bracket C N, close bracket two, close bracket, minus.”
+इस complex में Ag central metal ion है और इससे C N के two ligands सीधे जुड़े हुए हैं।
+On Screen:
+Ag → 2 CN⁻ ligands
+उप-सहसंयोजन संख्या = 2
+“Ag से two C N minus ligands सीधे जुड़े हैं, इसलिए Ag की उप-सहसंयोजन संख्या two है।”
+तो बच्चों, उप-सहसंयोजन संख्या निकालने का सबसे आसान तरीका है—central metal से सीधे जुड़े ligands की संख्या गिनिए।
+On Screen:
+[Co(NH₃)₆]³⁺ → Coordination Number = 6
+[Ag(CN)₂]⁻ → Coordination Number = 2
+“इसमें C o complex में coordination number six है, और A g complex में coordination number two है।”
+तो Exam में definition के साथ ये दोनों examples जरूर लिखना, ताकि answer पूरा और clear रहे। 
+अब इसका पूरा answer Notes में मिल जाएगा और ऐसे ही एक-एक topic पूरा करते हुए अपने 90%+ target की तैयारी मजबूत करते जाओ।

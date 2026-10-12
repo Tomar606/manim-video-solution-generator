@@ -1,0 +1,299 @@
+/* ============================================================
+   Arivihan Truth Layer — frame styles
+   Canvas: 1080 x 1920. ONLY the top 960px is ever drawn.
+   Bottom 960px stays transparent (avatar goes there in editor).
+   ============================================================ */
+
+@font-face{font-family:Poppins;src:url(vendor/fonts/poppins-latin-700-normal.woff2) format('woff2');font-weight:700;font-display:block}
+@font-face{font-family:Poppins;src:url(vendor/fonts/poppins-latin-800-normal.woff2) format('woff2');font-weight:800;font-display:block}
+@font-face{font-family:Poppins;src:url(vendor/fonts/poppins-latin-900-normal.woff2) format('woff2');font-weight:900;font-display:block}
+@font-face{font-family:Mukta;src:url(vendor/fonts/mukta-devanagari-700-normal.woff2) format('woff2');font-weight:700;font-display:block}
+@font-face{font-family:Mukta;src:url(vendor/fonts/mukta-devanagari-800-normal.woff2) format('woff2');font-weight:800;font-display:block}
+
+:root{
+  /* --- palette: white text is non-negotiable (survives any Veo bg),
+         ONE accent, nothing else. Colour = meaning, not decoration. --- */
+  --ink:        #F2F2F2;
+  --gold:       #E8C25A;   /* headings, and the single golden keyword */
+  --gold-soft:  #F3DFA6;
+  --line:       #78C0F0;   /* diagram strokes, numerals, card borders */
+  --warm:       #F0A860;   /* the SECOND strand / the other side of a pair */
+  --charge:     #FF5A5A;
+  --field:      #78C0F0;
+
+  /* --- functional scrim: written for VEO backgrounds, which change
+         brightness frame to frame and can go bright enough to swallow white
+         text. This project's background is a FIXED, already-dark chalkboard
+         asset, so the scrim buys no legibility here and costs the whole top
+         half of the plate its colour (PHY-C1-LA-02's physics plate, a mid teal,
+         came out near-black under it). The --shadow halo below is what actually
+         keeps the type readable, which is why turning this off is safe.
+         Restore the gradient the moment a generated background goes under
+         this renderer again. --- */
+  --scrim: none;
+
+  /* tight dark halo — this, not the scrim, is what actually keeps
+     white type readable when a Veo frame goes bright */
+  --shadow: 0 0 14px rgba(0,0,0,.95), 0 0 38px rgba(0,0,0,.75),
+            0 5px 12px rgba(0,0,0,.9);
+
+  /* --- layout zones (px, from top of the 1920 canvas) ---
+     TEXT SITS AT THE TOP. The diagram sits UNDER it. Everything below
+     --half is untouched, so the avatar always has a clean lower half. --- */
+  /* The caption is at the BOTTOM in this theme, not the top.
+     Measured off the approved sheet: caption ink y 1185-1286, the presenter's
+     floor hairline at y 1344. Putting the line down there frees the whole top
+     band for the graphic and, because the two no longer share any pixels, a
+     caption can run while the stage is busy - which is what the top-band
+     layout could never do.
+     It only works while the presenter stays UNDER the floor. composite.py's
+     FULL_W 645 puts his head at y 979 and would drive his face straight
+     through this band, so while the stage is busy he is framed to the floor
+     below instead — pushed in on and cut off at the frame's bottom edge.
+
+     THE BAND MOVED UP 128px. At 1178 it left the presenter 576 rows to stand
+     in, and the only way to fit him there was to shrink him to 31% of frame
+     width — a doll under the diagram. Every bottom caption in this theme
+     measures ONE line, 65px of ink in a 152px band, and the stage above ends
+     at 850 (a figure) or 978 (the paper's bottom edge), so the band was
+     sitting in the middle of empty plate with room on both sides of it.
+     1050 keeps 72px of daylight under the paper and hands the 128 rows to the
+     presenter, who is 600px wide there instead of 340. */
+  --cap-top:   1050px;
+  --cap-h:     152px;
+  --stage-top: 380px;
+  --stage-h:   470px;
+  --floor:     1210px;     /* the presenter's ceiling. Nothing below it.
+                              composite.py is given the SAME number, in
+                              out/layout_part<N>.json — the two halves of one
+                              layout, so they cannot disagree. */
+  --half:      960px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;background:transparent;overflow:hidden}
+/* The plate is drawn by the page, not composited underneath it. full.mjs
+   renders on transparent and ffmpeg lays the result over the background; here
+   the theme owns its own ground so a preview frame IS the delivered frame. */
+/* THE PLATE IS THE VIDEO'S, NEVER THIS FILE'S. Every copy of this stylesheet
+   used to name one subject's background here, and each new video inherited the
+   last one's: BIO-C2-LA-01 shipped over chemistry test tubes that way. The one
+   engine now reads `--plate` from /renderer/video.css, which tools/clip/lib.mjs
+   writes from the video folder's video.json — and refuses to write when the
+   background named there does not exist. */
+#frame{background:#0B2322 var(--plate, none) center/1080px 1920px no-repeat}
+
+#frame{
+  position:relative;width:1080px;height:1920px;
+  font-family:Poppins,Mukta,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* preview-only backdrop, stripped in headless render */
+#frame.preview{background:#0B1020}
+#frame.preview::after{
+  content:'';position:absolute;left:0;top:var(--half);width:1080px;height:960px;
+  background:repeating-linear-gradient(45deg,#151b2e 0 22px,#111629 22px 44px);
+}
+
+#scrim{position:absolute;inset:0 0 960px 0;background:var(--scrim);pointer-events:none}
+
+/* ---------- STAGE: diagram or equation ---------- */
+#stage{
+  position:absolute;left:0;top:var(--stage-top);width:1080px;height:var(--stage-h);
+  display:flex;align-items:center;justify-content:center;
+}
+#stage svg{width:100%;height:100%;overflow:visible}
+#stage .lbl{
+  position:absolute;transform-origin:50% 50%;
+  font-weight:800;font-size:46px;letter-spacing:.2px;color:var(--ink);
+  text-shadow:var(--shadow);white-space:nowrap;
+}
+#stage .lbl.accent{color:var(--gold)}
+/* A CENTRED label. `left` is the label's own left edge, so centring one inside
+   a pyramid tier otherwise means guessing how wide the Devanagari will set —
+   which is how जेल and झिल्ली ended up overlapping on the last video. With
+   this the spec gives the tier's centre and the browser does the measuring. */
+#stage .lbl.mid{transform:translateX(-50%)}
+/* A SMALL label, for a dense figure. Spec labels are one size, 46px, and
+   Devanagari sets at ~25px a character there, so three 14-character names use
+   the whole 1080px width and a figure with more than four labels cannot be
+   labelled at all. BIO-C2-LA-01's redraw of NCERT Fig 2.8 needs ten - the three
+   life stages, two chromosome counts and five cell names - because that figure
+   IS the answer and every one of those names is examined. Used only where the
+   figure needs it; everything else stays at 46px. */
+#stage .lbl.sm{font-size:32px}
+
+/* ---------- EQUATION ---------- */
+#eqWrap{
+  position:absolute;left:0;top:var(--stage-top);width:1080px;height:var(--stage-h);
+  display:flex;align-items:center;justify-content:center;
+}
+#eq{transform-origin:50% 50%;filter:drop-shadow(0 6px 26px rgba(0,0,0,.9))}
+#eq > span{font-size:80px}
+#eq .katex{color:var(--ink)}
+
+/* the name on a redox arc. Sits ON the curve with the plate colour behind it,
+   so the arc reads as passing behind the word rather than through it. */
+#eqWrap .eqarc{
+  position:absolute;transform-origin:50% 50%;
+  font-family:Poppins,Mukta,sans-serif;font-weight:800;font-size:36px;
+  white-space:nowrap;padding:1px 16px;border-radius:11px;
+  background:rgba(6,10,24,.88);text-shadow:0 0 10px rgba(0,0,0,.9);
+}
+
+/* ---------- CAPTION (the script text) ---------- */
+#caption{
+  position:absolute;left:70px;top:var(--cap-top);width:940px;height:var(--cap-h);
+  display:flex;align-items:flex-start;justify-content:center;text-align:center;
+}
+#caption .phrase{
+  position:absolute;top:0;width:940px;transform-origin:50% 0;
+  font-weight:800;line-height:1.18;letter-spacing:-.2px;
+  color:var(--ink);text-shadow:var(--shadow);
+  text-wrap:balance;
+}
+#caption .phrase .g{color:var(--gold)}
+/* Sized for the low band, which is 152px tall against the old 240. Two lines
+   of 48px is 118px with leading - it fits; two of 64px does not. */
+#caption .phrase.xl{font-size:54px}
+#caption .phrase.lg{font-size:50px}
+#caption .phrase.md{font-size:46px}
+#caption .phrase.sm{font-size:42px;line-height:1.22}
+
+/* ---------- preview controls (never rendered headless) ---------- */
+#ui{position:fixed;left:0;bottom:0;width:1080px;padding:24px;background:#000C;
+    display:flex;gap:18px;align-items:center;font:600 26px Poppins;color:#fff;z-index:99}
+#ui input[type=range]{flex:1;height:34px}
+#ui.hide{display:none}
+
+
+/* ============================================================
+   BLOCKS — the screen text types this theme adds.
+   Captions say what was SAID; a block ORGANISES it: a heading, a
+   counted list, a two-way contrast. If a block's words are the
+   caption's words, the block is not earning its place.
+   All of them live inside #stage, so they occupy the same 470px
+   band a diagram would and nothing can drift into the presenter.
+   ============================================================ */
+#stage .blk{position:absolute;left:70px;top:0;width:940px;text-align:left;
+            transform-origin:0 0}
+#stage .blk .bt{font:800 42px Poppins,Mukta,sans-serif;color:var(--gold);
+                letter-spacing:.2px;margin-bottom:28px;text-shadow:var(--shadow)}
+#stage .blk .bl{font:800 50px Poppins,Mukta,sans-serif;color:var(--ink);
+                line-height:1.36;text-shadow:var(--shadow)}
+#stage .blk .bl .g{color:var(--gold)}
+
+/* counted list. Every item ends up on screen so the student has the whole
+   map; the one being spoken is bright and the rest sit back at 55%. A list
+   that lands whole says "here are four things"; this says "here is the
+   third of four", which is what he is actually saying. */
+#stage .pts{list-style:none;margin:0;padding:0}
+#stage .pts li{display:flex;align-items:center;gap:26px;margin:0 0 30px}
+#stage .pts .n{flex:0 0 auto;width:58px;height:58px;border-radius:50%;
+               border:4px solid var(--line);color:var(--line);
+               font:800 30px Poppins,sans-serif;
+               display:flex;align-items:center;justify-content:center}
+#stage .pts .x{font:800 46px Poppins,Mukta,sans-serif;color:var(--ink);
+               text-shadow:var(--shadow)}
+
+/* two-way contrast. The side being spoken about is the taller, brighter card. */
+#stage .cmp{display:flex;gap:36px;align-items:flex-start}
+#stage .cmp .card{flex:1;border:3px solid rgba(120,192,240,.55);border-radius:22px;
+                  background:rgba(8,32,30,.55);padding:24px 22px 30px;text-align:center}
+#stage .cmp .card.on{border-color:var(--line);background:rgba(10,44,42,.72)}
+#stage .cmp .ch{font:800 30px Poppins,Mukta,sans-serif;color:var(--gold);
+                margin-bottom:12px}
+#stage .cmp .cr{height:3px;background:rgba(232,194,90,.45);margin:0 0 20px;
+                border-radius:2px}
+#stage .cmp .cb{font:800 44px Poppins,Mukta,sans-serif;color:var(--ink);
+                line-height:1.28;text-shadow:var(--shadow)}
+
+/* ---------- the generated-clip placeholder ----------
+   A Veo clip is NOT confined to the 470px stage - it runs full-bleed from the
+   top of the frame down to a torn edge, which is what the approved sheet
+   shows. This box stands in for it while the storyboard is being read. */
+/* A generated clip is placed one of two ways, and the placeholder has to show
+   which — they occupy different parts of the frame.
+
+   .panel  a REALISTIC clip, played as it comes back with its own background.
+           1080x608 is 16:9 at full frame width, so a landscape generation drops
+           in at native size with nothing cropped. Sitting it at the top with a
+           torn edge under it makes it read as a window cut into the page
+           rather than a rectangle pasted onto it.
+   .keyed  a TEXTBOOK clip generated on chroma, keyed, and composited into the
+           470px figure band like any drawn figure. No panel, no torn edge —
+           the plate shows through it.
+   Mixing both in one video is fine; each clip is placed on its own terms. */
+#veo{position:absolute;left:0;width:1080px;
+     display:flex;flex-direction:column;align-items:center;justify-content:center;
+     padding-top:150px}
+/* Geometry from src/panel_layout.py, not invented here:
+     TOP_MARGIN 84   plate showing above the panel
+     panel_h    810  = 1080 / (4:3). Flow only offers 16:9 and 9:16, so the 4:3
+                     panel is reached by cropping a 16:9 generation CENTRED —
+                     160px off each side of a 1280-wide clip.
+     seam       894  where the torn paper sits
+     TOP_FADE   150  rows over which the panel dissolves into the plate. With a
+                     margin above it that edge is visible, and a hard line
+                     between a clip's near-black field and the teal plate reads
+                     as a pasted rectangle. */
+#veo.panel{top:84px;height:810px;background:#05100F;
+     -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 150px);
+     mask-image:linear-gradient(to bottom, transparent 0, #000 150px)}
+
+/* The divider is the REAL torn edge, keyed out of assets/dividers/
+   paper_tear_texture.jpg by tools/make_tear.py and cached per seam. It used to
+   be a drawn zigzag here, which reads as patchy and too regular — no amount of
+   tuning makes a drawn line look like torn paper. The PNG is full-frame with
+   the paper already at the right rows, so it is laid at 0,0 untouched. */
+#veotear{position:absolute;left:0;top:0;width:1080px;height:1920px;
+     background:url(../assets/dividers/paper_tear_894.png) 0 0/1080px 1920px no-repeat;
+     pointer-events:none}
+#veo.keyed{top:var(--stage-top);height:var(--stage-h);
+     background:rgba(5,16,15,.35);border:2px dashed rgba(232,194,90,.35);
+     border-radius:16px}
+#veo .vk{font:800 26px Poppins,sans-serif;letter-spacing:3px;color:var(--gold);
+         text-transform:uppercase}
+#veo .vl{font:800 46px Poppins,Mukta,sans-serif;color:var(--ink);
+         line-height:1.32;text-align:center;margin-top:30px;max-width:860px}
+#veo .vn{font:600 26px Poppins,sans-serif;color:#7E9B98;margin-top:34px;
+         letter-spacing:.4px}
+#veo .tear{display:none}          /* the drawn zigzag is retired */
+
+/* THE PLACEHOLDER IS FOR THE STORYBOARD, NOT FOR THE VIDEO.
+   `#veo` is the hole a generated clip is laid into by tools/composite.py, and
+   the compositor ramps the clip's alpha over VEO_FADE (0.30s) at each edge. So
+   for 0.3s at the start and 0.3s at the end of every clip, whatever the render
+   drew inside that panel is visible THROUGH the clip — and what it drew was
+   the kicker, the description lines and the note. They ghost up as the clip
+   fades out, which is exactly what shipped in BIO-C5-LA-01 and BIO-C12-LA-02.
+   The panel's dark ground and the torn divider must stay: they are what the
+   clip fades onto. Only the words go, and only outside the sheet. */
+#veo .vk, #veo .vl, #veo .vn{display:none}
+#frame.sheet #veo .vk, #frame.sheet #veo .vl, #frame.sheet #veo .vn{display:block}
+
+/* ---------- the presenter's floor, drawn for the storyboard only ---------- */
+#frame.sheet::before{content:'';position:absolute;left:0;top:var(--floor);
+  width:1080px;height:2px;background:rgba(226,232,231,.45)}
+#frame.sheet::after{content:'प्रस्तुतकर्ता का क्षेत्र';position:absolute;
+  left:0;top:calc(var(--floor) + 22px);width:1080px;text-align:center;
+  font:700 26px Mukta,Poppins,sans-serif;color:rgba(226,232,231,.55)}
+
+
+/* ============================================================
+   CAPTIONS MOVE WHEN THE STAGE IS EMPTY.
+   With a figure up, the caption belongs low — below the stage, above the
+   presenter's floor — and the presenter is small so it stays readable.
+   With NOTHING on the stage there is no reason to keep either of them
+   pinned there: the top two thirds of the frame are empty, so the caption
+   goes up into it and the presenter grows into the space he is standing in.
+   `composite.py` already has the sizing half of this (its `big` windows);
+   this is the caption half, and the two are driven from the SAME segment
+   list so they can never disagree about which state the frame is in.
+   ============================================================ */
+#frame.captop #caption{ top:120px; height:280px }
+#frame.captop #caption .phrase.xl{font-size:72px}
+#frame.captop #caption .phrase.lg{font-size:66px}
+#frame.captop #caption .phrase.md{font-size:60px}
+#frame.captop #caption .phrase.sm{font-size:52px;line-height:1.20}

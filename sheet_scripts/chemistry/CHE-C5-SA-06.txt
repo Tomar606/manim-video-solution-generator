@@ -1,0 +1,93 @@
+“उपसहसंयोजक यौगिकों में हाइड्रेट समावयवता उदाहरण सहित समझाइए।”
+MP Board कक्षा 12वीं के बच्चों!
+आज का question बहुत important है, क्योंकि इसमें आपसे उपसहसंयोजक यौगिकों में हाइड्रेट समावयवता को उदाहरण सहित समझाने के लिए कहा गया है। यह question अगर आप concept के साथ समझेंगे, तो इसके examples भी आसानी से याद रहेंगे।
+
+
+चलिए इसे एक आसान example की मदद से समझते हैं।
+Part 1 — हाइड्रेट समावयवता क्या है?
+सबसे पहले समझते हैं कि हाइड्रेट समावयवता क्या होती है।
+जब किसी संकुल के उपसहसंयोजक मंडल के भीतर और बाहर जल के अणुओं की संख्या में भिन्नता होती है, तब हाइड्रेट समावयवता उत्पन्न होती है।
+मतलब, किसी यौगिक में जल के अणु तो कुल संख्या में समान होते हैं, लेकिन वे संकुल के अंदर और बाहर अलग-अलग संख्या में उपस्थित हो सकते हैं।
+इसी कारण अलग-अलग संरचनाएँ प्राप्त होती हैं, जिन्हें हाइड्रेट समावयवी कहते हैं।
+अब इसे एक बहुत important example से समझते हैं।
+हमारे पास यौगिक है—
+On Screen:
+CrCl₃ · 6H₂O
+“C r C l three dot six H two O।”
+इस यौगिक के तीन हाइड्रेट समावयवी संभव हैं।
+पहला हाइड्रेट समावयवी है—
+On Screen:
+[Cr(H₂O)₆]Cl₃
+बैंगनी
+“Open bracket C r, open bracket H two O, close bracket six, close bracket C l three। यह बैंगनी रंग का है।”
+इस संरचना में सभी six H two O, यानी छह जल के अणु, संकुल के अंदर हैं और three C l, यानी तीन chloride ions, संकुल के बाहर हैं।
+On Screen:
+अंदर → 6 H₂O
+बाहर → 3Cl⁻
+“अंदर six H two O और बाहर three C l minus।”
+अब दूसरा हाइड्रेट समावयवी देखते हैं।
+On Screen:
+[Cr(H₂O)₅Cl]Cl₂ · H₂O
+हरा
+“Open bracket C r, open bracket H two O, close bracket five, C l, close bracket C l two dot H two O। यह हरे रंग का है।”
+इसमें five H two O, यानी पाँच जल के अणु, संकुल के अंदर हैं और one H two O, यानी एक जल का अणु, संकुल के बाहर है।
+साथ ही two C l minus संकुल के बाहर हैं।
+On Screen:
+अंदर → 5 H₂O + 1Cl⁻
+बाहर → 2Cl⁻ + 1H₂O
+“अंदर five H two O और one C l minus, जबकि बाहर two C l minus और one H two O।”
+अब तीसरा हाइड्रेट समावयवी देखते हैं।
+On Screen:
+[Cr(H₂O)₄Cl₂]Cl · 2H₂O
+गहरा हरा
+“Open bracket C r, open bracket H two O, close bracket four, C l two, close bracket C l dot two H two O। यह गहरे हरे रंग का है।”
+इसमें four H two O, यानी चार जल के अणु, संकुल के अंदर हैं और two H two O, यानी दो जल के अणु, संकुल के बाहर हैं।
+On Screen:
+अंदर → 4 H₂O + 2Cl⁻
+बाहर → 1Cl⁻ + 2H₂O
+“अंदर four H two O और two C l minus, जबकि बाहर one C l minus और two H two O।”
+अब तीनों को ध्यान से देखिए।
+On Screen:
+CrCl₃ · 6H₂O
+“C r C l three dot six H two O।”
+कुल मिलाकर हर संरचना में six H two O और three C l ही हैं, लेकिन संकुल के अंदर और बाहर इनकी स्थिति अलग-अलग है।
+यही हाइड्रेट समावयवता का मुख्य आधार है।
+तो Part 1 में हमने समझा कि हाइड्रेट समावयवता तब होती है, जब जल के अणुओं का संकुल के अंदर और बाहर वितरण अलग-अलग हो।
+अब इन तीनों हाइड्रेट समावयवियों को एक साथ compare करके याद करना बाकी है। इसे Part 2 में एक आसान तरीके से revise करेंगे।
+________________
+
+
+Part 2 — तीनों हाइड्रेट समावयवियों की तुलना
+तो बच्चों, Part 1 में हमने समझा कि CrCl₃ · 6H₂O के तीन हाइड्रेट समावयवी होते हैं और तीनों में जल के अणुओं की कुल संख्या समान होती है, लेकिन संकुल के अंदर और बाहर उनका वितरण अलग होता है।
+अब तीनों को क्रम से दोबारा समझ लेते हैं।
+पहला है—
+On Screen:
+[Cr(H₂O)₆]Cl₃ → बैंगनी
+“Open bracket C r, open bracket H two O, close bracket six, close bracket C l three। यह बैंगनी रंग का है।”
+इसमें six H two O संकुल के अंदर और three C l minus बाहर हैं।
+दूसरा है—
+On Screen:
+[Cr(H₂O)₅Cl]Cl₂ · H₂O → हरा
+“Open bracket C r, open bracket H two O, close bracket five, C l, close bracket C l two dot H two O। यह हरे रंग का है।”
+इसमें five H two O अंदर और one H two O बाहर है।
+तीसरा है—
+On Screen:
+[Cr(H₂O)₄Cl₂]Cl · 2H₂O → गहरा हरा
+“Open bracket C r, open bracket H two O, close bracket four, C l two, close bracket C l dot two H two O। यह गहरे हरे रंग का है।”
+इसमें four H two O अंदर और two H two O बाहर हैं।
+अब इसे एक trick की तरह याद कर सकते हैं—
+On Screen:
+6 H₂O अंदर → बैंगनी
+5 H₂O अंदर + 1 H₂O बाहर → हरा
+4 H₂O अंदर + 2 H₂O बाहर → गहरा हरा
+“Six H two O अंदर होने पर बैंगनी, five H two O अंदर और one H two O बाहर होने पर हरा, और four H two O अंदर तथा two H two O बाहर होने पर गहरा हरा रंग प्राप्त होता है।”
+तो बच्चों, इस question में सबसे important चीज है—जल के अणुओं का वितरण और तीनों समावयवियों के रंग।
+On Screen:
+CrCl₃ · 6H₂O
+↓
+[Cr(H₂O)₆]Cl₃ → बैंगनी
+[Cr(H₂O)₅Cl]Cl₂ · H₂O → हरा
+[Cr(H₂O)₄Cl₂]Cl · 2H₂O → गहरा हरा
+“C r C l three dot six H two O से तीन हाइड्रेट समावयवी प्राप्त होते हैं—पहला open bracket C r open bracket H two O close bracket six close bracket C l three, बैंगनी; दूसरा open bracket C r open bracket H two O close bracket five C l close bracket C l two dot H two O, हरा; और तीसरा open bracket C r open bracket H two O close bracket four C l two close bracket C l dot two H two O, गहरा हरा।”
+इसलिए exam में पहले हाइड्रेट समावयवता की परिभाषा लिखिए और फिर CrCl₃ · 6H₂O के ये तीनों समावयवी उनके रंगों के साथ लिखिए।
+अब इसका exact answer exam में किस तरह लिखना है, वो आपको Notes button पर click करके मिल जाएगा।

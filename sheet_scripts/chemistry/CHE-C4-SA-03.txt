@@ -1,0 +1,22 @@
+“संक्रमण तत्व परिवर्ती संयोजकता प्रदर्शित करते हैं, क्यों?”
+MP Board कक्षा 12वीं के बच्चों! ये सवाल 2024 में पूछा जा चुका है, और इस बार भी आपकी board exam में आ सकता है। ये सवाल पूरे 3 नंबर का आता है तो इसे अच्छे से समझ लेते हैं, क्योंकि exam में बिलकुल ऐसा ही लिखना है जैसे मैं बता रहा हूँ
+सबसे पहले समझो— परिवर्ती संयोजकता का मतलब क्या है?
+जब कोई element एक से अधिक valency या oxidation state प्रदर्शित करता है, तो उसे परिवर्ती संयोजकता कहते हैं।
+अब सवाल है कि transition elements में ऐसा क्यों होता है?
+इसका main reason है इनके d और s orbitals की energy का difference बहुत कम होना।
+On Screen:
+(n−1)d और ns कक्षक
+Transition elements में n minus one d orbital और n s orbital के electrons की energy में बहुत अधिक अंतर नहीं होता।
+इसलिए जब ये elements compound या ion बनाते हैं, तो केवल outermost n s electrons ही नहीं, बल्कि n minus one d electrons भी bonding में participate कर सकते हैं।
+On Screen:
+(n−1)d electrons + ns electrons → संयोजी इलेक्ट्रॉन
+“n minus one d electrons और n s electrons मिलकर संयोजी electrons की तरह काम कर सकते हैं।”
+अब क्योंकि अलग-अलग संख्या में d और s electrons bonding में participate कर सकते हैं, इसलिए transition elements एक से अधिक oxidation states या संयोजकताएँ प्रदर्शित करते हैं।
+यही कारण है कि transition elements को परिवर्ती संयोजकता वाले तत्व कहा जाता है।
+अब एक important fact याद रखो—
+On Screen:
+Mn → अधिकतम परिवर्ती संयोजकता
+“M n अधिकतम परिवर्ती संयोजकता प्रदर्शित करता है।”
+यानी transition elements में manganese, सबसे अधिक variable oxidation states प्रदर्शित करता है।
+बस, यही है संक्रमण तत्वों की परिवर्ती संयोजकता का पूरा concept 
+तो बच्चों, पूरे 3 नंबर के लिए Exam में इसका exact answer लिखना भी ज़रूरी है, और ये exact answer आपको Notes button पर मिल जाएगा। और ऐसे ही important questions को एक-एक करके complete करते जाओ

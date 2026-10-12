@@ -1,0 +1,140 @@
+प्रश्न:
+बायो-सेवर्ट नियम द्वारा किसी धारावाही वृत्तीय कुण्डली के अक्ष पर स्थित किसी बिन्दु पर चुम्बकीय क्षेत्र की तीव्रता हेतु व्यंजक ज्ञात कीजिए।
+PART 1
+शिक्षक:
+“MP Board कक्षा 12वीं के बच्चों! धारावाही वृत्तीय कुण्डली के अक्ष पर चुम्बकीय क्षेत्र का ये derivation Board Exam के लिए बहुत important है।”
+“इस derivation में हम बायो-सेवर्ट नियम की मदद से कुण्डली के अक्ष पर किसी बिन्दु P पर चुम्बकीय क्षेत्र का पूरा expression निकालेंगे।”
+“मान लेते हैं कि a त्रिज्या की एक वृत्तीय कुण्डली है, जिसमें I विद्युत् धारा प्रवाहित हो रही है।”
+“कुण्डली के केन्द्र O से उसके अक्ष पर x दूरी पर एक बिन्दु P है, जहाँ हमें चुम्बकीय क्षेत्र ज्ञात करना है।”
+“अब कुण्डली को बहुत सारे छोटे-छोटे current elements में बाँट लेते हैं। कुण्डली के ऊपरी हिस्से में dl लंबाई का एक छोटा element AB लेते हैं।”
+“इस element से बिन्दु P की दूरी r है।”
+ON SCREEN
+AB = dl
+AP = BP = r
+“AB बराबर है dl और P से इस current element की दूरी r है।”
+“अब बायो-सेवर्ट नियम के अनुसार, इस छोटे current element के कारण P पर चुम्बकीय क्षेत्र होगा—”
+ON SCREEN
+dB = μ₀/(4π) × (I dl sin θ)/r²
+“dB बराबर है mu naught by four pi into I dl sine theta by r square।”
+“यहाँ theta, current element dl और P को जोड़ने वाली रेखा के बीच का कोण है।”
+“Diagram से यहाँ theta का मान 90 degree है।”
+ON SCREEN
+θ = 90°
+“थीटा बराबर 90 degree।”
+“इसलिए sine 90 degree का मान one होगा और—”
+ON SCREEN
+dB = μ₀/(4π) × I dl/r²
+“dB बराबर है mu naught by four pi into I dl by r square।”
+“अब बच्चों, यहाँ एक बहुत important step है। इस dB की दिशा P और current element को जोड़ने वाली रेखा के अनुदिश होगी।”
+“लेकिन हमें केवल कुण्डली के अक्ष OP के अनुदिश चुम्बकीय क्षेत्र चाहिए। इसलिए dB को दो components में resolve करेंगे।”
+“मान लेते हैं कि OP और dB के बीच कोण phi है।”
+ON SCREEN
+अक्ष के अनुदिश component = dB sin φ
+अक्ष के लम्बवत् component = dB cos φ
+“अक्ष के along component dB sine phi होगा और अक्ष के perpendicular component dB cos phi होगा।”
+“अब कुण्डली के ठीक opposite side पर उतनी ही लंबाई dl का दूसरा current element लेते हैं।”
+“इसके कारण भी P पर समान magnitude का dB उत्पन्न होगा, लेकिन इसकी दिशा opposite होगी।”
+“इसलिए दोनों elements के perpendicular components एक-दूसरे को cancel कर देंगे, जबकि अक्ष OP के along components आपस में जुड़ जाएँगे।”
+“बच्चों, यही पूरी derivation का सबसे important concept है—कुण्डली के हर pair से perpendicular components cancel और axial components add होते हैं।”
+“इसलिए पूरी कुण्डली के कारण P पर axial magnetic field होगा—”
+ON SCREEN
+B = Σ dB sin φ
+“B बराबर है sigma dB sine phi।”
+“अब dB की value रखते हैं।”
+ON SCREEN
+B = Σ [μ₀/(4π) × I dl/r² × sin φ]
+“B बराबर है sigma mu naught by four pi into I dl by r square into sine phi।”
+“अब Part 2 में इसी expression को आगे simplify करके पूरी कुण्डली के लिए magnetic field निकालेंगे।”
+PART 2
+शिक्षक:
+“बच्चों, Part 1 में हमने देखा कि perpendicular components cancel हो जाते हैं और axial components add होते हैं। इसलिए हमारे पास था—”
+ON SCREEN
+B = Σ [μ₀/(4π) × I dl/r² × sin φ]
+“B बराबर है sigma mu naught by four pi into I dl by r square into sine phi।”
+“अब diagram से sin phi का relation निकालते हैं।”
+“समकोण त्रिभुज में कुण्डली की त्रिज्या a और element से P की दूरी r है। इसलिए—”
+ON SCREEN
+sin φ = a/r
+“साइन phi बराबर है a by r।”
+“अब इसे magnetic field वाले expression में रख देते हैं।”
+ON SCREEN
+B = Σ [μ₀/(4π) × I dl/r² × a/r]
+“B बराबर है sigma mu naught by four pi into I dl by r square into a by r।”
+“इसे simplify करने पर—”
+ON SCREEN
+B = μ₀/(4π) × Ia/r³ × Σ dl
+“B बराबर है mu naught by four pi into I a by r cube into sigma dl।”
+“अब पूरी वृत्तीय कुण्डली के सभी छोटे elements की लंबाइयों का योग कुण्डली की पूरी परिधि के बराबर होगा।”
+ON SCREEN
+Σ dl = 2πa
+“Sigma dl बराबर है two pi a।”
+“अब इसे पिछले expression में रख देते हैं।”
+ON SCREEN
+B = μ₀/(4π) × Ia/r³ × 2πa
+“B बराबर है mu naught by four pi into I a by r cube into two pi a।”
+“इससे हमें मिलता है—”
+ON SCREEN
+B = μ₀/(4π) × 2πIa²/r³
+“B बराबर है mu naught by four pi into two pi I a square by r cube।”
+“अब बच्चों, अभी हमें r की जगह x और a के terms में expression चाहिए।”
+“इसके लिए diagram में समकोण त्रिभुज COP लेते हैं।”
+ON SCREEN
+r² = a² + x²
+“r square बराबर है a square plus x square।”
+“इसलिए r होगा—”
+ON SCREEN
+r = (a² + x²)^(1/2)
+“r बराबर है a square plus x square का power one by two।”
+“अब r cube के लिए—”
+ON SCREEN
+r³ = (a² + x²)^(3/2)
+“r cube बराबर है a square plus x square का power three by two।”
+“अब r cube की ये value magnetic field के expression में रख देते हैं।”
+ON SCREEN
+B = μ₀/(4π) × 2πIa²/(a² + x²)^(3/2)
+“B बराबर है mu naught by four pi into two pi I a square divided by a square plus x square का power three by two।”
+“तो बच्चों, एक single-turn circular loop के axis पर x दूरी पर magnetic field का expression हमें मिल गया।”
+“लेकिन अगर कुण्डली में एक से ज्यादा turns हों, तो field कैसे बदलेगा? ये समझते हैं Part 3 में।”
+PART 3
+शिक्षक:
+“बच्चों, अभी तक हमने एक single-turn circular loop के लिए magnetic field का expression निकाला है।”
+ON SCREEN
+B = μ₀/(4π) × 2πIa²/(a² + x²)^(3/2)
+“B बराबर है mu naught by four pi into two pi I a square divided by a square plus x square का power three by two।”
+“अब मान लो इसी radius की कुण्डली में n turns हैं।”
+“क्योंकि हर turn में समान current I प्रवाहित हो रही है, इसलिए सभी turns के magnetic fields आपस में जुड़ेंगे।”
+“इसलिए single-turn field को n से multiply करेंगे।”
+ON SCREEN
+B = μ₀/(4π) × 2πnIa²/(a² + x²)^(3/2)
+“B बराबर है mu naught by four pi into two pi n I a square divided by a square plus x square का power three by two।”
+“अब बच्चों, इसका एक बहुत important special case है—कुण्डली के centre पर magnetic field।”
+“Centre पर point P, centre O पर ही होगा। इसलिए x का मान zero होगा।”
+ON SCREEN
+x = 0
+“x बराबर zero।”
+“अब x की जगह zero रखने पर—”
+ON SCREEN
+B = μ₀/(4π) × 2πnIa²/(a²)^(3/2)
+“B बराबर है mu naught by four pi into two pi n I a square divided by a square का power three by two।”
+“a square का power three by two, a cube के बराबर होगा। इसलिए a square ऊपर और a cube नीचे से एक a cancel हो जाएगा।”
+ON SCREEN
+B = μ₀/(4π) × 2πnI/a
+“B बराबर है mu naught by four pi into two pi n I by a।”
+“इसलिए centre पर magnetic field का मान maximum होता है और—”
+ON SCREEN
+B = μ₀nI/(2a)
+“B बराबर है mu naught n I by two a।”
+“बच्चों, पूरे derivation का sequence एक बार याद कर लो—”
+ON SCREEN
+Biot-Savart law → dB → axial component → sin φ = a/r → Σdl = 2πa → r² = a² + x² → B = μ₀/(4π) × 2πnIa²/(a² + x²)^(3/2)
+“बस ये sequence दिमाग में clear है, तो पूरा derivation step-by-step आसानी से लिखा जा सकता है।”
+“अतः n फेरों वाली धारावाही वृत्तीय कुण्डली के अक्ष पर x दूरी पर चुम्बकीय क्षेत्र की तीव्रता का व्यंजक है—”
+ON SCREEN
+B = μ₀/(4π) × 2πnIa²/(a² + x²)^(3/2)
+“B बराबर है mu naught by four pi into two pi n I a square divided by a square plus x square का power three by two।”
+“और कुण्डली के centre पर, x बराबर zero होने पर—”
+ON SCREEN
+B = μ₀nI/(2a)
+“B बराबर है mu naught n I by two a।”
+“अब इसे परीक्षा में कैसे लिखना है, वो आपकी स्क्रीन के right side में दिए Notes button पर मिल जाएगा।”
+“और ऐसे ही important derivations को समझते जाओ और एक-एक करके अपना syllabus complete करते जाओ।”

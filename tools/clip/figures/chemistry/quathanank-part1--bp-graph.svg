@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Vapour pressure against temperature. The solution curve (gold) lies BELOW
+       the pure solvent curve (cyan), so it meets the atmospheric-pressure line
+       further to the right - a higher boiling point. That gap is the whole
+       lesson. Part 1 built this; here it is the recap.
+       No word or number lives here: every label comes from the spec. -->
+
+  <g id="axes" data-optional>
+    <path d="M170 380 V52" stroke="#8FA6B8" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <path d="M170 40 l-18 30 h36 z" fill="#8FA6B8"/>
+    <path d="M170 380 H988" stroke="#8FA6B8" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <path d="M1000 380 l-30 -18 v36 z" fill="#8FA6B8"/>
+  </g>
+
+  <!-- the atmospheric-pressure line, drawn as separate dashes: the engine
+       overwrites stroke-dasharray on anything it animates, so a dash PATTERN
+       has to be real geometry or it renders as a solid rule -->
+  <g id="patm" data-optional>
+    <path d="M180 110 h34" stroke="#8FA6B8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M240 110 h34" stroke="#8FA6B8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M300 110 h34" stroke="#8FA6B8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M360 110 h34" stroke="#8FA6B8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M420 110 h34" stroke="#8FA6B8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M480 110 h34" stroke="#8FA6B8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M540 110 h34" stroke="#8FA6B8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M600 110 h34" stroke="#8FA6B8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M660 110 h34" stroke="#8FA6B8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M720 110 h34" stroke="#8FA6B8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M780 110 h34" stroke="#8FA6B8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M840 110 h34" stroke="#8FA6B8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M900 110 h34" stroke="#8FA6B8" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <path id="curve_a" data-optional fill="none" stroke="#7FD4FF" stroke-width="9"
+        stroke-linecap="round" d="M250 362 C 470 350, 612 268, 700 110 L 726 58"/>
+
+  <path id="curve_b" data-optional fill="none" stroke="#FFC53D" stroke-width="9"
+        stroke-linecap="round" d="M300 374 C 566 366, 748 292, 840 110 L 864 58"/>
+
+  <g id="drop_a" data-optional>
+    <path d="M700 122 v30" stroke="#7FD4FF" stroke-width="5" stroke-linecap="round"/>
+    <path d="M700 176 v30" stroke="#7FD4FF" stroke-width="5" stroke-linecap="round"/>
+    <path d="M700 230 v30" stroke="#7FD4FF" stroke-width="5" stroke-linecap="round"/>
+    <path d="M700 284 v30" stroke="#7FD4FF" stroke-width="5" stroke-linecap="round"/>
+    <path d="M700 338 v30" stroke="#7FD4FF" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="700" cy="110" r="15" fill="#0B1F2E" stroke="#7FD4FF" stroke-width="7"/>
+  </g>
+
+  <g id="drop_b" data-optional>
+    <path d="M840 122 v30" stroke="#FFC53D" stroke-width="5" stroke-linecap="round"/>
+    <path d="M840 176 v30" stroke="#FFC53D" stroke-width="5" stroke-linecap="round"/>
+    <path d="M840 230 v30" stroke="#FFC53D" stroke-width="5" stroke-linecap="round"/>
+    <path d="M840 284 v30" stroke="#FFC53D" stroke-width="5" stroke-linecap="round"/>
+    <path d="M840 338 v30" stroke="#FFC53D" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="840" cy="110" r="15" fill="#2A1E05" stroke="#FFC53D" stroke-width="7"/>
+  </g>
+
+  <g id="gap" data-optional>
+    <path d="M700 330 v34" stroke="#EDC68A" stroke-width="5" stroke-linecap="round"/>
+    <path d="M840 330 v34" stroke="#EDC68A" stroke-width="5" stroke-linecap="round"/>
+    <path d="M714 347 H826" stroke="#EDC68A" stroke-width="7" stroke-linecap="round"/>
+    <path d="M700 347 l26 -14 v28 z" fill="#EDC68A"/>
+    <path d="M840 347 l-26 -14 v28 z" fill="#EDC68A"/>
+  </g>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- WHY the boiling point rises. A non-volatile solute sits at the surface and
+       takes up room the solvent molecules would have escaped from, so fewer get
+       out and the vapour pressure falls. Left: pure solvent, four escaping.
+       Right: solution, the surface partly occupied, two escaping.
+       The arrow COUNT is the whole argument - do not change one side only.
+       No word or number lives here: every label comes from the spec. -->
+
+  <path id="vessel_a" data-optional fill="none" stroke="#7FD4FF" stroke-width="8"
+        stroke-linecap="round" d="M150 200 V350 Q150 380 180 380 H440 Q470 380 470 350 V200"/>
+  <path id="liq_a" data-optional stroke="none" fill="#7FD4FF" fill-opacity="0.32"
+        d="M158 246 V350 Q158 372 180 372 H440 Q462 372 462 350 V246 Z"/>
+  <g id="esc_a" data-optional>
+    <path d="M200 232 V150" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <path d="M200 134 l-16 30 h32 z" fill="#7FD4FF"/>
+    <path d="M272 232 V122" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <path d="M272 106 l-16 30 h32 z" fill="#7FD4FF"/>
+    <path d="M344 232 V150" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <path d="M344 134 l-16 30 h32 z" fill="#7FD4FF"/>
+    <path d="M416 232 V122" stroke="#7FD4FF" stroke-width="7" stroke-linecap="round"/>
+    <path d="M416 106 l-16 30 h32 z" fill="#7FD4FF"/>
+  </g>
+
+  <path id="vessel_b" data-optional fill="none" stroke="#FFC53D" stroke-width="8"
+        stroke-linecap="round" d="M610 200 V350 Q610 380 640 380 H900 Q930 380 930 350 V200"/>
+  <path id="liq_b" data-optional stroke="none" fill="#FFC53D" fill-opacity="0.28"
+        d="M618 246 V350 Q618 372 640 372 H900 Q922 372 922 350 V246 Z"/>
+  <!-- the solute, sitting IN the surface: this is what blocks the escape -->
+  <g id="solute_b" data-optional>
+    <circle cx="652" cy="246" r="17" fill="#FFE9A8" stroke="#FFC53D" stroke-width="4"/>
+    <circle cx="714" cy="246" r="17" fill="#FFE9A8" stroke="#FFC53D" stroke-width="4"/>
+    <circle cx="776" cy="246" r="17" fill="#FFE9A8" stroke="#FFC53D" stroke-width="4"/>
+    <circle cx="838" cy="246" r="17" fill="#FFE9A8" stroke="#FFC53D" stroke-width="4"/>
+    <circle cx="900" cy="246" r="17" fill="#FFE9A8" stroke="#FFC53D" stroke-width="4"/>
+    <circle cx="683" cy="300" r="15" fill="#FFE9A8" stroke="#FFC53D" stroke-width="4"/>
+    <circle cx="807" cy="312" r="15" fill="#FFE9A8" stroke="#FFC53D" stroke-width="4"/>
+  </g>
+  <g id="esc_b" data-optional>
+    <path d="M683 224 V150" stroke="#FFC53D" stroke-width="7" stroke-linecap="round"/>
+    <path d="M683 134 l-16 30 h32 z" fill="#FFC53D"/>
+    <path d="M869 224 V150" stroke="#FFC53D" stroke-width="7" stroke-linecap="round"/>
+    <path d="M869 134 l-16 30 h32 z" fill="#FFC53D"/>
+  </g>
+</svg>

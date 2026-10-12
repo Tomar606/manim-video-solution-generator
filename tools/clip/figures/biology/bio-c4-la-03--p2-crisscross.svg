@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- CRISS-CROSS: the trait goes ACROSS the generation, never straight down.
+
+       Parents on the top row, children on the bottom row, each shown as its
+       sex-chromosome pair (father and son Y+X, mother and daughter X+X). The
+       father's arrow runs to the DAUGHTER diagonally opposite and the
+       mother's to the SON, so the two arrows cross in the middle - which is
+       literally the shape the name describes. The gold ring lands on that
+       crossing when he says the word for it.
+
+       The father and the son are drawn Y first, X second, so each arrow
+       leaves from an X and arrives at an X: what crosses is the X
+       chromosome, and an arrow leaving the father's Y for a daughter would
+       teach the wrong thing. Labels sit outside the pairs, clear of both
+       arrows. -->
+  <style>
+    .cc-xo { fill:#246574; stroke:#78C0F0; stroke-width:14; stroke-linejoin:round }
+    .cc-xf { fill:#246574 }
+    .cc-yo { fill:#5A4632; stroke:#F0A860; stroke-width:14; stroke-linejoin:round }
+    .cc-yf { fill:#5A4632 }
+    .cc-bh { fill:#FF5A5A }
+    .cc-bn { fill:#F2F2F2 }
+    .cc-gh { fill:#35504A }
+    .cc-slot { fill:#78C0F0; fill-opacity:.07; stroke:#6E8A99; stroke-width:6; stroke-dasharray:18 12 }
+    .cc-blk { fill:none; stroke:#6E8A99; stroke-width:7; stroke-dasharray:16 13; stroke-linecap:round }
+    .cc-blkh { fill:#6E8A99 }
+    .cc-stop { stroke:#FF5A5A; stroke-width:10; stroke-linecap:round }
+    .cc-ring { fill:none; stroke:#FF5A5A; stroke-width:6 }
+    .cc-dot { fill:#E8C25A; fill-opacity:.35; stroke:#E8C25A; stroke-width:7 }
+  </style>
+
+  <g id="cc_fath" data-optional>
+    <g transform="translate(322 117)">
+      <g class="cc-yo"><rect x="-11.4" y="-47.1" width="22.8" height="49.4" rx="11.4" transform="rotate(32 0 -9.1)"/><rect x="-11.4" y="-47.1" width="22.8" height="49.4" rx="11.4" transform="rotate(-32 0 -9.1)"/><rect x="-11.4" y="-20.5" width="22.8" height="58.5" rx="11.4"/></g>
+      <g class="cc-yf"><rect x="-11.4" y="-47.1" width="22.8" height="49.4" rx="11.4" transform="rotate(32 0 -9.1)"/><rect x="-11.4" y="-47.1" width="22.8" height="49.4" rx="11.4" transform="rotate(-32 0 -9.1)"/><rect x="-11.4" y="-20.5" width="22.8" height="58.5" rx="11.4"/></g>
+    </g>
+    <g transform="translate(410 112)">
+      <g class="cc-xo"><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(20)"/><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(-20)"/></g>
+      <g class="cc-xf"><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(20)"/><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(-20)"/></g>
+    </g>
+  </g>
+  <g id="cc_moth" data-optional>
+    <g transform="translate(670 112)">
+      <g class="cc-xo"><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(20)"/><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(-20)"/></g>
+      <g class="cc-xf"><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(20)"/><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(-20)"/></g>
+    </g>
+    <g transform="translate(758 112)">
+      <g class="cc-xo"><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(20)"/><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(-20)"/></g>
+      <g class="cc-xf"><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(20)"/><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(-20)"/></g>
+    </g>
+  </g>
+  <g id="cc_son" data-optional>
+    <g transform="translate(322 357)">
+      <g class="cc-yo"><rect x="-11.4" y="-47.1" width="22.8" height="49.4" rx="11.4" transform="rotate(32 0 -9.1)"/><rect x="-11.4" y="-47.1" width="22.8" height="49.4" rx="11.4" transform="rotate(-32 0 -9.1)"/><rect x="-11.4" y="-20.5" width="22.8" height="58.5" rx="11.4"/></g>
+      <g class="cc-yf"><rect x="-11.4" y="-47.1" width="22.8" height="49.4" rx="11.4" transform="rotate(32 0 -9.1)"/><rect x="-11.4" y="-47.1" width="22.8" height="49.4" rx="11.4" transform="rotate(-32 0 -9.1)"/><rect x="-11.4" y="-20.5" width="22.8" height="58.5" rx="11.4"/></g>
+    </g>
+    <g transform="translate(410 352)">
+      <g class="cc-xo"><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(20)"/><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(-20)"/></g>
+      <g class="cc-xf"><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(20)"/><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(-20)"/></g>
+    </g>
+  </g>
+  <g id="cc_daug" data-optional>
+    <g transform="translate(670 352)">
+      <g class="cc-xo"><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(20)"/><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(-20)"/></g>
+      <g class="cc-xf"><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(20)"/><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(-20)"/></g>
+    </g>
+    <g transform="translate(758 352)">
+      <g class="cc-xo"><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(20)"/><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(-20)"/></g>
+      <g class="cc-xf"><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(20)"/><rect x="-11.4" y="-51.7" width="22.8" height="103.4" rx="11.4" transform="rotate(-20)"/></g>
+    </g>
+  </g>
+  <line id="cc_ar_fd" data-optional x1="450" y1="162" x2="610.6" y2="282.5" stroke="#78C0F0" stroke-width="9" stroke-linecap="round"/>
+  <path id="cc_ar_fd_hd" data-optional fill="#78C0F0" d="M626 294 L589.8 288.9 L611 260.7 Z"/>
+  <line id="cc_ar_ms" data-optional x1="630" y1="162" x2="469.4" y2="282.5" stroke="#F2F2F2" stroke-width="9" stroke-linecap="round"/>
+  <path id="cc_ar_ms_hd" data-optional fill="#F2F2F2" d="M454 294 L469 260.7 L490.2 288.9 Z"/>
+  <circle id="cc_cross" data-optional class="cc-dot" cx="540" cy="228" r="30"/>
+</svg>

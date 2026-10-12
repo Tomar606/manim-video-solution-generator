@@ -1,0 +1,36 @@
+{
+ "note": "Length targets. VS/SA/LA/NM = the question category in the QID. 158 words/minute measured from shot clips.",
+ "speaking_rate_wpm": 158,
+ "by_question_category": {
+  "LA": {
+   "scripts": 31,
+   "median_words": 913,
+   "word_range": [
+    242,
+    1934
+   ],
+   "median_parts": 3,
+   "est_minutes": 5.8
+  },
+  "NM": {
+   "scripts": 13,
+   "median_words": 866,
+   "word_range": [
+    277,
+    1391
+   ],
+   "median_parts": 2,
+   "est_minutes": 5.5
+  },
+  "SA": {
+   "scripts": 67,
+   "median_words": 414,
+   "word_range": [
+    186,
+    1199
+   ],
+   "median_parts": 1,
+   "est_minutes": 2.6
+  }
+ }
+}

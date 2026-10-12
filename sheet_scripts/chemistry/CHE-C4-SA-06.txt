@@ -1,0 +1,51 @@
+“d⁴ श्रेणी में Cr²⁺ प्रबल अपचायक है, जबकि Mn³⁺ प्रबल ऑक्सीकारक है। निम्न से क्या समझते हैं?”
+Part 1
+MP Board कक्षा 12वीं के बच्चों!
+आज का सवाल थोड़ा conceptual है—
+“d⁴ श्रेणी में Cr²⁺ प्रबल अपचायक है, जबकि Mn³⁺ प्रबल ऑक्सीकारक है—क्यों?”
+इस सवाल में आपको सिर्फ ये याद नहीं करना है कि Cr²⁺ reducing agent है और Mn³⁺ oxidising agent है, बल्कि ये समझना है कि d⁴ configuration से कौन-सा stable configuration बन रहा है।
+तो चलो इसे step by step समझते हैं।
+सबसे पहले बात करते हैं Cr²⁺ की।
+Chromium यानी Cr का atomic number twenty four है। Cr²⁺ बनने पर इसके d-orbital में four electrons होते हैं।
+On Screen:
+Cr²⁺ → d⁴
+“C r two plus का electronic configuration d four होता है।”
+अब जब Cr²⁺ एक electron lose करता है, तो ये Cr³⁺ बन जाता है।
+On Screen:
+Cr²⁺ → Cr³⁺ + e⁻
+d⁴ → d³
+“C r two plus, one electron lose करके C r three plus बनता है और d four से d three configuration हो जाता है।”
+अब यहाँ सबसे important point है— d³ configuration relatively more stable होता है, क्योंकि octahedral field में इसके तीन electrons तीनों t two g orbitals में अलग-अलग रहते हैं।
+On Screen:
+d³ → t₂g³
+“d three में t two g की power three configuration मिलती है।”
+इसमें t two g orbitals half-filled होते हैं, जो इसे extra stability देते हैं।
+इसी extra stability को प्राप्त करने के लिए Cr²⁺ आसानी से electron lose करता है।
+इसलिए Cr²⁺ एक strong reducing agent, यानी प्रबल अपचायक, होता है।
+अब इसी concept को आगे बढ़ाते हैं।
+अगर कोई species electron lose करती है, तो वह दूसरे substance को electron gain करने में मदद करती है। इसलिए Cr²⁺ की reducing nature समझ में आती है।
+अब बात करते हैं Mn³⁺ की।
+Manganese यानी Mn का atomic number twenty five है और Mn³⁺ का configuration भी d⁴ होता है।
+On Screen:
+Mn³⁺ → d⁴
+“M n three plus का electronic configuration d four होता है।”
+अब Mn³⁺ एक electron gain करता है, तो यह Mn²⁺ बन जाता है।
+On Screen:
+Mn³⁺ + e⁻ → Mn²⁺
+d⁴ → d⁵
+“M n three plus, one electron gain करके M n two plus बनता है और d four से d five configuration हो जाता है।”
+और यहाँ d⁵ configuration विशेष रूप से stable होता है, क्योंकि पाँचों d-orbitals में एक-एक electron होता है।
+On Screen:
+d⁵ → पाँचों d-orbitals half-filled
+“d five में पाँचों d-orbitals half-filled होते हैं।”
+इसलिए Mn³⁺ electron gain करके stable d⁵ configuration प्राप्त करना चाहता है।
+इसी कारण Mn³⁺ आसानी से electron accept करता है और strong oxidising agent, यानी प्रबल ऑक्सीकारक, की तरह behave करता है।
+तो इस पूरे question का सबसे important logic यही है—
+On Screen:
+Cr²⁺ : d⁴ → d³ → अधिक स्थिर
+Mn³⁺ : d⁴ → d⁵ → अधिक स्थिर
+“C r two plus में d four से d three configuration बनता है, जो stable है। और M n three plus में d four से d five configuration बनता है, जो ज्यादा stable है।”
+इसलिए Cr²⁺ electron lose करके d³ बनना चाहता है, जबकि Mn³⁺ electron gain करके d⁵ बनना चाहता है।
+यही वजह है कि Cr²⁺ strong reducing agent और Mn³⁺ strong oxidising agent होता है।
+बस, इस question में d⁴ से d³ और d⁵ की stability वाला concept पक्का कर लो—exam में पूरा reason अपने आप याद रहेगा।
+अब इसका exact answer exam में किस तरह लिखना है, वो आपको Notes button पर click करके मिल जाएगा।

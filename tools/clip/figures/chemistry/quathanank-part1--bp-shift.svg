@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Two thermometers, one reading. The left one is the pure solvent, the
+       right one the SAME liquid after a non-volatile solute goes in: it has to
+       be taken higher before it boils. Each level runs out to a rule, and the
+       gold double arrow between the two rules is the elevation itself - the
+       thing being defined. Without those rules the arrow floats and reads as
+       decoration, which is what the first cut of this diagram did.
+       Cyan = what was already known, gold = the new fact.
+       No word or number lives here: every label comes from the spec. -->
+
+  <g id="thermo_a" data-optional>
+    <rect x="202" y="30" width="56" height="270" rx="28"
+          fill="#0B1F2E" stroke="#7FD4FF" stroke-width="8"/>
+    <circle cx="230" cy="338" r="46" fill="#0B1F2E" stroke="#7FD4FF" stroke-width="8"/>
+  </g>
+  <g id="merc_a" data-optional>
+    <rect x="217" y="230" width="26" height="114" fill="#7FD4FF"/>
+    <circle cx="230" cy="338" r="32" fill="#7FD4FF"/>
+  </g>
+
+  <g id="thermo_b" data-optional>
+    <rect x="532" y="30" width="56" height="270" rx="28"
+          fill="#2A1E05" stroke="#FFC53D" stroke-width="8"/>
+    <circle cx="560" cy="338" r="46" fill="#2A1E05" stroke="#FFC53D" stroke-width="8"/>
+  </g>
+  <g id="merc_b" data-optional>
+    <rect x="547" y="118" width="26" height="226" fill="#FFC53D"/>
+    <circle cx="560" cy="338" r="32" fill="#FFC53D"/>
+  </g>
+
+  <!-- level rules, drawn as real dashes: the engine overwrites stroke-dasharray
+       on anything it animates, so a dash PATTERN has to be geometry -->
+  <g id="lvl_a" data-optional>
+    <path d="M272 230 h34" stroke="#7FD4FF" stroke-width="5" stroke-linecap="round"/>
+    <path d="M330 230 h34" stroke="#7FD4FF" stroke-width="5" stroke-linecap="round"/>
+    <path d="M388 230 h34" stroke="#7FD4FF" stroke-width="5" stroke-linecap="round"/>
+    <path d="M446 230 h34" stroke="#7FD4FF" stroke-width="5" stroke-linecap="round"/>
+    <path d="M504 230 h34" stroke="#7FD4FF" stroke-width="5" stroke-linecap="round"/>
+    <path d="M600 230 h34" stroke="#7FD4FF" stroke-width="5" stroke-linecap="round"/>
+    <path d="M658 230 h32" stroke="#7FD4FF" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <g id="lvl_b" data-optional>
+    <path d="M600 118 h34" stroke="#FFC53D" stroke-width="5" stroke-linecap="round"/>
+    <path d="M658 118 h32" stroke="#FFC53D" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <g id="gap_arr" data-optional>
+    <path d="M706 218 V130" stroke="#EDC68A" stroke-width="9" stroke-linecap="round" fill="none"/>
+    <path d="M706 112 l-19 32 h38 z" fill="#EDC68A"/>
+    <path d="M706 236 l-19 -32 h38 z" fill="#EDC68A"/>
+  </g>
+</svg>

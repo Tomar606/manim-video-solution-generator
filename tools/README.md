@@ -1,5 +1,10 @@
 # tools/ — the avatar-synced video pipeline
 
+> **Building a video from an already-shot HeyGen clip?** That track runs through
+> `tools/build_clip.py` (steps, gates, parallel schedule) and `tools/clip/` (the
+> one renderer: engine, render, QA, storyboard, intro card). See `PROCESS.md`,
+> "Running it". The rest of this page is the older `projects/` Manim track.
+
 These build a **Manim video timed against a real HeyGen clip**, as opposed to
 `video.py`, which builds a video whose clock comes from synthesized narration.
 The difference matters: here the audio already exists and cannot be changed, so
@@ -225,7 +230,8 @@ image once you pass `--approve`. Two tools finish the job:
 | tool | what it does |
 |---|---|
 | `fix_text.py` | repair a wrong word on the generated page, in the browser |
-| `answer_outro.py` | fade the card up over the end of a finished video, hold, fade to black |
+| `answer_outro.py` | dissolve the answer pages up over the end of a finished video, hold each, fade to black |
+| `plate_from_render.py` | recover a render's background with nothing on it, for the band around the card |
 
 **Fix the word; do not re-roll the page.** The image model copies the typeset
 temp, and its mistakes are Devanagari-specific — a dropped halant

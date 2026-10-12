@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Effect of a catalyst: the same reaction by two paths. Warm is the path
+       WITHOUT a catalyst (the curve p1 drew), cyan the lower path WITH one.
+       Each path's activation energy is the arrow of its own colour, measured
+       from the reactant plateau to its own dashed peak level; the gold arrow
+       between the two levels is the decrease. A molecule then crosses the
+       lower hump, which sits wholly under the upper one as in the NCERT
+       figure. No text elements: every word comes from the spec. -->
+  <g id="axes" data-optional>
+    <path d="M110,40 L110,400 L1000,400" fill="none" stroke="#DCE6EE" stroke-width="7"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g id="axis_heads" data-optional>
+    <polygon points="110,14 124,44 96,44" fill="#DCE6EE"/>
+    <polygon points="1026,400 996,386 996,414" fill="#DCE6EE"/>
+  </g>
+
+  <path id="curve_u" data-optional
+        d="M130,310 L400,310 C480,310 510,104 580,104 C650,104 700,350 820,350 L1000,350"
+        fill="none" stroke="#F0A860" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="curve_c" data-optional
+        d="M400,310 C470,310 530,215 600,215 C670,215 730,350 820,350"
+        fill="none" stroke="#78C0F0" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- peak levels, dashed (style= so draw-on does not overwrite the dashes) -->
+  <line id="guide_u" data-optional x1="236" y1="104" x2="572" y2="104"
+        style="stroke:#F0A860;stroke-opacity:0.9" stroke-width="5" stroke-dasharray="14 12"/>
+  <line id="guide_c" data-optional x1="326" y1="215" x2="592" y2="215"
+        style="stroke:#78C0F0;stroke-opacity:0.9" stroke-width="5" stroke-dasharray="14 12"/>
+
+  <g id="ea_u" data-optional>
+    <line x1="250" y1="130" x2="250" y2="280" stroke="#F0A860" stroke-width="8" stroke-linecap="round"/>
+    <polygon points="250,108 236,136 264,136" fill="#F0A860"/>
+    <polygon points="250,305 236,277 264,277" fill="#F0A860"/>
+  </g>
+  <g id="ea_c" data-optional>
+    <line x1="340" y1="240" x2="340" y2="280" stroke="#78C0F0" stroke-width="8" stroke-linecap="round"/>
+    <polygon points="340,219 326,247 354,247" fill="#78C0F0"/>
+    <polygon points="340,305 326,277 354,277" fill="#78C0F0"/>
+  </g>
+
+  <!-- the decrease: from the higher level down to the lower -->
+  <g id="drop" data-optional>
+    <line x1="470" y1="114" x2="470" y2="182" stroke="#E8C25A" stroke-width="8" stroke-linecap="round"/>
+    <polygon points="470,208 455,178 485,178" fill="#E8C25A"/>
+  </g>
+
+  <!-- legend swatches; their names are spec labels -->
+  <line id="key_u" data-optional x1="690" y1="40" x2="745" y2="40"
+        stroke="#F0A860" stroke-width="10" stroke-linecap="round"/>
+  <line id="key_c" data-optional x1="690" y1="100" x2="745" y2="100"
+        stroke="#78C0F0" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- a molecule that crosses the LOWER hump -->
+  <circle id="mol" data-optional cx="418.9" cy="286.1" r="14" fill="#BFE3FA" stroke="#0E2A3A" stroke-width="3"/>
+
+  <g id="done" data-optional>
+    <circle cx="905" cy="262" r="34" fill="#12301E" fill-opacity="0.7" stroke="#6FD08C" stroke-width="6"/>
+    <path d="M889,263 L901,276 L923,249" fill="none" stroke="#6FD08C" stroke-width="8"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

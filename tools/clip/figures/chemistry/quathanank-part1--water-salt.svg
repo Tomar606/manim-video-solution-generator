@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- The example the re-recorded clip exists for: water boils at 100 degrees,
+       salt water does not. Left beaker plain, right beaker with salt in it, and
+       a chip under each for the temperature. The chips are 100px tall because a
+       46px Devanagari label measures 69-76px with its matras.
+       No word or number lives here: every label comes from the spec. -->
+
+  <path id="beaker_a" data-optional fill="none" stroke="#7FD4FF" stroke-width="8"
+        stroke-linecap="round" d="M180 90 V280 Q180 310 210 310 H350 Q380 310 380 280 V90"/>
+  <path id="liquid_a" data-optional stroke="none" fill="#7FD4FF" fill-opacity="0.32"
+        d="M188 165 V280 Q188 302 210 302 H350 Q372 302 372 280 V165 Z"/>
+
+  <g id="arrow" data-optional>
+    <path d="M420 200 H648" stroke="#FFC53D" stroke-width="9" stroke-linecap="round" fill="none"/>
+    <path d="M670 200 l-30 -18 v36 z" fill="#FFC53D"/>
+  </g>
+
+  <path id="beaker_b" data-optional fill="none" stroke="#FFC53D" stroke-width="8"
+        stroke-linecap="round" d="M700 90 V280 Q700 310 730 310 H870 Q900 310 900 280 V90"/>
+  <path id="liquid_b" data-optional stroke="none" fill="#FFC53D" fill-opacity="0.30"
+        d="M708 165 V280 Q708 302 730 302 H870 Q892 302 892 280 V165 Z"/>
+  <g id="salt" data-optional>
+    <rect x="736" y="196" width="16" height="16" rx="3" fill="#FFE9A8"/>
+    <rect x="790" y="228" width="16" height="16" rx="3" fill="#FFE9A8"/>
+    <rect x="842" y="200" width="16" height="16" rx="3" fill="#FFE9A8"/>
+    <rect x="762" y="258" width="16" height="16" rx="3" fill="#FFE9A8"/>
+    <rect x="820" y="264" width="16" height="16" rx="3" fill="#FFE9A8"/>
+    <rect x="866" y="242" width="16" height="16" rx="3" fill="#FFE9A8"/>
+  </g>
+
+  <rect id="chip_a" data-optional x="90" y="358" width="380" height="100" rx="22"
+        fill="#0B1F2E" fill-opacity="0.55" stroke="#7FD4FF" stroke-width="6"/>
+  <rect id="chip_b" data-optional x="610" y="358" width="380" height="100" rx="22"
+        fill="#2A1E05" fill-opacity="0.75" stroke="#FFC53D" stroke-width="7"/>
+</svg>

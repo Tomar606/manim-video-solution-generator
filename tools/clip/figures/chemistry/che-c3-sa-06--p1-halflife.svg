@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Half-life defined as a TIME, read straight off the concentration-time
+       curve of a first-order reaction. The cyan curve falls from its starting
+       value on the concentration axis; a gold marker rides down it and stops
+       where the concentration is exactly half that start (y = 247.5, halfway
+       between 110 and the axis at 385). The dashed half level and the dashed
+       drop fix that point, and the gold stretch of the time axis from the
+       origin to the drop IS the half-life. Curve: y = 385 - 275*2^(-(x-300)/240),
+       cubic Hermite segments through every 20px, exact at (540,247.5).
+       No text elements: every word comes from the spec. -->
+
+  <g id="axes" data-optional>
+    <line x1="300" y1="385" x2="300" y2="62" stroke="#F2F2F2" stroke-width="6" stroke-linecap="round"/>
+    <line x1="300" y1="385" x2="958" y2="385" stroke="#F2F2F2" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g id="axis_heads" data-optional>
+    <polygon points="300,48 289,68 311,68" fill="#F2F2F2"/>
+    <polygon points="972,385 952,374 952,396" fill="#F2F2F2"/>
+  </g>
+
+  <!-- dashed guides: colour and dash pattern live in style= so the engine's
+       draw-on dashing leaves the pattern alone -->
+  <line id="half_line" data-optional x1="300" y1="247.5" x2="540" y2="247.5" stroke-width="6"
+        style="stroke:#F2F2F2;stroke-opacity:0.75;stroke-dasharray:14 10"/>
+  <line id="drop_line" data-optional x1="540" y1="247.5" x2="540" y2="385" stroke-width="6"
+        style="stroke:#F2F2F2;stroke-opacity:0.75;stroke-dasharray:14 10"/>
+
+  <!-- the first-order decay -->
+  <path id="curve" data-optional
+        d="M300,110.00 C306.67,115.29 313.33,120.44 320,125.43 C326.67,130.43 333.33,135.29 340,140.00
+           C346.67,144.72 353.33,149.30 360,153.75 C366.67,158.21 373.33,162.53 380,166.73
+           C386.67,170.93 393.33,175.02 400,178.98 C406.67,182.95 413.33,186.80 420,190.55
+           C426.67,194.29 433.33,197.93 440,201.46 C446.67,204.99 453.33,208.43 460,211.76
+           C466.67,215.10 473.33,218.34 480,221.48 C486.67,224.63 493.33,227.69 500,230.66
+           C506.67,233.63 513.33,236.52 520,239.32 C526.67,242.13 533.33,244.85 540,247.50
+           C546.67,250.15 553.33,252.72 560,255.22 C566.67,257.72 573.33,260.14 580,262.50
+           C586.67,264.86 593.33,267.15 600,269.38 C606.67,271.60 613.33,273.76 620,275.87
+           C626.67,277.97 633.33,280.01 640,281.99 C646.67,283.97 653.33,285.90 660,287.77
+           C666.67,289.64 673.33,291.46 680,293.23 C686.67,295.00 693.33,296.71 700,298.38
+           C706.67,300.05 713.33,301.67 720,303.24 C726.67,304.82 733.33,306.34 740,307.83
+           C746.67,309.32 753.33,310.76 760,312.16 C766.67,313.56 773.33,314.93 780,316.25
+           C786.67,317.57 793.33,318.86 800,320.11 C806.67,321.36 813.33,322.57 820,323.75
+           C826.67,324.93 833.33,326.08 840,327.19 C846.67,328.30 853.33,329.38 860,330.43
+           C866.67,331.48 873.33,332.50 880,333.50"
+        fill="none" stroke="#4FC3F7" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- the half-life: origin to the drop, laid over the time axis -->
+  <line id="thalf_span" data-optional x1="300" y1="385" x2="540" y2="385"
+        stroke="#E8C25A" stroke-width="12" stroke-linecap="round"/>
+  <line id="thalf_tick" data-optional x1="540" y1="376" x2="540" y2="400"
+        stroke="#E8C25A" stroke-width="6"/>
+
+  <!-- the starting concentration, on the concentration axis -->
+  <circle id="a0_dot" data-optional cx="300" cy="110" r="12" fill="#F2F2F2"/>
+
+  <!-- authored at the start; the timeline translates it down the curve to
+       (540,247.5), the half point, where it stays -->
+  <circle id="tracer" data-optional cx="300" cy="110" r="14" fill="#E8C25A"/>
+</svg>

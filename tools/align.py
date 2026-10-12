@@ -39,6 +39,33 @@ def skel(word: str) -> str:
     return re.sub(r"[aeiou]", "", re.sub(r"[^A-Za-z]", "", word).lower())
 
 
+# A caption writes a formula as NOTATION and whisper hears it as SPOKEN LATIN:
+# the line "φₑ = E·ds·cos θ" is the words "phi e बराबर e dot ds cos theta".
+# `skel` drops every character that is neither Devanagari nor A-Z, so notation
+# skeletons to nothing: on PHY-C1-SA-01 a correctly-ranged formula line scored
+# 0.38 against its own words, and srt_drift matched two formula cues to words
+# 1-2s later. Read the notation aloud before comparing. For COMPARISON only;
+# the caption text itself is never changed.
+#
+# Replaced in ORDER. CHE-C3-SA-04 reads "log₁₀ (k₂/k₁) = Eₐ/2.303R ×
+# (T₂ - T₁)/T₁T₂" aloud as "log base ten, k two upon k one, equals ...,
+# into ...", so "₁₀" has to go before "₀" or it becomes "log₁ not". That
+# speaker says "equals" where PHY-C1-SA-01's said "बराबर", so "=" carries both.
+NOTATION = {"₁₀": " base ten ",
+            "θ": " theta ", "φ": " phi ", "Φ": " phi ", "ε": " epsilon ",
+            "ₑ": " e ", "₀": " not ", "°": " degree ", "=": " बराबर equals ",
+            "·": " dot ", "∴": " इसलिए ", "/": " upon ", "×": " into ",
+            # CHE-C3-SA-05: "मोल लीटर⁻¹ समय⁻¹" is spoken "mole liter inverse
+            # समय inverse"; without this the unit line lost half its skeleton
+            "⁻¹": " inverse "}
+
+
+def spoken(text: str) -> str:
+    for k, v in NOTATION.items():
+        text = text.replace(k, v)
+    return text
+
+
 def toks(text: str) -> list[str]:
     return [t for t in (skel(w) for w in text.split()) if t]
 

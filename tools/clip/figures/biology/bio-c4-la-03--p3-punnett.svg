@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- PUNNETT SQUARE: पीड़ित पिता (X^h Y) x सामान्य माता (X^H X^H).
+
+       Father's gametes are the ROWS (left strip, "पिता" in its top slot),
+       mother's are the COLUMNS (top strip, "माता" at its right end). Each ROW
+       is one kind of child: X^h row = both daughters X^H X^h (carriers, gold
+       tint), Y row = both sons X^H Y (normal, blue tint). The row labels sit
+       in a legend column to the right, one per row, clear of the cells.
+
+       Nothing is drawn over a glyph. Inheritance is shown by COLOUR, not by
+       arrows through the cells: the parent's header slot lights up and the
+       matching chromosome in the children is underlined in the same colour
+       (red = father's X^h, gold = mother's X^H, warm = father's Y). The ids
+       keep their old arrow names (pq_arXh, pq_arM1, pq_arM2, pq_arY) so the
+       beats' timelines are unchanged.
+
+       Notation is monoline strokes, never type. h red, H ink.
+       The asset carries across three beats (punnett, sons, daughters). -->
+  <style>
+    .pq-strip  { fill:#6E8A99; fill-opacity:.16 }
+    .pq-dtint  { fill:#E8C25A; fill-opacity:.14 }
+    .pq-stint  { fill:#78C0F0; fill-opacity:.14 }
+    .pq-ring   { fill:none; stroke:#9FB4BF; stroke-width:6; stroke-dasharray:16 12; stroke-linejoin:round }
+  </style>
+  <g id="pq_all" data-optional>
+  <g id="pq_strips" data-optional><rect class="pq-strip" x="74" y="20" width="130" height="422" rx="16"/><rect class="pq-strip" x="220" y="20" width="674" height="102" rx="16"/></g>
+  <g id="pq_dcells" data-optional><rect class="pq-dtint" x="227" y="145" width="236" height="138" rx="10"/><rect class="pq-dtint" x="477" y="145" width="236" height="138" rx="10"/><g id="pq_dhalo" data-optional><rect x="243.5" y="156.5" width="97.7" height="113" rx="16" fill="#E8C25A" fill-opacity=".14" stroke="#E8C25A" stroke-width="5" stroke-linejoin="round"/><rect x="493.5" y="156.5" width="97.7" height="113" rx="16" fill="#E8C25A" fill-opacity=".14" stroke="#E8C25A" stroke-width="5" stroke-linejoin="round"/></g><g id="pq_dXH" data-optional><path d="M260.8 180 L301.2 236 M301.2 180 L260.8 236" fill="none" stroke="#F2F2F2" stroke-width="7" stroke-linecap="round"/><path d="M306.7 173 L306.7 203 M325.3 173 L325.3 203 M306.7 188 L325.3 188" fill="none" stroke="#F2F2F2" stroke-width="5" stroke-linecap="round"/><path d="M510.8 180 L551.2 236 M551.2 180 L510.8 236" fill="none" stroke="#F2F2F2" stroke-width="7" stroke-linecap="round"/><path d="M556.7 173 L556.7 203 M575.3 173 L575.3 203 M556.7 188 L575.3 188" fill="none" stroke="#F2F2F2" stroke-width="5" stroke-linecap="round"/></g><g id="pq_dXh" data-optional><path d="M366.8 180 L407.2 236 M407.2 180 L366.8 236" fill="none" stroke="#F2F2F2" stroke-width="7" stroke-linecap="round"/><path d="M413.3 173 L413.3 203 M413.3 190.4 C414.8 181.4 430.7 181.4 430.7 191.6 L430.7 203" fill="none" stroke="#FF5A5A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M616.8 180 L657.2 236 M657.2 180 L616.8 236" fill="none" stroke="#F2F2F2" stroke-width="7" stroke-linecap="round"/><path d="M663.3 173 L663.3 203 M663.3 190.4 C664.8 181.4 680.7 181.4 680.7 191.6 L680.7 203" fill="none" stroke="#FF5A5A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+  <g id="pq_scells" data-optional><rect class="pq-stint" x="227" y="297" width="236" height="138" rx="10"/><rect class="pq-stint" x="477" y="297" width="236" height="138" rx="10"/><line id="pq_strike" data-optional x1="254" y1="416" x2="686" y2="316" stroke="#FF5A5A" stroke-width="10" stroke-linecap="round"/><path d="M274.8 332 L315.2 388 M315.2 332 L274.8 388" fill="none" stroke="#F2F2F2" stroke-width="7" stroke-linecap="round"/><path d="M320.7 325 L320.7 355 M339.3 325 L339.3 355 M320.7 340 L339.3 340" fill="none" stroke="#F2F2F2" stroke-width="5" stroke-linecap="round"/><path d="M374.8 332 L395 360 L415.2 332 M395 360 L395 388" fill="none" stroke="#F2F2F2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M524.8 332 L565.2 388 M565.2 332 L524.8 388" fill="none" stroke="#F2F2F2" stroke-width="7" stroke-linecap="round"/><path d="M570.7 325 L570.7 355 M589.3 325 L589.3 355 M570.7 340 L589.3 340" fill="none" stroke="#F2F2F2" stroke-width="5" stroke-linecap="round"/><path d="M624.8 332 L645 360 L665.2 332 M645 360 L645 388" fill="none" stroke="#F2F2F2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g id="pq_grid" data-optional><rect x="220" y="138" width="500" height="304" rx="8" fill="none" stroke="#F2F2F2" stroke-width="6"/><line x1="470" y1="138" x2="470" y2="442" stroke="#F2F2F2" stroke-width="6"/><line x1="220" y1="290" x2="720" y2="290" stroke="#F2F2F2" stroke-width="6"/></g>
+  <g id="pq_arY" data-optional><path d="M371 406 L419 406" fill="none" stroke="#F0A860" stroke-width="7" stroke-linecap="round"/><path d="M621 406 L669 406" fill="none" stroke="#F0A860" stroke-width="7" stroke-linecap="round"/><rect x="82" y="298" width="114" height="136" rx="14" fill="none" stroke="#F0A860" stroke-width="5" stroke-linejoin="round"/><rect x="82" y="298" width="114" height="136" rx="14" fill="#F0A860" fill-opacity=".16"/></g>
+  <g id="pq_arXh" data-optional><path d="M365 254 L433 254" fill="none" stroke="#FF5A5A" stroke-width="7" stroke-linecap="round"/><path d="M615 254 L683 254" fill="none" stroke="#FF5A5A" stroke-width="7" stroke-linecap="round"/><rect x="82" y="146" width="114" height="136" rx="14" fill="none" stroke="#FF5A5A" stroke-width="5" stroke-linejoin="round"/><rect x="82" y="146" width="114" height="136" rx="14" fill="#FF5A5A" fill-opacity=".16"/></g>
+  <g id="pq_arM1" data-optional><path d="M259 254 L327 254" fill="none" stroke="#E8C25A" stroke-width="7" stroke-linecap="round"/><rect x="233" y="23" width="224" height="96" rx="14" fill="none" stroke="#E8C25A" stroke-width="5" stroke-linejoin="round"/><rect x="233" y="23" width="224" height="96" rx="14" fill="#E8C25A" fill-opacity=".16"/></g>
+  <g id="pq_arM2" data-optional><path d="M509 254 L577 254" fill="none" stroke="#E8C25A" stroke-width="7" stroke-linecap="round"/><rect x="483" y="23" width="224" height="96" rx="14" fill="none" stroke="#E8C25A" stroke-width="5" stroke-linejoin="round"/><rect x="483" y="23" width="224" height="96" rx="14" fill="#E8C25A" fill-opacity=".16"/></g>
+  <g id="pq_fXh" data-optional><path d="M107.5 180 L147.8 236 M147.8 180 L107.5 236" fill="none" stroke="#F2F2F2" stroke-width="7" stroke-linecap="round"/><path d="M154 173 L154 203 M154 190.4 C155.5 181.4 171.3 181.4 171.3 191.6 L171.3 203" fill="none" stroke="#FF5A5A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g id="pq_fY" data-optional><path d="M118.8 332 L139 360 L159.2 332 M139 360 L139 388" fill="none" stroke="#F2F2F2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g id="pq_m1" data-optional><path d="M313.5 46 L353.8 102 M353.8 46 L313.5 102" fill="none" stroke="#F2F2F2" stroke-width="7" stroke-linecap="round"/><path d="M359.3 39 L359.3 69 M377.9 39 L377.9 69 M359.3 54 L377.9 54" fill="none" stroke="#F2F2F2" stroke-width="5" stroke-linecap="round"/></g>
+  <g id="pq_m2" data-optional><path d="M563.5 46 L603.8 102 M603.8 46 L563.5 102" fill="none" stroke="#F2F2F2" stroke-width="7" stroke-linecap="round"/><path d="M609.4 39 L609.4 69 M627.9 39 L627.9 69 M609.4 54 L627.9 54" fill="none" stroke="#F2F2F2" stroke-width="5" stroke-linecap="round"/></g>
+  <rect id="pq_sring" data-optional class="pq-ring" x="232" y="302" width="476" height="128" rx="20"/>
+  </g>
+</svg>

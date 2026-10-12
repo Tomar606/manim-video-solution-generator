@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- WHY A SON CAN NEVER GET HIS FATHER'S DISEASE GENE, built as he reasons.
+
+       Laid out like a pedigree: the parents on the top row, the son below
+       between them, so every arrow runs DOWN a generation. The father's X
+       carries the red h band; the mother's two X carry white H bands.
+
+       1  the son's empty slot, with a dashed outline of the Y he needs
+       2  father's Y pulses (only he has one), then an arrow draws it down
+          into the slot
+       3  the father's X tries the same trip: a grey DASHED arrow that ends on
+          a red cross. It is the thing that does NOT happen, so it is drawn
+          as a path that stops, never as a delivery.
+       4  a red ring marks the h band on the father's X - the gene that is
+          therefore blocked
+       5  the son's only X arrives from the mother instead
+
+       Labels come from the spec: father left of his pair, mother right of
+       hers, son right of the slot, so no label sits on an arrow. -->
+  <style>
+    .fs-xo { fill:#246574; stroke:#78C0F0; stroke-width:14; stroke-linejoin:round }
+    .fs-xf { fill:#246574 }
+    .fs-yo { fill:#5A4632; stroke:#F0A860; stroke-width:14; stroke-linejoin:round }
+    .fs-yf { fill:#5A4632 }
+    .fs-bh { fill:#FF5A5A }
+    .fs-bn { fill:#F2F2F2 }
+    .fs-gh { fill:#35504A }
+    .fs-slot { fill:#78C0F0; fill-opacity:.07; stroke:#6E8A99; stroke-width:6; stroke-dasharray:18 12 }
+    .fs-blk { fill:none; stroke:#6E8A99; stroke-width:7; stroke-dasharray:16 13; stroke-linecap:round }
+    .fs-blkh { fill:#6E8A99 }
+    .fs-stop { stroke:#FF5A5A; stroke-width:10; stroke-linecap:round }
+    .fs-ring { fill:none; stroke:#FF5A5A; stroke-width:6 }
+    .fs-dot { fill:#E8C25A; fill-opacity:.35; stroke:#E8C25A; stroke-width:7 }
+  </style>
+
+  <rect id="son_slot" data-optional class="fs-slot" x="420" y="250" width="246" height="180" rx="28"/>
+  <g id="son_y_ghost" data-optional>
+    <g transform="translate(492 340)" class="fs-gh"><rect x="-14.4" y="-59.5" width="28.8" height="62.4" rx="14.4" transform="rotate(32 0 -11.5)"/><rect x="-14.4" y="-59.5" width="28.8" height="62.4" rx="14.4" transform="rotate(-32 0 -11.5)"/><rect x="-14.4" y="-25.9" width="28.8" height="73.9" rx="14.4"/></g>
+  </g>
+  <g id="fath_x" data-optional>
+    <g transform="translate(290 118)">
+      <g class="fs-xo"><rect x="-14.4" y="-65.3" width="28.8" height="130.6" rx="14.4" transform="rotate(20)"/><rect x="-14.4" y="-65.3" width="28.8" height="130.6" rx="14.4" transform="rotate(-20)"/></g>
+      <g class="fs-xf"><rect x="-14.4" y="-65.3" width="28.8" height="130.6" rx="14.4" transform="rotate(20)"/><rect x="-14.4" y="-65.3" width="28.8" height="130.6" rx="14.4" transform="rotate(-20)"/></g>
+      <rect class="fs-bh" x="-22.4" y="-43.1" width="44.8" height="16.3" rx="4" transform="rotate(20)"/>
+    </g>
+  </g>
+  <g id="fath_y" data-optional>
+    <g transform="translate(396 124)">
+      <g class="fs-yo"><rect x="-14.4" y="-59.5" width="28.8" height="62.4" rx="14.4" transform="rotate(32 0 -11.5)"/><rect x="-14.4" y="-59.5" width="28.8" height="62.4" rx="14.4" transform="rotate(-32 0 -11.5)"/><rect x="-14.4" y="-25.9" width="28.8" height="73.9" rx="14.4"/></g>
+      <g class="fs-yf"><rect x="-14.4" y="-59.5" width="28.8" height="62.4" rx="14.4" transform="rotate(32 0 -11.5)"/><rect x="-14.4" y="-59.5" width="28.8" height="62.4" rx="14.4" transform="rotate(-32 0 -11.5)"/><rect x="-14.4" y="-25.9" width="28.8" height="73.9" rx="14.4"/></g>
+    </g>
+  </g>
+  <circle id="fath_ring" data-optional class="fs-ring" cx="301.9" cy="85.2" r="36"/>
+  <g id="moth" data-optional>
+    <g transform="translate(684 118)">
+      <g class="fs-xo"><rect x="-14.4" y="-65.3" width="28.8" height="130.6" rx="14.4" transform="rotate(20)"/><rect x="-14.4" y="-65.3" width="28.8" height="130.6" rx="14.4" transform="rotate(-20)"/></g>
+      <g class="fs-xf"><rect x="-14.4" y="-65.3" width="28.8" height="130.6" rx="14.4" transform="rotate(20)"/><rect x="-14.4" y="-65.3" width="28.8" height="130.6" rx="14.4" transform="rotate(-20)"/></g>
+      <rect class="fs-bn" x="-22.4" y="-43.1" width="44.8" height="16.3" rx="4" transform="rotate(20)"/>
+    </g>
+    <g transform="translate(790 118)">
+      <g class="fs-xo"><rect x="-14.4" y="-65.3" width="28.8" height="130.6" rx="14.4" transform="rotate(20)"/><rect x="-14.4" y="-65.3" width="28.8" height="130.6" rx="14.4" transform="rotate(-20)"/></g>
+      <g class="fs-xf"><rect x="-14.4" y="-65.3" width="28.8" height="130.6" rx="14.4" transform="rotate(20)"/><rect x="-14.4" y="-65.3" width="28.8" height="130.6" rx="14.4" transform="rotate(-20)"/></g>
+      <rect class="fs-bn" x="-22.4" y="-43.1" width="44.8" height="16.3" rx="4" transform="rotate(20)"/>
+    </g>
+  </g>
+  <g id="arr_blk" data-optional>
+    <path class="fs-blk" d="M262 196 C 250 310, 300 350, 362 352"/>
+  </g>
+  <g id="stop_x" data-optional class="fs-stop">
+    <line x1="370" y1="334" x2="404" y2="368"/><line x1="404" y1="334" x2="370" y2="368"/>
+  </g>
+  <line id="arr_y" data-optional x1="402" y1="194" x2="470.4" y2="244.1" stroke="#F0A860" stroke-width="8" stroke-linecap="round"/>
+  <path id="arr_y_hd" data-optional fill="#F0A860" d="M484 254 L452.3 249.9 L470.5 225 Z"/>
+  <g id="son_y" data-optional>
+    <g transform="translate(492 340)">
+      <g class="fs-yo"><rect x="-14.4" y="-59.5" width="28.8" height="62.4" rx="14.4" transform="rotate(32 0 -11.5)"/><rect x="-14.4" y="-59.5" width="28.8" height="62.4" rx="14.4" transform="rotate(-32 0 -11.5)"/><rect x="-14.4" y="-25.9" width="28.8" height="73.9" rx="14.4"/></g>
+      <g class="fs-yf"><rect x="-14.4" y="-59.5" width="28.8" height="62.4" rx="14.4" transform="rotate(32 0 -11.5)"/><rect x="-14.4" y="-59.5" width="28.8" height="62.4" rx="14.4" transform="rotate(-32 0 -11.5)"/><rect x="-14.4" y="-25.9" width="28.8" height="73.9" rx="14.4"/></g>
+    </g>
+  </g>
+  <line id="arr_m" data-optional x1="676" y1="198" x2="622.8" y2="243.1" stroke="#78C0F0" stroke-width="8" stroke-linecap="round"/>
+  <path id="arr_m_hd" data-optional fill="#78C0F0" d="M610 254 L621.4 224.1 L641.3 247.6 Z"/>
+  <g id="son_x" data-optional>
+    <g transform="translate(594 336)">
+      <g class="fs-xo"><rect x="-14.4" y="-65.3" width="28.8" height="130.6" rx="14.4" transform="rotate(20)"/><rect x="-14.4" y="-65.3" width="28.8" height="130.6" rx="14.4" transform="rotate(-20)"/></g>
+      <g class="fs-xf"><rect x="-14.4" y="-65.3" width="28.8" height="130.6" rx="14.4" transform="rotate(20)"/><rect x="-14.4" y="-65.3" width="28.8" height="130.6" rx="14.4" transform="rotate(-20)"/></g>
+      <rect class="fs-bn" x="-22.4" y="-43.1" width="44.8" height="16.3" rx="4" transform="rotate(20)"/>
+    </g>
+  </g>
+</svg>

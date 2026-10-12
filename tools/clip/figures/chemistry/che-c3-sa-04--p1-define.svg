@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- The definition, drawn as the answer's own figure: energy against the
+       progress of the reaction. The reactants sit on a low plateau, the
+       threshold (देहली) energy is the dashed level at the top of the hump, and
+       the activation energy is the gold gap between the two. The reaction
+       curve is warm, the colour the uncatalysed curve keeps in p3. No text
+       elements: every word comes from the spec. -->
+  <g id="axes" data-optional>
+    <path d="M110,40 L110,400 L1000,400" fill="none" stroke="#DCE6EE" stroke-width="7"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g id="axis_heads" data-optional>
+    <polygon points="110,14 124,44 96,44" fill="#DCE6EE"/>
+    <polygon points="1026,400 996,386 996,414" fill="#DCE6EE"/>
+  </g>
+
+  <path id="curve" data-optional
+        d="M130,300 L470,300 C570,300 610,104 680,104 C750,104 790,350 880,350 L1000,350"
+        fill="none" stroke="#F0A860" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- dashed: colour set in style= so the engine's draw-on dashing leaves the
+       dot pattern alone -->
+  <line id="thresh" data-optional x1="110" y1="104" x2="1000" y2="104"
+        style="stroke:#DCE6EE;stroke-opacity:0.85" stroke-width="5" stroke-dasharray="16 14"/>
+
+  <!-- low-energy reactant molecules, resting on the plateau -->
+  <g id="mols" data-optional>
+    <circle cx="175" cy="277" r="16" fill="#78C0F0" stroke="#0E2A3A" stroke-width="3"/>
+    <circle cx="225" cy="277" r="16" fill="#78C0F0" stroke="#0E2A3A" stroke-width="3"/>
+    <circle cx="275" cy="277" r="16" fill="#78C0F0" stroke="#0E2A3A" stroke-width="3"/>
+  </g>
+
+  <!-- the activation energy: plateau up to the threshold level -->
+  <g id="ea_arrow" data-optional>
+    <line x1="440" y1="132" x2="440" y2="268" stroke="#E8C25A" stroke-width="8" stroke-linecap="round"/>
+    <polygon points="440,108 425,138 455,138" fill="#E8C25A"/>
+    <polygon points="440,294 425,264 455,264" fill="#E8C25A"/>
+  </g>
+</svg>

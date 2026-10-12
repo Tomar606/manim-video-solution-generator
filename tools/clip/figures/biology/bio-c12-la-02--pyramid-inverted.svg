@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- Pyramid of NUMBERS, inverted — the one tree carrying insects and birds.
+       उत्पादक 200 at the base, शाकाहारी 1,50,000 above it, मांसाहारी 1,20,000
+       on top. Labels come from the spec; there is no text element here.
+
+       THE MIDDLE TIER IS THE WIDEST, AND THAT IS NOT A STYLE CHOICE.
+       This file used to widen monotonically upward — 250..850 for the middle
+       and 150..950 for the top — which says birds outnumber insects. The
+       numbers say the opposite: 1,50,000 insects against 1,20,000 birds. The
+       house answer sheet (answer/BIO-C12-LA-02_2.png) draws it correctly, as
+       three stacked boxes with the शाकाहारी box widest, and that sheet is the
+       artefact the student copies into the answer book. A figure that
+       contradicts its own labels teaches the wrong picture to anyone reading
+       the shape rather than the digits — which is most of them, since the
+       shape is the whole point of a pyramid.
+
+       So the widths are ordered by the counts they carry:
+         y=345 (base)   ~443px   उत्पादक     200
+         y=235 (middle) ~670px   शाकाहारी  1,50,000   <- widest
+         y=125 (top)    ~810px   मांसाहारी 1,20,000
+       Each tier is still wide enough for its own label at 46px, measured at
+       the tier's centre, and the top still overhangs the base heavily so the
+       figure reads as INVERTED at a glance.
+
+       ids: tier_producer, tier_primary, tier_top -->
+
+  <g id="tier_producer" data-optional>
+    <path d="M300 290 L780 290 L740 400 L340 400 Z"
+          fill="#2A1E05" stroke="#FFC53D" stroke-width="9" stroke-linejoin="round"/>
+  </g>
+  <g id="tier_primary" data-optional>
+    <path d="M110 180 L970 180 L780 290 L300 290 Z"
+          fill="#12283A" stroke="#7FD4FF" stroke-width="9" stroke-linejoin="round"/>
+  </g>
+  <g id="tier_top" data-optional>
+    <path d="M160 70 L920 70 L970 180 L110 180 Z"
+          fill="#12283A" stroke="#7FD4FF" stroke-width="9" stroke-linejoin="round"/>
+  </g>
+</svg>

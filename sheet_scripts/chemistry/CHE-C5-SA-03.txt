@@ -1,0 +1,52 @@
+प्रभावी परमाणु संख्या (EAN) क्या है ? एक उदाहरण देकर समझाइए 
+MP Board कक्षा 12वीं के बच्चों!
+आज का question बहुत important है, क्योंकि इसमें आपसे प्रभावी परमाणु संख्या, यानी EAN की definition और उसका example पूछा गया है।
+प्रश्न:
+“प्रभावी परमाणु संख्या (EAN) क्या है? एक उदाहरण देकर समझाइए।”
+चलिए इसे आसान भाषा में समझते हैं।
+किसी उप-सहसंयोजक यौगिक में केंद्रीय धातु परमाणु के पास उपस्थित electrons की संख्या और ligand द्वारा bond बनाने के लिए दिए गए electrons की संख्या के योग को प्रभावी परमाणु संख्या, यानी EAN कहते हैं।
+अब EAN निकालने का formula देखिए।
+On Screen:
+EAN = Atomic number − Lost electrons + Ligand donated electrons
+“EAN equals atomic number minus lost electrons plus ligand donated electrons।”
+अब इसे example से समझते हैं।
+हमारे पास complex है—
+On Screen:
+K₄[Fe(CN)₆]
+“Potassium four, open bracket Fe, open bracket C N, close bracket six, close bracket।”
+इस complex में Fe की atomic number 26 है।
+On Screen:
+Fe → Atomic number = 26
+“Fe की atomic number twenty-six है।”
+अब इस complex में Fe, Fe two plus के रूप में उपस्थित है।
+On Screen:
+Fe²⁺
+“Fe two plus।”
+इसलिए Fe ने अपने neutral atom से two electrons lose किए हैं।
+On Screen:
+Lost electrons = 2
+“Lost electrons की संख्या two है।”
+अब complex में six CN minus ligands जुड़े हुए हैं।
+हर CN minus ligand, central metal को two electrons का एक electron pair देता है।
+On Screen:
+6 CN⁻ ligands × 2 electrons = 12 electrons
+“Six C N minus ligands, each two electrons donate करते हैं, इसलिए total donated electrons twelve हैं।”
+अब EAN के formula में values put करते हैं।
+On Screen:
+EAN = 26 − 2 + 12
+“EAN equals twenty-six minus two plus twelve।”
+Calculation करने पर—
+On Screen:
+EAN = 36
+“EAN equals thirty-six।”
+इसलिए K₄[Fe(CN)₆] complex में Fe की effective atomic number 36 है।
+तो बच्चों, EAN निकालने के लिए तीन चीजें याद रखिए—atomic number, lost electrons और ligand द्वारा donated electrons।
+On Screen:
+EAN = Atomic number − Lost electrons + Donated electrons
+“EAN equals atomic number minus lost electrons plus donated electrons।”
+और इस example में—
+On Screen:
+Fe²⁺ : 26 − 2 + 12 = 36
+“Fe two plus के लिए twenty-six minus two plus twelve equals thirty-six।”
+बस इसी formula की मदद से आप किसी भी complex की effective atomic number आसानी से निकाल सकते हैं।
+अब इसका exact answer exam में किस तरह लिखना है, वो आपको Notes button पर click करके मिल जाएगा।

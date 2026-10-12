@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- THE FEMALE PAIRS. Left: one X with h (red) and one with H (white) at
+       the same height on the same arm - the carrier. The white allele gets a
+       halo because it is the one that shows. Right: both X carry h, both
+       bands glow - the homozygous recessive patient. Glow means expressed,
+       the same meaning as the male beat.
+       Labels come from the spec. -->
+  <style>
+    .xc    { fill:#78C0F0; fill-opacity:.25; stroke:#78C0F0; stroke-width:7; stroke-linejoin:round }
+    .yc    { fill:#F0A860; fill-opacity:.25; stroke:#F0A860; stroke-width:7; stroke-linejoin:round }
+    .ghost { fill:none; stroke:#6E8A99; stroke-width:6; stroke-dasharray:18 14; stroke-linejoin:round }
+    .bad   { fill:#FF5A5A; stroke:#FF5A5A; stroke-width:4; stroke-linejoin:round }
+    .ok    { fill:#F2F2F2; stroke:#F2F2F2; stroke-width:4; stroke-linejoin:round }
+    .glowbad { fill:#FF5A5A; fill-opacity:.45; stroke:#FF5A5A; stroke-opacity:.35; stroke-width:26; stroke-linejoin:round }
+    .glowok  { fill:#F2F2F2; fill-opacity:.40; stroke:#F2F2F2; stroke-opacity:.30; stroke-width:26; stroke-linejoin:round }
+    .cover { fill:#6E8A99; fill-opacity:.72; stroke:#6E8A99; stroke-width:6; stroke-dasharray:14 10; stroke-linejoin:round }
+    .slot  { fill:none; stroke:#6E8A99; stroke-width:6; stroke-dasharray:12 9; stroke-linejoin:round }
+    .link  { stroke:#6E8A99; stroke-width:6; stroke-dasharray:12 10; stroke-linecap:round }
+    .leadr { stroke:#FF5A5A; stroke-width:6; stroke-linecap:round }
+    .leadg { stroke:#E8C25A; stroke-width:6; stroke-linecap:round }
+    .gold  { fill:#E8C25A }
+  </style>
+
+  <g id="pair_left" data-optional>
+  <g id="xa_left" data-optional>
+    <path class="xc" d="M226 155.3 L256.2 93.4 A24 24 0 0 1 299.3 114.5 L252.7 210 L299.3 305.5 A24 24 0 0 1 256.2 326.6 L226 264.7 L195.8 326.6 A24 24 0 0 1 152.7 305.5 L199.3 210 L152.7 114.5 A24 24 0 0 1 195.8 93.4 Z"/>
+    <path id="band_bad_left" data-optional class="bad" d="M227.9 137.6 L281.8 163.9 L292.4 142.4 L238.4 116.1 Z"/>
+  </g>
+  <g id="xb_left" data-optional>
+    <path class="xc" d="M404 155.3 L434.2 93.4 A24 24 0 0 1 477.3 114.5 L430.7 210 L477.3 305.5 A24 24 0 0 1 434.2 326.6 L404 264.7 L373.8 326.6 A24 24 0 0 1 330.7 305.5 L377.3 210 L330.7 114.5 A24 24 0 0 1 373.8 93.4 Z"/>
+    <path id="glow_ok_left" data-optional class="glowok" d="M405.9 137.6 L459.8 163.9 L470.4 142.4 L416.4 116.1 Z"/>
+    <path id="band_ok_left" data-optional class="ok" d="M405.9 137.6 L459.8 163.9 L470.4 142.4 L416.4 116.1 Z"/>
+  </g>
+  </g>
+
+  <g id="pair_right" data-optional>
+  <g>
+    <path class="xc" d="M676 155.3 L706.2 93.4 A24 24 0 0 1 749.3 114.5 L702.7 210 L749.3 305.5 A24 24 0 0 1 706.2 326.6 L676 264.7 L645.8 326.6 A24 24 0 0 1 602.7 305.5 L649.3 210 L602.7 114.5 A24 24 0 0 1 645.8 93.4 Z"/>
+    <path id="glow_bad_r1" data-optional class="glowbad" d="M677.9 137.6 L731.8 163.9 L742.4 142.4 L688.4 116.1 Z"/>
+    <path class="bad" d="M677.9 137.6 L731.8 163.9 L742.4 142.4 L688.4 116.1 Z"/>
+  </g>
+  <g>
+    <path class="xc" d="M854 155.3 L884.2 93.4 A24 24 0 0 1 927.3 114.5 L880.7 210 L927.3 305.5 A24 24 0 0 1 884.2 326.6 L854 264.7 L823.8 326.6 A24 24 0 0 1 780.7 305.5 L827.3 210 L780.7 114.5 A24 24 0 0 1 823.8 93.4 Z"/>
+    <path id="glow_bad_r2" data-optional class="glowbad" d="M855.9 137.6 L909.8 163.9 L920.4 142.4 L866.4 116.1 Z"/>
+    <path class="bad" d="M855.9 137.6 L909.8 163.9 L920.4 142.4 L866.4 116.1 Z"/>
+  </g>
+  </g>
+</svg>

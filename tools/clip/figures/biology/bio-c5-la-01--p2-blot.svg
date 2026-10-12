@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <style>
+    .s  { fill:none; stroke-linecap:round; stroke-linejoin:round }
+    .cy { stroke:#78C0F0; stroke-width:8 }
+    .wm { stroke:#F0A860; stroke-width:8 }
+    .lead { fill:none; stroke:#78C0F0; stroke-width:4; stroke-opacity:.75 }
+    .fcy{ fill:#78C0F0; fill-opacity:.92 }
+    .fgd{ fill:#E8C25A; fill-opacity:.95 }
+    .fwm{ fill:#F0A860; fill-opacity:.92 }
+    .plate { fill:#0E2E2C; fill-opacity:.55; stroke:#78C0F0; stroke-width:6 }
+    .memb { fill:#12332F; fill-opacity:.75; stroke:#E8C25A; stroke-width:6 }
+  </style>
+  <path id="tray" data-optional class="s cy" d="M230,330 L230,398 L850,398 L850,330"/>
+  <rect id="buffer" data-optional class="fcy" x="238" y="352" width="604" height="42" rx="6" fill-opacity=".35"/>
+  <rect id="gel" data-optional class="plate" x="286" y="286" width="508" height="46" rx="8"/>
+  <rect id="membrane" data-optional class="memb" x="286" y="232" width="508" height="40" rx="8"/>
+  <rect id="paper_1" data-optional class="s cy" x="316" y="190" width="448" height="28" rx="6"/>
+  <rect id="paper_2" data-optional class="s cy" x="316" y="154" width="448" height="28" rx="6"/>
+  <rect id="paper_3" data-optional class="s cy" x="316" y="118" width="448" height="28" rx="6"/>
+  <rect id="weight" data-optional class="fwm" x="420" y="72" width="240" height="34" rx="8"/>
+  <path id="lift_1" data-optional class="s wm" d="M392,322 L392,288 M374,300 L392,280 L410,300"/>
+  <rect id="gband_1" data-optional class="fcy" x="338" y="300" width="108" height="16" rx="5"/>
+  <rect id="mband_1" data-optional class="fgd" x="338" y="244" width="108" height="16" rx="5"/>
+  <path id="lift_2" data-optional class="s wm" d="M540,322 L540,288 M522,300 L540,280 L558,300"/>
+  <rect id="gband_2" data-optional class="fcy" x="486" y="300" width="108" height="16" rx="5"/>
+  <rect id="mband_2" data-optional class="fgd" x="486" y="244" width="108" height="16" rx="5"/>
+  <path id="lift_3" data-optional class="s wm" d="M688,322 L688,288 M670,300 L688,280 L706,300"/>
+  <rect id="gband_3" data-optional class="fcy" x="634" y="300" width="108" height="16" rx="5"/>
+  <rect id="mband_3" data-optional class="fgd" x="634" y="244" width="108" height="16" rx="5"/>
+  <path id="lead_memb" data-optional class="lead" d="M170,252 L280,252"/>
+  <path id="lead_gel" data-optional class="lead" d="M170,309 L280,309"/>
+</svg>

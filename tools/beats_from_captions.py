@@ -48,7 +48,16 @@ def run(project: str, part: str, window: int = WINDOW, log=print) -> int:
     lines = json.loads((root / f"lines_part{part}.json").read_text(encoding="utf-8"))
     meta = json.loads((root / "meta.json").read_text(encoding="utf-8"))
     cl = meta.get("card_lines", 0)
-    start = int(cl[str(part)] if isinstance(cl, dict) else cl)
+    # `.get(..., 0)`, not a subscript: card_lines is keyed per part, and it is
+    # written incrementally as each part's card is designed (part 1 got a
+    # card_lines entry when its card was built; parts 2/3 never will, because
+    # meta.json lists them in `no_card`). A bare `cl[str(part)]` KeyErrors the
+    # moment ANY part has an entry and another does not — which is every video
+    # with one card_lines entry and two more parts still to come. 0 is the
+    # right default: no card means the director's first window starts at
+    # caption line 0, exactly what `no_card` already means everywhere else
+    # this key is read (see tools/preflight_beats.py).
+    start = int((cl.get(str(part), 0) if isinstance(cl, dict) else cl))
     prompt = prompt_for(meta.get("question", ""))
 
     out_path = root / f"beats_part{part}.json"

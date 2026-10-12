@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- वृद्धि प्रावस्था, redrawn from NCERT Fig 2.7 (अंडाशय के आरेखीय काट का एक
+       दृश्य) - not pasted: the extracted figure carries the "not to be
+       republished" watermark and a white page, and the part that matters here is
+       only its left half.
+
+       Inside one ovary, left to right, the three states he names in order:
+       ऊगोनिया → प्राथमिक अण्डक (the SAME cell, grown) → प्राथमिक पुटक (that cell
+       with a ring of follicle cells round it). Then the arrest: chromosomes appear
+       in the primary oocyte's nucleus and stay there, on "प्रोफेज-I में ही
+       निलम्बित". The full arrest is drawn in its own beat later; this is where it
+       is first named. -->
+  <style>
+    .ovary { fill:#78C0F0; fill-opacity:.06; stroke:#78C0F0; stroke-width:6 }
+    .oog   { fill:#F0A860; fill-opacity:.25; stroke:#F0A860; stroke-width:4 }
+    .onuc  { fill:#F0A860; fill-opacity:.9 }
+    .oocyte{ fill:#78C0F0; fill-opacity:.25; stroke:#78C0F0; stroke-width:5 }
+    .nuc   { fill:#0A1014; stroke:#F2F2F2; stroke-width:4 }
+    .ring  { fill:#E8C25A; fill-opacity:.55; stroke:#E8C25A; stroke-width:2 }
+    .arr   { stroke:#F2F2F2; stroke-width:5; stroke-linecap:round }
+    .arrf  { fill:#F2F2F2 }
+    .chrom { stroke:#FF5A5A; stroke-width:5; fill:none; stroke-linecap:round }
+  </style>
+
+  <path id="ovary" data-optional class="ovary"
+        d="M70 185 C60 80 250 30 540 34 C830 30 1030 80 1012 185 C1030 290 830 340 540 336 C250 340 60 290 70 185 z"/>
+
+  <g id="oogonia" data-optional>
+    <circle class="oog" cx="138" cy="170" r="20"/><circle class="onuc" cx="138" cy="170" r="7"/>
+    <circle class="oog" cx="186" cy="143" r="20"/><circle class="onuc" cx="186" cy="143" r="7"/>
+    <circle class="oog" cx="190" cy="197" r="20"/><circle class="onuc" cx="190" cy="197" r="7"/>
+    <circle class="oog" cx="142" cy="223" r="20"/><circle class="onuc" cx="142" cy="223" r="7"/>
+  </g>
+
+  <g id="arrow1" data-optional>
+    <line class="arr" x1="236" y1="185" x2="300" y2="185"/>
+    <path class="arrf" d="M316 185 l-20 -12 v24 z"/>
+  </g>
+
+  <!-- the same cell, grown: the primary oocyte -->
+  <g id="oocyte" data-optional>
+    <circle class="oocyte" cx="420" cy="185" r="72"/>
+    <circle class="nuc" cx="420" cy="185" r="28"/>
+  </g>
+
+  <g id="arrow2" data-optional>
+    <line class="arr" x1="512" y1="185" x2="640" y2="185"/>
+    <path class="arrf" d="M656 185 l-20 -12 v24 z"/>
+  </g>
+
+  <!-- the primary follicle: that oocyte, now ringed by follicle cells -->
+  <g id="follicle_cell" data-optional>
+    <circle class="oocyte" cx="826" cy="185" r="72"/>
+    <circle class="nuc" cx="826" cy="185" r="28"/>
+  </g>
+  <g id="follicle_ring" data-optional class="ring">
+    <circle cx="920" cy="185" r="17"/><circle cx="907" cy="138" r="17"/>
+    <circle cx="873" cy="104" r="17"/><circle cx="826" cy="91" r="17"/>
+    <circle cx="779" cy="104" r="17"/><circle cx="745" cy="138" r="17"/>
+    <circle cx="732" cy="185" r="17"/><circle cx="745" cy="232" r="17"/>
+    <circle cx="779" cy="266" r="17"/><circle cx="826" cy="279" r="17"/>
+    <circle cx="873" cy="266" r="17"/><circle cx="907" cy="232" r="17"/>
+  </g>
+
+  <!-- the arrest, first named: chromosomes in the nucleus, and they stay -->
+  <g id="chromosomes" data-optional class="chrom">
+    <path d="M812 171 q8 10 -2 20"/><path d="M830 167 q10 12 0 24"/><path d="M842 187 q-6 8 2 14"/>
+  </g>
+</svg>

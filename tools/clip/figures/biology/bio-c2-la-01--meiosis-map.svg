@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- THE WHOLE SEQUENCE IN ONE PICTURE, and where the counts are examined: ONE
+       ovum and TWO polar bodies, produced in that order.
+
+       Nothing moves - it is a map, not an event. It fills in stage by stage as
+       he names each one, so the map is always on screen and the step being
+       spoken is the one that just arrived. A counted list must FILL IN rather
+       than land whole, or the student never sees where in the sequence they are.
+
+       BOTH polar bodies are drawn identically (same size, same gold) so that one
+       spec label naming the second reads across to the first. At 46px there is
+       room for four labels across this width and no more. -->
+  <style>
+    .cell  { fill:#78C0F0; fill-opacity:.16; stroke:#78C0F0; stroke-width:6 }
+    .cyt   { fill:#78C0F0; fill-opacity:.5 }
+    .cellg { fill:#E8C25A; fill-opacity:.2; stroke:#E8C25A; stroke-width:6 }
+    .cytg  { fill:#E8C25A; fill-opacity:.55 }
+    .pb    { fill:#E8C25A; fill-opacity:.3; stroke:#E8C25A; stroke-width:5 }
+    .arr   { stroke:#F2F2F2; stroke-width:5 }
+    .arrf  { fill:#F2F2F2 }
+  </style>
+
+  <g id="s1_cell" data-optional>
+    <circle class="cell" cx="158" cy="272" r="58"/>
+    <circle class="cyt"  cx="158" cy="272" r="21"/>
+  </g>
+
+  <g id="ar1" data-optional>
+    <line class="arr" x1="228" y1="272" x2="368" y2="272"/>
+    <path class="arrf" d="M380 272 l-25 -13 v26 z"/>
+  </g>
+
+  <g id="s2_cell" data-optional>
+    <circle class="cell" cx="480" cy="272" r="56"/>
+    <circle class="cyt"  cx="480" cy="272" r="20"/>
+  </g>
+  <circle id="pb1" data-optional class="pb" cx="540" cy="166" r="24"/>
+
+  <g id="ar2" data-optional>
+    <line class="arr" x1="548" y1="272" x2="688" y2="272"/>
+    <path class="arrf" d="M700 272 l-25 -13 v26 z"/>
+  </g>
+
+  <g id="s3_cell" data-optional>
+    <circle class="cellg" cx="800" cy="272" r="56"/>
+    <circle class="cytg"  cx="800" cy="272" r="20"/>
+  </g>
+  <circle id="pb2" data-optional class="pb" cx="860" cy="166" r="24"/>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- THE COUNT IS THE ANSWER. Millions of oogonia in the embryo, 60-80 thousand
+       follicles per ovary by puberty, atresia in between. The second number is
+       what he tells them to memorise, so it is the last thing to arrive.
+
+       This beat may not be generated: three topics were re-briefed with a number
+       named explicitly and all three came back wrong.
+
+       The dot clusters are deliberately unequal (16 against 6) so the fall reads
+       without the labels. They are not literal counts and are never shown as any. -->
+  <style>
+    .ov    { fill:#78C0F0; fill-opacity:.10; stroke:#78C0F0; stroke-width:6 }
+    .ovg   { fill:#E8C25A; fill-opacity:.10; stroke:#E8C25A; stroke-width:6 }
+    .dot   { fill:#78C0F0; fill-opacity:.85 }
+    .dotg  { fill:#E8C25A }
+    .loss  { stroke:#FF5A5A; stroke-width:7 }
+    .lossf { fill:#FF5A5A }
+  </style>
+
+  <ellipse id="ov_left" data-optional class="ov" cx="255" cy="248" rx="130" ry="98"/>
+  <g id="dots_left" data-optional class="dot">
+    <circle cx="198" cy="204" r="9"/><circle cx="236" cy="192" r="9"/>
+    <circle cx="278" cy="200" r="9"/><circle cx="316" cy="216" r="9"/>
+    <circle cx="182" cy="240" r="9"/><circle cx="222" cy="232" r="9"/>
+    <circle cx="262" cy="238" r="9"/><circle cx="302" cy="246" r="9"/>
+    <circle cx="196" cy="278" r="9"/><circle cx="238" cy="274" r="9"/>
+    <circle cx="280" cy="282" r="9"/><circle cx="318" cy="268" r="9"/>
+    <circle cx="216" cy="308" r="9"/><circle cx="258" cy="306" r="9"/>
+    <circle cx="296" cy="300" r="9"/><circle cx="340" cy="240" r="9"/>
+  </g>
+
+  <line id="atresia_line" data-optional class="loss"  x1="425" y1="248" x2="618" y2="248"/>
+  <path id="atresia_head" data-optional class="lossf" d="M630 248 l-28 -15 v30 z"/>
+
+  <ellipse id="ov_right" data-optional class="ovg" cx="822" cy="248" rx="130" ry="98"/>
+  <g id="dots_right" data-optional class="dotg">
+    <circle cx="782" cy="222" r="9"/><circle cx="838" cy="212" r="9"/>
+    <circle cx="806" cy="262" r="9"/><circle cx="864" cy="256" r="9"/>
+    <circle cx="822" cy="300" r="9"/><circle cx="876" cy="296" r="9"/>
+  </g>
+</svg>

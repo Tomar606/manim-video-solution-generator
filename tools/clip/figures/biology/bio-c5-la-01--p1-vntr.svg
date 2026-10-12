@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <style>
+    .s  { fill:none; stroke-linecap:round; stroke-linejoin:round }
+    .cy { stroke:#78C0F0; stroke-width:8 }
+    .gd { stroke:#E8C25A; stroke-width:8 }
+    .wm { stroke:#F0A860; stroke-width:8 }
+    .fcy{ fill:#78C0F0; fill-opacity:.92 }
+    .fgd{ fill:#E8C25A; fill-opacity:.92 }
+    .fwm{ fill:#F0A860; fill-opacity:.92 }
+    .plate { fill:#0E2E2C; fill-opacity:.55; stroke:#78C0F0; stroke-width:6 }
+  </style>
+  <line id="flank_a_l" data-optional class="s cy" x1="150" y1="150" x2="322" y2="150"/>
+  <line id="flank_a_r" data-optional class="s cy" x1="554" y1="150" x2="950" y2="150"/>
+  <rect id="rep_a1" data-optional class="fgd" x="330" y="124" width="64" height="52" rx="10"/>
+  <rect id="rep_a2" data-optional class="fgd" x="406" y="124" width="64" height="52" rx="10"/>
+  <rect id="rep_a3" data-optional class="fgd" x="482" y="124" width="64" height="52" rx="10"/>
+  <path id="brace_a" data-optional class="s wm" d="M330,194 L330,210 L546,210 L546,194"/>
+  <line id="flank_b_l" data-optional class="s cy" x1="150" y1="330" x2="322" y2="330"/>
+  <line id="flank_b_r" data-optional class="s cy" x1="706" y1="330" x2="950" y2="330"/>
+  <rect id="rep_b1" data-optional class="fgd" x="330" y="304" width="64" height="52" rx="10"/>
+  <rect id="rep_b2" data-optional class="fgd" x="406" y="304" width="64" height="52" rx="10"/>
+  <rect id="rep_b3" data-optional class="fgd" x="482" y="304" width="64" height="52" rx="10"/>
+  <rect id="rep_b4" data-optional class="fgd" x="558" y="304" width="64" height="52" rx="10"/>
+  <rect id="rep_b5" data-optional class="fgd" x="634" y="304" width="64" height="52" rx="10"/>
+  <path id="brace_b" data-optional class="s wm" d="M330,374 L330,390 L698,390 L698,374"/>
+</svg>

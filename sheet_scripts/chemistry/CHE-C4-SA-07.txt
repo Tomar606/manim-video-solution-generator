@@ -1,0 +1,101 @@
+निम्न को ध्यान में रखकर एक्टीनॉयड्स के रसायन की तुलना लैन्थेनॉयद्स के साथ
+(i) इलेक्ट्रॉनिक विन्यास
+(ii) परमाणु एवं आयनिक आकार
+(iii) ऑक्सीकरण अवस्था
+(iv) रासायनिक क्रियाशीलता। 
+
+
+MP Board कक्षा 12वीं के बच्चों!
+आज का question बहुत important है, क्योंकि इसमें आपको लैंथेनाइड्स और एक्टिनाइड्स के बीच चार मुख्य आधारों पर comparison करना है।
+प्रश्न:
+“निम्न को ध्यान में रखकर एक्टिनॉयड्स के रसायन की तुलना लैन्थेनॉयद्स के साथ—
+(i) इलेक्ट्रॉनिक विन्यास
+(ii) परमाणु एवं आयनिक आकार
+(iii) ऑक्सीकरण अवस्था
+(iv) रासायनिक क्रियाशीलता।”
+इस question को हम दो parts में समझेंगे, ताकि comparison आपको आसानी से याद भी रहे और exam में लिखना भी आसान हो।
+Part 1 — इलेक्ट्रॉनिक विन्यास और परमाणु एवं आयनिक आकार
+सबसे पहले बात करते हैं इलेक्ट्रॉनिक विन्यास की।
+लैंथेनाइड्स में विभेदीकरण या अंतिम electron, n minus two shell के four f subshell में प्रवेश करता है।
+On Screen:
+Lanthanide → (n−2)f → 4f
+इसे ऐसे बोलेंगे—
+“लैंथेनाइड में अंतिम electron, n minus two shell के four f subshell में प्रवेश करता है।”
+वहीं एक्टिनाइड्स में अंतिम electron, n minus two shell के five f subshell में प्रवेश करता है।
+On Screen:
+Actinide → (n−2)f → 5f
+इसे बोलेंगे—
+“एक्टिनाइड में अंतिम electron, n minus two shell के five f subshell में प्रवेश करता है।”
+अब इनके नाम से जुड़ी बात भी याद रखिए।
+लैंथेनाइड, lanthanum के बाद आने वाले elements की series है, इसलिए इन्हें लैंथेनाइड कहा जाता है।
+और एक्टिनाइड, actinium के बाद आने वाले elements की series है, इसलिए इन्हें एक्टिनाइड कहा जाता है।
+अब आते हैं परमाणु एवं आयनिक आकार पर।
+लैंथेनाइड series में atomic number बढ़ने के साथ-साथ atomic और ionic radius धीरे-धीरे कम होती जाती है।
+On Screen:
+Atomic number ↑ → Atomic / Ionic radius ↓
+इस क्रमिक कमी को लैंथेनाइड संकुचन, यानी lanthanide contraction, कहते हैं।
+दूसरी तरफ एक्टिनाइड्स में भी atomic और ionic radius क्रमशः कम होती जाती है। इस घटना को actinide contraction, यानी एक्टिनाइड संकुचन, कहते हैं।
+On Screen:
+Lanthanide → Lanthanide contraction
+Actinide → Actinide contraction
+तो अभी तक दो बातें clear हैं—
+On Screen:
+Lanthanide → 4f filling → Lanthanide contraction
+Actinide → 5f filling → Actinide contraction
+अब तक हमने electronic configuration और atomic तथा ionic size का comparison समझ लिया है।
+लेकिन question के दो और बहुत important points—oxidation state और chemical reactivity—अभी बाकी हैं।
+इन्हें समझते हैं Part 2 में।
+________________
+
+
+Part 2 — ऑक्सीकरण अवस्था और रासायनिक क्रियाशीलता
+तो बच्चों, Part 1 में हमने देखा था कि लैंथेनाइड्स में four f और एक्टिनाइड्स में five f subshell में differentiation होता है, और दोनों series में contraction देखने को मिलता है।
+अब बात करते हैं oxidation state की।
+लैंथेनाइड्स की सबसे सामान्य oxidation state plus three होती है।
+On Screen:
+Lanthanides → Common oxidation state = +3
+इसके अलावा कुछ लैंथेनाइड्स plus two और plus four oxidation states भी प्रदर्शित करते हैं।
+On Screen:
+Lanthanides → +2, +3, +4
+अब एक्टिनाइड्स को देखिए।
+एक्टिनाइड्स में भी सबसे सामान्य oxidation state plus three होती है, लेकिन इनकी खास बात यह है कि ये कई दूसरी oxidation states भी प्रदर्शित करते हैं।
+जैसे—plus four, plus five, plus six और plus seven।
+On Screen:
+Actinides → +3, +4, +5, +6, +7
+इसलिए oxidation states के मामले में एक्टिनाइड्स में अधिक विविधता देखने को मिलती है।
+अब आते हैं chemical reactivity, यानी रासायनिक क्रियाशीलता पर।
+लैंथेनाइड्स की तुलना में एक्टिनाइड्स में complex formation की tendency अधिक होती है।
+On Screen:
+Complex formation tendency:
+Lanthanides < Actinides
+इसके अलावा एक्टिनाइड्स oxo ions भी बनाते हैं।
+उदाहरण के लिए uranium के oxo ions में U O two plus और U O two two plus जैसे species मिलते हैं।
+On Screen:
+UO₂⁺
+UO₂²⁺
+एक्टिनाइड्स के compounds सामान्यतः लैंथेनाइड्स की तुलना में अधिक क्षारीय प्रकृति प्रदर्शित करते हैं।
+On Screen:
+Basic character:
+Lanthanides < Actinides
+अब एक बहुत important difference और याद रखिए।
+लैंथेनाइड्स में promethium, यानी Pm, को छोड़कर बाकी अधिकांश लैंथेनाइड्स naturally occurring और non-radioactive होते हैं।
+वहीं सभी एक्टिनाइड्स radioactive होते हैं।
+On Screen:
+Lanthanides → Pm को छोड़कर अधिकांश non-radioactive
+Actinides → All radioactive
+और एक्टिनाइड्स में से अधिकांश elements प्रकृति में नहीं पाए जाते, बल्कि उन्हें artificially prepare किया जाता है।
+तो पूरे question का quick revision कर लेते हैं।
+On Screen:
+1. Electronic configuration
+Lanthanides → 4f
+Actinides → 5f
+2. Atomic / Ionic size
+दोनों में contraction
+3. Oxidation state
+Lanthanides → mainly +3
+Actinides → +3 से +7 तक अधिक variety
+4. Chemical reactivity
+Actinides → higher complex formation tendency
+तो बच्चों, इस comparison को चार headings में याद रखिए—
+Electronic configuration, size, oxidation state और chemical reactivity.
+अब इसका exact answer exam में किस तरह लिखना है, वो आपको Notes button पर click करके मिल जाएगा।

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- THE GENE SITS ON X, AND IT IS RECESSIVE. One X chromosome, the disease
+       allele h drawn as a red band across its upper-right arm, then a grey
+       cover over that band on the word for suppressed: the gene is present
+       but does not show. The cover is the whole point of the beat.
+       Labels come from the spec. -->
+  <style>
+    .xc    { fill:#78C0F0; fill-opacity:.25; stroke:#78C0F0; stroke-width:7; stroke-linejoin:round }
+    .yc    { fill:#F0A860; fill-opacity:.25; stroke:#F0A860; stroke-width:7; stroke-linejoin:round }
+    .ghost { fill:none; stroke:#6E8A99; stroke-width:6; stroke-dasharray:18 14; stroke-linejoin:round }
+    .bad   { fill:#FF5A5A; stroke:#FF5A5A; stroke-width:4; stroke-linejoin:round }
+    .ok    { fill:#F2F2F2; stroke:#F2F2F2; stroke-width:4; stroke-linejoin:round }
+    .glowbad { fill:#FF5A5A; fill-opacity:.45; stroke:#FF5A5A; stroke-opacity:.35; stroke-width:26; stroke-linejoin:round }
+    .glowok  { fill:#F2F2F2; fill-opacity:.40; stroke:#F2F2F2; stroke-opacity:.30; stroke-width:26; stroke-linejoin:round }
+    .cover { fill:#6E8A99; fill-opacity:.72; stroke:#6E8A99; stroke-width:6; stroke-dasharray:14 10; stroke-linejoin:round }
+    .slot  { fill:none; stroke:#6E8A99; stroke-width:6; stroke-dasharray:12 9; stroke-linejoin:round }
+    .link  { stroke:#6E8A99; stroke-width:6; stroke-dasharray:12 10; stroke-linecap:round }
+    .leadr { stroke:#FF5A5A; stroke-width:6; stroke-linecap:round }
+    .leadg { stroke:#E8C25A; stroke-width:6; stroke-linecap:round }
+    .gold  { fill:#E8C25A }
+  </style>
+
+  <g id="x_gene" data-optional>
+    <path class="xc" d="M320 149 L353.5 80.3 A32 32 0 0 1 411 108.4 L355.6 222 L411 335.6 A32 32 0 0 1 353.5 363.7 L320 295 L286.5 363.7 A32 32 0 0 1 229 335.6 L284.4 222 L229 108.4 A32 32 0 0 1 286.5 80.3 Z"/>
+    <path id="band_gene" data-optional class="bad" d="M312.6 148.2 L382.7 182.4 L395.9 155.4 L325.8 121.2 Z"/>
+    <path id="cover_gene" data-optional class="cover" d="M298.4 154.6 L386.4 197.6 L410.1 149 L322 106.1 Z"/>
+  </g>
+
+  <line id="lead_gene" data-optional class="leadr" x1="406.2" y1="129.8" x2="585" y2="108"/>
+  <line id="lead_rec" data-optional class="leadg" x1="410.2" y1="181.8" x2="550" y2="238"/>
+</svg>

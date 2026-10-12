@@ -1,0 +1,33 @@
+“Fe²⁺ आयन की त्रिज्या Mn²⁺ आयन की त्रिज्या से कम होती है, क्यों?”
+________________
+
+
+MP Board कक्षा 12वीं के बच्चों! ये सवाल 2018 में पूछा जा चुका है, और इस बार भी आपकी board exam में आ सकता है।
+पूरे 3 नंबर का सवाल है, तो चलो इसे एकदम आसान तरीके से समझते हैं। 
+सबसे पहले दोनों elements के atomic numbers देखो।
+On Screen:
+Mn = 25
+Fe = 26
+“Mn का atomic number twenty five है और Fe का atomic number twenty six है।”
+अब ध्यान दो— Fe का atomic number Mn से एक ज्यादा है।
+इसका मतलब Fe के nucleus में एक proton ज्यादा है।
+On Screen:
+Mn → 25 protons
+Fe → 26 protons
+“Mn में twenty five protons होते हैं, जबकि Fe में twenty six protons होते हैं।”
+अब जब हम Mn²⁺ और Fe²⁺ ions की बात करते हैं, तो दोनों ने two electrons lose किए हैं।
+इसलिए दोनों में electrons की संख्या comparable है, लेकिन Fe²⁺ में nuclear charge ज्यादा है, क्योंकि उसमें एक proton ज्यादा है।
+अब यहाँ एक important point है—
+जब nucleus में protons की संख्या बढ़ती है, तो nucleus और electrons के बीच electrostatic attraction बढ़ जाता है।
+On Screen:
+Nuclear charge ↑ → आकर्षण बल ↑ → आयनिक त्रिज्या ↓
+“Nuclear charge बढ़ने पर nucleus और electrons के बीच attraction force बढ़ता है और ionic radius कम होती है।”
+इस ज्यादा attraction की वजह से electron cloud nucleus की तरफ थोड़ा ज्यादा खिंच जाता है।
+इसलिए Fe²⁺ का size Mn²⁺ की तुलना में छोटा हो जाता है।
+तो यही कारण है कि—
+On Screen:
+त्रिज्या: Fe²⁺ < Mn²⁺
+“Fe two plus की radius, Mn two plus की radius से कम होती है।”
+तो बच्चो ये topic तो दिमाग में बैठ गया
+बस, इस question में आपको यही logic याद रखना है— जैसे-जैसे atomic number बढ़ता गया वैसे-वैसे nuclear charge बढ़ता गया और attraction बढ़ने से ionic radius कम होती गई। 
+अब इसका exact answer exam में किस तरह लिखना है, वो आपको Notes button पर click करके मिल जाएगा। ऐसे ही छोटे-छोटे Chemistry के concept तैयार करते जाओ,ताकि Exam में इस question के पूरे marks मिलें।

@@ -1,0 +1,134 @@
+प्रश्न:
+किसी वैद्युत द्विधुव के कारण अक्षीय स्थिति में किसी बिन्दु पर विद्युत् क्षेत्र की तीव्रता के लिए व्यंजक प्राप्त कीजिए।
+अथवा
+विद्युत् द्विधुव किसे कहते हैं? किसी विद्युत् द्विधुव के कारण अक्षीय स्थिति में स्थित किसी बिन्दु पर विद्युत् क्षेत्र की तीव्रता का व्यंजक ज्ञात कीजिए।
+PART 1
+शिक्षक:
+“MP Board कक्षा 12वीं के बच्चों! विद्युत् द्विधुव की अक्षीय स्थिति में विद्युत् क्षेत्र की तीव्रता का ये derivation Board Exam के लिए बहुत important है।”
+“इस सवाल में पहले हम समझेंगे कि विद्युत् द्विधुव क्या होता है, फिर axial position में electric field का पूरा expression निकालेंगे।”
+“विद्युत् द्विधुव ऐसे दो समान और विपरीत आवेशों की व्यवस्था है, जिनके बीच कुछ दूरी होती है।”
+“मान लो AB एक विद्युत् द्विधुव है, जिसमें A पर +q और B पर −q आवेश है। दोनों आवेशों के बीच की दूरी 2l है।”
+ON SCREEN
+AB = 2l
+“AB बराबर है two l।”
+“अब दोनों आवेशों के मध्य-बिन्दु को O मान लेते हैं और O से r दूरी पर द्विधुव की अक्ष के along एक बिन्दु P लेते हैं।”
+“यही बिन्दु P हमारी axial position में है, जहाँ हमें electric field की intensity ज्ञात करनी है।”
+ON SCREEN
+OP = r
+“OP बराबर है r।”
+“अब सबसे पहले +q आवेश के कारण P पर electric field निकालते हैं।”
+“+q आवेश से P की दूरी AP होगी। Diagram से—”
+ON SCREEN
+AP = r − l
+“AP बराबर है r minus l।”
+“इसलिए +q के कारण P पर विद्युत् क्षेत्र की तीव्रता होगी—”
+ON SCREEN
+E₁ = 1/(4πε₀) × q/(r − l)²
+“E one बराबर है one by four pi epsilon naught into q by r minus l whole square।”
+“अब −q आवेश के कारण P पर electric field निकालते हैं।”
+“−q से P की दूरी BP होगी—”
+ON SCREEN
+BP = r + l
+“BP बराबर है r plus l।”
+“इसलिए −q के कारण P पर विद्युत् क्षेत्र की तीव्रता का परिमाण होगा—”
+ON SCREEN
+E₂ = 1/(4πε₀) × q/(r + l)²
+“E two बराबर है one by four pi epsilon naught into q by r plus l whole square।”
+“अब बच्चों, यहाँ सबसे important बात ध्यान रखना। दोनों electric fields एक ही straight line में हैं, लेकिन उनकी directions opposite हैं।”
+“और क्योंकि P, +q के ज्यादा पास है, इसलिए E one का मान E two से ज्यादा होगा।”
+“इसलिए P पर परिणामी electric field होगा—”
+ON SCREEN
+E = E₁ − E₂
+“E बराबर है E one minus E two।”
+“अब दोनों की values रखकर इसे simplify करते हैं।”
+ON SCREEN
+E = 1/(4πε₀) × [q/(r − l)² − q/(r + l)²]
+“E बराबर है one by four pi epsilon naught into bracket q by r minus l whole square minus q by r plus l whole square bracket।”
+“Common q को बाहर लेने पर—”
+ON SCREEN
+E = q/(4πε₀) × [1/(r − l)² − 1/(r + l)²]
+“E बराबर है q by four pi epsilon naught into bracket one by r minus l whole square minus one by r plus l whole square bracket।”
+“अब इस bracket को simplify करेंगे। ये step ध्यान से देखना, क्योंकि यहीं से पूरा derivation आगे निकलेगा।”
+“तो इसे समझते हैं Part 2 में।”
+PART 2
+शिक्षक:
+“बच्चों, Part 1 में हमारे पास परिणामी electric field का expression आया था।”
+ON SCREEN
+E = q/(4πε₀) × [1/(r − l)² − 1/(r + l)²]
+“E बराबर है q by four pi epsilon naught into bracket one by r minus l whole square minus one by r plus l whole square bracket।”
+“अब दोनों fractions को एक denominator में लेते हैं।”
+ON SCREEN
+E = q/(4πε₀) × [(r + l)² − (r − l)²] / [(r − l)²(r + l)²]
+“E बराबर है q by four pi epsilon naught into numerator में r plus l whole square minus r minus l whole square, divided by r minus l whole square into r plus l whole square।”
+“अब numerator को expand करते हैं।”
+ON SCREEN
+(r + l)² − (r − l)² = 4rl
+“r plus l whole square minus r minus l whole square बराबर four r l।”
+“और denominator में—”
+ON SCREEN
+(r − l)²(r + l)² = (r² − l²)²
+“r minus l whole square into r plus l whole square बराबर r square minus l square whole square।”
+“अब दोनों values रखने पर—”
+ON SCREEN
+E = q/(4πε₀) × 4rl/(r² − l²)²
+“E बराबर है q by four pi epsilon naught into four r l divided by r square minus l square whole square।”
+“चार को four pi epsilon naught के साथ simplify करने की जरूरत नहीं है; अब इसे द्विधुव आघूर्ण के रूप में लिखेंगे।”
+“बच्चों, विद्युत् द्विधुव का आघूर्ण p बराबर आवेश q और दोनों आवेशों के बीच की दूरी 2l के गुणनफल के बराबर होता है।”
+ON SCREEN
+p = q × 2l
+“p बराबर है q into two l।”
+“इसलिए 2 q l को p के रूप में लिख सकते हैं। अब expression को इस form में लिखते हैं—”
+ON SCREEN
+E = 1/(4πε₀) × 2pr/(r² − l²)²
+“E बराबर है one by four pi epsilon naught into two p r divided by r square minus l square whole square।”
+“यही विद्युत् द्विधुव के कारण axial position में electric field का exact expression है।”
+“लेकिन बच्चों, आमतौर पर axial point की दूरी r, द्विधुव की आधी दूरी l से बहुत बड़ी मानी जाती है।”
+“अर्थात् l, r की तुलना में बहुत छोटा है।”
+ON SCREEN
+l << r
+“l is much less than r।”
+“इस condition में l square को r square की तुलना में बहुत छोटा माना जा सकता है।”
+“इसलिए r square minus l square की जगह लगभग r square लिख सकते हैं।”
+“अब expression बन जाएगा—”
+ON SCREEN
+E = 1/(4πε₀) × 2pr/(r²)²
+“E बराबर है one by four pi epsilon naught into two p r divided by r square whole square।”
+“और r square का square होगा r to the power four।”
+ON SCREEN
+E = 1/(4πε₀) × 2pr/r⁴
+“E बराबर है one by four pi epsilon naught into two p r by r to the power four।”
+“अब r को cancel करने पर final result मिलेगा।”
+“इसे समझते हैं Part 3 में।”
+PART 3
+शिक्षक:
+“बच्चों, Part 2 में हमने axial position के exact expression से approximation वाला result निकाला था।”
+ON SCREEN
+E = 1/(4πε₀) × 2pr/r⁴
+“E बराबर है one by four pi epsilon naught into two p r by r to the power four।”
+“अब ऊपर r और नीचे r to the power four में से एक r cancel होगा।”
+ON SCREEN
+E = 1/(4πε₀) × 2p/r³
+“E बराबर है one by four pi epsilon naught into two p by r cube।”
+“तो बच्चों, जब axial point की दूरी r, द्विधुव की लंबाई की तुलना में बहुत बड़ी हो, तब विद्युत् द्विधुव के कारण axial position में electric field का final expression है—”
+ON SCREEN
+E = 1/(4πε₀) × 2p/r³
+“E बराबर है one by four pi epsilon naught into two p by r cube।”
+“अब एक बार पूरे derivation को sequence में याद कर लो।”
+ON SCREEN
++q और −q → E = E₁ − E₂ → AP = r − l → BP = r + l → p = 2ql → E = 1/(4πε₀) × 2pr/(r² − l²)² → l << r → E = 1/(4πε₀) × 2p/r³
+“पहले दोनों charges के electric fields का difference लिया, फिर AP और BP की values रखीं, उसके बाद द्विधुव आघूर्ण p का relation लगाया और finally l much less than r की condition में final result मिला।”
+“बच्चों, यहाँ एक बात जरूर याद रखना—axial position में electric field की direction द्विधुव आघूर्ण p की दिशा में होती है, अर्थात् −q से +q की ओर।”
+ON SCREEN
+Axial position → E की दिशा = p की दिशा
+“Axial position में E की direction, p की direction के समान होती है।”
+“अतः विद्युत् द्विधुव के कारण axial position में किसी बिन्दु पर विद्युत् क्षेत्र की तीव्रता का exact expression है—”
+ON SCREEN
+E = 1/(4πε₀) × 2pr/(r² − l²)²
+“E बराबर है one by four pi epsilon naught into two p r divided by r square minus l square whole square।”
+“और जब l, r की तुलना में बहुत छोटा हो, तब—”
+ON SCREEN
+E = 1/(4πε₀) × 2p/r³
+“E बराबर है one by four pi epsilon naught into two p by r cube।”
+“बस इस derivation में AP equals r minus l, BP equals r plus l और p equals 2ql वाली तीन बातें ध्यान में रखो। पूरा derivation आसानी से निकल जाएगा।”
+“अब इसे परीक्षा में कैसे लिखना है, वो आपकी स्क्रीन के right side में दिए Notes button पर मिल जाएगा।”
+“और ऐसे ही important derivations को समझते जाओ और एक-एक करके अपना syllabus complete करते जाओ।”

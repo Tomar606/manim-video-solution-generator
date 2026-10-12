@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- "आसान तरीके से": the energy barrier as a hill and a reactant molecule as
+       a ball at its foot. The ball first climbs part way and rolls back (not
+       enough energy); the gold gap between its level and the top is the extra
+       energy it lacks, which is the activation energy; then an energised ball
+       (gold) goes over the top and down to the other side.
+
+       Motion is by `move` offsets from the ball's rest centre (240,348). The
+       flanks are straight so a straight move rides them: the ball's centre is
+       32px off the hill's centreline (r 26 + stroke halves), which gives
+         foot (45,0)   part-climb (121.8,-92.2)   top-left (245,-240)
+         top-right (356.1,-240)   right foot (556.1,30)   rest (640,30)
+       No text elements: every word comes from the spec. -->
+  <path id="hill_fill" data-optional
+        d="M40,380 L300,380 L500,140 L580,140 L780,410 L1040,410 L1040,450 L40,450 Z"
+        fill="#F0A860" fill-opacity="0.16"/>
+  <path id="hill" data-optional
+        d="M40,380 L300,380 L500,140 L580,140 L780,410 L1040,410"
+        fill="none" stroke="#F0A860" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- the level the ball's centre must reach, and the level it sits at -->
+  <line id="top_guide" data-optional x1="110" y1="108" x2="470" y2="108"
+        style="stroke:#E8C25A;stroke-opacity:0.9" stroke-width="5" stroke-dasharray="14 12"/>
+  <line id="low_guide" data-optional x1="110" y1="348" x2="206" y2="348"
+        style="stroke:#E8C25A;stroke-opacity:0.9" stroke-width="5" stroke-dasharray="14 12"/>
+
+  <g id="ea_gap" data-optional>
+    <line x1="125" y1="134" x2="125" y2="322" stroke="#E8C25A" stroke-width="8" stroke-linecap="round"/>
+    <polygon points="125,110 111,138 139,138" fill="#E8C25A"/>
+    <polygon points="125,346 111,318 139,318" fill="#E8C25A"/>
+  </g>
+
+  <g id="fail_x" data-optional>
+    <line x1="377" y1="172" x2="413" y2="208" stroke="#FF5A5A" stroke-width="9" stroke-linecap="round"/>
+    <line x1="413" y1="172" x2="377" y2="208" stroke="#FF5A5A" stroke-width="9" stroke-linecap="round"/>
+  </g>
+
+  <circle id="ball" data-optional cx="240" cy="348" r="26" fill="#78C0F0" stroke="#CFE9FA" stroke-width="4"/>
+
+  <g id="ball_hot" data-optional>
+    <circle cx="240" cy="348" r="42" fill="#E8C25A" fill-opacity="0.22"/>
+    <circle cx="240" cy="348" r="26" fill="#F3C85A" stroke="#FFF1C2" stroke-width="4"/>
+  </g>
+
+  <g id="done" data-optional>
+    <circle cx="880" cy="195" r="34" fill="#12301E" fill-opacity="0.7" stroke="#6FD08C" stroke-width="6"/>
+    <path d="M864,196 L876,209 L898,182" fill="none" stroke="#6FD08C" stroke-width="8"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

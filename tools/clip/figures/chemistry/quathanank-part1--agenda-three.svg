@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- The three things this video answers, named in the opening line. Same
+       idiom as recap-four.svg so the student recognises a list when they see
+       one, with a `hi<n>` plate for the item being spoken.
+       Boxes are 120px tall: a 46px Devanagari label measures 69-76px with its
+       matras, and QA fails a label taller than its box minus 8.
+       No word or number lives here: every label comes from the spec. -->
+
+  <rect id="bar1" data-optional x="150" y="30"  width="880" height="120" rx="24"
+        fill="#0B1F2E" fill-opacity="0.55" stroke="#5C6B7A" stroke-width="5"/>
+  <rect id="bar2" data-optional x="150" y="175" width="880" height="120" rx="24"
+        fill="#0B1F2E" fill-opacity="0.55" stroke="#5C6B7A" stroke-width="5"/>
+  <rect id="bar3" data-optional x="150" y="320" width="880" height="120" rx="24"
+        fill="#0B1F2E" fill-opacity="0.55" stroke="#5C6B7A" stroke-width="5"/>
+
+  <circle id="chip1" data-optional cx="88" cy="90"  r="40" fill="#0B1F2E" stroke="#5C6B7A" stroke-width="6"/>
+  <circle id="chip2" data-optional cx="88" cy="235" r="40" fill="#0B1F2E" stroke="#5C6B7A" stroke-width="6"/>
+  <circle id="chip3" data-optional cx="88" cy="380" r="40" fill="#0B1F2E" stroke="#5C6B7A" stroke-width="6"/>
+
+  <g id="hi1" data-optional>
+    <rect x="150" y="30" width="880" height="120" rx="24"
+          fill="#2A1E05" fill-opacity="0.85" stroke="#FFC53D" stroke-width="7"/>
+    <circle cx="88" cy="90" r="40" fill="#2A1E05" stroke="#FFC53D" stroke-width="7"/>
+  </g>
+  <g id="hi2" data-optional>
+    <rect x="150" y="175" width="880" height="120" rx="24"
+          fill="#2A1E05" fill-opacity="0.85" stroke="#FFC53D" stroke-width="7"/>
+    <circle cx="88" cy="235" r="40" fill="#2A1E05" stroke="#FFC53D" stroke-width="7"/>
+  </g>
+  <g id="hi3" data-optional>
+    <rect x="150" y="320" width="880" height="120" rx="24"
+          fill="#2A1E05" fill-opacity="0.85" stroke="#FFC53D" stroke-width="7"/>
+    <circle cx="88" cy="380" r="40" fill="#2A1E05" stroke="#FFC53D" stroke-width="7"/>
+  </g>
+</svg>

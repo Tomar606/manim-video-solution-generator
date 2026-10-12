@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470">
+  <!-- THE MALE PAIR. X carries h (red band). Y is SHORTER and has no part at
+       the band's height: the dashed grey slot opposite the band is the
+       missing homologous region, so nothing can mask h. The dashed X on the
+       left is the second X a male does not have. At the end the band glows:
+       the recessive gene shows, so the male is a patient.
+       Labels come from the spec. -->
+  <style>
+    .xc    { fill:#78C0F0; fill-opacity:.25; stroke:#78C0F0; stroke-width:7; stroke-linejoin:round }
+    .yc    { fill:#F0A860; fill-opacity:.25; stroke:#F0A860; stroke-width:7; stroke-linejoin:round }
+    .ghost { fill:none; stroke:#6E8A99; stroke-width:6; stroke-dasharray:18 14; stroke-linejoin:round }
+    .bad   { fill:#FF5A5A; stroke:#FF5A5A; stroke-width:4; stroke-linejoin:round }
+    .ok    { fill:#F2F2F2; stroke:#F2F2F2; stroke-width:4; stroke-linejoin:round }
+    .glowbad { fill:#FF5A5A; fill-opacity:.45; stroke:#FF5A5A; stroke-opacity:.35; stroke-width:26; stroke-linejoin:round }
+    .glowok  { fill:#F2F2F2; fill-opacity:.40; stroke:#F2F2F2; stroke-opacity:.30; stroke-width:26; stroke-linejoin:round }
+    .cover { fill:#6E8A99; fill-opacity:.72; stroke:#6E8A99; stroke-width:6; stroke-dasharray:14 10; stroke-linejoin:round }
+    .slot  { fill:none; stroke:#6E8A99; stroke-width:6; stroke-dasharray:12 9; stroke-linejoin:round }
+    .link  { stroke:#6E8A99; stroke-width:6; stroke-dasharray:12 10; stroke-linecap:round }
+    .leadr { stroke:#FF5A5A; stroke-width:6; stroke-linecap:round }
+    .leadg { stroke:#E8C25A; stroke-width:6; stroke-linecap:round }
+    .gold  { fill:#E8C25A }
+  </style>
+
+  <path id="ghost_x" data-optional class="ghost" d="M225 162.7 L257.7 95.6 A26 26 0 0 1 304.5 118.4 L253.9 222 L304.5 325.6 A26 26 0 0 1 257.7 348.4 L225 281.3 L192.3 348.4 A26 26 0 0 1 145.5 325.6 L196.1 222 L145.5 118.4 A26 26 0 0 1 192.3 95.6 Z"/>
+
+  <g id="x_male" data-optional>
+    <path class="xc" d="M475 162.7 L507.7 95.6 A26 26 0 0 1 554.5 118.4 L503.9 222 L554.5 325.6 A26 26 0 0 1 507.7 348.4 L475 281.3 L442.3 348.4 A26 26 0 0 1 395.5 325.6 L446.1 222 L395.5 118.4 A26 26 0 0 1 442.3 95.6 Z"/>
+    <path id="glow_male" data-optional class="glowbad" d="M485.4 127.6 L543 155.7 L554.3 132.3 L496.8 104.3 Z"/>
+    <path id="band_male" data-optional class="bad" d="M485.4 127.6 L543 155.7 L554.3 132.3 L496.8 104.3 Z"/>
+  </g>
+
+  <path id="y_male" data-optional class="yc" d="M690 210.5 L714.3 174.5 A26 26 0 0 1 757.4 203.6 L716 264.9 L716 337 A26 26 0 0 1 664 337 L664 264.9 L622.6 203.6 A26 26 0 0 1 665.7 174.5 Z"/>
+
+  <line id="link_male" data-optional class="link" x1="567.9" y1="130" x2="642" y2="130"/>
+  <rect id="slot_male" data-optional class="slot" x="658" y="115" width="64" height="30" rx="6"/>
+
+  <g id="arrow_male" data-optional>
+    <line class="leadg" x1="566" y1="425" x2="606" y2="425"/>
+    <path class="gold" d="M626 425 l-24 -14 v28 z"/>
+  </g>
+</svg>

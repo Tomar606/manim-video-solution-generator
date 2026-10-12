@@ -4,9 +4,20 @@ Read this before changing anything. It records *why* the pipeline is shaped the
 way it is — the constraints that aren't visible from the code, and the decisions
 that look arbitrary until you know what they're avoiding.
 
-> **New here? Read [`PIPELINE.md`](PIPELINE.md) first.** It is the operational
-> walkthrough: what to run, what the outputs mean, and the mistakes already made
-> and fixed. This file explains *why*; that one explains *how*.
+> **Building a video from an already-shot HeyGen clip? Read
+> [`PROCESS.md`](PROCESS.md) first.** It is the fixed step order with the gate on
+> each step — the shortest path to a correct video, and the only one new videos
+> use. `CLIP_VIDEO_RUNBOOK.md` is the detail behind each step.
+>
+> **Working on the older tracks? Read [`PIPELINE.md`](PIPELINE.md) first.** It is
+> the operational walkthrough: what to run, what the outputs mean, and the
+> mistakes already made and fixed. This file explains *why*; that one explains
+> *how*.
+
+> **Source material goes in exactly one place: `inbox/<QID>/`.** Run
+> `python tools/ingest.py <QID>` before anything else — it measures the drop,
+> gates it, and writes `work/<slug>/inputs.json`. Every later stage reads that
+> manifest; nothing globs `inbox/` again. See [`inbox/README.md`](inbox/README.md).
 
 ## Two tracks, one repo
 
@@ -18,6 +29,18 @@ row of an MP Board question sheet becomes a portrait Hindi script
 (`src/pyq_writer.py`), reviewed as a Google Doc, then rendered either by Manim
 or via a Gemini/Veo prompt pack. It shares `src/llm.py`, `src/style.py` and the
 render/composite stages; it does **not** share the script format.
+
+A **third track** now exists: a video built from an ALREADY-SHOT HeyGen clip,
+rendered by `tools/clip/` (headless Chromium + KaTeX + hand-written SVG, Node
+and ffmpeg only — no Manim, no LaTeX). The clip owns the clock and every stage
+bends to it. `tools/build_clip.py` runs its steps in order behind their gates
+and schedules independent work in parallel; the `clip-video` skill drives it
+with one agent per part (captions, design) and one per diagram (SVG). **The
+renderer exists once** — never copy it, or an old `work/<slug>/`, into a video
+folder; the tools refuse a folder that carries code. **Read `CLIP_VIDEO_RUNBOOK.md` before touching one** — it is
+ordered so the video comes out right on the first render, and every rule in it
+names the defect it prevents. The caption timing rules in particular are not
+optional: getting them wrong means a full re-render.
 
 The routing decision between Manim and Veo is not cosmetic — see
 "Route: Manim or Veo" in `PIPELINE.md`. Roughly two thirds of the PYQ scripts
@@ -197,6 +220,25 @@ login and the host has no Manim, but the repair loop needs both. So
   on the prompt, but the prompt itself is generated, so it differs every run and
   never hits. Prompts are cached in `frames/prompts.json` — seed it before any
   re-run or you pay for the same frame twice.
+- **The answer card REPLACES the last frame; it is never laid on top of it.**
+  A sheet is 2:3 inside a 9:16 frame, so fitting it to the width leaves 150px
+  showing above and below it, and the card is deliberately left that way — the
+  house look is the page sitting on a band of the video's own background, not a
+  full-bleed still (`work/quathanank-part1/make_endcard.py`). What must NOT be
+  in that band is the frame the card landed on. Overlay the pages on a frozen
+  final frame and those 150px are the last caption stranded across the top and
+  the presenter's hands resting under the answer, for the whole tail — which is
+  how CHE-C4-LA-01 part 3 shipped. `tools/answer_outro.py --plate-image` xfades
+  into a card composed on the clean plate instead, so the presenter and the
+  captions go out with the frame, and it takes one image per page.
+- **The band's background comes from a MEDIAN of the render, not from the
+  background asset and not from a lifted frame.** The theme scales, crops and
+  darkens the asset, so a band pasted from `assets/backgrounds/` is visibly
+  lighter than the frame it butts against; and a part whose captions hold
+  through the pauses has no clean frame to lift. `tools/plate_from_render.py`
+  takes the per-pixel median across the part — the background is the only thing
+  that does not move. Feed it the Manim/edu render, never the composited file:
+  the presenter does not move enough between frames for a median to remove him.
 
 ## Layout
 
@@ -225,6 +267,8 @@ src/veo_labels.py     the Devanagari labels that go over a generated clip
 src/flow_bridge.py    the local half of the browser bridge
 flow/extension/       the Chrome extension that drives Flow in a background tab
 src/qc.py             Claude vision review of rendered frames
+tools/clip/           the clip track's renderer: engine, render, QA, storyboard
+tools/build_clip.py   the clip track's steps, gates and parallel schedule
 src/assemble.py       conform -> concat -> mix -> mux
 src/dashboard.py      the browser editor (single self-contained page)
 ```

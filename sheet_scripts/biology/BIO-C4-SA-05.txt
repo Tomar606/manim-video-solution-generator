@@ -1,0 +1,50 @@
+एक संकर क्रास का प्रयोग करते हुए प्रभाविता नियम की व्याख्या कीजिये । 
+
+शिक्षक:
+"MP Board कक्षा 12वीं के बच्चों! ये सवाल 2020 और 2024 में board exam में पूछा जा चुका है, और इस साल भी आपकी परीक्षा में आ सकता है।
+सवाल है—एक संकर क्रॉस का प्रयोग करते हुए प्रभाविता नियम की व्याख्या कीजिए।
+तो बच्चों, आज इसे Mendel के मटर के पौधे वाले example और एक simple cross से समझेंगे, ताकि definition और पूरा cross दोनों आसानी से याद हो जाएँ।"
+"सबसे पहले समझते हैं—प्रभाविता का नियम यानी Law of Dominance क्या कहता है?"
+"यह नियम ग्रेगर जॉन मेंडल ने दिया था। इसके अनुसार, जब किसी संकर में एक लक्षण के दो विपरीत alleles यानी एक dominant और एक recessive allele साथ मौजूद होते हैं, तो केवल dominant allele का लक्षण दिखाई देता है, जबकि recessive allele का लक्षण दबा रहता है।"
+ON SCREEN:
+प्रभाविता का नियम
+Dominant allele + Recessive allele
+↓
+Dominant trait व्यक्त होता है
+Recessive trait दबा रहता है
+"अब इसे मटर के पौधे के एक बहुत आसान example से समझते हैं—बीज के रंग का।"
+"मटर में पीले बीज का लक्षण Y dominant है, जबकि हरे बीज का लक्षण y recessive है।"
+ON SCREEN:
+पीला बीज → Y → प्रभावी
+हरा बीज → y → अप्रभावी
+"अब Mendel ने दो शुद्ध यानी pure breeding plants लिए। एक पौधा था शुद्ध पीले बीज वाला—YY, और दूसरा था शुद्ध हरे बीज वाला—yy।"
+"अब दोनों का cross कराया।"
+ON SCREEN:
+P Generation:
+YY × yy
+पीला × हरा
+"अब gametes देखो। YY से दोनों gametes में Y आएगा और yy से दोनों gametes में y आएगा।"
+ON SCREEN:
+Gametes:
+YY → Y, Y
+yy → y, y
+"अब Punnett square में cross करने पर F₁ generation में चारों combinations में Yy ही मिलेगा।"
+ON SCREEN:
+F₁ Generation:
+Yy | Yy
+Yy | Yy
+Genotype: 100% Yy
+Phenotype: 100% पीले बीज
+"अब यहाँ सबसे important बात समझो बच्चों। F₁ की सभी संतानों का genotype Yy है, यानी इनके अंदर Y और y दोनों alleles मौजूद हैं।"
+"लेकिन बाहर से सभी बीज पीले दिखाई दे रहे हैं। ऐसा क्यों?"
+"क्योंकि Y dominant allele है। इसलिए Y अपना लक्षण व्यक्त करता है और y recessive allele का लक्षण दबा रहता है।"
+ON SCREEN:
+Yy → पीला बीज
+Y = Dominant → व्यक्त
+y = Recessive → दबा हुआ
+"यही इस पूरे experiment से प्रभाविता का नियम समझ आता है।"
+"एक लाइन में गाँठ बाँध लो—जब dominant और recessive allele साथ होते हैं, तो dominant trait दिखाई देता है और recessive trait छिपा रहता है।"
+"तो बच्चों, exam में answer लिखते समय पहले प्रभाविता के नियम की definition, फिर YY × yy का cross, gametes और F₁ generation जरूर दिखाना।"
+"तो बच्चों, प्रभाविता के नियम वाला सवाल भी पूरा हो गया।"
+"अब परीक्षा में इसका exact answer और Punnett square कैसे बनाना है, वो आपकी स्क्रीन के right side में दिए Notes button पर मिल जाएगा।"
+"अब ऐसे ही आगे की पढ़ाई वाली reels देखते रहो, एक-एक करके syllabus पूरा करते जाओ और 90% की तैयारी मजबूत करो।"

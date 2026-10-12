@@ -1,0 +1,25 @@
+{
+ "qid": "",
+ "slug": "",
+ "subject": "",
+ "background": "",
+ "card": {
+  "part": 1,
+  "question": "",
+  "year": "",
+  "marks": "",
+  "base": "projects/che-c2-la-01/assets/design/question_sheet.png",
+  "last_line": null
+ },
+ "answer": {
+  "pages": [],
+  "skip": ""
+ },
+ "layout": {
+  "busy_w": 600,
+  "floor": 1210
+ },
+ "suppress_captions": [
+  "equation"
+ ]
+}

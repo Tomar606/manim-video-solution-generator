@@ -1,10 +1,43 @@
 """Close a finished video on the handwritten answer card.
 
-    python tools/answer_outro.py in.mp4 answer.png out.mp4 [--hold 5] [--fade 1]
+    python tools/answer_outro.py in.mp4 page1.png [page2.png ...] out.mp4 \
+        [--hold 5] [--fade 1]
 
 The card fades up over the last frame, holds long enough to be read, then fades
 to black and the video ends. That shape is the brief; the numbers are flags so a
 longer answer can hold longer without touching this file.
+
+SEVERAL PAGES
+-------------
+An answer that runs to two or three sheets is passed as two or three images and
+they cross-dissolve into one another, each held for `--hold`.
+
+They are DISSOLVED FROM THE VIDEO, never overlaid on its last frame. That
+distinction is the whole reason this path exists: CHE-C4-LA-01 part 3 shipped
+with the pages composited over a frozen final frame, and because a sheet is 2:3
+inside a 9:16 frame, 150px of that frozen frame survived above and below every
+page — the last caption stranded across the top for eleven seconds and the
+presenter's hands resting under the answer. An xfade replaces the frame
+entirely, so the presenter and the captions go with it.
+
+THE BAND ABOVE AND BELOW: `--plate-image`
+-----------------------------------------
+A sheet is 2:3 and the frame is 9:16, so fitting it to the frame WIDTH leaves
+about 150px over and under it. There are two ways to answer that and this file
+does both:
+
+  default            keep drawing the sheet's own ruled paper until the frame
+                     is full (`to_full_page`) — the page IS the screen
+  `--plate-image`    leave the band, and fill it with the video's own
+                     background, so the card reads as another frame of this
+                     video rather than a full-bleed still
+
+The second is the house look — see `work/quathanank-part1/make_endcard.py`,
+which is where it comes from. Pass the render's clean background plate
+(`tools/plate_from_render.py`); a flat sampled colour is NOT a substitute,
+because the plate carries the chalk chemistry doodles and a flat navy band
+between them reads as a hole. A soft shadow is dropped under the page so the
+white does not butt hard against the dark plate.
 
 WHY THIS IS A TOOL AND NOT A MANIM BEAT
 ---------------------------------------
@@ -136,6 +169,42 @@ def trim_blank_tail(card: Path, dest: Path) -> Path:
     return dest
 
 
+def to_inset_page(card: Path, plate: Path, frame_w: int, frame_h: int,
+                  dest: Path) -> Path:
+    """Sit the sheet on the video's background, fitted to width, never cropped.
+
+    Covering the frame would slice ~100px off each side of a 2:3 sheet, which is
+    the pink margin rule and the whole प्रश्न/उत्तर column. This page exists to be
+    screenshotted and read; a band of background above and below costs nothing,
+    a lost character costs the answer.
+    """
+    from PIL import Image, ImageFilter
+
+    bg = Image.open(plate).convert("RGB").resize((frame_w, frame_h), Image.LANCZOS)
+    src = Image.open(card).convert("RGB")
+    page_h = round(src.height * frame_w / src.width)
+    if page_h <= frame_h:
+        page = src.resize((frame_w, page_h), Image.LANCZOS)
+        x, y = 0, (frame_h - page_h) // 2
+    else:
+        # A sheet TALLER than 9:16 at full width — fit the height instead. Still
+        # never cropped: bands move to the sides.
+        page_w = round(src.width * frame_h / src.height)
+        page = src.resize((page_w, frame_h), Image.LANCZOS)
+        x, y = (frame_w - page_w) // 2, 0
+
+    shadow = Image.new("L", (frame_w, frame_h), 0)
+    shadow.paste(255, (x, y, x + page.width, y + page.height))
+    shadow = shadow.filter(ImageFilter.GaussianBlur(26)).point(lambda v: int(v * 0.55))
+    frame = Image.composite(Image.new("RGB", (frame_w, frame_h), (0, 0, 0)), bg, shadow)
+    frame.paste(page, (x, y))
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    frame.save(dest)
+    print(f"   {src.width}x{src.height} sheet -> {page.width}x{page.height} at "
+          f"({x},{y}) — {y}px band top and bottom, nothing cropped")
+    return dest
+
+
 def rule_rows(arr, x: int) -> list[int]:
     """Rows where a ruled line crosses, probed down a single column."""
     import numpy as np
@@ -242,7 +311,7 @@ def to_full_page(card: Path, frame_w: int, frame_h: int, dest: Path) -> Path:
     return dest
 
 
-def build(video: Path, card: Path, out: Path, hold: float, fade: float,
+def build(video: Path, cards: list[Path], out: Path, hold: float, fade: float,
           plate: str | None = None) -> None:
     v = probe(video)
     w, h, fps, dur = v["w"], v["h"], v["fps"], v["dur"]
@@ -250,35 +319,64 @@ def build(video: Path, card: Path, out: Path, hold: float, fade: float,
         raise SystemExit(f"❌ {video.name} is shorter than the fade ({dur:.1f}s)")
 
     plate = plate or plate_colour(video, dur - 2.0)
-    card_dur = fade + hold + fade        # fade up, hold, fade to black
-    total = dur - fade + card_dur
+    n = len(cards)
+    # fade up · hold · (dissolve · hold) per extra page · fade to black
+    card_dur = fade + n * hold + (n - 1) * fade + fade
+    # THE DISSOLVE STARTS AFTER THE LAST FRAME, NOT ONE FADE BEFORE IT.
+    # It used to begin at dur - fade, i.e. over the final second of the clip —
+    # and a HeyGen clip ends on its last word. On BIO-C4-LA-03 part 3 he says
+    # 'और syllabus भी पूरा करो' until 108.24s of a 108.245s clip, so the caption
+    # and the presenter were dissolving away a full second before he finished:
+    # the defect the whole caption-timing effort exists to remove. The last
+    # frame is now held for the length of the fade (the audio is already
+    # silent there) and the page dissolves in over that held frame.
+    total = dur + card_dur
+
+    # Every page clip is the same length, because an xfade chain of n clips of
+    # length d costs (n-1) overlaps: n*d - (n-1)*fade == card_dur exactly when
+    # d == 2*fade + hold, whatever n is. The k-th dissolve then starts at
+    # k*(fade + hold) — the moment page k has had its full hold.
+    page_dur = 2 * fade + hold
 
     # The page already fills the frame exactly (to_full_page), so the plate is
     # only there as a ground in case a caller passes an odd-sized image.
-    tail = (
-        f"color=c={plate}:s={w}x{h}:r={fps}:d={card_dur}[plate];"
-        f"[2:v]scale={w}:{h}:force_original_aspect_ratio=increase,"
-        f"crop={w}:{h}[card];"
-        f"[plate][card]overlay=(W-w)/2:(H-h)/2:format=auto[tail0];"
+    chains = []
+    for i in range(n):
+        chains.append(
+            f"color=c={plate}:s={w}x{h}:r={fps}:d={page_dur}[bg{i}];"
+            f"[{i + 2}:v]scale={w}:{h}:force_original_aspect_ratio=increase,"
+            f"crop={w}:{h}[card{i}];"
+            f"[bg{i}][card{i}]overlay=(W-w)/2:(H-h)/2:format=auto,"
+            f"fps={fps},format=yuv420p,trim=duration={page_dur},"
+            f"setpts=PTS-STARTPTS[p{i}];")
+    last = "[p0]"
+    for i in range(1, n):
+        chains.append(f"{last}[p{i}]xfade=transition=fade:duration={fade}"
+                      f":offset={i * (fade + hold)}[x{i}];")
+        last = f"[x{i}]"
+    chains.append(
         # black at the very end, not a dissolve back to the plate
-        f"[tail0]fade=t=out:st={fade + hold}:d={fade}:color=black,"
-        f"format=yuv420p[tail];"
-    )
+        f"{last}fade=t=out:st={card_dur - fade}:d={fade}:color=black,"
+        f"format=yuv420p[tail];")
     chain = (
-        tail +
-        f"[0:v]fps={fps},format=yuv420p[main];"
+        "".join(chains) +
+        f"[0:v]fps={fps},format=yuv420p,"
+        f"tpad=stop_mode=clone:stop_duration={fade}[main];"
         f"[main][tail]xfade=transition=fade:duration={fade}"
-        f":offset={dur - fade}[v];"
+        f":offset={dur}[v];"
         # the card runs past the narration, so the audio is padded rather than
         # the video being cut back to it
         f"[1:a]apad=whole_dur={total}[a]"
     )
 
+    ins = []
+    for card in cards:
+        ins += ["-loop", "1", "-i", str(card)]
     partial = out.with_suffix(".partial.mp4")
     partial.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(
         ["ffmpeg", "-y", "-v", "error",
-         "-i", str(video), "-i", str(video), "-loop", "1", "-i", str(card),
+         "-i", str(video), "-i", str(video), *ins,
          "-filter_complex", chain, "-map", "[v]", "-map", "[a]",
          "-c:v", "libx264", "-crf", "18", "-preset", "medium", "-pix_fmt", "yuv420p",
          "-c:a", "aac", "-b:a", "192k", "-t", f"{total:.3f}", str(partial)],
@@ -287,24 +385,46 @@ def build(video: Path, card: Path, out: Path, hold: float, fade: float,
     subprocess.run(["ffmpeg", "-v", "error", "-i", str(partial),
                     "-f", "null", "-"], check=True)
     shutil.move(str(partial), str(out))
-    print(f"   {dur:.2f}s + {card_dur:.1f}s card -> {total:.2f}s  plate {plate}")
+
+    # CARRY THE GEOMETRY SIDECAR ACROSS.
+    # tools/output_gate.py refuses a file with no `<name>.geom.json` beside it —
+    # rightly, since without it nothing can check where the presenter sits. But
+    # this stage only APPENDS an answer card: every frame of the body is the
+    # composite it was handed, so the geometry is the input's, unchanged. Left
+    # behind, the finished deliverable is the one file in the build that cannot
+    # be gated, which is exactly backwards.
+    src_geom = Path(str(video) + ".geom.json")
+    if src_geom.is_file():
+        shutil.copyfile(src_geom, str(out) + ".geom.json")
+
+    print(f"   {dur:.2f}s + {card_dur:.1f}s of {n} page(s) -> {total:.2f}s  "
+          f"plate {plate}")
 
 
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    p.add_argument("video"), p.add_argument("card"), p.add_argument("out")
+    p.add_argument("video")
+    p.add_argument("card", nargs="+", help="one image per page of the answer")
+    p.add_argument("out")
     p.add_argument("--hold", type=float, default=5.0,
-                   help="seconds the card is fully visible (default 5)")
+                   help="seconds each page is fully visible (default 5)")
     p.add_argument("--fade", type=float, default=1.0,
-                   help="seconds for the fade up and the fade to black")
+                   help="seconds for the fade up, each dissolve and the fade to black")
     p.add_argument("--plate", help="background colour, e.g. 0x000B1F "
                                    "(default: sampled from the video)")
+    p.add_argument("--plate-image", type=Path,
+                   help="the video's own background (tools/plate_from_render.py). "
+                        "Sits the sheet on it fitted to width, with a band above "
+                        "and below, instead of extending the paper to fill the frame")
     p.add_argument("--no-trim", action="store_true",
                    help="place the whole sheet, blank rows and all")
     a = p.parse_args()
+    if a.plate_image and not a.plate_image.exists():
+        raise SystemExit(f"❌ not found: {a.plate_image}")
 
-    video, card, out = Path(a.video), Path(a.card), Path(a.out)
-    for path in (video, card):
+    video, out = Path(a.video), Path(a.out)
+    cards = [Path(c) for c in a.card]
+    for path in (video, *cards):
         if not path.exists():
             raise SystemExit(f"❌ not found: {path}")
     print(f"🎬 answer outro -> {out}")
@@ -312,8 +432,13 @@ def main() -> int:
     # either way, so trimming buys no size — it only removes the blank paper the
     # extension needs to carry the ruling down the page.
     v = probe(video)
-    card = to_full_page(card, v["w"], v["h"], card.with_name(f"{card.stem}_page.png"))
-    build(video, card, out, a.hold, a.fade, a.plate)
+    if a.plate_image:
+        cards = [to_inset_page(c, a.plate_image, v["w"], v["h"],
+                               c.with_name(f"{c.stem}_card.png")) for c in cards]
+    else:
+        cards = [to_full_page(c, v["w"], v["h"], c.with_name(f"{c.stem}_page.png"))
+                 for c in cards]
+    build(video, cards, out, a.hold, a.fade, a.plate)
     return 0
 
 
