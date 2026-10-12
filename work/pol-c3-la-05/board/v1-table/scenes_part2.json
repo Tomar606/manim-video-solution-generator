@@ -1,0 +1,182 @@
+{
+ "part": 2,
+ "dur": 122.965,
+ "_about": "Scene cuts sit in the pause before each scene's first word (tools/reel/words.mjs cut()). presenter: you = large centre, explain = under the table, small = round seat bottom-right, hidden. shots = Veo pictures in the table's disc, in colour. Times of on-screen items are NOT here: the design code asks the word clock.",
+ "scenes": [
+  {
+   "id": "s1",
+   "t0": 0,
+   "t1": 7.96,
+   "presenter": "you",
+   "board": "recall; card 3",
+   "len": 7.96,
+   "shots": [],
+   "says": "बच्चों, Part 1 में हमने सार्क का परिचय और पहले दो points पढ़े। अब इसके बाद आता है व्यापार और आर्थिक वृद्धि।"
+  },
+  {
+   "id": "s2",
+   "t0": 7.96,
+   "t1": 14.866,
+   "presenter": "explain",
+   "board": "plaque साफ्टा, stamp समझौता, full name",
+   "len": 6.906,
+   "shots": [],
+   "says": "इसके लिए सार्क देशों ने साफ्टा समझौता किया, यानी दक्षिण एशिया मुक्त व्यापार क्षेत्र।"
+  },
+  {
+   "id": "s3",
+   "t0": 14.866,
+   "t1": 22.636,
+   "presenter": "explain",
+   "board": "V5 trucks; tags",
+   "len": 7.77,
+   "shots": [
+    {
+     "clip": "V5",
+     "ink": "colour",
+     "t0": 14.866,
+     "t1": 22.636,
+     "start": 0.2
+    }
+   ],
+   "says": "इसके तहत इन देशों ने आपसी व्यापार को बढ़ावा देने और आर्थिक साझेदारी मज़बूत करने का प्रयास किया है।"
+  },
+  {
+   "id": "s4",
+   "t0": 22.636,
+   "t1": 31.385,
+   "presenter": "explain",
+   "board": "tax barrier drops, crate crosses",
+   "len": 8.749,
+   "shots": [],
+   "says": "मुक्त व्यापार का मतलब है कि सदस्य देशों के बीच सामान के लेन-देन पर लगने वाले कर, यानी टैक्स, कम किए जाएँ।"
+  },
+  {
+   "id": "s5",
+   "t0": 31.385,
+   "t1": 38.256,
+   "presenter": "you",
+   "board": "card 4",
+   "len": 6.871,
+   "shots": [],
+   "says": "और अर्थव्यवस्था के साथ समाज का विकास भी ज़रूरी है, इसलिए चौथा point है — सामाजिक और सांस्कृतिक विकास।"
+  },
+  {
+   "id": "s6",
+   "t0": 38.256,
+   "t1": 49.086,
+   "presenter": "explain",
+   "board": "four tiles; V6; arrows between seats",
+   "len": 10.83,
+   "shots": [
+    {
+     "clip": "V6",
+     "ink": "colour",
+     "t0": 43.309,
+     "t1": 49.086,
+     "start": 0.2
+    }
+   ],
+   "says": "शिक्षा, स्वास्थ्य, विज्ञान और तकनीकी क्षेत्रों में अपने अनुभव साझा करके ये देश एक-दूसरे के विकास में मदद करते हैं।"
+  },
+  {
+   "id": "s7",
+   "t0": 49.086,
+   "t1": 54.526,
+   "presenter": "you",
+   "board": "card 5 coral",
+   "len": 5.44,
+   "shots": [],
+   "says": "और अब आता है पाँचवाँ और आखिरी point — चुनौतियाँ और रुकावटें।"
+  },
+  {
+   "id": "s8",
+   "t0": 54.526,
+   "t1": 64.296,
+   "presenter": "you",
+   "board": "ध्यान से flag; bubble; stamp",
+   "len": 9.77,
+   "shots": [],
+   "says": "इसे ध्यान से सुनना, क्योंकि बच्चे सोचते हैं कि सवाल योगदान का है, तो कमियाँ क्यों लिखें, लेकिन यही point answer को पूरा बनाता है।"
+  },
+  {
+   "id": "s9",
+   "t0": 64.296,
+   "t1": 72.664,
+   "presenter": "hidden",
+   "board": "three cracks; two bars",
+   "len": 8.368,
+   "shots": [],
+   "says": "आपसी राजनीतिक तनाव, सरहद पर आतंकवाद और आपसी अविश्वास के कारण सार्क को जितनी सफलता मिलनी चाहिए थी, उतनी नहीं मिल पाई।"
+  },
+  {
+   "id": "s10",
+   "t0": 72.664,
+   "t1": 87.315,
+   "presenter": "explain",
+   "board": "निष्कर्ष: arrows, dial, ring lights",
+   "len": 14.651,
+   "shots": [],
+   "says": "और इसी से निकलता है answer का निष्कर्ष, कि विकास की अपार संभावनाओं के बावजूद आपसी मतभेद सार्क की रफ्तार को धीमा करते हैं, लेकिन क्षेत्रीय विकास के लिए यह आज भी एक अहम मंच है।"
+  },
+  {
+   "id": "s11",
+   "t0": 87.315,
+   "t1": 105.843,
+   "presenter": "small",
+   "board": "recap: five cards, each point's picture again",
+   "len": 18.528,
+   "shots": [
+    {
+     "clip": "V2",
+     "ink": "colour",
+     "t0": 90.153,
+     "t1": 92.455,
+     "start": 3.0
+    },
+    {
+     "clip": "V3",
+     "ink": "colour",
+     "t0": 92.455,
+     "t1": 95.396,
+     "start": 3.0
+    },
+    {
+     "clip": "V5",
+     "ink": "colour",
+     "t0": 95.396,
+     "t1": 99.516,
+     "start": 3.0
+    },
+    {
+     "clip": "V6",
+     "ink": "colour",
+     "t0": 99.516,
+     "t1": 103.166,
+     "start": 3.0
+    }
+   ],
+   "says": "चलो अब पाँचों points को एक बार दिमाग में बैठा लेते हैं। पहला - क्षेत्रीय सहयोग की शुरुआत। दूसरा - गरीबी और बेरोजगारी से मुकाबला। तीसरा - साफ्टा के द्वारा व्यापार और आर्थिक वृद्धि। चौथा - सामाजिक और सांस्कृतिक विकास। और पाँचवाँ - चुनौतियाँ और रुकावटें।"
+  },
+  {
+   "id": "s12",
+   "t0": 105.843,
+   "t1": 118.263,
+   "presenter": "you",
+   "board": "skeleton ticks; 4 नंबर पक्के; Notes",
+   "len": 12.42,
+   "shots": [],
+   "says": "बस, शुरुआत में परिचय, ये पाँच points और आखिर में निष्कर्ष, इतना लिख दिया तो 4 नंबर पक्के। और exam में इसे किस तरह लिखना है, उसका पूरा answer Notes में मिल जाएगा।"
+  },
+  {
+   "id": "s13",
+   "t0": 118.263,
+   "t1": 122.965,
+   "presenter": "you",
+   "board": "held",
+   "len": 4.702,
+   "shots": [],
+   "says": "तो ऐसे ही पढ़ाई वाली reels देखते जाओ और 90% की ओर बढ़ते जाओ"
+  }
+ ]
+}

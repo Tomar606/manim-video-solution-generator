@@ -1,0 +1,33 @@
+{
+ "_about": "POL-C3-LA-05 'गोल मेज़' (the round table): constants every piece of this video shares. Data only. Read by design/kit.mjs, the caption skin, and tools/reel/edit_from_scenes.py.",
+ "paper": "#8b5a36",
+ "wood": "#8b5a36", "wood_dark": "#5a3720", "brass": "#d9a841", "brass_dark": "#a67a22",
+ "cream": "#f6eedc", "ink": "#2b1d14", "maroon": "#5c1f24", "coral": "#e2553f", "teal": "#2f7d6d",
+ "fonts": {
+  "head": ["docs/history-poc/fonts/ttf/Baloo2[wght].ttf"],
+  "body": ["docs/history-poc/fonts/ttf/Hind-Bold.ttf"],
+  "num":  ["docs/history-poc/fonts/ttf/YatraOne-Regular.ttf"]
+ },
+ "frame": [1080, 1920],
+ "strip": {"y0": 28, "y1": 168},
+ "window": {"x": 150, "y": 260, "w": 780, "h": 780},
+ "disc": {
+  "explain": {"cx": 540, "cy": 650, "r": 390},
+  "small":   {"cx": 540, "cy": 650, "r": 390},
+  "you":     {"cx": 540, "cy": 470, "r": 235},
+  "hidden":  {"cx": 540, "cy": 930, "r": 400}
+ },
+ "band": {"y0": 1085, "y1": 1195},
+ "captions": {"y0": 1700, "y1": 1830, "centre_y": 1765},
+ "nothing_below": 1680,
+ "pcrop": {"w": 1120, "h": 960, "x": 400, "y": 120},
+ "presenter_in_crop": {"head_top": 68, "head_cx": 537, "head_w": 205, "shoulders_x": [240, 835], "widest_x": [260, 1030]},
+ "place": {
+  "you":     {"s": 1.2,  "x0": -104, "y0": 768,  "_covers": "x 186-894 from y 850 (head top) down; free: y 0-800 full width"},
+  "explain": {"s": 0.8,  "x0": 110,  "y0": 1152, "_covers": "x 318-934 from y 1206 (head top) down; free: everything above y 1200"},
+  "small":   {"s": 0.5,  "x0": 631,  "y0": 1415, "_covers": "inside the round seat, centre (900,1530) r 150; free: everything else above y 1680"}
+ },
+ "seat": {"cx": 900, "cy": 1530, "r": 150},
+ "glide": 0.5,
+ "print": {"band_y": 280, "band_h": 720}
+}

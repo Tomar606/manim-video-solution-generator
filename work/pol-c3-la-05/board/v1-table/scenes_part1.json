@@ -1,0 +1,199 @@
+{
+ "part": 1,
+ "dur": 111.52,
+ "_about": "Scene cuts sit in the pause before each scene's first word (tools/reel/words.mjs cut()). presenter: you = large centre, explain = under the table, small = round seat bottom-right, hidden. shots = Veo pictures in the table's disc, in colour. Times of on-screen items are NOT here: the design code asks the word clock.",
+ "scenes": [
+  {
+   "id": "s1",
+   "t0": 0,
+   "t1": 3.03,
+   "presenter": "you",
+   "board": "slip: MP Board · 12वीं · राजनीति विज्ञान",
+   "len": 3.03,
+   "shots": [],
+   "says": "MP Board कक्षा 12वीं के बच्चों!"
+  },
+  {
+   "id": "s2",
+   "t0": 3.03,
+   "t1": 9.67,
+   "presenter": "explain",
+   "board": "100 figures, 22 lit; rows of five",
+   "len": 6.64,
+   "shots": [],
+   "says": "दुनिया की कुल जनसंख्या का लगभग 22 प्रतिशत, यानी हर पाँच में से एक से ज़्यादा इंसान,"
+  },
+  {
+   "id": "s3",
+   "t0": 9.67,
+   "t1": 17.269,
+   "presenter": "explain",
+   "board": "V1 crowd, then the map in the disc; विकास में योगदान?",
+   "len": 7.599,
+   "shots": [
+    {
+     "clip": "V1",
+     "ink": "colour",
+     "t0": 9.67,
+     "t1": 11.82,
+     "start": 0.2
+    }
+   ],
+   "says": "सार्क के देशों में रहता है। तो इतने बड़े क्षेत्र के विकास में सार्क ने क्या योगदान दिया, आज यही पढ़ेंगे।"
+  },
+  {
+   "id": "s4",
+   "t0": 17.269,
+   "t1": 25.369,
+   "presenter": "you",
+   "board": "question card; stamp Board Exam 2024",
+   "len": 8.1,
+   "shots": [],
+   "says": "इसी पर 2024 board exam में ये सवाल पूछा जा चुका है-दक्षिण एशिया के विकास में सार्क देशों के योगदान को समझाइए।"
+  },
+  {
+   "id": "s5",
+   "t0": 25.369,
+   "t1": 32.855,
+   "presenter": "explain",
+   "board": "trays परिचय + 5 slots",
+   "len": 7.486,
+   "shots": [],
+   "says": "इस answer में पहले सार्क का छोटा परिचय आता है, फिर पाँच points। तो पहले परिचय से शुरू करते हैं।"
+  },
+  {
+   "id": "s6",
+   "t0": 32.855,
+   "t1": 36.435,
+   "presenter": "explain",
+   "board": "plaque सार्क + four words",
+   "len": 3.58,
+   "shots": [],
+   "says": "सार्क यानी दक्षिण एशियाई क्षेत्रीय सहयोग संगठन,"
+  },
+  {
+   "id": "s7",
+   "t0": 36.435,
+   "t1": 45.465,
+   "presenter": "explain",
+   "board": "rosette; 22%",
+   "len": 9.03,
+   "shots": [],
+   "says": "जनसंख्या की दृष्टि से विश्व का सबसे बड़ा क्षेत्रीय संगठन है, क्योंकि दुनिया की कुल जनसंख्या का 22 प्रतिशत इसके देशों में रहता है।"
+  },
+  {
+   "id": "s8",
+   "t0": 45.465,
+   "t1": 55.205,
+   "presenter": "hidden",
+   "board": "inlaid map, eight pins, counter",
+   "len": 9.74,
+   "shots": [],
+   "says": "इसके सदस्य देश हैं, अफ़ग़ानिस्तान, बांग्लादेश, भूटान, भारत, नेपाल, मालदीव, पाकिस्तान और श्रीलंका, यानी कुल आठ देश।"
+  },
+  {
+   "id": "s9",
+   "t0": 55.205,
+   "t1": 60.841,
+   "presenter": "you",
+   "board": "card 1",
+   "len": 5.636,
+   "shots": [],
+   "says": "अब योगदान के points पर आते हैं, और पहला point है क्षेत्रीय सहयोग की शुरुआत।"
+  },
+  {
+   "id": "s10",
+   "t0": 60.841,
+   "t1": 70.915,
+   "presenter": "explain",
+   "board": "table laid, स्थापना 1985, नींव blocks",
+   "len": 10.074,
+   "shots": [],
+   "says": "1985 में स्थापित सार्क ने दक्षिण एशिया के देशों को एक मंच पर लाकर आपसी सहयोग, शांति और सामूहिक विकास की नींव रखी।"
+  },
+  {
+   "id": "s11",
+   "t0": 70.915,
+   "t1": 79.701,
+   "presenter": "explain",
+   "board": "plates scattered then seated; V2",
+   "len": 8.786,
+   "shots": [
+    {
+     "clip": "V2",
+     "ink": "colour",
+     "t0": 76.162,
+     "t1": 79.701,
+     "start": 0.2
+    }
+   ],
+   "says": "यानी जो देश पहले अलग-अलग अपनी समस्याओं से जूझ रहे थे, उन्हें साथ बैठकर बात करने की एक जगह मिली। और जब देश साथ आए,"
+  },
+  {
+   "id": "s12",
+   "t0": 79.701,
+   "t1": 85.042,
+   "presenter": "explain",
+   "board": "one coral tag at every seat",
+   "len": 5.341,
+   "shots": [],
+   "says": "तो सबसे पहले उन्होंने उस समस्या को उठाया जो इन सभी देशों में एक जैसी है,"
+  },
+  {
+   "id": "s13",
+   "t0": 85.042,
+   "t1": 89.872,
+   "presenter": "you",
+   "board": "card 2",
+   "len": 4.83,
+   "shots": [],
+   "says": "और यही है अगला point, गरीबी और बेरोज़गारी से मुकाबला।"
+  },
+  {
+   "id": "s14",
+   "t0": 89.872,
+   "t1": 97.087,
+   "presenter": "explain",
+   "board": "V3; three tags struck out together",
+   "len": 7.215,
+   "shots": [
+    {
+     "clip": "V3",
+     "ink": "colour",
+     "t0": 89.872,
+     "t1": 97.087,
+     "start": 0.2
+    }
+   ],
+   "says": "सार्क देशों का मुख्य उद्देश्य इस क्षेत्र से गरीबी, भुखमरी और बेरोजगारी को मिलकर खत्म करना है,"
+  },
+  {
+   "id": "s15",
+   "t0": 97.087,
+   "t1": 100.211,
+   "presenter": "explain",
+   "board": "V4; जीवनस्तर ↑",
+   "len": 3.124,
+   "shots": [
+    {
+     "clip": "V4",
+     "ink": "colour",
+     "t0": 97.087,
+     "t1": 100.211,
+     "start": 0.2
+    }
+   ],
+   "says": "ताकि आम लोगों का जीवनस्तर सुधर सके।"
+  },
+  {
+   "id": "s16",
+   "t0": 100.211,
+   "t1": 111.52,
+   "presenter": "you",
+   "board": "slots 3-5 named; Part 2 →",
+   "len": 11.309,
+   "shots": [],
+   "says": "तो दो points हो गए, और अब व्यापार, शिक्षा-स्वास्थ्य, और सार्क के सामने आने वाली रुकावटें, ये तीन points Part 2 में हैं, इसलिए उसे ज़रूर देखना।"
+  }
+ ]
+}

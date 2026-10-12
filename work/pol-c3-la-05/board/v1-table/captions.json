@@ -1,0 +1,28 @@
+{
+ "_about": "POL-C3-LA-05 'गोल मेज़': the caption skin, read by tools/reel/captions_line.mjs. One line of dark engraved Hind Bold on a brass plaque in the band y 1700-1830 (look.json); the spoken word turns maroon. Data only.",
+ "style": {
+  "font": "docs/history-poc/fonts/ttf/Hind-Bold.ttf",
+  "size": 54, "min_size": 40,
+  "color": "#2b1d14",
+  "stroke": 0, "shadow": 0,
+  "centre_y": 1765, "x0": 50, "x1": 1030,
+  "gap_em": 0.28,
+  "text_dy": 2,
+  "active": {"color": "#7a1d26", "scale": 1.06},
+  "upcoming_opacity": 0.5,
+  "fade_up": 0.15,
+  "strip": {
+   "fill": "#d9a841", "height": 100, "pad_x": 38,
+   "torn": 0,
+   "edge": "rgba(90,55,32,0.9)",
+   "shadow": "0 6px 8px rgba(30,15,5,0.45)"
+  },
+  "check_paper": "#8b5a36"
+ },
+ "keep": [
+  "22|प्रतिशत", "दक्षिण|एशिया", "दक्षिण|एशियाई", "क्षेत्रीय|सहयोग", "सहयोग|संगठन", "क्षेत्रीय|संगठन", "सदस्य|देश",
+  "आठ|देश", "एक|मंच", "सामूहिक|विकास", "बात|करने", "गरीबी|और", "आर्थिक|वृद्धि", "साफ्टा|समझौता", "मुक्त|व्यापार",
+  "आपसी|व्यापार", "आर्थिक|साझेदारी", "सामाजिक|और", "सांस्कृतिक|विकास", "राजनीतिक|तनाव", "आपसी|अविश्वास", "अहम|मंच",
+  "4|नंबर", "नंबर|पक्के", "Part|1", "Part|2", "board|exam"
+ ]
+}
