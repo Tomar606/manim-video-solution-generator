@@ -1,0 +1,70 @@
+{
+  "qid": "POL-C3-LA-02",
+  "slug": "pol-c3-la-02",
+  "drop": "inbox/POL-C3-LA-02",
+  "parts": [
+    {
+      "part": 1,
+      "captions": {
+        "path": "inbox/POL-C3-LA-02/POL-C3-LA-02 - Part 1-caption.srt",
+        "bytes": 5038,
+        "last_cue": 137.221
+      },
+      "clip": {
+        "path": "inbox/POL-C3-LA-02/POL-C3-LA-02 - Part 1_1080p.mp4",
+        "bytes": 145056139,
+        "duration": 137.24,
+        "width": 1920,
+        "height": 1080,
+        "codec": "h264",
+        "fps": 25.0,
+        "frames": 3431,
+        "audio_codec": "aac"
+      }
+    },
+    {
+      "part": 2,
+      "captions": {
+        "path": "inbox/POL-C3-LA-02/POL-C3-LA-02 - part 2-caption.srt",
+        "bytes": 4473,
+        "last_cue": 135.158
+      },
+      "clip": {
+        "path": "inbox/POL-C3-LA-02/POL-C3-LA-02 - part 2_1080p.mp4",
+        "bytes": 143387042,
+        "duration": 135.168,
+        "width": 1920,
+        "height": 1080,
+        "codec": "h264",
+        "fps": 25.0,
+        "frames": 3379,
+        "audio_codec": "aac"
+      }
+    },
+    {
+      "part": 3,
+      "captions": {
+        "path": "inbox/POL-C3-LA-02/POL-C3-LA-02 - part 3-caption.srt",
+        "bytes": 4150,
+        "last_cue": 121.339
+      },
+      "clip": {
+        "path": "inbox/POL-C3-LA-02/POL-C3-LA-02 - part 3_1080p.mp4",
+        "bytes": 119101562,
+        "duration": 121.36,
+        "width": 1920,
+        "height": 1080,
+        "codec": "h264",
+        "fps": 25.0,
+        "frames": 3034,
+        "audio_codec": "aac"
+      }
+    }
+  ],
+  "scripts": [],
+  "docs": [
+    "inbox/POL-C3-LA-02/POL-C3-LA-02.md"
+  ],
+  "images": [],
+  "warnings": []
+}

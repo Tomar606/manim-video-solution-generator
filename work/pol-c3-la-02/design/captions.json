@@ -1,0 +1,32 @@
+{
+ "_about": "POL-C3-LA-02 'दो स्याही': the caption skin, read by tools/reel/captions_line.mjs. One line of ink-black Mukta ExtraBold on a cream paper strip in the band y 1690-1830 (look.json); the spoken word gets a crimson marker stroke under it. Data only.",
+ "style": {
+  "font": "docs/history-poc/fonts/ttf/Mukta-ExtraBold.ttf",
+  "size": 52, "min_size": 40,
+  "color": "#1b1a17",
+  "stroke": 0, "shadow": 0,
+  "centre_y": 1760, "x0": 50, "x1": 1030,
+  "gap_em": 0.27,
+  "text_dy": -5,
+  "active": {"color": "#000000", "scale": 1},
+  "upcoming_opacity": 0.55,
+  "fade_up": 0.15,
+  "strip": {
+   "fill": "#f2ead9", "height": 104, "pad_x": 36,
+   "torn": 7,
+   "edge": "rgba(27,26,23,0.8)",
+   "shadow": "0 5px 7px rgba(27,26,23,0.38)"
+  },
+  "underline": {
+   "color": "#c8102e", "top_em": 0.9, "thickness_em": 0.19,
+   "overhang": 4, "slant": -1.2, "wipe": 0.12
+  },
+  "check_paper": "#f2ead9"
+ },
+ "keep": [
+  "संवैधानिक|राजतंत्र", "लोकतांत्रिक|गणराज्य", "लोकतांत्रिक|संविधान", "लोकतांत्रिक|राजनीति", "नया|संविधान",
+  "राजनीतिक|दल", "आम|जनता", "राजा|ज्ञानेन्द्र", "सात|दलों", "माओवादी|समूह", "माओवादी|समूहों",
+  "सामाजिक|कार्यकर्ता", "सामाजिक|कार्यकर्ताओं", "प्रधानमंत्री|प्रचंड", "पुष्प|कमल", "कमल|दहल", "रामबरन|यादव", "भारत|यात्राएँ",
+  "दोनों|देशों", "विकास|कार्यों", "छह|points", "छहों|points", "28|मई", "मई|2008", "अप्रैल|2006", "अप्रैल|2002"
+ ]
+}

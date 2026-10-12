@@ -1,0 +1,13 @@
+{
+ "map.png": {"what": "relief and rivers of the central Himalaya and the Ganga plain, printed in one ink; no political boundary of any kind", "source": "design/map.mjs + design/map_prep.py from the two Natural Earth files below, Mercator through d3-geo (parameters in assets/map.json)", "licence": "ours (derived from public-domain data)"},
+ "data/relief_sr_72-95E_19-36N.png": {"what": "crop of Natural Earth 1:10m Shaded Relief, low-resolution edition (SR_LR)", "source": "Natural Earth (naturalearthdata.com)", "licence": "public domain"},
+ "data/rivers_72-95E_19-36N.geojson": {"what": "cut of Natural Earth 1:10m rivers and lake centerlines", "source": "Natural Earth (naturalearthdata.com), via github.com/nvkelso/natural-earth-vector", "licence": "public domain"},
+ "question_sheet.png": {"what": "torn exam-sheet question card, Political Science 2025", "source": "tools/question_card.py on the house sheet design", "licence": "ours"},
+ "presenter_cutout.png": {"what": "one keyed frame of part 1's HeyGen clip, used only by the design code's preview layer; never in the video", "source": "inbox/POL-C3-LA-02 part 1 at 20 s", "licence": "ours"},
+ "veo/V*.mp4": {"what": "generated scenes of manner, each printed in one ink in the video; prompts in veo/prompts.json, Flow keys in veo/manifest.json", "source": "Google Flow, Veo 3.1 Fast", "licence": "generated for this video"},
+ "Khand-Bold.ttf, Khand-SemiBold.ttf": {"what": "Khand (headings, years)", "source": "Google Fonts / Indian Type Foundry, in assets/fonts", "licence": "SIL Open Font License 1.1"},
+ "Mukta-ExtraBold.ttf": {"what": "Mukta (body, captions)", "source": "Google Fonts / Ek Type, in docs/history-poc/fonts/ttf", "licence": "SIL Open Font License 1.1"},
+ "TiroDevanagariHindi-Regular.ttf": {"what": "Tiro Devanagari Hindi (the exam lines)", "source": "Google Fonts / Tiro Typeworks, downloaded 2026-10-07 into assets/fonts", "url": "https://github.com/google/fonts/raw/main/ofl/tirodevanagarihindi/TiroDevanagariHindi-Regular.ttf", "licence": "SIL Open Font License 1.1"},
+ "d3-geo 3.1.1, d3-array 3.2.4": {"source": "npm, bundled in tools/reel/vendor", "licence": "ISC"},
+ "sound": {"what": "every effect and the bed are synthesised in design/sound.py; no recordings", "licence": "ours"}
+}

@@ -1,0 +1,222 @@
+{
+ "part": 2,
+ "dur": 135.168,
+ "_about": "Scene cuts sit in the pause before each scene's first word (tools/reel/words.mjs cut()). presenter: you = large centre, explain = lower right, small = bottom-left corner, hidden. shots = Veo pictures in the frame, on the same clock. Times of on-screen items are NOT here: the design code asks the word clock.",
+ "scenes": [
+  {
+   "id": "s1",
+   "t0": 0,
+   "t1": 8.04,
+   "len": 8.04,
+   "presenter": "you",
+   "shots": [],
+   "says": "बच्चों Part 1 में हमने पृष्ठभूमि के साथ, 1990 का संविधान और 2002 में लोकतंत्र का खात्मा पढ़ा।",
+   "board": "the line replays: up at 1990, down at 2002; the two years land as he says them; pips 1, 2 filled"
+  },
+  {
+   "id": "s2",
+   "t0": 8.04,
+   "t1": 15.2,
+   "len": 7.16,
+   "presenter": "you",
+   "shots": [],
+   "says": "अब इसके बाद आता है, अप्रैल 2006 का जन-आंदोलन, यानी जनता का देशव्यापी आंदोलन।",
+   "board": "page turns blue; the 2006 dot gets its year. heading 3 · अप्रैल 2006 · जन-आंदोलन; slip: = जनता का देशव्यापी आंदोलन; pip 3 fills"
+  },
+  {
+   "id": "s3",
+   "t0": 15.2,
+   "t1": 21.323,
+   "len": 6.12,
+   "presenter": "explain",
+   "shots": [
+    {
+     "clip": "V6",
+     "ink": "blue",
+     "t0": 15.2,
+     "start": 0.2,
+     "t1": 21.323,
+     "band_y": 380
+    }
+   ],
+   "says": "अप्रैल 2006 में, पूरे देश में लोकतंत्र-समर्थक प्रदर्शन शुरू हुए।",
+   "board": "देशव्यापी प्रदर्शन (his words: पूरे देश में लोकतंत्र-समर्थक प्रदर्शन)"
+  },
+  {
+   "id": "s4",
+   "t0": 21.323,
+   "t1": 28.896,
+   "len": 7.57,
+   "presenter": "explain",
+   "shots": [],
+   "says": "और संघर्ष कर रही जनता और राजनीतिक ताकतों को, पहली बड़ी जीत तब मिली, जब राजा ज्ञानेन्द्र को झुकना पड़ा।",
+   "board": "OURS: a name plate राजा ज्ञानेन्द्र (type only, no face); the crown symbol tilts; the line turns upward. पहली बड़ी जीत"
+  },
+  {
+   "id": "s5",
+   "t0": 28.896,
+   "t1": 36.537,
+   "len": 7.64,
+   "presenter": "explain",
+   "shots": [
+    {
+     "clip": "V7",
+     "ink": "blue",
+     "t0": 28.896,
+     "start": 0.2,
+     "t1": 36.537,
+     "band_y": 260
+    }
+   ],
+   "says": "उन्हें अप्रैल 2002 में भंग की गई संसद को, फिर से बहाल करने के लिए, मजबूर होना पड़ा।",
+   "board": "the red stamp भंग is struck out; blue stamp संसद बहाल"
+  },
+  {
+   "id": "s6",
+   "t0": 36.537,
+   "t1": 41.337,
+   "len": 4.8,
+   "presenter": "you",
+   "shots": [],
+   "says": "इसी आंदोलन से जुड़ा अगला point है, नेतृत्व और प्रतिरोध।",
+   "board": "heading 4 · नेतृत्व और प्रतिरोध; pip 4 fills"
+  },
+  {
+   "id": "s7",
+   "t0": 41.337,
+   "t1": 48.578,
+   "len": 7.24,
+   "presenter": "explain",
+   "shots": [
+    {
+     "clip": "V8",
+     "ink": "blue",
+     "t0": 41.337,
+     "start": 0.2,
+     "t1": 48.578,
+     "band_y": 330
+    }
+   ],
+   "says": "ये ऐतिहासिक प्रतिरोध, मोटे तौर पर अहिंसक रहा, यानी ज़्यादातर बिना हिंसा के चला।",
+   "board": "अहिंसक · slip: = बिना हिंसा के"
+  },
+  {
+   "id": "s8",
+   "t0": 48.578,
+   "t1": 58.419,
+   "len": 9.84,
+   "presenter": "explain",
+   "shots": [],
+   "says": "और इसका नेतृत्व, तीन गुटों ने मिलकर किया, सात दलों का गठबंधन, माओवादी समूह, और विभिन्न सामाजिक कार्यकर्ता।",
+   "board": "OURS: three tiles fill in (1 of 3, 2 of 3, 3 of 3), then lock together under one bar: सात दलों का गठबंधन (seven small marks) · माओवादी समूह · सामाजिक कार्यकर्ता → नेतृत्व"
+  },
+  {
+   "id": "s9",
+   "t0": 58.419,
+   "t1": 67.679,
+   "len": 9.26,
+   "presenter": "you",
+   "shots": [],
+   "says": "और संसद बहाल होने के बाद, अगला कदम था नया संविधान बनाना, और यही है अगला point, संविधान-सभा का गठन।",
+   "board": "a new mark on the line between 2006 and 2008. heading 5 · संविधान-सभा का गठन; pip 5 fills"
+  },
+  {
+   "id": "s10",
+   "t0": 67.679,
+   "t1": 78.472,
+   "len": 10.79,
+   "presenter": "explain",
+   "shots": [
+    {
+     "clip": "V9",
+     "ink": "blue",
+     "t0": 67.679,
+     "start": 0.2,
+     "t1": 78.472,
+     "band_y": 420
+    }
+   ],
+   "says": "संविधान-सभा यानी, वो सभा जिसका काम, देश का संविधान लिखना होता है। नेपाल का नया संविधान लिखने के लिए, एक विशेष संविधान-सभा बनाई गई।",
+   "board": "slip: संविधान-सभा = संविधान लिखने वाली सभा"
+  },
+  {
+   "id": "s11",
+   "t0": 78.472,
+   "t1": 89.913,
+   "len": 11.44,
+   "presenter": "explain",
+   "shots": [],
+   "says": "और इसी दौरान, माओवादी समूहों ने भी हिंसा और सशस्त्र संघर्ष का रास्ता छोड़कर, लोकतांत्रिक राजनीति में शामिल होने का फैसला किया।",
+   "board": "OURS: a road that forks. The red branch सशस्त्र संघर्ष fades; the walker turns onto the blue branch लोकतांत्रिक राजनीति, which joins the line"
+  },
+  {
+   "id": "s12",
+   "t0": 89.913,
+   "t1": 100.969,
+   "len": 11.06,
+   "presenter": "you",
+   "shots": [],
+   "says": "और अब इस answer का सबसे important point, राजशाही का अंत और गणराज्य का उदय। इसे ध्यान से सुनना, क्योंकि बच्चे यहीं तारीख गलत लिख देते हैं,",
+   "board": "a red corner flag सबसे important. heading 6 · राजशाही का अंत, गणराज्य का उदय; pip 6 fills"
+  },
+  {
+   "id": "s13",
+   "t0": 100.969,
+   "t1": 112.767,
+   "len": 11.8,
+   "presenter": "hidden",
+   "shots": [],
+   "says": "तो नेपाल में, 240 वर्षों से चली आ रही राजशाही का अंत, 28 मई 2008 को हुआ, और नेपाल राजतंत्र को पूरी तरह खत्म करके,",
+   "board": "OURS: the whole page is the date, stamped: 28 मई 2008. Above it a red 240 वर्ष bar reaches its end and stops. Stamp thud. THE DATE HOLDS FULL-PAGE until the cut (he is hidden through \"राजतंत्र को पूरी तरह खत्म करके\")."
+  },
+  {
+   "id": "s14",
+   "t0": 112.767,
+   "t1": 115.327,
+   "len": 2.56,
+   "presenter": "explain",
+   "shots": [],
+   "says": "एक लोकतांत्रिक गणराज्य बन गया।",
+   "board": "OURS: the line reaches the top; the crown symbol drops off the page; everything left is blue. नेपाल बना लोकतांत्रिक गणराज्य"
+  },
+  {
+   "id": "s15",
+   "t0": 115.327,
+   "t1": 121.997,
+   "len": 6.67,
+   "presenter": "explain",
+   "shots": [
+    {
+     "clip": "V10",
+     "ink": "blue",
+     "t0": 115.327,
+     "start": 0.2,
+     "t1": 121.997,
+     "band_y": 500
+    }
+   ],
+   "says": "गणराज्य यानी, जहाँ देश का प्रमुख राजा नहीं, बल्कि चुना हुआ व्यक्ति होता है।",
+   "board": "slip: राजा ✕ → चुना हुआ व्यक्ति ✓"
+  },
+  {
+   "id": "s16",
+   "t0": 121.997,
+   "t1": 127.267,
+   "len": 5.27,
+   "presenter": "explain",
+   "shots": [],
+   "says": "और इसके बाद, 2015 में नेपाल ने अपना नया संविधान अपनाया।",
+   "board": "the line's last dot lights. 2015 · नया संविधान"
+  },
+  {
+   "id": "s17",
+   "t0": 127.267,
+   "t1": 135.168,
+   "len": 7.9,
+   "presenter": "you",
+   "shots": [],
+   "says": "तो छहों points पूरे हो गए। अब answer पूरा करने के लिए, भारत की भूमिका लिखनी है, वो Part 3 में है, इसलिए उसे मत छोड़ना।",
+   "board": "the finished line; six pips full. skeleton: पृष्ठभूमि ✓ · छह points ✓ · भारत की भूमिका → · Part 3 →"
+  }
+ ]
+}

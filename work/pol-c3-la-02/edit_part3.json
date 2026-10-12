@@ -1,0 +1,123 @@
+{
+ "part": 3,
+ "dur": 121.36,
+ "_from": "tools/reel/edit_from_scenes.py from scenes_part3.json + look.json",
+ "heygen": "inbox/POL-C3-LA-02/POL-C3-LA-02 - part 3_1080p.mp4",
+ "key": "out/key_part3.json",
+ "pcrop": {
+  "w": 1120,
+  "h": 960,
+  "x": 400,
+  "y": 120
+ },
+ "layers": {
+  "under": "out/layers/p3/under.mov",
+  "mask": "out/layers/p3/mask.mov",
+  "overlay": "out/layers/p3/overlay.mov",
+  "captions": "out/layers/p3/captions.mov"
+ },
+ "audio": "out/audio/p3.wav",
+ "bg_preset": "veryfast",
+ "segments": [
+  {
+   "id": "paper@0.00",
+   "t0": 0.0,
+   "t1": 121.36,
+   "src": "out/paper.mp4",
+   "crop": "null",
+   "hold": true,
+   "xf": 0.034
+  }
+ ],
+ "place": [
+  {
+   "t0": 0,
+   "t1": 10.858,
+   "s": 1.2,
+   "x0": -104,
+   "y0": 768,
+   "state": "you"
+  },
+  {
+   "t0": 10.858,
+   "t1": 17.234,
+   "s": 1.2,
+   "x0": -104,
+   "y0": 768,
+   "state": "you"
+  },
+  {
+   "t0": 17.234,
+   "t1": 25.778,
+   "s": 0.82,
+   "x0": 220,
+   "y0": 1133,
+   "state": "explain"
+  },
+  {
+   "t0": 25.778,
+   "t1": 39.168,
+   "s": 0.82,
+   "x0": 220,
+   "y0": 1133,
+   "state": "explain"
+  },
+  {
+   "t0": 39.168,
+   "t1": 47.708,
+   "s": 0.82,
+   "x0": 220,
+   "y0": 1133,
+   "state": "explain"
+  },
+  {
+   "t0": 47.708,
+   "t1": 57.735,
+   "s": 1.2,
+   "x0": -104,
+   "y0": 768,
+   "state": "you"
+  },
+  {
+   "t0": 57.735,
+   "t1": 61.294,
+   "hidden": true
+  },
+  {
+   "t0": 61.294,
+   "t1": 100.57,
+   "s": 0.55,
+   "x0": -45,
+   "y0": 1392,
+   "state": "small"
+  },
+  {
+   "t0": 100.57,
+   "t1": 106.264,
+   "s": 0.55,
+   "x0": -45,
+   "y0": 1392,
+   "state": "small"
+  },
+  {
+   "t0": 106.264,
+   "t1": 117.784,
+   "s": 1.2,
+   "x0": -104,
+   "y0": 768,
+   "state": "you"
+  },
+  {
+   "t0": 117.784,
+   "t1": 121.36,
+   "s": 1.2,
+   "x0": -104,
+   "y0": 768,
+   "state": "you"
+  }
+ ],
+ "cutout": {
+  "edge": 6,
+  "shadow": true
+ }
+}

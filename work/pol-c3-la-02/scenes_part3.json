@@ -1,0 +1,117 @@
+{
+ "part": 3,
+ "dur": 121.36,
+ "_about": "Scene cuts sit in the pause before each scene's first word (tools/reel/words.mjs cut()). presenter: you = large centre, explain = lower right, small = bottom-left corner, hidden. shots = Veo pictures in the frame, on the same clock. Times of on-screen items are NOT here: the design code asks the word clock.",
+ "scenes": [
+  {
+   "id": "s1",
+   "t0": 0,
+   "t1": 10.858,
+   "len": 10.86,
+   "presenter": "you",
+   "shots": [],
+   "says": "बच्चों, पिछले दो parts में हमने 1990 के संविधान से लेकर, 2008 में राजशाही के अंत तक, छहों points पढ़ लिए।",
+   "board": "the finished line, drawn fast. 1990 … 2008; six pips full"
+  },
+  {
+   "id": "s2",
+   "t0": 10.858,
+   "t1": 17.234,
+   "len": 6.38,
+   "presenter": "you",
+   "shots": [],
+   "says": "अब answer का आखिरी हिस्सा, यानी नेपाल में लोकतंत्र की स्थापना में, भारत की भूमिका।",
+   "board": "heading भारत की भूमिका"
+  },
+  {
+   "id": "s3",
+   "t0": 17.234,
+   "t1": 25.778,
+   "len": 8.54,
+   "presenter": "explain",
+   "shots": [],
+   "says": "भारत ने पड़ोसी होने के नाते, नेपाल में लोकतंत्र की स्थापना के लिए, नैतिक, राजनीतिक और कूटनीतिक समर्थन दिया।",
+   "board": "OURS: THE MAP (assets/map.png + assets/map.json) in the picture frame; नेपाल typeset in the hills, भारत on the plain. Three arrows rise from भारत to नेपाल, each named as he says it: नैतिक · राजनीतिक · कूटनीतिक → समर्थन"
+  },
+  {
+   "id": "s4",
+   "t0": 25.778,
+   "t1": 39.168,
+   "len": 13.39,
+   "presenter": "explain",
+   "shots": [],
+   "says": "इसके अलावा नई लोकतांत्रिक सरकार के साथ, रेल सेवा, नागरिक विमान सेवा, नए पॉलिटेक्निक कॉलेज, और सीमा पर नए कन्वेंशन हॉल के निर्माण जैसे विकास कार्यों के समझौते किए।",
+   "board": "OURS: four tiles fill in, each with a drawn symbol (track, aircraft, college, hall): रेल सेवा · नागरिक विमान सेवा · पॉलिटेक्निक कॉलेज · कन्वेंशन हॉल; a signature line is drawn under all four; then the heading विकास कार्यों के समझौते when he says it"
+  },
+  {
+   "id": "s5",
+   "t0": 39.168,
+   "t1": 47.708,
+   "len": 8.54,
+   "presenter": "explain",
+   "shots": [],
+   "says": "और नेपाल के तत्कालीन प्रधानमंत्री प्रचंड, यानी पुष्प कमल दहल, और राष्ट्रपति रामबरन यादव की भारत यात्राएँ,",
+   "board": "OURS: the map again; two name plates (type only): प्रधानमंत्री प्रचंड (slip: पुष्प कमल दहल) · राष्ट्रपति रामबरन यादव; a dashed path from नेपाल to भारत for each; भारत यात्राएँ"
+  },
+  {
+   "id": "s6",
+   "t0": 47.708,
+   "t1": 57.735,
+   "len": 10.03,
+   "presenter": "you",
+   "shots": [],
+   "says": "इस बात का स्पष्ट प्रमाण हैं, कि भारत ने नेपाल में लोकतंत्र की बहाली और दोनों देशों के रिश्ते मज़बूत करने में, महत्वपूर्ण भूमिका निभाई।",
+   "board": "in the exam-line serif: लोकतंत्र की बहाली + रिश्ते मज़बूत = महत्वपूर्ण भूमिका"
+  },
+  {
+   "id": "s7",
+   "t0": 57.735,
+   "t1": 61.294,
+   "len": 3.56,
+   "presenter": "hidden",
+   "shots": [],
+   "says": "अब पूरे answer को, एक बार क्रम से दोहरा लेते हैं।",
+   "board": "the page clears to an empty line (axes and the name only)"
+  },
+  {
+   "id": "s8",
+   "t0": 61.294,
+   "t1": 100.57,
+   "len": 39.28,
+   "presenter": "small",
+   "shots": [],
+   "says": "पहला, 1990 में जन-आंदोलन के दबाव में, लोकतांत्रिक संविधान। दूसरा, 2002 में राजा ने संसद भंग करके, लोकतंत्र खत्म किया। तीसरा, अप्रैल 2006 का जन-आंदोलन, और संसद की बहाली। चौथा, सात दलों, माओवादी समूहों और सामाजिक कार्यकर्ताओं का, अहिंसक नेतृत्व। पाँचवाँ, संविधान-सभा का गठन, और माओवादियों का, लोकतांत्रिक राजनीति में आना। छठा, 28 मई 2008 को राजशाही का अंत, नेपाल बना गणराज्य, और 2015 में नया संविधान।",
+   "board": "OURS: THE LINE REDRAWS ITSELF, one stretch per point, in that point's ink. Beside each new point a small still from that point's own picture pops in (out/stills/V*.png). Per point, his own short words: 1 · 1990 संविधान · 2 · 2002 संसद भंग · 3 · अप्रैल 2006 जन-आंदोलन, संसद बहाल · 4 · अहिंसक नेतृत्व: तीन गुट · 5 · संविधान-सभा · 6 · 28 मई 2008 गणराज्य, 2015 संविधान"
+  },
+  {
+   "id": "s9",
+   "t0": 100.57,
+   "t1": 106.264,
+   "len": 5.69,
+   "presenter": "small",
+   "shots": [],
+   "says": "और आखिर में, भारत का नैतिक, राजनीतिक और कूटनीतिक समर्थन।",
+   "board": "the three arrows land beside the finished line. + भारत की भूमिका"
+  },
+  {
+   "id": "s10",
+   "t0": 106.264,
+   "t1": 117.784,
+   "len": 11.52,
+   "presenter": "you",
+   "shots": [],
+   "says": "बस, पृष्ठभूमि, ये छह points और भारत की भूमिका, इतना लिख दिया तो, पूरे 4 नंबर पक्के। और exam में answer किस तरह लिखना है, वो Notes में मिल जाएगा।",
+   "board": "skeleton, three ticks · stamp 4 नंबर पक्के · Notes pointer"
+  },
+  {
+   "id": "s11",
+   "t0": 117.784,
+   "t1": 121.36,
+   "len": 3.58,
+   "presenter": "you",
+   "shots": [],
+   "says": "तो ऐसे ही पढ़ाई वाली reels देखते जाओ, और syllabus पूरा करते जाओ।",
+   "board": "the finished line, held"
+  }
+ ]
+}

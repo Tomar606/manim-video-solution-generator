@@ -1,0 +1,84 @@
+{
+ "size": [
+  960,
+  720
+ ],
+ "projection": "Mercator (d3.geoMercator, spherical), north up; scale 3666.930 = 64 px per degree of longitude, center [83.25,27.6] at pixel [480,360]",
+ "projection_d3": {
+  "name": "geoMercator",
+  "scale": 3666.9298888372687,
+  "center": [
+   83.25,
+   27.6
+  ],
+  "translate": [
+   480,
+   360
+  ]
+ },
+ "bounds": [
+  [
+   75.75,
+   22.507
+  ],
+  [
+   90.75,
+   32.467
+  ]
+ ],
+ "sources": [
+  {
+   "file": "work/pol-c3-la-02/assets/data/relief_sr_72-95E_19-36N.png",
+   "licence": "public domain (Natural Earth)",
+   "what": "Natural Earth 10m Shaded Relief, low-res edition (SR_LR.tif, v2.0.0, 16200x8100, 45 px/degree), grayscale hillshade cropped to 72-95E 19-36N"
+  },
+  {
+   "file": "work/pol-c3-la-02/assets/data/rivers_72-95E_19-36N.geojson",
+   "licence": "public domain (Natural Earth)",
+   "what": "Natural Earth 10m rivers + lake centerlines (ne_10m_rivers_lake_centerlines), cut to the same box"
+  }
+ ],
+ "anchors": {
+  "nepal": [
+   528,
+   309
+  ],
+  "india": [
+   278,
+   574
+  ],
+  "kathmandu": [
+   612,
+   352
+  ],
+  "delhi": [
+   93,
+   287
+  ]
+ },
+ "anchors_lonlat": {
+  "nepal": [
+   84,
+   28.3
+  ],
+  "india": [
+   80.1,
+   24.6
+  ],
+  "kathmandu": [
+   85.32,
+   27.71
+  ],
+  "delhi": [
+   77.21,
+   28.61
+  ]
+ },
+ "anchors_as_asked": {
+  "india": [
+   336,
+   510
+  ]
+ },
+ "note": "Relief is real data, not drawn: the blue tone is the Natural Earth hillshade (shadowed slopes inked, lit slopes left as paper) plus a tone of local ruggedness measured from the same hillshade, so darker means steeper. No elevation model was used, so tone is not height: the high Himalaya is darkest because it is the most rugged ground, and flat ground (the plain, and any sea) is bare paper. Rivers and relief only: no country, admin or boundary layer was loaded, no coastline is stroked, and there is no text. The tone is laid in 5 flat tints, as a screen print would be. anchors.india is at 80.1E 24.6N, not the 81E 25.5N first asked for: that point (anchors_as_asked.india) sits on the Yamuna just above its confluence with the Ganga, so both rivers would run through the word; the anchor given is the nearest open paper, just south of the Yamuna. anchors.nepal is on the darkest part of the plate, so a label there needs a paper-coloured face or a paper casing. kathmandu and delhi are end points for arrows and are not marked on the plate. Drawn by design/map.mjs; data cut once by design/map_prep.py."
+}

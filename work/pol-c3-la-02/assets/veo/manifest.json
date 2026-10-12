@@ -1,0 +1,99 @@
+{
+ "V3": {
+  "title": "A town square full of people, hands raised",
+  "key": "7d6c1ea7-2b16-46d5-a871-f90ccea50ecc",
+  "file": "work/pol-c3-la-02/assets/veo/V3.mp4",
+  "prompt": "A wide old brick-paved town square in a South Asian hill town, completely filled with a peaceful crowd of ordinary men and women seen from behind, in everyday shirts, jackets, sweaters, saris and cloth caps of the late twentieth century. They raise their open, empty hands together toward an old brick building at the far end of the square. Bright daylight. The crowd fills the middle of the frame. The camera rises slowly above the heads.\nSTYLE: photorealistic documentary footage, natural light, true colours, fine detail, shot on a stabilised cinema camera. Vertical 9:16 frame. One continuous shot with slow, steady camera movement; no cuts.\nCOMPOSITION: the main subject sits in the middle of the frame, with strong clear light and shadow.\nSOUND: silent clip, no speech, no narration, no music.",
+  "negative": "text, letters, numbers, readable signs, banners with writing, subtitles, captions, logos on screen, voiceover, speech, camera cuts, sudden zoom, reversed motion, split screen, borders, vignette, placards, signboards, flags, mobile phones, faces looking at the camera",
+  "seconds": 94,
+  "flow_label": "Crowd raising hands in square"
+ },
+ "V1": {
+  "title": "An empty throne in a dim old hall",
+  "prompt": "Inside a dim, old royal hall with dark carved wooden pillars and a high ceiling. In the middle of the frame, on a low stepped platform, stands a single empty, ornately carved wooden throne with deep red cushions, lit by one strong shaft of sunlight falling from a high window; dust drifts in the light. Nobody is in the hall. The camera pushes in very slowly toward the throne.\nSTYLE: photorealistic documentary footage, natural light, true colours, fine detail, shot on a stabilised cinema camera. Vertical 9:16 frame. One continuous shot with slow, steady camera movement; no cuts.\nCOMPOSITION: the main subject sits in the middle of the frame, with strong clear light and shadow.\nSOUND: silent clip, no speech, no narration, no music.",
+  "negative": "text, letters, numbers, readable signs, banners with writing, subtitles, captions, logos on screen, voiceover, speech, camera cuts, sudden zoom, reversed motion, split screen, borders, vignette, people, flags, emblems",
+  "submitted": true,
+  "file": "work/pol-c3-la-02/assets/veo/V1.mp4",
+  "flow_label": "Sunlight illuminating empty wood"
+ },
+ "V2": {
+  "title": "A hill-valley town at dawn",
+  "prompt": "Dawn over an old town in a green mountain valley in South Asia. In the middle of the frame, clustered brick houses and tall three-tiered brick-and-carved-timber temple roofs rise above them, with thin morning mist between the buildings, forested hills behind and a line of distant snow peaks under a pale sky. A few birds cross the sky. The camera glides slowly forward.\nSTYLE: photorealistic documentary footage, natural light, true colours, fine detail, shot on a stabilised cinema camera. Vertical 9:16 frame. One continuous shot with slow, steady camera movement; no cuts.\nCOMPOSITION: the main subject sits in the middle of the frame, with strong clear light and shadow.\nSOUND: silent clip, no speech, no narration, no music.",
+  "negative": "text, letters, numbers, readable signs, banners with writing, subtitles, captions, logos on screen, voiceover, speech, camera cuts, sudden zoom, reversed motion, split screen, borders, vignette, people in close-up, flags, vehicles, modern towers",
+  "submitted": true,
+  "file": "work/pol-c3-la-02/assets/veo/V2.mp4",
+  "flow_label": "Town rising in mountain valley"
+ },
+ "V4": {
+  "title": "A hand signing a formal document",
+  "prompt": "A close shot of a man's hand in a dark sleeve signing the last page of a thick, formal bound document with a fountain pen, on a heavy wooden desk in the middle of the frame. The pages are cream and blank. Behind the desk, softly out of focus, a row of men and women in everyday late-twentieth-century clothes stand watching quietly. Warm window light from the side. The camera pushes in very slowly on the pen.\nSTYLE: photorealistic documentary footage, natural light, true colours, fine detail, shot on a stabilised cinema camera. Vertical 9:16 frame. One continuous shot with slow, steady camera movement; no cuts.\nCOMPOSITION: the main subject sits in the middle of the frame, with strong clear light and shadow.\nSOUND: silent clip, no speech, no narration, no music.",
+  "negative": "text, letters, numbers, readable signs, banners with writing, subtitles, captions, logos on screen, voiceover, speech, camera cuts, sudden zoom, reversed motion, split screen, borders, vignette, printed pages, emblems, flags",
+  "submitted": true,
+  "file": "work/pol-c3-la-02/assets/veo/V4.mp4",
+  "flow_label": "Man signing document"
+ },
+ "V5": {
+  "title": "An empty assembly hall, doors closing",
+  "prompt": "A large, empty assembly chamber with curved rows of empty wooden seats and desks, seen from the back of the hall. At the far end, in the middle of the frame, two tall heavy wooden doors swing slowly shut, and the bright band of daylight coming through them narrows across the floor until the hall is left in shadow. Nobody is in the hall. The camera holds almost still.\nSTYLE: photorealistic documentary footage, natural light, true colours, fine detail, shot on a stabilised cinema camera. Vertical 9:16 frame. One continuous shot with slow, steady camera movement; no cuts.\nCOMPOSITION: the main subject sits in the middle of the frame, with strong clear light and shadow.\nSOUND: silent clip, no speech, no narration, no music.",
+  "negative": "text, letters, numbers, readable signs, banners with writing, subtitles, captions, logos on screen, voiceover, speech, camera cuts, sudden zoom, reversed motion, split screen, borders, vignette, people, flags, emblems",
+  "submitted": true,
+  "file": "work/pol-c3-la-02/assets/veo/V5.mp4",
+  "size": [
+   720,
+   1280
+  ],
+  "matched_by": "grid order",
+  "seconds": 177,
+  "flow_label": "Wooden doors swing shut"
+ },
+ "V6": {
+  "title": "A street filled with a peaceful march, from above",
+  "prompt": "A high view looking down a long, narrow street between old three-storey brick buildings in a South Asian hill city, filled from wall to wall with a huge, peaceful march of ordinary men and women walking slowly away from the camera, many with open, empty hands raised, in everyday shirts, jackets, saris and cloth caps of the early two-thousands. Bright daylight. The march fills the middle of the frame and runs to the far end of the street. The camera drifts slowly forward above the crowd.\nSTYLE: photorealistic documentary footage, natural light, true colours, fine detail, shot on a stabilised cinema camera. Vertical 9:16 frame. One continuous shot with slow, steady camera movement; no cuts.\nCOMPOSITION: the main subject sits in the middle of the frame, with strong clear light and shadow.\nSOUND: silent clip, no speech, no narration, no music.",
+  "negative": "text, letters, numbers, readable signs, banners with writing, subtitles, captions, logos on screen, voiceover, speech, camera cuts, sudden zoom, reversed motion, split screen, borders, vignette, placards, signboards, flags, mobile phones, faces looking at the camera, vehicles",
+  "submitted": true,
+  "file": "work/pol-c3-la-02/assets/veo/V6.mp4",
+  "flow_label": "Crowd marching down narrow street"
+ },
+ "V7": {
+  "title": "Assembly hall doors opening, people walking in",
+  "prompt": "A large assembly chamber with curved rows of wooden seats and desks, seen from the back of the hall. At the far end, in the middle of the frame, two tall heavy wooden doors swing slowly open and bright daylight floods across the floor. Men and women in plain everyday formal clothes walk in through the doors and move calmly toward the seats, seen small and from a distance. The camera holds almost still.\nSTYLE: photorealistic documentary footage, natural light, true colours, fine detail, shot on a stabilised cinema camera. Vertical 9:16 frame. One continuous shot with slow, steady camera movement; no cuts.\nCOMPOSITION: the main subject sits in the middle of the frame, with strong clear light and shadow.\nSOUND: silent clip, no speech, no narration, no music.",
+  "negative": "text, letters, numbers, readable signs, banners with writing, subtitles, captions, logos on screen, voiceover, speech, camera cuts, sudden zoom, reversed motion, split screen, borders, vignette, flags, emblems, faces looking at the camera",
+  "submitted": true,
+  "file": "work/pol-c3-la-02/assets/veo/V7.mp4",
+  "flow_label": "People entering assembly chamber"
+ },
+ "V8": {
+  "title": "People standing together at dusk holding small lamps",
+  "prompt": "Dusk in an old brick town square in a South Asian hill town. A long line of ordinary men and women stand calmly shoulder to shoulder, seen from behind, each holding a small lit oil lamp in cupped hands; hundreds of small warm flames glow across the middle of the frame. Nobody hurries; the mood is quiet and peaceful. The camera glides slowly sideways along the line.\nSTYLE: photorealistic documentary footage, natural light, true colours, fine detail, shot on a stabilised cinema camera. Vertical 9:16 frame. One continuous shot with slow, steady camera movement; no cuts.\nCOMPOSITION: the main subject sits in the middle of the frame, with strong clear light and shadow.\nSOUND: silent clip, no speech, no narration, no music.",
+  "negative": "text, letters, numbers, readable signs, banners with writing, subtitles, captions, logos on screen, voiceover, speech, camera cuts, sudden zoom, reversed motion, split screen, borders, vignette, placards, signboards, flags, mobile phones, faces looking at the camera",
+  "submitted": true,
+  "file": "work/pol-c3-la-02/assets/veo/V8.mp4",
+  "flow_label": "People holding lit oil lamps"
+ },
+ "V9": {
+  "title": "A round hall of seated people, a hand writing in a large book",
+  "prompt": "A large round hall where many men and women in plain everyday formal clothes sit in curved rows, softly out of focus in the background. In the foreground, in the middle of the frame, a hand writes steadily with a pen in a very large open bound book with blank cream pages lying on a wooden table. Soft daylight from high windows. The camera pushes in slowly toward the book.\nSTYLE: photorealistic documentary footage, natural light, true colours, fine detail, shot on a stabilised cinema camera. Vertical 9:16 frame. One continuous shot with slow, steady camera movement; no cuts.\nCOMPOSITION: the main subject sits in the middle of the frame, with strong clear light and shadow.\nSOUND: silent clip, no speech, no narration, no music.",
+  "negative": "text, letters, numbers, readable signs, banners with writing, subtitles, captions, logos on screen, voiceover, speech, camera cuts, sudden zoom, reversed motion, split screen, borders, vignette, printed pages, flags, emblems",
+  "submitted": true,
+  "file": "work/pol-c3-la-02/assets/veo/V9.mp4",
+  "size": [
+   720,
+   1280
+  ],
+  "flow_label": "Hand writing in large book",
+  "matched_by": "label"
+ },
+ "V10": {
+  "title": "A folded paper dropped into a plain box, a queue behind",
+  "prompt": "A close shot of a hand lowering a folded slip of blank paper into the slot of a plain wooden box on a table, in the middle of the frame. Behind it, softly out of focus, a long patient queue of ordinary men and women in everyday clothes, saris and cloth caps waits in the morning light outside a simple brick building. The camera holds almost still.\nSTYLE: photorealistic documentary footage, natural light, true colours, fine detail, shot on a stabilised cinema camera. Vertical 9:16 frame. One continuous shot with slow, steady camera movement; no cuts.\nCOMPOSITION: the main subject sits in the middle of the frame, with strong clear light and shadow.\nSOUND: silent clip, no speech, no narration, no music.",
+  "negative": "text, letters, numbers, readable signs, banners with writing, subtitles, captions, logos on screen, voiceover, speech, camera cuts, sudden zoom, reversed motion, split screen, borders, vignette, posters, symbols on the box, flags",
+  "submitted": true,
+  "file": "work/pol-c3-la-02/assets/veo/V10.mp4",
+  "size": [
+   720,
+   1280
+  ],
+  "flow_label": "Hand lowering paper into box",
+  "matched_by": "label"
+ }
+}

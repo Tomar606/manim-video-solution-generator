@@ -1,0 +1,24 @@
+{
+ "_about": "POL-C3-LA-02 'दो स्याही': the constants every piece of this video shares. Data only. Read by design/kit.mjs, the captions skin, and tools/reel/edit_from_scenes.py.",
+ "paper": "#f2ead9", "ink": "#1b1a17", "red": "#c8102e", "blue": "#12357a",
+ "fonts": {
+  "head": ["assets/fonts/Khand-Bold.ttf", "assets/fonts/Khand-SemiBold.ttf"],
+  "body": ["docs/history-poc/fonts/ttf/Mukta-ExtraBold.ttf"],
+  "serif": ["assets/fonts/TiroDevanagariHindi-Regular.ttf"]
+ },
+ "frame": [1080, 1920],
+ "strip": {"y0": 60, "y1": 250},
+ "window": {"x": 60, "y": 300, "w": 960, "h": 720},
+ "captions": {"y0": 1690, "y1": 1830, "centre_y": 1760},
+ "nothing_below": 1660,
+ "pcrop": {"w": 1120, "h": 960, "x": 400, "y": 120},
+ "presenter_in_crop": {"head_top": 68, "head_cx": 537, "head_w": 205, "shoulders_x": [240, 835], "widest_x": [260, 1030]},
+ "place": {
+  "you":     {"s": 1.2,  "x0": -104, "y0": 768,  "_covers": "x 186-894 from y 850 (head top) down; free: y 280-800 full width"},
+  "explain": {"s": 0.82, "x0": 220,  "y0": 1133, "_covers": "x 417-1065 from y 1189 down; free: heading band y 1040-1175 full width, left column x 40-400 y 1200-1640"},
+  "small":   {"s": 0.55, "x0": -45,  "y0": 1392, "_covers": "x 98-520 from y 1429 down; free: everything above y 1380, and x 560-1040 down to y 1640"}
+ },
+ "glide": 0.5,
+ "cutout": {"edge": 6, "shadow": true},
+ "print": {"contrast": 1.35, "brightness": 0.02, "band_y": 370, "band_h": 540}
+}

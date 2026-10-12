@@ -1,0 +1,230 @@
+{
+ "part": 1,
+ "dur": 137.24,
+ "_about": "Scene cuts sit in the pause before each scene's first word (tools/reel/words.mjs cut()). presenter: you = large centre, explain = lower right, small = bottom-left corner, hidden. shots = Veo pictures in the frame, on the same clock. Times of on-screen items are NOT here: the design code asks the word clock.",
+ "scenes": [
+  {
+   "id": "s1",
+   "t0": 0,
+   "t1": 2.41,
+   "len": 2.41,
+   "presenter": "you",
+   "shots": [],
+   "says": "MP Board कक्षा 12वीं के बच्चों!",
+   "board": "slip: MP Board · 12वीं · राजनीति विज्ञान"
+  },
+  {
+   "id": "s2",
+   "t0": 2.41,
+   "t1": 8.97,
+   "len": 6.56,
+   "presenter": "explain",
+   "shots": [
+    {
+     "clip": "V1",
+     "ink": "red",
+     "t0": 2.41,
+     "start": 0.2,
+     "t1": 8.97,
+     "band_y": 430
+    }
+   ],
+   "says": "हमारे पड़ोसी देश नेपाल में, लगभग 240 साल तक राजशाही रही, यानी राजा का शासन।",
+   "board": "नेपाल · a bar that fills: 240 साल · slip: राजशाही = राजा का शासन"
+  },
+  {
+   "id": "s3",
+   "t0": 8.97,
+   "t1": 15.96,
+   "len": 6.99,
+   "presenter": "explain",
+   "shots": [],
+   "says": "और 2008 में, वही नेपाल एक लोकतांत्रिक गणराज्य बन गया। ये बदलाव कैसे हुआ, आज यही पढ़ेंगे।",
+   "board": "OURS: a red card राजशाही flips to a blue card लोकतांत्रिक गणराज्य, 2008 on the hinge; big कैसे? on the word कैसे"
+  },
+  {
+   "id": "s4",
+   "t0": 15.96,
+   "t1": 27.36,
+   "len": 11.4,
+   "presenter": "you",
+   "shots": [],
+   "says": "और बच्चों, ये सिर्फ कहानी नहीं है, 2025 के Board Exam में, इसी topic पर सवाल पूछा गया था, नेपाल में लोकतंत्र कैसे स्थापित हुआ? विस्तारपूर्वक समझाइए।",
+   "board": "the house question card (assets/question_sheet.png); stamp Board Exam 2025"
+  },
+  {
+   "id": "s5",
+   "t0": 27.36,
+   "t1": 33.88,
+   "len": 6.52,
+   "presenter": "explain",
+   "shots": [],
+   "says": "इस answer में पहले पृष्ठभूमि, फिर छह points, और आखिर में भारत की भूमिका समझेंगे।",
+   "board": "OURS: three slots fill in one by one: पृष्ठभूमि · छह points (six empty pips) · भारत की भूमिका"
+  },
+  {
+   "id": "s6",
+   "t0": 33.88,
+   "t1": 42.567,
+   "len": 8.69,
+   "presenter": "hidden",
+   "shots": [],
+   "says": "ये points साल के क्रम में चलते हैं, 1990 से 2015 तक, तो साल याद रहे, तो points अपने आप याद रहेंगे।",
+   "board": "OURS: THE LINE appears, full page: 1990 at one end, 2015 at the other, unnamed dots between; drawn like a pencil stroke"
+  },
+  {
+   "id": "s7",
+   "t0": 42.567,
+   "t1": 52.874,
+   "len": 10.31,
+   "presenter": "explain",
+   "shots": [
+    {
+     "clip": "V2",
+     "ink": "red",
+     "t0": 44.747,
+     "start": 0.2,
+     "t1": 52.874,
+     "band_y": 260
+    }
+   ],
+   "says": "तो सबसे पहले पृष्ठभूमि समझ लेते हैं। नेपाल अतीत में एक हिंदू-राज्य रहा है, और आधुनिक काल में, यहाँ लंबे समय तक संवैधानिक राजतंत्र कायम रहा।",
+   "board": "heading पृष्ठभूमि · अतीत: हिंदू-राज्य → आधुनिक काल: संवैधानिक राजतंत्र"
+  },
+  {
+   "id": "s8",
+   "t0": 52.874,
+   "t1": 59.547,
+   "len": 6.67,
+   "presenter": "explain",
+   "shots": [],
+   "says": "संवैधानिक राजतंत्र यानी, देश का प्रमुख राजा होता है, पर शासन संविधान के अनुसार चलना चाहिए।",
+   "board": "OURS: a crown symbol above a book symbol; slip: प्रमुख = राजा · शासन = संविधान के अनुसार"
+  },
+  {
+   "id": "s9",
+   "t0": 59.547,
+   "t1": 69.821,
+   "len": 10.27,
+   "presenter": "explain",
+   "shots": [
+    {
+     "clip": "V3",
+     "ink": "blue",
+     "t0": 59.547,
+     "start": 0.2,
+     "t1": 69.821,
+     "band_y": 300
+    }
+   ],
+   "says": "इस दौर में राजनीतिक दल और आम जनता, हमेशा एक खुले और उत्तरदायी शासन की माँग उठाते रहे, यानी ऐसी सरकार जो जनता के प्रति जवाबदेह हो।",
+   "board": "माँग: खुला और उत्तरदायी शासन · slip: = जनता के प्रति जवाबदेह"
+  },
+  {
+   "id": "s10",
+   "t0": 69.821,
+   "t1": 77.501,
+   "len": 7.68,
+   "presenter": "explain",
+   "shots": [],
+   "says": "लेकिन राजा ने सेना की मदद से, शासन की सारी शक्तियाँ अपने हाथों में समेट लीं, जिससे लोकतंत्र की राह रुक गई।",
+   "board": "OURS: blue tiles \"शक्तियाँ\" slide one by one under the crown and turn red; the page goes red. The strip gets its name लोकतंत्र की राह when he says it, and a red bar across it: रुक गई"
+  },
+  {
+   "id": "s11",
+   "t0": 77.501,
+   "t1": 81.901,
+   "len": 4.4,
+   "presenter": "you",
+   "shots": [],
+   "says": "इसके बाद पहला point है, 1990 का लोकतांत्रिक संविधान।",
+   "board": "the line: the 1990 dot lights. heading 1 · 1990 · लोकतांत्रिक संविधान; pip 1 fills"
+  },
+  {
+   "id": "s12",
+   "t0": 81.901,
+   "t1": 92.024,
+   "len": 10.12,
+   "presenter": "explain",
+   "shots": [
+    {
+     "clip": "V3",
+     "ink": "blue",
+     "t0": 81.901,
+     "start": 5.0,
+     "t1": 86.224,
+     "band_y": 440
+    },
+    {
+     "clip": "V4",
+     "ink": "blue",
+     "t0": 86.224,
+     "start": 0.2,
+     "t1": 92.024,
+     "band_y": 480
+    }
+   ],
+   "says": "जनता के एक मज़बूत लोकतंत्र-समर्थक आंदोलन के दबाव में, राजा को 1990 में, नए लोकतांत्रिक संविधान की माँग माननी पड़ी।",
+   "board": "आंदोलन का दबाव → राजा को माँग माननी पड़ी; the line CLIMBS, turning blue"
+  },
+  {
+   "id": "s13",
+   "t0": 92.024,
+   "t1": 101.764,
+   "len": 9.74,
+   "presenter": "explain",
+   "shots": [],
+   "says": "लेकिन इसके बाद जो लोकतांत्रिक सरकारें आईं, उनका कार्यकाल काफी छोटा रहा, और वो राजनीतिक अस्थिरता और समस्याओं से भरी रहीं।",
+   "board": "OURS: a row of cards marked सरकार tipping over one after another; the line wobbles. कार्यकाल छोटा · राजनीतिक अस्थिरता"
+  },
+  {
+   "id": "s14",
+   "t0": 101.764,
+   "t1": 110.78,
+   "len": 9.02,
+   "presenter": "you",
+   "shots": [],
+   "says": "और इसी अस्थिरता के बीच आता है, अगला point, राजा द्वारा लोकतंत्र का खात्मा, जो हुआ 2002 में।",
+   "board": "page turning red; the 2002 dot gets its year. heading 2 · 2002 · लोकतंत्र का खात्मा; pip 2 fills"
+  },
+  {
+   "id": "s15",
+   "t0": 110.78,
+   "t1": 121.336,
+   "len": 10.56,
+   "presenter": "explain",
+   "shots": [
+    {
+     "clip": "V5",
+     "ink": "red",
+     "t0": 110.78,
+     "start": 0.2,
+     "t1": 121.336,
+     "band_y": 250
+    }
+   ],
+   "says": "साल 2002 में, राजा ने संसद को भंग कर दिया, यानी उसे निष्क्रिय कर दिया, और लोकतांत्रिक रूप से चुनी हुई सरकार को, सत्ता से बेदखल कर दिया।",
+   "board": "stamp संसद भंग (slip: = निष्क्रिय) · stamp सरकार बेदखल"
+  },
+  {
+   "id": "s16",
+   "t0": 121.336,
+   "t1": 127.861,
+   "len": 6.53,
+   "presenter": "hidden",
+   "shots": [],
+   "says": "इस तरह नेपाल में जो थोड़ा-बहुत लोकतंत्र बचा था, उसे भी राजा ने पूरी तरह समाप्त कर दिया।",
+   "board": "OURS: the line DROPS to the floor, blue draining to red. लोकतंत्र समाप्त"
+  },
+  {
+   "id": "s17",
+   "t0": 127.861,
+   "t1": 137.24,
+   "len": 9.38,
+   "presenter": "you",
+   "shots": [],
+   "says": "तो 2002 तक, नेपाल में लोकतंत्र पूरी तरह खत्म हो चुका था। इसके बाद ये वापस कैसे आया, वो अगले part में है, इसलिए Part 2 ज़रूर देखना।",
+   "board": "the line lying flat at 2002, a dotted path with ? ahead. वापस कैसे आया? · Part 2 →"
+  }
+ ]
+}
