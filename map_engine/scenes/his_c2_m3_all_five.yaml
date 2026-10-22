@@ -1,0 +1,18 @@
+# M3 — under HeyGen block 9 (83.90-99.00).
+# सुवर्णगिरि is named at 80.2s, inside VEO-5, so it is already spoken when this
+# scene opens on it — the block opens "कर्नाटक की सोने की खदानें यहीं थीं".
+# "तो पाँचों एक साथ देख लो" is at 89.7s = 5.80 into the block: that is when the
+# camera pulls out, and all five are held for the recap that follows.
+scene: { id: his_c2_m3_all_five, duration: 15.1 }
+map:
+  base: India
+  layers: { states: false }
+  actions:
+    - { time: 0.0,  type: show_map }
+    - { time: 0.0,  type: point, location: Pataliputra, label: "पाटलिपुत्र" }
+    - { time: 0.0,  type: point, location: Taxila,      label: "तक्षशिला" }
+    - { time: 0.0,  type: point, location: Ujjayini,    label: "उज्जयिनी" }
+    - { time: 0.0,  type: point, location: Tosali,      label: "तोसलि" }
+    - { time: 0.0,  type: fly_to, location: Suvarnagiri, zoom: 5.2, duration: 1.2 }
+    - { time: 1.40, type: point,  location: Suvarnagiri, label: "सुवर्णगिरि" }
+    - { time: 5.80, type: fly_to, location: India, duration: 2.2 }

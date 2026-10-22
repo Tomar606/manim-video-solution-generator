@@ -1,0 +1,492 @@
+{
+ "_about": "POL-C1-SA-02 part 2, case-file look",
+ "project": "pol-c1-sa-02",
+ "part": 2,
+ "skin": "paper-editorial",
+ "theme": "rx",
+ "presenter_style": "card",
+ "plate": "st-kremlin",
+ "captions_at": "bottom",
+ "spine": {
+  "title": "शॉक थेरेपी: इलाज की कहानी",
+  "items": [
+   "मरीज़",
+   "डॉक्टर",
+   "दवा",
+   "Side effects"
+  ],
+  "pre_lit": 3,
+  "lit_at": [
+   6
+  ],
+  "show_from": 0
+ },
+ "beats": [
+  {
+   "id": "so-far",
+   "in": 0,
+   "out": 6,
+   "presenter": "standard",
+   "plate": "st-kremlin",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "Part 1 तक का उत्तर",
+     "points": [
+      "मरीज़: 1991 के बाद रूस, पूर्वी यूरोप और मध्य एशिया",
+      "बीमारी: साम्यवाद से पूँजीवाद की ओर बदलाव",
+      "डॉक्टर: IMF (अंतर्राष्ट्रीय मुद्रा कोष) और विश्व बैंक",
+      "दवा: शॉक थेरेपी, यानी एक ही झटके में बदलाव",
+      "क्या सबसे बेहतर तरीका था? नहीं",
+      "आर्थिक तबाही: 90% उद्योग औने-पौने दाम पर बिके (गैराज सेल)",
+      "रूबल गिरा, महँगाई बढ़ी, लोगों की जमापूँजी डूबी",
+      "सामाजिक कल्याण का अंत: सब्सिडी बंद, अमीर-गरीब की खाई बढ़ी"
+     ],
+     "show": 5,
+     "animate_from": 5,
+     "at": 0,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "se1",
+   "in": 6,
+   "out": 7,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r07",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "Side effect 1",
+     "text": "आर्थिक तबाही",
+     "at": [
+      6,
+      1.4
+     ],
+     "hl": [
+      "तबाही"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ninety",
+   "in": 7,
+   "out": 10,
+   "presenter": "standard",
+   "plate": "st-factory",
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "head",
+     "text": "पूरा औद्योगिक ढाँचा ढह गया",
+     "at": 7,
+     "fx": "rise"
+    },
+    {
+     "type": "counter",
+     "slot": "upper",
+     "num": "90%",
+     "label": "उद्योग, बहुत कम दाम पर निजी हाथों में",
+     "at": [
+      8,
+      0.6
+     ]
+    }
+   ]
+  },
+  {
+   "id": "garage",
+   "in": 10,
+   "out": 13,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r15",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "इसे कहा गया",
+     "text": "सबसे बड़ी गैराज सेल",
+     "at": [
+      10,
+      1.0
+     ],
+     "hl": [
+      "गैराज"
+     ],
+     "sub": "कीमती सामान, औने-पौने दाम"
+    }
+   ]
+  },
+  {
+   "id": "ans6",
+   "in": 13,
+   "out": 14,
+   "presenter": "standard",
+   "plate": "st-factory",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "Case File: उत्तर बन रहा है",
+     "points": [
+      "मरीज़: 1991 के बाद रूस, पूर्वी यूरोप और मध्य एशिया",
+      "बीमारी: साम्यवाद से पूँजीवाद की ओर बदलाव",
+      "डॉक्टर: IMF (अंतर्राष्ट्रीय मुद्रा कोष) और विश्व बैंक",
+      "दवा: शॉक थेरेपी, यानी एक ही झटके में बदलाव",
+      "क्या सबसे बेहतर तरीका था? नहीं",
+      "आर्थिक तबाही: 90% उद्योग औने-पौने दाम पर बिके (गैराज सेल)",
+      "रूबल गिरा, महँगाई बढ़ी, लोगों की जमापूँजी डूबी",
+      "सामाजिक कल्याण का अंत: सब्सिडी बंद, अमीर-गरीब की खाई बढ़ी"
+     ],
+     "show": 6,
+     "animate_from": 5,
+     "at": 13,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "se2",
+   "in": 14,
+   "out": 15,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r09",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "Side effect 2",
+     "text": "गरीबी + मुद्रास्फीति",
+     "at": [
+      14,
+      0.8
+     ],
+     "hl": [
+      "मुद्रास्फीति"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "queue",
+   "in": 15,
+   "out": 18,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r10",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "रूबल में भारी गिरावट",
+       15
+      ],
+      [
+       "महँगाई बढ़ी",
+       16
+      ],
+      [
+       "जमापूँजी खत्म",
+       17
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "chain",
+   "in": 18,
+   "out": 20,
+   "presenter": "standard",
+   "plate": "st-roubles",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "एक कड़ी में याद रखो",
+     "size": "m",
+     "at": 18
+    },
+    {
+     "type": "chain",
+     "slot": "upper",
+     "items": [
+      [
+       "रूबल गिरा",
+       [
+        18,
+        1.6
+       ]
+      ],
+      [
+       "महँगाई बढ़ी",
+       [
+        18,
+        2.7
+       ]
+      ],
+      [
+       "बचत डूब गई",
+       19
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans7",
+   "in": 20,
+   "out": 21,
+   "presenter": "standard",
+   "plate": "st-roubles",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "Case File: उत्तर बन रहा है",
+     "points": [
+      "मरीज़: 1991 के बाद रूस, पूर्वी यूरोप और मध्य एशिया",
+      "बीमारी: साम्यवाद से पूँजीवाद की ओर बदलाव",
+      "डॉक्टर: IMF (अंतर्राष्ट्रीय मुद्रा कोष) और विश्व बैंक",
+      "दवा: शॉक थेरेपी, यानी एक ही झटके में बदलाव",
+      "क्या सबसे बेहतर तरीका था? नहीं",
+      "आर्थिक तबाही: 90% उद्योग औने-पौने दाम पर बिके (गैराज सेल)",
+      "रूबल गिरा, महँगाई बढ़ी, लोगों की जमापूँजी डूबी",
+      "सामाजिक कल्याण का अंत: सब्सिडी बंद, अमीर-गरीब की खाई बढ़ी"
+     ],
+     "show": 7,
+     "animate_from": 6,
+     "at": 20,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "se3",
+   "in": 21,
+   "out": 23,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r11",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "Side effect 3",
+     "text": "सामाजिक कल्याण का अंत",
+     "at": [
+      22,
+      0.2
+     ],
+     "hl": [
+      "अंत"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "welfare",
+   "in": 23,
+   "out": 26,
+   "presenter": "standard",
+   "plate": "st-kremlin",
+   "elements": [
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "सरकारी सब्सिडी खत्म",
+       23
+      ],
+      [
+       "सरकार की मदद बंद",
+       24
+      ],
+      [
+       "समाज कल्याण की व्यवस्था टूटी",
+       25
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gap",
+   "in": 26,
+   "out": 27,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r12",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "अमीर-गरीब की खाई और चौड़ी",
+     "style": "accent",
+     "at": 26
+    }
+   ]
+  },
+  {
+   "id": "ans8",
+   "in": 27,
+   "out": 28,
+   "presenter": "standard",
+   "plate": "st-worldbank",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "Case File: पूरा उत्तर",
+     "points": [
+      "मरीज़: 1991 के बाद रूस, पूर्वी यूरोप और मध्य एशिया",
+      "बीमारी: साम्यवाद से पूँजीवाद की ओर बदलाव",
+      "डॉक्टर: IMF (अंतर्राष्ट्रीय मुद्रा कोष) और विश्व बैंक",
+      "दवा: शॉक थेरेपी, यानी एक ही झटके में बदलाव",
+      "क्या सबसे बेहतर तरीका था? नहीं",
+      "आर्थिक तबाही: 90% उद्योग औने-पौने दाम पर बिके (गैराज सेल)",
+      "रूबल गिरा, महँगाई बढ़ी, लोगों की जमापूँजी डूबी",
+      "सामाजिक कल्याण का अंत: सब्सिडी बंद, अमीर-गरीब की खाई बढ़ी"
+     ],
+     "show": 8,
+     "animate_from": 7,
+     "at": 27,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "revise",
+   "in": 28,
+   "out": 39,
+   "presenter": "hub",
+   "hub": {
+    "cy": 980,
+    "r": 200,
+    "backdrop": "veo:r05@3"
+   },
+   "plate": "st-kremlin",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "पूरी कहानी, एक नज़र में",
+     "size": "m",
+     "at": 28
+    },
+    {
+     "type": "quad",
+     "slot": "full",
+     "icons": [
+      "tabler:bed",
+      "tabler:stethoscope",
+      "tabler:pill",
+      "tabler:alert-triangle"
+     ],
+     "items": [
+      [
+       "मरीज़",
+       "रूस, पूर्वी यूरोप, मध्य एशिया",
+       28
+      ],
+      [
+       "डॉक्टर",
+       "IMF और विश्व बैंक",
+       31
+      ],
+      [
+       "दवा",
+       "एक झटके में बदलाव = शॉक थेरेपी",
+       33
+      ],
+      [
+       "Side effects",
+       "तबाही · महँगाई · कल्याण का अंत",
+       35
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "marks",
+   "in": 39,
+   "out": 42,
+   "presenter": "standard",
+   "plate": "st-worldbank",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "परिभाषा + 'नहीं' + 3 दुष्परिणाम",
+     "text": "पूरे 3 नंबर पक्के",
+     "at": [
+      41,
+      0.2
+     ],
+     "hl": [
+      "पक्के"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "notes",
+   "in": 42,
+   "out": 44,
+   "presenter": "standard",
+   "plate": "st-kremlin",
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "head",
+     "text": "सही format: Notes button",
+     "style": "accent",
+     "at": 42,
+     "fx": "drop"
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "in": 44,
+   "out": "end",
+   "presenter": "standard",
+   "broll": {
+    "clip": "r16",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "हर topic पूरा करते जाओ",
+     "at": 44,
+     "fx": "blur"
+    }
+   ]
+  }
+ ]
+}

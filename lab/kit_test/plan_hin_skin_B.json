@@ -1,0 +1,225 @@
+{
+ "project": "hin-mohenjodaro",
+ "part": 1,
+ "captions_from": 16,
+ "skin": "paper-editorial",
+ "theme": "mohar",
+ "presenter_style": "card",
+ "plate": "indus-seal-soapstone",
+ "spine": {
+  "title": "मोहनजोदड़ो के घर: 6 विशेषताएँ",
+  "items": [
+   "पिछला भाग सड़क की ओर",
+   "सामने सिर्फ मुख्य द्वार",
+   "खिड़कियाँ दूसरी मंज़िल पर",
+   "आँगन के चारों ओर कमरे",
+   "कतार में छोटे-बड़े घर",
+   "जैसलमेर जैसी बनावट"
+  ],
+  "lit_at": [
+   19,
+   23,
+   28,
+   33,
+   42,
+   45
+  ],
+  "show_from": 15
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "in": 0,
+   "out": 10,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "counter",
+     "slot": "upper",
+     "num": "3",
+     "label": "बार पूछा गया: 2022 · 2023 · 2025",
+     "at": 1
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "2 नंबर पक्के",
+     "at": 6
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": 10,
+   "out": 17,
+   "presenter": "small",
+   "elements": [
+    {
+     "type": "qcard",
+     "slot": "upper",
+     "question": "मोहनजोदड़ो के घरों की क्या विशेषताएँ थीं?",
+     "year": "2022, 23, 25",
+     "marks": "2 अंक",
+     "t_marks": [
+      11,
+      1
+     ],
+     "at": 10
+    }
+   ]
+  },
+  {
+   "id": "f1",
+   "in": 17,
+   "out": 22,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "section",
+     "slot": "head",
+     "num": "1",
+     "text": "पिछला भाग सड़क की ओर",
+     "at": 19
+    },
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "सामने वाला हिस्सा सड़क की ओर",
+     "yes": "पिछला हिस्सा सड़क की ओर",
+     "at": 19,
+     "t_yes": 20
+    }
+   ]
+  },
+  {
+   "id": "tracker",
+   "in": 29,
+   "out": 33,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "checklist",
+     "slot": "upper",
+     "lit": [
+      0,
+      1,
+      2
+     ],
+     "at": 29
+    }
+   ]
+  },
+  {
+   "id": "myth",
+   "in": 36,
+   "out": 41,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "ध्यान दें: बच्चे यहीं गलती करते हैं",
+     "size": "m",
+     "at": 36
+    },
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "घरों में खिड़कियाँ होती ही नहीं थीं",
+     "yes": "आँगन वाले कमरों में खिड़कियाँ थीं",
+     "at": 37,
+     "t_yes": 40
+    }
+   ]
+  },
+  {
+   "id": "jaisalmer",
+   "in": 45,
+   "out": 47,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "section",
+     "slot": "head",
+     "num": "6",
+     "text": "जैसलमेर जैसी बनावट",
+     "at": 45
+    },
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/mohenjodaro/jaisalmer-2.jpg",
+     "w": 800,
+     "label": "जैसलमेर: पारंपरिक घर (पटवों की हवेली)",
+     "at": 45
+    }
+   ]
+  },
+  {
+   "id": "recap",
+   "in": 47,
+   "out": 49,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 200,
+    "backdrop": "plate"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "छह विशेषताएँ, एक नज़र में",
+     "size": "m",
+     "at": 47
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 330,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:road",
+       "पिछला भाग सड़क ओर",
+       47
+      ],
+      [
+       "tabler:door",
+       "सिर्फ मुख्य द्वार",
+       47
+      ],
+      [
+       "tabler:window",
+       "दूसरी मंज़िल पर खिड़की",
+       47
+      ],
+      [
+       "tabler:home",
+       "आँगन + कमरे",
+       47
+      ],
+      [
+       "tabler:building",
+       "कतार में घर",
+       47
+      ],
+      [
+       "tabler:building-castle",
+       "जैसलमेर जैसे",
+       47
+      ]
+     ],
+     "recount": [
+      47,
+      47,
+      47,
+      47,
+      47,
+      47
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,274 @@
+{
+ "_about": "POL-C4-LA-05 part 1, plan B: paper-archival",
+ "project": "pol-c4-la-05",
+ "part": 1,
+ "skin": "paper-editorial",
+ "theme": "paper-archival",
+ "plate": "paper-archival-folded",
+ "spine": {
+  "title": "UN के चार कार्य",
+  "items": [
+   "शांति की स्थापना",
+   "गैर-राजनीतिक कार्य",
+   "सांस्कृतिक आदान-प्रदान",
+   "अवैध व्यापार पर प्रतिबंध"
+  ],
+  "lit_at": [
+   15
+  ],
+  "show_from": 13
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "in": 0,
+   "out": 5,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "दो देशों में लड़ाई की खबर",
+     "at": 1
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "UN: संयुक्त राष्ट्र संघ",
+     "style": "accent",
+     "at": 3
+    }
+   ],
+   "broll": {
+    "photo": "political-science/united-nations/peacekeepers-2.jpg",
+    "region": "top",
+    "treatment": "duotone-navy"
+   }
+  },
+  {
+   "id": "question",
+   "in": 5,
+   "out": 8,
+   "presenter": "small",
+   "elements": [
+    {
+     "type": "qcard",
+     "slot": "upper",
+     "question": "संयुक्त राष्ट्र संघ के कोई चार कार्य लिखिए।",
+     "year": "2023",
+     "marks": "4 अंक",
+     "t_marks": [
+      6,
+      0.3
+     ],
+     "at": 5
+    }
+   ],
+   "broll": {
+    "photo": "political-science/united-nations/assembly-1.jpg",
+    "region": "top",
+    "treatment": "duotone-navy"
+   }
+  },
+  {
+   "id": "structure",
+   "in": 8,
+   "out": 10,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "answer का ढाँचा",
+     "size": "m",
+     "at": 8
+    },
+    {
+     "type": "chain",
+     "slot": "upper",
+     "items": [
+      [
+       "1. छोटा सा परिचय",
+       8
+      ],
+      [
+       "2. चार कार्य",
+       9
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intro",
+   "in": 10,
+   "out": 13,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "def",
+     "slot": "over-broll-top",
+     "term": "संयुक्त राष्ट्र संघ",
+     "text": "अंतर्राष्ट्रीय संगठन",
+     "at": 10
+    },
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "स्थापना 1945",
+       11
+      ],
+      [
+       "विश्व शांति",
+       [
+        11,
+        1.6
+       ]
+      ],
+      [
+       "सुरक्षा",
+       12
+      ],
+      [
+       "सहयोग",
+       [
+        12,
+        1.2
+       ]
+      ]
+     ],
+     "style": "accent"
+    }
+   ],
+   "broll": {
+    "photo": "political-science/united-nations/charter-3.jpg",
+    "region": "top",
+    "treatment": "duotone-navy"
+   }
+  },
+  {
+   "id": "four",
+   "in": 13,
+   "out": 15,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "अब मुख्य भाग: चार कार्य",
+     "size": "m",
+     "at": 14
+    },
+    {
+     "type": "checklist",
+     "slot": "upper",
+     "lit": [],
+     "at": 13
+    }
+   ]
+  },
+  {
+   "id": "f1",
+   "in": 15,
+   "out": 18,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "1",
+     "text": "शांति की स्थापना",
+     "at": 15
+    },
+    {
+     "type": "chain",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "युद्ध को रोकना",
+       16
+      ],
+      [
+       "विश्व में शांति",
+       [
+        16,
+        1.6
+       ]
+      ],
+      [
+       "सहानुभूतिपूर्ण संबंध",
+       17
+      ]
+     ]
+    }
+   ],
+   "broll": {
+    "photo": "political-science/united-nations/peacekeepers-1.jpg",
+    "region": "top",
+    "treatment": "duotone-navy"
+   }
+  },
+  {
+   "id": "f1-word",
+   "in": 18,
+   "out": 19,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "def",
+     "slot": "head",
+     "term": "सहानुभूतिपूर्ण",
+     "text": "एक-दूसरे की तकलीफ़ समझने वाला",
+     "at": 18
+    }
+   ]
+  },
+  {
+   "id": "f1-first",
+   "in": 19,
+   "out": 21,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "upper",
+     "text": "मुख्य कार्य: सबसे पहले लिखो",
+     "at": 19
+    }
+   ]
+  },
+  {
+   "id": "teaser",
+   "in": 21,
+   "out": "end",
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "एक हो गया, तीन बाकी",
+     "size": "m",
+     "at": 21
+    },
+    {
+     "type": "checklist",
+     "slot": "upper",
+     "lit": [
+      0
+     ],
+     "at": 21
+    },
+    {
+     "type": "pill",
+     "slot": "under-upper",
+     "text": "बाकी तीन: Part 2",
+     "style": "accent",
+     "at": 22
+    }
+   ]
+  }
+ ],
+ "captions_from": 8
+}

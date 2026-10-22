@@ -1,0 +1,292 @@
+<!doctype html><meta charset="utf-8">
+<!--
+  The render surface. Node computes WHAT the map shows at time t; this page
+  only draws it.
+
+  WHY A BROWSER AND NOT MATPLOTLIB. Labels here are Devanagari, and complex
+  script shaping is the thing this repo has already been burned by — Pillow
+  without libraqm reorders matras silently (विद्युत् -> वदि्युत्). Chromium
+  shapes Devanagari correctly, the project already runs Playwright, and frames
+  already pipe into ffmpeg from it. So the map is SVG in a page.
+
+  Everything is redrawn from scratch each frame. At 1080x1920 with a few
+  hundred features that is comfortably fast, and it means a frame depends on
+  nothing but its state — no accumulated DOM, no leaked animation.
+-->
+<style>
+  html,body { margin:0; padding:0; overflow:hidden; background:#000; }
+  #stage { position:relative; }
+  svg { display:block; }
+  .lbl { font-family:'Noto Sans Devanagari','Poppins',sans-serif; font-weight:600;
+         paint-order:stroke fill; stroke-linejoin:round; }
+  #dbg { position:absolute; left:12px; top:12px; font:13px ui-monospace,monospace;
+         color:#9EF; background:rgba(0,0,0,.55); padding:8px 10px; white-space:pre;
+         border-radius:6px; }
+</style>
+<div id="stage"><svg id="map"></svg><div id="dbg" hidden></div></div>
+<!-- d3-geo is UMD and expects d3-array's global to exist already; loading it
+     second gives "d3.geoMercator is not a function". -->
+<script src="/tools/edu/renderer/node_modules/d3-array/dist/d3-array.min.js"></script>
+<script src="/tools/edu/renderer/node_modules/d3-geo/dist/d3-geo.min.js"></script>
+<script>
+const NS = 'http://www.w3.org/2000/svg';
+const el = (n, a = {}) => { const e = document.createElementNS(NS, n);
+  for (const k in a) if (a[k] !== undefined) e.setAttribute(k, a[k]); return e; };
+
+const MAP = {
+  async setup(cfg) {
+    this.cfg = cfg; this.theme = cfg.theme; this.W = cfg.width; this.H = cfg.height;
+    const svg = document.getElementById('map');
+    svg.setAttribute('width', this.W); svg.setAttribute('height', this.H);
+    document.getElementById('stage').style.width = this.W + 'px';
+    this.svg = svg;
+    this.data = {};
+    for (const [k, url] of Object.entries(cfg.datasets))
+      this.data[k] = await (await fetch(url)).json();
+    // THE DATA SCREEN. For arts videos the map is not the whole frame: it sits
+    // in a rounded window on a subject background, so the switch from a Veo
+    // scene (teacher inside the world) to a data screen reads as a deliberate
+    // change of register rather than a cut to a different video.
+    //
+    // The window is a clipPath, so no map ink can escape the rounded corners —
+    // drawing the frame on top instead leaves land showing through at the
+    // corners, which is exactly what a "premium textbook" does not do.
+    this.win = cfg.frame || null;   // NOT this.frame: that is the render method
+    this.proj = d3.geoMercator();
+    this.path = d3.geoPath(this.proj);
+    // index features by lowercased name, so a scene can say "Madhya Pradesh"
+    this.byName = new Map();
+    for (const key of ['states', 'countries', 'eras'])
+      for (const f of (this.data[key] || {}).features || []) {
+        const n = f.properties.name || f.properties.NAME;
+        if (n) this.byName.set(String(n).toLowerCase(), f);
+      }
+    window.MAP_READY = true;
+  },
+
+  bounds(name) {
+    const f = this.byName.get(String(name).toLowerCase());
+    return f ? d3.geoBounds(f).flat() : null;   // [w,s,e,n]
+  },
+
+  frame(s) {
+    const t = this.theme, svg = this.svg;
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    this.proj.center(s.camera.center)
+             .scale(s.camera.scale);
+
+    const F = this.win;
+    // THE CONTENT BOX. Full bleed does not mean the SUBJECT may use the whole
+    // frame: the presenter is keyed over the lower third, and a wide shot that
+    // centres the empire in the frame puts Suvarnagiri and Tosali behind his
+    // head. `theme.content` is the part of the frame the map is composed into —
+    // the basemap still fills everything, only the subject is lifted.
+    const CB = (!F && this.theme.content) ? this.theme.content : null;
+    const box = F ? { x: F.margin, y: F.top, w: this.W - 2 * F.margin, h: F.height }
+                  : (CB ? { x: 0, y: CB.top ?? 0, w: this.W, h: CB.height }
+                        : { x: 0, y: 0, w: this.W, h: this.H });
+    // the map is projected into the WINDOW's centre, not the frame's
+    this.proj.translate([box.x + box.w / 2, box.y + box.h / 2]);
+
+    if (F) {
+      svg.appendChild(el('rect', { width: this.W, height: this.H, fill: F.background }));
+      if (F.background_image) {
+        const im = el('image', { x: 0, y: 0, width: this.W, height: this.H,
+          preserveAspectRatio: 'xMidYMid slice' });
+        im.setAttributeNS('http://www.w3.org/1999/xlink', 'href', F.background_image);
+        im.setAttribute('href', F.background_image);
+        svg.appendChild(im);
+      }
+      const defs = el('defs'); svg.appendChild(defs);
+      const clip = el('clipPath', { id: 'win' });
+      clip.appendChild(el('rect', { x: box.x, y: box.y, width: box.w, height: box.h,
+                                    rx: F.radius, ry: F.radius }));
+      defs.appendChild(clip);
+      // the halo: a few widening strokes rather than a blur filter, which
+      // Chromium renders inconsistently between frames at this size
+      for (let i = F.halo_rings; i >= 1; i--)
+        svg.appendChild(el('rect', { x: box.x, y: box.y, width: box.w, height: box.h,
+          rx: F.radius, ry: F.radius, fill: 'none', stroke: F.halo,
+          'stroke-width': F.halo_width * i / F.halo_rings,
+          'stroke-opacity': (0.16 * (F.halo_rings - i + 1)) / F.halo_rings }));
+    }
+    const root = el('g', F ? { 'clip-path': 'url(#win)' } : {});
+    svg.appendChild(root);
+    root.appendChild(F ? el('rect', { x: box.x, y: box.y, width: box.w,
+                                      height: box.h, fill: t.water })
+                       : el('rect', { x: 0, y: 0, width: this.W, height: this.H,
+                                      fill: t.water }));
+    const layer = id => { const g = el('g', { id }); root.appendChild(g); return g; };
+
+    // --- basemap ----------------------------------------------------------
+    // A SHADED-RELIEF RASTER INSTEAD OF FLAT VECTOR LAND, when the theme has
+    // one. It is placed by projecting its two corners and stretching linearly,
+    // which is exact ONLY because the asset was resampled to Mercator offline:
+    // geoMercator is linear in longitude and in mercator-y, so a raster already
+    // in those coordinates maps to a rectangle. A plate carree image cannot be
+    // placed this way — it would be wrong by degrees of north-south stretch.
+    if (t.basemap) {
+      const b = t.basemap.bounds;               // [w, s, e, n]
+      const tl = this.proj([b[0], b[3]]), br = this.proj([b[2], b[1]]);
+      if (tl && br) {
+        const im = el('image', { x: tl[0], y: tl[1],
+          width: br[0] - tl[0], height: br[1] - tl[1],
+          preserveAspectRatio: 'none' });
+        if (t.basemap.saturate !== undefined)
+          im.setAttribute('style', `filter: saturate(${t.basemap.saturate})`);
+        im.setAttributeNS('http://www.w3.org/1999/xlink', 'href', t.basemap.url);
+        im.setAttribute('href', t.basemap.url);
+        root.appendChild(im);
+      }
+    } else {
+      // --- land (vector) --------------------------------------------------
+      const gLand = layer('land');
+      for (const f of (this.data.countries || {}).features || []) {
+        const india = (f.properties.NAME === 'India');
+        gLand.appendChild(el('path', { d: this.path(f),
+          fill: india ? t.land : t.land_muted,
+          stroke: t.border_country, 'stroke-width': t.line_country,
+          'stroke-linejoin': 'round' }));
+      }
+    }
+    // --- states -----------------------------------------------------------
+    if (s.layers.states) {
+      const g = layer('states');
+      for (const f of (this.data.states || {}).features || [])
+        g.appendChild(el('path', { d: this.path(f), fill: 'none',
+          stroke: t.border_state, 'stroke-width': t.line_state }));
+    }
+    // --- highlights (drawn over states so the fill reads) ------------------
+    // OVER A RELIEF BASEMAP THE FILL IS A COLOUR BLEND, not a translucent wash.
+    // `mix-blend-mode: color` takes hue and saturation from the fill and
+    // LUMINOSITY from the terrain underneath, so ridges and river valleys read
+    // straight through a fully saturated colour. Opacity cannot do this: it
+    // either hides the relief or desaturates the colour. The white edge is a
+    // SEPARATE path with no blend, or it would be tinted by what is beneath.
+    const gH = layer('highlights');
+    for (const h of s.highlights || []) {
+      const f = this.byName.get(String(h.feature).toLowerCase());
+      if (!f) continue;
+      const o = h.opacity ?? 1;
+      if (t.basemap) {
+        gH.appendChild(el('path', { d: this.path(f),
+          fill: h.color || t.region_fill || t.selected_region,
+          'fill-opacity': o, style: 'mix-blend-mode: color' }));
+        gH.appendChild(el('path', { d: this.path(f), fill: 'none',
+          stroke: t.region_edge || '#FFFFFF',
+          'stroke-width': t.region_edge_width ?? 5,
+          'stroke-linejoin': 'round', 'stroke-opacity': o }));
+      } else {
+        gH.appendChild(el('path', { d: this.path(f), fill: t.selected_region,
+          'fill-opacity': o * 0.85, stroke: t.selected_edge,
+          'stroke-width': 1.6, 'stroke-opacity': o }));
+      }
+    }
+    // --- water detail ------------------------------------------------------
+    if (s.layers.rivers) {
+      const g = layer('rivers');
+      for (const f of (this.data.rivers || {}).features || [])
+        g.appendChild(el('path', { d: this.path(f), fill: 'none',
+          stroke: t.river, 'stroke-width': 1.2, 'stroke-opacity': 0.9 }));
+    }
+    if (s.layers.lakes) {
+      const g = layer('lakes');
+      for (const f of (this.data.lakes || {}).features || [])
+        g.appendChild(el('path', { d: this.path(f), fill: t.lake, stroke: 'none' }));
+    }
+    // --- routes ------------------------------------------------------------
+    const gR = layer('routes');
+    for (const r of s.routes || []) {
+      if (r.frac <= 0) continue;
+      // Sampled along a great circle and cut at `frac`, so a half-drawn route
+      // ends where it has actually got to rather than being a dashed whole.
+      const pts = r.coords.slice(0, Math.max(2, Math.ceil(r.coords.length * r.frac)));
+      const line = { type: 'LineString', coordinates: pts };
+      gR.appendChild(el('path', { d: this.path(line), fill: 'none',
+        stroke: t.route, 'stroke-width': t.line_route, 'stroke-linecap': 'round',
+        'stroke-linejoin': 'round' }));
+      const head = this.proj(pts[pts.length - 1]);
+      if (head && r.frac < 1)
+        gR.appendChild(el('circle', { cx: head[0], cy: head[1], r: 5,
+          fill: t.route_head }));
+    }
+    // --- points ------------------------------------------------------------
+    const gP = layer('points'), gL = layer('labels');
+    // COLLISION AVOIDANCE. Points that are far apart on the ground can be a few
+    // pixels apart on a wide shot, and two Devanagari labels on top of each
+    // other are worse than one — the student reads neither. Each label is
+    // offered the slot above its point first (the textbook default), then
+    // below, then the sides; the first that does not overlap an already-placed
+    // label wins. Placement is in draw order, which is the order the teacher
+    // named them, so the earliest-mentioned keeps the best slot.
+    const placed = [];
+    const hits = (a, b) => !(a.x2 < b.x1 || a.x1 > b.x2 || a.y2 < b.y1 || a.y1 > b.y2);
+    const SLOTS = [[0, -1], [0, 1], [-1, 0], [1, 0], [-1, -1], [1, -1]];
+    for (const p of s.points || []) {
+      const xy = this.proj([p.lon, p.lat]);
+      if (!xy) continue;
+      const o = p.opacity ?? 1, r = (t.point_radius) * (p.scale ?? 1);
+      gP.appendChild(el('circle', { cx: xy[0], cy: xy[1], r: r + 3,
+        fill: t.point_ring, 'fill-opacity': o }));
+      gP.appendChild(el('circle', { cx: xy[0], cy: xy[1], r,
+        fill: t.point, 'fill-opacity': o }));
+      if (p.label) {
+        const size = p.small ? t.label_size_small : t.label_size;
+        // Devanagari is wider per glyph than Latin; 0.62em is measured from
+        // the Noto Sans Devanagari renders this engine produces, and is only
+        // used to reserve space, never to position glyphs.
+        const w = p.label.length * size * 0.62, h = size * 1.15;
+        let lx = xy[0], ly = xy[1] - r - 14;
+        // A slot must clear the other labels AND stay inside the window. The
+        // window clips, so a label that overflows is not merely crowded — it is
+        // sliced in half by the rounded edge, which is how तक्षशिला lost its
+        // top in the three-centres segment.
+        const pad = 8;
+        const inside = b => b.x1 >= box.x + pad && b.x2 <= box.x + box.w - pad
+                         && b.y1 >= box.y + pad && b.y2 <= box.y + box.h - pad;
+        for (const [dx, dy] of SLOTS) {
+          const cx = xy[0] + dx * (w / 2 + r + 10);
+          const cy = xy[1] + dy * (h / 2 + r + 12) + (dy <= 0 ? -2 : 6);
+          const b = { x1: cx - w / 2, x2: cx + w / 2, y1: cy - h, y2: cy + 4 };
+          if (inside(b) && !placed.some(q => hits(b, q))) {
+            lx = cx; ly = cy; placed.push(b); break;
+          }
+        }
+        if (t.label_style === 'chip') {
+          // A SOLID PLATE, NOT HALOED TEXT. Over a relief basemap a halo has
+          // nothing consistent to sit against — the ground under a label runs
+          // from white snow to dark ocean within one pan — so the label carries
+          // its own background instead.
+          const px = t.chip_pad_x ?? 22, py = t.chip_pad_y ?? 10;
+          const cw2 = w / 2 + px, ch2 = h / 2 + py;
+          gL.appendChild(el('rect', { x: lx - cw2, y: ly - h * 0.78 - py,
+            width: cw2 * 2, height: h + py * 2, fill: t.chip_fill || '#00A8A8',
+            'fill-opacity': o }));
+          const txt = el('text', { x: lx, y: ly, 'text-anchor': 'middle',
+            class: 'lbl', 'font-size': size, fill: t.chip_text || '#FFFFFF',
+            'fill-opacity': o });
+          txt.textContent = p.label;
+          gL.appendChild(txt);
+        } else {
+          const txt = el('text', { x: lx, y: ly, 'text-anchor': 'middle',
+            class: 'lbl', 'font-size': size, fill: t.label, stroke: t.label_halo,
+            'stroke-width': 6, 'fill-opacity': o, 'stroke-opacity': o * 0.9 });
+          txt.textContent = p.label;
+          gL.appendChild(txt);
+        }
+      }
+    }
+    if (F)
+      svg.appendChild(el('rect', { x: box.x, y: box.y, width: box.w, height: box.h,
+        rx: F.radius, ry: F.radius, fill: 'none', stroke: F.edge,
+        'stroke-width': F.edge_width }));
+
+    if (s.debug) {
+      const d = document.getElementById('dbg');
+      d.hidden = false;
+      d.textContent = s.debug;
+    }
+  },
+};
+window.MAP = MAP;
+</script>

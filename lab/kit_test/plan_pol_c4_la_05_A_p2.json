@@ -1,0 +1,296 @@
+{
+ "_about": "POL-C4-LA-05 part 2, plan A: un-blue",
+ "project": "pol-c4-la-05",
+ "part": 2,
+ "skin": "paper-editorial",
+ "theme": "un-blue",
+ "plate": "un-hq-blue",
+ "presenter_style": "card",
+ "spine": {
+  "title": "UN के चार कार्य",
+  "items": [
+   "शांति की स्थापना",
+   "गैर-राजनीतिक कार्य",
+   "सांस्कृतिक आदान-प्रदान",
+   "अवैध व्यापार पर प्रतिबंध"
+  ],
+  "lit_at": [
+   6,
+   16,
+   20
+  ],
+  "show_from": 0,
+  "pre_lit": 1
+ },
+ "beats": [
+  {
+   "id": "bridge",
+   "in": 0,
+   "out": 4,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "एक हो गया, तीन बाकी",
+     "size": "m",
+     "at": 0
+    },
+    {
+     "type": "checklist",
+     "slot": "upper",
+     "lit": [
+      0
+     ],
+     "at": 0
+    }
+   ]
+  },
+  {
+   "id": "f2",
+   "in": 4,
+   "out": 8,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "राजनीति से कोई लेना-देना नहीं",
+     "at": 5
+    },
+    {
+     "type": "section",
+     "slot": "over-broll-low",
+     "num": "2",
+     "text": "गैर-राजनीतिक कार्य",
+     "at": 6
+    }
+   ],
+   "broll": {
+    "clip": "v03",
+    "region": "full",
+    "dim": false
+   }
+  },
+  {
+   "id": "f2-tiles",
+   "in": 8,
+   "out": 11,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "section",
+     "slot": "head",
+     "num": "2",
+     "text": "गैर-राजनीतिक कार्य",
+     "at": 8
+    },
+    {
+     "type": "tiles",
+     "slot": "upper",
+     "cols": 2,
+     "items": [
+      [
+       "tabler:stethoscope",
+       "स्वास्थ्य",
+       [
+        8,
+        0.2
+       ]
+      ],
+      [
+       "tabler:coin",
+       "आर्थिक सहयोग",
+       [
+        8,
+        1.8
+       ]
+      ],
+      [
+       "tabler:mood-kid",
+       "स्त्री-बच्चों का शोषण रोकना",
+       9
+      ],
+      [
+       "tabler:tent",
+       "शरणार्थी समस्या",
+       10
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "refugee",
+   "in": 11,
+   "out": 14,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "def",
+     "slot": "over-broll-low",
+     "term": "शरणार्थी",
+     "text": "युद्ध या संकट से घर-देश छोड़ने वाले",
+     "at": 11
+    }
+   ],
+   "broll": {
+    "clip": "v04",
+    "region": "full",
+    "dim": false
+   }
+  },
+  {
+   "id": "two-done",
+   "in": 14,
+   "out": 16,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "checklist",
+     "slot": "upper",
+     "lit": [
+      0,
+      1
+     ],
+     "at": 14
+    }
+   ]
+  },
+  {
+   "id": "f3",
+   "in": 16,
+   "out": 20,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "3",
+     "text": "सांस्कृतिक आदान-प्रदान",
+     "at": 16
+    },
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "सभ्यता का लेन-देन",
+       17
+      ],
+      [
+       "संस्कृति का लेन-देन",
+       [
+        17,
+        1.8
+       ]
+      ],
+      [
+       "विश्व संस्कृति",
+       18
+      ]
+     ],
+     "style": "accent"
+    },
+    {
+     "type": "note",
+     "slot": "over-broll",
+     "text": "जैसे: योग पूरी दुनिया तक पहुँचा",
+     "at": 19
+    }
+   ],
+   "broll": {
+    "clip": "v05",
+    "region": "full",
+    "dim": false
+   }
+  },
+  {
+   "id": "f4",
+   "in": 20,
+   "out": 23,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "4",
+     "text": "अवैध व्यापार पर प्रतिबंध",
+     "at": 20
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "नशीली वस्तुओं के व्यापार पर रोक",
+     "at": 22
+    }
+   ],
+   "broll": {
+    "clip": "v06",
+    "region": "full",
+    "dim": false
+   }
+  },
+  {
+   "id": "recap",
+   "in": 23,
+   "out": 28,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "चारों कार्य, क्रम से",
+     "size": "m",
+     "at": 23
+    },
+    {
+     "type": "checklist",
+     "slot": "upper",
+     "lit": [],
+     "at": 23,
+     "lit_t": [
+      24,
+      25,
+      26,
+      27
+     ]
+    }
+   ]
+  },
+  {
+   "id": "marks",
+   "in": 28,
+   "out": 30,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "4 नंबर पक्के",
+     "at": 29
+    }
+   ],
+   "broll": {
+    "clip": "v02",
+    "region": "full",
+    "dim": true
+   }
+  },
+  {
+   "id": "outro",
+   "in": 30,
+   "out": "end",
+   "presenter": "hero",
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "head",
+     "text": "पूरा answer: Notes button",
+     "style": "accent",
+     "at": 31
+    }
+   ]
+  }
+ ]
+}

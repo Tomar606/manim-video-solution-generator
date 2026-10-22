@@ -1,0 +1,13 @@
+# D look — the atlas behind the whole video, with 2 territorial cause(s) pinned.
+# Static and short: it is looped by the compositor, and a pin that re-dropped
+# every loop would read as a glitch. Every pin is resolved from the location
+# registry and PROJECTED — a mock-up that placed them by eye put Kashmir in the
+# south, which is the error this replaces.
+scene: { id: pol_c3_la01_atlas_2, duration: 2.0 }
+map:
+  viewport: { center: [78.5, 19.2], zoom: 5.3 }
+  layers: { states: false }
+  actions:
+    - { time: 0.0, type: show_map }
+    - { time: 0.0, type: point, location: Hyderabad, label: "हैदराबाद" }
+    - { time: 0.0, type: point, location: Junagadh,  label: "जूनागढ़" }

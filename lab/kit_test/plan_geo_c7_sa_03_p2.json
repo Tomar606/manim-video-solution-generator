@@ -1,0 +1,620 @@
+{
+ "_about": "GEO-C7-SA-03 part 2, blueprint look",
+ "project": "geo-c7-sa-03",
+ "part": 2,
+ "skin": "paper-editorial",
+ "theme": "blueprint",
+ "presenter_style": "card",
+ "plate": "blueprint-pipeline-alaska",
+ "spine": {
+  "title": "पाइपलाइन परिवहन के 4 महत्व",
+  "items": [
+   "समय-श्रम की बचत",
+   "निरंतर आपूर्ति",
+   "किफायती और कुशल",
+   "पर्यावरण के अनुकूल"
+  ],
+  "pre_lit": 2,
+  "lit_at": [
+   5,
+   19
+  ],
+  "show_from": 0
+ },
+ "beats": [
+  {
+   "id": "recall",
+   "in": 0,
+   "out": 2,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 215,
+    "backdrop": "veo:c14@3"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "Part 1 में",
+     "size": "m",
+     "at": 0
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 330,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:clock",
+       "समय-श्रम की बचत",
+       0
+      ],
+      [
+       "tabler:infinity",
+       "निरंतर आपूर्ति",
+       0
+      ],
+      [
+       "tabler:coin-rupee",
+       "किफायती और कुशल",
+       999
+      ],
+      [
+       "tabler:leaf",
+       "पर्यावरण के अनुकूल",
+       999
+      ]
+     ],
+     "recount": [
+      [
+       1,
+       0.0
+      ],
+      [
+       1,
+       1.6
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "recall-flows",
+   "in": 2,
+   "out": 5,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "pipeflow",
+     "slot": "upper",
+     "title": "पानी से लेकर दूध तक",
+     "items": [
+      [
+       "जल",
+       "#3D8BFD",
+       [
+        3,
+        0.3
+       ]
+      ],
+      [
+       "पेट्रोलियम",
+       "#A0522D",
+       [
+        3,
+        0.6
+       ]
+      ],
+      [
+       "प्राकृतिक गैस",
+       "#9FE3F7",
+       [
+        3,
+        0.9
+       ]
+      ],
+      [
+       "LPG",
+       "#F28C28",
+       [
+        3,
+        1.2
+       ]
+      ],
+      [
+       "कोयले का स्लरी",
+       "#3A3A3A",
+       [
+        3,
+        1.5
+       ]
+      ],
+      [
+       "दूध (न्यूज़ीलैंड)",
+       "#F4F1E8",
+       [
+        3,
+        1.9
+       ],
+       true
+      ]
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "under-upper",
+     "text": "अब बाकी दो महत्व",
+     "style": "accent",
+     "at": 4
+    }
+   ]
+  },
+  {
+   "id": "cheap",
+   "in": 5,
+   "out": 8,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c11",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "3",
+     "text": "किफायती और कुशल परिवहन",
+     "at": 5
+    },
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "style": "accent",
+     "items": [
+      [
+       "तरल",
+       [
+        6,
+        2.1
+       ]
+      ],
+      [
+       "गैसीय",
+       [
+        6,
+        2.6
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "pills",
+     "slot": "over-broll",
+     "items": [
+      [
+       "किफायती",
+       [
+        6,
+        4.04
+       ]
+      ],
+      [
+       "कुशल",
+       [
+        7,
+        0.0
+       ]
+      ],
+      [
+       "सुरक्षित",
+       [
+        7,
+        0.94
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "meaning",
+   "in": 8,
+   "out": 10,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "किफायती = सस्ता",
+       8
+      ],
+      [
+       "कुशल = काम अच्छे से करने वाला",
+       9
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tankers",
+   "in": 10,
+   "out": 11,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c10",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "टैंकरों में, हज़ारों किलोमीटर",
+     "at": 10
+    }
+   ]
+  },
+  {
+   "id": "tanker-vs-pipe",
+   "in": 11,
+   "out": 13,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "compare",
+     "slot": "upper",
+     "left": [
+      "टैंकर से",
+      "महँगा, हादसे का खतरा"
+     ],
+     "right": [
+      "पाइप से",
+      "सस्ता, खतरा कम"
+     ],
+     "at": 11,
+     "right_at": [
+      11,
+      0.6
+     ]
+    }
+   ]
+  },
+  {
+   "id": "liquid-gas",
+   "in": 13,
+   "out": 17,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "ध्यान दें",
+     "size": "m",
+     "at": 13
+    },
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "ठोस पदार्थ",
+     "yes": "तरल और गैसीय पदार्थ",
+     "at": 14,
+     "t_yes": [
+      14,
+      3.79
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "ये दोनों शब्द लिखें",
+     "at": 16
+    }
+   ]
+  },
+  {
+   "id": "three-done",
+   "in": 17,
+   "out": 18,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 215,
+    "backdrop": "veo:c11@3"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "तीसरा भी समझ आ गया",
+     "size": "m",
+     "at": 17
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 330,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:clock",
+       "समय-श्रम की बचत",
+       17
+      ],
+      [
+       "tabler:infinity",
+       "निरंतर आपूर्ति",
+       17
+      ],
+      [
+       "tabler:coin-rupee",
+       "किफायती और कुशल",
+       17
+      ],
+      [
+       "tabler:leaf",
+       "पर्यावरण के अनुकूल",
+       999
+      ]
+     ],
+     "recount": [
+      17,
+      17,
+      [
+       17,
+       0.5
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "green",
+   "in": 18,
+   "out": 20,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c13",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "सबसे बड़ा point",
+     "at": 18
+    },
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "4",
+     "text": "पर्यावरण के अनुकूल",
+     "at": [
+      19,
+      2.4
+     ]
+    }
+   ]
+  },
+  {
+   "id": "smoke",
+   "in": 20,
+   "out": 23,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c12",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "सड़क-रेल: बार-बार आना-जाना",
+       20
+      ],
+      [
+       "कम गाड़ियाँ = कम धुआँ",
+       22
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sentence",
+   "in": 23,
+   "out": 28,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "chain",
+     "slot": "upper",
+     "items": [
+      [
+       "पाइपलाइन",
+       23
+      ],
+      [
+       "अपेक्षाकृत",
+       [
+        24,
+        2.27
+       ]
+      ],
+      [
+       "पर्यावरण-अनुकूल",
+       [
+        24,
+        3.55
+       ]
+      ],
+      [
+       "परिवहन माध्यम",
+       [
+        25,
+        0.0
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "relatively",
+   "in": 28,
+   "out": 30,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "def",
+     "slot": "head",
+     "term": "अपेक्षाकृत",
+     "text": "बाकी साधनों की तुलना में",
+     "at": 29
+    },
+    {
+     "type": "stamp",
+     "slot": "upper",
+     "text": "ये शब्द ज़रूर लिखें",
+     "at": 28
+    }
+   ]
+  },
+  {
+   "id": "one-sentence",
+   "in": 30,
+   "out": 35,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 215,
+    "backdrop": "veo:c13@3"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "चारों, एक वाक्य में",
+     "size": "m",
+     "at": 30
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 330,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:clock",
+       "समय-श्रम की बचत",
+       30
+      ],
+      [
+       "tabler:infinity",
+       "निरंतर आपूर्ति",
+       30
+      ],
+      [
+       "tabler:coin-rupee",
+       "किफायती और कुशल",
+       30
+      ],
+      [
+       "tabler:leaf",
+       "पर्यावरण के अनुकूल",
+       30
+      ]
+     ],
+     "recount": [
+      [
+       31,
+       0.76
+      ],
+      [
+       31,
+       1.66
+      ],
+      [
+       32,
+       0.0
+      ],
+      [
+       32,
+       1.44
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "marks",
+   "in": 35,
+   "out": 38,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c03",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "चारों महत्व + न्यूज़ीलैंड उदाहरण",
+     "style": "accent",
+     "at": 36
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "3 नंबर पक्के",
+     "at": 37
+    }
+   ]
+  },
+  {
+   "id": "notes",
+   "in": 38,
+   "out": 39,
+   "presenter": "hero",
+   "broll": {
+    "clip": "c11",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "head",
+     "text": "पूरा format: Notes button",
+     "style": "accent",
+     "at": 38
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "in": 39,
+   "out": "end",
+   "presenter": "hero",
+   "broll": {
+    "clip": "c14",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "सप्लाई की तरह, पढ़ाई भी लगातार",
+     "at": 40
+    }
+   ]
+  }
+ ]
+}

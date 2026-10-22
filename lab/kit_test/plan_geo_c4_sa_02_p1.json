@@ -1,0 +1,92 @@
+{
+ "_about": "GEO-C4-SA-02 part 1 (चलवासी पशुचारण). Terrain-atlas look; clip-led: ten Veo b-roll shots (veo/prompts/broll) carry most beats, graphics are legend-glass panels laid over them. Presenter: standard cutout, plus the circle hub for the five needs and the 2x2 recap, each hub backed by a frame of this video's own footage. The earlier field-journal version is kept as plan_geo_c4_sa_02_p1.field-journal.json.",
+ "project": "geo-c4-sa-02",
+ "part": 1,
+ "captions_from": 6,
+ "skin": "paper-editorial",
+ "theme": "terrain-atlas",
+ "plate": "pasture-changthang",
+ "spine": {
+  "title": "चलवासी पशुचारण",
+  "items": ["प्राकृतिक वनस्पति", "निश्चित क्षेत्र", "मौसम का अनुभव"],
+  "lit_at": [16, 19, 24],
+  "show_from": 16
+ },
+ "beats": [
+  {"id": "hook", "in": 0, "out": 3, "presenter": "standard",
+   "broll": {"clip": "b01", "region": "full"},
+   "elements": [
+    {"type": "pills", "slot": "over-broll-low", "items": [["खाना", [1, 0.6]], ["कपड़े", [1, 1.2]], ["तंबू", [1, 1.8]], ["सवारी", [1, 2.6]]], "style": "accent"},
+    {"type": "note", "slot": "over-broll-top", "text": "सब कुछ जानवरों से", "at": 2}
+   ]},
+  {"id": "question", "in": 3, "out": 6, "presenter": "small",
+   "broll": {"clip": "b02", "region": "full", "dim": true},
+   "elements": [
+    {"type": "qcard", "slot": "upper", "question": "चलवासी पशुचारण की कोई तीन विशेषताएँ लिखिए।", "year": "2024", "marks": "3 अंक", "t_marks": [3, 1.5], "at": 4}
+   ]},
+  {"id": "name", "in": 6, "out": 9, "presenter": "standard",
+   "broll": {"clip": "b03", "region": "full"},
+   "elements": [
+    {"type": "def", "slot": "over-broll-low", "term": "चलवासी", "text": "जो एक जगह टिकते नहीं", "at": 7},
+    {"type": "note", "slot": "over-broll-top", "text": "चलते-फिरते रहते हैं", "at": 8}
+   ]},
+  {"id": "subsistence", "in": 9, "out": 12, "presenter": "standard",
+   "broll": {"clip": "b04", "region": "full"},
+   "elements": [
+    {"type": "headline", "slot": "head", "text": "जीवन निर्वाह के लिए पशुपालन", "size": "m", "at": 9},
+    {"type": "yn", "slot": "upper", "no": "बेचने के लिए", "yes": "अपने गुज़ारे के लिए", "t_yes": [10, 1.6], "at": 10}
+   ]},
+  {"id": "five-needs", "in": 12, "out": 16, "presenter": "hub",
+   "hub": {"cy": 1000, "r": 215, "backdrop": "veo:b02@1"},
+   "elements": [
+    {"type": "headline", "slot": "head", "text": "पाँच ज़रूरतें, एक सहारा: पशु", "size": "m", "at": 14},
+    {"type": "radial", "slot": "around-hub", "radius": 370,
+     "items": [["tabler:tools-kitchen-2", "भोजन", [12, 1.4]], ["tabler:shirt", "वस्त्र", [12, 2.0]], ["tabler:tent", "शरण", [12, 2.6]], ["tabler:tools", "औज़ार", [13, 0.2]], ["tabler:horse", "यातायात", [13, 1.0]]],
+     "recount": [[14, 2.4], [14, 3.4], [14, 4.2], [15, 0.3], [15, 1.4], [15, 2.6]]}
+   ]},
+  {"id": "f1", "in": 16, "out": 19, "presenter": "standard",
+   "broll": {"clip": "b05", "region": "full"},
+   "elements": [
+    {"type": "section", "slot": "over-broll-top", "num": "1", "text": "प्राकृतिक वनस्पति पर निर्भर", "at": 16},
+    {"type": "def", "slot": "over-broll-low", "term": "प्राकृतिक वनस्पति", "text": "अपने आप उगी घास, झाड़ियाँ", "at": 17},
+    {"type": "stamp", "slot": "over-broll", "text": "न उगाया, न खरीदा", "at": 18}
+   ]},
+  {"id": "f2-clip", "in": 19, "out": 21, "presenter": "standard",
+   "broll": {"clip": "b06", "region": "full"},
+   "elements": [
+    {"type": "section", "slot": "over-broll-top", "num": "2", "text": "आवागमन का क्षेत्र निश्चित", "at": 19},
+    {"type": "note", "slot": "over-broll-low", "text": "ध्यान से: यहीं गलती होती है", "at": 20}
+   ]},
+  {"id": "f2-map", "in": 21, "out": 24, "presenter": "standard",
+   "elements": [
+    {"type": "section", "slot": "head", "num": "2", "text": "आवागमन का क्षेत्र निश्चित", "at": 21},
+    {"type": "territory", "slot": "upper", "label": "निश्चित क्षेत्र", "t_wrong": 21, "t_cross": [21, 0.9], "t_right": 22, "t_label": [23, 1.5], "at": 21}
+   ]},
+  {"id": "f3-clip", "in": 24, "out": 26, "presenter": "standard",
+   "broll": {"clip": "b07", "region": "full"},
+   "elements": [
+    {"type": "section", "slot": "over-broll-top", "num": "3", "text": "मौसम का अनुभव", "at": 24}
+   ]},
+  {"id": "f3-seasons", "in": 26, "out": 29, "presenter": "standard",
+   "broll": {"clip": "b08", "region": "full", "dim": true},
+   "elements": [
+    {"type": "seasons", "slot": "upper", "h": 640,
+     "stops": [["tabler:sun", 1, 1, [26, 0.4]], ["tabler:cloud-rain", 3, 3, [26, 1.4]], ["tabler:snowflake", 2, 1, [26, 2.4]]],
+     "note": "मौसम देखकर, सोच-समझकर", "t_note": 28, "at": 26},
+    {"type": "stamp", "slot": "under-upper", "text": "अंधाधुंध नहीं", "at": 27}
+   ]},
+  {"id": "recap", "in": 29, "out": 36, "presenter": "hub",
+   "hub": {"cy": 960, "r": 200, "backdrop": "veo:b06@2"},
+   "elements": [
+    {"type": "quad", "slot": "around-hub", "nums": ["1", "2", "3", "+"], "icons": ["tabler:plant-2", "tabler:route", "tabler:cloud-rain", "tabler:pencil"],
+     "items": [["प्राकृतिक वनस्पति", "पशु पूरी तरह इसी पर निर्भर", 30], ["निश्चित चारागाह", "हर वर्ग का, सुस्पष्ट सीमा", 31],
+               ["मौसम का ज्ञान", "जल और घास की पूरी जानकारी", 33], ["शुरुआत में लिखो", "परिभाषा + पाँच ज़रूरतें", 34]]},
+    {"type": "stamp", "slot": "hub-below", "text": "3 नंबर पक्के", "at": 35}
+   ]},
+  {"id": "outro", "in": 36, "out": "end", "presenter": "hero",
+   "broll": {"clip": "b10", "region": "full", "dim": true},
+   "elements": [
+    {"type": "pill", "slot": "head", "text": "पूरा answer: Notes button", "style": "accent", "at": 37}
+   ]}
+ ]
+}

@@ -1,0 +1,97 @@
+/* blueprint — an engineering drawing of a pipeline.  Plate: the Trans-Alaska
+   Pipeline zigzagging across the tundra (Arthur T. LaBar, CC BY 2.0), toned
+   blueprint-blue under a drafting grid.  Panels are navy drafting sheets with a
+   thin white rule and corner ticks; the key is SAFETY YELLOW (the colour pipes,
+   valves and marker posts are painted), the second key a cool cyan.  Khand set
+   condensed for heads, like stencilled plant labels.
+   Music: tech-pulse / documentary.  SFX: element-pop, whoosh, tick, stamp. */
+@font-face { font-family: 'Martel'; src: url('../../../library/elements/fonts/Martel-Bold.ttf'); font-weight: 700; }
+@font-face { font-family: 'Martel'; src: url('../../../library/elements/fonts/Martel-ExtraBold.ttf'); font-weight: 800; }
+
+#frame.theme-blueprint {
+  --ink: #EEF4F7;
+  --accent: #F5C518;          /* teal: the sea lane, the key */
+  --accent-2: #7FD8FF;        /* amber: numbers and the port being named */
+  --muted: #9FB3BF;
+  --paper: #0A2140;
+  --card-bg: rgba(10, 33, 64, .88);
+  --solid: rgba(10, 33, 64, .94);
+  --card-border: rgba(220, 238, 255, .55);
+  --font-head: 'Khand', 'Noto Sans Devanagari', sans-serif;
+  --head-weight: 800;
+  --head-stretch: 100%;
+  --font-body: 'Noto Sans Devanagari', sans-serif;
+  --font-num: 'Khand', sans-serif;
+  --halo: 0 0 6px rgba(0, 0, 0, .85), 0 2px 3px rgba(0, 0, 0, .9);
+  --glass-shadow: 0 12px 28px rgba(0, 0, 0, .45);
+    color: var(--ink);
+}
+
+.theme-blueprint .card, .theme-blueprint .qcard, .theme-blueprint .k-card, .theme-blueprint .compare .k-card,
+.theme-blueprint .k-def, .theme-blueprint .yn .side, .theme-blueprint .imgcard, .theme-blueprint .panel {
+  background: var(--card-bg) !important; border: 1.5px solid var(--card-border) !important; border-radius: 4px !important;
+  box-shadow: var(--glass-shadow) !important; border-top: 7px solid var(--accent) !important;
+  background-image: linear-gradient(var(--accent), var(--accent)), linear-gradient(var(--accent), var(--accent)), linear-gradient(var(--accent), var(--accent)), linear-gradient(var(--accent), var(--accent)) !important;
+  background-size: 26px 4px, 4px 26px, 26px 4px, 4px 26px !important; background-repeat: no-repeat !important;
+  background-position: right 8px bottom 8px, right 8px bottom 8px, left 8px bottom 8px, left 8px bottom 8px !important; background-color: var(--card-bg) !important; color: var(--ink);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.theme-blueprint .k-head { font-family: 'Khand'; font-weight: 700; }
+.theme-blueprint .hl-m { font-family: 'Khand'; font-weight: 700; color: #fff; text-shadow: var(--halo); text-wrap: balance; font-size: 78px; line-height: 1.15; }
+.theme-blueprint .qcard .k-head { color: var(--accent) !important; }
+
+.theme-blueprint .k-section-tag { background: var(--card-bg) !important; border: 1.5px solid var(--card-border) !important; box-shadow: var(--glass-shadow) !important;
+  display: inline-flex; align-items: center; gap: 18px; padding: 8px 30px 8px 8px; border-radius: 44px; }
+.theme-blueprint .k-section-tag__num { width: 70px; height: 70px; border-radius: 50%; display: grid; place-items: center; padding: 0;
+  background: var(--accent); color: #1A1400; font-family: 'Khand'; font-weight: 700; font-size: 52px; line-height: 1; }
+.theme-blueprint .k-section-tag__text { font-family: 'Khand'; font-weight: 700; font-size: 62px; color: var(--ink); background: none; padding: 0; line-height: 1.5; }
+
+.theme-blueprint .k-pill { border-radius: 40px !important; font-family: 'Noto Sans Devanagari'; font-weight: 700; font-size: 46px;
+  background: var(--card-bg) !important; color: var(--ink) !important; border: 1.5px solid var(--card-border) !important;
+  padding: 6px 30px 6px 20px; box-shadow: var(--glass-shadow); display: inline-flex; align-items: center; gap: 14px; }
+.theme-blueprint .k-pill::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); flex: none; }
+.theme-blueprint .k-pill--accent { background: var(--accent) !important; color: #1A1400 !important; border-color: var(--accent) !important; }
+.theme-blueprint .k-pill--accent::before { background: #1A1400; }
+
+.theme-blueprint .k-stamp { font-family: 'Khand'; font-weight: 700; color: var(--accent-2); border-color: var(--accent-2);
+  outline-color: var(--accent-2); background: var(--solid) !important; -webkit-mask-image: none; mix-blend-mode: normal; border-radius: 12px; }
+
+.theme-blueprint .note { font-family: 'Noto Sans Devanagari'; font-weight: 700; font-size: 48px; color: var(--accent-2); text-shadow: var(--halo); }
+.theme-blueprint .note.on-photo { background: var(--card-bg); padding: 8px 24px; border-radius: 12px; text-shadow: none; }
+
+.theme-blueprint #spine { left: 24px; right: 24px; top: 24px; height: 92px; background: var(--card-bg); border-radius: 46px; border: 1.5px solid var(--card-border);
+  padding: 0 30px; box-sizing: border-box; box-shadow: var(--glass-shadow); }
+.theme-blueprint #spine .ttl { font-family: 'Khand'; font-weight: 700; font-size: 40px; color: var(--ink); }
+.theme-blueprint #spine .k-dots i { width: 26px; height: 26px; border-radius: 50%; background: transparent; border: 4px solid var(--accent); margin: 0 6px; }
+.theme-blueprint #spine .k-dots i.on { background: var(--accent); }
+.theme-blueprint #spine .cnt { font-family: 'Khand'; font-weight: 700; color: var(--accent-2); }
+
+.theme-blueprint #cap { font-family: 'Noto Sans Devanagari'; font-weight: 700; font-size: 44px; color: var(--ink);
+  --torn-bg: rgba(10, 33, 64, .92); clip-path: none; border-radius: 14px; box-shadow: var(--glass-shadow); border: 1.5px solid var(--card-border); }
+.theme-blueprint #cap .hl { color: var(--accent-2); }
+
+.theme-blueprint .hub-ring { border: 8px solid #fff; box-shadow: 0 0 0 5px var(--accent), var(--glass-shadow); }
+.theme-blueprint .hub-route { border: 3px dashed rgba(245, 197, 24, .8); }
+.theme-blueprint .num { font-family: 'Khand'; font-weight: 700; color: var(--accent-2); }
+
+.theme-blueprint #broll { background: #000; }
+.theme-blueprint #broll img { filter: saturate(1.05) !important; mix-blend-mode: normal !important; }
+.theme-blueprint #broll::after { background-image: none; background: linear-gradient(180deg, rgba(4,12,22,.45) 0%, transparent 20%, transparent 58%, rgba(4,12,22,.6) 100%); mix-blend-mode: normal; }
+.theme-blueprint #broll.dim img { filter: brightness(.5) saturate(.85) !important; }
+
+.theme-blueprint .p-card { border: 8px solid #fff; box-shadow: 0 0 0 4px var(--accent), var(--glass-shadow); }
+
+/* pipe-flow rows: steel pipe, the contents striping past at a steady speed */
+.theme-blueprint .pipe { position: relative; height: 58px; border-radius: 29px; background: linear-gradient(180deg, #5F7184, #2B3A4A 55%, #1A2532);
+  border: 3px solid rgba(220, 238, 255, .7); overflow: hidden; box-sizing: border-box; }
+.theme-blueprint .pipe i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 26px; }
+.theme-blueprint .pipe-label { font-family: 'Noto Sans Devanagari'; font-weight: 800; font-size: 44px; color: var(--ink); white-space: nowrap; }
+.theme-blueprint .pipe-row.on .pipe-label { color: var(--accent); }
+
+/* Khand sets small: lift the body text of the stock templates so it reads on a phone */
+.theme-blueprint .pipe-label { font-size: 50px; }
+.theme-blueprint .yn .side div:last-child { font-size: 52px !important; }
+.theme-blueprint .k-def__term { font-size: 56px !important; }
+.theme-blueprint .k-def__text { font-size: 50px !important; }
+.theme-blueprint .k-counter__label { font-size: 48px !important; }
+.theme-blueprint .card > span:last-child { font-size: 52px !important; }

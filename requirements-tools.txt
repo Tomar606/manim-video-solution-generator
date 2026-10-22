@@ -17,3 +17,10 @@ pillow                   # Devanagari typesetting for the answer card
 python-docx              # reading the script drafts the team writes in Word
 pydantic>=2.10.0         # structured LLM outputs, shared with src/
 python-dotenv>=1.0.1
+
+# the arts kit (lab/kit_test) and its tools
+requests                 # Whisper API calls in tools/kit_captions.py
+openpyxl                 # reading the question sheet's xlsx export (answer-page links)
+scipy                    # signal maths in the sound and key measurements
+PyYAML
+facenet-pytorch          # face_gate / avatar_shape_gate (tools/gates.py runs them)

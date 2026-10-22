@@ -1,0 +1,14 @@
+# POL-C3-LA-01 M3 — कारण 5, कश्मीर. The north-west frontier, which is the whole
+# reason it is रणनीतिक. All three causes' places are on screen by now, so the
+# student can see the spread of the dispute across the map.
+scene: { id: pol_c3_la01_m3_kashmir, duration: 12.0 }
+map:
+  base: India
+  layers: { states: false }
+  actions:
+    - { time: 0.0, type: show_map }
+    - { time: 0.0, type: point,  location: Hyderabad, label: "हैदराबाद" }
+    - { time: 0.0, type: point,  location: Junagadh,  label: "जूनागढ़" }
+    - { time: 1.0, type: point,  location: Srinagar,  label: "श्रीनगर" }
+    - { time: 1.8, type: fly_to, location: Srinagar, zoom: 5.0, duration: 2.8 }
+    - { time: 8.6, type: fly_to, location: India, duration: 2.6 }

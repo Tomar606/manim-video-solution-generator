@@ -227,6 +227,16 @@ def to_full_page(card: Path, frame_w: int, frame_h: int, dest: Path) -> Path:
     if pitch >= 8 and rows:
         floor = (written + pitch) if written is not None else int(im.height * 0.55)
         band_top = next((r for r in rows if r > floor), None)
+        # AND THE BAND MUST HOLD NO INK. written_bottom() needs a minimum row coverage, so a short
+        # closing line ("करना।") reads as blank, and POL-C4-LA-06 shipped with that line printed
+        # twice more down the extension.  So look at the pixels: dark and NOT red (the margin rule
+        # is red and dark enough to count), and step down past any pitch that has writing in it.
+        ink = ((arr.astype(int).mean(axis=2) < INK_LEVEL) & (arr[..., 2].astype(int) >= arr[..., 0].astype(int) - 10))
+        inked = lambda y0, y1: int(ink[y0:y1, int(frame_w * 0.12):].sum()) > 25
+        while band_top is not None and band_top + pitch <= arr.shape[0] and inked(band_top, band_top + pitch):
+            band_top = next((r for r in rows if r > band_top), None)
+        if band_top is not None and band_top + pitch > arr.shape[0]:
+            band_top = None
         if band_top is not None:
             # CLAMPED to the sheet. Cropping past the bottom edge returns BLACK
             # padding, and pasting that under the answer put a 300px black bar
@@ -235,6 +245,8 @@ def to_full_page(card: Path, frame_w: int, frame_h: int, dest: Path) -> Path:
             # leaves no blank band at all, which is exactly when it happened.
             usable = (arr.shape[0] - band_top) // pitch
             n = min(max(1, (frame_h - im.height) // pitch + 1), usable)
+            while n >= 1 and inked(band_top, band_top + n * pitch):     # a taller band can reach writing below
+                n -= 1
             if n >= 1:
                 band = im.crop((0, band_top, frame_w, band_top + n * pitch))
 
@@ -265,8 +277,14 @@ def to_full_page(card: Path, frame_w: int, frame_h: int, dest: Path) -> Path:
         # tile. The margin rule itself sits further in, so this narrow band is
         # blank paper on a good row.
         edge = slice(0, max(4, int(frame_w * 0.037)))
+        # ...and no INK anywhere across the row.  The middle test starts a quarter of the way in, and
+        # a short closing line ("करना।" at x 130-207) sits between the edge band and it: it passed as
+        # blank paper and was tiled four times down POL-C4-LA-06's page.
+        rgb = arr.astype(int)
+        ink_row = (((rgb.mean(axis=2) < INK_LEVEL) & (rgb[..., 2] >= rgb[..., 0] - 10))[:, int(frame_w * 0.05):]).sum(axis=1)
         clear = np.array([g[y, mid].min() > paper_lum - 40
                           and g[y, edge].min() > paper_lum - 40
+                          and ink_row[y] == 0
                           for y in range(g.shape[0])])
         # The LAST long run of blank paper, found by scanning the sheet itself.
         #
@@ -287,7 +305,13 @@ def to_full_page(card: Path, frame_w: int, frame_h: int, dest: Path) -> Path:
         if runs:
             top, bot = runs[-1]
             page.paste(im.crop((0, 0, frame_w, bot)), (0, 0))   # drop the edge
-            band = im.crop((0, top, frame_w, min(bot, top + 200)))
+            # ONE clean row, stretched, not a 200px strip.  A strip carries whatever faint marks sit in
+            # it (dust specks, a slice of the diagonal watermark) and tiling repeats them down the page:
+            # HIS-C2-SA-06 and POL-C4-LA-06 ended on rows of watermark fragments and dots.  A single
+            # row still carries the margin rule and the paper colour, which is all the extension needs.
+            span = g[top:bot + 1, int(frame_w * 0.15):]
+            y_clean = top + int(np.argmin(span.std(axis=1) + (paper_lum - span.mean(axis=1)).clip(0)))
+            band = im.crop((0, y_clean, frame_w, y_clean + 1)).resize((frame_w, 200), Image.NEAREST)
             start_y = bot
 
     if band is not None and band.height > 0:
@@ -307,12 +331,27 @@ def to_full_page(card: Path, frame_w: int, frame_h: int, dest: Path) -> Path:
     if len(bad):
         print(f"   \u26a0 the page is not paper below y={im.height + int(bad.min())} "
               f"({len(bad)} row(s)) \u2014 the ruling extension failed")
+    # GATE: no handwriting may appear in the extension.  A repeated answer line looks like a real
+    # line of the answer, so nothing above catches it by eye or by luminance.
+    if extension_ink(dest, im.height) > 25:
+        raise SystemExit(f"\u274c {dest.name}: handwriting copied into the paper extension below y={im.height}")
     return dest
+
+
+def extension_ink(page_png: Path, sheet_h: int) -> int:
+    """Pixels of handwriting ink (dark, not the red margin rule) below the sheet's own height."""
+    import numpy as np
+    from PIL import Image
+    a = np.asarray(Image.open(page_png).convert("RGB"))[sheet_h + 4:]
+    w = a.shape[1]
+    ink = (a.astype(int).mean(axis=2) < INK_LEVEL) & (a[..., 2].astype(int) >= a[..., 0].astype(int) - 10)
+    return int(ink[:, int(w * 0.12):].sum())
 
 
 def build(video: Path, card: Path, out: Path, hold: float, fade: float,
           plate: str | None = None, card2: Path | None = None,
-          hold2: float | None = None, in_fade: float | None = None) -> None:
+          hold2: float | None = None, in_fade: float | None = None,
+          more: list[Path] | None = None) -> None:
     """One card, or two shown in turn.
 
     A long answer runs to two sheets, and a student cannot read the second if it
@@ -342,6 +381,20 @@ def build(video: Path, card: Path, out: Path, hold: float, fade: float,
                 # black at the very end, not a dissolve back to the plate
                 f"[t0]fade=t=out:st={fade + hold}:d={fade}:color=black,"
                 f"format=yuv420p[tail];")
+    elif more:
+        # THREE OR MORE PAGES (POL-C3-LA-01's answer runs to three sheets): the same
+        # page-turn cut between each, only the last page fades to black.
+        cut = 0.08
+        pages = [card, card2] + list(more)
+        holds = [hold] + [hold2] * (len(pages) - 1)
+        durs = [ifade + holds[0] + cut] + [cut + h_ + cut for h_ in holds[1:-1]] + [cut + holds[-1] + fade]
+        tail = "".join(page(2 + i, d_, f"p{i}") for i, d_ in enumerate(durs))
+        prev, acc = "p0", durs[0]
+        for i in range(1, len(pages)):
+            tail += f"[{prev}][p{i}]xfade=transition=fade:duration={cut}:offset={acc - cut:.3f}[x{i}];"
+            prev, acc = f"x{i}", acc + durs[i] - cut
+        card_dur = acc
+        tail += f"[{prev}]fade=t=out:st={card_dur - fade:.3f}:d={fade}:color=black,format=yuv420p[tail];"
     else:
         # ALL BUT A CUT BETWEEN PAGES. These are two dense sheets of
         # handwriting: cross-faded over a second, both sets of text are legible
@@ -377,6 +430,8 @@ def build(video: Path, card: Path, out: Path, hold: float, fade: float,
     ins = ["-i", str(video), "-i", str(video), "-loop", "1", "-i", str(card)]
     if card2 is not None:
         ins += ["-loop", "1", "-i", str(card2)]
+    for c in more or []:
+        ins += ["-loop", "1", "-i", str(c)]
     subprocess.run(
         ["ffmpeg", "-y", "-v", "error", *ins,
          "-filter_complex", chain, "-map", "[v]", "-map", "[a]",
@@ -401,7 +456,7 @@ def main() -> int:
                                    "(default: sampled from the video)")
     p.add_argument("--no-trim", action="store_true",
                    help="place the whole sheet, blank rows and all")
-    p.add_argument("--then", help="a SECOND page, shown after the first")
+    p.add_argument("--then", action="append", help="a further page, shown after the first; repeat for a third")
     p.add_argument("--then-hold", type=float,
                    help="seconds the second page holds (default: same as --hold)")
     p.add_argument("--in-fade", type=float,
@@ -412,8 +467,9 @@ def main() -> int:
     a = p.parse_args()
 
     video, card, out = Path(a.video), Path(a.card), Path(a.out)
-    card2 = Path(a.then) if a.then else None
-    for path in [video, card] + ([card2] if card2 else []):
+    thens = [Path(x) for x in (a.then or [])]
+    card2 = thens[0] if thens else None
+    for path in [video, card] + thens:
         if not path.exists():
             raise SystemExit(f"❌ not found: {path}")
     print(f"🎬 answer outro -> {out}")
@@ -425,8 +481,9 @@ def main() -> int:
     if card2 is not None:
         card2 = to_full_page(card2, v["w"], v["h"],
                              card2.with_name(f"{card2.stem}_page.png"))
+    more = [to_full_page(c, v["w"], v["h"], c.with_name(f"{c.stem}_page.png")) for c in thens[1:]]
     build(video, card, out, a.hold, a.fade, a.plate, card2, a.then_hold,
-          in_fade=a.in_fade)
+          in_fade=a.in_fade, more=more)
     return 0
 
 

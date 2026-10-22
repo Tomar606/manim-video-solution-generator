@@ -1,0 +1,680 @@
+{
+ "_about": "GEO-C7-SA-03 part 1, blueprint look",
+ "project": "geo-c7-sa-03",
+ "part": 1,
+ "skin": "paper-editorial",
+ "theme": "blueprint",
+ "presenter_style": "card",
+ "plate": "blueprint-pipeline-alaska",
+ "captions_from": 9,
+ "spine": {
+  "title": "पाइपलाइन परिवहन के 4 महत्व",
+  "items": [
+   "समय-श्रम की बचत",
+   "निरंतर आपूर्ति",
+   "किफायती और कुशल",
+   "पर्यावरण के अनुकूल"
+  ],
+  "lit_at": [
+   24,
+   35
+  ],
+  "show_from": 9
+ },
+ "beats": [
+  {
+   "id": "tap",
+   "in": 0,
+   "out": 2,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c01",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "नल खोलो, पानी हाज़िर",
+     "style": "accent",
+     "at": 1
+    }
+   ]
+  },
+  {
+   "id": "gas",
+   "in": 2,
+   "out": 5,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c02",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "रसोई गैस: सीधे पाइप से",
+     "at": 3
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "न ट्रक, न टैंकर",
+     "at": 4
+    }
+   ]
+  },
+  {
+   "id": "alaska",
+   "in": 5,
+   "out": 6,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c03",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "over-broll-top",
+     "text": "पाइपलाइन परिवहन",
+     "size": "m",
+     "at": 5
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": 6,
+   "out": 9,
+   "presenter": "small",
+   "broll": {
+    "clip": "c14",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "qcard",
+     "slot": "upper",
+     "question": "विश्व में पाइपलाइन परिवहन के कोई चार महत्व लिखिए।",
+     "year": "2024",
+     "marks": "3 अंक",
+     "t_marks": [
+      7,
+      0.8
+     ],
+     "at": 6
+    }
+   ]
+  },
+  {
+   "id": "count4",
+   "in": 9,
+   "out": 11,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "counter",
+     "slot": "upper",
+     "num": "4",
+     "label": "महत्व, गिनकर लिखें",
+     "at": 9
+    }
+   ]
+  },
+  {
+   "id": "what-flows",
+   "in": 11,
+   "out": 14,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c14",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "पहले: पाइप में बहता क्या है?",
+     "at": 12
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "answer अलग बनेगा",
+     "at": 13
+    }
+   ]
+  },
+  {
+   "id": "flows",
+   "in": 14,
+   "out": 16,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "pipeflow",
+     "slot": "upper",
+     "title": "पाइप में क्या बहता है?",
+     "items": [
+      [
+       "जल",
+       "#3D8BFD",
+       [
+        14,
+        1.44
+       ]
+      ],
+      [
+       "पेट्रोलियम",
+       "#A0522D",
+       [
+        14,
+        2.7
+       ]
+      ],
+      [
+       "प्राकृतिक गैस",
+       "#9FE3F7",
+       [
+        14,
+        3.7
+       ]
+      ],
+      [
+       "LPG",
+       "#F28C28",
+       [
+        14,
+        4.84
+       ]
+      ],
+      [
+       "कोयले का स्लरी",
+       "#3A3A3A",
+       [
+        15,
+        0.5
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "slurry",
+   "in": 16,
+   "out": 18,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c05",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "def",
+     "slot": "over-broll-top",
+     "term": "स्लरी",
+     "text": "कोयला + पानी",
+     "at": 16
+    },
+    {
+     "type": "note",
+     "slot": "over-broll-low",
+     "text": "ताकि ठोस कोयला भी बह सके",
+     "at": 17
+    }
+   ]
+  },
+  {
+   "id": "nz",
+   "in": 18,
+   "out": 21,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c06",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "न्यूज़ीलैंड",
+     "style": "accent",
+     "at": 18
+    },
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "खेत → कारखाना",
+       19
+      ],
+      [
+       "दूध भी पाइप से!",
+       20
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "nz-answer",
+   "in": 21,
+   "out": 23,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "pipeflow",
+     "slot": "upper",
+     "title": "★ ये उदाहरण answer को दमदार बनाएगा",
+     "items": [
+      [
+       "जल",
+       "#3D8BFD",
+       "pre"
+      ],
+      [
+       "पेट्रोलियम",
+       "#A0522D",
+       "pre"
+      ],
+      [
+       "प्राकृतिक गैस",
+       "#9FE3F7",
+       "pre"
+      ],
+      [
+       "LPG",
+       "#F28C28",
+       "pre"
+      ],
+      [
+       "कोयले का स्लरी",
+       "#3A3A3A",
+       "pre"
+      ],
+      [
+       "दूध (न्यूज़ीलैंड)",
+       "#F4F1E8",
+       21,
+       true
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "first",
+   "in": 23,
+   "out": 25,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 215,
+    "backdrop": "veo:c03@3"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "अब चार महत्व",
+     "size": "m",
+     "at": 23
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 330,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:clock",
+       "समय-श्रम की बचत",
+       24
+      ],
+      [
+       "tabler:infinity",
+       "निरंतर आपूर्ति",
+       999
+      ],
+      [
+       "tabler:coin-rupee",
+       "किफायती और कुशल",
+       999
+      ],
+      [
+       "tabler:leaf",
+       "पर्यावरण के अनुकूल",
+       999
+      ]
+     ],
+     "recount": [
+      24
+     ]
+    }
+   ]
+  },
+  {
+   "id": "no-loading",
+   "in": 25,
+   "out": 30,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c07",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "1",
+     "text": "समय और श्रम की बचत",
+     "at": 25
+    },
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "लगातार बहाव",
+       [
+        25,
+        1.5
+       ]
+      ],
+      [
+       "बार-बार लदान-उतराई नहीं",
+       27
+      ]
+     ]
+    },
+    {
+     "type": "def",
+     "slot": "over-broll",
+     "term": "लदान",
+     "text": "गाड़ी में माल चढ़ाना",
+     "at": 29
+    }
+   ]
+  },
+  {
+   "id": "truck-vs-pipe",
+   "in": 30,
+   "out": 33,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "ट्रक: भरो → ले जाओ → खाली करो",
+     "yes": "पाइप: बस एक बार चालू करो",
+     "at": [
+      30,
+      1.84
+     ],
+     "t_yes": [
+      31,
+      0.92
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "under-upper",
+     "text": "समय भी बचा, मेहनत भी",
+     "style": "accent",
+     "at": 32
+    }
+   ]
+  },
+  {
+   "id": "first-done",
+   "in": 33,
+   "out": 34,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 215,
+    "backdrop": "veo:c08@2"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "पहला महत्व पक्का",
+     "size": "m",
+     "at": 33
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 330,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:clock",
+       "समय-श्रम की बचत",
+       33
+      ],
+      [
+       "tabler:infinity",
+       "निरंतर आपूर्ति",
+       999
+      ],
+      [
+       "tabler:coin-rupee",
+       "किफायती और कुशल",
+       999
+      ],
+      [
+       "tabler:leaf",
+       "पर्यावरण के अनुकूल",
+       999
+      ]
+     ],
+     "recount": [
+      33
+     ]
+    }
+   ]
+  },
+  {
+   "id": "continuous",
+   "in": 34,
+   "out": 36,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c08",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "2",
+     "text": "निरंतर आपूर्ति",
+     "at": [
+      35,
+      1.34
+     ]
+    },
+    {
+     "type": "note",
+     "slot": "over-broll-low",
+     "text": "लगातार बहने से ही",
+     "at": 34
+    }
+   ]
+  },
+  {
+   "id": "steady",
+   "in": 36,
+   "out": 38,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "pipeflow",
+     "slot": "upper",
+     "title": "बिना रुके, हर समय",
+     "items": [
+      [
+       "जल",
+       "#3D8BFD",
+       [
+        36,
+        1.75
+       ]
+      ],
+      [
+       "पेट्रोलियम",
+       "#A0522D",
+       [
+        37,
+        1.24
+       ]
+      ],
+      [
+       "प्राकृतिक गैस",
+       "#9FE3F7",
+       [
+        37,
+        1.78
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "under-upper",
+     "text": "निरंतर + नियमित आपूर्ति",
+     "style": "accent",
+     "at": 37
+    }
+   ]
+  },
+  {
+   "id": "mains",
+   "in": 38,
+   "out": 39,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c09",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "सप्लाई बीच में टूटती नहीं",
+     "at": 38
+    }
+   ]
+  },
+  {
+   "id": "two-words",
+   "in": 39,
+   "out": 41,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "def",
+     "slot": "head",
+     "term": "निरंतर + नियमित",
+     "text": "दोनों शब्द जोड़कर",
+     "at": 39
+    },
+    {
+     "type": "stamp",
+     "slot": "upper",
+     "text": "इस point की पहचान",
+     "at": 40
+    }
+   ]
+  },
+  {
+   "id": "two-done",
+   "in": 41,
+   "out": 43,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 215,
+    "backdrop": "veo:c09@3"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "दो महत्व हो गए",
+     "size": "m",
+     "at": 41
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 330,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:clock",
+       "समय-श्रम की बचत",
+       41
+      ],
+      [
+       "tabler:infinity",
+       "निरंतर आपूर्ति",
+       41
+      ],
+      [
+       "tabler:coin-rupee",
+       "किफायती और कुशल",
+       999
+      ],
+      [
+       "tabler:leaf",
+       "पर्यावरण के अनुकूल",
+       999
+      ]
+     ],
+     "recount": [
+      41,
+      [
+       42,
+       1.0
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "teaser",
+   "in": 43,
+   "out": "end",
+   "presenter": "standard",
+   "broll": {
+    "clip": "c13",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "over-broll-top",
+     "text": "असली फायदा: पैसा और पर्यावरण",
+     "size": "m",
+     "at": 43
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "बाकी दो: Part 2 में",
+     "style": "accent",
+     "at": 45
+    }
+   ]
+  }
+ ]
+}

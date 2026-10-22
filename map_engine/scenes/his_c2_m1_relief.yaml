@@ -1,0 +1,20 @@
+# M1 — under HeyGen block 5 (40.45-50.30), 9.85s.
+#
+# MOVE, THEN HOLD. Measured on the reference: 37% of its frames barely change.
+# It punches to a view and sits there while the point is made, rather than
+# drifting. So every fly_to here is followed by a hold long enough to read.
+#
+# Label times are 0.35s BEFORE the word, because a label fades in over 0.45s
+# and is only readable about 0.40s after its cue — "पाटलिपुत्र" is spoken at
+# 42.20s in the take, which is 1.75 into this block.
+scene: { id: his_c2_m1_relief, duration: 9.85 }
+map:
+  base: Mauryan Empire
+  frame: false
+  layers: { states: false }
+  actions:
+    - { time: 0.0,  type: show_map }
+    - { time: 0.0,  type: highlight, feature: "Mauryan Empire" }
+    - { time: 1.40, type: point,  location: Pataliputra, label: "पाटलिपुत्र" }
+    - { time: 2.10, type: fly_to, location: Pataliputra, zoom: 6.8, duration: 1.9 }
+    - { time: 6.00, type: fly_to, location: Pataliputra, zoom: 7.1, duration: 1.6 }

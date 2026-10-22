@@ -1,0 +1,13 @@
+# Region highlighting: India stays visible, states light up in sequence and stay lit.
+scene:
+  id: geo_states_highlight
+  duration: 12
+map:
+  base: India
+  layers: { states: true }
+  actions:
+    - { time: 0.0, type: show_map }
+    - { time: 1.5, type: highlight, feature: "Madhya Pradesh" }
+    - { time: 4.0, type: highlight, feature: "Maharashtra" }
+    - { time: 6.5, type: highlight, features: ["Gujarat", "Rajasthan"] }
+    - { time: 9.0, type: point, location: Bhopal, label: "भोपाल" }

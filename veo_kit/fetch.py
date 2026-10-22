@@ -167,10 +167,43 @@ def identify(page: str, known: dict[str, str]) -> str | None:
     best, total, slug = scores[0]
     # With one candidate there is no runner-up, so it must clear a high bar alone.
     if len(scores) == 1:
-        return slug if best >= max(3, int(total * 0.6)) else None
-    if best < 3 or best - scores[1][0] < 2:
+        if best >= max(3, int(total * 0.6)):
+            return slug
+    elif best >= 3 and best - scores[1][0] >= 2:
+        return slug
+    return by_content_words(flat, known)
+
+
+# Words every b-roll prompt shares (house sentences, the negative list) and
+# ordinary English: none of them says WHICH shot a page is.
+_COMMON = set("""live action video footage filmed with real camera shot holding still framed
+tall continuous motion throughout natural colour soft daylight vertical frame silent voiceover
+negative their there these those where which while front behind through across along around
+toward towards between beside under above about after before other every still keeps keep
+moving moves wide medium close slowly small large long high very""".split())
+
+
+def by_content_words(page: str, known: dict[str, str]) -> str | None:
+    """B-ROLL HAS NO SPOKEN LINE, AND THE AGENT PARAPHRASES THE ENGLISH.
+
+    The 46-character slices above never survive a rewrite ("the camera holding
+    still" -> "static camera"), so every b-roll tile came back `unknown` and a
+    finished, paid-for clip was skipped (GEO-C4-SA-02 b01, 9 Oct). What the
+    rewrite DOES keep is the nouns that make the shot this shot: Changpa,
+    Ladakh, yak, spindle, Rabari, camels. So score each prompt by the share of
+    its distinctive words present on the page, and demand both a high share and
+    a clear margin over the runner-up."""
+    def words(t: str) -> set[str]:
+        t = t.split("NEGATIVE:")[0].lower()
+        return {w for w in re.findall(r"[a-z]{5,}", t) if w not in _COMMON}
+    page_words = set(re.findall(r"[a-z]{5,}", page.lower()))
+    scored = sorted(((len(words(p) & page_words) / max(1, len(words(p))), slug)
+                     for slug, p in known.items() if words(p)), reverse=True)
+    if not scored:
         return None
-    return slug
+    best, slug = scored[0]
+    runner = scored[1][0] if len(scored) > 1 else 0.0
+    return slug if best >= 0.45 and best - runner >= 0.15 else None
 
 
 # What the agent actually sent to the model sits between the player controls

@@ -1,0 +1,1286 @@
+{
+ "_about": "GEO-C7-SA-01, signal look",
+ "project": "geo-c7-sa-01",
+ "part": 1,
+ "captions_from": 8,
+ "skin": "paper-editorial",
+ "theme": "signal",
+ "presenter_style": "card",
+ "plate": "atlantic-portland-light",
+ "spine": {
+  "title": "उत्तरी अटलांटिक समुद्री मार्ग",
+  "items": [
+   "जोड़ता है",
+   "व्यस्त मार्ग",
+   "अंतर्राष्ट्रीय व्यापार"
+  ],
+  "lit_at": [
+   16,
+   24,
+   28
+  ],
+  "show_from": 8
+ },
+ "beats": [
+  {
+   "id": "storm",
+   "in": 0,
+   "out": 4,
+   "presenter": "standard",
+   "broll": {
+    "clip": "a01",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "पूरी दुनिया का समुद्री व्यापार…",
+     "at": 1
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "हर चौथा हिस्सा: एक ही रास्ते से",
+     "style": "accent",
+     "at": [
+      2,
+      0.36
+     ]
+    }
+   ]
+  },
+  {
+   "id": "name-map",
+   "in": 4,
+   "out": 5,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "seamap",
+     "slot": "upper",
+     "map": "north-atlantic",
+     "labels": [
+      [
+       "अटलांटिक महासागर",
+       [
+        -38,
+        36
+       ],
+       "pre",
+       "sea"
+      ]
+     ],
+     "routes": [
+      {
+       "pts": [
+        [
+         -74.0,
+         40.6
+        ],
+        [
+         -69,
+         41
+        ],
+        [
+         -60,
+         42.5
+        ],
+        [
+         -45,
+         46
+        ],
+        [
+         -30,
+         49
+        ],
+        [
+         -15,
+         49.8
+        ],
+        [
+         -6,
+         49.6
+        ],
+        [
+         1.5,
+         50.6
+        ],
+        [
+         4.1,
+         51.95
+        ]
+       ],
+       "at": 4,
+       "ship": true,
+       "dur": 2.6,
+       "tag": "उत्तरी अटलांटिक समुद्री मार्ग",
+       "tag_xy": [
+        -37,
+        51.5
+       ],
+       "tag_at": [
+        4,
+        1.2
+       ]
+      }
+     ],
+     "regions": [],
+     "ports": []
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": 5,
+   "out": 8,
+   "presenter": "small",
+   "broll": {
+    "clip": "a06",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "qcard",
+     "slot": "upper",
+     "question": "उत्तरी अटलांटिक समुद्री मार्ग की कोई तीन विशेषताएँ लिखिए।",
+     "year": "2025",
+     "marks": "3 अंक",
+     "t_marks": [
+      7,
+      1.5
+     ],
+     "at": 5
+    }
+   ]
+  },
+  {
+   "id": "start",
+   "in": 8,
+   "out": 10,
+   "presenter": "standard",
+   "broll": {
+    "clip": "a10",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "answer की शुरुआत में…",
+     "at": 8
+    }
+   ]
+  },
+  {
+   "id": "industrial",
+   "in": 10,
+   "out": 11,
+   "presenter": "standard",
+   "broll": {
+    "clip": "a03",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "औद्योगिक दृष्टि से विकसित दो प्रदेश",
+     "style": "accent",
+     "at": [
+      10,
+      0.28
+     ]
+    }
+   ]
+  },
+  {
+   "id": "two-regions",
+   "in": 11,
+   "out": 12,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "दो विकसित प्रदेशों को मिलाता है",
+     "size": "m",
+     "at": 11
+    },
+    {
+     "type": "seamap",
+     "slot": "upper",
+     "map": "north-atlantic",
+     "labels": [
+      [
+       "अटलांटिक महासागर",
+       [
+        -38,
+        36
+       ],
+       "pre",
+       "sea"
+      ]
+     ],
+     "routes": [
+      {
+       "pts": [
+        [
+         -74.0,
+         40.6
+        ],
+        [
+         -69,
+         41
+        ],
+        [
+         -60,
+         42.5
+        ],
+        [
+         -45,
+         46
+        ],
+        [
+         -30,
+         49
+        ],
+        [
+         -15,
+         49.8
+        ],
+        [
+         -6,
+         49.6
+        ],
+        [
+         1.5,
+         50.6
+        ],
+        [
+         4.1,
+         51.95
+        ]
+       ],
+       "at": [
+        11,
+        3.38
+       ],
+       "dur": 1.6
+      }
+     ],
+     "regions": [
+      {
+       "pts": [
+        [
+         -82,
+         41.5
+        ],
+        [
+         -80,
+         43
+        ],
+        [
+         -76,
+         44.5
+        ],
+        [
+         -71,
+         45.3
+        ],
+        [
+         -67,
+         45
+        ],
+        [
+         -67.5,
+         44
+        ],
+        [
+         -70,
+         43
+        ],
+        [
+         -70.5,
+         41.6
+        ],
+        [
+         -74,
+         40.3
+        ],
+        [
+         -75.5,
+         38.8
+        ],
+        [
+         -77,
+         38
+        ],
+        [
+         -80,
+         39
+        ]
+       ],
+       "at": 11,
+       "label": "उत्तर-पूर्वी अमेरिका",
+       "label_xy": [
+        -66,
+        49.5
+       ],
+       "label_at": 11
+      },
+      {
+       "pts": [
+        [
+         -10.5,
+         51.5
+        ],
+        [
+         -8,
+         55.5
+        ],
+        [
+         -5,
+         58.7
+        ],
+        [
+         -1.5,
+         58.6
+        ],
+        [
+         2,
+         53
+        ],
+        [
+         5,
+         53.6
+        ],
+        [
+         8.5,
+         55
+        ],
+        [
+         11.5,
+         54.2
+        ],
+        [
+         12.5,
+         50.5
+        ],
+        [
+         10.5,
+         47.5
+        ],
+        [
+         7,
+         45.7
+        ],
+        [
+         3,
+         43.2
+        ],
+        [
+         -1.8,
+         43.3
+        ],
+        [
+         -9.5,
+         43.2
+        ],
+        [
+         -9,
+         47.8
+        ],
+        [
+         -5,
+         48.3
+        ]
+       ],
+       "at": [
+        11,
+        2.94
+       ],
+       "label": "पश्चिमी यूरोप",
+       "label_xy": [
+        -1,
+        61.0
+       ],
+       "label_at": [
+        11,
+        2.94
+       ]
+      }
+     ],
+     "ports": []
+    }
+   ]
+  },
+  {
+   "id": "harbour",
+   "in": 12,
+   "out": 14,
+   "presenter": "standard",
+   "broll": {
+    "clip": "a05",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "style": "accent",
+     "items": [
+      [
+       "पत्तन",
+       [
+        12,
+        0.0
+       ]
+      ],
+      [
+       "पोताश्रय",
+       [
+        12,
+        0.82
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "def",
+     "slot": "over-broll-top",
+     "term": "पोताश्रय",
+     "text": "जहाज़ों के सुरक्षित ठहरने की जगह",
+     "at": 13
+    }
+   ]
+  },
+  {
+   "id": "write-first",
+   "in": 14,
+   "out": 16,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "upper",
+     "text": "पत्तन + पोताश्रय: शुरुआत में ही",
+     "at": 14
+    },
+    {
+     "type": "note",
+     "slot": "under-upper",
+     "text": "examiner यहीं से समझ जाता है",
+     "at": 15
+    }
+   ]
+  },
+  {
+   "id": "joins",
+   "in": 16,
+   "out": 19,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "section",
+     "slot": "head",
+     "num": "1",
+     "text": "जोड़ता है",
+     "at": [
+      16,
+      2.2
+     ]
+    },
+    {
+     "type": "seamap",
+     "slot": "upper",
+     "map": "north-atlantic",
+     "labels": [
+      [
+       "अटलांटिक महासागर",
+       [
+        -38,
+        36
+       ],
+       "pre",
+       "sea"
+      ]
+     ],
+     "routes": [
+      {
+       "pts": [
+        [
+         -74.0,
+         40.6
+        ],
+        [
+         -69,
+         41
+        ],
+        [
+         -60,
+         42.5
+        ],
+        [
+         -45,
+         46
+        ],
+        [
+         -30,
+         49
+        ],
+        [
+         -15,
+         49.8
+        ],
+        [
+         -6,
+         49.6
+        ],
+        [
+         1.5,
+         50.6
+        ],
+        [
+         4.1,
+         51.95
+        ]
+       ],
+       "at": [
+        17,
+        0.28
+       ],
+       "ship": true,
+       "dur": 4.2
+      }
+     ],
+     "regions": [
+      {
+       "pts": [
+        [
+         -82,
+         41.5
+        ],
+        [
+         -80,
+         43
+        ],
+        [
+         -76,
+         44.5
+        ],
+        [
+         -71,
+         45.3
+        ],
+        [
+         -67,
+         45
+        ],
+        [
+         -67.5,
+         44
+        ],
+        [
+         -70,
+         43
+        ],
+        [
+         -70.5,
+         41.6
+        ],
+        [
+         -74,
+         40.3
+        ],
+        [
+         -75.5,
+         38.8
+        ],
+        [
+         -77,
+         38
+        ],
+        [
+         -80,
+         39
+        ]
+       ],
+       "at": "pre",
+       "label": "उत्तर-पूर्वी अमेरिका",
+       "label_xy": [
+        -66,
+        49.5
+       ],
+       "label_at": "pre"
+      },
+      {
+       "pts": [
+        [
+         -10.5,
+         51.5
+        ],
+        [
+         -8,
+         55.5
+        ],
+        [
+         -5,
+         58.7
+        ],
+        [
+         -1.5,
+         58.6
+        ],
+        [
+         2,
+         53
+        ],
+        [
+         5,
+         53.6
+        ],
+        [
+         8.5,
+         55
+        ],
+        [
+         11.5,
+         54.2
+        ],
+        [
+         12.5,
+         50.5
+        ],
+        [
+         10.5,
+         47.5
+        ],
+        [
+         7,
+         45.7
+        ],
+        [
+         3,
+         43.2
+        ],
+        [
+         -1.8,
+         43.3
+        ],
+        [
+         -9.5,
+         43.2
+        ],
+        [
+         -9,
+         47.8
+        ],
+        [
+         -5,
+         48.3
+        ]
+       ],
+       "at": "pre",
+       "label": "पश्चिमी यूरोप",
+       "label_xy": [
+        -1,
+        61.0
+       ],
+       "label_at": "pre"
+      }
+     ],
+     "ports": [
+      [
+       "पूर्वी तट",
+       "उत्तरी अमेरिका",
+       [
+        -74.0,
+        40.6
+       ],
+       [
+        17,
+        1.9
+       ],
+       "s"
+      ],
+      [
+       "पश्चिमी तट",
+       "यूरोप",
+       [
+        4.1,
+        51.95
+       ],
+       [
+        18,
+        0.9
+       ],
+       "sw"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "quarter",
+   "in": 19,
+   "out": 22,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "dots100",
+     "slot": "upper",
+     "label": "विश्व का समुद्री व्यापार",
+     "states": [
+      [
+       25,
+       "एक-चौथाई इसी मार्ग से",
+       [
+        19,
+        2.62
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "एक-चौथाई = answer की जान",
+     "at": [
+      20,
+      0.54
+     ]
+    }
+   ]
+  },
+  {
+   "id": "crowded",
+   "in": 22,
+   "out": 24,
+   "presenter": "standard",
+   "broll": {
+    "clip": "a06",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "इतना व्यापार, एक ही रास्ता…",
+     "at": 22
+    }
+   ]
+  },
+  {
+   "id": "busy",
+   "in": 24,
+   "out": 26,
+   "presenter": "standard",
+   "broll": {
+    "clip": "a02",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "2",
+     "text": "व्यस्त मार्ग",
+     "at": [
+      24,
+      1.2
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tonnes",
+   "in": 26,
+   "out": 28,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r_v11",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "हर साल लाखों टन माल",
+     "style": "accent",
+     "at": [
+      27,
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "trade",
+   "in": 28,
+   "out": 30,
+   "presenter": "standard",
+   "broll": {
+    "clip": "a08",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "3",
+     "text": "अंतर्राष्ट्रीय व्यापार",
+     "at": [
+      28,
+      5.62
+     ]
+    }
+   ]
+  },
+  {
+   "id": "exchange",
+   "in": 30,
+   "out": 32,
+   "presenter": "standard",
+   "broll": {
+    "clip": "a04",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "अलग-अलग देशों के बीच",
+     "at": 30
+    },
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "style": "accent",
+     "items": [
+      [
+       "वस्तुएँ",
+       [
+        31,
+        0.0
+       ]
+      ],
+      [
+       "सेवाएँ",
+       [
+        31,
+        1.02
+       ]
+      ],
+      [
+       "आदान-प्रदान",
+       [
+        31,
+        1.72
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "trunk-name",
+   "in": 32,
+   "out": 33,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "पहचान वाला नाम",
+     "size": "m",
+     "at": 32
+    },
+    {
+     "type": "stamp",
+     "slot": "upper",
+     "text": "वृहद ट्रंक मार्ग",
+     "at": [
+      32,
+      3.4
+     ]
+    }
+   ]
+  },
+  {
+   "id": "trunk",
+   "in": 33,
+   "out": 35,
+   "presenter": "standard",
+   "broll": {
+    "clip": "a09",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "def",
+     "slot": "over-broll-top",
+     "term": "ट्रंक",
+     "text": "पेड़ का तना",
+     "at": 33
+    },
+    {
+     "type": "note",
+     "slot": "over-broll-low",
+     "text": "पूरा पेड़ तने पर टिका",
+     "at": 34
+    }
+   ]
+  },
+  {
+   "id": "trunk-map",
+   "in": 35,
+   "out": 37,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "पूरा व्यापार इसी पर टिका",
+     "size": "m",
+     "at": 35
+    },
+    {
+     "type": "seamap",
+     "slot": "upper",
+     "map": "north-atlantic",
+     "labels": [
+      [
+       "अटलांटिक महासागर",
+       [
+        -38,
+        36
+       ],
+       "pre",
+       "sea"
+      ]
+     ],
+     "routes": [
+      {
+       "pts": [
+        [
+         -74.0,
+         40.6
+        ],
+        [
+         -69,
+         41
+        ],
+        [
+         -60,
+         42.5
+        ],
+        [
+         -45,
+         46
+        ],
+        [
+         -30,
+         49
+        ],
+        [
+         -15,
+         49.8
+        ],
+        [
+         -6,
+         49.6
+        ],
+        [
+         1.5,
+         50.6
+        ],
+        [
+         4.1,
+         51.95
+        ]
+       ],
+       "at": 35,
+       "dur": 1.4,
+       "tag": "वृहद ट्रंक मार्ग",
+       "tag_xy": [
+        -37,
+        51.5
+       ],
+       "tag_at": [
+        35,
+        1.0
+       ]
+      }
+     ],
+     "regions": [
+      {
+       "pts": [
+        [
+         -82,
+         41.5
+        ],
+        [
+         -80,
+         43
+        ],
+        [
+         -76,
+         44.5
+        ],
+        [
+         -71,
+         45.3
+        ],
+        [
+         -67,
+         45
+        ],
+        [
+         -67.5,
+         44
+        ],
+        [
+         -70,
+         43
+        ],
+        [
+         -70.5,
+         41.6
+        ],
+        [
+         -74,
+         40.3
+        ],
+        [
+         -75.5,
+         38.8
+        ],
+        [
+         -77,
+         38
+        ],
+        [
+         -80,
+         39
+        ]
+       ],
+       "at": "pre",
+       "label": "उत्तर-पूर्वी अमेरिका",
+       "label_xy": [
+        -66,
+        49.5
+       ],
+       "label_at": "pre"
+      },
+      {
+       "pts": [
+        [
+         -10.5,
+         51.5
+        ],
+        [
+         -8,
+         55.5
+        ],
+        [
+         -5,
+         58.7
+        ],
+        [
+         -1.5,
+         58.6
+        ],
+        [
+         2,
+         53
+        ],
+        [
+         5,
+         53.6
+        ],
+        [
+         8.5,
+         55
+        ],
+        [
+         11.5,
+         54.2
+        ],
+        [
+         12.5,
+         50.5
+        ],
+        [
+         10.5,
+         47.5
+        ],
+        [
+         7,
+         45.7
+        ],
+        [
+         3,
+         43.2
+        ],
+        [
+         -1.8,
+         43.3
+        ],
+        [
+         -9.5,
+         43.2
+        ],
+        [
+         -9,
+         47.8
+        ],
+        [
+         -5,
+         48.3
+        ]
+       ],
+       "at": "pre",
+       "label": "पश्चिमी यूरोप",
+       "label_xy": [
+        -1,
+        61.0
+       ],
+       "label_at": "pre"
+      }
+     ],
+     "ports": []
+    }
+   ]
+  },
+  {
+   "id": "three-words",
+   "in": 37,
+   "out": 41,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 200,
+    "backdrop": "veo:a06@3"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "तीन शब्द + दो ज़रूरी चीज़ें",
+     "size": "m",
+     "at": 37
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 330,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:link",
+       "जोड़ता है",
+       37
+      ],
+      [
+       "tabler:ship",
+       "व्यस्त है",
+       37
+      ],
+      [
+       "tabler:world",
+       "व्यापार कराता है",
+       37
+      ]
+     ],
+     "recount": [
+      [
+       37,
+       2.26
+      ],
+      [
+       38,
+       0.0
+      ],
+      [
+       38,
+       1.08
+      ]
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "center-low",
+     "text": "एक-चौथाई + वृहद ट्रंक मार्ग",
+     "style": "accent",
+     "at": [
+      39,
+      2.58
+     ]
+    }
+   ]
+  },
+  {
+   "id": "marks",
+   "in": 41,
+   "out": 42,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r_v12",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "पूरे 3 नंबर पक्के",
+     "at": [
+      41,
+      1.72
+     ]
+    }
+   ]
+  },
+  {
+   "id": "notes",
+   "in": 42,
+   "out": 43,
+   "presenter": "hero",
+   "broll": {
+    "clip": "r_d16",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "head",
+     "text": "exact answer: Notes button",
+     "style": "accent",
+     "at": 42
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "in": 43,
+   "out": "end",
+   "presenter": "hero",
+   "broll": {
+    "clip": "r_m12",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "जहाज़ों की तरह, पढ़ाई भी रोज़",
+     "at": 44
+    }
+   ]
+  }
+ ]
+}

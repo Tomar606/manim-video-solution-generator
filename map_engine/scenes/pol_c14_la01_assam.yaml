@@ -1,0 +1,9 @@
+# The Northeast, with Assam named. Pins are resolved from the location registry
+# and projected — never placed by eye.
+scene: { id: pol_c14_la01_assam, duration: 2.0 }
+map:
+  viewport: { center: [91.0, 25.0], zoom: 6.4 }
+  layers: { states: true }
+  actions:
+    - { time: 0.0, type: show_map }
+    - { time: 0.0, type: point, location: Guwahati, label: "असम" }

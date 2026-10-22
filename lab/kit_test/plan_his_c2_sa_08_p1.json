@@ -1,0 +1,987 @@
+{
+ "_about": "HIS-C2-SA-08, imperial look",
+ "project": "his-c2-sa-08",
+ "part": 1,
+ "captions_from": 8,
+ "skin": "paper-editorial",
+ "theme": "imperial",
+ "presenter_style": "card",
+ "plate": "imperial-maroon-lion",
+ "spine": {
+  "title": "मौर्य काल: 4 कारण",
+  "items": [
+   "अखिल भारतीय साम्राज्य",
+   "सुदृढ़ प्रशासन",
+   "अशोक का धम्म",
+   "प्रामाणिक स्रोत"
+  ],
+  "lit_at": [
+   12,
+   18,
+   26,
+   33
+  ],
+  "show_from": 8
+ },
+ "beats": [
+  {
+   "id": "divided",
+   "in": 0,
+   "out": 2,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m02",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "मौर्यों से पहले: छोटे-छोटे राज्य",
+     "style": "accent",
+     "at": [
+      1,
+      1.66
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pearls-clip",
+   "in": 2,
+   "out": 3,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m01",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "जैसे बिखरे हुए मोती",
+     "at": [
+      2,
+      0.58
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pearls-map",
+   "in": 3,
+   "out": 5,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "seamap",
+     "slot": "head",
+     "map": "subcontinent",
+     "labels": [
+      [
+       "अरब सागर",
+       [
+        68.6,
+        16.0
+       ],
+       "pre",
+       "sea"
+      ],
+      [
+       "बंगाल की खाड़ी",
+       [
+        88.6,
+        15.0
+       ],
+       "pre",
+       "sea"
+      ]
+     ],
+     "routes": [],
+     "ports": [],
+     "beads": [
+      [
+       70.5,
+       35.0
+      ],
+      [
+       72.0,
+       33.9
+      ],
+      [
+       77.2,
+       29.2
+      ],
+      [
+       76.3,
+       27.2
+      ],
+      [
+       77.7,
+       27.4
+      ],
+      [
+       79.4,
+       27.9
+      ],
+      [
+       82.2,
+       26.8
+      ],
+      [
+       83.9,
+       26.7
+      ],
+      [
+       85.2,
+       25.9
+      ],
+      [
+       87.0,
+       25.2
+      ],
+      [
+       85.4,
+       24.9
+      ],
+      [
+       83.0,
+       25.3
+      ],
+      [
+       81.8,
+       25.4
+      ],
+      [
+       80.2,
+       24.4
+      ],
+      [
+       75.8,
+       23.2
+      ],
+      [
+       77.8,
+       18.6
+      ]
+     ],
+     "t_beads": 3,
+     "t_thread": [
+      4,
+      0.76
+     ]
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": 5,
+   "out": 8,
+   "presenter": "small",
+   "broll": {
+    "clip": "m03",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "qcard",
+     "slot": "upper",
+     "question": "मौर्य साम्राज्य को भारतीय इतिहास का प्रमुख काल क्यों माना जाता है?",
+     "year": "2022",
+     "marks": "3 अंक",
+     "t_marks": [
+      7,
+      1.5
+     ],
+     "at": 5
+    }
+   ]
+  },
+  {
+   "id": "chain",
+   "in": 8,
+   "out": 12,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "चार कारण, एक कड़ी में",
+     "size": "m",
+     "at": 8
+    },
+    {
+     "type": "chain",
+     "slot": "upper",
+     "items": [
+      [
+       "देश जुड़ा",
+       [
+        10,
+        0.0
+       ]
+      ],
+      [
+       "तंत्र बना",
+       [
+        10,
+        0.86
+       ]
+      ],
+      [
+       "सही राह मिली",
+       [
+        10,
+        2.44
+       ]
+      ],
+      [
+       "सब लिखकर हम तक पहुँचा",
+       [
+        11,
+        0.0
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "unity",
+   "in": 12,
+   "out": 13,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m03",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "1",
+     "text": "प्रथम अखिल भारतीय साम्राज्य",
+     "at": [
+      12,
+      1.92
+     ]
+    }
+   ]
+  },
+  {
+   "id": "empire-map",
+   "in": 13,
+   "out": 15,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "seamap",
+     "slot": "head",
+     "map": "subcontinent",
+     "labels": [
+      [
+       "अरब सागर",
+       [
+        68.6,
+        16.0
+       ],
+       "pre",
+       "sea"
+      ],
+      [
+       "बंगाल की खाड़ी",
+       [
+        88.6,
+        15.0
+       ],
+       "pre",
+       "sea"
+      ]
+     ],
+     "routes": [],
+     "ports": [],
+     "beads": [
+      [
+       70.5,
+       35.0
+      ],
+      [
+       72.0,
+       33.9
+      ],
+      [
+       77.2,
+       29.2
+      ],
+      [
+       76.3,
+       27.2
+      ],
+      [
+       77.7,
+       27.4
+      ],
+      [
+       79.4,
+       27.9
+      ],
+      [
+       82.2,
+       26.8
+      ],
+      [
+       83.9,
+       26.7
+      ],
+      [
+       85.2,
+       25.9
+      ],
+      [
+       87.0,
+       25.2
+      ],
+      [
+       85.4,
+       24.9
+      ],
+      [
+       83.0,
+       25.3
+      ],
+      [
+       81.8,
+       25.4
+      ],
+      [
+       80.2,
+       24.4
+      ],
+      [
+       75.8,
+       23.2
+      ],
+      [
+       77.8,
+       18.6
+      ]
+     ],
+     "t_beads": 13,
+     "t_thread": 13,
+     "region": [
+      [
+       66,
+       25
+      ],
+      [
+       66,
+       36.5
+      ],
+      [
+       74,
+       36.5
+      ],
+      [
+       76,
+       34
+      ],
+      [
+       79,
+       31
+      ],
+      [
+       81,
+       30
+      ],
+      [
+       84,
+       28
+      ],
+      [
+       88,
+       27
+      ],
+      [
+       89.5,
+       26
+      ],
+      [
+       88.5,
+       22
+      ],
+      [
+       86.5,
+       20
+      ],
+      [
+       85,
+       19
+      ],
+      [
+       82,
+       16.5
+      ],
+      [
+       80,
+       15.5
+      ],
+      [
+       80,
+       13.5
+      ],
+      [
+       78,
+       12.5
+      ],
+      [
+       76,
+       13
+      ],
+      [
+       74.5,
+       14.5
+      ],
+      [
+       73.2,
+       17
+      ],
+      [
+       72.8,
+       19
+      ],
+      [
+       72.6,
+       21
+      ],
+      [
+       70,
+       22.3
+      ],
+      [
+       68.5,
+       23.5
+      ],
+      [
+       67,
+       24.8
+      ]
+     ],
+     "t_region": [
+      14,
+      0.0
+     ],
+     "region_label": "मौर्य साम्राज्य (लगभग)",
+     "region_label_xy": [
+      79.5,
+      21.0
+     ],
+     "t_region_label": [
+      14,
+      1.48
+     ]
+    }
+   ]
+  },
+  {
+   "id": "two-words",
+   "in": 15,
+   "out": 16,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "upper",
+     "text": "प्रथम · अखिल भारतीय",
+     "at": 15
+    },
+    {
+     "type": "note",
+     "slot": "under-upper",
+     "text": "ये दोनों शब्द ज़रूर लिखें",
+     "at": [
+      15,
+      1.2
+     ]
+    }
+   ]
+  },
+  {
+   "id": "who-runs",
+   "in": 16,
+   "out": 18,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m06",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "इतना बड़ा साम्राज्य… संभालेगा कौन?",
+     "at": 16
+    }
+   ]
+  },
+  {
+   "id": "admin",
+   "in": 18,
+   "out": 20,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m04",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "2",
+     "text": "सुदृढ़ प्रशासन",
+     "at": [
+      18,
+      1.6
+     ]
+    },
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "style": "accent",
+     "items": [
+      [
+       "चंद्रगुप्त मौर्य",
+       [
+        18,
+        3.9
+       ]
+      ],
+      [
+       "चाणक्य (कौटिल्य)",
+       [
+        19,
+        0.7
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "admin-kind",
+   "in": 20,
+   "out": 22,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "प्रशासन कैसा?",
+     "size": "m",
+     "at": 20
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "मज़बूत",
+       [
+        20,
+        1.94
+       ]
+      ],
+      [
+       "केंद्रीयकृत",
+       [
+        20,
+        2.78
+       ]
+      ],
+      [
+       "सुव्यवस्थित",
+       [
+        21,
+        0.32
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "central",
+   "in": 22,
+   "out": 23,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m05",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "def",
+     "slot": "over-broll-top",
+     "term": "केंद्रीयकृत",
+     "text": "बड़े फैसले राजधानी से",
+     "at": 22
+    }
+   ]
+  },
+  {
+   "id": "pair",
+   "in": 23,
+   "out": 25,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "चंद्रगुप्त + चाणक्य",
+     "size": "m",
+     "at": [
+      23,
+      2.38
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "upper",
+     "text": "दोनों नाम, जोड़ी में लिखें",
+     "at": [
+      23,
+      4.02
+     ]
+    }
+   ]
+  },
+  {
+   "id": "kalinga",
+   "in": 25,
+   "out": 27,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m07",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "दुनिया भर में अलग पहचान",
+     "at": 26
+    },
+    {
+     "type": "section",
+     "slot": "over-broll-low",
+     "num": "3",
+     "text": "अशोक का धम्म",
+     "at": [
+      26,
+      3.9
+     ]
+    }
+   ]
+  },
+  {
+   "id": "drums",
+   "in": 27,
+   "out": 29,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m08",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "def",
+     "slot": "over-broll-top",
+     "term": "भेरीघोष",
+     "text": "युद्ध के नगाड़े",
+     "at": [
+      27,
+      1.66
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "छोड़कर → धम्म का रास्ता",
+     "style": "accent",
+     "at": [
+      27,
+      4.26
+     ]
+    }
+   ]
+  },
+  {
+   "id": "dhamma",
+   "in": 29,
+   "out": 30,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m10",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "style": "accent",
+     "items": [
+      [
+       "शांति",
+       [
+        29,
+        0.46
+       ]
+      ],
+      [
+       "सहिष्णुता",
+       [
+        29,
+        1.62
+       ]
+      ],
+      [
+       "नैतिकता",
+       [
+        29,
+        2.6
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "world",
+   "in": 30,
+   "out": 31,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m11",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "पूरी दुनिया को प्रेरणा",
+     "at": 30
+    }
+   ]
+  },
+  {
+   "id": "bheri-mark",
+   "in": 31,
+   "out": 33,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m09",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "'भेरीघोष' ज़रूर लिखें",
+     "at": 31
+    },
+    {
+     "type": "note",
+     "slot": "over-broll-low",
+     "text": "यही इस point की पहचान",
+     "at": 32
+    }
+   ]
+  },
+  {
+   "id": "sources",
+   "in": 33,
+   "out": 37,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "section",
+     "slot": "head",
+     "num": "4",
+     "text": "प्रामाणिक ऐतिहासिक स्रोत",
+     "at": [
+      33,
+      4.0
+     ]
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "अशोक के अभिलेख",
+       [
+        34,
+        1.46
+       ]
+      ],
+      [
+       "कौटिल्य का अर्थशास्त्र",
+       [
+        35,
+        0.0
+       ]
+      ],
+      [
+       "मेगस्थनीज की इंडिका",
+       [
+        35,
+        2.34
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "under-upper",
+     "text": "ठोस लिखित सबूत",
+     "style": "accent",
+     "at": [
+      36,
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "four-words",
+   "in": 37,
+   "out": 40,
+   "presenter": "hub",
+   "hub": {
+    "cy": 980,
+    "r": 200,
+    "backdrop": "veo:m03@3"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "चार शब्दों में",
+     "size": "m",
+     "at": 37
+    },
+    {
+     "type": "quad",
+     "slot": "full",
+     "icons": [
+      "tabler:map-2",
+      "tabler:building-bank",
+      "tabler:peace",
+      "tabler:book"
+     ],
+     "items": [
+      [
+       "एकता",
+       "अखिल भारतीय साम्राज्य",
+       [
+        37,
+        2.96
+       ]
+      ],
+      [
+       "प्रशासन",
+       "चंद्रगुप्त-चाणक्य",
+       [
+        37,
+        3.22
+       ]
+      ],
+      [
+       "धम्म",
+       "अशोक का धम्म",
+       [
+        37,
+        4.28
+       ]
+      ],
+      [
+       "स्रोत",
+       "अभिलेख, अर्थशास्त्र, इंडिका",
+       [
+        37,
+        5.06
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "marks",
+   "in": 40,
+   "out": 42,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m03",
+    "region": "full",
+    "dim": true,
+    "offset": 4
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "चारों कारण, नामों के साथ",
+     "style": "accent",
+     "at": 40
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "पूरे 3 नंबर पक्के",
+     "at": 41
+    }
+   ]
+  },
+  {
+   "id": "notes",
+   "in": 42,
+   "out": 43,
+   "presenter": "hero",
+   "broll": {
+    "clip": "m11",
+    "region": "full",
+    "dim": true,
+    "offset": 3
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "head",
+     "text": "exact format: Notes button",
+     "style": "accent",
+     "at": 42
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "in": 43,
+   "out": "end",
+   "presenter": "hero",
+   "broll": {
+    "clip": "m12",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "हर topic पूरा, 90% की ओर",
+     "at": 44
+    }
+   ]
+  }
+ ]
+}

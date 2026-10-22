@@ -1,0 +1,549 @@
+{
+ "_about": "HIS-C3-SA-03 (महाभारत को प्रगतिशील/गतिशील ग्रंथ क्यों कहा गया है?): ganga look, two parts.",
+ "project": "his-c3-sa-03",
+ "part": 1,
+ "captions_at": "bottom",
+ "skin": "paper-editorial",
+ "theme": "ganga",
+ "presenter_style": "card",
+ "plate": "gg-river",
+ "spine": {
+  "title": "महाभारत: गतिशील ग्रंथ",
+  "items": [
+   "हज़ार वर्ष",
+   "अनुवाद",
+   "स्थानीय कथाएँ",
+   "कला व फिल्में"
+  ],
+  "lit_at": [
+   20
+  ],
+  "show_from": 9
+ },
+ "tracker": {
+  "from": 9
+ },
+ "beats": [
+  {
+   "id": "glacier",
+   "in": 0,
+   "out": 3,
+   "presenter": "standard",
+   "broll": {
+    "clip": "g1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "गंगोत्री: एक पतली-सी धारा",
+     "at": [
+      1,
+      1.0
+     ],
+     "fx": "blur"
+    }
+   ]
+  },
+  {
+   "id": "join",
+   "in": 3,
+   "out": 4,
+   "presenter": "standard",
+   "broll": {
+    "clip": "g2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "रास्ते में नई नदियाँ मिलती गईं",
+     "at": [
+      3,
+      0.6
+     ]
+    }
+   ]
+  },
+  {
+   "id": "vast",
+   "in": 4,
+   "out": 5,
+   "presenter": "standard",
+   "broll": {
+    "clip": "g3",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "और विशाल बनती गई",
+     "at": [
+      4,
+      0.3
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "same",
+   "in": 5,
+   "out": 6,
+   "presenter": "standard",
+   "plate": "gg-relief",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "बस, महाभारत भी",
+     "text": "बिल्कुल ऐसा ही ग्रंथ",
+     "at": [
+      5,
+      0.8
+     ],
+     "hl": [
+      "ऐसा"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": 6,
+   "out": 9,
+   "presenter": "standard",
+   "plate": "gg-devprayag",
+   "elements": [
+    {
+     "type": "qhero",
+     "slot": "upper",
+     "ribbon": "Board Exam PYQ",
+     "at": 6,
+     "years": [
+      [
+       "2023",
+       [
+        6,
+        0.8
+       ]
+      ]
+     ],
+     "question": "महाभारत को एक प्रगतिशील ग्रंथ क्यों कहा गया है? स्पष्ट कीजिए।",
+     "hl": [
+      "प्रगतिशील"
+     ],
+     "t_card": [
+      7,
+      0.0
+     ],
+     "marks": "3 अंक",
+     "t_marks": [
+      8,
+      0.2
+     ]
+    }
+   ]
+  },
+  {
+   "id": "word",
+   "in": 9,
+   "out": 12,
+   "presenter": "standard",
+   "plate": "gg-river",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "पहले एक ज़रूरी बात",
+     "size": "m",
+     "at": 9,
+     "fx": "drop",
+     "sfx": [
+      [
+       0.05,
+       "hud-blip/back-blip"
+      ]
+     ]
+    },
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "सवाल में: प्रगतिशील",
+     "yes": "किताब में: गतिशील ग्रंथ",
+     "at": [
+      10,
+      0.3
+     ],
+     "t_yes": [
+      11,
+      0.2
+     ]
+    }
+   ]
+  },
+  {
+   "id": "meaning",
+   "in": 12,
+   "out": 15,
+   "presenter": "standard",
+   "broll": {
+    "clip": "g3",
+    "region": "full",
+    "offset": 3
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "गतिशील = जो रुका न हो",
+     "style": "accent",
+     "at": [
+      12,
+      0.4
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "लगातार चलता और बदलता रहे",
+     "at": [
+      13,
+      0.3
+     ]
+    }
+   ]
+  },
+  {
+   "id": "opening",
+   "in": 15,
+   "out": 18,
+   "presenter": "standard",
+   "plate": "gg-razmnama",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "answer की शुरुआत",
+     "size": "m",
+     "at": 15,
+     "fx": "drop"
+    },
+    {
+     "type": "paper",
+     "slot": "upper",
+     "text": "महाभारत स्थिर ग्रंथ नहीं, समय के साथ लगातार बढ़ता और बदलता रहा।",
+     "texture": "kraft",
+     "at": [
+      16,
+      0.3
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans0",
+   "in": 18,
+   "out": 20,
+   "presenter": "standard",
+   "plate": "gg-river",
+   "tracker": false,
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर बन रहा है…",
+     "points": [
+      "महाभारत कोई स्थिर ग्रंथ नहीं, बल्कि समय के साथ लगातार बढ़ता और बदलता रहा, इसलिए यह <b>गतिशील ग्रंथ</b> है। मुख्य कारण:",
+      "<b>हज़ारों वर्षों तक विकास:</b> इसकी रचना 1000 से अधिक वर्षों तक होती रही और नए श्लोक जुड़ते गए।",
+      "<b>अनेक भाषाओं में अनुवाद:</b> संस्कृत तक सीमित नहीं; भारत की कई क्षेत्रीय भाषाओं में अनुवाद हुआ।",
+      "<b>स्थानीय कथाओं का समावेश:</b> अलग-अलग क्षेत्रों की स्थानीय कहानियाँ इसमें जुड़ती गईं।",
+      "<b>कला व साहित्य में प्रयोग:</b> नाटक, मूर्तिकला और फिल्मों के ज़रिए इसकी नई-नई व्याख्याएँ होती हैं।"
+     ],
+     "nums": [
+      "",
+      "1.",
+      "2.",
+      "3.",
+      "4."
+     ],
+     "show": 1,
+     "animate_from": 0,
+     "at": 18,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "r1",
+   "in": 20,
+   "out": 21,
+   "presenter": "standard",
+   "plate": "gg-devprayag",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "पहला कारण",
+     "text": "हज़ारों वर्षों तक विकास",
+     "at": [
+      20,
+      1.2
+     ],
+     "hl": [
+      "हज़ारों"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "scribes",
+   "in": 21,
+   "out": 22,
+   "presenter": "standard",
+   "broll": {
+    "clip": "w1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "किसी एक समय में नहीं बना",
+     "at": [
+      21,
+      0.4
+     ]
+    }
+   ]
+  },
+  {
+   "id": "thousand",
+   "in": 22,
+   "out": 24,
+   "presenter": "standard",
+   "broll": {
+    "clip": "w2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "1000+ वर्षों तक लिखा जाता रहा",
+     "style": "accent",
+     "at": [
+      22,
+      0.6
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "नए-नए श्लोक जुड़ते गए",
+     "at": [
+      23,
+      0.3
+     ]
+    }
+   ]
+  },
+  {
+   "id": "like-river",
+   "in": 24,
+   "out": 26,
+   "presenter": "standard",
+   "broll": {
+    "clip": "g2",
+    "region": "full",
+    "offset": 3
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "गंगा: धीरे-धीरे पानी",
+       [
+        24,
+        0.6
+       ]
+      ],
+      [
+       "महाभारत: धीरे-धीरे श्लोक",
+       [
+        25,
+        0.6
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "timespan",
+   "in": 26,
+   "out": 29,
+   "presenter": "standard",
+   "plate": "gg-razmnama",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "ये समय-सीमा ज़रूर लिखना",
+     "size": "m",
+     "at": 26,
+     "fx": "drop"
+    },
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "समय-सीमा",
+     "text": "1000 से अधिक वर्ष",
+     "at": [
+      26,
+      1.0
+     ],
+     "hl": [
+      "1000"
+     ],
+     "fx": "rise"
+    },
+    {
+     "type": "pill",
+     "slot": "under-upper",
+     "text": "= एक बार में नहीं बना",
+     "style": "accent",
+     "at": [
+      27,
+      1.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "generations",
+   "in": 29,
+   "out": 31,
+   "presenter": "standard",
+   "broll": {
+    "clip": "w1",
+    "region": "full",
+    "offset": 3
+   },
+   "elements": [
+    {
+     "type": "ask",
+     "slot": "upper",
+     "text": "हज़ार साल: कितनी पीढ़ियों के लेखक?",
+     "at": [
+      29,
+      0.4
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans1",
+   "in": 31,
+   "out": 32,
+   "presenter": "standard",
+   "plate": "gg-river",
+   "tracker": false,
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर बन रहा है…",
+     "points": [
+      "महाभारत कोई स्थिर ग्रंथ नहीं, बल्कि समय के साथ लगातार बढ़ता और बदलता रहा, इसलिए यह <b>गतिशील ग्रंथ</b> है। मुख्य कारण:",
+      "<b>हज़ारों वर्षों तक विकास:</b> इसकी रचना 1000 से अधिक वर्षों तक होती रही और नए श्लोक जुड़ते गए।",
+      "<b>अनेक भाषाओं में अनुवाद:</b> संस्कृत तक सीमित नहीं; भारत की कई क्षेत्रीय भाषाओं में अनुवाद हुआ।",
+      "<b>स्थानीय कथाओं का समावेश:</b> अलग-अलग क्षेत्रों की स्थानीय कहानियाँ इसमें जुड़ती गईं।",
+      "<b>कला व साहित्य में प्रयोग:</b> नाटक, मूर्तिकला और फिल्मों के ज़रिए इसकी नई-नई व्याख्याएँ होती हैं।"
+     ],
+     "nums": [
+      "",
+      "1.",
+      "2.",
+      "3.",
+      "4."
+     ],
+     "show": 2,
+     "animate_from": 1,
+     "at": 31,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "spread",
+   "in": 32,
+   "out": 35,
+   "presenter": "standard",
+   "broll": {
+    "clip": "t1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "समय में बढ़ा",
+       [
+        32,
+        0.6
+       ]
+      ],
+      [
+       "पूरे देश में फैला",
+       [
+        33,
+        0.4
+       ]
+      ],
+      [
+       "हर जगह कुछ नया लिया",
+       [
+        34,
+        0.3
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "next",
+   "in": 35,
+   "out": "end",
+   "presenter": "full",
+   "broll": {
+    "clip": "g3",
+    "region": "full",
+    "offset": 5,
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "बाकी 3 कारण: Part 2",
+     "at": [
+      35,
+      0.4
+     ],
+     "fx": "zoom"
+    }
+   ]
+  }
+ ]
+}

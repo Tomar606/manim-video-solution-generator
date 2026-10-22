@@ -1,0 +1,24 @@
+[
+ {
+  "out": "countries.geojson",
+  "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_0_countries_ind.geojson",
+  "features": 18,
+  "kb": 1541,
+  "licence": "Natural Earth — public domain"
+ },
+ {
+  "out": "india_states.geojson",
+  "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_1_states_provinces.geojson",
+  "cached": true
+ },
+ {
+  "out": "rivers.geojson",
+  "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_rivers_lake_centerlines.geojson",
+  "cached": true
+ },
+ {
+  "out": "lakes.geojson",
+  "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_lakes.geojson",
+  "cached": true
+ }
+]

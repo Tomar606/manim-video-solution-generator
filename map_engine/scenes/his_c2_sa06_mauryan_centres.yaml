@@ -1,0 +1,24 @@
+# HIS-C2-SA-06 — मौर्य साम्राज्य के पाँच प्रमुख राजनीतिक केंद्र (2022, 6 अंक)
+# The five centres named in the approved answer, in the order the script says
+# them: capital first, then the two trade-route provinces, then east, then the
+# gold country in the south.
+scene:
+  id: his_c2_sa06_mauryan_centres
+  duration: 26
+map:
+  base: India
+  layers: { states: true }
+  actions:
+    - { time: 0.0,  type: show_map }
+    - { time: 1.5,  type: fly_to, location: Pataliputra, zoom: 5.4, duration: 2.2 }
+    - { time: 3.8,  type: point,  location: Pataliputra, label: "पाटलिपुत्र" }
+    - { time: 7.0,  type: fly_to, location: Taxila,      zoom: 5.4, duration: 2.2 }
+    - { time: 9.3,  type: point,  location: Taxila,      label: "तक्षशिला" }
+    - { time: 12.0, type: fly_to, location: Ujjayini,    zoom: 5.4, duration: 2.0 }
+    - { time: 14.2, type: point,  location: Ujjayini,    label: "उज्जयिनी" }
+    - { time: 16.5, type: fly_to, location: Tosali,      zoom: 5.4, duration: 2.0 }
+    - { time: 18.7, type: point,  location: Tosali,      label: "तोसलि" }
+    - { time: 20.5, type: fly_to, location: Suvarnagiri, zoom: 5.4, duration: 2.0 }
+    - { time: 22.7, type: point,  location: Suvarnagiri, label: "सुवर्णगिरि" }
+    # India's full territory, fitted to the WINDOW so nothing is cut off
+    - { time: 24.0, type: fly_to, location: India, duration: 2.0 }

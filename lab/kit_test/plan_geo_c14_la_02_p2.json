@@ -1,0 +1,380 @@
+{
+ "_about": "GEO-C14-LA-02 part 2: social benefits, female literacy (1.88% in 1971 -> 65% in 2011, as narrated), economic change, recap. No question card in this part, so captions run from the start.",
+ "project": "geo-c14-la-02",
+ "part": 2,
+ "skin": "paper-editorial",
+ "theme": "survey-light",
+ "presenter_style": "card",
+ "plate": "pasture-hill-village",
+ "spine": {
+  "title": "भरमौर: नियोजन से विकास",
+  "items": [
+   "प्राथमिकता",
+   "आधारभूत संरचना",
+   "सामाजिक लाभ",
+   "महिला साक्षरता",
+   "आर्थिक परिवर्तन"
+  ],
+  "pre_lit": 2,
+  "lit_at": [
+   2,
+   6,
+   16
+  ],
+  "show_from": 0
+ },
+ "beats": [
+  {
+   "id": "bridge",
+   "in": 0,
+   "out": 2,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 215,
+    "backdrop": "veo:b12@1"
+   },
+   "elements": [
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 370,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:target-arrow",
+       "प्राथमिकता",
+       0
+      ],
+      [
+       "tabler:building-community",
+       "आधारभूत संरचना",
+       0
+      ],
+      [
+       "tabler:users-group",
+       "सामाजिक लाभ",
+       0
+      ],
+      [
+       "tabler:book",
+       "महिला साक्षरता",
+       0
+      ],
+      [
+       "tabler:coin",
+       "आर्थिक परिवर्तन",
+       0
+      ]
+     ],
+     "recount": [
+      [
+       0,
+       0.4
+      ],
+      [
+       0,
+       2.4
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p3-social",
+   "in": 2,
+   "out": 6,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b06",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "3",
+     "text": "सामाजिक लाभ",
+     "at": 2
+    },
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "साक्षरता दर में भारी वृद्धि",
+       [
+        4,
+        1.6
+       ]
+      ],
+      [
+       "लिंगानुपात सुधरा",
+       5
+      ],
+      [
+       "बाल विवाह में कमी",
+       [
+        5,
+        1.6
+       ]
+      ]
+     ],
+     "style": "accent"
+    }
+   ]
+  },
+  {
+   "id": "p4-intro",
+   "in": 6,
+   "out": 8,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b10",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "4",
+     "text": "महिला साक्षरता",
+     "at": 6
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "साल और प्रतिशत, ध्यान से",
+     "at": 7
+    }
+   ]
+  },
+  {
+   "id": "p4-data",
+   "in": 8,
+   "out": 14,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "bars",
+     "slot": "upper",
+     "title": "महिला साक्षरता",
+     "unit": "%",
+     "max": 82,
+     "items": [
+      [
+       "1971",
+       1.88,
+       9
+      ],
+      [
+       "2011",
+       65,
+       [
+        10,
+        0.6
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "dots100",
+     "slot": "under-upper",
+     "label": "सौ में से",
+     "states": [
+      [
+       2,
+       "1971",
+       12
+      ],
+      [
+       65,
+       "2011",
+       13
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p4-gap",
+   "in": 14,
+   "out": 16,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b10",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "महिला-पुरुष साक्षरता का अंतर घटा",
+     "style": "accent",
+     "at": 14
+    },
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "यानी लैंगिक असमानता कम",
+     "at": 15
+    }
+   ]
+  },
+  {
+   "id": "p5-intro",
+   "in": 16,
+   "out": 19,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b11",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "5",
+     "text": "आर्थिक परिवर्तन",
+     "at": 16
+    }
+   ]
+  },
+  {
+   "id": "p5-compare",
+   "in": 19,
+   "out": 25,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "compare",
+     "slot": "upper",
+     "left": [
+      "पहले",
+      "निर्वाह कृषि-पशुचारण"
+     ],
+     "right": [
+      "अब",
+      "दालें और नकदी फसलें"
+     ],
+     "at": 19,
+     "right_at": 22
+    },
+    {
+     "type": "pill",
+     "slot": "head",
+     "text": "खेती: निर्वाह से बाज़ार की ओर",
+     "style": "accent",
+     "at": 24
+    }
+   ]
+  },
+  {
+   "id": "recap",
+   "in": 25,
+   "out": 39,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 215,
+    "backdrop": "veo:b13@2"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "exam में पूरा answer",
+     "size": "m",
+     "at": 26
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 370,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:target-arrow",
+       "प्राथमिकता",
+       25
+      ],
+      [
+       "tabler:building-community",
+       "आधारभूत संरचना",
+       25
+      ],
+      [
+       "tabler:users-group",
+       "सामाजिक लाभ",
+       25
+      ],
+      [
+       "tabler:book",
+       "महिला साक्षरता",
+       25
+      ],
+      [
+       "tabler:coin",
+       "आर्थिक परिवर्तन",
+       25
+      ]
+     ],
+     "recount": [
+      28,
+      30,
+      32,
+      34,
+      37
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "center-low",
+     "text": "1.88% (1971) से 65% (2011)",
+     "style": "accent",
+     "at": 35
+    }
+   ]
+  },
+  {
+   "id": "marks",
+   "in": 39,
+   "out": 42,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b02",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "4 नंबर पक्के",
+     "at": 40
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "in": 42,
+   "out": "end",
+   "presenter": "hero",
+   "broll": {
+    "clip": "b09",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "head",
+     "text": "पूरा answer: Notes button",
+     "style": "accent",
+     "at": 42
+    }
+   ]
+  }
+ ]
+}

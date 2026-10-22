@@ -1,0 +1,10 @@
+scene: { id: _test_relief, duration: 1.0 }
+map:
+  base: Mauryan Empire
+  frame: false
+  layers: { states: false }
+  actions:
+    - { time: 0.0, type: show_map }
+    - { time: 0.0, type: highlight, feature: "Mauryan Empire" }
+    - { time: 0.0, type: point, location: Pataliputra, label: "पाटलिपुत्र" }
+    - { time: 0.0, type: point, location: Taxila,      label: "तक्षशिला" }

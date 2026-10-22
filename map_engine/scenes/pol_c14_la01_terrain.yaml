@@ -1,0 +1,8 @@
+# Ground only: no pin, no label. A name baked into the wallpaper collides with
+# whatever the layout puts on top of it; labels belong to the layout.
+scene: { id: pol_c14_la01_terrain, duration: 1.0 }
+map:
+  viewport: { center: [91.5, 25.4], zoom: 6.0 }
+  layers: { states: true }
+  actions:
+    - { time: 0.0, type: show_map }

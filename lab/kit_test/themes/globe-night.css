@@ -1,0 +1,87 @@
+/* globe-night — the world at night (NASA Black Marble over Asia), map-legend
+   glass panels, gold and cyan keys, Khand headings. Diagram-led: the four
+   functions fill a 2x2 around the presenter in a circle. */
+
+#frame.theme-globe-night {
+  --ink: #EEF2EF;
+  --accent: #F5B82E;          /* amber: the legend key */
+  --accent-2: #4FD1E8;        /* glacier blue */
+  --muted: #A9B8B9;
+  --paper: #0E1A1F;
+  --card-bg: rgba(10, 22, 28, .80);
+  --solid: rgba(10, 22, 28, .86);
+  --card-border: rgba(238, 242, 239, .38);
+  --font-head: 'Khand', 'Noto Sans Devanagari', sans-serif;
+  --head-weight: 600;
+  --head-stretch: 100%;
+  --font-body: 'Noto Sans Devanagari', sans-serif;
+  --font-num: 'Khand', sans-serif;
+  --halo: 0 0 6px rgba(0, 0, 0, .85), 0 2px 3px rgba(0, 0, 0, .9);
+  --glass-shadow: 0 10px 24px rgba(0, 0, 0, .35);
+  color: var(--ink);
+}
+
+/* legend glass: every card */
+.theme-globe-night .card, .theme-globe-night .qcard, .theme-globe-night .k-card, .theme-globe-night .compare .k-card,
+.theme-globe-night .k-def, .theme-globe-night .yn .side, .theme-globe-night .imgcard {
+  background: var(--card-bg) !important; border: 1.5px solid var(--card-border) !important; border-radius: 6px !important;
+  box-shadow: var(--glass-shadow) !important; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  border-left: 8px solid var(--accent) !important;
+}
+.theme-globe-night .k-head, .theme-globe-night .hl-m { font-family: 'Khand'; font-weight: 600; letter-spacing: .5px; text-shadow: var(--halo); }
+.theme-globe-night .hl-m { color: var(--ink); text-wrap: balance; }
+
+/* section head: amber square number, Khand title, a thin scale-bar rule under it */
+.theme-globe-night .k-section-tag { background: var(--card-bg) !important; border: none !important; box-shadow: var(--glass-shadow) !important;
+  display: inline-flex; align-items: center; gap: 18px; padding: 8px 26px 8px 8px; border-radius: 4px;
+  border-bottom: 4px solid transparent !important;
+  background-image: linear-gradient(90deg, var(--accent) 0 25%, transparent 25% 50%, var(--accent) 50% 75%, transparent 75%) !important;
+  background-size: 100% 5px !important; background-position: bottom !important; background-repeat: no-repeat !important;
+  background-color: var(--card-bg) !important; }
+.theme-globe-night .k-section-tag__num { width: 66px; height: 66px; display: grid; place-items: center; padding: 0; border-radius: 3px;
+  background: var(--accent); color: #10181B; font-family: 'Khand'; font-weight: 700; font-size: 50px; line-height: 1; }
+.theme-globe-night .k-section-tag__text { font-family: 'Khand'; font-weight: 600; font-size: 60px; color: var(--ink); background: none; padding: 0; }
+
+/* labels: legend entries — a colour swatch then the name */
+.theme-globe-night .k-pill { border-radius: 4px !important; font-family: 'Khand'; font-weight: 600; font-size: 50px; letter-spacing: .3px;
+  background: var(--card-bg) !important; color: var(--ink) !important; border: 1.5px solid var(--card-border) !important;
+  padding: 2px 24px 0 18px; box-shadow: var(--glass-shadow); display: inline-flex; align-items: center; gap: 14px; }
+.theme-globe-night .k-pill::before { content: ""; width: 22px; height: 22px; border-radius: 3px; background: var(--accent-2); flex: none; }
+.theme-globe-night .k-pill--accent::before { background: var(--accent); }
+.theme-globe-night .k-pill--accent { border-color: var(--accent) !important; }
+
+/* stamps become survey markers: amber double frame, no ink texture */
+.theme-globe-night .k-stamp { font-family: 'Khand'; font-weight: 700; color: var(--accent); border-color: var(--accent); outline-color: var(--accent);
+  background: var(--solid) !important; -webkit-mask-image: none; mix-blend-mode: normal; letter-spacing: .5px; }
+
+/* notes: map annotation, not handwriting */
+.theme-globe-night .note { font-family: 'Khand'; font-weight: 500; font-size: 50px; color: var(--accent-2); text-shadow: var(--halo); }
+.theme-globe-night .note.on-photo { background: var(--card-bg); padding: 4px 20px 0; border-radius: 4px; }
+
+/* masthead: a map title block */
+.theme-globe-night #spine { left: 24px; right: 24px; top: 24px; height: 92px; background: var(--card-bg); border-radius: 6px;
+  border: 1.5px solid var(--card-border); padding: 0 26px; box-sizing: border-box; box-shadow: var(--glass-shadow); }
+.theme-globe-night #spine .ttl { font-family: 'Khand'; font-weight: 600; font-stretch: 100%; font-size: 50px; color: var(--ink); }
+.theme-globe-night #spine .k-dots i { width: 22px; height: 22px; border-radius: 3px; background: transparent; border: 3px solid var(--muted); transform: rotate(45deg); margin: 0 6px; }
+.theme-globe-night #spine .k-dots i.on { background: var(--accent); border-color: var(--accent); }
+.theme-globe-night #spine .cnt { font-family: 'Khand'; font-weight: 700; color: var(--accent); }
+
+/* caption: a legend strip */
+.theme-globe-night #cap { font-family: 'Noto Sans Devanagari'; font-weight: 700; font-size: 44px; color: var(--ink);
+  --torn-bg: rgba(10, 22, 28, .86); clip-path: none; border-radius: 6px; border: 1.5px solid var(--card-border); }
+.theme-globe-night #cap .hl { color: var(--accent); text-decoration: none; }
+
+/* footage: natural colour, full-bleed or as a framed inset */
+.theme-globe-night #broll { background: #000; }
+.theme-globe-night #broll img { filter: saturate(1.02) contrast(1.03) !important; mix-blend-mode: normal !important; }
+.theme-globe-night #broll::after { background-image: none; background: linear-gradient(180deg, rgba(8,16,20,.35) 0%, transparent 18%, transparent 60%, rgba(8,16,20,.55) 100%); mix-blend-mode: normal; }
+.theme-globe-night #broll.print { left: 40px; width: 1000px; border: 2px solid var(--card-border); border-radius: 8px; box-sizing: border-box;
+  box-shadow: var(--glass-shadow); overflow: hidden; }
+.theme-globe-night #broll.dim img { filter: brightness(.55) saturate(.8) !important; }
+
+/* the hub: amber ring, glacier dashed orbit */
+.theme-globe-night .hub-ring { border: 8px solid var(--accent); box-shadow: 0 0 0 4px rgba(10,22,28,.8), var(--glass-shadow); }
+.theme-globe-night .hub-route { border: 3px dashed var(--accent-2); }
+
+/* territory + seasons diagrams on glass: strokes in map colours */
+.theme-globe-night .note, .theme-globe-night .k-check-row__text { color: var(--ink); }

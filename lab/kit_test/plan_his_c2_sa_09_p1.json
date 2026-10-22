@@ -1,0 +1,643 @@
+{
+ "_about": "HIS-C2-SA-09, palm-leaf look",
+ "project": "his-c2-sa-09",
+ "part": 1,
+ "captions_from": 8,
+ "skin": "paper-editorial",
+ "theme": "palmleaf",
+ "presenter_style": "card",
+ "plate": "palmleaf-stack",
+ "spine": {
+  "title": "राजा: दो रूप",
+  "items": [
+   "राजतंत्र: एक राजा",
+   "गण-संघ: कई राजा"
+  ],
+  "lit_at": [
+   8,
+   18
+  ],
+  "show_from": 8
+ },
+ "beats": [
+  {
+   "id": "throne",
+   "in": 0,
+   "out": 3,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s01",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "राजा = ?",
+     "at": [
+      0,
+      1.96
+     ]
+    },
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "सिर पर मुकुट",
+       [
+        2,
+        0.84
+       ]
+      ],
+      [
+       "ऊँचा सिंहासन",
+       [
+        2,
+        1.96
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "one-order",
+   "in": 3,
+   "out": 4,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s05",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "एक ही आदमी का हुक्म",
+     "at": [
+      3,
+      2.18
+     ]
+    }
+   ]
+  },
+  {
+   "id": "many-kings",
+   "in": 4,
+   "out": 6,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s03",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "लेकिन प्राचीन भारत में कुछ जगहें…",
+     "at": 4
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "एक साथ कई-कई राजा!",
+     "at": [
+      5,
+      1.12
+     ]
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": 6,
+   "out": 8,
+   "presenter": "small",
+   "broll": {
+    "clip": "s02",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "qcard",
+     "slot": "upper",
+     "question": "राजा शब्द से क्या अभिप्राय है?",
+     "year": "2022",
+     "marks": "3 अंक",
+     "t_marks": [
+      7,
+      0.8
+     ],
+     "at": 6
+    }
+   ]
+  },
+  {
+   "id": "definition",
+   "in": 8,
+   "out": 11,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "पहली लाइन: सीधी परिभाषा",
+     "size": "m",
+     "at": 8
+    },
+    {
+     "type": "pills",
+     "slot": "upper",
+     "items": [
+      [
+       "राज्य",
+       [
+        10,
+        0.52
+       ]
+      ],
+      [
+       "जनपद",
+       [
+        10,
+        1.04
+       ]
+      ],
+      [
+       "महाजनपद",
+       [
+        10,
+        1.78
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "def",
+     "slot": "under-upper",
+     "term": "राजा",
+     "text": "सर्वोच्च शासक",
+     "at": [
+      10,
+      2.98
+     ]
+    }
+   ]
+  },
+  {
+   "id": "powers",
+   "in": 11,
+   "out": 14,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s05",
+    "region": "full",
+    "offset": 3
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "सबसे ऊपर बैठा व्यक्ति",
+     "at": 11
+    },
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "style": "accent",
+     "items": [
+      [
+       "प्रशासन",
+       [
+        13,
+        0.0
+       ]
+      ],
+      [
+       "न्याय",
+       [
+        13,
+        0.88
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "सारी शक्तियाँ एक हाथ में",
+     "at": [
+      13,
+      1.88
+     ]
+    }
+   ]
+  },
+  {
+   "id": "hereditary",
+   "in": 14,
+   "out": 16,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s06",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "वंश परंपरागत",
+     "style": "accent",
+     "at": [
+      14,
+      3.16
+     ]
+    },
+    {
+     "type": "note",
+     "slot": "over-broll-low",
+     "text": "पिता के बाद → बेटा",
+     "at": [
+      15,
+      0.58
+     ]
+    }
+   ]
+  },
+  {
+   "id": "three",
+   "in": 16,
+   "out": 18,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "परिभाषा में ये तीन ज़रूर",
+     "size": "m",
+     "at": 16
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "सर्वोच्च शासक",
+       [
+        16,
+        3.08
+       ]
+      ],
+      [
+       "प्रशासन और न्याय की शक्तियाँ",
+       [
+        17,
+        0.0
+       ]
+      ],
+      [
+       "वंश परंपरागत पद",
+       [
+        17,
+        2.64
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "but",
+   "in": 18,
+   "out": 20,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s07",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "लेकिन… सब जगह ऐसा नहीं",
+     "at": 18
+    }
+   ]
+  },
+  {
+   "id": "vajji",
+   "in": 20,
+   "out": [
+    20,
+    1.32
+   ],
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/mahajanapada/vaishali-3.jpg",
+     "w": 760,
+     "label": "वैशाली (बिहार): वज्जि संघ की राजधानी",
+     "at": 20
+    },
+    {
+     "type": "pill",
+     "slot": "under-upper",
+     "text": "वज्जि",
+     "style": "accent",
+     "at": [
+      20,
+      0.56
+     ]
+    }
+   ]
+  },
+  {
+   "id": "malla",
+   "in": [
+    20,
+    1.32
+   ],
+   "out": 21,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s08",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "style": "accent",
+     "items": [
+      [
+       "मल्ल (कुशीनारा)",
+       [
+        20,
+        1.32
+       ]
+      ],
+      [
+       "गण / संघ",
+       [
+        20,
+        2.0
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "group",
+   "in": 21,
+   "out": 24,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s03",
+    "region": "full",
+    "offset": 3
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "एक व्यक्ति नहीं",
+       [
+        21,
+        0.56
+       ]
+      ],
+      [
+       "कई लोगों का समूह",
+       [
+        22,
+        0.28
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "each-raja",
+   "in": 24,
+   "out": 27,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s04",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "और मज़ेदार बात…",
+     "at": 24
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "हर सदस्य = राजा",
+     "at": [
+      26,
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "crowns",
+   "in": 27,
+   "out": 33,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "आज की भाषा में",
+     "size": "m",
+     "at": 27
+    },
+    {
+     "type": "crowns",
+     "slot": "upper",
+     "h": 640,
+     "many": 8,
+     "left": "राजतंत्र: एक राजा",
+     "t_one": [
+      28,
+      0.62
+     ],
+     "left_sub": "घर का एक मुखिया",
+     "t_left_sub": [
+      30,
+      0.52
+     ],
+     "right": "गण-संघ: कई राजा",
+     "t_many": [
+      31,
+      0.92
+     ],
+     "right_sub": "पंचायत",
+     "t_right_sub": [
+      31,
+      2.28
+     ]
+    }
+   ]
+  },
+  {
+   "id": "panchayat",
+   "in": 33,
+   "out": 34,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s09",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "सब बराबर के हकदार",
+     "style": "accent",
+     "at": 33
+    }
+   ]
+  },
+  {
+   "id": "dont-stop",
+   "in": 34,
+   "out": 37,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "सिर्फ पहली परिभाषा",
+     "yes": "परिभाषा + वज्जि-मल्ल का उदाहरण",
+     "at": 34,
+     "t_yes": [
+      35,
+      2.9
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "यहीं नंबर कटते हैं",
+     "at": [
+      35,
+      0.44
+     ]
+    }
+   ]
+  },
+  {
+   "id": "two-lines",
+   "in": 37,
+   "out": 41,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "पूरा answer, दो लाइनों में",
+     "size": "m",
+     "at": 37
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "आमतौर पर: सर्वोच्च, वंश परंपरागत शासक",
+       [
+        38,
+        0.0
+       ]
+      ],
+      [
+       "वज्जि-मल्ल जैसे गणों में: कई लोग मिलकर राजा",
+       [
+        39,
+        0.0
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "marks",
+   "in": 41,
+   "out": 43,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s02",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "दोनों रूप लिखें",
+     "style": "accent",
+     "at": 41
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "पूरे 3 नंबर पक्के",
+     "at": 42
+    }
+   ]
+  },
+  {
+   "id": "notes",
+   "in": 43,
+   "out": 45,
+   "presenter": "hero",
+   "broll": {
+    "clip": "s12",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "head",
+     "text": "सही format: Notes button",
+     "style": "accent",
+     "at": 43
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "in": 45,
+   "out": "end",
+   "presenter": "hero",
+   "broll": {
+    "clip": "s10",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "पढ़ते रहो, तैयारी पक्की",
+     "at": 45
+    }
+   ]
+  }
+ ]
+}

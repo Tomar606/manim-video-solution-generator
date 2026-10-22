@@ -1,0 +1,17 @@
+# M2 — under HeyGen block 7 (55.70-76.40). Each centre's label lands on the
+# word that names it, measured from the take:
+#   तक्षशिला 56.40s = 0.70   उज्जयिनी 64.20s = 8.50   तोसलि 72.10s = 16.40
+# Pataliputra is carried over from M1 and never fades: labels persist once shown.
+scene: { id: his_c2_m2_three_centres, duration: 20.7 }
+map:
+  base: India
+  layers: { states: false }
+  actions:
+    - { time: 0.0,  type: show_map }
+    - { time: 0.0,  type: point,  location: Pataliputra, label: "पाटलिपुत्र" }
+    - { time: 0.70, type: point,  location: Taxila,      label: "तक्षशिला" }
+    - { time: 1.20, type: fly_to, location: Taxila,   zoom: 5.2, duration: 2.0 }
+    - { time: 6.80, type: fly_to, location: Ujjayini, zoom: 5.2, duration: 1.6 }
+    - { time: 8.50, type: point,  location: Ujjayini,   label: "उज्जयिनी" }
+    - { time: 14.6, type: fly_to, location: Tosali,   zoom: 5.2, duration: 1.6 }
+    - { time: 16.40, type: point, location: Tosali,     label: "तोसलि" }

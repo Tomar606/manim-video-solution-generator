@@ -68,7 +68,7 @@ def search(query: str, limit: int = 6) -> list[dict]:
         "action": "query", "generator": "search",
         "gsrsearch": f"filetype:bitmap {query}", "gsrnamespace": "6",
         "gsrlimit": str(limit * 3), "prop": "imageinfo",
-        "iiprop": "url|extmetadata|size", "iiurlwidth": "1600",
+        "iiprop": "url|extmetadata|size", "iiurlwidth": "1920",  # Commons now refuses unlisted widths (1600 -> HTTP 400)
         "format": "json",
     })
     data = json.loads(_get(f"{API}?{q}"))

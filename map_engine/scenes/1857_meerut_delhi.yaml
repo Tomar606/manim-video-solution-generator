@@ -1,0 +1,21 @@
+# 1857 का विद्रोह — मेरठ से दिल्ली
+# The first milestone scene: India, fly to Meerut, mark it, draw the route to
+# Delhi, mark Delhi, pull back out to the whole country.
+scene:
+  id: history_1857_meerut_delhi
+  duration: 14
+
+map:
+  base: India
+  layers:
+    states: true
+    rivers: false
+    lakes: false
+
+  actions:
+    - { time: 0.0, type: show_map }
+    - { time: 1.0, type: fly_to, location: Meerut, zoom: 8.2, duration: 2.0 }
+    - { time: 3.2, type: point,  location: Meerut, label: "मेरठ" }
+    - { time: 5.0, type: route,  from: Meerut, to: Delhi, duration: 2.2 }
+    - { time: 7.4, type: point,  location: Delhi,  label: "दिल्ली" }
+    - { time: 10.0, type: fly_to, location: India, duration: 2.4 }

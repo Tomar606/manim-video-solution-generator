@@ -261,7 +261,17 @@ flow/extension/       the Chrome extension that drives Flow in a background tab
 src/qc.py             Claude vision review of rendered frames
 src/assemble.py       conform -> concat -> mix -> mux
 src/dashboard.py      the browser editor (single self-contained page)
+lab/kit_test/         the arts kit: every GEO/HIS/POL reel since Oct 2026 (README inside)
+library/              the kit's assets: sfx, music, photos, plates, fonts, lottie, textures,
+                      each with a manifest or credits.json recording its licence
+tools/gates.py        every gate, one command; the last line of every build
+tools/fetch_mixkit.py rebuilds the Mixkit sounds/music the public repo cannot carry
 ```
+
+**After cloning:** run `.venv-tools/bin/python tools/fetch_mixkit.py`. The repo
+is public and Mixkit's licence forbids redistributing its files, so those 75
+sounds and tracks are .gitignored; the script downloads and cuts them exactly as
+their manifests record. Without it the compositor fails on missing sounds.
 
 See also `PIPELINE.md` for the operational flow.
 

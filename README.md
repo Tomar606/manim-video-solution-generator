@@ -21,12 +21,12 @@ caption, every reveal and every animation cue is placed against them.
 
 ## The two tracks
 
-| | **PYQ track** — what we build now | **Reels track** — older, still wired up |
-|---|---|---|
-| input | a row of an MP Board question sheet | a topic string |
-| clock | the presenter's recorded audio | synthesized narration |
-| entry point | [`tools/`](tools/) + [`tools/edu/`](tools/edu/) | [`video.py`](video.py) |
-| read | [tools/README.md](tools/README.md) | [PIPELINE.md](PIPELINE.md) |
+| | **Arts kit**: every GEO/HIS/POL video since Oct 2026 | **PYQ track**: the science videos | **Reels track**: older, still wired up |
+|---|---|---|---|
+| input | a HeyGen clip + its .srt, a question-sheet row | a row of an MP Board question sheet | a topic string |
+| clock | the presenter's recorded audio | the presenter's recorded audio | synthesized narration |
+| entry point | [`lab/kit_test/`](lab/kit_test/) | [`tools/`](tools/) + [`tools/edu/`](tools/edu/) | [`video.py`](video.py) |
+| read | [lab/kit_test/README.md](lab/kit_test/README.md) | [tools/README.md](tools/README.md) | [PIPELINE.md](PIPELINE.md) |
 
 Both share `src/llm.py`, `src/style.py` and the compositor. They do **not**
 share a script format.
@@ -46,13 +46,19 @@ python3.11 -m venv .venv-manim  && .venv-manim/bin/pip install manim
 # 2. Everything else: whisper, pillow, the gates, the compositor
 python3.11 -m venv .venv-tools  && .venv-tools/bin/pip install -r requirements-tools.txt
 
-# 3. The HTML renderer (only if you use that route)
-cd tools/edu/renderer && npm install && npx playwright install chromium
+# 3. The HTML renderer: needed by the HTML route AND by the arts kit (lab/kit_test)
+cd tools/edu/renderer && npm install && npx playwright install chromium-headless-shell
 ```
 
 Also needed: **ffmpeg**, **LaTeX**, and on macOS `pkg-config` (pycairo will not
 build without it) and `libraqm` (without it Pillow silently mis-shapes every
 Devanagari image — see [CLAUDE.md](CLAUDE.md)).
+
+Then fetch the Mixkit sounds and music, which the public repo cannot carry:
+
+```bash
+.venv-tools/bin/python tools/fetch_mixkit.py      # ~75 files, cut exactly as the manifests record
+```
 
 Copy `.env.example` to `.env` and fill in the keys you need. The Claude CLI
 backend needs no key at all and is the default.
@@ -167,6 +173,12 @@ Defects fixed only in source came back; defects behind a gate did not.
 | [`qa.mjs`](tools/edu/renderer/qa.mjs) | before rendering | overlapping labels, anything crossing the presenter's line, a diagram element that never becomes visible |
 | [`layout_gate.py`](tools/layout_gate.py) | before compositing | text on text, content out of band, content off screen |
 | [`output_gate.py`](tools/output_gate.py) | before delivery | a floating or off-centre presenter, audio drifting against picture, the wrong frame rate |
+| [`gates.py`](tools/gates.py) | last line of every build | runs every gate above that applies, prints each skip with its reason, exits non-zero on any failure |
+| [`answer_outro.py`](tools/answer_outro.py) | appending the answer page | handwriting copied into the paper extension below the answer |
+| [`compile.py`](lab/kit_test/compile.py) (arts kit) | compiling a plan | captions under the question card, a part 1 without a Veo hook, an em-dash in screen text; warns on 6 s holds and dead air |
+
+The arts kit's own gates and how its render queue runs them are in
+[lab/kit_test/README.md](lab/kit_test/README.md#the-gates).
 
 **Look at stills before you render, and at frames before you deliver.** A
 two-minute render costs three minutes; a wrong one costs an hour.
@@ -205,6 +217,8 @@ Everything under `projects/<slug>/` except the script, the captions and
 | | |
 |---|---|
 | [CLAUDE.md](CLAUDE.md) | **why** the pipeline is shaped this way, and the gotchas that cost time |
+| [lab/kit_test/README.md](lab/kit_test/README.md) | the arts kit end to end: captions, look, Veo, plan, render, answer page, gates |
+| [flow/README.md](flow/README.md) + [veo_kit/SETUP.md](veo_kit/SETUP.md) | the Chrome extension that drives Google Flow (Veo), and setting it up |
 | [PIPELINE.md](PIPELINE.md) | the operational walkthrough, and the mistakes already made |
 | [tools/README.md](tools/README.md) | the avatar-synced track in detail |
 | [tools/edu/renderer/README.md](tools/edu/renderer/README.md) | the HTML renderer |

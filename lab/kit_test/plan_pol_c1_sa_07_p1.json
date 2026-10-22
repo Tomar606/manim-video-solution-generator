@@ -1,0 +1,525 @@
+{
+ "_about": "POL-C1-SA-07 part 1, poster look",
+ "project": "pol-c1-sa-07",
+ "part": 1,
+ "skin": "paper-editorial",
+ "theme": "poster",
+ "presenter_style": "card",
+ "plate": "sc-block",
+ "captions_at": "bottom",
+ "spine": {
+  "title": "सोवियत संघ का विघटन: 4 कारण",
+  "items": [
+   "आर्थिक गतिहीनता",
+   "प्रशासकीय ठहराव",
+   "गोर्बाचेव के सुधार",
+   "राष्ट्रवाद का उभार"
+  ],
+  "lit_at": [
+   15,
+   23
+  ],
+  "show_from": 11
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "in": 0,
+   "out": 5,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s01",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "बाहर से मज़बूत",
+       2
+      ],
+      [
+       "अंदर से कमज़ोर",
+       3
+      ]
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "अचानक धड़ाम!",
+     "at": [
+      4,
+      0.5
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "termites",
+   "in": 5,
+   "out": 7,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s02",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "1991: एक महाशक्ति के साथ यही हुआ",
+     "at": 5,
+     "fx": "blur"
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": 7,
+   "out": 11,
+   "presenter": "standard",
+   "plate": "sc-block",
+   "elements": [
+    {
+     "type": "qhero",
+     "slot": "upper",
+     "ribbon": "Board Exam PYQ",
+     "at": 7,
+     "years": [
+      [
+       "2023",
+       [
+        8,
+        0.6
+       ]
+      ]
+     ],
+     "qsize": 60,
+     "question": "सोवियत संघ के विघटन के कारणों को लिखिए।",
+     "hl": [
+      "विघटन",
+      "कारणों"
+     ],
+     "t_card": 10,
+     "marks": "3 अंक",
+     "t_marks": [
+      8,
+      2.4
+     ]
+    }
+   ]
+  },
+  {
+   "id": "four",
+   "in": 11,
+   "out": 14,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 190,
+    "backdrop": "veo:s01@1"
+   },
+   "plate": "sc-gate",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "विघटन के 4 कारण",
+     "size": "m",
+     "at": 11,
+     "fx": "drop"
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 350,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:coin-off",
+       "आर्थिक गतिहीनता",
+       12
+      ],
+      [
+       "tabler:building-bank",
+       "प्रशासकीय ठहराव",
+       [
+        12,
+        2.4
+       ]
+      ],
+      [
+       "tabler:refresh",
+       "गोर्बाचेव के सुधार",
+       [
+        13,
+        2.0
+       ]
+      ],
+      [
+       "tabler:flag",
+       "राष्ट्रवाद का उभार",
+       [
+        13,
+        4.0
+       ]
+      ]
+     ],
+     "recount": [
+      [
+       12,
+       0.3
+      ],
+      [
+       12,
+       2.6
+      ],
+      [
+       13,
+       2.2
+      ],
+      [
+       13,
+       4.2
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "define",
+   "in": 14,
+   "out": 15,
+   "presenter": "standard",
+   "plate": "sc-block",
+   "elements": [
+    {
+     "type": "def",
+     "slot": "head",
+     "term": "विघटन",
+     "text": "टूटकर बिखर जाना",
+     "at": 14
+    }
+   ]
+  },
+  {
+   "id": "c1",
+   "in": 15,
+   "out": 17,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s03",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "कारण 1",
+     "text": "आर्थिक गतिहीनता",
+     "at": [
+      15,
+      0.8
+     ],
+     "hl": [
+      "गतिहीनता"
+     ],
+     "sub": "अर्थव्यवस्था आगे नहीं बढ़ी"
+    }
+   ]
+  },
+  {
+   "id": "army",
+   "in": 17,
+   "out": 19,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s04",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "style": "accent",
+     "items": [
+      [
+       "परमाणु हथियार",
+       [
+        17,
+        2.2
+       ]
+      ],
+      [
+       "पूर्वी यूरोप में सेना",
+       18
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "shortage",
+   "in": 19,
+   "out": 21,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s05",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "ज़रूरी चीज़ों की भारी कमी",
+       19
+      ],
+      [
+       "अर्थव्यवस्था चरमराई",
+       20
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "chain1",
+   "in": 21,
+   "out": [
+    22,
+    1.6
+   ],
+   "presenter": "standard",
+   "plate": "sc-berlinwall",
+   "elements": [
+    {
+     "type": "chain",
+     "slot": "upper",
+     "items": [
+      [
+       "हथियारों पर ज़्यादा खर्च",
+       [
+        21,
+        1.0
+       ]
+      ],
+      [
+       "ज़रूरी सामान की कमी",
+       [
+        21,
+        2.2
+       ]
+      ],
+      [
+       "अर्थव्यवस्था में गिरावट",
+       [
+        21,
+        2.8
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans1",
+   "in": [
+    22,
+    1.6
+   ],
+   "out": 23,
+   "presenter": "standard",
+   "plate": "sc-berlinwall",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर बन रहा है…",
+     "points": [
+      "आर्थिक गतिहीनता: हथियारों और सेना पर भारी खर्च, ज़रूरी सामान की कमी",
+      "राजनीतिक-प्रशासकीय ठहराव: पार्टी का शासन सत्तावादी, भ्रष्ट, गैर-जवाबदेह; जनता में असंतोष",
+      "गोर्बाचेव के सुधार: पेरेस्त्रोइका (पुनर्संरचना) और ग्लासनोस्त (खुलापन)",
+      "राष्ट्रवाद का उभार: बाल्टिक गणराज्य (एस्टोनिया, लातविया, लिथुआनिया), यूक्रेन, जॉर्जिया"
+     ],
+     "show": 1,
+     "animate_from": 0,
+     "at": [
+      22,
+      1.6
+     ],
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "c2",
+   "in": 23,
+   "out": 25,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s06",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "कारण 2",
+     "text": "राजनीतिक-प्रशासकीय ठहराव",
+     "at": [
+      23,
+      0.2
+     ],
+     "hl": [
+      "ठहराव"
+     ],
+     "sub": "व्यवस्था जम गई, सुधार नहीं"
+    }
+   ]
+  },
+  {
+   "id": "corrupt",
+   "in": 25,
+   "out": 27,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s07",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "style": "accent",
+     "items": [
+      [
+       "सत्तावादी",
+       [
+        25,
+        2.0
+       ]
+      ],
+      [
+       "भ्रष्ट",
+       26
+      ],
+      [
+       "गैर-जवाबदेह",
+       [
+        26,
+        1.6
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "anger",
+   "in": 27,
+   "out": 28,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s08",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "आम नागरिकों में असंतोष",
+     "style": "accent",
+     "at": 27
+    }
+   ]
+  },
+  {
+   "id": "three-words",
+   "in": 28,
+   "out": 29,
+   "presenter": "standard",
+   "plate": "sc-block",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "तीन शब्द याद रखो",
+     "text": "सत्तावादी · भ्रष्ट · गैर-जवाबदेह",
+     "at": [
+      28,
+      1.2
+     ],
+     "hl": [
+      "भ्रष्ट"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans2",
+   "in": 29,
+   "out": 31,
+   "presenter": "standard",
+   "plate": "sc-block",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर बन रहा है…",
+     "points": [
+      "आर्थिक गतिहीनता: हथियारों और सेना पर भारी खर्च, ज़रूरी सामान की कमी",
+      "राजनीतिक-प्रशासकीय ठहराव: पार्टी का शासन सत्तावादी, भ्रष्ट, गैर-जवाबदेह; जनता में असंतोष",
+      "गोर्बाचेव के सुधार: पेरेस्त्रोइका (पुनर्संरचना) और ग्लासनोस्त (खुलापन)",
+      "राष्ट्रवाद का उभार: बाल्टिक गणराज्य (एस्टोनिया, लातविया, लिथुआनिया), यूक्रेन, जॉर्जिया"
+     ],
+     "show": 2,
+     "animate_from": 1,
+     "at": 29,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "teaser",
+   "in": 31,
+   "out": "end",
+   "presenter": "standard",
+   "plate": "sc-gate",
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "upper",
+     "style": "accent",
+     "items": [
+      [
+       "गोर्बाचेव के सुधार",
+       [
+        31,
+        1.0
+       ]
+      ],
+      [
+       "राष्ट्रवाद का उभार",
+       [
+        31,
+        2.6
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "Part 2 में",
+     "at": 32
+    }
+   ]
+  }
+ ]
+}

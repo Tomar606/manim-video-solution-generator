@@ -1,0 +1,131 @@
+{
+ "project": "hin-sample1",
+ "part": 1,
+ "skin": "paper-editorial",
+ "theme": "harappa",
+ "presenter_style": "card",
+ "plate": "mjd-seals",
+ "spine": {
+  "title": "मोहनजोदड़ो के घर: 6 विशेषताएँ",
+  "items": [
+   "पिछला भाग सड़क की ओर",
+   "सामने सिर्फ मुख्य द्वार",
+   "खिड़कियाँ दूसरी मंज़िल पर",
+   "आँगन के चारों ओर कमरे",
+   "कतार में छोटे-बड़े घर",
+   "जैसलमेर जैसी बनावट"
+  ],
+  "lit_at": [],
+  "show_from": 7
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "in": 0,
+   "out": 4,
+   "presenter": "standard",
+   "broll": {
+    "clip": "hka",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "qhero",
+     "slot": "upper",
+     "ribbon": "Board Exam PYQ",
+     "at": [
+      1,
+      0.2
+     ],
+     "years": [
+      [
+       "2022",
+       [
+        1,
+        1.6
+       ]
+      ],
+      [
+       "2023",
+       [
+        2,
+        0.0
+       ]
+      ],
+      [
+       "2025",
+       [
+        2,
+        0.9
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "next",
+   "in": 4,
+   "out": 6,
+   "presenter": "standard",
+   "plate": "mjd-seals",
+   "elements": [
+    {
+     "type": "qhero",
+     "slot": "upper",
+     "ribbon": "Board Exam PYQ",
+     "at": 4,
+     "years": [
+      [
+       "2022",
+       4
+      ],
+      [
+       "2023",
+       [
+        4,
+        0.1
+       ]
+      ],
+      [
+       "2025",
+       [
+        4,
+        0.2
+       ]
+      ]
+     ],
+     "next": "2027 में भी आ सकता है!",
+     "t_next": [
+      4,
+      0.8
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sure",
+   "in": 6,
+   "out": "end",
+   "presenter": "standard",
+   "plate": "mjd-seals",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "अच्छे से समझ लिया तो",
+     "text": "2 नंबर पक्के",
+     "hl": [
+      "पक्के"
+     ],
+     "at": [
+      6,
+      2.2
+     ],
+     "sub": "और end में एक surprise"
+    }
+   ]
+  }
+ ],
+ "captions_at": "bottom"
+}

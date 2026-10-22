@@ -1,0 +1,103 @@
+<!--
+  The data screens that are not maps: the question card, the writing method,
+  the close. Same window, same halo, same plate as map.html, so a cut between a
+  map and a screen changes only what is inside the window.
+
+  Chromium draws these for the same reason it draws the maps: it shapes
+  Devanagari correctly. Pillow without libraqm reorders matras silently.
+-->
+<style>
+  html,body { margin:0; padding:0; overflow:hidden; background:#000; }
+  #stage { position:relative; }
+  svg { display:block; }
+  .dv { font-family:'Noto Sans Devanagari','Poppins',sans-serif; }
+</style>
+<div id="stage"><svg id="s"></svg></div>
+<script>
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a={})=>{const e=document.createElementNS(NS,n);
+  for(const k in a) if(a[k]!==undefined) e.setAttribute(k,a[k]); return e;};
+
+const SCREEN={
+  setup(cfg){
+    this.cfg=cfg; this.W=cfg.width; this.H=cfg.height; this.F=cfg.frame; this.t=cfg.theme;
+    const svg=document.getElementById('s');
+    svg.setAttribute('width',this.W); svg.setAttribute('height',this.H);
+    document.getElementById('stage').style.width=this.W+'px';
+    this.svg=svg; window.SCREEN_READY=true;
+  },
+
+  // 0 before `at`, 1 after `at+dur`, eased between
+  fade(t,at,dur=0.45){
+    if(at===undefined) return 1;
+    const f=Math.max(0,Math.min(1,(t-at)/(dur||0.0001)));
+    return f*f*(3-2*f);
+  },
+
+  frame(state){
+    const {t,spec}=state, svg=this.svg, F=this.F, W=this.W, H=this.H;
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    const box={x:F.margin,y:F.top,w:W-2*F.margin,h:F.height};
+
+    svg.appendChild(el('rect',{width:W,height:H,fill:F.background}));
+    if(F.background_image){
+      const im=el('image',{x:0,y:0,width:W,height:H,preserveAspectRatio:'xMidYMid slice'});
+      im.setAttribute('href',F.background_image); svg.appendChild(im);
+    }
+    const defs=el('defs'); svg.appendChild(defs);
+    const clip=el('clipPath',{id:'win'});
+    clip.appendChild(el('rect',{x:box.x,y:box.y,width:box.w,height:box.h,rx:F.radius,ry:F.radius}));
+    defs.appendChild(clip);
+    for(let i=F.halo_rings;i>=1;i--)
+      svg.appendChild(el('rect',{x:box.x,y:box.y,width:box.w,height:box.h,rx:F.radius,ry:F.radius,
+        fill:'none',stroke:F.halo,'stroke-width':F.halo_width*i/F.halo_rings,
+        'stroke-opacity':(0.16*(F.halo_rings-i+1))/F.halo_rings}));
+
+    const root=el('g',{'clip-path':'url(#win)'}); svg.appendChild(root);
+    root.appendChild(el('rect',{x:box.x,y:box.y,width:box.w,height:box.h,fill:spec.paper||'#F7F3E8'}));
+
+    for(const it of spec.items){
+      const o=this.fade(t,it.at,it.fade);
+      if(o<=0.002) continue;
+      const dim = it.dim_until!==undefined && t < it.dim_until;
+      const g=el('g',{opacity:(dim?0.34:1)*o});
+      const x = it.x!==undefined ? it.x : W/2;
+      if(it.type==='text'){
+        const tx=el('text',{x,y:it.y,'text-anchor':it.anchor||'middle',
+          'font-size':it.size,'font-weight':it.weight||600,
+          fill:it.color||'#12303D',class:'dv'});
+        tx.textContent=it.text; g.appendChild(tx);
+      } else if(it.type==='rule'){
+        g.appendChild(el('rect',{x:it.x1,y:it.y,width:it.x2-it.x1,height:it.h||3,
+          rx:(it.h||3)/2,fill:it.color||'#C8B89A'}));
+      } else if(it.type==='chip'){
+        const pad=it.pad||18, w=it.w, h=it.h;
+        g.appendChild(el('rect',{x:x-w/2,y:it.y,width:w,height:h,rx:it.radius||14,
+          fill:it.fill||'#D9534F'}));
+        const tx=el('text',{x,y:it.y+h/2+it.size*0.36,'text-anchor':'middle',
+          'font-size':it.size,'font-weight':700,fill:it.color||'#FFFFFF',class:'dv'});
+        tx.textContent=it.text; g.appendChild(tx);
+      } else if(it.type==='num'){
+        // a counted-list item: the digit in a disc, then the name
+        const r=it.r||27;
+        g.appendChild(el('circle',{cx:it.x,cy:it.y,r,fill:it.fill||'#2E7FB8'}));
+        const d=el('text',{x:it.x,y:it.y+r*0.36,'text-anchor':'middle',
+          'font-size':r*1.05,'font-weight':700,fill:'#FFFFFF',class:'dv'});
+        d.textContent=it.n; g.appendChild(d);
+        const nm=el('text',{x:it.x+r+26,y:it.y+r*0.42,'text-anchor':'start',
+          'font-size':it.size,'font-weight':600,fill:it.color||'#12303D',class:'dv'});
+        nm.textContent=it.text; g.appendChild(nm);
+        if(it.note){
+          const nt=el('text',{x:it.x+r+26,y:it.y+r*0.42+it.size*0.92,'text-anchor':'start',
+            'font-size':it.size*0.62,'font-weight':500,fill:'#5B6E79',class:'dv'});
+          nt.textContent=it.note; g.appendChild(nt);
+        }
+      }
+      root.appendChild(g);
+    }
+    svg.appendChild(el('rect',{x:box.x,y:box.y,width:box.w,height:box.h,rx:F.radius,ry:F.radius,
+      fill:'none',stroke:F.edge,'stroke-width':F.edge_width}));
+  },
+};
+window.SCREEN = SCREEN;
+</script>

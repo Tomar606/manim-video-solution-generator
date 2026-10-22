@@ -1,0 +1,596 @@
+{
+ "_about": "POL-C1-SA-02 part 1, case-file look",
+ "project": "pol-c1-sa-02",
+ "part": 1,
+ "skin": "paper-editorial",
+ "theme": "rx",
+ "presenter_style": "card",
+ "plate": "st-kremlin",
+ "captions_at": "bottom",
+ "spine": {
+  "title": "शॉक थेरेपी: इलाज की कहानी",
+  "items": [
+   "मरीज़",
+   "डॉक्टर",
+   "दवा",
+   "Side effects"
+  ],
+  "lit_at": [
+   21,
+   30,
+   33
+  ],
+  "show_from": 12
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "in": 0,
+   "out": 3,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r06",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "qhero",
+     "slot": "upper",
+     "ribbon": "Board Exam PYQ",
+     "at": [
+      1,
+      0.0
+     ],
+     "years": [
+      [
+       "2025",
+       [
+        1,
+        0.3
+       ]
+      ]
+     ],
+     "marks": "3 अंक",
+     "t_marks": [
+      2,
+      1.4
+     ],
+     "sfx": [
+      [
+       0.05,
+       "hud-blip/electric-glitch"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": 3,
+   "out": 6,
+   "presenter": "standard",
+   "plate": "st-kremlin",
+   "elements": [
+    {
+     "type": "qhero",
+     "slot": "upper",
+     "ribbon": "Board Exam PYQ",
+     "at": 3,
+     "years": [
+      [
+       "2025",
+       3
+      ]
+     ],
+     "qsize": 52,
+     "question": "शॉक थेरेपी क्या थी? क्या साम्यवाद से पूँजीवाद की ओर संक्रमण का यह सबसे बेहतर तरीका था?",
+     "hl": [
+      "शॉक",
+      "थेरेपी",
+      "बेहतर"
+     ],
+     "t_card": [
+      3,
+      0.2
+     ],
+     "marks": "3 अंक",
+     "t_marks": [
+      5,
+      0.6
+     ]
+    }
+   ]
+  },
+  {
+   "id": "spoon",
+   "in": 6,
+   "out": 8,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r14",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "थोड़ी-थोड़ी दवा",
+     "style": "accent",
+     "at": 7
+    }
+   ]
+  },
+  {
+   "id": "bottle",
+   "in": 8,
+   "out": 11,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r01",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "एक ही दिन में पूरी बोतल!",
+     "at": 8,
+     "fx": "zoom"
+    },
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "मरीज़ ठीक होगा?",
+       9
+      ],
+      [
+       "या हालत बिगड़ेगी?",
+       10
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1991",
+   "in": 11,
+   "out": 12,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r02",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "1991 के बाद: रूस",
+     "at": [
+      11,
+      0.6
+     ]
+    }
+   ]
+  },
+  {
+   "id": "story",
+   "in": 12,
+   "out": 17,
+   "presenter": "standard",
+   "plate": "st-kremlin",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "एक इलाज की कहानी",
+     "size": "m",
+     "at": 12,
+     "fx": "drop"
+    },
+    {
+     "type": "tiles",
+     "slot": "upper",
+     "cols": 2,
+     "items": [
+      [
+       "tabler:bed",
+       "मरीज़",
+       14
+      ],
+      [
+       "tabler:stethoscope",
+       "डॉक्टर",
+       [
+        14,
+        1.0
+       ]
+      ],
+      [
+       "tabler:pill",
+       "दवा",
+       [
+        14,
+        2.0
+       ]
+      ],
+      [
+       "tabler:alert-triangle",
+       "Side effects",
+       15
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "breakup",
+   "in": 17,
+   "out": 21,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r03",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "1991: सोवियत संघ का विघटन",
+     "at": 18,
+     "fx": "blur"
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "टूटकर कई अलग देश",
+     "style": "accent",
+     "at": 20
+    }
+   ]
+  },
+  {
+   "id": "patient",
+   "in": 21,
+   "out": 23,
+   "presenter": "standard",
+   "plate": "st-kremlin",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "मरीज़",
+     "text": "रूस · पूर्वी यूरोप · मध्य एशिया",
+     "at": [
+      21,
+      0.4
+     ],
+     "hl": [
+      "रूस"
+     ],
+     "sub": "तीनों नाम answer में ज़रूर"
+    }
+   ]
+  },
+  {
+   "id": "ans1",
+   "in": 23,
+   "out": 25,
+   "presenter": "standard",
+   "plate": "st-kremlin",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "Case File: उत्तर बन रहा है",
+     "points": [
+      "मरीज़: 1991 के बाद रूस, पूर्वी यूरोप और मध्य एशिया",
+      "बीमारी: साम्यवाद से पूँजीवाद की ओर बदलाव",
+      "डॉक्टर: IMF (अंतर्राष्ट्रीय मुद्रा कोष) और विश्व बैंक",
+      "दवा: शॉक थेरेपी, यानी एक ही झटके में बदलाव",
+      "क्या सबसे बेहतर तरीका था? नहीं",
+      "आर्थिक तबाही: 90% उद्योग औने-पौने दाम पर बिके (गैराज सेल)",
+      "रूबल गिरा, महँगाई बढ़ी, लोगों की जमापूँजी डूबी",
+      "सामाजिक कल्याण का अंत: सब्सिडी बंद, अमीर-गरीब की खाई बढ़ी"
+     ],
+     "show": 1,
+     "animate_from": 0,
+     "at": 23,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "illness",
+   "in": 25,
+   "out": 27,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r04",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "बीमारी क्या थी?",
+     "at": 25,
+     "fx": "rise"
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "साम्यवाद → पूँजीवाद",
+     "style": "accent",
+     "at": 26
+    }
+   ]
+  },
+  {
+   "id": "two-systems",
+   "in": 27,
+   "out": 29,
+   "presenter": "standard",
+   "plate": "st-factory",
+   "elements": [
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "साम्यवाद: संपत्ति और उद्योग सरकार के हाथ",
+       27
+      ],
+      [
+       "पूँजीवाद: संपत्ति और उद्योग निजी हाथों में",
+       28
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans2",
+   "in": 29,
+   "out": 30,
+   "presenter": "standard",
+   "plate": "st-factory",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "Case File: उत्तर बन रहा है",
+     "points": [
+      "मरीज़: 1991 के बाद रूस, पूर्वी यूरोप और मध्य एशिया",
+      "बीमारी: साम्यवाद से पूँजीवाद की ओर बदलाव",
+      "डॉक्टर: IMF (अंतर्राष्ट्रीय मुद्रा कोष) और विश्व बैंक",
+      "दवा: शॉक थेरेपी, यानी एक ही झटके में बदलाव",
+      "क्या सबसे बेहतर तरीका था? नहीं",
+      "आर्थिक तबाही: 90% उद्योग औने-पौने दाम पर बिके (गैराज सेल)",
+      "रूबल गिरा, महँगाई बढ़ी, लोगों की जमापूँजी डूबी",
+      "सामाजिक कल्याण का अंत: सब्सिडी बंद, अमीर-गरीब की खाई बढ़ी"
+     ],
+     "show": 2,
+     "animate_from": 1,
+     "at": 29,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "doctors",
+   "in": 30,
+   "out": 32,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r05",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "डॉक्टर",
+     "text": "IMF + विश्व बैंक",
+     "at": [
+      31,
+      0.3
+     ],
+     "hl": [
+      "IMF"
+     ],
+     "sub": "अंतर्राष्ट्रीय मुद्रा कोष"
+    }
+   ]
+  },
+  {
+   "id": "model",
+   "in": 32,
+   "out": 34,
+   "presenter": "standard",
+   "plate": "st-worldbank",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "इनका बताया मॉडल =",
+     "text": "शॉक थेरेपी",
+     "at": [
+      33,
+      1.0
+     ],
+     "hl": [
+      "शॉक"
+     ],
+     "sfx": [
+      [
+       0.05,
+       "hud-blip/electric-glitch"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "jolt",
+   "in": 34,
+   "out": 36,
+   "presenter": "standard",
+   "plate": "st-worldbank",
+   "elements": [
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "धीरे-धीरे बदलाव",
+     "yes": "एक ही झटके में बदलाव",
+     "at": 34,
+     "t_yes": 35,
+     "sfx": [
+      [
+       1.9,
+       "hud-blip/electric-glitch"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans4",
+   "in": 36,
+   "out": 39,
+   "presenter": "standard",
+   "plate": "st-worldbank",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "Case File: परिभाषा तैयार",
+     "points": [
+      "मरीज़: 1991 के बाद रूस, पूर्वी यूरोप और मध्य एशिया",
+      "बीमारी: साम्यवाद से पूँजीवाद की ओर बदलाव",
+      "डॉक्टर: IMF (अंतर्राष्ट्रीय मुद्रा कोष) और विश्व बैंक",
+      "दवा: शॉक थेरेपी, यानी एक ही झटके में बदलाव",
+      "क्या सबसे बेहतर तरीका था? नहीं",
+      "आर्थिक तबाही: 90% उद्योग औने-पौने दाम पर बिके (गैराज सेल)",
+      "रूबल गिरा, महँगाई बढ़ी, लोगों की जमापूँजी डूबी",
+      "सामाजिक कल्याण का अंत: सब्सिडी बंद, अमीर-गरीब की खाई बढ़ी"
+     ],
+     "show": 4,
+     "animate_from": 2,
+     "at": 36,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "part-two",
+   "in": 39,
+   "out": 41,
+   "presenter": "standard",
+   "plate": "st-kremlin",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "सवाल का दूसरा हिस्सा",
+     "size": "m",
+     "at": 39,
+     "fx": "drop"
+    },
+    {
+     "type": "note",
+     "slot": "upper",
+     "text": "क्या ये सबसे बेहतर तरीका था?",
+     "at": 40,
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "no",
+   "in": 41,
+   "out": 42,
+   "presenter": "standard",
+   "plate": "st-kremlin",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "जवाब",
+     "text": "नहीं",
+     "at": [
+      41,
+      0.6
+     ],
+     "hl": [
+      "नहीं"
+     ],
+     "sfx": [
+      [
+       0.1,
+       "stamp/soft-thud-a"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans5",
+   "in": 42,
+   "out": 44,
+   "presenter": "standard",
+   "plate": "st-factory",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "Case File: उत्तर बन रहा है",
+     "points": [
+      "मरीज़: 1991 के बाद रूस, पूर्वी यूरोप और मध्य एशिया",
+      "बीमारी: साम्यवाद से पूँजीवाद की ओर बदलाव",
+      "डॉक्टर: IMF (अंतर्राष्ट्रीय मुद्रा कोष) और विश्व बैंक",
+      "दवा: शॉक थेरेपी, यानी एक ही झटके में बदलाव",
+      "क्या सबसे बेहतर तरीका था? नहीं",
+      "आर्थिक तबाही: 90% उद्योग औने-पौने दाम पर बिके (गैराज सेल)",
+      "रूबल गिरा, महँगाई बढ़ी, लोगों की जमापूँजी डूबी",
+      "सामाजिक कल्याण का अंत: सब्सिडी बंद, अमीर-गरीब की खाई बढ़ी"
+     ],
+     "show": 5,
+     "animate_from": 4,
+     "at": 42,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "teaser",
+   "in": 44,
+   "out": "end",
+   "presenter": "standard",
+   "broll": {
+    "clip": "r07",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "3 side effects",
+     "style": "accent",
+     "at": 44
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "Part 2 में",
+     "at": [
+      44,
+      0.8
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,453 @@
+{
+ "_about": "POL-C11-LA-02 part 2, plan B: globe-night",
+ "project": "pol-c11-la-02",
+ "part": 2,
+ "skin": "paper-editorial",
+ "theme": "globe-night",
+ "plate": "globe-night-asia",
+ "spine": {
+  "title": "विदेश नीति के सिद्धांत",
+  "items": [
+   "गुटनिरपेक्षता",
+   "साम्राज्यवाद-उपनिवेशवाद का विरोध",
+   "UN और अंतर्राष्ट्रीय कानून",
+   "सभी राष्ट्रों से मैत्री"
+  ],
+  "lit_at": [
+   4,
+   13,
+   21
+  ],
+  "show_from": 0,
+  "pre_lit": 1
+ },
+ "beats": [
+  {
+   "id": "bridge",
+   "in": 0,
+   "out": 4,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "Part 1: गुटनिरपेक्षता",
+     "size": "m",
+     "at": 0
+    },
+    {
+     "type": "quad",
+     "slot": "around-hub",
+     "nums": [
+      "1",
+      "2",
+      "3",
+      "4"
+     ],
+     "icons": [
+      "tabler:scale",
+      "tabler:ban",
+      "tabler:building-bank",
+      "tabler:heart-handshake"
+     ],
+     "items": [
+      [
+       "गुटनिरपेक्षता",
+       "किसी गुट में नहीं, फैसले खुद",
+       0
+      ],
+      [
+       "साम्राज्यवाद-उपनिवेशवाद विरोध",
+       "जो दर्द झेला, वो किसी और का न हो",
+       999
+      ],
+      [
+       "UN और अंतर्राष्ट्रीय कानून",
+       "समस्याओं का शांतिपूर्वक हल",
+       999
+      ],
+      [
+       "सभी राष्ट्रों से मैत्री",
+       "समानता; रंगभेद, नस्लवाद का विरोध",
+       999
+      ]
+     ]
+    }
+   ],
+   "hub": {
+    "cy": 1080,
+    "r": 200,
+    "backdrop": "plate"
+   }
+  },
+  {
+   "id": "f2",
+   "in": 4,
+   "out": 10,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "section",
+     "slot": "head",
+     "num": "2",
+     "text": "साम्राज्यवाद-उपनिवेशवाद का विरोध",
+     "at": 4
+    },
+    {
+     "type": "pills",
+     "slot": "upper",
+     "items": [
+      [
+       "200 वर्ष उपनिवेश",
+       5
+      ],
+      [
+       "अंग्रेज़ों का गुलाम",
+       6
+      ],
+      [
+       "पीड़ा को समझता है",
+       7
+      ]
+     ],
+     "style": "accent"
+    }
+   ],
+   "hub": {
+    "cy": 1500,
+    "r": 250,
+    "backdrop": "plate"
+   }
+  },
+  {
+   "id": "f2-pain",
+   "in": 10,
+   "out": 12,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "upper",
+     "text": "जो दर्द झेला, वो किसी और का न हो",
+     "at": 10
+    }
+   ],
+   "hub": {
+    "cy": 1500,
+    "r": 250,
+    "backdrop": "plate"
+   }
+  },
+  {
+   "id": "half",
+   "in": 12,
+   "out": 13,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "आधा answer तैयार",
+     "size": "m",
+     "at": 12
+    },
+    {
+     "type": "quad",
+     "slot": "around-hub",
+     "nums": [
+      "1",
+      "2",
+      "3",
+      "4"
+     ],
+     "icons": [
+      "tabler:scale",
+      "tabler:ban",
+      "tabler:building-bank",
+      "tabler:heart-handshake"
+     ],
+     "items": [
+      [
+       "गुटनिरपेक्षता",
+       "किसी गुट में नहीं, फैसले खुद",
+       0
+      ],
+      [
+       "साम्राज्यवाद-उपनिवेशवाद विरोध",
+       "जो दर्द झेला, वो किसी और का न हो",
+       12
+      ],
+      [
+       "UN और अंतर्राष्ट्रीय कानून",
+       "समस्याओं का शांतिपूर्वक हल",
+       999
+      ],
+      [
+       "सभी राष्ट्रों से मैत्री",
+       "समानता; रंगभेद, नस्लवाद का विरोध",
+       999
+      ]
+     ]
+    }
+   ],
+   "hub": {
+    "cy": 1080,
+    "r": 200,
+    "backdrop": "plate"
+   }
+  },
+  {
+   "id": "f3",
+   "in": 13,
+   "out": 19,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "3",
+     "text": "UN और अंतर्राष्ट्रीय कानून का पालन",
+     "at": 13
+    },
+    {
+     "type": "pills",
+     "slot": "upper",
+     "items": [
+      [
+       "UN में आस्था",
+       15
+      ],
+      [
+       "अंतर्राष्ट्रीय कानून का पालन",
+       16
+      ],
+      [
+       "समस्याओं का हल",
+       17
+      ]
+     ],
+     "style": "accent"
+    }
+   ],
+   "hub": {
+    "cy": 1500,
+    "r": 250,
+    "backdrop": "plate"
+   },
+   "broll": {
+    "photo": "political-science/united-nations/assembly-1.jpg",
+    "region": "top",
+    "treatment": "colour"
+   }
+  },
+  {
+   "id": "f3-word",
+   "in": 19,
+   "out": 21,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "upper",
+     "text": "शांतिपूर्वक: यही इसकी जान",
+     "at": 19
+    }
+   ],
+   "hub": {
+    "cy": 1500,
+    "r": 250,
+    "backdrop": "plate"
+   }
+  },
+  {
+   "id": "f4",
+   "in": 21,
+   "out": 25,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "4",
+     "text": "सभी राष्ट्रों से मैत्रीपूर्ण संबंध",
+     "at": 21
+    },
+    {
+     "type": "pill",
+     "slot": "upper",
+     "text": "सभी राष्ट्रों की समानता",
+     "style": "accent",
+     "at": 23
+    }
+   ],
+   "hub": {
+    "cy": 1500,
+    "r": 250,
+    "backdrop": "plate"
+   },
+   "broll": {
+    "photo": "history/foreign-policy/apartheid-3.jpg",
+    "region": "top",
+    "treatment": "colour"
+   }
+  },
+  {
+   "id": "f4-words",
+   "in": 25,
+   "out": 27,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "रंगभेद: चमड़ी के रंग के आधार पर भेदभाव",
+       25
+      ],
+      [
+       "नस्लवाद: नस्ल के आधार पर भेदभाव",
+       26
+      ]
+     ]
+    }
+   ],
+   "hub": {
+    "cy": 1500,
+    "r": 250,
+    "backdrop": "plate"
+   }
+  },
+  {
+   "id": "f4-friends",
+   "in": 27,
+   "out": 30,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "chain",
+     "slot": "upper",
+     "items": [
+      [
+       "साम्यवादी हो या पूँजीवादी",
+       27
+      ],
+      [
+       "भारत सबसे दोस्ती चाहता है",
+       28
+      ],
+      [
+       "पड़ोसी देश: विशेष प्राथमिकता",
+       [
+        28,
+        2.6
+       ]
+      ]
+     ]
+    }
+   ],
+   "hub": {
+    "cy": 1500,
+    "r": 250,
+    "backdrop": "plate"
+   }
+  },
+  {
+   "id": "recap",
+   "in": 30,
+   "out": 36,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "चारों सिद्धांत, एक बार",
+     "size": "m",
+     "at": 30
+    },
+    {
+     "type": "quad",
+     "slot": "around-hub",
+     "nums": [
+      "1",
+      "2",
+      "3",
+      "4"
+     ],
+     "icons": [
+      "tabler:scale",
+      "tabler:ban",
+      "tabler:building-bank",
+      "tabler:heart-handshake"
+     ],
+     "items": [
+      [
+       "गुटनिरपेक्षता",
+       "किसी गुट में नहीं, फैसले खुद",
+       32
+      ],
+      [
+       "साम्राज्यवाद-उपनिवेशवाद विरोध",
+       "जो दर्द झेला, वो किसी और का न हो",
+       33
+      ],
+      [
+       "UN और अंतर्राष्ट्रीय कानून",
+       "समस्याओं का शांतिपूर्वक हल",
+       34
+      ],
+      [
+       "सभी राष्ट्रों से मैत्री",
+       "समानता; रंगभेद, नस्लवाद का विरोध",
+       35
+      ]
+     ]
+    }
+   ],
+   "hub": {
+    "cy": 1080,
+    "r": 200,
+    "backdrop": "plate"
+   }
+  },
+  {
+   "id": "marks",
+   "in": 36,
+   "out": 38,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "upper",
+     "text": "भूमिका + चारों = 4 नंबर",
+     "at": 37
+    }
+   ],
+   "hub": {
+    "cy": 1500,
+    "r": 250,
+    "backdrop": "plate"
+   }
+  },
+  {
+   "id": "outro",
+   "in": 38,
+   "out": "end",
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "head",
+     "text": "पूरा answer: Notes button",
+     "style": "accent",
+     "at": 39
+    }
+   ],
+   "hub": {
+    "cy": 1500,
+    "r": 250,
+    "backdrop": "plate"
+   }
+  }
+ ]
+}

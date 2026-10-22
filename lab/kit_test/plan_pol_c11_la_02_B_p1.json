@@ -1,0 +1,375 @@
+{
+ "_about": "POL-C11-LA-02 part 1, plan B: globe-night",
+ "project": "pol-c11-la-02",
+ "part": 1,
+ "skin": "paper-editorial",
+ "theme": "globe-night",
+ "plate": "globe-night-asia",
+ "spine": {
+  "title": "विदेश नीति के सिद्धांत",
+  "items": [
+   "गुटनिरपेक्षता",
+   "साम्राज्यवाद-उपनिवेशवाद का विरोध",
+   "UN और अंतर्राष्ट्रीय कानून",
+   "सभी राष्ट्रों से मैत्री"
+  ],
+  "lit_at": [
+   20
+  ],
+  "show_from": 20
+ },
+ "beats": [
+  {
+   "id": "hook",
+   "in": 0,
+   "out": 4,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "1947: दुनिया से रिश्ते कैसे रखें?",
+     "size": "m",
+     "at": 1
+    }
+   ],
+   "hub": {
+    "cy": 1500,
+    "r": 250,
+    "backdrop": "plate"
+   },
+   "broll": {
+    "photo": "history/foreign-policy/nehru-1.jpg",
+    "region": "top",
+    "treatment": "colour"
+   }
+  },
+  {
+   "id": "question",
+   "in": 4,
+   "out": 8,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "qcard",
+     "slot": "upper",
+     "question": "भारत की विदेश नीति के प्रमुख सिद्धांत क्या हैं?",
+     "year": "2025",
+     "marks": "4 अंक",
+     "t_marks": [
+      5,
+      1.0
+     ],
+     "at": 5
+    }
+   ],
+   "hub": {
+    "cy": 1500,
+    "r": 250,
+    "backdrop": "plate"
+   },
+   "broll": {
+    "photo": "history/foreign-policy/potsdam-1.jpg",
+    "region": "top",
+    "treatment": "colour"
+   }
+  },
+  {
+   "id": "bhumika",
+   "in": 8,
+   "out": 14,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "पहले: छोटी-सी भूमिका",
+     "style": "accent",
+     "at": 8
+    },
+    {
+     "type": "chain",
+     "slot": "upper",
+     "items": [
+      [
+       "15 अगस्त 1947: आज़ादी",
+       9
+      ],
+      [
+       "अपनी स्वतंत्र विदेश नीति",
+       10
+      ],
+      [
+       "पर विश्व दो खेमों में बँटा",
+       13
+      ]
+     ]
+    }
+   ],
+   "hub": {
+    "cy": 1500,
+    "r": 250,
+    "backdrop": "plate"
+   },
+   "broll": {
+    "photo": "history/foreign-policy/potsdam-1.jpg",
+    "region": "top",
+    "treatment": "colour"
+   }
+  },
+  {
+   "id": "nehru",
+   "in": 14,
+   "out": 18,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "def",
+     "slot": "upper",
+     "term": "पहले विदेश मंत्री",
+     "text": "पं. जवाहरलाल नेहरू",
+     "at": 14
+    },
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "सोच-समझकर बनाई नीति, आज भी विकास की ओर",
+     "at": 16
+    }
+   ],
+   "hub": {
+    "cy": 1500,
+    "r": 250,
+    "backdrop": "plate"
+   },
+   "broll": {
+    "photo": "history/foreign-policy/nehru-1.jpg",
+    "region": "top",
+    "treatment": "colour"
+   }
+  },
+  {
+   "id": "bhumika3",
+   "in": 18,
+   "out": 20,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "भूमिका में तीन बातें",
+     "size": "m",
+     "at": 18
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "15 अगस्त 1947",
+       19
+      ],
+      [
+       "दुनिया के दो खेमे",
+       [
+        19,
+        2.2
+       ]
+      ],
+      [
+       "नेहरू जी",
+       [
+        19,
+        4.4
+       ]
+      ]
+     ]
+    }
+   ],
+   "hub": {
+    "cy": 1500,
+    "r": 250,
+    "backdrop": "plate"
+   }
+  },
+  {
+   "id": "f1",
+   "in": 20,
+   "out": 22,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "section",
+     "slot": "head",
+     "num": "1",
+     "text": "गुटनिरपेक्षता",
+     "at": 20
+    },
+    {
+     "type": "def",
+     "slot": "upper",
+     "term": "गुटनिरपेक्ष",
+     "text": "किसी गुट में शामिल न होना",
+     "at": [
+      20,
+      3.5
+     ]
+    }
+   ],
+   "hub": {
+    "cy": 1500,
+    "r": 250,
+    "backdrop": "plate"
+   }
+  },
+  {
+   "id": "blocs",
+   "in": 22,
+   "out": 29,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "blocs",
+     "slot": "upper",
+     "left": [
+      "साम्यवादी",
+      "सोवियत संघ"
+     ],
+     "right": [
+      "पूँजीवादी",
+      "अमेरिका"
+     ],
+     "t_left": 23,
+     "t_right": 24,
+     "t_india": 22,
+     "t_cross": 26,
+     "t_label": 28,
+     "label": "किसी गुट में नहीं",
+     "at": 22
+    }
+   ],
+   "hub": {
+    "cy": 1080,
+    "r": 200,
+    "backdrop": "plate"
+   }
+  },
+  {
+   "id": "f1-meaning",
+   "in": 29,
+   "out": 32,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "दुनिया से दूर रहना",
+     "yes": "सबसे दोस्ती, फैसले खुद",
+     "t_yes": 30,
+     "at": 29
+    }
+   ],
+   "hub": {
+    "cy": 1500,
+    "r": 250,
+    "backdrop": "plate"
+   },
+   "broll": {
+    "photo": "history/foreign-policy/belgrade-2.jpg",
+    "region": "top",
+    "treatment": "colour"
+   }
+  },
+  {
+   "id": "f1-key",
+   "in": 32,
+   "out": 35,
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "upper",
+     "text": "सबसे ज़रूरी सिद्धांत",
+     "at": 32
+    },
+    {
+     "type": "note",
+     "slot": "under-upper",
+     "text": "बाकी सिद्धांत इसी सोच से निकले",
+     "at": 33
+    }
+   ],
+   "hub": {
+    "cy": 1500,
+    "r": 250,
+    "backdrop": "plate"
+   }
+  },
+  {
+   "id": "teaser",
+   "in": 35,
+   "out": "end",
+   "presenter": "hub",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "एक हो गया, तीन बाकी",
+     "size": "m",
+     "at": 35
+    },
+    {
+     "type": "quad",
+     "slot": "around-hub",
+     "nums": [
+      "1",
+      "2",
+      "3",
+      "4"
+     ],
+     "icons": [
+      "tabler:scale",
+      "tabler:ban",
+      "tabler:building-bank",
+      "tabler:heart-handshake"
+     ],
+     "items": [
+      [
+       "गुटनिरपेक्षता",
+       "किसी गुट में नहीं, फैसले खुद",
+       0
+      ],
+      [
+       "साम्राज्यवाद-उपनिवेशवाद विरोध",
+       "जो दर्द झेला, वो किसी और का न हो",
+       999
+      ],
+      [
+       "UN और अंतर्राष्ट्रीय कानून",
+       "समस्याओं का शांतिपूर्वक हल",
+       999
+      ],
+      [
+       "सभी राष्ट्रों से मैत्री",
+       "समानता; रंगभेद, नस्लवाद का विरोध",
+       999
+      ]
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "center-low",
+     "text": "बाकी तीन: Part 2",
+     "style": "accent",
+     "at": 36
+    }
+   ],
+   "hub": {
+    "cy": 1080,
+    "r": 200,
+    "backdrop": "plate"
+   }
+  }
+ ],
+ "captions_from": 8
+}

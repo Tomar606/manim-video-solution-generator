@@ -1,0 +1,19 @@
+# M2 — under HeyGen block 7 (55.70-76.40), 20.7s.
+# तक्षशिला 56.40s = 0.70 | उज्जयिनी 64.20s = 8.50 | तोसलि 72.10s = 16.40
+# Each label is cued 0.35s early so it is readable ON the word.
+# Pataliputra carries over from M1: labels persist once shown.
+scene: { id: his_c2_m2_relief, duration: 20.7 }
+map:
+  base: Mauryan Empire
+  frame: false
+  layers: { states: false }
+  actions:
+    - { time: 0.0,   type: show_map }
+    - { time: 0.0,   type: highlight, feature: "Mauryan Empire" }
+    - { time: 0.0,   type: point,  location: Pataliputra, label: "पाटलिपुत्र" }
+    - { time: 0.35,  type: point,  location: Taxila,      label: "तक्षशिला" }
+    - { time: 1.40,  type: fly_to, location: Taxila,   zoom: 6.8, duration: 2.0 }
+    - { time: 5.90,  type: fly_to, location: Ujjayini, zoom: 6.8, duration: 2.2 }
+    - { time: 8.15,  type: point,  location: Ujjayini,   label: "उज्जयिनी" }
+    - { time: 13.20, type: fly_to, location: Tosali,   zoom: 6.8, duration: 2.2 }
+    - { time: 16.05, type: point,  location: Tosali,     label: "तोसलि" }

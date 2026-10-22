@@ -1,0 +1,193 @@
+/* harappa — "पकी ईंट".  Plate: the Mohenjo-daro mound and its brick lanes
+   (Saqib Qayyum, CC BY-SA 3.0), warm and dimmed.  Cream cards whose top band is the
+   Harappan "intersecting circles" pottery pattern in terracotta; lapis-blue second key
+   (the Indus lapis beads); Martel heavy heads, Tiro Devanagari body.  Premium Hindi
+   (Vitan) reel.  (Derived from edict.) */
+@font-face { font-family: 'Martel'; src: url('../../../library/elements/fonts/Martel-ExtraBold.ttf'); font-weight: 800; }
+@font-face { font-family: 'Rozha One'; src: url('../../../library/elements/fonts/RozhaOne-Regular.ttf'); }
+@font-face { font-family: 'Tiro Devanagari Hindi'; src: url('../../../library/elements/fonts/TiroDevanagariHindi-Regular.ttf'); }
+#frame.theme-charter {
+  --ink: #1E1A16;
+  --accent: #8C1C13;          /* baked-brick terracotta */
+  --accent-2: #9A7420;        /* lapis lazuli */
+  --muted: #6B5F52;
+  --paper: #EADBC0;
+  --card-bg: rgba(250, 246, 236, .97);
+  --solid: rgba(250, 246, 236, .99);
+  --card-border: rgba(90, 58, 30, .35);
+  --font-head: 'Martel', serif;
+  --head-weight: 800;
+  --head-stretch: 100%;
+  --font-body: 'Tiro Devanagari Hindi', serif;
+  --font-num: 'Khand', sans-serif;
+  --halo: 0 0 6px rgba(0, 0, 0, .85), 0 2px 3px rgba(0, 0, 0, .9);
+  --glass-shadow: 0 12px 28px rgba(0, 0, 0, .45);
+  --sea: #0E2C47;
+  --land: #C9A877;
+  --coast: rgba(255, 240, 210, .55);
+  color: var(--ink);
+}
+
+.theme-charter .card, .theme-charter .qcard, .theme-charter .k-card, .theme-charter .compare .k-card,
+.theme-charter .k-def, .theme-charter .yn .side, .theme-charter .imgcard, .theme-charter .panel {
+  background: var(--card-bg) !important; border: 1.5px solid var(--card-border) !important; border-radius: 14px !important;
+  box-shadow: inset 0 0 0 6px rgba(250,246,236,.97), inset 0 0 0 8px rgba(90,58,30,.45), inset 2px 3px 10px rgba(90,58,30,.35), var(--glass-shadow) !important; border-top: none !important; border-radius: 6px !important; color: var(--ink);
+  }
+.theme-charter .k-head { font-family: 'Martel'; font-weight: 800; }
+.theme-charter .hl-m { font-family: 'Martel'; font-weight: 800; color: #fff; text-shadow: var(--halo); text-wrap: balance; font-size: 66px; line-height: 1.35; }
+.theme-charter .qcard .k-head { color: var(--accent) !important; }
+
+.theme-charter .k-section-tag { background: var(--card-bg) !important; border: 1.5px solid var(--card-border) !important; box-shadow: var(--glass-shadow) !important;
+  display: inline-flex; align-items: center; gap: 18px; padding: 8px 30px 8px 8px; border-radius: 44px; }
+.theme-charter .k-section-tag__num { width: 70px; height: 70px; border-radius: 50%; display: grid; place-items: center; padding: 0;
+  background: var(--accent); color: #FFF6E6; font-family: 'Khand'; font-weight: 700; font-size: 52px; line-height: 1; }
+.theme-charter .k-section-tag__text { font-family: 'Martel'; font-weight: 800; font-size: 54px; color: var(--ink); background: none; padding: 0; line-height: 1.5; }
+
+.theme-charter .k-pill { border-radius: 40px !important; font-family: 'Tiro Devanagari Hindi'; font-weight: 400; font-size: 48px;
+  background: var(--card-bg) !important; color: var(--ink) !important; border: 1.5px solid var(--card-border) !important;
+  padding: 6px 30px 6px 20px; box-shadow: var(--glass-shadow); display: inline-flex; align-items: center; gap: 14px; }
+.theme-charter .k-pill::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); flex: none; }
+.theme-charter .k-pill--accent { background: var(--accent) !important; color: #FFF6E6 !important; border-color: var(--accent) !important; }
+.theme-charter .k-pill--accent::before { background: #FFF6E6; }
+
+.theme-charter .k-stamp { font-family: 'Martel'; font-weight: 800; color: var(--accent); border-color: var(--accent);
+  outline-color: var(--accent); background: var(--solid) !important; -webkit-mask-image: none; mix-blend-mode: normal; border-radius: 12px; }
+
+.theme-charter .note { font-family: 'Tiro Devanagari Hindi'; font-weight: 400; font-size: 52px; color: #FFF6E4; text-shadow: var(--halo); }
+.theme-charter .note.on-photo { background: rgba(52, 32, 15, .82); padding: 8px 24px; border-radius: 12px; text-shadow: none; }
+
+.theme-charter #spine { left: 24px; right: 24px; top: 24px; height: 92px; background: var(--card-bg); border-radius: 46px; border: 1.5px solid var(--card-border);
+  padding: 0 30px; box-sizing: border-box; box-shadow: var(--glass-shadow); }
+.theme-charter #spine .ttl { font-family: 'Martel'; font-weight: 800; font-size: 40px; color: var(--ink); }
+.theme-charter #spine .k-dots i { width: 26px; height: 26px; border-radius: 50%; background: transparent; border: 4px solid var(--accent); margin: 0 6px; }
+.theme-charter #spine .k-dots i.on { background: var(--accent); }
+.theme-charter #spine .cnt { font-family: 'Khand'; font-weight: 700; color: var(--accent-2); }
+
+.theme-charter #cap { font-family: 'Noto Sans Devanagari'; font-weight: 700; font-size: 44px; color: var(--ink);
+  --torn-bg: rgba(240, 228, 204, .96); clip-path: none; border-radius: 14px; box-shadow: var(--glass-shadow); border: 1.5px solid var(--card-border); }
+.theme-charter #cap .hl { color: var(--accent); }
+
+.theme-charter .hub-ring { border: 8px solid #fff; box-shadow: 0 0 0 5px var(--accent), var(--glass-shadow); }
+.theme-charter .hub-route { border: 3px dashed rgba(184, 134, 46, .85); }
+.theme-charter .num { font-family: 'Khand'; font-weight: 700; color: var(--accent); }
+
+.theme-charter #broll { background: #000; }
+.theme-charter #broll img { filter: saturate(1.05) !important; mix-blend-mode: normal !important; }
+.theme-charter #broll::after { background-image: none; background: linear-gradient(180deg, rgba(4,12,22,.45) 0%, transparent 20%, transparent 58%, rgba(4,12,22,.6) 100%); mix-blend-mode: normal; }
+.theme-charter #broll.dim img { filter: brightness(.5) saturate(.85) !important; }
+
+.theme-charter .p-card { border: 8px solid #fff; box-shadow: 0 0 0 4px var(--accent), var(--glass-shadow); }
+
+.theme-charter .hl-m { font-size: 72px; line-height: 1.3; }
+.theme-charter .yn .side div:last-child, .theme-charter .card > span:last-child { font-size: 52px !important; }
+/* a source card: photo in a stone frame, its kind as a red seal, its one-line identity under it */
+.theme-charter .src-card { background: var(--card-bg); border-radius: 8px; box-shadow: inset 0 0 0 8px rgba(250,246,236,.97), inset 0 0 0 10px rgba(90,58,30,.45), var(--glass-shadow); padding: 26px; box-sizing: border-box; }
+.theme-charter .src-card img { display: block; border-radius: 4px; box-shadow: 0 0 0 3px rgba(90,58,30,.5); }
+
+/* Tiro sets a small x-height: lift every body text the stock templates fix inline */
+.theme-charter .yn .side div:last-child { font-size: 56px !important; }
+.theme-charter .card > span:last-child { font-size: 58px !important; }
+.theme-charter .k-def__term { font-size: 62px !important; }
+.theme-charter .k-def__text { font-size: 56px !important; }
+.theme-charter .imgcard .k-pill { font-size: 42px !important; }
+.theme-charter .note { font-size: 56px; }
+
+/* the map, as an old survey on cloth: pale water, parchment land, sepia coast, blue rivers */
+#frame.theme-charter { --sea: #B9C8C4; --land: #EBDDBF; --coast: rgba(90, 58, 30, .75); --river: #4C7FA8; }
+.theme-charter .seamap { padding: 0 !important; overflow: hidden; }
+.theme-charter .port-dot { fill: var(--accent); stroke: #FFF6E6; stroke-width: 4; }
+.theme-charter .port-tag { position: absolute; white-space: nowrap; font-family: 'Rozha One'; font-size: 40px; line-height: 1.2;
+  background: rgba(240, 228, 204, .97); color: var(--ink); border: 2px solid var(--accent); border-radius: 8px; padding: 2px 14px 4px; }
+.theme-charter .port-tag small { display: block; font-family: 'Tiro Devanagari Hindi'; font-size: 28px; color: var(--muted); }
+.theme-charter .port-tag.on { background: var(--accent); color: #FFF6E6; }
+.theme-charter .port-tag.on small { color: #F3D9C8; }
+.theme-charter .map-label { position: absolute; white-space: nowrap; font-family: 'Tiro Devanagari Hindi'; font-style: italic; font-size: 30px; color: rgba(52, 32, 15, .7); }
+.theme-charter .map-label.sea { color: rgba(40, 70, 95, .75); }
+.theme-charter .map-label.river { color: #2F6690; font-size: 28px; }
+.theme-charter .seamap .port-tag.on { color: #FFF6E6 !important; }
+
+/* the intersecting-circles band (Harappan pottery): a terracotta top border with the
+   circles painted into it, over a cream card */
+.theme-charter .card, .theme-charter .k-card, .theme-charter .k-def, .theme-charter .yn .side, .theme-charter .panel, .theme-charter .qcard {
+  border: 1.5px solid rgba(120,70,30,.35) !important; border-top: 20px solid #8C1C13 !important; border-radius: 8px !important;
+  background: radial-gradient(circle at 10px 10px, transparent 5px, #F3E6C4 6px 7.5px, transparent 8.5px) 0 0 / 20px 20px repeat-x border-box,
+              radial-gradient(circle at 0 10px, transparent 5px, #F3E6C4 6px 7.5px, transparent 8.5px) 0 0 / 20px 20px repeat-x border-box,
+              var(--card-bg) !important;
+  box-shadow: 0 14px 30px rgba(0,0,0,.4) !important; }
+#frame.theme-charter { --sea: #B9C8C4; --land: #EBDDBF; --coast: rgba(90, 58, 30, .75); --river: #4C7FA8; }
+.theme-charter .seamap { padding: 0 !important; overflow: hidden; }
+.theme-charter .port-dot { fill: var(--accent); stroke: #FFF6E6; stroke-width: 4; }
+.theme-charter .port-tag { position: absolute; white-space: nowrap; font-family: 'Rozha One'; font-size: 40px; line-height: 1.2;
+  background: rgba(240, 228, 204, .97); color: var(--ink); border: 2px solid var(--accent); border-radius: 8px; padding: 2px 14px 4px; }
+.theme-charter .port-tag small { display: block; font-family: 'Tiro Devanagari Hindi'; font-size: 28px; color: var(--muted); }
+.theme-charter .port-tag.on { background: var(--accent); color: #FFF6E6; }
+.theme-charter .port-tag.on small { color: #F3D9C8; }
+.theme-charter .map-label { position: absolute; white-space: nowrap; font-family: 'Tiro Devanagari Hindi'; font-style: italic; font-size: 30px; color: rgba(52, 32, 15, .7); }
+.theme-charter .map-label.sea { color: rgba(40, 70, 95, .75); }
+.theme-charter .map-label.river { color: #2F6690; font-size: 28px; }
+.theme-charter .seamap .port-tag.on { color: #FFF6E6 !important; }
+
+/* the intersecting-circles band (Harappan pottery) across the top of every card */
+.theme-charter .card, .theme-charter .k-card, .theme-charter .k-def, .theme-charter .yn .side, .theme-charter .panel, .theme-charter .qcard {
+  border-top: 18px solid transparent !important;
+  border-image: radial-gradient(circle at 50% 50%, transparent 5px, #8C1C13 6px 8px, transparent 9px) 0 0 18 0 / 18px 0 0 0 round !important;
+  background-image: radial-gradient(circle at 9px 9px, transparent 6px, rgba(140,28,19,.95) 7px 9px, transparent 10px) !important;
+  background-size: 18px 18px !important; background-repeat: repeat-x !important; background-position: 0 -18px !important; background-color: var(--card-bg) !important;
+  box-shadow: inset 0 18px 0 0 rgba(140,28,19,.0), 0 14px 30px rgba(0,0,0,.4) !important; }
+.theme-charter .card::before, .theme-charter .panel::before, .theme-charter .qcard::before, .theme-charter .yn .side::before, .theme-charter .k-def::before {
+  content: ""; position: absolute; left: 0; right: 0; top: -18px; height: 18px; border-radius: 6px 6px 0 0;
+  background: radial-gradient(circle at 9px 9px, transparent 5px, #F3E6C4 6px 7.5px, transparent 8.5px) 0 0 / 18px 18px repeat-x, #8C1C13; }
+.theme-charter .card, .theme-charter .panel, .theme-charter .qcard, .theme-charter .yn .side, .theme-charter .k-def { position: relative; overflow: visible !important; }
+#frame.theme-charter { --sea: #9A7420; --land: #EAD9B8; --coast: rgba(120,70,30,.75); }
+.theme-charter .k-pill--accent { background: var(--accent-2) !important; border-color: var(--accent-2) !important; color: #F3E6C4 !important; }
+.theme-charter .p-card { border: 8px solid #F3E6C4; box-shadow: 0 0 0 5px var(--accent), 0 14px 30px rgba(0,0,0,.45); }
+.theme-charter .k-check-row__text { font-size: 46px !important; }
+.theme-charter .k-check-row { padding-top: 10px !important; padding-bottom: 10px !important; }
+
+/* hero text: the one thing to remember, set large */
+.theme-charter .hero { background: linear-gradient(180deg, rgba(250,246,236,.97), rgba(240,226,200,.97)); border-top: 20px solid #8C1C13;
+  border-radius: 10px; box-shadow: 0 18px 40px rgba(0,0,0,.45); position: relative; }
+.theme-charter .hero::before { content: ""; position: absolute; left: 0; right: 0; top: -20px; height: 20px;
+  background: radial-gradient(circle at 10px 10px, transparent 5px, #F3E6C4 6px 7.5px, transparent 8.5px) 0 0 / 20px 20px repeat-x; }
+.theme-charter .hero-kicker { font-family: 'Tiro Devanagari Hindi'; font-size: 44px; color: var(--muted); margin-bottom: 6px; }
+.theme-charter .hero-text { font-family: 'Martel'; font-weight: 800; font-size: 104px; line-height: 1.32; color: var(--accent); }
+.theme-charter .hero-rule { height: 9px; margin: 10px auto 0; background: var(--accent-2); border-radius: 5px; }
+.theme-charter .hero-sub { font-family: 'Tiro Devanagari Hindi'; font-size: 52px; color: var(--ink); margin-top: 14px; }
+/* the question as an event */
+.theme-charter .qh-year { position: absolute; top: 96px; width: 270px; text-align: center; font-family: 'Khand'; font-weight: 700; font-size: 104px; line-height: 1;
+  color: #8C1C13; border: 7px solid #8C1C13; outline: 3px solid #8C1C13; outline-offset: 5px; border-radius: 10px; padding: 14px 0 6px;
+  background: rgba(250,246,236,.96); box-shadow: 0 10px 22px rgba(0,0,0,.35); }
+.theme-charter .qh-next { position: absolute; left: 160px; top: 300px; font-size: 54px; padding: 12px 28px; }
+.theme-charter .qh-card { position: absolute; left: 0; top: 440px; width: 960px; box-sizing: border-box; padding: 34px 44px 54px; }
+.theme-charter .qh-ul { height: 9px; background: var(--accent-2); border-radius: 5px; margin-top: 6px; }
+.theme-charter .qh-marks { position: absolute; right: -10px; top: 400px; width: 190px; height: 190px; border-radius: 50%; display: grid; place-items: center;
+  background: #9A7420; color: #F3E6C4; font-family: 'Martel'; font-weight: 800; font-size: 50px; box-shadow: 0 0 0 7px #F3E6C4, 0 0 0 11px #9A7420, 0 12px 26px rgba(0,0,0,.4); }
+.theme-charter .qh-year { width: 270px; }
+.theme-charter .hero-text { text-wrap: balance; }
+/* the answer sheet */
+.theme-charter .ans { background: repeating-linear-gradient(180deg, transparent 0 59px, rgba(154,116,32,.22) 59px 61px), rgba(250,244,230,.98) !important; }
+.theme-charter .ans-head { font-family: 'Martel'; font-weight: 800; font-size: 54px; color: var(--accent); margin-bottom: 8px; }
+.theme-charter .ans-row { font-family: 'Tiro Devanagari Hindi'; font-size: 40px; line-height: 1.5; color: #1E2A44; margin: 4px 0 10px; }
+.theme-charter .ans-row b { color: var(--accent); font-family: 'Martel'; }
+.theme-charter .ans-todo { opacity: .45; }
+.theme-charter .ans-blank { display: inline-block; width: 70%; height: 6px; border-bottom: 4px dotted rgba(154,116,32,.5); vertical-align: middle; }
+.theme-charter .ans-new { background: linear-gradient(90deg, rgba(242,169,0,.22), transparent 85%); border-radius: 6px; }
+.theme-charter .ans { padding: 20px 30px 22px !important; }
+.theme-charter .ans-head { font-size: 48px; margin-bottom: 2px; }
+.theme-charter .ans-row { font-size: 39px; line-height: 1.38; margin: 2px 0 6px; }
+
+/* charter — "घोषणा-पत्र".  The 1945 UN Charter as the motif: ivory paper cards under a DOUBLE oxblood
+   rule (a treaty page's border), brass second key (the seal), Martel heads, Tiro body.  Plates: the
+   Charter's cover, the Security Council chamber and its wheat-and-anchor mural, the Peace Palace.
+   (Derived from harappa; the circles band is replaced by the double rule.) */
+.theme-charter .card::before, .theme-charter .panel::before, .theme-charter .qcard::before, .theme-charter .yn .side::before, .theme-charter .k-def::before {
+  background: linear-gradient(180deg, #8C1C13 0 5px, #F3E6C4 5px 9px, #8C1C13 9px 14px, #9A7420 14px 18px); }
+.theme-charter .hero::before { background: linear-gradient(180deg, #8C1C13 0 5px, #F3E6C4 5px 9px, #8C1C13 9px 14px, #9A7420 14px 20px); }
+.theme-charter .hero { border-top-color: #8C1C13; }
+.theme-charter .hero-text { color: #8C1C13; }
+.theme-charter .hero-rule { background: #9A7420; }
+.theme-charter .hl-m { background: rgba(250,246,236,.96); color: #1E1A16; text-shadow: none; width: fit-content; max-width: 960px;
+  padding: 6px 28px 10px; border-radius: 6px; border-left: 12px solid #8C1C13; box-shadow: 0 10px 24px rgba(0,0,0,.4); font-size: 58px; }
+.theme-charter #broll::after { background: linear-gradient(180deg, rgba(20,12,8,.5) 0%, transparent 22%, transparent 58%, rgba(20,12,8,.6) 100%); }
+.theme-charter .k-pill::before { background: #9A7420; }
+.theme-charter .qh-marks { background: #8C1C13; box-shadow: 0 0 0 7px #F3E6C4, 0 0 0 11px #9A7420, 0 12px 26px rgba(0,0,0,.4); }

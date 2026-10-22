@@ -1,0 +1,48 @@
+# The house map look: a well-made textbook map that can move.
+# Nothing here is hard-coded in the renderer — swap this file, change the look.
+name: textbook
+background:      "#0E2A36"    # the video plate, so the map sits in the same world
+water:           "#BBD9EC"
+land:            "#F4F7F9"
+land_muted:      "#D5DEE4"
+border_country:  "#9AAAB4"
+border_state:    "#A9BAC4"
+coastline:       "#7E8F9A"
+river:           "#7FB3D5"
+lake:            "#9CC9E8"
+selected_region: "#2E7FB8"
+selected_edge:   "#1B5E8C"
+route:           "#D9534F"
+route_head:      "#B02E2A"
+point:           "#D9534F"
+point_ring:      "#FFFFFF"
+label:           "#12303D"
+label_halo:      "#FFFFFF"
+muted_label:     "#5B6E79"
+line_country:    1.1
+line_state:      0.7
+line_route:      3.0
+point_radius:    7
+label_size:      34
+label_size_small: 26
+
+# The arts data-screen window. Omit `frame:` in a scene and the map fills the
+# whole frame instead (which is what the science/panel route wants).
+frame:
+  background: "#101C2B"            # shows through if the image fails to load
+  background_image: "/map_engine/assets/pol_bg.png"
+  # SIZED TO CLEAR THE PRESENTER. On the data screens he is keyed in below the
+  # map, so the window cannot simply be centred: measured on this presenter's
+  # delivered videos his head top reaches 1032 at its highest, and the captions
+  # end at 243. The window therefore lives between them — 47px below the
+  # captions, 52px above his head at its worst. Widening it eats one or the
+  # other, and the one it eats is his face.
+  top: 290
+  height: 690
+  margin: 70
+  radius: 44
+  halo: "#5FA8D3"
+  halo_width: 26
+  halo_rings: 5
+  edge: "#8FC6E8"
+  edge_width: 2.5

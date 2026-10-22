@@ -1,0 +1,65 @@
+# The explainer look: a shaded-relief basemap, full bleed, with saturated
+# region fills that let the terrain read THROUGH them.
+#
+# The one property that makes it work is `mix-blend-mode: color` on the fill:
+# hue and saturation come from the fill, LUMINOSITY from the relief. Measured
+# off the reference, its orange runs #784800 to #C06000 — one hue, one
+# saturation, only the lightness moving, and moving exactly where the terrain
+# does. A flat fill at any opacity cannot do that: it either hides the relief
+# or washes the colour out.
+name: relief
+background:       "#A8C4DC"    # shows only if the basemap fails to load
+water:            "#A8C4DC"
+land:             "#D8CFC0"
+land_muted:       "#D8CFC0"
+border_country:   "#FFFFFF"
+border_state:     "#B9A98F"
+coastline:        "#FFFFFF"
+river:            "#7FB3D5"
+lake:             "#9CC9E8"
+selected_region:  "#C06000"
+selected_edge:    "#FFFFFF"
+route:            "#D9534F"
+route_head:       "#B02E2A"
+point:            "#D9534F"
+point_ring:       "#FFFFFF"
+label:            "#FFFFFF"
+label_halo:       "#12303D"
+muted_label:      "#5B6E79"
+line_country:     0
+line_state:       0.6
+line_route:       4.0
+point_radius:     11
+label_size:       40
+label_size_small: 30
+
+# The raster. It is ALREADY resampled to Mercator (see relief_south_asia.json),
+# which is why it can be placed by projecting its two corners and stretching
+# linearly — a plate carree image cannot be placed that way under geoMercator.
+basemap:
+  url: /map_engine/data/derived/relief_south_asia_merc.jpg
+  bounds: [48.0, -8.0, 112.0, 54.0]     # west, south, east, north
+  saturate: 0.72                        # Natural Earth is greener than the
+                                        # reference; pull it back so the
+                                        # coloured fills stay dominant
+
+# Region fills, drawn with the colour blend described above.
+region_fill:   "#C06000"
+region_edge:   "#FFFFFF"
+region_edge_width: 5
+
+# Labels are chips, not haloed text: a solid plate with bold white type.
+label_style: chip
+chip_fill:  "#00A8A8"
+chip_text:  "#FFFFFF"
+chip_pad_x: 22
+chip_pad_y: 10
+
+# No window: this style is full bleed by definition.
+
+# The part of the frame the map composes into. The presenter is keyed over the
+# lower third (his head reaches y 1060), so the subject is lifted clear of him.
+# The basemap still fills the whole 1080x1920 — only the composition moves.
+content:
+  top: 0
+  height: 1030

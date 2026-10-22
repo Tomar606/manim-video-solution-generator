@@ -1,0 +1,164 @@
+/* paper-archival — the paper-editorial look pushed into one world: Indian
+   newsprint of the late 1940s.  Everything on screen should look like it was
+   printed, typed, stamped, clipped or pinned.  No rounded app pills, no
+   glow, no sans-serif.  Plate: plates/generated/paper-archival-folded.jpg.
+   Fonts (library/elements/fonts, OFL): Rozha One = masthead headlines,
+   Martel = sturdy serif for captions and slips, Tiro Devanagari Hindi = body.
+   Music bucket: history-reflective.  SFX families: paper, stamp, typewriter,
+   tape, page-turn, map-pin (see the theme's sound map in themes/README). */
+
+@font-face { font-family: 'Rozha One'; src: url('../../../library/elements/fonts/RozhaOne-Regular.ttf'); }
+@font-face { font-family: 'Martel'; src: url('../../../library/elements/fonts/Martel-Bold.ttf'); font-weight: 700; }
+@font-face { font-family: 'Martel'; src: url('../../../library/elements/fonts/Martel-ExtraBold.ttf'); font-weight: 800; }
+@font-face { font-family: 'Tiro Devanagari Hindi'; src: url('../../../library/elements/fonts/TiroDevanagariHindi-Regular.ttf'); }
+@font-face { font-family: 'Special Elite'; src: url('../../../library/elements/fonts/SpecialElite-Regular.ttf'); }
+
+#frame.theme-paper-archival {
+  --ink: #1C1712;
+  --accent: #A81E1E;           /* print red, a shade older than paper-editorial's */
+  --accent-2: #1E2F5C;         /* ink navy */
+  --paper: #EFE4CC;
+  --muted: #6B5D48;
+  --card-bg: #F5ECD7;
+  --card-border: #2A231B;
+  --solid: #F5ECD7;
+  --font-head: 'Rozha One', 'Noto Sans Devanagari', serif;
+  --head-weight: 400;
+  --head-stretch: 100%;
+  --font-body: 'Tiro Devanagari Hindi', 'Noto Sans Devanagari', serif;
+  --font-num: 'Rozha One', serif;
+  --newsprint: url('../../../library/backgrounds/plates/generated/paper-archival-folded.jpg');
+  --clip-shadow: 0 2px 2px rgba(40, 25, 10, .18), 0 10px 18px rgba(40, 25, 10, .22);
+  color: var(--ink);
+}
+
+/* ---- every card is a newsprint clipping ---- */
+.theme-paper-archival .k-card, .theme-paper-archival .imgcard, .theme-paper-archival .k-counter.boxed,
+.theme-paper-archival .crosses, .theme-paper-archival .compare .k-card, .theme-paper-archival .k-def,
+.theme-paper-archival .hl-xl, .theme-paper-archival .k-sticker {
+  background: var(--newsprint) center / 1080px 1920px, var(--card-bg) !important;
+  border: none !important;
+  border-top: 5px double var(--ink) !important;
+  box-shadow: var(--clip-shadow) !important;
+  border-radius: 0 !important;
+}
+
+/* ---- masthead spine ---- */
+.theme-paper-archival #spine { top: 34px; height: 86px; border-bottom: 6px double var(--ink); }
+.theme-paper-archival #spine .ttl { font-family: 'Rozha One'; font-weight: 400; font-stretch: 100%; font-size: 52px; letter-spacing: .5px; }
+.theme-paper-archival #spine .k-dots i { background: transparent; border: 3px solid var(--ink); border-radius: 50%; }
+.theme-paper-archival #spine .k-dots i.on { background: var(--accent); border-color: var(--accent); }
+.theme-paper-archival #spine .cnt { font-family: 'Rozha One'; font-weight: 400; }
+
+/* ---- headlines: masthead type between thick-thin rules ---- */
+.theme-paper-archival .hl-xl { color: var(--accent); font-family: 'Rozha One'; font-weight: 400; padding: 30px 46px 10px;
+  border-bottom: 5px double var(--ink) !important; transform: rotate(-1.2deg); }
+.theme-paper-archival .hl-m { font-family: 'Rozha One'; font-weight: 400; color: var(--ink); }
+.theme-paper-archival .bignum .n { font-family: 'Rozha One'; font-weight: 400; background: var(--accent); color: var(--paper);
+  border-radius: 50%; width: 220px; height: 220px; display: grid; place-items: center; padding: 0; font-size: 170px; line-height: 1;
+  box-shadow: 0 0 0 8px var(--paper), 0 0 0 12px var(--accent); }
+.theme-paper-archival .bignum .tx { font-family: 'Rozha One'; font-weight: 400; color: var(--ink);
+  border-bottom: 6px double var(--ink); padding-bottom: 8px; }
+
+/* ---- section tag: a newspaper section head with a stamped numeral ---- */
+.theme-paper-archival .k-section-tag { background: transparent !important; border: none !important; box-shadow: none !important;
+  display: flex; align-items: center; gap: 18px; padding: 0; border-bottom: 4px double var(--ink) !important; padding-bottom: 6px; min-width: 520px; }
+.theme-paper-archival .k-section-tag__num { background: var(--accent); color: var(--paper); border-radius: 50%; width: 62px; height: 62px;
+  display: grid; place-items: center; font-family: 'Rozha One'; font-size: 44px; line-height: 1; padding: 0; }
+.theme-paper-archival .k-section-tag__text { font-family: 'Rozha One'; font-size: 54px; color: var(--ink); background: none; padding: 0; }
+
+/* ---- pills become typed paper slips ---- */
+.theme-paper-archival .k-pill { border-radius: 0 !important; font-family: 'Martel'; font-weight: 800; font-size: 40px;
+  background: var(--newsprint) center / 1080px 1920px, var(--card-bg) !important; color: var(--ink) !important;
+  border: 2px solid var(--ink) !important; padding: 10px 24px 6px; box-shadow: 0 6px 12px rgba(40, 25, 10, .25); }
+.theme-paper-archival .k-pill--accent { background: var(--accent) !important; color: var(--paper) !important; border-color: var(--accent) !important; }
+.theme-paper-archival .pills .k-pill:nth-child(odd), .theme-paper-archival span.k-pill:nth-child(odd) { transform: rotate(-1.5deg); }
+.theme-paper-archival .pills .k-pill:nth-child(even) { transform: rotate(1.2deg); }
+
+/* ---- rubber stamps with worn ink ---- */
+.theme-paper-archival .k-stamp { font-family: 'Rozha One'; font-weight: 400; color: var(--accent); border-color: var(--accent);
+  background: transparent !important; outline-color: var(--accent);
+  -webkit-mask-image: url('stamp-grunge-soft.png'); -webkit-mask-size: 100% 100%; mix-blend-mode: multiply; }
+.theme-paper-archival .k-stamp.on-photo { mix-blend-mode: normal; background: color-mix(in srgb, var(--paper) 85%, transparent) !important; }
+
+/* ---- definition: term in a red slip, meaning typed ---- */
+.theme-paper-archival .k-def__term { font-family: 'Rozha One'; font-weight: 400; background: var(--accent); color: var(--paper); border-radius: 0; }
+.theme-paper-archival .k-def__eq { font-family: 'Rozha One'; background: none; color: var(--ink); }
+.theme-paper-archival .k-def__text { font-family: 'Martel'; font-weight: 700; }
+
+/* ---- counter, crosses, compare ---- */
+.theme-paper-archival .k-counter__num b { font-family: 'Rozha One'; font-weight: 400; color: var(--accent); font-size: 190px; }
+.theme-paper-archival .k-counter__label, .theme-paper-archival .crosses .lb { font-family: 'Martel'; font-weight: 800; }
+.theme-paper-archival .compare .lab { font-family: 'Martel'; font-weight: 700; color: var(--muted); }
+.theme-paper-archival .compare .val { font-family: 'Rozha One'; font-weight: 400; }
+.theme-paper-archival .compare .vs { font-family: 'Rozha One'; color: var(--accent); }
+
+/* ---- ledger checklist ---- */
+.theme-paper-archival .k-check-row { border-top: none !important; border-bottom: 2px solid rgba(28, 23, 18, .35) !important; box-shadow: none !important;
+  background: transparent !important; padding: 12px 6px; }
+.theme-paper-archival .k-check-row .k-badge { background: transparent; color: var(--accent); border: 3px solid var(--accent); border-radius: 50%;
+  font-family: 'Rozha One'; }
+.theme-paper-archival .k-check-row__text { font-family: 'Martel'; font-weight: 800; font-size: 44px; }
+.theme-paper-archival .k-check-row__tick { color: var(--accent); }
+.theme-paper-archival .ledger { background: var(--newsprint) center / 1080px 1920px, var(--card-bg); box-shadow: var(--clip-shadow);
+  border-top: 5px double var(--ink); padding: 18px 30px 22px; }
+.theme-paper-archival .next { font-family: 'Martel'; font-weight: 800; }
+
+/* ---- footage: a photo print with a white border and tape ---- */
+.theme-paper-archival #broll.print { left: 44px; width: 992px; border: 18px solid #F7F1E3; box-sizing: border-box;
+  box-shadow: 0 3px 3px rgba(40, 25, 10, .2), 0 16px 26px rgba(40, 25, 10, .28); transform: rotate(-.8deg); overflow: visible; }
+.theme-paper-archival #broll.print::before, .theme-paper-archival .imgcard::before {
+  content: ""; position: absolute; top: -26px; left: 50%; width: 190px; height: 52px; transform: translateX(-50%) rotate(-3deg);
+  background: rgba(230, 214, 168, .82); box-shadow: 0 1px 2px rgba(0,0,0,.12); z-index: 2; }
+.theme-paper-archival .imgcard { position: absolute; transform: rotate(.7deg); }
+
+/* ---- the caption: a torn newsprint strip, set in Martel ---- */
+.theme-paper-archival #cap { font-family: 'Martel'; font-weight: 800; font-size: 44px; color: var(--ink);
+  --torn-bg: var(--card-bg); }
+
+/* ---- red thread + push pins (the arrow chain) ---- */
+.theme-paper-archival .chain { gap: 34px; }   /* stays absolutely placed: never set position here */
+.theme-paper-archival .chain .k-pill { position: relative; }
+.theme-paper-archival .chain .k-pill::after { content: ""; position: absolute; left: 22px; top: -14px; width: 26px; height: 26px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff8a80, #B71C1C 55%, #6d0f0f); box-shadow: 0 3px 4px rgba(0,0,0,.35); }
+.theme-paper-archival .thread { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+
+/* footage: warm archival grade, deliberately NOT the red/blue duotone of paper-editorial */
+.theme-paper-archival #broll { background: #000; }
+.theme-paper-archival #broll img { filter: sepia(.45) saturate(.75) contrast(1.06) brightness(.98) !important; mix-blend-mode: normal !important; }
+/* the masthead sits on its own newsprint strip, so it reads over footage */
+.theme-paper-archival #spine { left: 0; right: 0; top: 0; height: 118px; padding: 26px 40px 0; box-sizing: border-box;
+  background: var(--newsprint) center top / 1080px 1920px, var(--card-bg); box-shadow: 0 6px 12px rgba(40,25,10,.18); }
+.theme-paper-archival .k-stamp.on-photo { -webkit-mask-image: none; background: var(--card-bg) !important; }
+.theme-paper-archival .hl-m { text-wrap: balance; }
+
+/* the kit templates added after this theme was written */
+.theme-paper-archival .card, .theme-paper-archival .panel, .theme-paper-archival .qcard, .theme-paper-archival .yn .side {
+  background: var(--newsprint) center / 1080px 1920px, var(--card-bg) !important; border: none !important;
+  border-top: 5px double var(--ink) !important; box-shadow: var(--clip-shadow) !important; border-radius: 0 !important; color: var(--ink); }
+.theme-paper-archival .note { font-family: 'Special Elite', 'Martel', serif; font-size: 44px; color: var(--ink); }
+.theme-paper-archival .note.on-photo { background: var(--card-bg); padding: 8px 22px; box-shadow: var(--clip-shadow); }
+.theme-paper-archival .hub-ring { border: 10px solid #F7F1E3; box-shadow: 0 0 0 4px var(--ink), var(--clip-shadow); }
+.theme-paper-archival .hub-route { border: 3px dashed var(--accent); }
+.theme-paper-archival .p-card { border: 10px solid #F7F1E3; box-shadow: 0 0 0 3px var(--ink), var(--clip-shadow); }
+
+/* larger type (POL-C4-LA-05 review, 9 Oct): read on a phone, not a monitor */
+.theme-paper-archival .k-pill { font-size: 48px !important; padding: 12px 28px 8px; }
+.theme-paper-archival .k-check-row__text { font-size: 54px; }
+.theme-paper-archival .k-check-row .k-badge { width: 72px; height: 72px; font-size: 46px; }
+.theme-paper-archival .k-section-tag__text { font-size: 64px; }
+.theme-paper-archival .k-section-tag__num { width: 74px; height: 74px; font-size: 52px; }
+.theme-paper-archival .k-def { font-size: 52px; }
+.theme-paper-archival .note { font-size: 52px; }
+.theme-paper-archival .hl-m { font-size: 88px; }
+.theme-paper-archival .k-stamp { font-size: 66px; }
+.theme-paper-archival #cap { font-size: 50px; }
+.theme-paper-archival .qcard div:last-child { font-size: 60px !important; }
+.theme-paper-archival .panel div[style*="font-size:40px"] { font-size: 46px !important; }
+
+/* a section head always sits on its own strip of paper, so it reads over a print */
+.theme-paper-archival .k-section-tag { background: var(--newsprint) center / 1080px 1920px, var(--card-bg) !important;
+  padding: 10px 26px 12px 12px !important; box-shadow: var(--clip-shadow) !important; min-width: 0; }
+
+.theme-paper-archival #broll.print[style*='transparent'] { background: transparent !important; }
+.theme-paper-archival #broll.print[style*='transparent']::after { display: none; }

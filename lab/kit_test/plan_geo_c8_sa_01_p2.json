@@ -1,0 +1,783 @@
+{
+ "_about": "GEO-C8-SA-01 part 2, cargo look",
+ "project": "geo-c8-sa-01",
+ "part": 2,
+ "skin": "paper-editorial",
+ "theme": "cargo",
+ "presenter_style": "card",
+ "plate": "sea-container-port",
+ "spine": {
+  "title": "अंतर्राष्ट्रीय पत्तन: 4 विशेषताएँ",
+  "items": [
+   "गहरा जल",
+   "आधुनिक सुविधाएँ",
+   "विशाल पृष्ठ प्रदेश",
+   "अंतर्राष्ट्रीय व्यापार केंद्र"
+  ],
+  "pre_lit": 2,
+  "lit_at": [
+   4,
+   18
+  ],
+  "show_from": 0
+ },
+ "beats": [
+  {
+   "id": "recall",
+   "in": 0,
+   "out": 2,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 215,
+    "backdrop": "veo:d03@3"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "Part 1 में",
+     "size": "m",
+     "at": 0
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 330,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:ripple",
+       "गहरा जल",
+       0
+      ],
+      [
+       "tabler:crane",
+       "आधुनिक सुविधाएँ",
+       0
+      ],
+      [
+       "tabler:map-2",
+       "विशाल पृष्ठ प्रदेश",
+       999
+      ],
+      [
+       "tabler:world",
+       "अंतर्राष्ट्रीय व्यापार केंद्र",
+       999
+      ]
+     ],
+     "recount": [
+      [
+       0,
+       3.5
+      ],
+      [
+       1,
+       1.6
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "unloaded",
+   "in": 2,
+   "out": 4,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d07",
+    "region": "full",
+    "offset": 2
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "माल पत्तन पर उतर चुका…",
+     "at": 3
+    }
+   ]
+  },
+  {
+   "id": "hinter-intro",
+   "in": 4,
+   "out": 5,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d11",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "3",
+     "text": "विशाल पृष्ठ प्रदेश",
+     "at": [
+      4,
+      2.66
+     ]
+    }
+   ]
+  },
+  {
+   "id": "meaning",
+   "in": 5,
+   "out": 9,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "नया शब्द, आसान मतलब",
+     "size": "m",
+     "at": 5
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "पृष्ठ = पीठ",
+       [
+        6,
+        1.5
+       ]
+      ],
+      [
+       "पृष्ठ प्रदेश = पत्तन के पीछे का पूरा इलाका",
+       7
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "hinterland",
+   "in": 9,
+   "out": 13,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "hinterland",
+     "slot": "upper",
+     "h": 760,
+     "t_region": [
+      10,
+      1.9
+     ],
+     "links": [
+      [
+       "रेल",
+       "rail",
+       [
+        9,
+        1.06
+       ]
+      ],
+      [
+       "सड़क",
+       "road",
+       [
+        9,
+        1.64
+       ]
+      ],
+      [
+       "पाइपलाइन",
+       "pipe",
+       [
+        9,
+        2.52
+       ]
+      ],
+      [
+       "जलमार्ग",
+       "water",
+       [
+        9,
+        3.04
+       ]
+      ]
+     ],
+     "t_export": [
+      11,
+      0.78
+     ],
+     "t_import": [
+      12,
+      0.98
+     ]
+    }
+   ]
+  },
+  {
+   "id": "weight",
+   "in": 13,
+   "out": 16,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "पृष्ठ प्रदेश",
+     "size": "m",
+     "at": 13
+    },
+    {
+     "type": "stamp",
+     "slot": "upper",
+     "text": "सबसे ज़्यादा वज़न वाला term",
+     "at": [
+      14,
+      1.0
+     ]
+    },
+    {
+     "type": "note",
+     "slot": "under-upper",
+     "text": "साफ अक्षरों में लिखें",
+     "at": 15
+    }
+   ]
+  },
+  {
+   "id": "three-done",
+   "in": 16,
+   "out": 18,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 215,
+    "backdrop": "veo:d11@3"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "पीछे बड़ा इलाका, आगे पूरी दुनिया",
+     "size": "m",
+     "at": 16
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 330,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:ripple",
+       "गहरा जल",
+       16
+      ],
+      [
+       "tabler:crane",
+       "आधुनिक सुविधाएँ",
+       16
+      ],
+      [
+       "tabler:map-2",
+       "विशाल पृष्ठ प्रदेश",
+       16
+      ],
+      [
+       "tabler:world",
+       "अंतर्राष्ट्रीय व्यापार केंद्र",
+       999
+      ]
+     ],
+     "recount": [
+      16,
+      16,
+      [
+       16,
+       0.6
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "trade",
+   "in": 18,
+   "out": 19,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d16",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "4",
+     "text": "अंतर्राष्ट्रीय व्यापार का केंद्र",
+     "at": [
+      18,
+      1.52
+     ]
+    }
+   ]
+  },
+  {
+   "id": "lanes",
+   "in": 19,
+   "out": 21,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r_v10",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "प्रमुख समुद्री मार्गों पर",
+       19
+      ],
+      [
+       "अनेक देशों से आयात-निर्यात",
+       20
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "customs",
+   "in": 21,
+   "out": 24,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d13",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "def",
+     "slot": "over-broll-top",
+     "term": "सीमा शुल्क",
+     "text": "कस्टम",
+     "at": 21
+    },
+    {
+     "type": "note",
+     "slot": "over-broll-low",
+     "text": "भारी मात्रा, तरह-तरह का माल",
+     "at": 22
+    }
+   ]
+  },
+  {
+   "id": "examples",
+   "in": 24,
+   "out": 31,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "उदाहरण, याद रखने के तरीके से",
+     "size": "m",
+     "at": 24
+    },
+    {
+     "type": "seamap",
+     "slot": "upper",
+     "map": "world-trade",
+     "labels": [
+      [
+       "यूरोप",
+       [
+        22,
+        50
+       ],
+       "pre"
+      ],
+      [
+       "अफ्रीका",
+       [
+        20,
+        8
+       ],
+       "pre"
+      ],
+      [
+       "एशिया",
+       [
+        92,
+        40
+       ],
+       "pre"
+      ]
+     ],
+     "routes": [
+      {
+       "pts": [
+        [
+         4.3,
+         52.0
+        ],
+        [
+         2.0,
+         51.2
+        ],
+        [
+         -5.0,
+         48.8
+        ],
+        [
+         -9.6,
+         43.0
+        ],
+        [
+         -9.8,
+         37.5
+        ],
+        [
+         -5.6,
+         35.95
+        ],
+        [
+         3,
+         37.6
+        ],
+        [
+         11.5,
+         37.4
+        ],
+        [
+         20,
+         34.2
+        ],
+        [
+         32.3,
+         31.4
+        ],
+        [
+         32.6,
+         29.8
+        ],
+        [
+         34.6,
+         27.2
+        ],
+        [
+         38.4,
+         20.5
+        ],
+        [
+         42.3,
+         14.6
+        ],
+        [
+         43.4,
+         12.6
+        ],
+        [
+         45,
+         12.7
+        ],
+        [
+         53,
+         14.3
+        ],
+        [
+         63,
+         17.5
+        ],
+        [
+         72.6,
+         18.9
+        ],
+        [
+         72.4,
+         15
+        ],
+        [
+         74.4,
+         10.5
+        ],
+        [
+         76.6,
+         7.3
+        ],
+        [
+         79.6,
+         6.9
+        ],
+        [
+         82.5,
+         5.6
+        ],
+        [
+         91,
+         6.2
+        ],
+        [
+         96.5,
+         5.9
+        ],
+        [
+         99.5,
+         3.6
+        ],
+        [
+         103.8,
+         1.25
+        ],
+        [
+         106,
+         3
+        ],
+        [
+         109.5,
+         9
+        ],
+        [
+         112,
+         15
+        ],
+        [
+         117,
+         21
+        ],
+        [
+         119.5,
+         24.5
+        ],
+        [
+         122.2,
+         28.5
+        ],
+        [
+         121.6,
+         31.1
+        ]
+       ],
+       "at": 24,
+       "dur": 3.0
+      }
+     ],
+     "ports": [
+      [
+       "रॉटरडैम",
+       "नीदरलैंड",
+       [
+        4.3,
+        51.9
+       ],
+       [
+        26,
+        1.64
+       ],
+       "e"
+      ],
+      [
+       "सिंगापुर",
+       "",
+       [
+        103.8,
+        1.3
+       ],
+       [
+        28,
+        0.0
+       ],
+       "s"
+      ],
+      [
+       "शंघाई",
+       "चीन",
+       [
+        121.5,
+        31.2
+       ],
+       [
+        28,
+        1.1
+       ],
+       "nw"
+      ],
+      [
+       "मुंबई",
+       "भारत",
+       [
+        72.8,
+        18.9
+       ],
+       [
+        28,
+        2.9
+       ],
+       "w"
+      ]
+     ]
+    },
+    {
+     "type": "pills",
+     "slot": "under-upper",
+     "style": "accent",
+     "items": [
+      [
+       "1 यूरोप",
+       [
+        29,
+        0.0
+       ]
+      ],
+      [
+       "2 एशिया",
+       [
+        29,
+        1.52
+       ]
+      ],
+      [
+       "1 भारत",
+       [
+        30,
+        0.5
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "adjectives",
+   "in": 31,
+   "out": 34,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 215,
+    "backdrop": "veo:d16@3"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "गहरा · आधुनिक · विशाल · अंतर्राष्ट्रीय",
+     "size": "m",
+     "at": 31
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 330,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:ripple",
+       "गहरा जल",
+       31
+      ],
+      [
+       "tabler:crane",
+       "आधुनिक सुविधाएँ",
+       31
+      ],
+      [
+       "tabler:map-2",
+       "विशाल पृष्ठ प्रदेश",
+       31
+      ],
+      [
+       "tabler:world",
+       "अंतर्राष्ट्रीय व्यापार केंद्र",
+       31
+      ]
+     ],
+     "recount": [
+      [
+       31,
+       3.48
+      ],
+      [
+       31,
+       4.28
+      ],
+      [
+       31,
+       4.8
+      ],
+      [
+       31,
+       5.56
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "marks",
+   "in": 34,
+   "out": 36,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d14",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "चारों विशेषताएँ + उदाहरण",
+     "style": "accent",
+     "at": 34
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "3 नंबर पक्के",
+     "at": 35
+    }
+   ]
+  },
+  {
+   "id": "notes",
+   "in": 36,
+   "out": 37,
+   "presenter": "hero",
+   "broll": {
+    "clip": "d15",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "head",
+     "text": "exam-ready answer: Notes button",
+     "style": "accent",
+     "at": 36
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "in": 37,
+   "out": "end",
+   "presenter": "hero",
+   "broll": {
+    "clip": "d16",
+    "region": "full",
+    "dim": true,
+    "offset": 2
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "रोज़ थोड़ा-थोड़ा, पूरा syllabus",
+     "at": 39
+    }
+   ]
+  }
+ ]
+}

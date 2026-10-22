@@ -1,0 +1,30 @@
+# The location registry. Scenes say `location: Meerut`, never raw coordinates,
+# so a coordinate is fixed in one place rather than copied into every scene.
+# lat/lon are decimal degrees, WGS84.
+meerut:     { name_en: Meerut,     name_hi: "मेरठ",       lat: 28.9845, lon: 77.7064 }
+delhi:      { name_en: Delhi,      name_hi: "दिल्ली",      lat: 28.6139, lon: 77.2090 }
+kanpur:     { name_en: Kanpur,     name_hi: "कानपुर",      lat: 26.4499, lon: 80.3319 }
+jhansi:     { name_en: Jhansi,     name_hi: "झाँसी",       lat: 25.4484, lon: 78.5685 }
+lucknow:    { name_en: Lucknow,    name_hi: "लखनऊ",       lat: 26.8467, lon: 80.9462 }
+bhopal:     { name_en: Bhopal,     name_hi: "भोपाल",       lat: 23.2599, lon: 77.4126 }
+sabarmati:  { name_en: "Sabarmati Ashram", name_hi: "साबरमती आश्रम", lat: 23.0608, lon: 72.5806 }
+dandi:      { name_en: Dandi,      name_hi: "दांडी",       lat: 20.9167, lon: 72.6167 }
+mumbai:     { name_en: Mumbai,     name_hi: "मुंबई",       lat: 19.0760, lon: 72.8777 }
+kolkata:    { name_en: Kolkata,    name_hi: "कोलकाता",     lat: 22.5726, lon: 88.3639 }
+chennai:    { name_en: Chennai,    name_hi: "चेन्नई",      lat: 13.0827, lon: 80.2707 }
+barrackpore: { name_en: Barrackpore, name_hi: "बैरकपुर",    lat: 22.7644, lon: 88.3700 }
+gwalior:    { name_en: Gwalior,    name_hi: "ग्वालियर",    lat: 26.2183, lon: 78.1828 }
+
+# POL-C3-LA-01 — भारत-पाक मतभेद के पाँच कारण. Three of the five causes are
+# geographical arguments, so each gets the place that makes the argument.
+hyderabad:  { name_en: Hyderabad,  name_hi: "हैदराबाद",   lat: 17.3850, lon: 78.4867 }
+junagadh:   { name_en: Junagadh,   name_hi: "जूनागढ़",    lat: 21.5222, lon: 70.4579 }
+srinagar:   { name_en: Srinagar,   name_hi: "श्रीनगर",    lat: 34.0837, lon: 74.7973 }
+karachi:    { name_en: Karachi,    name_hi: "कराची",      lat: 24.8607, lon: 67.0011 }
+
+# POL-C14-LA-01 — असम आंदोलन. The movement's argument is partly geographic:
+# Assam sits in the Northeast, joined to the rest of India by a narrow corridor,
+# and borders Bangladesh — which is what makes migration the live issue.
+assam:      { name_en: Assam,      name_hi: "असम",        lat: 26.2006, lon: 92.9376 }
+guwahati:   { name_en: Guwahati,   name_hi: "गुवाहाटी",   lat: 26.1445, lon: 91.7362 }
+dhaka:      { name_en: Dhaka,      name_hi: "ढाका",       lat: 23.8103, lon: 90.4125 }

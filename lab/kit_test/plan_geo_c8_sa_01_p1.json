@@ -1,0 +1,575 @@
+{
+ "_about": "GEO-C8-SA-01 part 1, cargo look",
+ "project": "geo-c8-sa-01",
+ "part": 1,
+ "skin": "paper-editorial",
+ "theme": "cargo",
+ "presenter_style": "card",
+ "plate": "sea-container-port",
+ "captions_from": 9,
+ "spine": {
+  "title": "अंतर्राष्ट्रीय पत्तन: 4 विशेषताएँ",
+  "items": [
+   "गहरा जल",
+   "आधुनिक सुविधाएँ",
+   "विशाल पृष्ठ प्रदेश",
+   "अंतर्राष्ट्रीय व्यापार केंद्र"
+  ],
+  "lit_at": [
+   14,
+   26
+  ],
+  "show_from": 9
+ },
+ "beats": [
+  {
+   "id": "phone",
+   "in": 0,
+   "out": 3,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d01",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "फोन के कई पुर्ज़े: दूसरे देश में बने",
+     "style": "accent",
+     "at": 1
+    }
+   ]
+  },
+  {
+   "id": "voyage",
+   "in": 3,
+   "out": 5,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d02",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "हज़ारों किलोमीटर दूर से…",
+     "at": 3
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "आपके शहर तक कैसे?",
+     "at": 4
+    }
+   ]
+  },
+  {
+   "id": "first-stop",
+   "in": 5,
+   "out": 6,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d03",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "पहला पड़ाव: अंतर्राष्ट्रीय पत्तन",
+     "at": [
+      5,
+      1.68
+     ]
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": 6,
+   "out": 9,
+   "presenter": "small",
+   "broll": {
+    "clip": "r_v08",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "qcard",
+     "slot": "upper",
+     "question": "अंतर्राष्ट्रीय पत्तनों की कोई चार विशेषताएँ लिखिए।",
+     "year": "2024",
+     "marks": "3 अंक",
+     "t_marks": [
+      7,
+      0.8
+     ],
+     "at": 6
+    }
+   ]
+  },
+  {
+   "id": "port-is",
+   "in": 9,
+   "out": 11,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "def",
+     "slot": "head",
+     "term": "पत्तन",
+     "text": "बंदरगाह",
+     "at": 9
+    },
+    {
+     "type": "chain",
+     "slot": "upper",
+     "items": [
+      [
+       "जहाज़ आकर रुकते हैं",
+       [
+        9,
+        2.4
+       ]
+      ],
+      [
+       "माल चढ़ता-उतरता है",
+       10
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "not-every",
+   "in": 11,
+   "out": 12,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d04",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "हर बंदरगाह अंतर्राष्ट्रीय नहीं",
+     "at": 11
+    }
+   ]
+  },
+  {
+   "id": "four",
+   "in": 12,
+   "out": 14,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "counter",
+     "slot": "upper",
+     "num": "4",
+     "label": "विशेषताएँ जो पत्तन को अंतर्राष्ट्रीय बनाती हैं",
+     "at": 12
+    }
+   ]
+  },
+  {
+   "id": "deep",
+   "in": 14,
+   "out": 15,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d05",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "1",
+     "text": "गहरा जल, विशाल पोताश्रय",
+     "at": 14
+    }
+   ]
+  },
+  {
+   "id": "big-ships",
+   "in": 15,
+   "out": 19,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r_v10",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "बड़े मालवाहक जहाज़",
+       [
+        16,
+        0.68
+       ]
+      ],
+      [
+       "टैंकर",
+       [
+        16,
+        2.08
+       ]
+      ],
+      [
+       "कंटेनर जहाज़",
+       [
+        16,
+        2.78
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "आसानी से आ-जा सकें, ठहर सकें",
+     "at": 17
+    }
+   ]
+  },
+  {
+   "id": "draft",
+   "in": 19,
+   "out": 22,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "depth",
+     "slot": "upper",
+     "t_shallow": [
+      19,
+      0.84
+     ],
+     "t_stuck": [
+      21,
+      0.58
+     ],
+     "t_deep": [
+      21,
+      1.78
+     ]
+    }
+   ]
+  },
+  {
+   "id": "aground",
+   "in": 22,
+   "out": 23,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d06",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "गहराई: सबसे पहली शर्त",
+     "at": 22
+    }
+   ]
+  },
+  {
+   "id": "write-both",
+   "in": 23,
+   "out": 25,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "def",
+     "slot": "head",
+     "term": "गहरा जल + विशाल पोताश्रय",
+     "text": "दोनों साथ",
+     "at": 24
+    },
+    {
+     "type": "stamp",
+     "slot": "upper",
+     "text": "एक ही point में लिखें",
+     "at": [
+      24,
+      1.4
+     ]
+    }
+   ]
+  },
+  {
+   "id": "one-done",
+   "in": 25,
+   "out": 26,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 215,
+    "backdrop": "veo:d05@3"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "पानी तैयार… अब माल?",
+     "size": "m",
+     "at": 25
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 330,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:ripple",
+       "गहरा जल",
+       25
+      ],
+      [
+       "tabler:crane",
+       "आधुनिक सुविधाएँ",
+       999
+      ],
+      [
+       "tabler:map-2",
+       "विशाल पृष्ठ प्रदेश",
+       999
+      ],
+      [
+       "tabler:world",
+       "अंतर्राष्ट्रीय व्यापार केंद्र",
+       999
+      ]
+     ],
+     "recount": [
+      25
+     ]
+    }
+   ]
+  },
+  {
+   "id": "modern",
+   "in": 26,
+   "out": 27,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d07",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "2",
+     "text": "आधुनिक सुविधाएँ",
+     "at": 26
+    }
+   ]
+  },
+  {
+   "id": "facilities",
+   "in": 27,
+   "out": 31,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "tiles",
+     "slot": "upper",
+     "cols": 3,
+     "items": [
+      [
+       "tabler:crane",
+       "बड़ी क्रेनें",
+       [
+        27,
+        1.64
+       ]
+      ],
+      [
+       "tabler:building-warehouse",
+       "गोदाम",
+       [
+        28,
+        1.2
+       ]
+      ],
+      [
+       "tabler:snowflake",
+       "शीत भंडार",
+       [
+        28,
+        2.14
+       ]
+      ],
+      [
+       "tabler:container",
+       "कंटेनर टर्मिनल",
+       [
+        28,
+        2.92
+       ]
+      ],
+      [
+       "tabler:anchor",
+       "गोदी (डॉक)",
+       [
+        28,
+        4.04
+       ]
+      ],
+      [
+       "tabler:tools",
+       "मरम्मत",
+       [
+        30,
+        0.38
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cold",
+   "in": 31,
+   "out": 33,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d08",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "def",
+     "slot": "over-broll-top",
+     "term": "शीत भंडार",
+     "text": "ठंडा रखने वाला गोदाम",
+     "at": 31
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "फल-सब्ज़ी: जल्दी खराब होने वाला माल",
+     "at": 32
+    }
+   ]
+  },
+  {
+   "id": "name-them",
+   "in": 33,
+   "out": 37,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d09",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "कम से कम 4-5 नाम गिनाएँ",
+     "at": 34
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "गोदी (डॉक): ब्रैकेट में लिखें",
+     "style": "accent",
+     "at": 35
+    }
+   ]
+  },
+  {
+   "id": "two-done",
+   "in": 37,
+   "out": 38,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 215,
+    "backdrop": "veo:d07@3"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "दो विशेषताएँ हो गईं",
+     "size": "m",
+     "at": 37
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 330,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:ripple",
+       "गहरा जल",
+       37
+      ],
+      [
+       "tabler:crane",
+       "आधुनिक सुविधाएँ",
+       37
+      ],
+      [
+       "tabler:map-2",
+       "विशाल पृष्ठ प्रदेश",
+       999
+      ],
+      [
+       "tabler:world",
+       "अंतर्राष्ट्रीय व्यापार केंद्र",
+       999
+      ]
+     ],
+     "recount": [
+      37,
+      [
+       37,
+       2.4
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "teaser",
+   "in": 38,
+   "out": "end",
+   "presenter": "standard",
+   "broll": {
+    "clip": "d10",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "over-broll-top",
+     "text": "माल देश के अंदर कैसे जाएगा?",
+     "size": "m",
+     "at": 38
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "जवाब: Part 2 में",
+     "style": "accent",
+     "at": 40
+    }
+   ]
+  }
+ ]
+}

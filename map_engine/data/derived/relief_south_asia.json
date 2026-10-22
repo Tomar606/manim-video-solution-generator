@@ -1,0 +1,19 @@
+{
+ "file": "relief_south_asia_merc.jpg",
+ "width": 3840,
+ "height": 4346,
+ "bounds_lonlat": [
+  48.0,
+  -8.0,
+  112.0,
+  54.0
+ ],
+ "px_per_degree": 60.0,
+ "mercator_y_top": 1.1241772156979302,
+ "mercator_y_bottom": -0.14008224517796436,
+ "projection": "spherical Mercator, resampled offline from plate carree",
+ "source": "Natural Earth Cross Blended Hypso with Shaded Relief and Water, 10m",
+ "source_url": "https://naciscdn.org/naturalearth/10m/raster/HYP_HR_SR_W.zip",
+ "licence": "public domain",
+ "why_these_bounds": "The widest Mauryan shot in a 1080x1920 portrait frame reaches lat 50.5N and 4.3S; a crop that stopped at 48N put black bars across the top of the frame."
+}

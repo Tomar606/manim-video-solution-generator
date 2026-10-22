@@ -1,0 +1,1128 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Kit test stage.  Draws ONE time t from window.TL (compiled by compile.py).
+     Open as stage.html?tl=out/<plan>/timeline.js&still=<i>  (or &t=<seconds>).
+     Seek-based: nothing here depends on wall-clock time or the previous frame. -->
+<link rel="stylesheet" href="../../library/elements/kit/fonts.css">
+<link rel="stylesheet" href="../../library/elements/kit/skins/paper-editorial.css">
+<link rel="stylesheet" href="../../library/elements/kit/skins/night-hud.css">
+<link rel="stylesheet" href="../../library/elements/kit/skins/chalk-slate.css">
+<link rel="stylesheet" href="../../library/elements/kit/skins/pastel-notebook.css">
+<link rel="stylesheet" href="../../library/elements/kit/kit.css">
+<link rel="stylesheet" href="../../library/elements/kit/cards/cards.css">
+<script src="../../library/elements/vendor/lottie/lottie.min.js"></script>
+<style>
+  html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; }
+  #frame { position: relative; width: 1080px; height: 1920px; overflow: hidden;
+           background: var(--bg) center / cover no-repeat; }
+  .layer { position: absolute; inset: 0; }
+  /* an OPAQUE surface per skin: anything laid over footage or the presenter must be readable */
+  #frame { color: var(--ink); --solid: var(--card-bg); }
+  #frame.skin-night-hud { --solid: #0A1124; }
+  #frame.skin-chalk-slate { --solid: #22302B; }
+  #cap, .k-counter.boxed, .crosses, .compare .k-card, .imgcard, .k-check-row, .k-sticker, .hl-xl, .k-def, .k-section-tag { background: var(--solid) !important; }
+  .k-torn { --torn-bg: var(--solid); }
+  .skin-chalk-slate .k-pill:not(.k-pill--accent), .skin-night-hud .k-pill:not(.k-pill--accent) { background: var(--solid); }
+  .abs { position: absolute; }
+  #broll { position: absolute; left: 0; top: 150px; width: 1080px; height: 860px; overflow: hidden;
+           background: var(--photo-tint); }
+  #broll img { width: 100%; height: 100%; object-fit: cover; display: block;
+               filter: grayscale(1) contrast(1.25) brightness(1.08); mix-blend-mode: screen; }
+  #broll.navy { background: var(--accent-2); }
+  #broll.colour { background: #000; } #broll.colour img { filter: none; mix-blend-mode: normal; }
+  #broll.skinphoto { background: #000; } #broll.skinphoto img { filter: var(--photo-filter); mix-blend-mode: normal; }
+  #broll.skinphoto::after { background-image: none; }
+  .skin-night-hud #broll.skinphoto { box-shadow: inset 0 0 0 2px var(--accent); }
+  .skin-night-hud #broll.skinphoto::after { background: linear-gradient(180deg, transparent 55%, rgba(5,8,15,.75)); mix-blend-mode: normal; }
+  .skin-chalk-slate #broll.skinphoto { outline: 3px dashed rgba(241,240,230,.6); outline-offset: -14px; }
+  #broll::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+                  background-image: radial-gradient(rgba(0,0,0,.22) 1px, transparent 1.4px);
+                  background-size: 6px 6px; mix-blend-mode: multiply; }
+  #flood { position: absolute; inset: 0; background: color-mix(in srgb, var(--accent) 16%, var(--paper));
+           box-shadow: inset 0 0 0 14px var(--accent); }
+  #presenter { position: absolute; filter: drop-shadow(0 0 0 #fff) drop-shadow(0 10px 18px rgba(0,0,0,.25)); }
+  /* spine bar */
+  #spine { position: absolute; left: 40px; right: 40px; top: 40px; height: 90px;
+           display: flex; align-items: center; justify-content: space-between; }
+  #spine .ttl { font-family: var(--font-head); font-weight: var(--head-weight); font-stretch: var(--head-stretch);
+                font-size: 46px; color: var(--ink); }
+  #spine .right { display: flex; align-items: center; gap: 22px; }
+  #spine .k-dots i { width: 22px; height: 22px; }
+  #spine .cnt { font-family: var(--font-num); font-weight: 700; font-size: 52px; color: var(--accent); }
+  #spine .cnt span { color: var(--muted); font-size: .7em; }
+  .k-head { font-family: var(--font-head); font-weight: var(--head-weight); font-stretch: var(--head-stretch); }
+  .hl-xl { font-size: 230px; line-height: .9; color: var(--accent); background: var(--card-bg);
+           padding: 18px 34px 6px; box-shadow: var(--shadow); border: var(--card-border-w) solid var(--card-border); }
+  .hl-m { font-size: 78px; line-height: 1.1; color: var(--ink); }
+  .bignum { display: flex; align-items: center; gap: 30px; }
+  .bignum .n { font-family: var(--font-num); font-weight: 700; font-size: 220px; line-height: .85;
+               background: var(--ink); color: var(--paper); padding: 10px 46px 0; }
+  .bignum .tx { font-size: 104px; line-height: 1.05; color: var(--accent); }
+  .imgcard { background: var(--card-bg); padding: 14px; border: var(--card-border-w) solid var(--card-border);
+             box-shadow: var(--shadow); }
+  .imgcard img { display: block; width: 100%; }
+  .bare img { display: block; width: 100%; }
+  .ring { position: absolute; width: 74px; height: 74px; margin: -37px 0 0 -37px; border-radius: 50%;
+          border: 7px solid var(--accent); box-shadow: 0 0 0 10px color-mix(in srgb, var(--accent) 25%, transparent); }
+  .compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: 26px; align-items: center; }
+  .compare .k-card { padding: 30px 26px; text-align: center; background: var(--card-bg);
+                     border: var(--card-border-w) solid var(--card-border); box-shadow: var(--shadow); }
+  .compare .lab { font-size: 44px; color: var(--muted); }
+  .compare .val { font-size: 104px; line-height: 1.1; }
+  .compare .r .val { color: var(--accent); } .compare .l .val { color: var(--accent-2); }
+  .compare .vs { font-size: 54px; color: var(--muted); }
+  .chain { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .chain .arrow { width: 70px; height: 56px; margin-left: 40px; }
+  .crosses { display: flex; align-items: center; gap: 18px; background: var(--card-bg); padding: 14px 30px;
+             border: var(--card-border-w) solid var(--card-border); box-shadow: var(--shadow); }
+  .crosses svg { width: 78px; height: 78px; }
+  .crosses .lb { font-size: 52px; margin-left: 10px; }
+  .k-counter.boxed { background: var(--card-bg); padding: 10px 48px 24px; border: var(--card-border-w) solid var(--card-border);
+                     box-shadow: var(--shadow); }
+  .k-counter__label { font-size: 42px; }
+  .k-pill { font-size: 46px; }
+  .k-def { font-size: 44px; max-width: 960px; flex-wrap: wrap; box-sizing: border-box; }
+  .note { max-width: 900px; text-wrap: balance; }
+  .k-section-tag { max-width: 960px; box-sizing: border-box; }
+  .k-section-tag__text { white-space: normal; text-wrap: balance; line-height: 1.2; }
+  .next { margin: 8px 0 0 90px; font-size: 40px; color: var(--accent); }
+  /* caption: torn strip, one line at a time, keywords underlined in red */
+  #cap { position: absolute; left: 50%; width: max-content; max-width: 960px; transform: translateX(-50%);
+         font-size: 46px; padding: 26px 46px 30px; }
+  /* ask: a curiosity question set BEFORE its answer; the answer lands under it later */
+  .ask { width: 960px; box-sizing: border-box; padding: 24px 34px 28px; background: var(--solid); border-radius: 18px;
+         box-shadow: var(--glass-shadow, 0 12px 28px rgba(0,0,0,.4)); display: flex; flex-direction: column; gap: 16px; }
+  .ask-q { display: flex; align-items: center; gap: 24px; }
+  .ask-mark { flex: none; width: 96px; height: 96px; border-radius: 50%; display: grid; place-items: center; background: var(--accent);
+              color: #fff; font-family: var(--font-num); font-weight: 700; font-size: 78px; line-height: 1; }
+  .ask-text { font-family: var(--font-head); font-weight: var(--head-weight); font-size: 62px; line-height: 1.3; color: var(--ink); text-wrap: balance; }
+  .ask-a { display: flex; align-items: center; gap: 20px; border-top: 3px dashed color-mix(in srgb, var(--accent) 45%, transparent); padding-top: 16px; }
+  .ask-a .tick { flex: none; width: 64px; height: 64px; border-radius: 50%; background: var(--accent-2); color: #fff; display: grid; place-items: center; }
+  .ask-a .tick svg { width: 40px; height: 40px; }
+  .ask-a .txt { font-family: var(--font-body); font-weight: 800; font-size: 52px; line-height: 1.35; color: var(--ink); }
+  /* inset: then-and-now, a framed photo over the full-frame background, each side named */
+  .inset { background: #fff; padding: 14px 14px 0; box-shadow: 0 16px 34px rgba(0,0,0,.5); }
+  .inset img { display: block; }
+  .inset .lab { font-family: var(--font-head); font-weight: var(--head-weight); font-size: 40px; text-align: center; padding: 10px 6px 14px; color: #222; }
+  .main-lab { font-family: var(--font-head); font-weight: var(--head-weight); font-size: 46px; color: #fff; text-shadow: var(--halo, 0 2px 6px rgba(0,0,0,.9));
+              background: rgba(0,0,0,.45); padding: 6px 22px 10px; border-radius: 10px; }
+  /* tracker: the points done so far, always in the corner, so the student never loses the map */
+  #tracker { position: absolute; left: 30px; display: flex; flex-direction: column; gap: 8px; max-width: 540px; }
+  #tracker .row { display: flex; align-items: center; gap: 14px; background: var(--solid); border-radius: 30px; padding: 4px 22px 6px 6px;
+                  box-shadow: 0 6px 14px rgba(0,0,0,.35); width: max-content; max-width: 540px; }
+  #tracker .n { flex: none; width: 52px; height: 52px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center;
+                font-family: var(--font-num); font-weight: 700; font-size: 36px; line-height: 1; }
+  #tracker .tx { font-family: var(--font-body); font-weight: 800; font-size: 40px; color: var(--ink); line-height: 1.3; }
+  #tracker .row.now { outline: 4px solid var(--accent); }
+  /* ---- elements from the team's reference board (Pinterest "resources-for-video-gen"), built natively ---- */
+  .srch { width: 900px; height: 118px; box-sizing: border-box; display: flex; align-items: center; gap: 22px; padding: 0 30px;
+          background: #fff; border-radius: 60px; box-shadow: 0 14px 30px rgba(0,0,0,.35), 0 0 0 4px var(--accent); }
+  .srch svg { flex: none; width: 58px; height: 58px; color: var(--accent); }
+  .srch .q { font-family: var(--font-body); font-weight: 800; font-size: 50px; color: #222; white-space: nowrap; overflow: hidden; }
+  .srch .caret { display: inline-block; width: 4px; height: 52px; background: var(--accent); vertical-align: middle; margin-left: 4px; }
+  .tgl { display: flex; align-items: center; gap: 28px; padding: 18px 34px; background: var(--solid); border-radius: 70px; box-shadow: 0 12px 26px rgba(0,0,0,.35); width: max-content; }
+  .tgl .track { position: relative; width: 170px; height: 90px; border-radius: 45px; flex: none; }
+  .tgl .knob { position: absolute; top: 8px; width: 74px; height: 74px; border-radius: 50%; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,.35); }
+  .tgl .lab { font-family: var(--font-head); font-weight: var(--head-weight); font-size: 58px; color: var(--ink); }
+  .qm { position: absolute; font-family: var(--font-num); font-weight: 700; color: var(--accent); text-shadow: 0 4px 12px rgba(0,0,0,.45); }
+  .tline { width: 960px; position: relative; padding: 30px 0 10px; }
+  .tline .node { position: absolute; top: 68px; width: 52px; height: 52px; margin-left: -26px; box-sizing: border-box; border-radius: 50%; background: #fff; border: 12px solid var(--accent); box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 30%, transparent), 0 6px 14px rgba(0,0,0,.35); }
+  .tline .yr { position: absolute; top: 0; transform: translateX(-50%); font-family: var(--font-num); font-weight: 700; font-size: 52px; color: var(--accent-2);
+               background: var(--solid); padding: 0 14px; border-radius: 10px; white-space: nowrap; }
+  .tline .lb { position: absolute; top: 140px; transform: translateX(-50%); width: 230px; text-align: center; font-family: var(--font-body); font-weight: 800; font-size: 38px;
+               line-height: 1.3; color: var(--ink); background: var(--solid); padding: 8px 10px; border-radius: 12px; box-shadow: 0 8px 18px rgba(0,0,0,.3); }
+  .prog { display: flex; align-items: center; gap: 34px; background: var(--solid); padding: 26px 40px; border-radius: 26px; box-shadow: 0 14px 30px rgba(0,0,0,.35); width: max-content; max-width: 960px; box-sizing: border-box; }
+  .prog .pc { font-family: var(--font-num); font-weight: 700; font-size: 74px; fill: var(--ink); }
+  .prog .lab { font-family: var(--font-head); font-weight: var(--head-weight); font-size: 56px; line-height: 1.25; color: var(--ink); max-width: 520px; }
+  .vrd { position: absolute; width: 300px; height: 300px; }
+  .ntf { width: 900px; display: flex; flex-direction: column; gap: 18px; }
+  .ntf .ncard { display: flex; gap: 22px; align-items: center; background: rgba(255,255,255,.97); border-radius: 26px; padding: 20px 26px; box-shadow: 0 12px 26px rgba(0,0,0,.35); }
+  .ntf .ic { flex: none; width: 84px; height: 84px; border-radius: 20px; background: var(--accent); color: #fff; display: grid; place-items: center; font-family: var(--font-num); font-weight: 700; font-size: 50px; }
+  .ntf .t { font-family: var(--font-head); font-weight: var(--head-weight); font-size: 44px; color: #1b1b1b; line-height: 1.25; }
+  .ntf .b { font-family: var(--font-body); font-weight: 800; font-size: 38px; color: #555; line-height: 1.3; }
+  .pin { position: absolute; width: 76px; height: 100px; margin: -100px 0 0 -38px; }
+  .pin-tag { position: absolute; transform: translate(-50%, 6px); white-space: nowrap; font-family: var(--font-head); font-weight: var(--head-weight); font-size: 40px;
+             color: #fff; background: #D7261E; padding: 2px 16px 6px; border-radius: 10px; box-shadow: 0 6px 14px rgba(0,0,0,.35); }
+  .note-paper { width: 820px; box-sizing: border-box; padding: 60px 50px 46px 96px; position: relative; color: #1E2A55;
+                background: repeating-linear-gradient(180deg, transparent 0 63px, rgba(60,90,160,.28) 63px 65px), #FBF8EF;
+                box-shadow: 0 16px 34px rgba(0,0,0,.4); font-family: 'Kalam', var(--font-body); font-size: 52px; line-height: 65px;
+                -webkit-mask: radial-gradient(circle 9px at 50% 9px, transparent 98%, #000) -12px -9px / 26px 100% repeat-y,
+                              linear-gradient(#000, #000) 14px 0 / calc(100% - 14px) 100% no-repeat; }
+  .note-paper::before { content: ""; position: absolute; left: 70px; top: 0; bottom: 0; width: 3px; background: rgba(220,60,60,.6); }
+  .note-tape { position: absolute; left: 50%; top: -26px; width: 200px; height: 56px; transform: translateX(-50%) rotate(-3deg); background: rgba(214,190,120,.78);
+               box-shadow: 0 3px 6px rgba(0,0,0,.2); }
+  #cap .hl { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 5px;
+             text-underline-offset: 10px; }
+</style></head>
+<body>
+<div id="frame"></div>
+<script>
+const q = new URLSearchParams(location.search);
+const s = document.createElement('script');
+s.src = q.get('tl');
+s.onload = async () => {
+  const th = q.get('theme') ?? window.TL.theme;
+  if (th) {
+    await new Promise(r => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = `themes/${th}.css`; l.onload = r; l.onerror = r; document.head.appendChild(l); });
+    await Promise.all(['56px "Rozha One"', '56px "Yatra One"', '46px Kalam', '700 44px Martel', '800 44px Martel', '40px "Tiro Devanagari Hindi"'].map(f => document.fonts.load(f, 'भारत पाकिस्तान 1947')));
+  }
+  await document.fonts.ready;
+  window.THEME = th;
+  if (q.get('render') === '1') { window.renderAt = t => draw(th, t); document.title = 'ready'; }
+  else draw(th);
+};
+document.head.appendChild(s);
+
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const ease = x => 1 - Math.pow(1 - clamp(x), 3);
+const back = x => { x = clamp(x); const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+const CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path pathLength="1" d="M4 13 L9.5 18.5 L20 6"/></svg>';
+const XMARK = '<svg viewBox="0 0 40 40" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"><path pathLength="1" d="M8 8 L32 32"/><path pathLength="1" d="M32 8 L8 32"/></svg>';
+const DOWN = '<svg class="arrow" viewBox="0 0 40 56" fill="none" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path pathLength="1" d="M20 4 L20 48"/><path pathLength="1" d="M8 36 L20 50 L32 36"/></svg>';
+
+// entrance at local progress p: pop / stamp / slide / fade
+let FX = null;            // an element may name its own entrance ("fx"): applies to everything it draws
+function enter(node, kind, p) {
+  if (p >= 1) return;
+  kind = FX || kind;
+  if (kind === 'drop') { const k = back(p); node.style.transform = (node.style.transform || '') + ` translateY(${-90 * (1 - k)}px)`; node.style.opacity = clamp(p * 3); return; }
+  if (kind === 'rise') { node.style.transform = (node.style.transform || '') + ` translateY(${70 * (1 - ease(p))}px)`; node.style.opacity = ease(p); return; }
+  if (kind === 'zoom') { node.style.transform = (node.style.transform || '') + ` scale(${0.55 + 0.45 * back(p)})`; node.style.filter = `blur(${(10 * (1 - ease(p))).toFixed(1)}px)`; node.style.opacity = clamp(p * 2.5); return; }
+  if (kind === 'wipe') { node.style.clipPath = `inset(-20px ${(100 * (1 - ease(p))).toFixed(1)}% -20px -20px)`; return; }
+  if (kind === 'unfold') { node.style.transformOrigin = '50% 0'; node.style.transform = (node.style.transform || '') + ` scaleY(${(0.02 + 0.98 * ease(p)).toFixed(3)})`; node.style.opacity = clamp(p * 4); return; }   // no overshoot: a tall sheet must not grow into the presenter
+  if (kind === 'blur') { node.style.filter = `blur(${(14 * (1 - ease(p))).toFixed(1)}px)`; node.style.opacity = ease(p); return; }
+  if (kind === 'pop') { node.style.transform = (node.style.transform || '') + ` scale(${0.4 + 0.6 * back(p)})`; node.style.opacity = clamp(p * 3); }
+  else if (kind === 'stamp') { node.style.transform = (node.style.transform || '') + ` scale(${1.8 - 0.8 * ease(p)})`; node.style.opacity = clamp(p * 4); }
+  else if (kind === 'slide') { node.style.transform = (node.style.transform || '') + ` translateX(${-60 * (1 - ease(p))}px)`; node.style.opacity = ease(p); }
+  else node.style.opacity = ease(p);
+}
+function drawPaths(node, p) {
+  node.querySelectorAll('path[pathLength]').forEach((path, i, all) => {
+    const q = clamp(p * all.length - i);
+    path.style.strokeDasharray = '1 1'; path.style.strokeDashoffset = 1 - ease(q);
+  });
+}
+
+function draw(THEME, tOverride) {
+  const TL = window.TL;
+  const RENDER = q.get('render') === '1';   // graphics layer only: footage and presenter are composited elsewhere
+  const still = q.get('still');
+  const t = tOverride ?? (still != null ? TL.stills[+still].t : +(q.get('t') || 0));
+  const A = q.get('tl').replace(/timeline\.js$/, 'assets/');
+  const S = still != null ? TL.stills[+still] : {};
+  const F = document.getElementById('frame');
+  if (window.lottie) lottie.destroy();          // last frame's animations, before their nodes go
+  F.innerHTML = ''; F.removeAttribute('style');
+  const SKIN = q.get('skin') || TL.skin;
+  F.className = 'skin-' + SKIN + (THEME ? ' theme-' + THEME : '');
+  // one plate per skin; the plan never names a file
+  const PLATES = {
+    'paper-editorial': 'generated/paper-editorial-cream.jpg',
+    'night-hud': 'earth/portrait/night-iss-delhi-stars-1080x1920.jpg',
+    'chalk-slate': 'generated/chalk-slate-green-smudged.jpg',
+    'pastel-notebook': 'generated/pastel-notebook-ruled.jpg' };
+  const DIM = { 'night-hud': 'linear-gradient(rgba(5,8,15,.62),rgba(5,8,15,.62)),', 'chalk-slate': '' };
+  const THEME_PLATES = { 'paper-archival': 'generated/paper-archival-folded.jpg', 'field-journal': 'generated/field-journal-topo.jpg', 'terrain-atlas': 'generated/terrain-atlas-himalaya.jpg', 'survey-light': 'generated/pasture-himachal.jpg', 'dossier': 'generated/dossier-manila.jpg' };
+  const PLAN_PLATE = TL.plate_path || null;
+  const plateOverride = q.get('plate');
+  if (RENDER) { F.style.background = 'transparent'; document.body.style.background = 'transparent'; }
+  else F.style.backgroundImage = `${DIM[SKIN] || ''}url(../../library/backgrounds/plates/${plateOverride ? 'generated/' + plateOverride + '.jpg' : (PLAN_PLATE || THEME_PLATES[THEME] || PLATES[SKIN])})`;
+  const beat = TL.beats.find(b => t >= b.t_in && t < b.t_out) || TL.beats[TL.beats.length - 1];
+  if (!RENDER && beat.plate) F.style.backgroundImage = `url(../../library/backgrounds/plates/generated/${beat.plate}.jpg)`;   // a beat may bring its own background
+  const pb = beat.pbox;
+  const floor = pb.head - 24;                     // nothing may reach the presenter's head
+  const boxes = [];                               // every content box, for the gates
+  const panelBot = floor - 6;                     // a top panel ends just above his head
+  const midY = Math.round((150 + panelBot) / 2);
+
+  if (beat.flood) F.appendChild(el('div', '', '')).id = 'flood';
+  if (beat.broll && beat.broll.clip && q.get('placeholder') === '1') {
+    // PLAN VIEW: where a generated clip will play, an empty frame that says which one and what it shows
+    const id = beat.broll.clip || 'photo';
+    const ph = el('div', '', `<div style="position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:860px;text-align:center;color:#fff;font-family:'Noto Sans Devanagari',sans-serif">
+        <div style="font-family:Khand;font-weight:700;font-size:120px;letter-spacing:4px;color:#7FD3E6">VEO ${id.toUpperCase()}</div>
+        <div style="font-size:40px;font-weight:600;line-height:1.35;margin-top:10px;opacity:.9">${(TL.shots || {})[id] || beat.broll.photo || ''}</div>
+        ${beat.broll.dim ? '<div style="font-size:34px;margin-top:16px;color:#F2B63C">dimmed under the panel</div>' : ''}</div>`);
+    ph.id = 'ph';
+    Object.assign(ph.style, { position: 'absolute', inset: '0', background: 'repeating-linear-gradient(135deg, #20262B 0 40px, #262D33 40px 80px)', outline: '6px dashed rgba(127,211,230,.7)', outlineOffset: '-22px' });
+    F.appendChild(ph);
+  } else if (RENDER && beat.broll && beat.broll.clip && beat.broll.region !== 'full' && THEME) {
+    // a clip in a print frame: the compositor lays the footage into the hole, this draws only the frame
+    const b = el('div', 'print'); b.id = 'broll';
+    Object.assign(b.style, { top: '178px', height: (panelBot - 190) + 'px', transform: 'none', background: 'transparent' });
+    F.appendChild(b);
+  } else if (beat.broll && (S.broll || (RENDER && beat.broll.photo))) {
+    if (!S.broll) S.broll = 'bp_' + beat.broll.photo.split('/').pop().replace(/\.[a-z]+$/, '') + '.jpg';
+    // paper-editorial keeps the plan's duotone; every other skin uses its own photo treatment
+    const b = el('div', SKIN === 'paper-editorial' ? (beat.broll.treatment || 'colour').replace('duotone-', '') : 'skinphoto');
+    b.id = 'broll'; b.innerHTML = `<img src="${A}${S.broll}">`;
+    if (beat.broll.region === 'full') { b.style.top = '0px'; b.style.height = '1920px'; if (beat.broll.dim) b.classList.add('dim'); }
+    else { b.style.height = (panelBot - 150) + 'px'; if (THEME) { b.classList.add('print'); b.style.top = '178px'; b.style.height = (panelBot - 190) + 'px'; } }
+    enter(b, 'fade', (t - beat.t_in) / 0.35);
+    F.appendChild(b);
+  }
+  if ((S.presenter || RENDER) && pb.hub) {
+    // He sits INSIDE a circle at one uniform scale; the circle is centred on his
+    // face and carries its own backdrop.  Nothing is resized to fit the shape.
+    const d = 2 * pb.r, ox = pb.cx - pb.r, oy = pb.cy - pb.r;
+    const route = el('div', 'hub-route'); Object.assign(route.style, { position: 'absolute', left: (ox - 34) + 'px', top: (oy - 34) + 'px', width: (d + 68) + 'px', height: (d + 68) + 'px', borderRadius: '50%', boxSizing: 'border-box' });
+    F.appendChild(route);
+    const hub = el('div', 'hub-ring');
+    Object.assign(hub.style, { position: 'absolute', left: ox + 'px', top: oy + 'px', width: d + 'px', height: d + 'px', borderRadius: '50%', overflow: 'hidden', boxSizing: 'border-box', background: 'var(--accent-2)' });
+    if (RENDER) hub.style.background = 'transparent';
+    const bdKey = pb.backdrop ? (pb.backdrop.startsWith('veo:') ? 'bd_' + pb.backdrop.slice(4).split('@')[0] : pb.backdrop.split('/').pop().replace(/\.[a-z]+$/, '')) : null;
+    if (pb.backdrop === 'plate' && !RENDER) hub.innerHTML = `<img src="../../library/backgrounds/plates/${PLAN_PLATE}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(2.2);filter:brightness(1.35) saturate(1.1)">`;
+    else if (pb.backdrop && !RENDER) hub.innerHTML = `<img src="${A}${bdKey}.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.85) brightness(.92)">`;
+    const img = el('img'); img.src = A + S.presenter;
+    Object.assign(img.style, { position: 'absolute', left: (pb.x - ox) + 'px', top: (pb.y - oy) + 'px', width: pb.w + 'px', height: pb.h + 'px' });
+    if (!RENDER) hub.appendChild(img); F.appendChild(hub);
+    if (!RENDER) enter(hub, 'pop', (t - beat.t_in) / 0.45); enter(route, 'fade', (t - beat.t_in - 0.2) / 0.5);
+  } else if ((S.presenter || RENDER) && pb.card) {
+    const [bx, by, bw, bh] = pb.box;
+    const card = el('div', 'p-card');
+    Object.assign(card.style, { position: 'absolute', left: bx + 'px', top: by + 'px', width: bw + 'px', height: bh + 'px', borderRadius: pb.radius + 'px', overflow: 'hidden', boxSizing: 'border-box',
+      background: RENDER ? 'transparent' : 'radial-gradient(120% 90% at 50% 25%, color-mix(in srgb, var(--accent) 70%, #fff) 0%, var(--accent) 55%, color-mix(in srgb, var(--accent) 60%, #000) 100%)' });
+    if (!RENDER) { const img = el('img'); img.src = A + S.presenter; Object.assign(img.style, { position: 'absolute', left: (pb.x - bx) + 'px', top: (pb.y - by) + 'px', width: pb.w + 'px', height: pb.h + 'px' }); card.appendChild(img); }
+    F.appendChild(card);
+  } else if (S.presenter) {
+    const img = el('img'); img.id = 'presenter'; img.src = A + S.presenter;
+    Object.assign(img.style, { left: pb.x + 'px', top: pb.y + 'px', width: pb.w + 'px', height: pb.h + 'px' });
+    F.appendChild(img);
+  }
+  const content = el('div', 'layer'); F.appendChild(content);
+  let underY = null;          // flow anchor for 'under-upper'
+  let mapBox = null;
+  let sheetBox = null;
+  let headBottom = 0;         // 'upper' starts below whatever the head slot holds
+
+  const place = (node, slot) => {
+    node.classList.add('abs');
+    const B = { 'head': [60, 165], 'upper': [60, 300], 'over-broll-top': [60, 185] };
+    if (slot === 'over-broll') { node.style.left = '50%'; node.style.top = midY + 'px'; node.style.transform = 'translate(-50%,-50%)'; }
+    else if (slot === 'over-broll-low') { node.style.left = '60px'; node.style.bottom = (1920 - panelBot + 30) + 'px'; }
+    else if (slot === 'under-upper') { node.style.left = '60px'; node.style.top = (underY || 700) + 'px'; }
+    else if (slot.startsWith('map:')) { /* positioned after the map lays out */ }
+    else if (slot === 'hub-below') { node.style.left = '50%'; node.style.top = (pb.cy + pb.r + 20) + 'px'; node.style.transform = 'translateX(-50%)'; node.style.zIndex = 6; }
+    else if (slot === 'center-low') { node.style.left = '50%'; node.style.top = (pb.hub ? pb.cy + 480 : 1440) + 'px'; node.style.transform = 'translateX(-50%)'; }
+    else if (slot === 'over-broll-right') { node.style.right = '70px'; node.style.top = '230px'; }
+    else if (slot === 'sheet-corner' || slot === 'sheet-marks') {
+      const r = sheetBox ? sheetBox.getBoundingClientRect() : { left: 90, right: 990, top: 300, bottom: 900 };
+      if (slot === 'sheet-corner') { node.style.left = (r.left - 10) + 'px'; node.style.top = (r.top - 30) + 'px'; }
+      else { node.style.right = (1080 - r.right - 20) + 'px'; node.style.top = (r.bottom - 150) + 'px'; }
+    }
+    else { node.style.left = B[slot][0] + 'px'; node.style.top = (slot === 'upper' ? Math.max(B[slot][1], headBottom + 24) : B[slot][1]) + 'px'; }
+    content.appendChild(node);
+    if (slot === 'head') headBottom = Math.max(headBottom, node.getBoundingClientRect().bottom);
+    return node;
+  };
+
+  for (const e of beat.elements) {
+    const t0 = e.t ?? beat.t_in;
+    FX = e.fx || null;
+    if (t < t0) continue;
+    const p = (t - t0) / 0.45;
+    let n;
+    switch (e.type) {
+      case 'headline':
+        n = el('div', 'k-head ' + (e.size === 'xl' ? 'hl-xl' : 'hl-m'), e.text);
+        if (e.size === 'm') n.style.maxWidth = '960px';
+        place(n, e.slot); enter(n, e.size === 'xl' ? 'stamp' : 'slide', p); break;
+      case 'sticker':
+        n = el('div', 'k-sticker', `<div class="k-head" style="font-size:58px">${e.title}</div><div style="font-size:40px;color:var(--muted)">${e.body}</div>`);
+        place(n, e.slot); n.style.left = '120px'; enter(n, 'pop', p); break;
+      case 'image': {
+        const map = e.src.startsWith('map');
+        const [iw, ih] = TL.dims[e.src];
+        const pad = map ? 28 : 0;
+        const room = floor - 300 - (map ? 120 : 140);           // leave a row for the chip under it
+        const w = Math.min(map ? 960 : 860, (room - pad) * iw / ih + pad);
+        const h = (w - pad) * ih / iw;
+        n = el('div', map ? 'imgcard' : 'bare', `<img src="${A}${e.src}.png" style="width:${w - pad}px;height:${h}px">`);
+        n.style.width = w + 'px';
+        place(n, e.slot); n.style.left = Math.round((1080 - w) / 2) + 'px';
+        enter(n, map ? 'fade' : 'pop', p);
+        if (map) mapBox = n;
+        if (e.src === 'sheet') { sheetBox = n; n.style.transform = 'rotate(-2deg)'; }
+        break; }
+      case 'photo': {
+        const key = e.src.split('/').pop().replace(/\.[a-z]+$/, '');
+        const [iw, ih] = TL.dims[key]; const w = e.w || 340, h = (w - 28) * ih / iw;
+        n = el('div', 'imgcard', `<img src="${A}${key}.png" style="width:${w - 28}px;height:${h}px;filter:sepia(.35) contrast(1.05)">` +
+               (e.label ? `<div class="k-pill" style="position:absolute;left:18px;bottom:-30px;font-size:34px">${e.label}</div>` : ''));
+        n.style.width = w + 'px';
+        place(n, e.slot);
+        if (e.slot === 'over-broll-right') { n.style.left = 'auto'; n.style.right = '70px'; n.style.top = '230px'; }
+        if (e.tilt) n.style.transform = `rotate(${e.tilt}deg)`;
+        enter(n, 'pop', p); break; }
+      case 'qcard': {
+        n = el('div', 'qcard taped', `<div class="k-head" style="font-size:60px;color:var(--accent);padding:6px 0 18px">प्रश्न</div>
+          <div style="font-family:var(--font-body);font-weight:800;font-size:52px;line-height:1.55">${e.question}</div>`);
+        Object.assign(n.style, { width: '900px', padding: '30px 50px 60px', boxSizing: 'border-box', transform: 'rotate(-1.2deg)' });
+        place(n, e.slot); n.style.left = '90px'; enter(n, 'slide', p);
+        const st = el('div', 'k-stamp k-head on-photo', e.year); st.classList.add('abs'); st.style.right = '50px'; st.style.top = '-58px'; st.style.fontSize = '50px';
+        n.appendChild(st); enter(st, 'stamp', (t - t0 - 0.6) / 0.4);
+        if (e.marks && t >= (e.t_marks ?? t0)) { const mk = el('div', 'k-stamp k-head on-photo', e.marks); mk.classList.add('abs'); mk.style.right = '50px'; mk.style.bottom = '-78px'; mk.style.fontSize = '50px'; n.appendChild(mk); enter(mk, 'stamp', (t - (e.t_marks ?? t0)) / 0.4); }
+        break; }
+      case 'radial': {
+        // items laid round the hub: icon in a ring + a tag; `recount` lights them a second time
+        n = el('div', ''); n.classList.add('abs'); n.style.left = '0px'; n.style.top = '0px';
+        const k = e.items.length, R = e.radius || 360;
+        const act = (e.recount || []).filter(x => t >= x).length - 1;
+        const lit = i => e.cumulative ? (e.pre_lit || 0) > i || (e.recount && e.recount[i - (e.pre_lit || 0)] != null && t >= e.recount[i - (e.pre_lit || 0)]) : act === i;
+        e.items.forEach(([icon, label, ti], i) => {
+          if (t < ti) return;
+          const ang = -Math.PI / 2 + i * 2 * Math.PI / k;
+          const x = pb.cx + R * Math.cos(ang), y = pb.cy + R * Math.sin(ang);
+          const on = lit(i);
+          const tile = el('div', 'card', `<div style="width:96px;height:96px;color:${on ? 'var(--card-bg)' : 'var(--accent)'}">${TL.icons[icon] || ''}</div>`);
+          Object.assign(tile.style, { position: 'absolute', left: (x - 75) + 'px', top: (y - 92) + 'px', width: '150px', height: '150px', display: 'grid', placeItems: 'center', borderRadius: '50%', boxSizing: 'border-box' });
+          if (on) tile.style.setProperty('background', 'var(--accent)', 'important');
+          tile.querySelector('svg').setAttribute('width', '96'); tile.querySelector('svg').setAttribute('height', '96');
+          tile.querySelector('svg').style.stroke = 'currentColor';
+          const tag = el('span', 'k-pill' + (on ? ' k-pill--accent' : ''), label);
+          Object.assign(tag.style, { position: 'absolute', left: (x - 10) + 'px', top: (y + 66) + 'px', transform: 'translateX(-50%)', whiteSpace: 'nowrap' });
+          n.appendChild(tile); n.appendChild(tag); enter(tile, 'pop', (t - ti) / 0.45); enter(tag, 'fade', (t - ti - 0.15) / 0.4);
+        });
+        content.appendChild(n);
+        n.querySelectorAll('.k-pill').forEach(tg => {          // a side tag never leaves the frame: slide it back in
+          const r = tg.getBoundingClientRect(), x0 = parseFloat(tg.style.left);
+          if (r.left < 28) tg.style.left = (x0 + 28 - r.left) + 'px';
+          else if (r.right > 1052) tg.style.left = (x0 - (r.right - 1052)) + 'px';
+        });
+        n.querySelectorAll('.card, .k-pill').forEach(c => boxes.push({ type: 'radial-item', slot: 'around-hub', el: c }));
+        n = null; break; }
+      case 'yn': {
+        // a wrong idea struck out beside the right one
+        n = el('div', 'yn'); Object.assign(n.style, { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', width: '960px' });
+        const side = (txt, ok, show, tt) => `<div class="side card" style="padding:26px 24px 30px;text-align:center;visibility:${show ? 'visible' : 'hidden'}">
+            <div style="width:84px;height:84px;margin:0 auto 6px;color:${ok ? 'var(--accent-2)' : 'var(--accent)'}">${TL.icons[ok ? 'tabler:check' : 'tabler:x'] || ''}</div>
+            <div style="font-family:var(--font-body);font-weight:800;font-size:46px;line-height:1.35;${ok ? '' : 'text-decoration:line-through;text-decoration-color:var(--accent);text-decoration-thickness:5px;color:var(--muted)'}">${txt}</div></div>`;
+        n.innerHTML = side(e.no, false, true) + side(e.yes, true, t >= e.t_yes);
+        n.querySelectorAll('svg').forEach(v => { v.setAttribute('width', '84'); v.setAttribute('height', '84'); v.style.stroke = 'currentColor'; v.style.strokeWidth = '3'; });
+        place(n, e.slot); enter(n, 'slide', p);
+        if (t >= e.t_yes) enter(n.children[1], 'pop', (t - e.t_yes) / 0.45);
+        break; }
+      case 'territory': {
+        // top: the misconception (wandering anywhere) crossed out; bottom: a fixed range with its route
+        n = el('div', ''); Object.assign(n.style, { width: '960px', display: 'flex', flexDirection: 'column', gap: '26px' });
+        const wrongP = 'M40 200 C120 40 200 300 280 150 S420 20 470 210 S610 330 660 120 S800 60 900 230';
+        const rightP = 'M300 120 C420 60 600 80 660 170 C700 240 600 320 470 300 C360 290 250 230 300 120 Z';
+        const top = el('div', 'card', `<div class="k-head" style="font-size:40px;color:var(--muted);padding:6px 24px 0">गलत धारणा: कहीं भी घूमते हैं</div>
+          <svg viewBox="0 0 960 300" width="960" height="270" fill="none"><path pathLength="1" d="${wrongP}" stroke="var(--muted)" stroke-width="6" stroke-dasharray="1 1" stroke-linecap="round"/>
+          <g stroke="var(--accent)" stroke-width="14" stroke-linecap="round"><path pathLength="1" d="M330 40 L630 270"/><path pathLength="1" d="M630 40 L330 270"/></g></svg>`);
+        top.style.boxSizing = 'border-box';
+        n.appendChild(top);
+        drawPaths(top.querySelector('svg path'), (t - e.t_wrong) / 1.0);
+        const cross = top.querySelectorAll('g path'); cross.forEach((c, i) => { c.style.strokeDasharray = '1 1'; c.style.strokeDashoffset = 1 - ease(clamp((t - e.t_cross - i * 0.15) / 0.3)); });
+        if (t >= e.t_right) {
+          const bot = el('div', 'card', `<div class="k-head" style="font-size:44px;color:var(--accent-2);padding:6px 24px 0">सही: आवागमन का क्षेत्र निश्चित</div>
+            <svg viewBox="0 0 960 360" width="960" height="330" fill="none">
+              <path d="M170 60 C380 -10 760 10 830 150 C880 260 700 350 470 345 C250 340 90 270 110 160 C120 110 140 75 170 60 Z" stroke="var(--accent)" stroke-width="7" stroke-dasharray="22 16"/>
+              <path pathLength="1" d="${rightP}" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/>
+              ${[[300,120],[660,170],[470,300]].map(([x,y]) => `<circle cx="${x}" cy="${y}" r="16" fill="var(--accent-2)"/>`).join('')}
+            </svg>`);
+          bot.style.boxSizing = 'border-box';
+          n.appendChild(bot); enter(bot, 'slide', (t - e.t_right) / 0.45);
+          const rp = bot.querySelectorAll('path')[1]; rp.style.strokeDasharray = '1 1'; rp.style.strokeDashoffset = 1 - ease(clamp((t - e.t_right - 0.3) / 1.2));
+          if (t >= e.t_label) { const tg = el('span', 'k-pill k-pill--accent', e.label); Object.assign(tg.style, { position: 'absolute', right: '40px', bottom: '34px' }); bot.appendChild(tg); enter(tg, 'pop', (t - e.t_label) / 0.45); }
+        }
+        place(n, e.slot); break; }
+      case 'seasons': {
+        // a loop of camps; at each the season, the water and the grass that season brings
+        n = el('div', 'card'); Object.assign(n.style, { width: '960px', height: (e.h || 760) + 'px', boxSizing: 'border-box' });
+        const H_ = (e.h || 760), cx = 480, cy = H_ / 2 + 20, rx = 330, ry = H_ / 2 - 150;
+        let svg = `<svg viewBox="0 0 960 ${H_}" width="960" height="${H_}" fill="none" style="position:absolute;left:0;top:0">
+          <ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" stroke="var(--accent)" stroke-width="6" stroke-dasharray="20 16"/></svg>`;
+        n.innerHTML = svg;
+        e.stops.forEach(([season, water, grass, ti], i) => {
+          if (t < ti) return;
+          const ang = -Math.PI / 2 + i * 2 * Math.PI / e.stops.length;
+          const x = cx + rx * Math.cos(ang), y = cy + ry * Math.sin(ang);
+          const st = el('div', '', `<div style="display:flex;gap:10px;align-items:flex-end;justify-content:center">
+              <span style="width:84px;height:84px;color:var(--ochre)">${TL.icons[season]}</span>
+              <span style="width:${40 + 22 * water}px;height:${40 + 22 * water}px;color:#3D7AB8">${TL.icons['tabler:droplet']}</span>
+              <span style="width:${40 + 22 * grass}px;height:${40 + 22 * grass}px;color:var(--accent-2)">${TL.icons['tabler:plant-2']}</span></div>`);
+          Object.assign(st.style, { position: 'absolute', left: (x - 150) + 'px', top: (y - 60) + 'px', width: '300px', background: 'var(--card-bg)', borderRadius: '60px', padding: '14px 0', boxShadow: 'var(--card-shadow)' });
+          st.querySelectorAll('svg').forEach(v => { v.setAttribute('width', '100%'); v.setAttribute('height', '100%'); v.style.stroke = 'currentColor'; });
+          n.appendChild(st); enter(st, 'pop', (t - ti) / 0.45);
+        });
+        if (e.note && t >= e.t_note) { const no = el('div', 'note', e.note); Object.assign(no.style, { position: 'absolute', left: '50%', top: cy - 40 + 'px', transform: 'translateX(-50%) rotate(-3deg)', textAlign: 'center', width: '420px' }); n.appendChild(no); enter(no, 'fade', (t - e.t_note) / 0.5); }
+        place(n, e.slot); enter(n, 'fade', p);
+        break; }
+      case 'quad': {
+        // the screen split 2x2; the presenter's circle sits on the intersection, above the cells
+        n = el('div', ''); n.classList.add('abs'); n.style.left = '0px'; n.style.top = '0px';
+        const g = 14, X0 = 34, X1 = 1046, Y0 = 260, Y1 = 1700, MX = pb.cx, MY = pb.cy;   // Y0 leaves the head slot for a headline
+        const cells = [[X0, Y0, MX - g, MY - g], [MX + g, Y0, X1, MY - g], [X0, MY + g, MX - g, Y1], [MX + g, MY + g, X1, Y1]];
+        e.items.forEach(([title, body, ti], i) => {
+          const [x0, y0, x1, y1] = cells[i];
+          const lit = t >= ti;
+          const c = el('div', 'card', lit ? `<div style="display:flex;gap:16px;align-items:center"><span class="k-section-tag__num" style="flex:none;width:62px;height:62px;font-size:40px">${e.nums ? e.nums[i] : i + 1}</span>
+              <span class="k-head" style="font-size:62px;line-height:1.15;color:var(--accent)">${title}</span></div>
+              <div style="font-family:var(--font-body);font-weight:800;font-size:48px;line-height:1.45;margin-top:22px">${body}</div>` +
+              (e.icons ? `<div class="qicon" style="position:absolute;${i < 2 ? 'top:440px' : 'top:40px'};${i % 2 ? 'right:40px' : 'left:40px'};width:170px;height:170px;color:var(--accent-2);opacity:.85">${TL.icons[e.icons[i]] || ''}</div>` : '') : '');
+          Object.assign(c.style, { position: 'absolute', left: x0 + 'px', top: y0 + 'px', width: (x1 - x0) + 'px', height: (y1 - y0) + 'px', boxSizing: 'border-box',
+            padding: i < 2 ? '84px 30px 0' : '330px 30px 0', opacity: lit ? 1 : .45 });
+          if (i % 2 === 1) c.style.paddingLeft = '40px';
+          c.querySelectorAll('.qicon svg').forEach(v => { v.setAttribute('width', '170'); v.setAttribute('height', '170'); v.style.stroke = 'currentColor'; v.style.strokeWidth = '1.5'; });
+          n.appendChild(c); if (lit) enter(c.firstElementChild, 'slide', (t - ti) / 0.45);
+        });
+        F.insertBefore(n, F.querySelector('.hub-route'));        // under the circle
+        // in a render the presenter is composited UNDER this layer, so the cells must leave his circle open
+        const hole = `radial-gradient(circle at ${pb.cx}px ${pb.cy}px, transparent ${pb.r + 2}px, #000 ${pb.r + 3}px)`;
+        n.style.width = '1080px'; n.style.height = '1920px';   // the mask is sized to this box; a 0x0 box masks everything
+        n.style.webkitMaskImage = hole; n.style.maskImage = hole;
+        n = null; break; }
+      case 'tiles': {
+        // a grid of icon tiles that fill in as each is named
+        const cols = e.cols || 3;
+        n = el('div', 'panel'); Object.assign(n.style, { width: '960px', boxSizing: 'border-box', padding: '28px 24px', display: 'grid', gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: '22px' });
+        e.items.forEach(([icon, label, ti]) => {
+          const on = t >= ti;
+          const c = el('div', '', `<div style="width:120px;height:120px;margin:0 auto;border-radius:24px;display:grid;place-items:center;background:${on ? 'var(--accent)' : 'rgba(23,35,31,.06)'};color:${on ? '#fff' : 'rgba(23,35,31,.25)'}">${TL.icons[icon] || ''}</div>
+            <div style="text-align:center;margin-top:12px;font-family:var(--font-body);font-weight:800;font-size:40px;color:${on ? 'var(--ink)' : 'rgba(23,35,31,.3)'}">${label}</div>`);
+          c.querySelectorAll('svg').forEach(v => { v.setAttribute('width', '76'); v.setAttribute('height', '76'); v.style.stroke = 'currentColor'; });
+          n.appendChild(c); if (on) enter(c.firstElementChild, 'pop', (t - ti) / 0.45);
+        });
+        place(n, e.slot); enter(n, 'fade', p); break; }
+      case 'bars': {
+        // values grow from zero on their cue; numbers in saffron
+        n = el('div', 'panel'); Object.assign(n.style, { width: '960px', boxSizing: 'border-box', padding: '26px 34px 30px' });
+        if (e.title) n.appendChild(el('div', 'k-head', e.title)).style.cssText = 'font-size:46px;margin-bottom:18px;color:var(--ink)';
+        const mx = e.max || Math.max(...e.items.map(it => it[1]));
+        e.items.forEach(([label, val, ti]) => {
+          const g = ease(clamp((t - ti) / 1.0)), v = val * g;
+          const row = el('div', '', `<div style="display:flex;align-items:center;gap:20px;margin:14px 0">
+              <div class="num" style="width:150px;font-size:60px;color:var(--ink)">${label}</div>
+              <div style="flex:1;height:64px;background:rgba(23,35,31,.07);border-radius:10px;position:relative;overflow:visible">
+                <div style="position:absolute;left:0;top:0;bottom:0;width:${Math.max(0.6, 100 * v / mx)}%;background:${t >= ti ? 'var(--accent)' : 'transparent'};border-radius:10px"></div>
+                <div class="num" style="position:absolute;left:calc(${Math.max(0.6, 100 * v / mx)}% + 14px);top:-6px;font-size:66px;visibility:${t >= ti ? 'visible' : 'hidden'}">${(t >= ti + 1.0 ? val : v).toFixed(e.decimals ?? (val < 10 ? 2 : 0))}${e.unit || ''}</div>
+              </div></div>`);
+          n.appendChild(row);
+        });
+        place(n, e.slot); enter(n, 'fade', p); break; }
+      case 'dots100': {
+        // a hundred people; the filled ones are the share being spoken
+        n = el('div', 'panel'); Object.assign(n.style, { width: '960px', boxSizing: 'border-box', padding: '24px 30px', display: 'flex', alignItems: 'center', gap: '34px' });
+        const cur = [...e.states].reverse().find(st => t >= st[2]) || [0, '', t];   // [count, sub-label, time]
+        const k = cur[0];
+        let g = '';
+        for (let i = 0; i < 100; i++) g += `<i style="display:block;width:30px;height:30px;border-radius:50%;background:${i < k ? 'var(--accent-2)' : 'rgba(23,35,31,.12)'}"></i>`;
+        n.innerHTML = `<div style="display:grid;grid-template-columns:repeat(10,30px);gap:8px">${g}</div>
+          <div><div class="num" style="font-size:150px;line-height:1">${k}</div><div style="font-family:var(--font-body);font-weight:800;font-size:44px;line-height:1.3">${e.label}</div><div style="font-family:var(--font-body);font-weight:700;font-size:38px;color:var(--muted)">${cur[1] || ''}</div></div>`;
+        place(n, e.slot); enter(n, 'fade', p); break; }
+      case 'blocs': {
+        // the two camps of the Cold War, and India refusing both
+        const RED = '#C0392B', BLUE = '#2E5BBA';
+        const hubbed = !!pb.hub;
+        const box = hubbed ? { x: 0, y: 0, w: 1080, h: 1920 } : null;
+        n = el('div', hubbed ? '' : 'panel');
+        let L, R, C, rr;
+        if (hubbed) { Object.assign(n.style, { position: 'absolute', left: '0px', top: '0px', width: '1080px', height: '1920px' });
+          rr = 175; L = [265, pb.cy - pb.r - 300]; R = [815, pb.cy - pb.r - 300]; C = [pb.cx, pb.cy - pb.r]; }
+        else { Object.assign(n.style, { width: '960px', height: '640px', boxSizing: 'border-box', position: 'relative' });
+          rr = 150; L = [250, 230]; R = [710, 230]; C = [480, 520]; }
+        const show = k => t >= e[k];
+        const camp = (xy, col, a, b, k) => show(k) ? `<div style="position:absolute;left:${xy[0] - rr}px;top:${xy[1] - rr}px;width:${2 * rr}px;height:${2 * rr}px;border-radius:50%;background:${col};opacity:.92;display:grid;place-items:center;text-align:center;color:#fff;box-shadow:0 10px 24px rgba(0,0,0,.3)">
+            <div><div style="font-family:var(--font-head);font-weight:800;font-size:${hubbed ? 46 : 42}px;line-height:1.15">${a}</div><div style="font-family:var(--font-body);font-weight:700;font-size:34px;opacity:.9;margin-top:6px">${b}</div></div></div>` : '';
+        let svg = '';
+        if (show('t_india')) {
+          const cr = (t - e.t_cross) / 0.4;
+          const line = (xy) => { const mx = (xy[0] + C[0]) / 2, my = (xy[1] + C[1]) / 2;
+            return `<path pathLength="1" d="M${C[0]} ${C[1]} L${xy[0]} ${xy[1] + (xy[1] < C[1] ? rr : -rr)}" stroke="var(--ink)" stroke-width="5" stroke-dasharray="10 12" fill="none"/>` +
+              (t >= e.t_cross ? `<g stroke="var(--accent)" stroke-width="12" stroke-linecap="round" style="opacity:${clamp(cr * 2)}"><path d="M${mx - 34} ${my - 34} L${mx + 34} ${my + 34}"/><path d="M${mx + 34} ${my - 34} L${mx - 34} ${my + 34}"/></g>` : ''); };
+          svg = `<svg width="${hubbed ? 1080 : 960}" height="${hubbed ? 1920 : 640}" style="position:absolute;left:0;top:0;overflow:visible">${show('t_left') ? line(L) : ''}${show('t_right') ? line(R) : ''}</svg>`;
+        }
+        n.innerHTML = svg + camp(L, RED, e.left[0], e.left[1], 't_left') + camp(R, BLUE, e.right[0], e.right[1], 't_right') +
+          (!hubbed && show('t_india') ? `<div style="position:absolute;left:${C[0] - 95}px;top:${C[1] - 60}px;width:190px;height:120px;border-radius:60px;background:#FF9933;color:#fff;display:grid;place-items:center;font-family:var(--font-head);font-weight:800;font-size:48px;box-shadow:0 8px 18px rgba(0,0,0,.3);border:6px solid #fff;outline:6px solid #138808">भारत</div>` : '') +
+          (t >= (e.t_label ?? 1e9) ? `<div class="k-pill k-pill--accent" style="position:absolute;left:50%;top:${hubbed ? pb.cy + pb.r + 30 : 600}px;transform:translateX(-50%);white-space:nowrap">${e.label}</div>` : '');
+        if (hubbed) { F.insertBefore(n, F.querySelector('.hub-route')); n.querySelectorAll('div[style*="border-radius:50%"], .k-pill').forEach(c => boxes.push({ type: 'bloc', slot: 'around-hub', el: c })); n = null; }
+        else { place(n, e.slot); enter(n, 'fade', p); }
+        break; }
+      case 'hero': {
+        // the one thing to remember, set LARGE: a full-width band, the words arriving one by one
+        // (or wiped in), an underline sweeping under the key phrase, an optional small line above
+        n = el('div', 'hero'); Object.assign(n.style, { width: '1000px', left: '40px', boxSizing: 'border-box', padding: '26px 34px 34px', textAlign: 'center' });
+        const words = e.text.split(' ');
+        const per = e.word_gap ?? 0.16;
+        let html = e.kicker ? `<div class="hero-kicker" style="opacity:${ease((t - t0) / 0.4)}">${e.kicker}</div>` : '';
+        html += '<div class="hero-text">' + words.map((w, i) => {
+          const k = (e.effect || 'words') === 'words' ? ease((t - t0 - 0.15 - i * per) / 0.35) : 1;
+          const hl = (e.hl || []).includes(w);
+          return `<span style="display:inline-block;opacity:${k};transform:translateY(${(28 * (1 - k)).toFixed(1)}px) scale(${(0.9 + 0.1 * k).toFixed(3)});${hl ? 'color:var(--accent-2)' : ''}">${w}</span>`;
+        }).join(' ') + '</div>';
+        const ul = ease((t - t0 - 0.2 - words.length * per) / 0.5);
+        html += `<div class="hero-rule" style="width:${(ul * 70).toFixed(1)}%"></div>`;
+        if (e.sub) html += `<div class="hero-sub" style="opacity:${ease((t - t0 - 0.5 - words.length * per) / 0.4)}">${e.sub}</div>`;
+        n.innerHTML = html;
+        place(n, e.slot); n.style.left = '40px';
+        if ((e.effect || 'words') !== 'words') enter(n, e.effect, p);
+        else enter(n, 'rise', (t - t0) / 0.3);            // no overshoot: a full-width card must not scale past the frame
+        break; }
+      case 'ask': {
+        // a curiosity gap on screen: the question first ("हवा और रोशनी कहाँ से?"), the answer under it on its cue
+        n = el('div', 'ask');
+        const qn = el('div', 'ask-q', `<div class="ask-mark">?</div><div class="ask-text">${e.text}</div>`);
+        n.appendChild(qn);
+        if (e.answer && t >= e.t_answer) {
+          const a = el('div', 'ask-a', `<div class="tick">${CHECK}</div><div class="txt">${e.answer}</div>`);
+          n.appendChild(a); enter(a, 'slide', (t - e.t_answer) / 0.45); drawPaths(a.querySelector('.tick'), (t - e.t_answer - 0.2) / 0.4);
+          qn.style.opacity = .78;
+        }
+        place(n, e.slot); n.style.left = '60px';
+        enter(qn.querySelector('.ask-mark'), 'pop', (t - t0) / 0.45);
+        enter(n, 'rise', p); break; }
+      case 'inset': {
+        // then and now: the background is one place, the framed inset is the other, both named
+        const key = e.src.split('/').pop().replace(/\.[a-z]+$/, '');
+        const [iw, ih] = TL.dims[key]; const w = e.w || 380, h = Math.round((w - 28) * ih / iw);
+        n = el('div', 'inset', `<img src="${A}${key}.png" style="width:${w - 28}px;height:${h}px">` + (e.label ? `<div class="lab">${e.label}</div>` : ''));
+        n.style.width = w + 'px'; n.style.boxSizing = 'border-box';
+        place(n, 'over-broll-right'); n.style.top = (e.top || 240) + 'px';
+        if (e.side === 'left') { n.style.right = 'auto'; n.style.left = '60px'; }
+        enter(n, 'pop', p);
+        if (e.main_label && t >= (e.t_main ?? t0)) {
+          const m = el('div', 'main-lab abs', e.main_label);
+          m.style.top = (e.top || 240) + 'px'; m.style[e.side === 'left' ? 'right' : 'left'] = '60px';
+          content.appendChild(m); enter(m, 'slide', (t - (e.t_main ?? t0)) / 0.45);
+          boxes.push({ type: 'inset-label', slot: 'over-broll', el: m });
+        }
+        break; }
+      case 'search': {
+        // a search bar that types the query a student would type, then 'enter'
+        const per = e.cps ? 1 / e.cps : 0.07, nch = [...e.text].length;
+        const shown = [...e.text].slice(0, Math.max(0, Math.floor((t - t0 - 0.35) / per))).join('');
+        const done = t >= t0 + 0.35 + nch * per;
+        n = el('div', 'srch', `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 L21 21"/></svg>
+             <div class="q">${shown}${done && Math.floor((t - t0) * 2) % 2 ? '' : '<span class="caret"></span>'}</div>`);
+        place(n, e.slot); n.style.left = '90px'; enter(n, 'pop', p); break; }
+      case 'toggle': {
+        // a switch: off, then flipped on at its cue; the label lights with it
+        const k = ease((t - (e.t_on ?? t0 + 0.6)) / 0.3);
+        n = el('div', 'tgl', `<div class="track" style="background:${k > .5 ? 'var(--accent)' : '#B9B9B9'}"><div class="knob" style="left:${8 + 80 * k}px"></div></div>
+             <div class="lab" style="opacity:${(0.45 + 0.55 * k).toFixed(2)}">${e.text}</div>`);
+        place(n, e.slot); enter(n, 'pop', p); break; }
+      case 'qmarks': {
+        // question marks rising around the frame: the 'kya?' moment.  Positions are seeded, so every render matches
+        n = el('div', ''); Object.assign(n.style, { position: 'absolute', left: '0px', top: '0px', width: '1080px', height: (floor - 10) + 'px', overflow: 'hidden', pointerEvents: 'none' });
+        const N = e.n || 9;
+        for (let i = 0; i < N; i++) {
+          const r1 = (Math.sin(i * 12.9898 + 4.1) * 43758.5453) % 1, r2 = (Math.sin(i * 78.233 + 1.7) * 12345.678) % 1;
+          const x = 60 + Math.abs(r1) * 900, life = (t - t0 - i * 0.12), k = ease(life / 0.5);
+          if (life < 0) continue;
+          const q = el('div', 'qm', '?'); const sz = 70 + Math.abs(r2) * 110;
+          Object.assign(q.style, { left: x + 'px', top: (floor - 160 - Math.abs(r2) * (floor - 500) - life * 40) + 'px', fontSize: sz + 'px', opacity: (k * (life > 2.4 ? Math.max(0, 1 - (life - 2.4) / 0.6) : 1)).toFixed(2),
+            transform: `rotate(${(r1 * 30).toFixed(1)}deg) scale(${(0.6 + 0.4 * back(life / 0.5)).toFixed(3)})` });
+          n.appendChild(q);
+        }
+        content.appendChild(n); n = null; break; }
+      case 'timeline': {
+        // a line that draws left to right; each year pops on its node as it is named, its event under it
+        const items = e.items, W = 960, xs = items.map((_, i) => 80 + i * (W - 160) / Math.max(1, items.length - 1));
+        const lastOn = items.reduce((a, it, i) => t >= it[2] ? i : a, -1);
+        const reach = lastOn < 0 ? 0 : xs[lastOn] + (lastOn < items.length - 1 ? 0 : 80);
+        n = el('div', 'tline'); n.style.height = (e.h || 300) + 'px';
+        let html = `<svg width="${W}" height="200" style="position:absolute;left:0;top:0;overflow:visible"><line x1="0" y1="94" x2="${W}" y2="94" stroke="rgba(0,0,0,.18)" stroke-width="10" stroke-linecap="round"/>
+             <line x1="0" y1="94" x2="${reach.toFixed(1)}" y2="94" stroke="var(--accent)" stroke-width="10" stroke-linecap="round"/></svg>`;
+        items.forEach(([yr, lab, ti], i) => { if (t < ti) return; const k = back((t - ti) / 0.45);
+          html += `<div class="node" style="left:${xs[i]}px;transform:scale(${k.toFixed(3)})"></div><div class="yr" style="left:${xs[i]}px;opacity:${ease((t - ti) / 0.3)}">${yr}</div>` +
+                  (lab ? `<div class="lb" style="left:${xs[i]}px;opacity:${ease((t - ti - 0.2) / 0.35)}">${lab}</div>` : ''); });
+        n.innerHTML = html; place(n, e.slot); enter(n, 'fade', p); break; }
+      case 'progress': {
+        // a ring (or bar) counting up to a value: 'syllabus 90%', 'chances 100%'
+        const k = ease((t - t0 - 0.2) / (e.dur || 1.6)), v = Math.round((e.value ?? 100) * k), R = 84, C = 2 * Math.PI * R;
+        n = el('div', 'prog', `<svg width="210" height="210" viewBox="0 0 210 210"><circle cx="105" cy="105" r="${R}" fill="none" stroke="rgba(0,0,0,.12)" stroke-width="20"/>
+             <circle cx="105" cy="105" r="${R}" fill="none" stroke="var(--accent)" stroke-width="20" stroke-linecap="round" stroke-dasharray="${(C * v / 100).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 105 105)"/>
+             <text x="105" y="128" text-anchor="middle" class="pc">${v}%</text></svg>` + (e.text ? `<div class="lab">${e.text}</div>` : ''));
+        place(n, e.slot); enter(n, 'pop', p); break; }
+      case 'verdict': {
+        // a big brush-stroke cross, or a tick badge with a burst of rays, slammed over a point
+        const ok = e.kind !== 'cross';
+        n = el('div', 'vrd');
+        n.innerHTML = ok
+          ? `<svg viewBox="0 0 300 300" width="300" height="300">${Array.from({ length: 12 }, (_, i) => { const a = i * Math.PI / 6, k = ease((t - t0 - 0.25) / 0.4);
+                return `<line x1="${150 + Math.cos(a) * 120}" y1="${150 + Math.sin(a) * 120}" x2="${150 + Math.cos(a) * (120 + 26 * k)}" y2="${150 + Math.sin(a) * (120 + 26 * k)}" stroke="#2FBF71" stroke-width="7" stroke-linecap="round" opacity="${(1 - clamp((t - t0 - 0.7) / 0.6)).toFixed(2)}"/>`; }).join('')}
+               <circle cx="150" cy="150" r="98" fill="#2FBF71"/><path pathLength="1" d="M102 154 L136 188 L200 118" fill="none" stroke="#fff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+          : `<svg viewBox="0 0 300 300" width="300" height="300"><path pathLength="1" d="M60 58 Q150 150 246 250" fill="none" stroke="#E2231A" stroke-width="44" stroke-linecap="round"/>
+               <path pathLength="1" d="M244 52 Q150 150 56 246" fill="none" stroke="#E2231A" stroke-width="40" stroke-linecap="round"/></svg>`;
+        drawPaths(n, (t - t0 - (ok ? 0.15 : 0)) / 0.45);
+        place(n, e.slot || 'over-broll'); if (e.x != null) { n.style.left = (e.x - 150) + 'px'; n.style.top = (e.y - 150) + 'px'; n.style.transform = 'none'; }
+        enter(n, 'pop', p); break; }
+      case 'notify': {
+        // UI cards sliding in from the top, one per item, newest on top: an idea 'arriving'
+        n = el('div', 'ntf');
+        e.items.forEach(([icon, title, body, ti]) => { if (t < ti) return;
+          const c = el('div', 'ncard', `<div class="ic">${icon}</div><div><div class="t">${title}</div>${body ? `<div class="b">${body}</div>` : ''}</div>`);
+          if (e.newest_first) n.insertBefore(c, n.firstChild); else n.appendChild(c);   // a counted list fills downward
+          if (!body) c.style.padding = '12px 22px';
+          c.style.transform = `translateY(${(-50 * (1 - ease((t - ti) / 0.4))).toFixed(1)}px)`; c.style.opacity = ease((t - ti) / 0.3); });
+        place(n, e.slot); n.style.left = '90px'; break; }
+      case 'ring': {
+        // a red marker circle drawn round something already on screen (x, y, w, h in frame pixels), label beside it
+        const w = e.w, h = e.h;
+        n = el('div', ''); Object.assign(n.style, { position: 'absolute', left: (e.x - 20) + 'px', top: (e.y - 20) + 'px', width: (w + 40) + 'px', height: (h + 40) + 'px' });
+        n.innerHTML = `<svg width="${w + 40}" height="${h + 40}" style="overflow:visible"><path pathLength="1" d="M ${w * .55 + 20} 22 C ${w + 30} 18, ${w + 34} ${h + 24}, ${w * .5 + 20} ${h + 22} C 6 ${h + 26}, 4 18, ${w * .62 + 20} 12"
+             fill="none" stroke="${e.colour || '#E2231A'}" stroke-width="12" stroke-linecap="round"/></svg>` + (e.label ? `<div class="pin-tag" style="left:${(w + 40) / 2}px;top:${h + 44}px">${e.label}</div>` : '');
+        drawPaths(n, (t - t0) / 0.7); content.appendChild(n); boxes.push({ type: 'ring', slot: 'annot', el: n }); n = null; break; }
+      case 'pins': {
+        // map pins dropping onto places (x, y in frame pixels), each with its name
+        n = el('div', ''); n.classList.add('abs'); Object.assign(n.style, { left: '0px', top: '0px' });
+        e.items.forEach(([x, y, lab, ti]) => { if (t < ti) return; const d = 1 - back((t - ti) / 0.45);
+          const pn = el('div', 'pin', `<svg viewBox="0 0 76 100" width="76" height="100"><path d="M38 98 C38 98 4 58 4 36 A34 34 0 1 1 72 36 C72 58 38 98 38 98Z" fill="#D7261E" stroke="#fff" stroke-width="4"/><circle cx="38" cy="36" r="13" fill="#fff"/></svg>`);
+          Object.assign(pn.style, { left: x + 'px', top: (y - 120 * d) + 'px', opacity: clamp((t - ti) / 0.15) }); n.appendChild(pn);
+          if (lab) { const tg = el('div', 'pin-tag', lab); Object.assign(tg.style, { left: x + 'px', top: y + 'px', opacity: ease((t - ti - 0.3) / 0.3) }); n.appendChild(tg); } });
+        content.appendChild(n); n = null; break; }
+      case 'paper': {
+        // a torn notepad slip taped down, handwritten: 'note kar lo'
+        n = el('div', 'note-paper', `<div class="note-tape"></div>${e.text}`);
+        if (e.texture) n.style.background = `repeating-linear-gradient(180deg, transparent 0 63px, rgba(60,90,160,.28) 63px 65px), url(../../library/elements/textures/paper-${e.texture}.jpg) center / cover`;   // crumpled | kraft | kraft-dark (ambientCG, CC0)
+        place(n, e.slot); n.style.left = (e.left ?? 130) + 'px'; n.style.transform = `rotate(${e.tilt ?? 0}deg)`; enter(n, 'drop', p); break; }
+      case 'lottie': {
+        // a free LottieFiles animation (library/elements/lottie, Lottie Simple License), SEEKED to this
+        // frame's local time, so a render is as deterministic as every other element.  It plays once and
+        // holds its last frame, or loops with "loop": true.
+        const d = TL.lotties[e.src], w = e.w || 360, h = Math.round(w * d.h / d.w);
+        n = el('div', 'lot'); Object.assign(n.style, { width: w + 'px', height: h + 'px' });
+        if (e.x != null) { n.style.position = 'absolute'; n.style.left = (e.x - w / 2) + 'px'; n.style.top = (e.y - h / 2) + 'px'; content.appendChild(n); }
+        else { place(n, e.slot); n.style.left = e.left != null ? e.left + 'px' : Math.round((1080 - w) / 2) + 'px'; }
+        const total = d.op - d.ip; let f = (t - t0) * (e.speed || 1) * d.fr;
+        f = e.loop ? f % total : Math.min(f, total - 1);
+        const anim = lottie.loadAnimation({ container: n, renderer: 'svg', loop: false, autoplay: false, animationData: structuredClone(d) });
+        anim.goToAndStop(d.ip + Math.max(0, f), true);
+        if (e.colour) {                                  // recolour every painted stroke and fill: "var(--accent)", "#fff", ...
+          const c = e.colour.startsWith('var(') ? getComputedStyle(F).getPropertyValue(e.colour.slice(4, -1)).trim() : e.colour;
+          n.querySelectorAll('path, circle, rect, ellipse').forEach(q => {
+            if (q.getAttribute('stroke') && q.getAttribute('stroke') !== 'none') q.setAttribute('stroke', c);
+            if (q.getAttribute('fill') && q.getAttribute('fill') !== 'none' && !e.stroke_only) q.setAttribute('fill', c); });
+        }
+        if (e.x != null) { boxes.push({ type: 'lottie', slot: 'annot', el: n }); n = null; }
+        break; }
+      case 'answer': {
+        // the exam answer, set like an answer sheet: a heading, then numbered points writing in one by one
+        n = el('div', 'panel ans'); Object.assign(n.style, { width: '980px', boxSizing: 'border-box', padding: '26px 34px 30px' });
+        let html = `<div class="ans-head">${e.title || 'उत्तर'}</div>`;
+        // builds across the video: "show" points are on the sheet, those from "animate_from" write in now,
+        // the rest wait as faint numbered blanks so the student sees how many are still to come
+        const shown = e.show ?? e.points.length, a0 = e.animate_from ?? 0;
+        e.points.forEach((pt, i) => {
+          const no = e.nums ? (e.nums[i] ? `<b>${e.nums[i]}</b> ` : '') : `<b>${i + 1}.</b> `;   // nums: a lead paragraph (the definition) goes unnumbered
+          if (i >= shown) { html += `<div class="ans-row ans-todo">${no}<span class="ans-blank"></span></div>`; return; }
+          const k = i < a0 ? 1 : ease((t - t0 - 0.5 - (i - a0) * (e.gap ?? 0.35)) / 0.4);
+          html += `<div class="ans-row${i >= a0 ? ' ans-new' : ''}" style="opacity:${k.toFixed(2)};transform:translateX(${(-30 * (1 - k)).toFixed(1)}px)">${no}${pt}</div>`; });
+        n.innerHTML = html;
+        place(n, e.slot); n.style.left = '50px'; if (e.top) n.style.top = e.top + 'px'; enter(n, 'unfold', p); break; }
+      case 'qhero': {
+        // the question as an event: a PYQ ribbon drops in, each year stamps down in turn, the
+        // question card unfolds and its words arrive, the key phrase gets underlined, the marks spin in
+        n = el('div', ''); Object.assign(n.style, { width: '960px', position: 'absolute' });
+        let html = '';
+        if (t >= t0) html += `<div class="k-pill k-pill--accent qh-ribbon" style="position:absolute;left:0;top:0;font-size:40px">${e.ribbon || 'Board Exam PYQ'}</div>`;
+        const ys = e.years || [];
+        ys.forEach(([y, ty], i) => { if (t < ty) return;
+          const k = clamp((t - ty) / 0.28), sc = 1.9 - 0.9 * ease(k);
+          html += `<div class="qh-year" style="left:${i * 325}px;transform:rotate(${[-6, 3, -3][i % 3]}deg) scale(${sc.toFixed(3)});opacity:${clamp(k * 4)}">${y}</div>`; });
+        if (e.t_next != null && t >= e.t_next) { const k = clamp((t - e.t_next) / 0.35);
+          html += `<div class="k-stamp qh-next" style="transform:rotate(-4deg) scale(${(1.7 - 0.7 * ease(k)).toFixed(3)});opacity:${clamp(k * 4)}">${e.next}</div>`; }
+        if (e.t_card != null && t >= e.t_card) {
+          const k = (t - e.t_card) / 0.5, words = e.question.split(' ');
+          const body = words.map((w, i) => { const a = ease((t - e.t_card - 0.35 - i * 0.09) / 0.3);
+            const hl = (e.hl || []).includes(w);
+            return `<span style="opacity:${a.toFixed(2)};${hl ? 'color:var(--accent)' : ''}">${w}</span>`; }).join(' ');
+          const ul = ease((t - e.t_card - 0.4 - words.length * 0.09) / 0.5);
+          html += `<div class="qcard qh-card" style="transform-origin:50% 0;transform:scaleY(${(0.02 + 0.98 * back(clamp(k))).toFixed(3)})">
+              <div class="k-head" style="font-size:54px;color:var(--accent);padding-bottom:12px">प्रश्न</div>
+              <div style="font-family:var(--font-body);font-size:${e.qsize || 64}px;line-height:1.45">${body}</div>
+              <div class="qh-ul" style="width:${(ul * 62).toFixed(1)}%"></div></div>`; }
+        if (e.t_marks != null && t >= e.t_marks) { const k = clamp((t - e.t_marks) / 0.45);
+          html += `<div class="qh-marks" style="transform:rotate(${(-200 * (1 - ease(k)) + 8).toFixed(1)}deg) scale(${(0.3 + 0.7 * back(k)).toFixed(3)});opacity:${clamp(k * 3)}">${e.marks}</div>`; }
+        n.innerHTML = html;
+        place(n, e.slot); n.style.left = '60px';
+        break; }
+      case 'crowns': {
+        // monarchy vs gana-sangha: one crowned figure on a throne | a ring of figures, each crown popping on in turn
+        n = el('div', 'panel'); Object.assign(n.style, { width: '960px', height: (e.h || 640) + 'px', boxSizing: 'border-box', padding: '0', position: 'relative', overflow: 'hidden' });
+        const H3 = e.h || 640, crown = (x, y, s, o) => `<path transform="translate(${x} ${y}) scale(${s})" d="M-30 12 L-30 -14 L-15 2 L0 -24 L15 2 L30 -14 L30 12 Z" fill="#D9A21B" stroke="#7A4E0A" stroke-width="${3 / s}" opacity="${o}"/>`;
+        const person = (x, y, s, col) => `<g transform="translate(${x} ${y}) scale(${s})"><circle cy="-46" r="20" fill="${col}"/><path d="M-30 30 Q-30 -18 0 -20 Q30 -18 30 30 Z" fill="${col}"/></g>`;
+        let svg = `<svg width="960" height="${H3}" viewBox="0 0 960 ${H3}" style="position:absolute;left:0;top:0"><line x1="480" y1="40" x2="480" y2="${H3 - 40}" stroke="rgba(52,32,15,.35)" stroke-width="3" stroke-dasharray="10 10"/>`;
+        if (t >= e.t_one) {
+          const k = ease((t - e.t_one) / 0.6), cx = 240, cy = H3 / 2 + 70;
+          svg += `<rect x="${cx - 80}" y="${cy + 40}" width="160" height="34" rx="6" fill="#7A4E0A" opacity="${k}"/><rect x="${cx - 110}" y="${cy + 74}" width="220" height="30" rx="6" fill="#5A3608" opacity="${k}"/>`;
+          svg += person(cx, cy, 1.9, '#3A2414') + crown(cx, cy - 150, 1.6, ease((t - e.t_one - 0.4) / 0.4));
+        }
+        if (t >= e.t_many) {
+          const N = e.many || 8, cx = 720, cy = H3 / 2 + 60, R = 150;
+          svg += `<ellipse cx="${cx}" cy="${cy + 10}" rx="${R - 50}" ry="${(R - 50) * 0.45}" fill="#7A4E0A" opacity=".35"/>`;
+          for (let i = 0; i < N; i++) {
+            const a = Math.PI * 2 * i / N - Math.PI / 2, x = cx + R * Math.cos(a), y = cy + R * 0.55 * Math.sin(a), ti = e.t_many + 0.25 + i * 0.18;
+            svg += person(x, y, 0.8, '#3A2414') + (t >= ti ? crown(x, y - 66, 0.62, ease((t - ti) / 0.3)) : '');
+          }
+        }
+        n.innerHTML = svg + '</svg>';
+        const lab = (x, txt, tt, sub, ts) => { if (t < tt) return;
+          const d = el('div', 'k-head', txt); Object.assign(d.style, { position: 'absolute', left: x + 'px', top: '26px', transform: 'translateX(-50%)', width: '440px', textAlign: 'center', fontSize: '54px', lineHeight: '1.25', color: 'var(--accent)' }); n.appendChild(d); enter(d, 'fade', (t - tt) / 0.4);
+          if (sub && t >= ts) { const s2 = el('span', 'k-pill', sub); Object.assign(s2.style, { position: 'absolute', left: x + 'px', bottom: '24px', transform: 'translateX(-50%)', whiteSpace: 'nowrap', fontSize: '46px' }); n.appendChild(s2); enter(s2, 'pop', (t - ts) / 0.4); } };
+        lab(240, e.left || 'एक राजा', e.t_one, e.left_sub, e.t_left_sub ?? 1e9);
+        lab(720, e.right || 'कई राजा', e.t_many, e.right_sub, e.t_right_sub ?? 1e9);
+        place(n, e.slot); enter(n, 'fade', p); break; }
+      case 'depth': {
+        // a loaded ship sails in over a shallow sandbar (grounds: red X, tilts) and over deep water (clears: tick, gap arrow)
+        n = el('div', 'panel'); Object.assign(n.style, { width: '960px', height: '600px', boxSizing: 'border-box', padding: '0', position: 'relative', overflow: 'hidden' });
+        const WL = 210, KEEL = 130;                              // waterline, and how far the hull reaches below it
+        const ship = (x, tilt) => `<g transform="translate(${x} ${WL}) rotate(${tilt})">
+            <path d="M-150 -18 L150 -18 L118 ${KEEL} L-118 ${KEEL} Z" fill="#2B3440" stroke="#fff" stroke-width="3"/>
+            <rect x="-150" y="-18" width="300" height="34" fill="#C92A2A"/>
+            ${[[-130, '#E8590C'], [-80, '#1864AB'], [-30, '#2B8A3E'], [20, '#E8590C'], [70, '#1864AB']].map(([cx, c]) => `<rect x="${cx}" y="-62" width="46" height="44" fill="${c}" stroke="#fff" stroke-width="2"/><rect x="${cx}" y="-104" width="46" height="42" fill="${c}" stroke="#fff" stroke-width="2" opacity=".85"/>`).join('')}
+            <rect x="105" y="-120" width="34" height="102" fill="#F4F1EA" stroke="#2B3440" stroke-width="3"/></g>`;
+        const side = (ox, bed, sand, tIn, tHit, ok, title) => {
+          if (t < tIn) return '';
+          const k = ease((t - tIn) / 1.6), x = -170 + k * 410;
+          const hit = !ok && t >= tHit, tilt = hit ? -5 * ease((t - tHit) / 0.4) : 0;
+          return `<g transform="translate(${ox} 0)"><clipPath id="c${ox}"><rect width="470" height="600"/></clipPath><g clip-path="url(#c${ox})">
+            <rect width="470" height="${WL}" fill="#CFE8F7"/><rect y="${WL}" width="470" height="${600 - WL}" fill="#2F7DBA"/>
+            <path d="M0 ${bed} ${sand ? `L150 ${bed} Q240 ${WL + KEEL - 6} 330 ${bed}` : ''} L470 ${bed} L470 600 L0 600 Z" fill="#C8A86B"/>
+            ${ship(x, tilt)}
+            ${ok && k > .95 ? `<g stroke="#fff" stroke-width="5" fill="#fff"><path d="M240 ${WL + KEEL + 10} L240 ${bed - 10}"/><path d="M228 ${WL + KEEL + 24} L240 ${WL + KEEL + 8} L252 ${WL + KEEL + 24}" fill="none"/><path d="M228 ${bed - 24} L240 ${bed - 8} L252 ${bed - 24}" fill="none"/></g>` : ''}
+          </g><text x="235" y="70" text-anchor="middle" font-family="Noto Sans Devanagari" font-weight="800" font-size="48" fill="#15202B">${title}</text>
+          ${hit ? `<g stroke="#C92A2A" stroke-width="16" stroke-linecap="round" opacity="${ease((t - tHit) / 0.3)}"><path d="M190 ${WL + 40} L290 ${WL + 140}"/><path d="M290 ${WL + 40} L190 ${WL + 140}"/></g>` : ''}
+          ${ok && k > .95 ? `<path d="M320 ${WL + 30} l30 30 l60 -70" stroke="#2B8A3E" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="${ease((t - tIn - 1.6) / 0.3)}"/>` : ''}</g>`;
+        };
+        n.innerHTML = `<svg width="960" height="600" viewBox="0 0 960 600" style="position:absolute;left:0;top:0">
+          ${side(0, WL + KEEL - 10, true, e.t_shallow, e.t_stuck, false, e.left || 'उथला पानी')}
+          ${side(490, 560, false, e.t_deep, 1e9, true, e.right || 'गहरा जल')}<rect x="470" width="20" height="600" fill="var(--card-bg)"/></svg>`;
+        place(n, e.slot); enter(n, 'fade', p); break; }
+      case 'hinterland': {
+        // the port on the coast; links fan out inland into the region behind it; exports flow in, imports flow out
+        n = el('div', 'panel'); Object.assign(n.style, { width: '960px', height: (e.h || 780) + 'px', boxSizing: 'border-box', padding: '0', position: 'relative', overflow: 'hidden' });
+        const H2 = e.h || 780, PX = 480, PY = 170;
+        const qp = (L, s) => { const [a, c, b] = L; return [0, 1].map(j => (1 - s) ** 2 * a[j] + 2 * (1 - s) * s * c[j] + s * s * b[j]); };
+        const styles = { rail: '#2B3440', road: '#868E96', pipe: '#F5C518', water: '#228BE6' };
+        let svg = `<svg width="960" height="${H2}" viewBox="0 0 960 ${H2}" style="position:absolute;left:0;top:0">
+          <rect width="960" height="${PY}" fill="#2F7DBA"/><path d="M0 ${PY - 10} Q240 ${PY + 18} 480 ${PY} T960 ${PY - 6} L960 ${H2} L0 ${H2} Z" fill="#EFE9DA"/>`;
+        if (t >= e.t_region) svg += `<path d="M60 ${H2 - 40} Q30 ${PY + 140} 250 ${PY + 70} Q480 ${PY + 30} 720 ${PY + 70} Q940 ${PY + 140} 900 ${H2 - 40} Z" fill="var(--accent-2)" opacity="${.16 * ease((t - e.t_region) / 0.6)}" stroke="var(--accent-2)" stroke-width="4" stroke-dasharray="18 12"/>`;
+        const ends = [[[PX, PY], [260, 330], [150, H2 - 190]], [[PX, PY], [420, 420], [380, H2 - 150]], [[PX, PY], [560, 420], [610, H2 - 160]], [[PX, PY], [760, 300], [830, H2 - 200]]];
+        const tags = [];
+        e.links.forEach(([label, kind, ti], i) => {
+          if (t < ti) return;
+          const L = ends[i], d = `M${L[0][0]} ${L[0][1]} Q${L[1][0]} ${L[1][1]} ${L[2][0]} ${L[2][1]}`, g = ease((t - ti) / 0.9);
+          const dash = `stroke-dasharray="${g} 1" pathLength="1"`;
+          if (kind === 'rail') svg += `<path d="${d}" ${dash} stroke="#2B3440" stroke-width="14" fill="none"/>`;
+          else if (kind === 'road') svg += `<path d="${d}" ${dash} stroke="#868E96" stroke-width="20" fill="none" stroke-linecap="round"/>`;
+          else if (kind === 'water') svg += `<path d="${d}" ${dash} stroke="#228BE6" stroke-width="16" fill="none" stroke-linecap="round"/>`;
+          else svg += `<path d="${d}" ${dash} stroke="#F5C518" stroke-width="12" fill="none" stroke-linecap="round"/><path d="${d}" ${dash} stroke="#B08900" stroke-width="2" fill="none"/>`;
+          if (g > .98) { svg += `<circle cx="${L[2][0]}" cy="${L[2][1]}" r="20" fill="${styles[kind]}" stroke="#fff" stroke-width="5"/>`; tags.push([label, L[2], ti + 0.9]); }
+          // goods moving on the link once both flows are on
+          for (const [tt, dir, col] of [[e.t_export, -1, '#2B8A3E'], [e.t_import, 1, '#E8590C']]) {
+            if (t < tt || g < .98) continue;
+            for (let k = 0; k < 3; k++) { let s = ((t - tt) * 0.28 + k / 3) % 1; if (dir < 0) s = 1 - s;
+              const [x, y] = qp(L, s); svg += `<rect x="${x - 15 + dir * 0}" y="${y - (dir < 0 ? 26 : -6)}" width="30" height="20" rx="3" fill="${col}" stroke="#fff" stroke-width="2.5"/>`; }
+          }
+        });
+        svg += `<g transform="translate(${PX} ${PY})"><circle r="34" fill="var(--accent)" stroke="#fff" stroke-width="6"/></g></svg>`;
+        n.innerHTML = svg;
+        const pt = el('div', 'k-pill k-pill--accent', e.port || 'पत्तन'); Object.assign(pt.style, { position: 'absolute', left: (PX + 48) + 'px', top: (PY + 6) + 'px' }); n.appendChild(pt);
+        if (t >= e.t_region) { const rg = el('div', 'k-head', e.label || 'पृष्ठ प्रदेश'); Object.assign(rg.style, { position: 'absolute', left: '50%', top: (H2 / 2 + 40) + 'px', transform: 'translateX(-50%)', fontSize: '64px', color: 'var(--accent-2)', whiteSpace: 'nowrap' }); n.appendChild(rg); enter(rg, 'pop', (t - e.t_region) / 0.45); }
+        for (const [label, [x, y], tt] of tags) { const tg = el('div', 'k-pill', label); Object.assign(tg.style, { position: 'absolute', left: Math.min(Math.max(x - 90, 14), 960 - 300) + 'px', top: (y + 26) + 'px', fontSize: '38px' }); n.appendChild(tg); enter(tg, 'pop', (t - tt) / 0.4); }
+        for (const [tt, txt, col, side] of [[e.t_export, 'निर्यात → पत्तन', '#2B8A3E', 0], [e.t_import, 'आयात → अंदर', '#E8590C', 1]]) {
+          if (t < tt) continue;
+          const fl = el('div', 'k-pill', txt); Object.assign(fl.style, { position: 'absolute', [side ? 'right' : 'left']: '24px', top: '20px', fontSize: '38px', background: col, color: '#fff', borderColor: col });
+          fl.style.setProperty('background', col, 'important'); fl.style.setProperty('color', '#fff', 'important'); n.appendChild(fl); enter(fl, 'pop', (t - tt) / 0.4);
+        }
+        place(n, e.slot); enter(n, 'fade', p); break; }
+      case 'pipeflow': {
+        // one steel pipe per substance; each fills from the left on its cue, then its contents stripe past steadily
+        n = el('div', 'panel'); Object.assign(n.style, { width: '960px', boxSizing: 'border-box', padding: '24px 34px 28px', display: 'flex', flexDirection: 'column', gap: '18px' });
+        if (e.title) n.appendChild(el('div', 'k-head', e.title)).style.cssText = 'font-size:52px;color:var(--accent);margin-bottom:4px';
+        const shown = e.items.filter(it => t >= it[2]);
+        const lastT = shown.length ? Math.max(...shown.map(it => it[2])) : -1;
+        e.items.forEach(([label, col, ti, star]) => {
+          const on = t >= ti, fill = on ? ease((t - ti) / 0.9) : 0;
+          const row = el('div', 'pipe-row' + (on && ti === lastT && t - ti < 3 ? ' on' : ''));
+          Object.assign(row.style, { display: 'grid', gridTemplateColumns: (e.label_w || 330) + 'px 1fr', alignItems: 'center', gap: '22px', opacity: on ? 1 : .35 });
+          const stripes = `repeating-linear-gradient(90deg, ${col} 0 46px, color-mix(in srgb, ${col} 62%, #fff) 46px 60px)`;
+          row.innerHTML = `<div class="pipe-label">${on ? label : '·····'}${star && on ? ' <span style="color:var(--accent)">★</span>' : ''}</div>
+            <div class="pipe"><i style="width:${(fill * 100).toFixed(1)}%;background:${stripes};background-position:${(t * 90).toFixed(1)}px 0"></i></div>`;
+          n.appendChild(row);
+        });
+        place(n, e.slot); enter(n, 'fade', p); break; }
+      case 'seamap': {
+        // coastline-only Mercator map (tools/make_sea_map.py); routes draw along their stops, ports light as named
+        const M = TL.seamaps[e.map || 'sea-route'], W_ = M.w, H_ = M.h;
+        const mrc = la => Math.log(Math.tan(Math.PI / 4 + la * Math.PI / 360));
+        const P = ([lon, lat]) => [(lon - M.lon0) / (M.lon1 - M.lon0) * W_, (mrc(M.lat1) - mrc(lat)) / (mrc(M.lat1) - mrc(M.lat0)) * H_];
+        n = el('div', 'card seamap'); Object.assign(n.style, { width: W_ + 'px', height: H_ + 'px', boxSizing: 'content-box', position: 'relative' });
+        let svg = `<svg viewBox="0 0 ${W_} ${H_}" width="${W_}" height="${H_}" style="position:absolute;left:0;top:0">
+          <rect width="${W_}" height="${H_}" fill="var(--sea)"/><path d="${M.land}" fill="var(--land)" stroke="var(--coast)" stroke-width="1.5"/>
+          ${M.rivers ? `<path d="${M.rivers}" fill="none" stroke="var(--river, #3F86C0)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>` : ''}`;
+        const extras = [];
+        for (const r of e.routes || []) {
+          if (t < r.t) continue;
+          const pts = r.pts.map(P), cum = [0];
+          for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+          const total = cum[cum.length - 1];
+          const stops = [[0, r.t], ...(r.stops || [[pts.length - 1, r.t + (r.dur || 2.2)]])];
+          let drawn = total;
+          for (let k = 1; k < stops.length; k++) {
+            const [i0, s0] = stops[k - 1], [i1, s1] = stops[k];
+            if (t < s0) { drawn = cum[i0]; break; }
+            if (t < s1) { drawn = cum[i0] + (cum[i1] - cum[i0]) * ease((t - s0) / Math.max(0.3, Math.min(1.6, s1 - s0))); break; }
+            drawn = cum[i1];
+          }
+          const crossed = r.t_cross != null && t >= r.t_cross;
+          const d = 'M' + pts.map(q => q[0].toFixed(1) + ' ' + q[1].toFixed(1)).join('L');
+          const col = r.color === 'warn' ? '#E2574C' : 'var(--accent)';
+          svg += `<path d="${d}" fill="none" stroke="rgba(0,0,0,.55)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="${drawn} ${total + 10}" opacity="${crossed ? .5 : 1}"/>
+                  <path d="${d}" fill="none" stroke="${col}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="${drawn} ${total + 10}" opacity="${crossed ? .65 : 1}"/>`;
+          if (r.ship && drawn > 0 && !crossed) {      // the ship rides the head of the line
+            let k = 1; while (k < cum.length - 1 && cum[k] < drawn) k++;
+            const f = (drawn - cum[k - 1]) / Math.max(1e-6, cum[k] - cum[k - 1]);
+            const x = pts[k - 1][0] + f * (pts[k][0] - pts[k - 1][0]), y = pts[k - 1][1] + f * (pts[k][1] - pts[k - 1][1]);
+            svg += `<circle cx="${x}" cy="${y}" r="22" fill="none" stroke="#fff" stroke-width="4" opacity=".8"/><circle cx="${x}" cy="${y}" r="13" fill="#fff"/>`;
+          }
+          if (crossed) {
+            const [mx, my] = P(r.cross_xy || r.pts[Math.floor(r.pts.length / 2)]);
+            const c = ease((t - r.t_cross) / 0.35);
+            svg += `<g stroke="#E2574C" stroke-width="16" stroke-linecap="round" opacity="${c}"><path d="M${mx - 44} ${my - 44} L${mx + 44} ${my + 44}"/><path d="M${mx + 44} ${my - 44} L${mx - 44} ${my + 44}"/></g>`;
+          }
+          if (r.tag && t >= (r.t_tag ?? 1e9)) extras.push(['route-tag', r.tag, P(r.tag_xy), r.t_tag, r.color === 'warn']);
+        }
+        // an empire's approximate extent, shaded in once it is named
+        const regs = (e.regions || []).concat(e.region ? [{ pts: e.region, t: e.t_region }] : []);
+        for (const rg of regs) {
+          if (t < rg.t) continue;
+          const d = 'M' + rg.pts.map(q => P(q).map(v => v.toFixed(1)).join(' ')).join('L') + 'Z';
+          svg += `<path d="${d}" fill="var(--accent)" fill-opacity="${0.24 * ease((t - rg.t) / 0.8)}" stroke="var(--accent)" stroke-width="4" stroke-dasharray="14 10" opacity="${ease((t - rg.t) / 0.8)}"/>`;
+        }
+        // pearls: scattered states that a thread strings into one
+        if (e.beads && t >= e.t_beads) {
+          svg += `<defs><radialGradient id="pearl" cx="35%" cy="35%" r="70%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".6" stop-color="#EDE6DA"/><stop offset="1" stop-color="#B8AE9E"/></radialGradient></defs>`;
+          const pts = e.beads.map(P);
+          if (e.t_thread != null && t >= e.t_thread) {
+            const d = 'M' + pts.map(q => q[0].toFixed(1) + ' ' + q[1].toFixed(1)).join('L');
+            svg += `<path d="${d}" pathLength="1" fill="none" stroke="var(--accent-2)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="${ease((t - e.t_thread) / 1.8).toFixed(3)} 1"/>`;
+          }
+          pts.forEach(([x, y], i) => {
+            const ti = e.t_beads + i * 0.08; if (t < ti) return;
+            const loose = e.t_thread == null || t < e.t_thread ? 6 * Math.sin(t * 2.2 + i * 1.7) : 0;      // loose pearls drift a little
+            svg += `<circle cx="${(x + loose).toFixed(1)}" cy="${(y + loose * 0.6).toFixed(1)}" r="${(14 * ease((t - ti) / 0.3)).toFixed(1)}" fill="url(#pearl)" stroke="rgba(60,40,20,.55)" stroke-width="2"/>`;
+          });
+        }
+        const named = (e.ports || []).filter(pt => t >= pt[3]);
+        const lastT = named.length ? Math.max(...named.map(pt => pt[3])) : -1;
+        for (const [label, sub, ll, tp, side] of named) {
+          const [x, y] = P(ll);
+          svg += `<circle cx="${x}" cy="${y}" r="${tp === lastT && t - tp < 2.5 ? 20 : 15}" class="port-dot"/>`;
+          extras.push(['port', [label, sub, side, tp === lastT && !e.calm], [x, y], tp]);
+        }
+        n.innerHTML = svg + '</svg>';
+        for (const rg of e.regions || []) {
+          if (!rg.label || t < rg.t_label) continue;
+          const [x, y] = P(rg.label_xy); const rl = el('div', 'port-tag on', rg.label);
+          Object.assign(rl.style, { left: x + 'px', top: y + 'px', transform: 'translate(-50%,-50%)', fontSize: '40px' }); n.appendChild(rl); enter(rl, 'pop', (t - rg.t_label) / 0.4);
+        }
+        if (e.region_label && t >= e.t_region_label) { const [x, y] = P(e.region_label_xy); const rl = el('div', 'port-tag on', e.region_label);
+          Object.assign(rl.style, { left: x + 'px', top: y + 'px', transform: 'translate(-50%,-50%)', fontSize: '44px' }); n.appendChild(rl); enter(rl, 'pop', (t - e.t_region_label) / 0.4); }
+        for (const [txt, ll, tl_, cls] of e.labels || []) {
+          if (t < tl_) continue;
+          const [x, y] = P(ll); const lb = el('div', 'map-label' + (cls ? ' ' + cls : ''), txt);
+          Object.assign(lb.style, { left: x + 'px', top: y + 'px', transform: 'translate(-50%,-50%)' }); n.appendChild(lb); enter(lb, 'fade', (t - tl_) / 0.5);
+        }
+        for (const [kind, data, [x, y], tx, warn] of extras) {
+          if (kind === 'port') {
+            const [label, sub, side, on] = data;
+            const tg = el('div', 'port-tag' + (on ? ' on' : ''), label + (sub ? `<small>${sub}</small>` : ''));
+            const off = { n: [0, -34, '-50%', '-100%'], s: [0, 34, '-50%', '0%'], e: [30, 0, '0%', '-50%'], w: [-30, 0, '-100%', '-50%'],
+                          nw: [-18, -24, '-100%', '-100%'], ne: [18, -24, '0%', '-100%'], sw: [-18, 24, '-100%', '0%'], se: [18, 24, '0%', '0%'] }[side || 'n'];
+            Object.assign(tg.style, { left: (x + off[0]) + 'px', top: (y + off[1]) + 'px', transform: `translate(${off[2]},${off[3]})` });
+            n.appendChild(tg); enter(tg, 'pop', (t - tx) / 0.4);
+          } else {
+            const tg = el('div', 'port-tag on', data);
+            if (!warn) tg.style.cssText += ';background:var(--accent);border-color:var(--accent);color:#06202B';
+            else tg.style.cssText += ';background:#E2574C;border-color:#E2574C;color:#fff';
+            Object.assign(tg.style, { left: x + 'px', top: y + 'px', transform: 'translate(-50%,-50%)' });
+            n.appendChild(tg); enter(tg, 'pop', (t - tx) / 0.4);
+          }
+        }
+        place(n, e.slot); n.style.left = Math.round((1080 - W_) / 2) + 'px'; enter(n, 'fade', p);
+        break; }
+      case 'note':
+        n = el('div', 'note' + (e.slot.startsWith('over-broll') ? ' on-photo' : ''), e.text); place(n, e.slot); n.style.transform = (n.style.transform || '') + ' rotate(-3deg)'; enter(n, 'fade', p); break;
+      case 'cards3': {
+        n = el('div', ''); Object.assign(n.style, { width: '960px', display: 'flex', flexDirection: 'column', gap: '22px' });
+        e.items.forEach(([txt, ti], i) => {
+          if (t < ti) return;
+          const c = el('div', 'card', `<span class="k-section-tag__num" style="flex:none">${i + 1}</span><span style="font-family:var(--font-body);font-weight:800;font-size:46px;line-height:1.35">${txt}</span>`);
+          Object.assign(c.style, { display: 'flex', alignItems: 'center', gap: '26px', padding: '22px 30px', boxSizing: 'border-box', transform: `rotate(${i % 2 ? .8 : -.8}deg)` });
+          n.appendChild(c); enter(c, 'slide', (t - ti) / 0.45);
+        });
+        place(n, e.slot); break; }
+      case 'pin': {
+        if (!mapBox) break;
+        const r = mapBox.getBoundingClientRect(), pad = 14;
+        const x = r.left + pad + e.map_xy[0] * (r.width - 2 * pad), y = r.top + pad + e.map_xy[1] * (r.height - 2 * pad);
+        let ring;
+        if (THEME === 'paper-archival' || THEME === 'dossier') {
+          ring = el('div', '', `<svg width="150" height="110" viewBox="0 0 150 110" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"><path pathLength="1" d="M108 18 C80 2 22 10 12 44 C2 80 52 102 96 94 C136 86 148 50 124 26 C112 14 92 8 70 10"/></svg>`);
+          ring.className = 'abs'; ring.style.left = (x - 75) + 'px'; ring.style.top = (y - 55) + 'px';
+          content.appendChild(ring); drawPaths(ring, p * 1.2);
+        } else { ring = el('div', 'ring'); ring.style.left = x + 'px'; ring.style.top = y + 'px'; content.appendChild(ring); enter(ring, 'pop', p); }
+        n = el('div', 'k-pill k-pill--accent', e.sub); n.classList.add('abs');
+        n.style.left = (x - 30) + 'px'; n.style.top = (y + 56) + 'px';   // below the dot: the atlas prints the name above it
+        content.appendChild(n); enter(n, 'slide', (t - t0 - 0.3) / 0.45);
+        if (x + 70 + n.offsetWidth > 1040) { n.style.left = (x - 70 - n.offsetWidth) + 'px'; }
+        break; }
+      case 'pill':
+        n = el('span', 'k-pill' + (e.style === 'accent' ? ' k-pill--accent' : ''), e.text);
+        place(n, e.slot); enter(n, 'pop', p); break;
+      case 'pills':
+        n = el('div', '', ''); n.style.display = 'flex'; n.style.gap = '18px'; n.style.flexWrap = 'wrap'; n.style.maxWidth = '960px';
+        for (const [txt, ti] of e.items) if (t >= ti) {
+          const pi = el('span', 'k-pill' + (e.style === 'accent' ? ' k-pill--accent' : ''), txt);
+          enter(pi, 'pop', (t - ti) / 0.45); n.appendChild(pi);
+        }
+        place(n, e.slot); break;
+      case 'section':
+        n = el('div', 'k-section-tag k-head', `<span class="k-section-tag__num">${e.num}</span><span class="k-section-tag__text">${e.text}</span>`);
+        place(n, e.slot); enter(n, 'slide', p); break;
+      case 'bignum':
+        n = el('div', 'bignum', `<span class="n">${e.num}</span><span class="tx k-head">${e.text}</span>`);
+        place(n, e.slot); n.style.top = '420px'; enter(n, 'stamp', p); break;
+      case 'def':
+        n = el('div', 'k-def', `<span class="k-def__term k-head">${e.term}</span><span class="k-def__eq">=</span><span class="k-def__text">${e.text}</span>`);
+        place(n, e.slot); enter(n, 'slide', p); break;
+      case 'torn':
+        n = el('div', 'k-torn k-head', e.text); n.style.maxWidth = '960px'; n.style.fontSize = '52px';
+        place(n, e.slot); enter(n, 'slide', p); break;
+      case 'stamp':
+        n = el('div', 'k-stamp k-head' + (e.slot.startsWith('over-broll') ? ' on-photo' : ''), e.text);
+        if (!THEME) n.style.background = 'color-mix(in srgb, var(--paper) 88%, transparent)';
+        place(n, e.slot);
+        if (e.slot === 'over-broll-low') { n.style.left = 'auto'; n.style.right = '70px'; }
+        enter(n, 'stamp', p); break;
+      case 'counter':
+        n = el('div', 'k-counter boxed', `<div class="k-counter__num"><b>${e.num}</b></div><div class="k-counter__label">${e.label}</div>`);
+        place(n, e.slot); enter(n, 'stamp', p); break;
+      case 'crosses':
+        n = el('div', 'crosses', XMARK.repeat(e.n) + `<span class="lb k-head">${e.label}</span>`);
+        place(n, e.slot); drawPaths(n, p / 2); break;
+      case 'compare': {
+        n = el('div', 'compare');
+        const show_r = t >= (e.t_right ?? t0);
+        n.innerHTML = `<div class="k-card l"><div class="lab">${e.left[0]}</div><div class="val k-head">${e.left[1]}</div></div>
+                       <div class="vs k-head">लेकिन</div>
+                       <div class="k-card r" style="visibility:${show_r ? 'visible' : 'hidden'}"><div class="lab">${e.right[0]}</div><div class="val k-head">${e.right[1]}</div></div>`;
+        n.style.width = '960px'; place(n, e.slot); if (e.slot !== 'under-upper') n.style.top = '420px'; enter(n, 'slide', p);
+        if (show_r) enter(n.querySelector('.r'), 'pop', (t - e.t_right) / 0.45);
+        break; }
+      case 'chain': {
+        if (THEME === 'paper-archival') {
+          n = el('div', 'chain');
+          const shown = e.items.filter(([, ti]) => t >= ti);
+          shown.forEach(([txt], i) => {
+            const c = el('span', 'k-pill' + (i === e.items.length - 1 ? ' k-pill--accent' : ''), txt);
+            c.style.marginLeft = (i % 2 ? 60 : 0) + 'px'; c.style.maxWidth = '900px'; c.style.alignSelf = 'flex-start';
+            n.appendChild(c); enter(c, 'slide', (t - e.items[i][1] - 0.25) / 0.45);
+          });
+          place(n, e.slot);
+          const pins = [...n.querySelectorAll('.k-pill')].map(c => { const r = c.getBoundingClientRect(), o = n.getBoundingClientRect(); return [r.left - o.left + 35, r.top - o.top - 1]; });
+          if (pins.length > 1) {
+            let d = `M${pins[0][0]} ${pins[0][1]}`;
+            for (let k = 1; k < pins.length; k++) { const [x0, y0] = pins[k - 1], [x1, y1] = pins[k]; d += ` Q${(x0 + x1) / 2} ${Math.max(y0, y1) + 40} ${x1} ${y1}`; }
+            const sv = el('div', 'thread', `<svg width="1000" height="600" style="overflow:visible"><path pathLength="1" d="${d}" fill="none" stroke="#B71C1C" stroke-width="4"/></svg>`);
+            n.insertBefore(sv, n.firstChild); drawPaths(sv, (t - e.items[pins.length - 1][1]) / 0.5);
+          }
+          break;
+        }
+        n = el('div', 'chain');
+        e.items.forEach(([txt, ti], i) => {
+          if (t < ti) return;
+          if (i) { const a = el('div', '', DOWN); n.appendChild(a); drawPaths(a, (t - ti) / 0.4); }
+          const c = el('span', 'k-pill' + (i === e.items.length - 1 ? ' k-pill--accent' : ''), txt);
+          n.appendChild(c); enter(c, 'slide', (t - ti - 0.2) / 0.45);
+        });
+        place(n, e.slot); break; }
+      case 'checklist': {
+        n = el('div', 'ledger', ''); n.style.width = '960px'; n.style.boxSizing = 'border-box'; n.style.display = 'flex'; n.style.flexDirection = 'column'; n.style.gap = '6px';
+        TL.spine.items.forEach((txt, i) => {
+          const lit = e.lit.includes(i) || (e.lit_t && e.lit_t[i] != null && t >= e.lit_t[i]);
+          const r = el('div', 'k-card k-check-row' + (lit ? ' is-done' : ''),
+            `<span class="k-badge k-badge--sm">${i + 1}</span><span class="k-check-row__text">${txt}</span><span class="k-check-row__tick">${CHECK}</span>`);
+          r.style.background = 'var(--card-bg)'; r.style.border = 'var(--card-border-w) solid var(--card-border)';
+          enter(r, 'slide', (t - t0 - i * 0.12) / 0.45);
+          if (lit) drawPaths(r.querySelector('.k-check-row__tick'), (t - t0 - 0.5 - i * 0.2) / 0.5);
+          n.appendChild(r);
+          if (e.next_label && i === e.lit[e.lit.length - 1]) n.appendChild(el('div', 'next k-head', e.next_label + ' : 3, 4, 5'));
+        });
+        place(n, e.slot); break; }
+    }
+    if (n && n.isConnected) {
+      if (e.slot === 'upper') { const r = n.getBoundingClientRect(); underY = r.bottom + 28; }
+      boxes.push({ type: e.type, slot: e.slot, el: n });
+    }
+  }
+
+  // spine: title, five dots, counter — from show_t on
+  if (t >= TL.spine.show_t) {
+    const lit = (TL.spine.pre_lit || 0) + TL.spine.lit_t.filter(x => t >= x).length;
+    const sp = el('div', '', `<div class="ttl">${TL.spine.title}</div><div class="right"><div class="k-dots">${TL.spine.items.map((_, i) => `<i class="${i < lit ? 'on' : ''}"></i>`).join('')}</div><div class="cnt">${lit}<span>/${TL.spine.items.length}</span></div></div>`);
+    sp.id = 'spine'; F.appendChild(sp);
+  }
+
+  // tracker: the points finished so far, bottom left beside the presenter card (card beats only:
+  // a free-standing presenter or the hub fill that corner).  A beat may switch it off.
+  if (TL.tracker && t >= TL.tracker.show_t && pb.card && beat.tracker !== false) {
+    const lit = (TL.spine.pre_lit || 0) + TL.spine.lit_t.filter(x => t >= x).length;
+    const last = Math.max(-1, ...TL.spine.lit_t.map((x, i) => t >= x ? i : -1));
+    if (lit > 0) {
+      const tr = el('div', ''); tr.id = 'tracker';
+      TL.spine.items.slice(0, lit).forEach((txt, i) => {
+        const r = el('div', 'row' + (i === lit - 1 ? ' now' : ''), `<span class="n">${i + 1}</span><span class="tx">${(TL.tracker.items || TL.spine.items)[i]}</span>`);
+        tr.appendChild(r);
+        if (i === lit - 1) enter(r, 'slide', (t - TL.spine.lit_t[Math.max(0, last)]) / 0.45);
+      });
+      tr.style.bottom = (1920 - pb.box[1] - pb.box[3]) + 'px';
+      F.appendChild(tr);
+      boxes.push({ type: 'tracker', slot: 'corner', el: tr });
+    }
+  }
+
+  // caption: the line being spoken, placed where it covers no content box
+  const line = t >= (TL.captions_from || 0) ? TL.captions.find(c => t >= c.t0 && t < c.t1 + 0.15) : null;
+  const report = { t, beat: beat.id, presenter: beat.presenter, violations: [] };
+  const rects = boxes.map(b => ({ ...b, r: b.el.getBoundingClientRect() }));
+  for (const b of rects) {
+    if (pb.hub) {
+      const [x0, y0, x1, y1] = pb.face;
+      const dx = Math.max(x0 - b.r.right, 0, b.r.left - x1), dy = Math.max(y0 - b.r.bottom, 0, b.r.top - y1);
+      if (dx === 0 && dy === 0 && b.slot !== 'around-hub') report.violations.push(`${b.type}@${b.slot} overlaps the presenter circle`);
+      continue;
+    }
+    if (b.slot === 'corner') { if (pb.card && b.r.right > pb.box[0] - 12) report.violations.push(`tracker runs into the presenter card (right ${Math.round(b.r.right)})`); continue; }
+    if (b.r.bottom > floor + 1) report.violations.push(`${b.type}@${b.slot} reaches the presenter (bottom ${Math.round(b.r.bottom)} > head ${pb.head})`);
+    const settled = !b.el.style.opacity || +b.el.style.opacity >= 1;   // an entrance slide starts off its mark
+    if (settled && (b.r.left < 20 || b.r.right > 1060)) report.violations.push(`${b.type}@${b.slot} leaves the frame`);
+  }
+  if (line) {
+    let txt = line.text;
+    for (const w of TL.hilite) txt = txt.split(w).join(`<span class="hl">${w}</span>`);
+    const cap = el('div', 'k-torn k-head', txt); cap.id = 'cap'; F.appendChild(cap);
+    const cands = TL.captions_at === 'bottom' ? [1920 - 70]                                              // pinned: always the bottom strip
+      : [1920 - 70, pb.face[3] + 120, floor - 20, ...(pb.hub ? [pb.cy - pb.r - 30] : []), 285];   // bottom, under his face, above his head, under the spine
+    let ok = false;
+    for (const fs of [46, 40, 35]) { if (ok) break; cap.style.fontSize = fs + 'px';
+    for (const bottom of cands) {
+      cap.style.top = ''; cap.style.bottom = (1920 - bottom) + 'px';
+      const cr = cap.getBoundingClientRect();
+      const [fx0, fy0, fx1, fy1] = pb.face;
+      const obst = rects.map(b => b.r).concat([{ left: fx0, top: fy0, right: fx1, bottom: fy1 }]);
+      const hit = obst.find(r => !(cr.right < r.left || cr.left > r.right || cr.bottom < r.top || cr.top > r.bottom));
+      if (!hit) { ok = true; report.caption_at = Math.round(cr.top); break; }
+    }}
+    if (!ok && TL.captions_at === 'bottom') { cap.style.fontSize = '44px'; cap.style.top = ''; cap.style.bottom = '70px'; report.violations.push('caption (pinned bottom) overlaps content'); }
+    else if (!ok) report.violations.push('caption has no position clear of content');
+  }
+  window.REPORT = report;
+  document.title = 'ready';
+}
+</script>
+</body></html>

@@ -1,0 +1,36 @@
+# Historical places. Kept apart from india.yaml because a modern city registry
+# and a historical one age differently — Taxila is not a modern Indian city and
+# Tosali is an identification, not an address.
+#
+# Coordinates are the modern site each is identified with; the identification
+# is named so a later reader can check it rather than trust it.
+pataliputra:
+  name_en: Pataliputra
+  name_hi: "पाटलिपुत्र"
+  lat: 25.5941
+  lon: 85.1376
+  note: "modern Patna, Bihar — Mauryan capital"
+takshashila:
+  name_en: Taxila
+  name_hi: "तक्षशिला"
+  lat: 33.7463
+  lon: 72.8397
+  note: "modern Taxila, Punjab province, Pakistan — north-western provincial centre"
+ujjayini:
+  name_en: Ujjayini
+  name_hi: "उज्जयिनी"
+  lat: 23.1793
+  lon: 75.7849
+  note: "modern Ujjain, Madhya Pradesh"
+tosali:
+  name_en: Tosali
+  name_hi: "तोसलि"
+  lat: 20.1920
+  lon: 85.8390
+  note: "identified with Dhauli, near Bhubaneswar, Odisha — Ashokan separate edicts"
+suvarnagiri:
+  name_en: Suvarnagiri
+  name_hi: "सुवर्णगिरि"
+  lat: 15.4667
+  lon: 76.4833
+  note: "identified with Kanakagiri, Koppal district, Karnataka — 'golden mountain', the gold tracts"

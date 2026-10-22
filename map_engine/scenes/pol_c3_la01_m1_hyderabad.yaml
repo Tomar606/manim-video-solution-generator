@@ -1,0 +1,13 @@
+# POL-C3-LA-01 M1 — कारण 1, हैदराबाद. The argument IS the geography: Hyderabad
+# sat in the middle of India, which is why its accession was natural and why the
+# Nizam's bid for independence could not hold. The camera opens on the whole
+# country so the student SEES "बीचों-बीच" before the label names it.
+scene: { id: pol_c3_la01_m1_hyderabad, duration: 11.0 }
+map:
+  base: India
+  layers: { states: false }
+  actions:
+    - { time: 0.0, type: show_map }
+    - { time: 1.2, type: point,  location: Hyderabad, label: "हैदराबाद" }
+    - { time: 2.0, type: fly_to, location: Hyderabad, zoom: 4.6, duration: 2.6 }
+    - { time: 7.5, type: fly_to, location: India, duration: 2.4 }

@@ -1,0 +1,30 @@
+# The D look: the atlas IS the stage. No `frame:` block, so the map fills the
+# whole 1080x1920 frame and everything else is composited on top of it.
+#
+# Sand land on a muted teal sea, as an old survey atlas. Labels are large
+# because this map is read at arm's length on a phone, not in a textbook.
+name: atlas
+background:      "#8FB4C0"
+water:           "#8FB4C0"
+land:            "#EFE3C6"
+land_muted:      "#D9CAA6"
+border_country:  "#6F6650"
+border_state:    "#C3B79C"
+coastline:       "#5F6B6E"
+river:           "#9FBFC9"
+lake:            "#AFC9CF"
+selected_region: "#D8C9A4"
+selected_edge:   "#B8362A"
+route:           "#B8362A"
+route_head:      "#8F2A20"
+point:           "#B8362A"
+point_ring:      "#FAF6EC"
+label:           "#20262C"
+label_halo:      "#F6EFDE"
+muted_label:     "#6B6A5E"
+line_country:    2.2
+line_state:      0.8
+line_route:      3.4
+point_radius:    21
+label_size:      68
+label_size_small: 52

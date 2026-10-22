@@ -1,0 +1,14 @@
+# POL-C3-LA-01 M2 — कारण 2, जूनागढ़. A small state on the Kathiawar coast.
+# Karachi is marked because the Nawab's accession to Pakistan is only intelligible
+# once you see the sea between them. Hyderabad persists: labels stay once shown.
+scene: { id: pol_c3_la01_m2_junagadh, duration: 11.0 }
+map:
+  base: India
+  layers: { states: false }
+  actions:
+    - { time: 0.0, type: show_map }
+    - { time: 0.0, type: point,  location: Hyderabad, label: "हैदराबाद" }
+    - { time: 1.0, type: point,  location: Junagadh,  label: "जूनागढ़" }
+    - { time: 1.6, type: fly_to, location: Junagadh, zoom: 5.4, duration: 2.6 }
+    - { time: 5.2, type: point,  location: Karachi,   label: "कराची" }
+    - { time: 8.2, type: fly_to, location: India, duration: 2.4 }

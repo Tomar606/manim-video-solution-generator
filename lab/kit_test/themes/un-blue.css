@@ -1,0 +1,75 @@
+/* un-blue — a briefing room at the United Nations: deep UN blue plate (the
+   UN headquarters, graded), white glass panels, UN-blue key with a gold
+   second key, bold condensed Noto Sans Devanagari. Clip-led: footage carries
+   most beats. Presenter in a rounded card, bottom right.
+   Plate: plates/generated/un-hq-blue.jpg. */
+#frame.theme-un-blue {
+  --ink: #0E1B2E;
+  --accent: #1C64B4;          /* UN blue: the key */
+  --accent-2: #E5A823;        /* gold: the second key, and every number */
+  --muted: #5E6B66;
+  --paper: #F7F4EC;
+  --card-bg: rgba(250, 248, 241, .92);
+  --solid: rgba(250, 248, 241, .95);
+  --card-border: rgba(14, 27, 46, .18);
+  --font-head: 'Noto Sans Devanagari', sans-serif;
+  --head-weight: 800;
+  --head-stretch: 87.5%;
+  --font-body: 'Noto Sans Devanagari', sans-serif;
+  --font-num: 'Khand', sans-serif;
+  --halo: 0 0 6px rgba(0, 0, 0, .7), 0 2px 3px rgba(0, 0, 0, .8);
+  --glass-shadow: 0 10px 26px rgba(0, 0, 0, .28);
+  color: var(--ink);
+}
+
+.theme-un-blue .card, .theme-un-blue .qcard, .theme-un-blue .k-card, .theme-un-blue .compare .k-card,
+.theme-un-blue .k-def, .theme-un-blue .yn .side, .theme-un-blue .imgcard, .theme-un-blue .panel {
+  background: var(--card-bg) !important; border: 1px solid var(--card-border) !important; border-radius: 10px !important;
+  box-shadow: var(--glass-shadow) !important; border-top: 6px solid var(--accent) !important; color: var(--ink);
+}
+.theme-un-blue .k-head { font-family: 'Noto Sans Devanagari'; font-weight: 800; font-stretch: 87.5%; }
+.theme-un-blue .hl-m { font-family: 'Noto Sans Devanagari'; font-weight: 800; font-stretch: 87.5%; color: #fff; text-shadow: var(--halo); text-wrap: balance; }
+
+.theme-un-blue .k-section-tag { background: var(--card-bg) !important; border: none !important; box-shadow: var(--glass-shadow) !important;
+  display: inline-flex; align-items: center; gap: 16px; padding: 6px 26px 6px 6px; border-radius: 40px; }
+.theme-un-blue .k-section-tag__num { width: 66px; height: 66px; border-radius: 50%; display: grid; place-items: center; padding: 0;
+  background: var(--accent); color: #fff; font-family: 'Khand'; font-weight: 700; font-size: 48px; line-height: 1; }
+.theme-un-blue .k-section-tag__text { font-family: 'Noto Sans Devanagari'; font-weight: 800; font-stretch: 87.5%; font-size: 54px; color: var(--ink); background: none; padding: 0; }
+
+.theme-un-blue .k-pill { border-radius: 40px !important; font-family: 'Noto Sans Devanagari'; font-weight: 700; font-size: 44px;
+  background: var(--card-bg) !important; color: var(--ink) !important; border: 1px solid var(--card-border) !important;
+  padding: 6px 28px 6px 20px; box-shadow: var(--glass-shadow); display: inline-flex; align-items: center; gap: 14px; }
+.theme-un-blue .k-pill::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); flex: none; }
+.theme-un-blue .k-pill--accent { background: var(--accent) !important; color: #fff !important; border-color: var(--accent) !important; }
+.theme-un-blue .k-pill--accent::before { background: #fff; }
+
+.theme-un-blue .k-stamp { font-family: 'Noto Sans Devanagari'; font-weight: 800; font-stretch: 87.5%; color: var(--accent-2); border-color: var(--accent-2);
+  outline-color: var(--accent-2); background: var(--solid) !important; -webkit-mask-image: none; mix-blend-mode: normal; border-radius: 14px; }
+
+.theme-un-blue .note { font-family: 'Noto Sans Devanagari'; font-weight: 700; font-size: 46px; color: #fff; text-shadow: var(--halo); }
+.theme-un-blue .note.on-photo { background: rgba(14, 27, 46, .72); padding: 8px 24px; border-radius: 10px; text-shadow: none; }
+
+.theme-un-blue #spine { left: 24px; right: 24px; top: 24px; height: 92px; background: var(--card-bg); border-radius: 46px;
+  padding: 0 30px; box-sizing: border-box; box-shadow: var(--glass-shadow); }
+.theme-un-blue #spine .ttl { font-family: 'Noto Sans Devanagari'; font-weight: 800; font-stretch: 87.5%; font-size: 44px; color: var(--ink); }
+.theme-un-blue #spine .k-dots i { width: 24px; height: 24px; border-radius: 50%; background: transparent; border: 4px solid var(--accent); margin: 0 5px; }
+.theme-un-blue #spine .k-dots i.on { background: var(--accent); }
+.theme-un-blue #spine .cnt { font-family: 'Khand'; font-weight: 700; color: var(--accent-2); }
+
+.theme-un-blue #cap { font-family: 'Noto Sans Devanagari'; font-weight: 700; font-size: 44px; color: var(--ink);
+  --torn-bg: rgba(250, 248, 241, .94); clip-path: none; border-radius: 14px; box-shadow: var(--glass-shadow); }
+.theme-un-blue #cap .hl { color: var(--accent); text-decoration: underline; text-decoration-color: var(--accent-2); text-decoration-thickness: 4px; text-underline-offset: 8px; }
+
+.theme-un-blue .hub-ring { border: 8px solid #fff; box-shadow: 0 0 0 5px var(--accent), var(--glass-shadow); }
+.theme-un-blue .hub-route { border: 3px dashed rgba(255, 255, 255, .8); }
+
+/* numbers in the data graphics are saffron, always */
+.theme-un-blue .num { font-family: 'Khand'; font-weight: 700; color: var(--accent-2); }
+
+.theme-un-blue #broll { background: #000; }
+.theme-un-blue #broll img { filter: saturate(1.02) !important; mix-blend-mode: normal !important; }
+.theme-un-blue #broll::after { background-image: none; background: linear-gradient(180deg, rgba(8,16,20,.35) 0%, transparent 18%, transparent 60%, rgba(8,16,20,.55) 100%); mix-blend-mode: normal; }
+.theme-un-blue #broll.dim img { filter: brightness(.55) saturate(.8) !important; }
+
+/* the presenter card: white rim, green key line, soft shadow */
+.theme-un-blue .p-card { border: 8px solid #fff; box-shadow: 0 0 0 4px var(--accent), var(--glass-shadow); }

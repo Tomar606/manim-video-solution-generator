@@ -1,0 +1,27 @@
+# The house map look: a well-made textbook map that can move.
+# Nothing here is hard-coded in the renderer — swap this file, change the look.
+name: warm
+background:      "#0E2A36"    # the video plate, so the map sits in the same world
+water:           "#DCEAF2"
+land:            "#FBF7F0"
+land_muted:      "#D5DEE4"
+border_country:  "#9AAAB4"
+border_state:    "#8FA0AB"
+coastline:       "#7E8F9A"
+river:           "#7FB3D5"
+lake:            "#9CC9E8"
+selected_region: "#E8A33D"
+selected_edge:   "#A6641A"
+route:           "#D9534F"
+route_head:      "#B02E2A"
+point:           "#D9534F"
+point_ring:      "#FFFFFF"
+label:           "#12303D"
+label_halo:      "#FFFFFF"
+muted_label:     "#5B6E79"
+line_country:    1.1
+line_state:      0.7
+line_route:      3.0
+point_radius:    7
+label_size:      34
+label_size_small: 26

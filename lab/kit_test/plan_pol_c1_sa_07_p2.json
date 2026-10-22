@@ -1,0 +1,463 @@
+{
+ "_about": "POL-C1-SA-07 part 2, poster look",
+ "project": "pol-c1-sa-07",
+ "part": 2,
+ "skin": "paper-editorial",
+ "theme": "poster",
+ "presenter_style": "card",
+ "plate": "sc-block",
+ "captions_at": "bottom",
+ "spine": {
+  "title": "सोवियत संघ का विघटन: 4 कारण",
+  "items": [
+   "आर्थिक गतिहीनता",
+   "प्रशासकीय ठहराव",
+   "गोर्बाचेव के सुधार",
+   "राष्ट्रवाद का उभार"
+  ],
+  "pre_lit": 2,
+  "lit_at": [
+   5,
+   16
+  ],
+  "show_from": 0
+ },
+ "beats": [
+  {
+   "id": "so-far",
+   "in": 0,
+   "out": 4,
+   "presenter": "standard",
+   "plate": "sc-block",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "Part 1 तक का उत्तर",
+     "points": [
+      "आर्थिक गतिहीनता: हथियारों और सेना पर भारी खर्च, ज़रूरी सामान की कमी",
+      "राजनीतिक-प्रशासकीय ठहराव: पार्टी का शासन सत्तावादी, भ्रष्ट, गैर-जवाबदेह; जनता में असंतोष",
+      "गोर्बाचेव के सुधार: पेरेस्त्रोइका (पुनर्संरचना) और ग्लासनोस्त (खुलापन)",
+      "राष्ट्रवाद का उभार: बाल्टिक गणराज्य (एस्टोनिया, लातविया, लिथुआनिया), यूक्रेन, जॉर्जिया"
+     ],
+     "show": 2,
+     "animate_from": 2,
+     "at": 0,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "c3",
+   "in": 4,
+   "out": 6,
+   "presenter": "standard",
+   "plate": "sc-gate",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "कारण 3",
+     "text": "गोर्बाचेव के सुधार",
+     "at": [
+      5,
+      0.4
+     ],
+     "hl": [
+      "सुधार"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gorbachev",
+   "in": 6,
+   "out": 8,
+   "presenter": "standard",
+   "plate": "sc-gate",
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "head",
+     "text": "दो प्रमुख नीतियाँ",
+     "style": "accent",
+     "at": 7
+    },
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "political-science/soviet-collapse/gorbachev-1.jpg",
+     "w": 460,
+     "label": "मिखाइल गोर्बाचेव (1987)",
+     "at": 6
+    }
+   ]
+  },
+  {
+   "id": "perestroika",
+   "in": 8,
+   "out": 10,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s09",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "def",
+     "slot": "over-broll-top",
+     "term": "पेरेस्त्रोइका",
+     "text": "पुनर्संरचना: व्यवस्था में बदलाव",
+     "at": 8
+    }
+   ]
+  },
+  {
+   "id": "glasnost",
+   "in": 10,
+   "out": 12,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s10",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "def",
+     "slot": "over-broll-top",
+     "term": "ग्लासनोस्त",
+     "text": "खुलापन: खुलकर बोलने की आज़ादी",
+     "at": 10
+    }
+   ]
+  },
+  {
+   "id": "pressure",
+   "in": 12,
+   "out": 14,
+   "presenter": "standard",
+   "plate": "sc-gate",
+   "elements": [
+    {
+     "type": "note",
+     "slot": "head",
+     "text": "पर पुरानी व्यवस्था पर दबाव बढ़ा",
+     "at": 12,
+     "fx": "rise"
+    },
+    {
+     "type": "stamp",
+     "slot": "upper",
+     "text": "संभालना मुश्किल",
+     "at": 13
+    }
+   ]
+  },
+  {
+   "id": "remember",
+   "in": 14,
+   "out": 15,
+   "presenter": "standard",
+   "plate": "sc-gate",
+   "elements": [
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "पेरेस्त्रोइका = व्यवस्था में बदलाव",
+       [
+        14,
+        1.2
+       ]
+      ],
+      [
+       "ग्लासनोस्त = खुलापन",
+       [
+        14,
+        2.6
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans3",
+   "in": 15,
+   "out": 16,
+   "presenter": "standard",
+   "plate": "sc-gate",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर बन रहा है…",
+     "points": [
+      "आर्थिक गतिहीनता: हथियारों और सेना पर भारी खर्च, ज़रूरी सामान की कमी",
+      "राजनीतिक-प्रशासकीय ठहराव: पार्टी का शासन सत्तावादी, भ्रष्ट, गैर-जवाबदेह; जनता में असंतोष",
+      "गोर्बाचेव के सुधार: पेरेस्त्रोइका (पुनर्संरचना) और ग्लासनोस्त (खुलापन)",
+      "राष्ट्रवाद का उभार: बाल्टिक गणराज्य (एस्टोनिया, लातविया, लिथुआनिया), यूक्रेन, जॉर्जिया"
+     ],
+     "show": 3,
+     "animate_from": 2,
+     "at": 15,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "c4",
+   "in": 16,
+   "out": 17,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s12",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "कारण 4",
+     "text": "राष्ट्रवाद का उभार",
+     "at": [
+      16,
+      0.6
+     ],
+     "hl": [
+      "राष्ट्रवाद"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "regions",
+   "in": 17,
+   "out": 18,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s11",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "style": "accent",
+     "items": [
+      [
+       "रूस",
+       [
+        17,
+        0.3
+       ]
+      ],
+      [
+       "बाल्टिक गणराज्य",
+       [
+        17,
+        1.2
+       ]
+      ],
+      [
+       "यूक्रेन",
+       [
+        17,
+        2.6
+       ]
+      ],
+      [
+       "जॉर्जिया",
+       [
+        17,
+        3.4
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "अलग पहचान, स्वतंत्रता की माँग",
+     "at": [
+      17,
+      4.5
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "sovereignty",
+   "in": 18,
+   "out": 20,
+   "presenter": "standard",
+   "plate": "sc-baltic",
+   "elements": [
+    {
+     "type": "def",
+     "slot": "head",
+     "term": "संप्रभुता",
+     "text": "अपने देश के फैसले खुद लेना",
+     "at": 18
+    },
+    {
+     "type": "stamp",
+     "slot": "upper",
+     "text": "विघटन में अहम भूमिका",
+     "at": 19
+    }
+   ]
+  },
+  {
+   "id": "baltic",
+   "in": 20,
+   "out": 21,
+   "presenter": "standard",
+   "plate": "sc-baltic",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "3 बाल्टिक गणराज्य",
+     "text": "एस्टोनिया · लातविया · लिथुआनिया",
+     "at": [
+      20,
+      2.0
+     ],
+     "hl": [
+      "लातविया"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans4",
+   "in": 21,
+   "out": 22,
+   "presenter": "standard",
+   "plate": "sc-berlinwall",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर: विघटन के चार कारण",
+     "points": [
+      "आर्थिक गतिहीनता: हथियारों और सेना पर भारी खर्च, ज़रूरी सामान की कमी",
+      "राजनीतिक-प्रशासकीय ठहराव: पार्टी का शासन सत्तावादी, भ्रष्ट, गैर-जवाबदेह; जनता में असंतोष",
+      "गोर्बाचेव के सुधार: पेरेस्त्रोइका (पुनर्संरचना) और ग्लासनोस्त (खुलापन)",
+      "राष्ट्रवाद का उभार: बाल्टिक गणराज्य (एस्टोनिया, लातविया, लिथुआनिया), यूक्रेन, जॉर्जिया"
+     ],
+     "show": 4,
+     "animate_from": 3,
+     "at": 21,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "revise",
+   "in": 22,
+   "out": 29,
+   "presenter": "hub",
+   "hub": {
+    "cy": 980,
+    "r": 200,
+    "backdrop": "veo:s12@3"
+   },
+   "plate": "sc-gate",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "चारों कारण, जल्दी से",
+     "size": "m",
+     "at": 22
+    },
+    {
+     "type": "quad",
+     "slot": "full",
+     "icons": [
+      "tabler:coin-off",
+      "tabler:building-bank",
+      "tabler:refresh",
+      "tabler:flag"
+     ],
+     "items": [
+      [
+       "आर्थिक गतिहीनता",
+       "हथियारों पर खर्च, सामान की कमी",
+       22
+      ],
+      [
+       "प्रशासकीय ठहराव",
+       "सत्तावादी, भ्रष्ट, गैर-जवाबदेह",
+       24
+      ],
+      [
+       "गोर्बाचेव के सुधार",
+       "पेरेस्त्रोइका + ग्लासनोस्त",
+       26
+      ],
+      [
+       "राष्ट्रवाद का उभार",
+       "अलग होने की माँग",
+       27
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "marks",
+   "in": 29,
+   "out": 31,
+   "presenter": "standard",
+   "plate": "sc-block",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "चारों कारण सही लिखे तो",
+     "text": "3 नंबर पक्के",
+     "at": [
+      30,
+      0.0
+     ],
+     "hl": [
+      "पक्के"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "in": 31,
+   "out": "end",
+   "presenter": "standard",
+   "broll": {
+    "clip": "s13",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "head",
+     "text": "exam का format: Notes button",
+     "style": "accent",
+     "at": 31,
+     "fx": "drop"
+    },
+    {
+     "type": "note",
+     "slot": "over-broll-low",
+     "text": "90% की तैयारी पक्की",
+     "at": 33,
+     "fx": "blur"
+    }
+   ]
+  }
+ ]
+}

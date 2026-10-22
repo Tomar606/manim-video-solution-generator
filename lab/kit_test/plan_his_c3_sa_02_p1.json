@@ -1,0 +1,585 @@
+{
+ "_about": "HIS-C3-SA-02 (प्राचीन काल में संपत्ति और महिलाओं की स्थिति): taala look, two parts.",
+ "project": "his-c3-sa-02",
+ "part": 1,
+ "captions_at": "bottom",
+ "skin": "paper-editorial",
+ "theme": "taala",
+ "presenter_style": "card",
+ "plate": "ta-wood",
+ "spine": {
+  "title": "संपत्ति और महिलाएँ",
+  "items": [
+   "पैतृक संपत्ति नहीं",
+   "सिर्फ स्त्रीधन",
+   "संचय पर रोक",
+   "अपवाद: प्रभावती गुप्त"
+  ],
+  "lit_at": [
+   20,
+   29
+  ],
+  "show_from": 11
+ },
+ "tracker": {
+  "from": 11
+ },
+ "beats": [
+  {
+   "id": "queen",
+   "in": 0,
+   "out": 3,
+   "presenter": "standard",
+   "broll": {
+    "clip": "q1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "करीब 1500 साल पहले…",
+     "at": [
+      1,
+      0.3
+     ],
+     "fx": "blur"
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "रानी: अपनी ज़मीन, खुद दान",
+     "style": "accent",
+     "at": [
+      2,
+      0.6
+     ]
+    }
+   ]
+  },
+  {
+   "id": "woman",
+   "in": 3,
+   "out": 6,
+   "presenter": "standard",
+   "broll": {
+    "clip": "q2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "आम महिला: थोड़ा-सा पैसा भी नहीं बचा सकती",
+     "at": [
+      5,
+      0.2
+     ]
+    }
+   ]
+  },
+  {
+   "id": "why",
+   "in": 6,
+   "out": 7,
+   "presenter": "standard",
+   "plate": "ta-ajanta",
+   "elements": [
+    {
+     "type": "ask",
+     "slot": "upper",
+     "text": "एक ही समय में, इतना बड़ा फर्क क्यों?",
+     "at": [
+      6,
+      0.3
+     ]
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": 7,
+   "out": 11,
+   "presenter": "standard",
+   "plate": "ta-wood",
+   "elements": [
+    {
+     "type": "qhero",
+     "slot": "upper",
+     "ribbon": "Board Exam PYQ",
+     "at": 7,
+     "years": [
+      [
+       "2023",
+       [
+        7,
+        1.0
+       ]
+      ]
+     ],
+     "question": "प्राचीन काल में संपत्ति के स्वामित्व के संदर्भ में महिलाओं की स्थिति की व्याख्या कीजिए।",
+     "hl": [
+      "संपत्ति",
+      "महिलाओं"
+     ],
+     "t_card": [
+      9,
+      0.0
+     ],
+     "marks": "3 अंक",
+     "t_marks": [
+      8,
+      0.3
+     ]
+    }
+   ]
+  },
+  {
+   "id": "source",
+   "in": 11,
+   "out": 15,
+   "presenter": "standard",
+   "plate": "ta-kraft",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "पहली लाइन: आधार",
+     "size": "m",
+     "at": 11,
+     "fx": "drop"
+    },
+    {
+     "type": "paper",
+     "slot": "upper",
+     "text": "इसका आधार: मनुस्मृति",
+     "texture": "crumpled",
+     "at": [
+      12,
+      0.3
+     ]
+    },
+    {
+     "type": "lottie",
+     "src": "circle-sketch",
+     "x": 560,
+     "y": 470,
+     "w": 360,
+     "colour": "#A3261B",
+     "at": [
+      12,
+      1.2
+     ]
+    }
+   ]
+  },
+  {
+   "id": "four",
+   "in": 15,
+   "out": 19,
+   "presenter": "standard",
+   "plate": "ta-wood",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "चार points",
+     "size": "m",
+     "at": 15,
+     "fx": "drop"
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "पाबंदी",
+       [
+        17,
+        0.2
+       ]
+      ],
+      [
+       "पाबंदी",
+       [
+        17,
+        0.6
+       ]
+      ],
+      [
+       "पाबंदी",
+       [
+        17,
+        1.0
+       ]
+      ],
+      [
+       "एक अपवाद",
+       [
+        17,
+        1.6
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p1",
+   "in": 19,
+   "out": 21,
+   "presenter": "standard",
+   "plate": "ta-ajanta",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "पहला point",
+     "text": "पैतृक संपत्ति नहीं",
+     "at": [
+      20,
+      0.2
+     ],
+     "hl": [
+      "नहीं"
+     ],
+     "fx": "rise",
+     "sub": "माता-पिता की संपत्ति"
+    }
+   ]
+  },
+  {
+   "id": "sons",
+   "in": 21,
+   "out": 24,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "मनुस्मृति: सिर्फ पुत्रों का अधिकार",
+     "at": [
+      22,
+      0.3
+     ]
+    },
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "घर",
+       [
+        23,
+        0.6
+       ]
+      ],
+      [
+       "ज़मीन",
+       [
+        23,
+        1.8
+       ]
+      ],
+      [
+       "खेत",
+       [
+        23,
+        2.7
+       ]
+      ],
+      [
+       "सब बेटों को",
+       [
+        23,
+        3.1
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "write-source",
+   "in": 24,
+   "out": 27,
+   "presenter": "standard",
+   "plate": "ta-kraft",
+   "elements": [
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "बेटियों को हक़ नहीं था",
+     "yes": "मनुस्मृति के अनुसार बेटियों को हक़ नहीं था",
+     "at": [
+      24,
+      0.3
+     ],
+     "t_yes": [
+      26,
+      0.2
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans1",
+   "in": 27,
+   "out": 28,
+   "presenter": "standard",
+   "plate": "ta-wood",
+   "tracker": false,
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर बन रहा है…",
+     "points": [
+      "प्राचीन भारत (<b>मनुस्मृति</b>) में महिलाओं के संपत्ति अधिकारों की स्थिति इन चार बिंदुओं से समझी जा सकती है:",
+      "<b>पैतृक संपत्ति नहीं:</b> माता-पिता की संपत्ति पर केवल पुत्रों का अधिकार, बेटियों का नहीं।",
+      "<b>केवल स्त्रीधन पर हक़:</b> विवाह के समय मिले उपहारों पर महिला का अधिकार; उस पर पति का दावा नहीं।",
+      "<b>गुप्त संचय पर रोक:</b> पति की आज्ञा के बिना धन छिपाकर रखने की सख्त मनाही।",
+      "<b>ऐतिहासिक अपवाद:</b> वाकाटक रानी प्रभावती गुप्त ज़मीन की मालकिन थीं और उन्होंने भूमि दान किया।"
+     ],
+     "nums": [
+      "",
+      "1.",
+      "2.",
+      "3.",
+      "4."
+     ],
+     "show": 2,
+     "animate_from": 1,
+     "at": 27,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "ask2",
+   "in": 28,
+   "out": 29,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "ask",
+     "slot": "upper",
+     "text": "तो महिला के पास, अपना क्या था?",
+     "at": [
+      28,
+      0.3
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2",
+   "in": 29,
+   "out": 30,
+   "presenter": "standard",
+   "plate": "ta-ajanta",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "दूसरा point",
+     "text": "केवल स्त्रीधन पर हक़",
+     "at": [
+      29,
+      1.4
+     ],
+     "hl": [
+      "स्त्रीधन"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "gifts",
+   "in": 30,
+   "out": 32,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "स्त्रीधन = विवाह के समय मिले उपहार",
+     "style": "accent",
+     "at": [
+      30,
+      0.8
+     ]
+    }
+   ]
+  },
+  {
+   "id": "hers",
+   "in": 32,
+   "out": 34,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s2",
+    "region": "full",
+    "offset": 3
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "पति का कोई दावा नहीं",
+     "at": [
+      33,
+      0.3
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "keyword",
+   "in": 34,
+   "out": 38,
+   "presenter": "standard",
+   "plate": "ta-kraft",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "सबसे ज़रूरी keyword",
+     "size": "m",
+     "at": 34,
+     "fx": "drop",
+     "sfx": [
+      [
+       0.05,
+       "hud-blip/back-blip"
+      ]
+     ]
+    },
+    {
+     "type": "paper",
+     "slot": "upper",
+     "text": "स्त्रीधन: पति का दावा नहीं",
+     "texture": "crumpled",
+     "at": [
+      35,
+      0.3
+     ]
+    },
+    {
+     "type": "lottie",
+     "src": "tick-spark",
+     "x": 820,
+     "y": 600,
+     "w": 460,
+     "at": [
+      37,
+      0.2
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans2",
+   "in": 38,
+   "out": 40,
+   "presenter": "standard",
+   "plate": "ta-wood",
+   "tracker": false,
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर बन रहा है…",
+     "points": [
+      "प्राचीन भारत (<b>मनुस्मृति</b>) में महिलाओं के संपत्ति अधिकारों की स्थिति इन चार बिंदुओं से समझी जा सकती है:",
+      "<b>पैतृक संपत्ति नहीं:</b> माता-पिता की संपत्ति पर केवल पुत्रों का अधिकार, बेटियों का नहीं।",
+      "<b>केवल स्त्रीधन पर हक़:</b> विवाह के समय मिले उपहारों पर महिला का अधिकार; उस पर पति का दावा नहीं।",
+      "<b>गुप्त संचय पर रोक:</b> पति की आज्ञा के बिना धन छिपाकर रखने की सख्त मनाही।",
+      "<b>ऐतिहासिक अपवाद:</b> वाकाटक रानी प्रभावती गुप्त ज़मीन की मालकिन थीं और उन्होंने भूमि दान किया।"
+     ],
+     "nums": [
+      "",
+      "1.",
+      "2.",
+      "3.",
+      "4."
+     ],
+     "show": 3,
+     "animate_from": 2,
+     "at": 38,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "more",
+   "in": 40,
+   "out": 43,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "एक और पाबंदी",
+       [
+        40,
+        0.4
+       ]
+      ],
+      [
+       "और वो रानी",
+       [
+        41,
+        0.6
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "next",
+   "in": 43,
+   "out": "end",
+   "presenter": "full",
+   "broll": {
+    "clip": "q1",
+    "region": "full",
+    "offset": 4,
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "बाकी 2 points: Part 2",
+     "at": [
+      43,
+      0.6
+     ],
+     "fx": "zoom"
+    }
+   ]
+  }
+ ]
+}
