@@ -1,0 +1,26 @@
+[
+ {
+  "png": "tools/edu/renderer/out/chips/bio4/p3-punnett.png",
+  "start": 28.9,
+  "end": 41.6,
+  "top": 380
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio4/p3-ratio.png",
+  "start": 54.57,
+  "end": 65.5,
+  "top": 380
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio4/p3-enzyme.png",
+  "start": 67.75,
+  "end": 91.9,
+  "top": 380
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio4/p3-oneline.png",
+  "start": 93.69,
+  "end": 102.85,
+  "top": 380
+ }
+]

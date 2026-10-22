@@ -1,0 +1,34 @@
+[
+ {
+  "type": "formula",
+  "at": 11,
+  "label": "फैराडे का प्रथम नियम",
+  "tex": [
+   "W \\propto Q",
+   "Q = i \\times t",
+   "W \\propto i \\times t",
+   "W = Z\\,i\\,t"
+  ],
+  "build": "progressive",
+  "reveal_at": [
+   16,
+   20,
+   24,
+   25
+  ]
+ },
+ {
+  "type": "chain",
+  "at": 28,
+  "direction": "right",
+  "title": "पहला नियम — मतलब",
+  "items": [
+   "विद्युत् अधिक",
+   "मुक्त पदार्थ अधिक"
+  ],
+  "reveal_at": [
+   28,
+   29
+  ]
+ }
+]

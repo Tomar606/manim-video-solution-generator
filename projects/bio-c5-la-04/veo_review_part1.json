@@ -1,0 +1,246 @@
+[
+  {
+    "verdict": "fail",
+    "summary": "The clip shows a static-looking, uniformly wound DNA double helix with a permanently tangled/compressed patch near its right end — there is no Y-shaped junction anywhere, and no legible twist-then-relax change occurs between the first and last frame.",
+    "failed_checks": [
+      "2. There is exactly one Y-shaped junction: on one side two separate single strands run apart, on the other side the two strands remain wound together as an unbroken double helix.",
+      "4. Partway through the clip, the wound helix beyond the junction has visibly tighter, more closely spaced turns and its axis crosses over itself in coiled loops.",
+      "5. In the final frame the helix beyond the junction is straight along its axis, with evenly spaced turns and no crossed loops, matching its appearance in the first frame.",
+      "6. Neither strand is ever cut, nicked or broken, and no gap appears in either backbone at any moment.",
+      "E. Whatever change the clip depicts has finished by the last frame."
+    ],
+    "defects": [
+      {
+        "severity": "fail",
+        "issue": "No Y-shaped replication junction is present at any point — the molecule is a continuous wound double helix from one capped end to the other, with no region where two separate single strands run apart, so the commissioned 'just ahead of that junction' anatomy is absent."
+      },
+      {
+        "severity": "fail",
+        "issue": "The tighter, crossed-over supercoiled region is already present in frame 1 and is still present, essentially unchanged, in the final frame, so the clip never shows a helix tightening under strain and never shows it slackening back to a straight, evenly spaced state."
+      },
+      {
+        "severity": "fail",
+        "issue": "The final frame does not satisfy the relaxed end-state requirement: the segment at roughly the right quarter of the molecule still has closely bunched turns whose axis crosses over itself, instead of straight, evenly spaced turns."
+      },
+      {
+        "severity": "fail",
+        "issue": "In the bunched right-hand region the two backbones overlap and interleave so densely that backbone continuity cannot be confirmed in any frame — the no-cut/no-gap check is unverifiable from these frames."
+      },
+      {
+        "severity": "warn",
+        "issue": "The subject appears very slightly larger and sharper in the middle frames (roughly frames 3-8) than in the first and last, suggesting a small scale or focus drift rather than a locked camera."
+      },
+      {
+        "severity": "warn",
+        "issue": "Motion across the ten seconds is barely perceptible, so the beat reads as a near-frozen still rather than a demonstrated mechanism."
+      }
+    ],
+    "last_good_frame": 0,
+    "tail_problem": "Frame 1 is already wrong — the junction is missing and the crossed, over-tight coil region is present from the outset — and nothing in the remaining frames corrects it.",
+    "loopable": false,
+    "frames": [
+      "projects/bio-c5-la-04/veo/review/part1_at045_try1_clean_f0.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try1_clean_f1.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try1_clean_f2.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try1_clean_f3.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try1_clean_f4.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try1_clean_f5.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try1_clean_f6.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try1_clean_f7.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try1_clean_f8.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try1_clean_f9.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try1_clean_f10.png"
+    ],
+    "stamps": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      9.95
+    ],
+    "good_until": 0.0,
+    "attempt": 1,
+    "clip": "veo/part1_at045_try1_clean.mp4",
+    "at": 45,
+    "prompt": "Silent clip. Begin exactly on the supplied picture and keep everything it shows — the same two ribbon strands in their own two colours, the same rungs joining them, the same materials, the same soft key light, the same dark out-of-focus ground — unchanged from the first frame to the last. The subject is one double helix laid across the picture, complete, both ends inside the frame, centred with even background all round. Its two strands are parted at a single Y-shaped junction near the middle: two separate single strands run away to one side, and the wound double helix continues unbroken to the other side. Only that still-wound length beyond the junction moves. Over about three seconds its turns crowd towards the junction — the gap between successive turns shortens, the turns steepen, and the axis of that length bends slowly out of straightness into two or three tight loops that cross over themselves, the helix coiling upon its own length while every rung stays joined and each strand keeps its own colour. It rests for a moment at its most tightly wound. Then, over about three seconds, those crossed loops open out one at a time, the axis straightens, and the turns space themselves evenly again until that length looks exactly as it did in the first frame. The junction and the two parted strands hold their positions throughout. The last two seconds hold the relaxed helix completely still.",
+    "negative": "on-screen text, letters, numerals, words in any script, subtitles, captions, labels, legends, axis numbers, equations, chemical formulae, units, lettering on the background, a generated letterform, a border, a frame, a vignette, a split panel, a title card, an end card, sparkles, glints, lens flares, floating particles, dust motes, light rays, interface elements, arrows, pointers, callouts, measurement marks, a floor, a wall, a tabletop, a horizon, a room, an expanse of liquid, the subject bringing its own environment, anything in the background coming into focus or becoming recognisable, a sharp edge behind the subject, extra artwork on the background, additional molecules, additional strands, additional helices, additional diagrams, a strand breaking, a strand being cut, a gap or nick appearing in either strand, the rungs detaching, the helix unwinding completely, the two parted strands rejoining, a part changing colour during the clip, the two strands ending up the same colour as each other, a strand losing its own colour or dulling, the subject growing, expanding, drifting or scaling up, the subject touching or running off any edge of the picture, the subject spanning the full height of the frame, a visible line, band or seam across the frame, camera push in, pull back, pan, drift or rack focus, a change still in progress at the last frame, the motion reversing or looping, any voiceover, narration, spoken words, human voice, music, sound effects, auto-generated captions"
+  },
+  {
+    "verdict": "fail",
+    "summary": "The clip has no replication fork at all in frame 1 or in frames 5-11, briefly grows one in frames 2-4, then collapses back into a continuous unforked helix, so the commissioned supercoiling-beyond-a-junction action is never shown.",
+    "failed_checks": [
+      "2. There is exactly one Y-shaped junction: on one side two separate single strands run apart, on the other side the two strands remain wound together as an unbroken double helix.",
+      "3. Only the wound length beyond the junction moves; the junction itself and the two parted single strands hold their positions throughout.",
+      "4. Partway through the clip, the wound helix beyond the junction has visibly tighter, more closely spaced turns and its axis crosses over itself in coiled loops.",
+      "5. In the final frame the helix beyond the junction is straight along its axis, with evenly spaced turns and no crossed loops, matching its appearance in the first frame.",
+      "6. Neither strand is ever cut, nicked or broken, and no gap appears in either backbone at any moment.",
+      "7. In the first frame the helix beyond the junction is straight along its axis with evenly spaced turns and no crossed loops anywhere — it does not begin already coiled.",
+      "8. The fork is unmistakable in every frame: visible background separates the two parted single strands, and at no point is the molecule a continuous unforked helix from end to end.",
+      "9. At its tightest the crossed loops number about two and stay open enough that each of the two backbones can be followed separately through every crossing, with no region where they merge into an untraceable mass.",
+      "10. The tightened, crossed-over state exists only in the middle of the clip — it is absent at the start and absent at the end.",
+      "C. The subject is complete and centred inside the picture, with clear background margin on all four sides."
+    ],
+    "defects": [
+      {
+        "severity": "fail",
+        "issue": "Frame 1 and frames 5-11 show a single continuous unforked double helix from end to end with no Y-shaped junction anywhere, so the required replication fork is absent for most of the clip."
+      },
+      {
+        "severity": "fail",
+        "issue": "The fork appears out of nowhere between frame 1 and frame 2 and then unzips shut again by frame 5, showing the strands re-annealing — a process running backwards relative to the commissioned action."
+      },
+      {
+        "severity": "fail",
+        "issue": "The junction and the two parted single strands do not hold position: they slide, shorten and finally vanish instead of staying fixed while only the wound length beyond them moves."
+      },
+      {
+        "severity": "fail",
+        "issue": "No clean supercoil ever forms; frame 4 instead shows a jumbled central region where the two backbones merge into an untraceable mass with base pairs floating loose and gaps visible in the backbones."
+      },
+      {
+        "severity": "fail",
+        "issue": "The tightened, tangled state is not confined to the middle: the molecule ends in a state structurally different from the commissioned one (no fork at all), so the depicted change is not the one asked for and does not resolve correctly."
+      },
+      {
+        "severity": "fail",
+        "issue": "In frames 2-3 the two parted single strands run to the extreme left of the picture and terminate in flat cut-off ends with almost no background margin, so the subject is not comfortably complete and centred."
+      },
+      {
+        "severity": "warn",
+        "issue": "A permanently over-wound, tightly spaced patch sits in the right third of the helix in every frame including the first, so the tighter-turn region is a static feature of the model rather than an animated change."
+      },
+      {
+        "severity": "warn",
+        "issue": "In the forked frames both parted single strands are rendered the same grey-blue colour, losing the two-colour strand distinction the wound section uses."
+      }
+    ],
+    "last_good_frame": 0,
+    "tail_problem": "Even frame 1 fails the required fork; the clip then grows a fork (frames 2-3), tangles into an untraceable knotted mass with broken backbones (frame 4), and re-anneals into a continuous unforked helix that holds unchanged to the end.",
+    "loopable": false,
+    "frames": [
+      "projects/bio-c5-la-04/veo/review/part1_at045_try2_clean_f0.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try2_clean_f1.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try2_clean_f2.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try2_clean_f3.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try2_clean_f4.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try2_clean_f5.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try2_clean_f6.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try2_clean_f7.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try2_clean_f8.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try2_clean_f9.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try2_clean_f10.png"
+    ],
+    "stamps": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      9.95
+    ],
+    "good_until": 0.0,
+    "attempt": 2,
+    "clip": "veo/part1_at045_try2_clean.mp4",
+    "at": 45,
+    "prompt": "Silent clip. Begin exactly on the supplied picture and keep everything it shows — the same two ribbon strands in their own two colours, the same rungs, the same ground — unchanged from first frame to last. The subject is one double helix laid across the picture, complete, both ends inside the frame, centred with even background all round.\n\nIn the very first frame the whole helix is straight along its axis with evenly spaced turns and no crossed loops: nothing is bunched or coiled over itself at the start.\n\nThe strands are parted at a single Y-shaped junction near the middle. On one side of the junction the two strands separate and run away as two free single strands with visible background between them; on the other side they stay wound together as an unbroken double helix. This fork is present and obvious in every frame; the molecule is never a continuous unforked helix from end to end.\n\nOnly the still-wound length beyond the junction moves. Over about three seconds its turns crowd towards the junction — successive turns come closer and steepen — and its axis bends out of straightness into exactly two open loops that cross over themselves. The loops stay wide and loose enough that each backbone can be followed separately through every crossing; the turns never bunch into a solid mass. Every rung stays joined, each strand keeps its own colour, and no gap appears in either backbone.\n\nIt rests a moment at its tightest. Then over about three seconds the loops open out, the axis straightens and the turns space evenly again, so the last frame matches the first: straight axis, even turns, no crossed loops. The junction and the two parted strands hold their positions throughout. The final two seconds hold completely still.",
+    "negative": "on-screen text, letters, numerals, words in any script, subtitles, captions, labels, legends, axis numbers, equations, chemical formulae, units, lettering on the background, a generated letterform, a border, a frame, a vignette, a split panel, a title card, an end card, sparkles, glints, lens flares, floating particles, dust motes, light rays, interface elements, arrows, pointers, callouts, measurement marks, a floor, a wall, a tabletop, a horizon, a room, an expanse of liquid, the subject bringing its own environment, anything in the background coming into focus or becoming recognisable, a sharp edge behind the subject, extra artwork on the background, additional molecules, additional strands, additional helices, additional diagrams, a continuous unforked double helix running from one end to the other, a molecule with no Y-shaped fork in it, the junction missing or hidden, the two parted strands lying against each other so no gap shows between them, the parted strands rewinding into a helix, crossed loops present in the first frame, bunched or closely spaced turns present in the first frame, the helix starting out already supercoiled, crossed loops still present in the last frame, bunched turns remaining anywhere in the last frame, the tightened state unchanged from start to finish, loops so tight the two backbones cannot be told apart, backbones overlapping into a solid mass, a region where a backbone cannot be traced through a crossing, more than two crossed loops, a strand breaking, a strand being cut, a gap or nick appearing in either strand, the rungs detaching, the helix unwinding completely, the two parted strands rejoining, a part changing colour during the clip, the two strands ending up the same colour as each other, a strand losing its own colour or dulling, the subject growing, expanding, drifting or scaling up, the subject touching or running off any edge of the picture, the subject spanning the full height of the frame, a visible line, band or seam across the frame, camera push in, pull back, pan, drift or rack focus, a change still in progress at the last frame, the motion reversing or looping, any voiceover, narration, spoken words, human voice, music, sound effects, auto-generated captions"
+  },
+  {
+    "verdict": "fail",
+    "summary": "The clip shows a continuous, unforked double helix that barely changes across the whole ten seconds — there is no replication fork, no tightening-then-relaxing supercoil, and small white floating particles accumulate in the background between the first and last frames.",
+    "failed_checks": [
+      "2. There is exactly one Y-shaped junction: on one side two separate single strands run apart, on the other side the two strands remain wound together as an unbroken double helix.",
+      "3. Only the wound length beyond the junction moves; the junction itself and the two parted single strands hold their positions throughout.",
+      "4. Partway through the clip, the wound helix beyond the junction has visibly tighter, more closely spaced turns and its axis crosses over itself in coiled loops.",
+      "5. In the final frame the helix beyond the junction is straight along its axis, with evenly spaced turns and no crossed loops, matching its appearance in the first frame.",
+      "7. In the first frame the helix beyond the junction is straight along its axis with evenly spaced turns and no crossed loops anywhere — it does not begin already coiled.",
+      "8. The fork is unmistakable in every frame: visible background separates the two parted single strands, and at no point is the molecule a continuous unforked helix from end to end.",
+      "9. At its tightest the crossed loops number about two and stay open enough that each of the two backbones can be followed separately through every crossing, with no region where they merge into an untraceable mass.",
+      "10. The tightened, crossed-over state exists only in the middle of the clip — it is absent at the start and absent at the end.",
+      "11. The Y-shaped junction is already present in the very first frame and is still present in the very last frame; it never appears partway through the clip and never disappears before the end.",
+      "12. The two parted single strands never zip back together, re-anneal or rewind into a helix at any moment.",
+      "13. The junction stays at one fixed point in the picture and the two parted strands keep the same length and shape throughout — they do not slide, shorten, lengthen or vanish.",
+      "15. The last frame shows the same forked structure as the first frame — fork present, wound length straight, evenly spaced turns — so the depicted change resolves back to its starting state.",
+      "16. The two parted single strands stay clear of every edge: visible background separates their ends from the edge of the picture, and no strand end is cut off flat by the frame.",
+      "A2 (no decoration)",
+      "B (background unchanged from first frame to last)",
+      "E (the depicted change has finished by the last frame)"
+    ],
+    "defects": [
+      {
+        "severity": "fail",
+        "issue": "The molecule is one continuous unforked double helix running edge to edge in every frame — there is no Y-shaped replication junction and no pair of parted single strands anywhere in the clip."
+      },
+      {
+        "severity": "fail",
+        "issue": "The commissioned change is absent: the helix never visibly tightens into crossed supercoil loops and never relaxes back, so the clip depicts no process at all and the frames are effectively identical throughout."
+      },
+      {
+        "severity": "fail",
+        "issue": "The helix already contains a compressed, closely-spaced region of turns (right of centre) in the very first frame, so it begins in the coiled state instead of straight and evenly wound."
+      },
+      {
+        "severity": "fail",
+        "issue": "Small bright white floating specks/particles progressively populate the background — nearly absent in the first frame and scattered across the whole plate by the middle and final frames — which is both added decoration and a background that changes from first frame to last."
+      },
+      {
+        "severity": "fail",
+        "issue": "In the compressed right-of-centre region the orange and blue backbones crowd together into an overlapping cluster where the individual strands cannot be followed separately through the crossings."
+      },
+      {
+        "severity": "warn",
+        "issue": "The helix ends sit very close to the left and right picture edges, leaving only a narrow background margin on those two sides."
+      },
+      {
+        "severity": "warn",
+        "issue": "Overall brightness and background contrast drift slightly between the opening frame and the later frames, so the plate does not stay identical."
+      }
+    ],
+    "last_good_frame": 0,
+    "tail_problem": "Even the first frame is wrong — no fork exists and the helix is already partly compressed — and from roughly frame 5 onward white floating particles additionally build up in the background.",
+    "loopable": false,
+    "frames": [
+      "projects/bio-c5-la-04/veo/review/part1_at045_try3_clean_f0.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try3_clean_f1.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try3_clean_f2.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try3_clean_f3.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try3_clean_f4.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try3_clean_f5.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try3_clean_f6.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try3_clean_f7.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try3_clean_f8.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try3_clean_f9.png",
+      "projects/bio-c5-la-04/veo/review/part1_at045_try3_clean_f10.png"
+    ],
+    "stamps": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      9.95
+    ],
+    "good_until": 0.0,
+    "attempt": 3,
+    "clip": "veo/part1_at045_try3_clean.mp4",
+    "at": 45,
+    "prompt": "Silent clip. Begin exactly on the supplied picture and keep everything it shows — the same two ribbon strands in their own two colours, the same rungs, the same ground — unchanged from first frame to last. The subject is one forked molecule, complete, both ends inside the frame, centred with a clear background margin on all four sides. The two parted strand ends stay well inside that margin and never reach or touch an edge.\n\nThe fork is built into the subject before any motion begins and is never made, unmade or moved: in the very first frame, in every middle frame and in the last frame there is one Y-shaped junction, with two free single strands running apart on one side with visible background between them, and an unbroken double helix on the other. The junction sits at one fixed point in the picture; the two parted strands keep the same length, the same shape and the same positions for the whole clip. They never close, never rewind, never shorten and never leave the frame.\n\nIn the first frame the wound length beyond the junction is straight along its axis with evenly spaced turns and no crossed loops.\n\nOnly that wound length moves. Over about three seconds its turns crowd towards the junction and its axis bends into exactly two open loops that cross over themselves. Every crossing stays wide open, so both backbones can be followed separately through it; nothing merges into a mass, no rung detaches or floats free, and no gap, cut or nick appears in either backbone.\n\nIt rests a moment. Then over about three seconds the loops open out, the axis straightens and the turns space evenly again, so the last frame matches the first. The final two seconds hold completely still.",
+    "negative": "on-screen text, letters, numerals, words in any script, subtitles, captions, labels, legends, axis numbers, equations, chemical formulae, units, lettering on the background, a generated letterform, a border, a frame, a vignette, a split panel, a title card, an end card, sparkles, glints, lens flares, floating particles, dust motes, light rays, interface elements, arrows, pointers, callouts, measurement marks, a floor, a wall, a tabletop, a horizon, a room, an expanse of liquid, the subject bringing its own environment, anything in the background coming into focus or becoming recognisable, a sharp edge behind the subject, extra artwork on the background, additional molecules, additional strands, additional helices, additional diagrams, a continuous unforked double helix running from one end to the other, a molecule with no Y-shaped fork in it, the junction missing or hidden, the Y-shaped junction appearing partway through the clip, the fork forming during the clip, the fork closing up, the junction fading out or disappearing before the last frame, a fork present in some frames and absent in others, the two parted strands lying against each other so no gap shows between them, the parted strands rewinding into a helix, the two parted strands zipping back together, the strands re-annealing, the junction sliding along the molecule, the junction shifting position, the parted strands shortening, the parted strands lengthening, the parted strands moving or waving, the parted strands running off the left edge, a strand end cut off flat by the edge of the picture, the subject pushed to one side with no margin on that side, crossed loops present in the first frame, bunched or closely spaced turns present in the first frame, the helix starting out already supercoiled, crossed loops still present in the last frame, bunched turns remaining anywhere in the last frame, the tightened state unchanged from start to finish, a last frame that does not match the first, the molecule ending in a different structure from the one it started in, loops so tight the two backbones cannot be told apart, backbones overlapping into a solid mass, a jumbled or tangled central region, a region where a backbone cannot be traced through a crossing, base pairs floating loose, rungs separated from a backbone, more than two crossed loops, a strand breaking, a strand being cut, a gap or nick appearing in either strand, the rungs detaching, the helix unwinding completely, the two parted strands rejoining, a part changing colour during the clip, the two strands ending up the same colour as each other, a strand losing its own colour or dulling, the subject growing, expanding, drifting or scaling up, the subject touching or running off any edge of the picture, the subject spanning the full height of the frame, a visible line, band or seam across the frame, camera push in, pull back, pan, drift or rack focus, a change still in progress at the last frame, the motion reversing or looping, any voiceover, narration, spoken words, human voice, music, sound effects, auto-generated captions"
+  }
+]

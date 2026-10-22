@@ -1,0 +1,44 @@
+[
+ {
+  "slug": "p2-primer",
+  "route": "chip",
+  "mark": "RNA primer gives the free 3' OH end",
+  "marked": {
+   "reproduce": true
+  }
+ },
+ {
+  "slug": "p2-polymerase",
+  "route": "chip",
+  "mark": "polymerase cannot start alone",
+  "marked": {
+   "order": true
+  }
+ },
+ {
+  "slug": "p2-direction",
+  "route": "manim",
+  "mark": "nucleotides added only 5' to 3'",
+  "marked": {
+   "direction": true
+  }
+ },
+ {
+  "slug": "p2-leading",
+  "route": "manim",
+  "mark": "3'-5' template, synthesis continuous, leading strand",
+  "marked": {
+   "direction": true
+  }
+ },
+ {
+  "slug": "p2-primer-anim",
+  "route": "veo",
+  "mark": "a short RNA piece settles onto the open template and the strand starts to grow from it",
+  "marked": {},
+  "labels": [
+   "प्राइमर"
+  ],
+  "overlay": "manim"
+ }
+]

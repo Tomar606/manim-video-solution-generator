@@ -1,0 +1,51 @@
+[
+ {
+  "type": "gauss",
+  "at": 2,
+  "arrows": true,
+  "patch": true,
+  "vectors": true
+ },
+ {
+  "type": "formula",
+  "at": 6,
+  "build": "progressive",
+  "label": "एक अवयव से फ्लक्स",
+  "reveal_at": [
+   6,
+   11,
+   15,
+   16
+  ],
+  "tex": [
+   "d\\phi_E = E\\,dS\\,\\cos\\theta",
+   "\\theta = 0^{\\circ},\\qquad \\cos 0^{\\circ} = 1",
+   "d\\phi_E = E\\,dS",
+   "d\\phi_E = \\dfrac{1}{4\\pi\\varepsilon_0}\\,\\dfrac{q}{r^{2}}\\,dS"
+  ]
+ },
+ {
+  "type": "gauss",
+  "at": 20,
+  "arrows": true,
+  "tile": true
+ },
+ {
+  "type": "formula",
+  "at": 26,
+  "build": "progressive",
+  "label": "पूरे पृष्ठ पर योग",
+  "reveal_at": [
+   27,
+   33
+  ],
+  "tex": [
+   "\\oint d\\phi_E = \\oint \\dfrac{1}{4\\pi\\varepsilon_0}\\,\\dfrac{q}{r^{2}}\\,dS",
+   "\\phi_E = \\dfrac{1}{4\\pi\\varepsilon_0}\\,\\dfrac{q}{r^{2}}\\oint dS"
+  ]
+ },
+ {
+  "type": "clear",
+  "at": 35
+ }
+]

@@ -1,0 +1,23 @@
+[
+ {
+  "at": 20,
+  "start": 29.71,
+  "end": 44.47,
+  "src": "veo/part1_at020.mp4",
+  "raw": "projects/bio-c2-sa-04/veo/clips/newborn.mp4",
+  "full": false,
+  "frame": "partial",
+  "layout": "panel",
+  "green": false,
+  "backdrop": "own",
+  "panel_ar": 1.7777777777777777,
+  "panel_top": 160,
+  "mark": [
+   1132,
+   572,
+   56,
+   56
+  ],
+  "labels": []
+ }
+]

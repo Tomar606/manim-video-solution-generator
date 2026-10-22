@@ -1,0 +1,48 @@
+[
+  {
+    "at": 12,
+    "start": 39.54,
+    "end": 47.8,
+    "src": "veo/part2_at012.mp4",
+    "raw": "veo/part2_at012_raw.mp4",
+    "full": false,
+    "frame": "presenter",
+    "layout": "panel",
+    "green": false,
+    "backdrop": "own",
+    "panel_ar": 1.7777777777777777,
+    "panel_top": 300,
+    "labels": [
+      {
+        "png": "veo/labels/part2_at012_label00.png",
+        "x": 134,
+        "y": 785,
+        "w": 142,
+        "h": 70,
+        "start": 39.54,
+        "end": 47.8,
+        "text": "प्राइमर"
+      }
+    ],
+    "fit": {
+      "src": "projects/bio-c5-la-04/veo/part2_at012_raw.mp4",
+      "dest": "projects/bio-c5-la-04/veo/part2_at012.mp4",
+      "had": 8.4,
+      "usable": 8.4,
+      "need": 6.86,
+      "strategy": "one_way",
+      "trimmed": 0.0,
+      "filters": "trim=0:6.860,setpts=PTS-STARTPTS,fps=30,fps=30,tpad=stop_mode=clone:stop_duration=0.5"
+    },
+    "verdict": "fail",
+    "attempts": 1,
+    "sequence": null,
+    "continues_from": null,
+    "continuity": null,
+    "reference": null,
+    "usable": true,
+    "by_hand": true,
+    "accepted_by_hand": "Drawn in Manim; stored checks predate the switch. Label re-placed clear of the template bar.",
+    "overrode_verdict": "fail"
+  }
+]

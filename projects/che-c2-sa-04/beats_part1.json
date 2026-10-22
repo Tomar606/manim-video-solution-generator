@@ -1,0 +1,145 @@
+[
+ {
+  "at": 5,
+  "type": "points",
+  "intent": "DEFINITION",
+  "title": "तुल्यांकी चालकता",
+  "reason": "परिभाषा तीन शर्तों की है और शिक्षक उन्हें क्रम से बोलता है; सूची भरती जाए ताकि पूरा वाक्य बनता दिखे।",
+  "items": [
+   "एक ग्राम तुल्यांक विद्युत्-अपघट्य",
+   "V ml विलयन में घुला",
+   "सभी आयनों की कुल चालकता"
+  ],
+  "reveal": "progressive",
+  "reveal_at": [
+   6,
+   7,
+   8
+  ]
+ },
+ {
+  "at": 11,
+  "type": "video",
+  "seconds": 8,
+  "motion": "one_way",
+  "presenter": "partial",
+  "label": "चालकता सेल",
+  "background": "own",
+  "layout": "panel",
+  "panel_ar": 1.7777777777777777,
+  "panel_top": 300,
+  "brief": "conductivity cell: two parallel plate electrodes in a beaker of clear solution, a measuring cylinder of the same solution poured in",
+  "labels": [
+   {
+    "text": "इलेक्ट्रोड",
+    "x": 0.3,
+    "y": 0.132,
+    "align": "c",
+    "at": 11
+   },
+   {
+    "text": "V ml विलयन",
+    "x": 0.5,
+    "y": 0.443,
+    "align": "c",
+    "at": 13
+   }
+  ],
+  "reason": "परिभाषा जिस चित्र की है वही दिखता है: दो समांतर इलेक्ट्रोड वाला चालकता सेल और मापा हुआ आयतन. तनुकरण वाला पुराना क्लिप अलग बात कहता था."
+ },
+ {
+  "at": 17,
+  "type": "formula",
+  "intent": "FORMULA",
+  "label": "तुल्यांकी चालकता का सूत्र",
+  "reason": "शिक्षक सूत्र बोलकर देता है और आगे की पूरी व्युत्पत्ति इसी पर टिकी है।",
+  "tex": [
+   "\\Lambda_{eq} = \\kappa \\times V"
+  ],
+  "terms": [
+   [
+    "\\Lambda_{eq}",
+    "तुल्यांकी चालकता"
+   ],
+   [
+    "\\kappa",
+    "विशिष्ट चालकता"
+   ],
+   [
+    "V",
+    "विलयन का आयतन"
+   ]
+  ]
+ },
+ {
+  "at": 24,
+  "type": "formula",
+  "intent": "DERIVATION",
+  "label": "एक ग्राम तुल्यांक का आयतन",
+  "reason": "V का मान यहीं निकलता है; यही अगला कदम है।",
+  "tex": [
+   "V = \\frac{1000}{C_{eq}}\\ \\mathrm{cm}^3"
+  ],
+  "terms": [
+   [
+    "V",
+    "आयतन"
+   ],
+   [
+    "C_{eq}",
+    "ग्राम तुल्यांक"
+   ]
+  ]
+ },
+ {
+  "at": 30,
+  "type": "formula",
+  "intent": "DERIVATION",
+  "label": "मान रखने पर",
+  "reason": "V की जगह मान रखकर अंतिम सूत्र बनता है — यही परीक्षा में लिखा जाता है।",
+  "tex": [
+   "\\Lambda_{eq} = \\frac{\\kappa \\times 1000}{C_{eq}}"
+  ],
+  "terms": [
+   [
+    "\\Lambda_{eq}",
+    "तुल्यांकी चालकता"
+   ],
+   [
+    "\\kappa",
+    "विशिष्ट चालकता"
+   ],
+   [
+    "C_{eq}",
+    "ग्राम तुल्यांक"
+   ]
+  ]
+ },
+ {
+  "at": 32,
+  "type": "formula",
+  "intent": "TERMS",
+  "label": "नॉर्मलता",
+  "reason": "शिक्षक बताता है कि C तुल्यांक को N भी कहते हैं; दोनों रूप साथ दिखें तो परीक्षा में भ्रम नहीं होगा।",
+  "tex": [
+   "C_{eq} = N",
+   "\\Lambda_{eq} = \\frac{\\kappa \\times 1000}{N}"
+  ]
+ },
+ {
+  "at": 38,
+  "type": "formula",
+  "intent": "UNIT",
+  "label": "मात्रक",
+  "reason": "प्रश्न का अंतिम हिस्सा इकाई है और शिक्षक दोनों रूप बोलता है।",
+  "tex": [
+   "\\Omega^{-1}\\,\\mathrm{cm}^2\\,\\mathrm{eq}^{-1}",
+   "\\mathrm{S\\ m}^2\\,\\mathrm{eq}^{-1}\\ (\\mathrm{SI})"
+  ]
+ },
+ {
+  "at": 43,
+  "type": "clear",
+  "reason": "समापन — Notes और लक्ष्य की बात; मंच खाली हो और कैप्शन चलें।"
+ }
+]

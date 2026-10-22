@@ -1,0 +1,26 @@
+[
+ {
+  "png": "tools/edu/renderer/out/chips/bio4/p2-ab.png",
+  "start": 37.79,
+  "end": 52.63,
+  "top": 380
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio4/p2-defn.png",
+  "start": 66.84,
+  "end": 96.37,
+  "top": 380
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio4/p2-cross.png",
+  "start": 111.55,
+  "end": 128.91,
+  "top": 380
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio4/p2-compare.png",
+  "start": 128.91,
+  "end": 142.32,
+  "top": 380
+ }
+]

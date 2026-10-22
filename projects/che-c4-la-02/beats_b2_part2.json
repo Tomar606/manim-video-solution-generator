@@ -1,0 +1,79 @@
+[
+ {
+  "type": "table",
+  "at": 5,
+  "cols": [
+   "माध्यम",
+   "अपचयन उत्पाद"
+  ],
+  "rows": [
+   [
+    "अम्लीय",
+    "$Mn^{2+}$"
+   ],
+   [
+    "क्षारीय",
+    "$MnO_4^{2-}$"
+   ]
+  ],
+  "reveal_at": [
+   5,
+   6
+  ]
+ },
+ {
+  "type": "formula",
+  "at": 12,
+  "label": "क्षारीय माध्यम",
+  "tex": [
+   "2KMnO_4 + 2KOH \\longrightarrow 2K_2MnO_4 + H_2O + [O]",
+   "Mn:\\; +7 \\longrightarrow +6"
+  ],
+  "build": "progressive",
+  "reveal_at": [
+   12,
+   14
+  ]
+ },
+ {
+  "type": "formula",
+  "at": 18,
+  "label": "उदाहरण — KI का ऑक्सीकरण",
+  "tex": [
+   "2KMnO_4 + H_2O + KI \\longrightarrow KIO_3 + 2MnO_2 + 2KOH"
+  ]
+ },
+ {
+  "type": "formula",
+  "at": 28,
+  "label": "उदासीन माध्यम",
+  "tex": [
+   "2KMnO_4 + H_2O \\longrightarrow 2MnO_2 + 2KOH + 3[O]"
+  ]
+ },
+ {
+  "type": "formula",
+  "at": 32,
+  "label": "उदाहरण — H₂S का ऑक्सीकरण",
+  "tex": [
+   "H_2S + [O] \\longrightarrow H_2O + S"
+  ]
+ },
+ {
+  "type": "table",
+  "at": 35,
+  "cols": [
+   "अम्लीय",
+   "क्षारीय",
+   "उदासीन"
+  ],
+  "rows": [
+   [
+    "$Mn^{2+}$",
+    "$MnO_4^{2-}$",
+    "$MnO_2$"
+   ]
+  ],
+  "size": 32
+ }
+]

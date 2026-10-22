@@ -1,0 +1,54 @@
+[
+ {
+  "layout": "panel",
+  "panel_ar": 1.7777777777777777,
+  "panel_top": 300,
+  "at": 40,
+  "motion": "one_way",
+  "brief": "a long DNA double helix unwinds: the two strands peel apart from one point and the opening travels along the molecule, leaving a Y-shaped junction where the wound part meets the two separated strands",
+  "labels": [
+   {
+    "text": "हेलिकेज",
+    "at": 40,
+    "x": 0.3,
+    "y": 0.29,
+    "hold": 1.2
+   },
+   {
+    "text": "प्रतिकृति द्विशाख",
+    "at": 44,
+    "x": 0.68,
+    "y": 0.43,
+    "hold": 2.0
+   }
+  ],
+  "type": "video",
+  "background": "own",
+  "style": "realistic",
+  "look": "One DNA double helix seen from the side, lying horizontally across the picture. Exactly two backbones and no more: one warm amber ribbon and one cool slate-blue ribbon, the same thickness, both smooth and rounded, winding around one shared horizontal axis in a right-handed spiral of about eight even turns. Between them, evenly spaced flat rungs, one per step of the spiral; each rung is two short plain cylindrical halves that meet at the axis, the amber half joined to the amber backbone and the blue half to the blue one. Both ends of the molecule are finished and visible. The helix is whole and closed along its entire length, with no gap, no break and nothing detached.",
+  "reference": "p1_at040"
+ },
+ {
+  "layout": "panel",
+  "panel_ar": 1.7777777777777777,
+  "panel_top": 300,
+  "at": 45,
+  "seconds": 9.61,
+  "motion": "one_way",
+  "brief": "a wound DNA double helix twists tighter and tighter under strain until a couple of its turns cross over themselves into coiled loops, then the loops open out and the helix settles back to evenly spaced turns along a straight axis",
+  "labels": [
+   {
+    "text": "टोपोआइसोमरेज",
+    "at": 47,
+    "x": 0.5,
+    "y": 0.42,
+    "hold": 1.6
+   }
+  ],
+  "type": "video",
+  "background": "own",
+  "style": "realistic",
+  "look": "One closed DNA double helix seen from the side, lying horizontally across the picture. Exactly two smooth rounded backbones, one warm amber and one cool slate blue, wound around a shared horizontal axis, joined all along by evenly spaced flat rungs of two halves meeting at the axis. The turns are evenly spaced along a straight axis, none bunched and none crossing over itself. Both ends are inside the picture. Nothing is broken and nothing floats free.",
+  "reference": "p1_at045"
+ }
+]

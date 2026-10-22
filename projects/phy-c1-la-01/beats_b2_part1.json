@@ -1,0 +1,49 @@
+[
+ {
+  "type": "law",
+  "at": 8,
+  "figure": "gauss",
+  "figure_scale": 0.6,
+  "tex": "\\phi_E = \\dfrac{q}{\\varepsilon_0}",
+  "rows": [
+   {
+    "sym": "\\phi_E",
+    "text": "बंद पृष्ठ से कुल वैद्युत फ्लक्स",
+    "at": 12
+   },
+   {
+    "sym": "q",
+    "text": "पृष्ठ के अंदर परिबद्ध कुल आवेश",
+    "at": 13
+   },
+   {
+    "sym": "\\varepsilon_0",
+    "text": "निर्वात की विद्युतशीलता",
+    "at": 14
+   }
+  ]
+ },
+ {
+  "type": "gauss",
+  "at": 19
+ },
+ {
+  "type": "formula",
+  "at": 22,
+  "tex": [
+   "E = \\dfrac{1}{4\\pi\\varepsilon_0}\\,\\dfrac{q}{r^{2}}"
+  ],
+  "eqno": 1
+ },
+ {
+  "type": "gauss",
+  "at": 27,
+  "arrows": 27,
+  "patch": 29,
+  "vectors": 33
+ },
+ {
+  "type": "clear",
+  "at": 39
+ }
+]

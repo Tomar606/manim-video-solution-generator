@@ -1,0 +1,54 @@
+[
+  {
+    "at": 11,
+    "start": 29.74,
+    "end": 37.74,
+    "src": "veo/part1_at011.mp4",
+    "raw": "veo/part1_at011_clean.mp4",
+    "full": false,
+    "frame": "partial",
+    "layout": "panel",
+    "green": false,
+    "backdrop": "own",
+    "panel_ar": 1.7777777777777777,
+    "panel_top": 300,
+    "mark": [
+      1132,
+      572,
+      56,
+      56
+    ],
+    "labels": [
+      {
+        "png": "veo/labels/part1_at011_label00.png",
+        "x": 420,
+        "y": 215,
+        "w": 240,
+        "h": 77,
+        "start": 29.74,
+        "end": 37.74,
+        "text": "चालकता सेल"
+      },
+      {
+        "png": "veo/labels/part1_at011_label01.png",
+        "x": 103,
+        "y": 454,
+        "w": 162,
+        "h": 82,
+        "start": 29.74,
+        "end": 37.74,
+        "text": "इलेक्ट्रोड"
+      },
+      {
+        "png": "veo/labels/part1_at011_label02.png",
+        "x": 348,
+        "y": 806,
+        "w": 385,
+        "h": 90,
+        "start": 29.74,
+        "end": 37.74,
+        "text": "विद्युत्-अपघट्य विलयन"
+      }
+    ]
+  }
+]

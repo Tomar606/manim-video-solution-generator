@@ -1,0 +1,102 @@
+[
+  {
+    "at": 40,
+    "start": 115.03,
+    "end": 131.29,
+    "src": "veo/part1_at040.mp4",
+    "raw": "veo/part1_at040_clean.mp4",
+    "full": false,
+    "frame": "presenter",
+    "layout": "panel",
+    "green": false,
+    "backdrop": "own",
+    "panel_ar": 1.7777777777777777,
+    "panel_top": 300,
+    "labels": [
+      {
+        "png": "veo/labels/part1_at040_label00.png",
+        "x": 243,
+        "y": 518,
+        "w": 162,
+        "h": 77,
+        "start": 115.03,
+        "end": 131.29,
+        "text": "हेलिकेज"
+      },
+      {
+        "png": "veo/labels/part1_at040_label01.png",
+        "x": 595,
+        "y": 779,
+        "w": 279,
+        "h": 94,
+        "start": 127.07,
+        "end": 131.29,
+        "text": "प्रतिकृति द्विशाख"
+      }
+    ],
+    "fit": {
+      "src": "/Users/indian/projects/manim-video-solution-generator/projects/bio-c5-la-04/veo/part1_at040_clean.mp4",
+      "dest": "/Users/indian/projects/manim-video-solution-generator/projects/bio-c5-la-04/veo/part1_at040.mp4",
+      "had": 10.0,
+      "usable": 9.95,
+      "need": 13.06,
+      "strategy": "one_way",
+      "trimmed": 0.05,
+      "filters": "trim=0:9.950,setpts=PTS-STARTPTS,setpts=1.31256*PTS,minterpolate=fps=30:mi_mode=blend,fps=30,tpad=stop_mode=clone:stop_duration=0.5"
+    },
+    "verdict": "warn",
+    "attempts": 1,
+    "sequence": null,
+    "continues_from": null,
+    "continuity": null,
+    "reference": null,
+    "usable": true,
+    "by_hand": true
+  },
+  {
+    "at": 45,
+    "start": 131.29,
+    "end": 140.9,
+    "src": "veo/part1_at045.mp4",
+    "raw": "veo/part1_at045_clean.mp4",
+    "full": false,
+    "frame": "presenter",
+    "layout": "panel",
+    "green": false,
+    "backdrop": "own",
+    "panel_ar": 1.7777777777777777,
+    "panel_top": 300,
+    "labels": [
+      {
+        "png": "veo/labels/part1_at045_label00.png",
+        "x": 397,
+        "y": 766,
+        "w": 286,
+        "h": 81,
+        "start": 136.09,
+        "end": 140.9,
+        "text": "टोपोआइसोमरेज"
+      }
+    ],
+    "fit": {
+      "src": "projects/bio-c5-la-04/veo/part1_at045_clean.mp4",
+      "dest": "projects/bio-c5-la-04/veo/part1_at045.mp4",
+      "had": 10.0,
+      "usable": 4.7,
+      "need": 8.01,
+      "strategy": "one_way",
+      "trimmed": 5.3,
+      "filters": "trim=0:4.700,setpts=PTS-STARTPTS,setpts=1.70426*PTS,minterpolate=fps=30:mi_mode=blend,fps=30,tpad=stop_mode=clone:stop_duration=0.5"
+    },
+    "verdict": "fail",
+    "attempts": 1,
+    "sequence": null,
+    "continues_from": null,
+    "continuity": null,
+    "reference": null,
+    "usable": true,
+    "by_hand": true,
+    "accepted_by_hand": "Only the first 4.7s is used. Measured crowding in the strained zone runs 6.68 at 0.3s down to 5.66 at 4.5s and back up to 6.22 by 9.5s - the clip relieves the supercoiling and then lets it return, ending strained, which teaches the process backwards. The kept half is crowded-then-relaxed, which is exactly what the line describes: topoisomerase removing the supercoiling that forms ahead of the fork. The grader's fail was chiefly the missing Y-shaped fork, which the brief was later revised to forbid.",
+    "overrode_verdict": "fail"
+  }
+]

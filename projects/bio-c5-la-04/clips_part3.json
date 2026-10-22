@@ -1,0 +1,46 @@
+[
+  {
+    "at": 19,
+    "start": 51.99,
+    "end": 63.28,
+    "src": "veo/part3_at019.mp4",
+    "raw": "veo/part3_at019_raw.mp4",
+    "full": false,
+    "frame": "presenter",
+    "layout": "panel",
+    "green": false,
+    "backdrop": "own",
+    "panel_ar": 1.7777777777777777,
+    "panel_top": 300,
+    "labels": [
+      {
+        "png": "veo/labels/part3_at019_label00.png",
+        "x": 397,
+        "y": 804,
+        "w": 286,
+        "h": 81,
+        "start": 51.99,
+        "end": 63.28,
+        "text": "डी एन ए लाइगेज"
+      }
+    ],
+    "fit": {
+      "src": "projects/bio-c5-la-04/veo/part3_at019_raw.mp4",
+      "dest": "projects/bio-c5-la-04/veo/part3_at019.mp4",
+      "had": 10.0,
+      "usable": 9.0,
+      "need": 9.79,
+      "strategy": "one_way",
+      "trimmed": 1.0,
+      "filters": "trim=0:9.000,setpts=PTS-STARTPTS,setpts=1.08778*PTS,minterpolate=fps=30:mi_mode=blend,fps=30,tpad=stop_mode=clone:stop_duration=0.5"
+    },
+    "verdict": "warn",
+    "attempts": 1,
+    "sequence": null,
+    "continues_from": null,
+    "continuity": null,
+    "reference": null,
+    "usable": true,
+    "by_hand": true
+  }
+]

@@ -1,0 +1,24 @@
+{
+ "subject": "Physics",
+ "years": "2019",
+ "question": "विद्युत् फ्लक्स क्या है ? विद्युत् फ्लक्स कितने प्रकार का होता है ? सिद्ध कीजिए कि विद्युत् क्षेत्र के समांतर पृष्ठ से गुजरने वाले विद्युत् फ्लक्स का मान शून्य होता है।",
+ "chapter": "वैद्युत आवेश तथा क्षेत्र",
+ "sheet_id": "PHY-C1-SA-01",
+ "category": "Short Answer",
+ "highlight": "विद्युत् फ्लक्स",
+ "hilite": [
+  "विद्युत् फ्लक्स",
+  "धनात्मक",
+  "ऋणात्मक",
+  "अभिलम्ब",
+  "समान्तर",
+  "शून्य",
+  "क्षेत्र रेखाओं"
+ ],
+ "years_conflict": "sheet and textbook scan say 2022; the recorded narration says 2019",
+ "card_lines": {
+  "1": 3
+ },
+ "close": "Notes button in the narration; the answer page is appended after it",
+ "marks": 3
+}

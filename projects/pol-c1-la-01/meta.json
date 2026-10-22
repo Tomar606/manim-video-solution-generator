@@ -1,0 +1,35 @@
+{
+ "subject": "Political Science",
+ "years": "2025",
+ "marks": 4,
+ "question": "नेपाल में लोकतंत्र कैसे स्थापित हुआ? विस्तारपूर्वक समझाइए।",
+ "chapter": "लोकतंत्र की स्थापना और विस्तार",
+ "sheet_id": "POL-C1-LA-01",
+ "category": "Long Answer",
+ "highlight": "लोकतंत्र",
+ "hilite": [
+  "लोकतंत्र",
+  "लोकतांत्रिक",
+  "गणराज्य",
+  "संविधान",
+  "संविधान-सभा",
+  "संसद",
+  "आंदोलन",
+  "राजतंत्र",
+  "माओवादी",
+  "अहिंसक",
+  "ज्ञानेन्द्र",
+  "नेपाल"
+ ],
+ "route": "veo",
+ "look": "reference",
+ "close": "Notes — answer page pending",
+ "_note": [
+  "The marks come from the narration, not from a sheet: s20 says 'इस सवाल के",
+  "पूरे चार नंबर पक्के', and the year from s01, 'दो हज़ार पच्चीस में पूछा गया'.",
+  "Card year follows the narration (memory: card-year-follows-the-narration).",
+  "",
+  "This is the all-Veo route: there is no Manim scene and no lines_part*.json.",
+  "The reel is assembled by tools/veo_reel.py from reel.json."
+ ]
+}

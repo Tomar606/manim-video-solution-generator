@@ -1,0 +1,27 @@
+[
+ {
+  "layout": "panel",
+  "panel_ar": 1.7777777777777777,
+  "panel_top": 300,
+  "at": 12,
+  "seconds": 8.26,
+  "motion": "one_way",
+  "brief": "a new strand extends from the far end of the RNA primer along the template, closing one rung at a time to the template as it goes, and stops short leaving bare template ahead of it",
+  "labels": [
+   {
+    "text": "प्राइमर",
+    "at": 12,
+    "x": 0.19,
+    "y": 0.427,
+    "hold": 1.4
+   }
+  ],
+  "type": "video",
+  "background": "own",
+  "style": "realistic",
+  "look": "DNA drawn flat and side-on: a continuous blue template backbone along the bottom; above its left-hand part a short green primer, joined to the template by a row of evenly spaced two-colour rungs; the rest of the template bare. The new strand is rose pink and continues the green primer end to end along the same line — never beside it, never below it, never joined to it by a rung.",
+  "reference": "p2_at012",
+  "route": "manim",
+  "source": "projects/_scratch/bio/ligase.py::Primer"
+ }
+]

@@ -1,0 +1,132 @@
+[
+ {
+  "at": 16,
+  "type": "statement",
+  "intent": "MECHANISM",
+  "title": "ऊर्जा का प्रवाह",
+  "lines": [
+   "सूर्य से हरे पौधों तक",
+   "प्रकाश संश्लेषण से रासायनिक ऊर्जा में संचित",
+   "पौधों से शाकाहारी, शाकाहारी से मांसाहारी तक"
+  ],
+  "reveal_at": [
+   20,
+   23,
+   30
+  ],
+  "reason": "पोषण स्तर समझने से पहले ऊर्जा का रास्ता चाहिए; तीनों कड़ियाँ इसी क्रम में बोली जाती हैं."
+ },
+ {
+  "at": 23,
+  "type": "video",
+  "clip": "sunlight_leaves",
+  "intent": "RELATE",
+  "seconds": 8,
+  "motion": "one_way",
+  "presenter": "partial",
+  "background": "own",
+  "layout": "panel",
+  "panel_ar": 1.7777777777777777,
+  "panel_top": 300,
+  "brief": "sunlight through backlit green leaves, beams shifting in a breeze",
+  "labels": [
+   {
+    "text": "प्रकाश ऊर्जा",
+    "x": 0.5,
+    "y": 0.290,
+    "align": "c",
+    "at": 23
+   },
+   {
+    "text": "हरे पौधे",
+    "x": 0.5,
+    "y": 0.443,
+    "align": "c",
+    "at": 25
+   }
+  ],
+  "reason": "प्रकाश संश्लेषण की शुरुआत असली पत्तियों पर पड़ती धूप है, जिसे बच्चा रोज़ देखता है; आरेख यह नहीं दिखा सकता."
+ },
+ {
+  "at": 35,
+  "type": "statement",
+  "intent": "DEFINITION",
+  "title": "पोषण स्तर",
+  "lines": [
+   "खाद्य शृंखला में ऊर्जा स्थानांतरण का",
+   "प्रत्येक पद एक पोषण स्तर कहलाता है"
+  ],
+  "reveal_at": [
+   36,
+   40
+  ],
+  "reason": "यही उत्तर की पहली पंक्ति है; परीक्षा में इसी वाक्य में लिखी जाती है."
+ },
+ {
+  "at": 46,
+  "type": "pyramid",
+  "intent": "EVIDENCE",
+  "title": "चार पोषण स्तर",
+  "subtitle": "खाद्य शृंखला का उदाहरण",
+  "tiers": [
+   {
+    "label": "उत्पादक",
+    "energy": 1000,
+    "note": "प्रथम",
+    "tone": "green",
+    "icon": "assets/icons/producer.png"
+   },
+   {
+    "label": "शाकाहारी",
+    "energy": 100,
+    "note": "द्वितीय",
+    "tone": "teal",
+    "icon": "assets/icons/herbivore.png"
+   },
+   {
+    "label": "मांसाहारी",
+    "energy": 10,
+    "note": "तृतीय",
+    "tone": "white",
+    "icon": "assets/icons/carnivore.png"
+   },
+   {
+    "label": "उच्च मांसाहारी",
+    "energy": 1,
+    "note": "चतुर्थ",
+    "tone": "gold",
+    "icon": "assets/icons/apex.png"
+   }
+  ],
+  "reveal_at": [
+   48,
+   54,
+   60,
+   66
+  ],
+  "reason": "चारों स्तर उसी क्रम में भरते हैं जिस क्रम में बोले जाते हैं, और हर स्तर के साथ उसका असली उदाहरण खड़ा रहता है."
+ },
+ {
+  "at": 74,
+  "type": "facts",
+  "intent": "RULE",
+  "keep": true,
+  "items": [
+   {
+    "lead": "सामान्यतः",
+    "text": "एक खाद्य शृंखला में 3 से 5 पोषण स्तर",
+    "tone": "gold"
+   }
+  ],
+  "reveal_at": [
+   76
+  ],
+  "reason": "यह वह अतिरिक्त तथ्य है जो उत्तर को पूरा करता है; पिरामिड के नीचे टँगा रहता है."
+ },
+ {
+  "at": 81,
+  "type": "notes",
+  "intent": "CLOSE",
+  "reason": "'Notes button पर मिल जाएगा' पर ही पिल आती है."
+ }
+]

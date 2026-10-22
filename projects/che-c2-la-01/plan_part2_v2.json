@@ -1,0 +1,38 @@
+[
+ {
+  "png": "tools/edu/renderer/out/chips/far/law2.png",
+  "start": 13.85,
+  "end": 35.84,
+  "top": 227
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/far/b1.png",
+  "start": 35.84,
+  "end": 41.1,
+  "top": 235
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/far/twocell.png",
+  "start": 41.1,
+  "end": 48.91,
+  "top": 253
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/far/b2.png",
+  "start": 48.91,
+  "end": 58.37,
+  "top": 228
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/far/b3.png",
+  "start": 58.37,
+  "end": 67.29,
+  "top": 230
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/far/compare.png",
+  "start": 67.29,
+  "end": 84.11,
+  "top": 226
+ }
+]

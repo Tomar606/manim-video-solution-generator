@@ -1,0 +1,58 @@
+[
+ {
+  "png": "tools/edu/renderer/out/chips/vit01/src-A.png",
+  "start": 31.04,
+  "end": 41.71
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/vit01/v-B1.png",
+  "start": 44.18,
+  "end": 49.48
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/vit01/v-B2.png",
+  "start": 49.48,
+  "end": 56.12
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/vit01/v-B6.png",
+  "start": 66.16,
+  "end": 75.02
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/vit01/v-B12.png",
+  "start": 75.02,
+  "end": 84.14
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/vit01/v-C.png",
+  "start": 91.82,
+  "end": 98.12
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/vit01/src-D.png",
+  "start": 98.12,
+  "end": 104.04
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/vit01/v-E.png",
+  "start": 104.04,
+  "end": 112.54
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/vit01/v-K.png",
+  "start": 112.54,
+  "end": 118.46
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/vit01/src-K.png",
+  "start": 118.46,
+  "end": 121.76
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/vit01/tbl-all.png",
+  "start": 121.76,
+  "end": 126.38,
+  "top": 300
+ }
+]

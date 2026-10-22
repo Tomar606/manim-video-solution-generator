@@ -1,0 +1,327 @@
+{
+ "_comment": [
+  "POL-C2-LA-01. Scenes marked `green` are the chroma studio takes and are keyed",
+  "onto assets/background.png; the rest are location takes shown as generated.",
+  "`broll` names the cinematic picture that REPLACES this scene's video while its",
+  "audio keeps playing — the scene's own presenter take supplies the narration.",
+  "Transitions are plain dissolves for now; the dead-air and L-cut work from the",
+  "Nepal post-mortem is not applied yet.",
+  "`steps` is the answer's shape, held on screen from the first cause to the end (tools/reel_steps.py). Items 4 and 5 are never reached in this POC and stay as empty circles — which is honestly what the finished video looks like at its three-minute mark, and tells the student there are five.",
+  "`sfx` marks the TEACHING beats. A whoosh on every join only says something changed; the chakra advancing is the moment a new cause lands, so it has its own sound, and the cinematic beats carry the sound of the thing on screen. Times are into the scene and peak on the picture, never on a caption.",
+  "`recap_list_on` names the closing plate scenes that drop the chakra and show the whole answer instead: five rows, the three covered written out and the two this video does not reach left dark. He is keyed small on the plate there so the top of the frame is free, which is the one place the answer fits whole.",
+  "`note` is one line on a cutaway saying what the PICTURE is. The presenter's own scenes need none: he is on screen and the caption carries his words. A cutaway changes the picture to something the narration never names, and a student who cannot place it stops listening to work it out."
+ ],
+ "frame": "1080x1920",
+ "fps": 30,
+ "background": "assets/background.png",
+ "scenes": [
+  {
+   "id": "s01",
+   "green": true,
+   "width": 505,
+   "transition": null,
+   "card": true,
+   "trim": [
+    0.0,
+    0.65
+   ]
+  },
+  {
+   "id": "s02",
+   "green": true,
+   "width": 505,
+   "transition": "dissolve:0.40",
+   "card": true,
+   "trim": [
+    0.86,
+    2.6
+   ]
+  },
+  {
+   "id": "s03",
+   "broll": "b03",
+   "transition": "dissolve:0.40",
+   "trim": [
+    1.16,
+    1.63
+   ],
+   "note": "विभाजन के समय का रेलवे स्टेशन"
+  },
+  {
+   "id": "s04",
+   "transition": "dissolve:0.40",
+   "trim": [
+    0.0,
+    2.25
+   ]
+  },
+  {
+   "id": "s05",
+   "transition": "dissolve:0.40",
+   "point": "भारत-पाक मतभेद: पाँच कारण",
+   "trim": [
+    0.82,
+    0.59
+   ]
+  },
+  {
+   "id": "s06",
+   "transition": "dissolve:0.40",
+   "point": "1 · हैदराबाद — भौगोलिक रूप से भारत से जुड़ा",
+   "trim": [
+    2.02,
+    0.82
+   ]
+  },
+  {
+   "id": "s07",
+   "transition": "dissolve:0.40",
+   "point": "निजाम स्वतंत्र राज्य चाहते थे",
+   "trim": [
+    0.96,
+    1.85
+   ]
+  },
+  {
+   "id": "s08",
+   "broll": "b08",
+   "transition": "dissolve:0.40",
+   "trim": [
+    0.0,
+    1.77
+   ],
+   "note": "हैदराबाद की सुनसान गलियाँ"
+  },
+  {
+   "id": "s09",
+   "transition": "dissolve:0.40",
+   "point": "भारत की सैनिक कार्रवाई",
+   "trim": [
+    1.54,
+    1.15
+   ]
+  },
+  {
+   "id": "s10",
+   "transition": "dissolve:0.40",
+   "point": "हैदराबाद का भारत में विलय",
+   "trim": [
+    0.94,
+    1.53
+   ]
+  },
+  {
+   "id": "s11",
+   "broll": "b11",
+   "transition": "dissolve:0.40",
+   "trim": [
+    0.0,
+    2.6
+   ],
+   "note": "संयुक्त राष्ट्र संघ की बैठक"
+  },
+  {
+   "id": "s12",
+   "transition": "dissolve:0.40",
+   "point": "2 · जूनागढ़",
+   "trim": [
+    0.0,
+    2.03
+   ]
+  },
+  {
+   "id": "s13",
+   "transition": "dissolve:0.40",
+   "point": "शासक मुस्लिम · अधिकांश जनता हिन्दू",
+   "trim": [
+    0.74,
+    1.97
+   ]
+  },
+  {
+   "id": "s14",
+   "broll": "b14",
+   "transition": "dissolve:0.40",
+   "trim": [
+    0.96,
+    2.01
+   ],
+   "note": "विलय की घोषणा का दस्तावेज़"
+  },
+  {
+   "id": "s15",
+   "broll": "b15",
+   "transition": "dissolve:0.40",
+   "trim": [
+    0.0,
+    1.03
+   ],
+   "note": "जूनागढ़ में जनता का जमावड़ा"
+  },
+  {
+   "id": "s16",
+   "broll": "b16",
+   "transition": "dissolve:0.40",
+   "trim": [
+    0.0,
+    1.32
+   ],
+   "note": "जनमत-संग्रह में मतदान"
+  },
+  {
+   "id": "s17",
+   "transition": "dissolve:0.40",
+   "point": "3 · ब्रिटिश ऋण की अदायगी",
+   "trim": [
+    0.88,
+    2.19
+   ]
+  },
+  {
+   "id": "s18",
+   "transition": "dissolve:0.40",
+   "point": "भारत ने ब्रिटिश ऋण का भार लिया",
+   "trim": [
+    1.56,
+    2.09
+   ]
+  },
+  {
+   "id": "s19",
+   "broll": "b19",
+   "transition": "dissolve:0.40",
+   "trim": [
+    1.14,
+    1.24
+   ],
+   "note": "ब्रिटिश सरकार के ऋण का बही-खाता"
+  },
+  {
+   "id": "s20",
+   "broll": "b20",
+   "transition": "dissolve:0.40",
+   "point": "पाकिस्तान ने अदायगी टाली",
+   "trim": [
+    2.6,
+    1.21
+   ],
+   "note": "सरकारी दफ़्तर — अदायगी अटकी रही"
+  },
+  {
+   "id": "s21",
+   "green": true,
+   "width": 505,
+   "transition": "dissolve:0.40",
+   "trim": [
+    0.0,
+    2.41
+   ]
+  },
+  {
+   "id": "s22",
+   "green": true,
+   "width": 505,
+   "transition": "dissolve:0.40",
+   "trim": [
+    1.02,
+    1.39
+   ]
+  },
+  {
+   "id": "s23",
+   "green": true,
+   "width": 505,
+   "transition": "dissolve:0.40",
+   "trim": [
+    0.72,
+    1.83
+   ]
+  }
+ ],
+ "steps": {
+  "title": "भारत-पाक मतभेद के पाँच कारण",
+  "items": [
+   {
+    "n": 1,
+    "text": "हैदराबाद",
+    "at": "s06"
+   },
+   {
+    "n": 2,
+    "text": "जूनागढ़",
+    "at": "s12"
+   },
+   {
+    "n": 3,
+    "text": "ऋण",
+    "at": "s17"
+   },
+   {
+    "n": 4,
+    "text": "शरणार्थी",
+    "at": null
+   },
+   {
+    "n": 5,
+    "text": "कश्मीर",
+    "at": null
+   }
+  ]
+ },
+ "sfx": {
+  "s01": [
+   {
+    "name": "card-appears",
+    "at": 0.35,
+    "gain": -9.0
+   }
+  ],
+  "s06": [
+   {
+    "name": "step-resolves",
+    "at": 0.3,
+    "gain": -7.0
+   }
+  ],
+  "s12": [
+   {
+    "name": "step-resolves",
+    "at": 0.3,
+    "gain": -7.0
+   }
+  ],
+  "s17": [
+   {
+    "name": "step-resolves",
+    "at": 0.3,
+    "gain": -7.0
+   }
+  ],
+  "s14": [
+   {
+    "name": "page-arrives",
+    "at": 1.6,
+    "gain": -11.0
+   }
+  ],
+  "s16": [
+   {
+    "name": "click",
+    "at": 2.1,
+    "gain": -12.0
+   }
+  ],
+  "s19": [
+   {
+    "name": "page_swoosh",
+    "at": 1.4,
+    "gain": -12.0
+   }
+  ]
+ },
+ "recap_list_on": [
+  "s21",
+  "s22",
+  "s23"
+ ]
+}

@@ -1,0 +1,32 @@
+{
+ "slug": "bio-c2-sa-02",
+ "id": "BIO-C2-SA-02",
+ "subject": "Biology",
+ "chapter": "मानव जनन",
+ "chapter_no": 2,
+ "category": "Short Answer",
+ "marks": 3,
+ "years": "2024",
+ "question": "स्त्री जनन तंत्र का एक नामांकित आरेख बनाइए।",
+ "highlight": "स्त्री जनन तंत्र",
+ "parts": 2,
+ "sheet_id": "BIO-C2-SA-02",
+ "card_lines": {
+  "1": 9,
+  "2": 0
+ },
+ "clip_end": {
+  "1": 148.48,
+  "2": 89.6
+ },
+ "close": "Answer photo",
+ "hilite": [
+  "स्त्री जनन तंत्र",
+  "गर्भाशय",
+  "अंडाशय",
+  "अंडवाहिनी",
+  "एंडोमेट्रियम",
+  "योनि",
+  "नामांकित आरेख"
+ ]
+}

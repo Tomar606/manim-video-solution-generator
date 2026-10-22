@@ -1,0 +1,113 @@
+[
+ {
+  "type": "cell",
+  "at": 6,
+  "fill": 0.94,
+  "labels": [
+   {
+    "at": 6,
+    "part": "cu_sol",
+    "text": "$CuSO_4$"
+   },
+   {
+    "at": 8,
+    "part": "cu_rod",
+    "text": "कॉपर",
+    "hi": true
+   },
+   {
+    "at": 10,
+    "part": "cathode",
+    "text": "अपचयन",
+    "plate": "#1E5B3A"
+   },
+   {
+    "at": 11,
+    "part": "cathode2",
+    "text": "कैथोड",
+    "plate": "#1F5E8C"
+   }
+  ],
+  "flows": [
+   {
+    "at": 7,
+    "kind": "electrons"
+   },
+   {
+    "at": 8,
+    "kind": "cu_ions"
+   },
+   {
+    "at": 12,
+    "kind": "no3"
+   },
+   {
+    "at": 12,
+    "kind": "k"
+   }
+  ]
+ },
+ {
+  "type": "table",
+  "at": 14,
+  "cols": [
+   "",
+   "",
+   ""
+  ],
+  "rows": [
+   [
+    "इलेक्ट्रोड",
+    "Zn",
+    "Cu"
+   ],
+   [
+    "क्रिया",
+    "ऑक्सीकरण",
+    "अपचयन"
+   ],
+   [
+    "ध्रुव",
+    "ऋण",
+    "धन"
+   ]
+  ],
+  "reveal_at": [
+   14,
+   18,
+   20
+  ]
+ },
+ {
+  "type": "formula",
+  "at": 21,
+  "label": "सम्पूर्ण सेल अभिक्रिया",
+  "tex": [
+   "Zn \\longrightarrow Zn^{2+} + 2e^{-}",
+   "Cu^{2+} + 2e^{-} \\longrightarrow Cu",
+   "Zn + Cu^{2+} \\longrightarrow Zn^{2+} + Cu"
+  ]
+ },
+ {
+  "type": "chain",
+  "at": 28,
+  "direction": "right",
+  "title": "सेल को ऐसे लिखते हैं",
+  "items": [
+   "Zn",
+   "ZnSO₄",
+   "CuSO₄",
+   "Cu"
+  ],
+  "reveal_at": [
+   28,
+   32,
+   33,
+   33
+  ]
+ },
+ {
+  "type": "clear",
+  "at": 34
+ }
+]

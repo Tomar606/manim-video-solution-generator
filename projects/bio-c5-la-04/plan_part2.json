@@ -1,0 +1,26 @@
+[
+ {
+  "png": "tools/edu/renderer/out/chips/bio5b/p2-primer.png",
+  "start": 20.38,
+  "end": 39.54,
+  "top": 380
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio5b/p2-polymerase.png",
+  "start": 47.8,
+  "end": 61.12,
+  "top": 380
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio5b/p2-direction.png",
+  "start": 71.42,
+  "end": 82.92,
+  "top": 364
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio5b/p2-leading.png",
+  "start": 88.4,
+  "end": 111.14,
+  "top": 364
+ }
+]

@@ -1,0 +1,38 @@
+[
+ {
+  "type": "gauss",
+  "at": 4,
+  "arrows": true,
+  "tile": true
+ },
+ {
+  "type": "formula",
+  "at": 9,
+  "build": "progressive",
+  "label": "गोले का पृष्ठीय क्षेत्रफल",
+  "reveal_at": [
+   9,
+   10,
+   13
+  ],
+  "tex": [
+   "\\oint dS = 4\\pi r^{2}",
+   "\\phi_E = \\dfrac{1}{4\\pi\\varepsilon_0}\\,\\dfrac{q}{r^{2}}\\times 4\\pi r^{2}",
+   "\\phi_E = \\dfrac{q}{\\varepsilon_0}"
+  ]
+ },
+ {
+  "type": "points",
+  "at": 15,
+  "title": "उत्तर में यही लिखिए",
+  "items": [
+   "किसी बंद पृष्ठ से गुजरने वाला कुल वैद्युत फ्लक्स,",
+   "उस पृष्ठ के अंदर परिबद्ध कुल आवेश का",
+   "$\\frac{1}{\\varepsilon_0}$ गुना होता है।"
+  ]
+ },
+ {
+  "type": "clear",
+  "at": 19
+ }
+]

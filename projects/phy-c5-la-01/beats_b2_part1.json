@@ -1,0 +1,20 @@
+[
+ {"type":"magnet","at":8,
+  "rows":[
+   {"name":"प्रतिचुम्बकीय","tone":"dia","verdict":"हल्का प्रतिकर्षित","toward":false,"force":0.40,"gap":2.35,"at":12},
+   {"name":"अनुचुम्बकीय","tone":"para","verdict":"हल्का आकर्षित","toward":true,"force":0.40,"gap":2.05,"at":13},
+   {"name":"लौह-चुम्बकीय","tone":"ferro","verdict":"प्रबल आकर्षित","toward":true,"force":1.00,"gap":1.30,"at":14}]},
+
+ {"type":"photos","at":17,"size":2.30,"wide":2.60,
+  "rows":[
+   {"src":"assets/photos/filings-4.jpg","tone":"field","name":"लोहे का बुरादा","note":"बल-रेखाएँ सचमुच दिखती हैं","at":17},
+   {"src":"assets/photos/levitation-1-crop.jpg","tone":"dia","name":"प्रतिचुम्बकीय प्रतिकर्षण","note":"चुम्बक के ऊपर तैरता हुआ","at":18}]},
+
+ {"type":"poles","at":20,
+  "rows":[
+   {"name":"प्रतिचुम्बकीय","tone":"dia","body":"bar","orient":"perp","note":"क्षेत्र के लम्बवत्","maths":"(\\perp)","at":24},
+   {"name":"अनुचुम्बकीय","tone":"para","body":"bar","orient":"par","note":"क्षेत्र के समान्तर","maths":"(\\parallel)","at":27},
+   {"name":"लौह-चुम्बकीय","tone":"ferro","body":"bar","orient":"par","note":"क्षेत्र के समान्तर","maths":"(\\parallel)","at":30}]},
+
+ {"type":"clear","at":36}
+]

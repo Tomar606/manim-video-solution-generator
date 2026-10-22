@@ -1,0 +1,41 @@
+{
+  "cues": [
+    {
+      "time": 17.47,
+      "name": "pop"
+    },
+    {
+      "time": 20.6,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 29.9,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 42.2,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 45.5,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 55.9,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 61.261,
+      "name": "write"
+    },
+    {
+      "time": 71.651,
+      "name": "reveal"
+    }
+  ]
+}

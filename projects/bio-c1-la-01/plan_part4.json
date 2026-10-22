@@ -1,0 +1,30 @@
+[
+ {
+  "png": "tools/edu/renderer/out/chips/ovule/p3b-egg.png",
+  "start": 17.58,
+  "end": 32.02,
+  "top": 340
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/ovule/p3c-anti.png",
+  "start": 32.64,
+  "end": 41.94,
+  "top": 340
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/ovule/p3d-polar.png",
+  "start": 45.96,
+  "end": 60.43,
+  "top": 340
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/ovule/p4b-pen.png",
+  "start": 64.46,
+  "end": 93.34
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/ovule/p4a-count.png",
+  "start": 94.9,
+  "end": 112.52
+ }
+]

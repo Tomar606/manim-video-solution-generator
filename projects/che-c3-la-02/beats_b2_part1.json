@@ -1,0 +1,48 @@
+[
+ {
+  "type": "formula",
+  "at": 11,
+  "label": "अर्द्ध-आयुकाल — परिभाषा",
+  "tex": [
+   "[A] = \\frac{[A]_0}{2}"
+  ]
+ },
+ {
+  "type": "formula",
+  "at": 23,
+  "label": "शून्य कोटि — व्युत्पादन",
+  "tex": [
+   "k[A]^0 = k",
+   "-\\frac{d[A]}{dt} = k",
+   "-d[A] = k\\,dt",
+   "\\int_{[A]_0}^{[A]} d[A] = -\\int_0^t k\\,dt",
+   "[A] = [A]_0 - kt",
+   "k\\,t = [A]_0 - [A]"
+  ],
+  "build": "progressive",
+  "reveal_at": [
+   23,
+   24,
+   25,
+   26,
+   27,
+   28
+  ]
+ },
+ {
+  "type": "formula",
+  "at": 31,
+  "label": "प्रतिस्थापन और हल",
+  "tex": [
+   "k\\,t_{1/2} = [A]_0 - \\frac{[A]_0}{2}",
+   "t_{1/2} = \\frac{[A]_0}{2k}",
+   "t_{1/2} \\propto [A]_0"
+  ],
+  "build": "progressive",
+  "reveal_at": [
+   31,
+   33,
+   36
+  ]
+ }
+]

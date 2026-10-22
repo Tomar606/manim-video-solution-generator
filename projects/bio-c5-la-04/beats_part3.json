@@ -1,0 +1,27 @@
+[
+ {
+  "layout": "panel",
+  "panel_ar": 1.7777777777777777,
+  "panel_top": 300,
+  "at": 19,
+  "seconds": 11.29,
+  "motion": "one_way",
+  "brief": "a nick in one backbone of a DNA duplex closes: the two facing ends reach across the gap, meet in the middle and seal into one continuous unbroken strand, while everything else stays still",
+  "labels": [
+   {
+    "text": "डी एन ए लाइगेज",
+    "at": 19,
+    "x": 0.5,
+    "y": 0.44,
+    "hold": 1.5
+   }
+  ],
+  "type": "video",
+  "background": "own",
+  "style": "realistic",
+  "look": "A short length of DNA drawn flat and side-on: a continuous blue template backbone along the bottom, an amber backbone above it, and between them one row of evenly spaced rungs at a single pitch, each rung two coloured halves meeting in the middle. The AMBER backbone alone is interrupted by one small clean gap near the centre — the nick. The blue template is unbroken, the rungs continue across the gap, and nothing else is in the picture.",
+  "reference": "p3_at019",
+  "route": "manim",
+  "source": "projects/_scratch/bio/ligase.py::Ligase"
+ }
+]

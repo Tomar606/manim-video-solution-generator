@@ -1,0 +1,52 @@
+[
+  {
+    "type": "formula",
+    "intent": "DEFINITION",
+    "reason": "समपरासरी विलयन की परिभाषा दो शर्तों पर टिकी है — समान परासरण दाब और समान मोलर सान्द्रता — और अंत में शिक्षक स्वयं सूत्र बोलता है; सूत्र को लेबल के साथ दिखाना परिभाषा को याद रखने योग्य बनाता है, केवल कैप्शन दोहराने से नहीं।",
+    "label": "समपरासरी विलयन",
+    "tex": [
+      "\\pi_1 = \\pi_2",
+      "M_1 = M_2"
+    ],
+    "at": 3
+  },
+  {
+    "at": 8,
+    "type": "graph",
+    "kind": "membrane",
+    "intent": "DEFINITION",
+    "presenter": "partial",
+    "label": "अर्द्धपारगम्य झिल्ली",
+    "reason": "परिभाषा का सार एक चित्र है — छोटे विलायक अणु पार, बड़े विलेय रुके."
+  },
+  {
+    "at": 10,
+    "type": "video",
+    "seconds": 8,
+    "motion": "one_way",
+    "presenter": "partial",
+    "brief": "a shrivelled dried raisin resting on the bottom of a clear glass tumbler of still water; it slowly swells and plumps as water passes into it, its deep wrinkles unfolding until the skin is smooth, rounded and taut, the water staying perfectly still",
+    "label": "जल अंदर जाता है",
+    "background": "own",
+    "layout": "panel",
+    "panel_ar": 1.7777777777777777,
+    "panel_top": 300
+  },
+  {
+    "at": 12,
+    "type": "points",
+    "intent": "EXAMPLE",
+    "presenter": null,
+    "label": "उदाहरण",
+    "items": [
+      "जान्तव झिल्ली",
+      "पादप झिल्ली"
+    ],
+    "reason": "दोनों उदाहरण बोले जाते हैं; लिखे दिखें तो उत्तर में उतारे जा सकते हैं."
+  },
+  {
+    "at": 13,
+    "type": "clear",
+    "reason": "दोनों उदाहरण line 12 में एक साथ बोले जाते हैं, इसलिए वे साथ ही आते हैं; line 13 से आगे समापन है और उसका सूची से कोई संबंध नहीं — मंच खाली होता है और कैप्शन फिर से चलते हैं."
+  }
+]

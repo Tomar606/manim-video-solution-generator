@@ -1,0 +1,41 @@
+[
+ {
+  "type": "formula",
+  "at": 5,
+  "label": "पद 2 — सोडियम क्रोमेट से डाइक्रोमेट",
+  "tex": [
+   "2Na_2CrO_4 + H_2SO_4 \\longrightarrow Na_2Cr_2O_7 + Na_2SO_4 + H_2O"
+  ]
+ },
+ {
+  "type": "formula",
+  "at": 20,
+  "label": "पद 3 — पोटैशियम डाइक्रोमेट",
+  "tex": [
+   "Na_2Cr_2O_7 + 2KCl \\longrightarrow K_2Cr_2O_7 + 2NaCl"
+  ],
+  "images": [
+   {
+    "at": 26,
+    "src": "images/b2_dichromate.png",
+    "h": 2.4
+   }
+  ]
+ },
+ {
+  "type": "chain",
+  "at": 29,
+  "direction": "down",
+  "title": "पूरा क्रम",
+  "items": [
+   "सोडियम क्रोमेट",
+   "सोडियम डाइक्रोमेट",
+   "पोटैशियम डाइक्रोमेट"
+  ],
+  "reveal_at": [
+   30,
+   31,
+   31
+  ]
+ }
+]

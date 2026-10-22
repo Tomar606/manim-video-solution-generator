@@ -1,0 +1,10 @@
+[
+ {
+  "at": 30,
+  "type": "video",
+  "presenter": "partial",
+  "seconds": 10,
+  "motion": "one_way",
+  "brief": "A SMALL, COMPACT object resting on the supplied background picture, which stays fully visible all around it: a short upright zinc rod standing in a small clear glass vessel of colourless liquid. The vessel is a compact object sitting in the picture — it does NOT fill the frame, the liquid does NOT spread across the screen, and the supplied background is still visible above it, below it and on both sides of it.\nBoth ends of the rod are inside the picture. The whole object is small enough to sit clear of the top of the frame and clear of the bottom of the frame.\nAs the circuit closes, the submerged lower part of the rod goes from smooth to visibly rough and pitted, the pitting spreading down from the liquid line, and the rod's outline narrows very slightly. Fine, slow, colourless material lifts off the pitted metal and sinks inside the vessel. The liquid stays clear and colourless; the rod above the liquid stays smooth. Nothing else in the picture changes at all.\nWhy this is generated and not drawn: Manim renders the rod, the labels and the equation correctly by construction, but it cannot show metal TEXTURE changing — smooth metal going pitted is the organic, photoreal change the routing table sends here."
+ }
+]

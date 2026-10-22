@@ -1,0 +1,52 @@
+[
+ {
+  "slug": "p3-lagging",
+  "route": "manim",
+  "mark": "5'-3' template, synthesis discontinuous, lagging strand",
+  "marked": {
+   "direction": true
+  }
+ },
+ {
+  "slug": "p3-okazaki",
+  "route": "manim",
+  "mark": "short fragments, joined by ligase",
+  "marked": {
+   "quantity": true
+  }
+ },
+ {
+  "slug": "p3-compare",
+  "route": "chip",
+  "mark": "leading continuous vs lagging discontinuous",
+  "marked": {
+   "order": true
+  }
+ },
+ {
+  "slug": "p3-energy",
+  "route": "chip",
+  "mark": "the last two high-energy phosphate bonds",
+  "marked": {
+   "quantity": true
+  }
+ },
+ {
+  "slug": "p3-cycle",
+  "route": "chip",
+  "mark": "once per cell cycle, in S phase; polymerase proofreads",
+  "marked": {
+   "quantity": true
+  }
+ },
+ {
+  "slug": "p3-ligase",
+  "route": "veo",
+  "mark": "two ends of a strand are drawn together and sealed into one",
+  "marked": {},
+  "labels": [
+   "डी एन ए लाइगेज"
+  ],
+  "overlay": "manim"
+ }
+]

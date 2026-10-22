@@ -1,0 +1,55 @@
+[
+ {
+  "slug": "defn",
+  "route": "chip",
+  "mark": "the definition, written as the exam wants it",
+  "marked": {
+   "reproduce": true
+  }
+ },
+ {
+  "slug": "semicons",
+  "route": "manim",
+  "mark": "each daughter keeps one parent strand",
+  "marked": {
+   "pairing": true
+  }
+ },
+ {
+  "slug": "steps",
+  "route": "chip",
+  "mark": "the four steps, numbered",
+  "marked": {
+   "order": true
+  }
+ },
+ {
+  "slug": "ori",
+  "route": "svg",
+  "mark": "prokaryote one origin, eukaryote many",
+  "marked": {
+   "quantity": true
+  }
+ },
+ {
+  "slug": "unwind",
+  "route": "veo",
+  "mark": "helicase unzips the helix and a Y-shaped fork opens",
+  "marked": {},
+  "labels": [
+   "प्रतिकृति द्विशाख",
+   "हेलिकेज"
+  ],
+  "overlay": "manim"
+ },
+ {
+  "slug": "supercoil",
+  "route": "veo",
+  "mark": "the helix twists tight ahead of the fork, then relaxes",
+  "marked": {},
+  "labels": [
+   "टोपोआइसोमरेज"
+  ],
+  "overlay": "manim"
+ }
+]

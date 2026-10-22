@@ -1,0 +1,144 @@
+[
+ {
+  "at": 11,
+  "type": "statement",
+  "intent": "DEFINITION",
+  "title": "प्रसव (Parturition)",
+  "lines": [
+   "गर्भ की अवधि पूरी होने पर",
+   "गर्भाशयी भित्ति के तीव्र संकुचनों के कारण",
+   "शिशु का योनिमार्ग से बाहर आना"
+  ],
+  "reveal_at": [
+   14,
+   15,
+   17
+  ],
+  "reason": "परिभाषा के तीन हिस्से ठीक इसी क्रम में बोले जाते हैं."
+ },
+ {
+  "at": 20,
+  "type": "video",
+  "clip": "newborn",
+  "intent": "RELATE",
+  "reason": "जन्म का पल — माँ और नवजात शिशु, जिसे हर छात्र पहचानता है.",
+  "brief": "Medium close-up at eye level, the camera holding still, in a bright, clean maternity ward of an Indian hospital. A young Indian mother sits propped up against white pillows on a hospital bed, smiling tenderly down at her newborn baby, who lies wrapped snugly in a soft white cotton blanket in her arms. The baby stirs, yawns and curls a tiny hand. A nurse in a light blue uniform leans in and gently tucks the blanket around the baby, then steps back. Soft morning daylight falls through a window beside the bed; the room is calm and warm. The only sound is quiet hospital room ambience. Natural, true-to-life colour; a clean, uncluttered documentary frame.",
+  "prompt_file": "projects/bio-c2-sa-04/veo/prompts/landscape/newborn.txt"
+ },
+ {
+  "at": 29,
+  "type": "statement",
+  "intent": "MECHANISM",
+  "title": "जटिल तंत्रिका-अंतःस्रावी प्रक्रिया",
+  "lines": [
+   "तंत्रिका तंत्र के संकेत",
+   "अंतःस्रावी तंत्र के हॉर्मोन",
+   "शुरुआत: पूर्ण विकसित शिशु और अपरा के संकेत"
+  ],
+  "reveal_at": [
+   33,
+   35,
+   37
+  ],
+  "reason": "दो तंत्र और संकेतों का स्रोत — तीन पंक्तियाँ."
+ },
+ {
+  "type": "rtable",
+  "heads": [
+   "ऑक्सीटोसिन",
+   "रिलैक्सिन"
+  ],
+  "n": 2,
+  "rows": [
+   {
+    "tag": "स्रोत",
+    "l": "माँ की पश्च पियूष ग्रंथि",
+    "r": "अण्डाशय",
+    "at": [
+     51,
+     null
+    ]
+   },
+   {
+    "tag": "कार्य",
+    "l": "गर्भाशय संकुचन बढ़ाता है",
+    "r": "प्रसव में सहायता",
+    "at": [
+     55,
+     null
+    ]
+   }
+  ],
+  "at": 41,
+  "intent": "COMPARISON",
+  "reason": "दो हॉर्मोन — तालिका अभी ऑक्सीटोसिन भरती है, रिलैक्सिन Part 2 में."
+ },
+ {
+  "at": 57,
+  "type": "loop",
+  "intent": "MECHANISM",
+  "nodes": [
+   "गर्भाशय संकुचन बढ़ते हैं",
+   "ऑक्सीटोसिन का स्राव बढ़ता है",
+   "संकुचन और तीव्र"
+  ],
+  "reveal_at": [
+   57,
+   59,
+   61
+  ],
+  "spin_at": 63,
+  "centre": "हर चक्र में और तीव्र",
+  "reason": "संकुचन और ऑक्सीटोसिन एक-दूसरे को बढ़ाते हैं — यह एक चक्र है, इसलिए घूमता हुआ दिखे."
+ },
+ {
+  "at": 65,
+  "type": "facts",
+  "items": [
+   {
+    "lead": "ऑक्सीटोसिन:",
+    "text": "गर्भाशय संकुचन में मदद",
+    "tone": "gold"
+   },
+   {
+    "lead": "परिणाम:",
+    "text": "प्रसव की प्रक्रिया आगे बढ़ती है",
+    "tone": "green"
+   }
+  ],
+  "reveal_at": [
+   66,
+   68
+  ],
+  "reason": "याद रखने वाली दो बातें."
+ },
+ {
+  "type": "rtable",
+  "heads": [
+   "ऑक्सीटोसिन",
+   "रिलैक्सिन"
+  ],
+  "n": 2,
+  "rows": [
+   {
+    "tag": "स्रोत",
+    "l": "माँ की पश्च पियूष ग्रंथि",
+    "r": "अण्डाशय",
+    "show": "l"
+   },
+   {
+    "tag": "कार्य",
+    "l": "गर्भाशय संकुचन बढ़ाता है",
+    "r": "प्रसव में सहायता",
+    "show": "l"
+   }
+  ],
+  "at": 70,
+  "intent": "TEASER",
+  "reason": "पहला हॉर्मोन हो गया; खाली कॉलम दिखाता है कि दूसरा बाकी है."
+ },
+ {
+  "at": 73,
+  "type": "clear"
+ }
+]

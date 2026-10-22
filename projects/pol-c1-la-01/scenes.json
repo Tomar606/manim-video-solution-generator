@@ -1,0 +1,202 @@
+{
+ "_comment": [
+  "POL — नेपाल में लोकतंत्र कैसे स्थापित हुआ (2025, 4 marks). All-Veo, vertical.",
+  "`green`: true means he is generated on flat chroma green and keyed onto the house plate,",
+  "  because that line's screen has to carry text (years, the summary flow).",
+  "  false means he is in the place he is describing, and only a short composited label goes over it.",
+  "Devanagari is NEVER generated: every label is composited afterwards.",
+  "Props carry NO writing: blank covers, smooth undyed cloth, plain paper. Veo cannot set Devanagari, so any prop with lettering comes back garbled — the march test came back with written banners."
+ ],
+ "accessory": "",
+ "scenes": {
+  "1": {
+   "camera": "Medium shot at eye level, the camera holding still.",
+   "setting": "stands in front of a flat, evenly lit chroma green wall that fills the frame behind him",
+   "before": "He takes a breath, raises an index finger and looks into the camera",
+   "after": "He finishes, closes his mouth and opens both palms towards the camera",
+   "others": "",
+   "sound": "The only sound is his voice in a quiet room.",
+   "green": true
+  },
+  "2": {
+   "camera": "Medium shot at eye level, the camera holding still.",
+   "setting": "stands in front of the same flat, evenly lit chroma green wall",
+   "before": "He tilts his head as if asking the question and looks into the camera",
+   "after": "He finishes, closes his mouth and nods once",
+   "others": "",
+   "sound": "The only sound is his voice in a quiet room.",
+   "green": true
+  },
+  "3": {
+   "camera": "Medium tracking shot, framed tall, the camera moving backwards ahead of him at walking pace.",
+   "setting": "walks through a busy hill-town market square in the Himalayan foothills at morning, plain cloth awnings and prayer flags behind him",
+   "before": "He walks towards the camera through the crowd and looks up",
+   "after": "He keeps walking as he speaks, then stops and looks around the square",
+   "others": "Shoppers and traders go about their business around him.",
+   "sound": "Market chatter and distant bells.",
+   "green": false
+  },
+  "4": {
+   "camera": "Low-angle medium shot, the camera holding still.",
+   "setting": "stands on the road below a tall stone palace gate, soldiers standing far back at the gate",
+   "before": "He looks up at the closed gate, then turns to the camera",
+   "after": "He finishes, closes his mouth and glances back at the gate",
+   "others": "Two uniformed guards stand at a distance by the gate.",
+   "sound": "A cold wind and a far-off bell.",
+   "green": false
+  },
+  "5": {
+   "camera": "Medium tracking shot, framed tall, the camera moving alongside at walking pace.",
+   "setting": "walks at the edge of a small peaceful procession of townspeople holding candles and raising open hands",
+   "before": "He falls into step beside the marchers, cups a hand around a candle flame and turns to the camera",
+   "after": "He finishes, closes his mouth and lifts the candle a little as the group walks on",
+   "others": "Ordinary people of all ages walk beside him, calm and determined, hands raised.",
+   "sound": "Footsteps, voices and cloth snapping in the wind.",
+   "green": false
+  },
+  "6": {
+   "camera": "Medium shot, the camera holding still.",
+   "setting": "stands on the wide stone steps of a government building, holding a thick cloth-bound volume with smooth blank covers in both hands",
+   "before": "He climbs the last two steps, lifts the bound document and turns it towards the camera",
+   "after": "He finishes, closes his mouth and holds the document against his chest",
+   "others": "",
+   "sound": "A quiet street and a flag rope tapping its pole.",
+   "green": false
+  },
+  "7": {
+   "camera": "Medium tracking shot, framed tall, the camera moving backwards ahead of him.",
+   "setting": "walks down a long government corridor lined with closed office doors and empty chairs",
+   "before": "He walks slowly past the empty chairs, brushing one with his hand, and looks at the camera",
+   "after": "He finishes, closes his mouth and looks down the corridor",
+   "others": "",
+   "sound": "Footsteps echoing in an empty corridor.",
+   "green": false
+  },
+  "8": {
+   "camera": "Medium shot, the camera holding still.",
+   "setting": "stands in the middle of an emptied assembly chamber, curved rows of wooden seats around him",
+   "before": "He rests a hand on the back of an empty seat and turns to the camera",
+   "after": "He finishes, closes his mouth and looks along the empty rows",
+   "others": "",
+   "sound": "A large empty hall, very quiet.",
+   "green": false
+  },
+  "9": {
+   "camera": "Wide shot from the back of the hall, the camera holding still.",
+   "setting": "stands alone at the speaker's desk of the same empty chamber",
+   "before": "He places both hands on the desk and looks up into the camera",
+   "after": "He finishes, closes his mouth and steps back from the desk",
+   "others": "",
+   "sound": "A large empty hall, very quiet.",
+   "green": false
+  },
+  "10": {
+   "camera": "Medium tracking shot, framed tall, the camera moving with him.",
+   "setting": "walks inside a large peaceful daytime demonstration, people of all ages around him with open hands raised and smooth banners of plain undyed cloth",
+   "before": "He walks among the marchers, raises a hand in greeting to them and looks into the camera",
+   "after": "He finishes, closes his mouth and keeps walking with the crowd",
+   "others": "A broad, calm crowd fills the street around him, hands raised.",
+   "sound": "A steady murmur of voices and footsteps.",
+   "green": false
+  },
+  "11": {
+   "camera": "Medium shot at eye level, the camera holding still.",
+   "setting": "stands still at the front of the same peaceful crowd, people seated calmly on the road behind him with open palms raised",
+   "before": "He looks at the seated demonstrators, then turns to the camera and holds up an open palm",
+   "after": "He finishes, closes his mouth and lowers his hand slowly",
+   "others": "Demonstrators sit calmly on the road, palms open and raised.",
+   "sound": "Quiet voices and a soft breeze.",
+   "green": false
+  },
+  "12": {
+   "camera": "Medium shot, the camera holding still.",
+   "setting": "stands with a group of organisers around a folding table on the roadside, rolls of plain undyed cloth stacked beside them",
+   "before": "He leans over the table where the group is planning, straightens and turns to the camera",
+   "after": "He finishes, closes his mouth and gestures towards the group",
+   "others": "Seven organisers stand around the table, talking quietly.",
+   "sound": "Low conversation and paper rustling.",
+   "green": false
+  },
+  "13": {
+   "camera": "Medium shot, the camera holding still.",
+   "setting": "stands at the tall wooden doors of the assembly building as they are pushed open from inside",
+   "before": "He steps aside as the doors swing open, then looks into the camera",
+   "after": "He finishes, closes his mouth and looks through the open doors",
+   "others": "An usher pushes the heavy doors open behind him.",
+   "sound": "Heavy doors creaking open and distant applause.",
+   "green": false
+  },
+  "14": {
+   "camera": "Medium shot, the camera holding still.",
+   "setting": "sits at a long committee table covered with smooth blank sheets of paper, members working along its length",
+   "before": "He squares a blank sheet, sets his pencil down on it and looks up at the camera",
+   "after": "He finishes, closes his mouth and slides the sheet to the member beside him",
+   "others": "Members in plain clothes read and annotate along the table.",
+   "sound": "Pages turning and pencils on paper.",
+   "green": false
+  },
+  "15": {
+   "camera": "Medium shot at eye level, the camera holding still.",
+   "setting": "stands beside the same committee table, a neat stack of blank pages in his hand",
+   "before": "He sets the stack down on the table, straightens it and turns to the camera",
+   "after": "He finishes, closes his mouth and rests a hand on the stack",
+   "others": "Two members shake hands quietly behind him.",
+   "sound": "Quiet voices and papers being squared.",
+   "green": false
+  },
+  "16": {
+   "camera": "Low-angle medium shot, framed tall, the camera holding still.",
+   "setting": "stands in a public square as a flag of one plain colour is hoisted on a tall pole above him",
+   "before": "He helps pull the rope hand over hand as the flag rises, then looks into the camera",
+   "after": "He finishes, closes his mouth and watches the flag climb",
+   "others": "A small crowd watches the flag go up behind him.",
+   "sound": "Rope on metal, wind and a cheering crowd.",
+   "green": false
+  },
+  "17": {
+   "camera": "Medium shot, the camera holding still.",
+   "setting": "stands outside the assembly building holding a newly bound volume with smooth blank covers in both hands",
+   "before": "He opens the book, turns one page and lifts it towards the camera",
+   "after": "He finishes, closes his mouth and closes the book",
+   "others": "",
+   "sound": "A calm street and a flag rope tapping its pole.",
+   "green": false
+  },
+  "18": {
+   "camera": "Medium shot, the camera holding still.",
+   "setting": "stands in a formal meeting room where two flag stands hold flags of plain colour side by side",
+   "before": "He walks between the two flag stands, touches one lightly and turns to the camera",
+   "after": "He finishes, closes his mouth and looks from one flag to the other",
+   "others": "",
+   "sound": "A quiet formal room.",
+   "green": false
+  },
+  "19": {
+   "camera": "Medium shot at eye level, the camera holding still.",
+   "setting": "stands in front of the flat, evenly lit chroma green wall again",
+   "before": "He counts off on his fingers as he begins, and looks into the camera",
+   "after": "He finishes, closes his mouth and opens both palms",
+   "others": "",
+   "sound": "The only sound is his voice in a quiet room.",
+   "green": true
+  },
+  "20": {
+   "camera": "Medium shot at eye level, the camera holding still.",
+   "setting": "stands in front of the flat, evenly lit chroma green wall",
+   "before": "He raises four fingers and looks into the camera",
+   "after": "He finishes, closes his mouth and smiles",
+   "others": "",
+   "sound": "The only sound is his voice in a quiet room.",
+   "green": true
+  },
+  "21": {
+   "camera": "Medium shot at eye level, the camera holding still.",
+   "setting": "stands in front of the flat, evenly lit chroma green wall",
+   "before": "He points towards the side of the frame and looks into the camera",
+   "after": "He finishes, closes his mouth and smiles slightly",
+   "others": "",
+   "sound": "The only sound is his voice in a quiet room.",
+   "green": true
+  }
+ }
+}

@@ -1,0 +1,84 @@
+{
+  "cues": [
+    {
+      "time": 13.27,
+      "name": "pop"
+    },
+    {
+      "time": 15.7,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 17.8,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 29.3,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 31.6,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 38.5,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 45.7,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 50.57,
+      "name": "pop"
+    },
+    {
+      "time": 62.77,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 70.37,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 76.77,
+      "name": "pop"
+    },
+    {
+      "time": 78.4,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 80.2,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 85.17,
+      "name": "pop"
+    },
+    {
+      "time": 88.67,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 93.07,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 96.77,
+      "name": "pop"
+    }
+  ]
+}

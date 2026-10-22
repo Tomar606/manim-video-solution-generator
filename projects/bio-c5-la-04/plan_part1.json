@@ -1,0 +1,26 @@
+[
+ {
+  "png": "tools/edu/renderer/out/chips/bio5b/p1-defn.png",
+  "start": 17.8,
+  "end": 43.94,
+  "top": 380
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio5b/p1-semicons.png",
+  "start": 49.8,
+  "end": 69.63,
+  "top": 362
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio5b/p1-steps.png",
+  "start": 74.07,
+  "end": 79.29,
+  "top": 380
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio5b/p1-ori.png",
+  "start": 87.97,
+  "end": 112.87,
+  "top": 380
+ }
+]

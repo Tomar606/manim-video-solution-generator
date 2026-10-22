@@ -1,0 +1,32 @@
+[
+ {
+  "png": "tools/edu/renderer/out/chips/bio5b/p3-lagging.png",
+  "start": 14.34,
+  "end": 34.69,
+  "top": 343
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio5b/p3-okazaki.png",
+  "start": 34.69,
+  "end": 40.08,
+  "top": 343
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio5b/p3-compare.png",
+  "start": 47.1,
+  "end": 49.0,
+  "top": 380
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio5b/p3-energy.png",
+  "start": 68.2,
+  "end": 77.3,
+  "top": 380
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio5b/p3-cycle.png",
+  "start": 80.14,
+  "end": 100.71,
+  "top": 380
+ }
+]

@@ -1,0 +1,60 @@
+[
+ {
+  "type": "formula",
+  "at": 6,
+  "label": "अम्लीय फेरस सल्फेट के साथ",
+  "tex": [
+   "K_2Cr_2O_7 + 7H_2SO_4 + 6FeSO_4 \\longrightarrow K_2SO_4 + Cr_2(SO_4)_3 + 3Fe_2(SO_4)_3 + 7H_2O",
+   "Fe^{2+} \\longrightarrow Fe^{3+}"
+  ],
+  "build": "progressive",
+  "reveal_at": [
+   6,
+   9
+  ]
+ },
+ {
+  "type": "formula",
+  "at": 14,
+  "label": "KI के साथ",
+  "tex": [
+   "6KI + K_2Cr_2O_7 + 7H_2SO_4 \\longrightarrow 4K_2SO_4 + Cr_2(SO_4)_3 + 7H_2O + 3I_2",
+   "I^- \\longrightarrow I_2"
+  ],
+  "build": "progressive",
+  "reveal_at": [
+   14,
+   18
+  ]
+ },
+ {
+  "type": "formula",
+  "at": 19,
+  "label": "H₂S के साथ",
+  "tex": [
+   "K_2Cr_2O_7 + 4H_2SO_4 + 3H_2S \\longrightarrow K_2SO_4 + Cr_2(SO_4)_3 + 7H_2O + 3S",
+   "H_2S \\longrightarrow S"
+  ],
+  "build": "progressive",
+  "reveal_at": [
+   19,
+   22
+  ]
+ },
+ {
+  "type": "points",
+  "at": 23,
+  "title": "तीनों एक लाइन में",
+  "items": [
+   "$Fe^{2+} \\longrightarrow Fe^{3+}$",
+   "$I^- \\longrightarrow I_2$",
+   "$H_2S \\longrightarrow S$"
+  ],
+  "reveal": "progressive",
+  "reveal_at": [
+   24,
+   25,
+   26
+  ]
+ }
+]

@@ -1,0 +1,20 @@
+[
+ {
+  "png": "tools/edu/renderer/out/chips/ovule/p1d-micro.png",
+  "start": 16.68,
+  "end": 32.62,
+  "top": 300
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/ovule/p2a-nucellus.png",
+  "start": 42.62,
+  "end": 50.94,
+  "top": 300
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/ovule/p2b-chalaza.png",
+  "start": 50.94,
+  "end": 65.18,
+  "top": 300
+ }
+]

@@ -1,0 +1,112 @@
+[
+ {
+  "at": 14,
+  "type": "statement",
+  "intent": "DEFINITION",
+  "title": "वंशावली (Pedigree)",
+  "lines": [
+   "किसी आनुवंशिक विशेषक (Trait) का",
+   "दो या अधिक पीढ़ियों में",
+   "वंशवृक्ष या आरेख के रूप में अभिलेख"
+  ],
+  "reveal_at": [
+   16,
+   18,
+   19
+  ],
+  "reason": "परिभाषा तीन टुकड़ों में बोली जाती है; कार्ड उसी क्रम में भरता है."
+ },
+ {
+  "at": 23,
+  "type": "video",
+  "clip": "family",
+  "intent": "RELATE",
+  "reason": "'एक family में कई पीढ़ियाँ' — तीन पीढ़ियों का एक परिवार जिसे छात्र पहचानता है.",
+  "brief": "Medium wide shot, the camera drifting slowly sideways, in the warm living room of a middle-class Indian home. Three generations of one family sit close together on a sofa for a family photograph: a grandfather and grandmother in the centre, their son and daughter-in-law on either side, and a boy and a girl of school age sitting on the floor in front. The family resemblance is strong: the same wavy black hair and the same broad smile run from the grandparents to the parents to the children. The grandfather puts an arm around his grandson and everyone laughs together. Soft evening light from a lamp; a framed family portrait hangs on the wall behind them. The only sound is gentle laughter and room ambience. Natural, true-to-life colour; a clean, uncluttered documentary frame.",
+  "prompt_file": "projects/bio-c4-sa-01/veo/prompts/landscape/family.txt"
+ },
+ {
+  "at": 30,
+  "type": "pedigree",
+  "intent": "MECHANISM",
+  "title": "वंशावली चार्ट",
+  "gen_at": [
+   30,
+   32,
+   34
+  ],
+  "legend_at": 34,
+  "trace_at": 35,
+  "reason": "रिकॉर्ड कैसा दिखता है — पीढ़ी-दर-पीढ़ी बनता चार्ट, और लक्षण किन-किन में आया वह घेरा जाता है."
+ },
+ {
+  "at": 35,
+  "type": "facts",
+  "keep": true,
+  "items": [
+   {
+    "lead": "वंशावली विश्लेषण:",
+    "text": "पीढ़ियों में लक्षण की वंशागति का अध्ययन",
+    "tone": "gold"
+   }
+  ],
+  "reveal_at": [
+   35
+  ],
+  "reason": "नाम उसी चार्ट के नीचे, जिस पर अध्ययन हो रहा है."
+ },
+ {
+  "at": 37,
+  "type": "statement",
+  "intent": "SCOPE",
+  "title": "किस लक्षण का अध्ययन?",
+  "lines": [
+   "आनुवंशिक या चिकित्सकीय विकार",
+   "या कोई सामान्य लक्षण भी"
+  ],
+  "reveal_at": [
+   40,
+   42
+  ],
+  "reason": "दो प्रकार के लक्षण — विकार और सामान्य; उदाहरण अगले दृश्य में दिखेगा."
+ },
+ {
+  "at": 44,
+  "type": "video",
+  "clip": "tongue",
+  "intent": "RELATE",
+  "reason": "'जैसे जीभ को रोल करना' — हर छात्र ने यह करके देखा है.",
+  "brief": "Medium close-up at eye level in a bright college classroom in India: a young woman rolls her tongue while her classmate tries and cannot, and they both laugh. Take 1 of 2; the close-up retake folded the tongue unnaturally and was rejected.",
+  "prompt_file": "projects/bio-c4-sa-01/veo/prompts/landscape/tongue.txt"
+ },
+ {
+  "at": 47,
+  "type": "rlist",
+  "intent": "LIST",
+  "title": "वंशावली विश्लेषण का महत्व",
+  "n": 3,
+  "rows": [
+   {
+    "text": "नैतिक व जैविक कारणों से मनुष्यों में संकरण संभव नहीं, इसलिए वंशावली ही अध्ययन का उपाय",
+    "at": 51
+   },
+   {
+    "text": "दम्पत्तियों को होने वाले बच्चों में आनुवंशिक विकार की संभावना पहले से बताना",
+    "at": 66
+   },
+   {
+    "text": "लिंग-सहलग्न रोगों (Sex-linked disorders) की वंशागति समझना",
+    "at": 80
+   }
+  ],
+  "reason": "तीन गिने हुए महत्व — सूची पूरी दिखती है और बोलते ही भरती है."
+ },
+ {
+  "at": 88,
+  "type": "notes"
+ },
+ {
+  "at": 93,
+  "type": "clear"
+ }
+]

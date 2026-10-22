@@ -1,0 +1,44 @@
+[
+ {
+  "at": 23,
+  "start": 33.55,
+  "end": 45.09,
+  "src": "veo/part1_at023.mp4",
+  "raw": "projects/bio-c4-sa-01/veo/clips/family.mp4",
+  "full": false,
+  "frame": "partial",
+  "layout": "panel",
+  "green": false,
+  "backdrop": "own",
+  "panel_ar": 1.7777777777777777,
+  "panel_top": 160,
+  "mark": [
+   1132,
+   572,
+   56,
+   56
+  ],
+  "labels": []
+ },
+ {
+  "at": 44,
+  "start": 68.49,
+  "end": 73.47,
+  "src": "veo/part1_at044.mp4",
+  "raw": "projects/bio-c4-sa-01/veo/clips/tongue_take1_weak_roll.mp4",
+  "full": false,
+  "frame": "partial",
+  "layout": "panel",
+  "green": false,
+  "backdrop": "own",
+  "panel_ar": 1.7777777777777777,
+  "panel_top": 160,
+  "mark": [
+   1132,
+   572,
+   56,
+   56
+  ],
+  "labels": []
+ }
+]

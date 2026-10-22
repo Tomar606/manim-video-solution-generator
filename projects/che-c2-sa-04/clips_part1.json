@@ -1,0 +1,52 @@
+[
+  {
+    "at": 11,
+    "start": 32.09,
+    "end": 40.09,
+    "src": "veo/part1_at011.mp4",
+    "raw": "veo/cell_volume_raw.mp4",
+    "full": false,
+    "frame": "partial",
+    "layout": "panel",
+    "green": false,
+    "backdrop": "own",
+    "panel_ar": 1.7777777777777777,
+    "panel_top": 300,
+    "labels": [
+      {
+        "png": "veo/labels/part1_at011_label00.png",
+        "x": 243,
+        "y": 212,
+        "w": 162,
+        "h": 82,
+        "start": 32.09,
+        "end": 40.09,
+        "text": "इलेक्ट्रोड"
+      },
+      {
+        "png": "veo/labels/part1_at011_label01.png",
+        "x": 419,
+        "y": 812,
+        "w": 242,
+        "h": 77,
+        "start": 36.62,
+        "end": 40.09,
+        "text": "V ml विलयन"
+      }
+    ],
+    "attempts": 1,
+    "sequence": null,
+    "continues_from": null,
+    "continuity": null,
+    "reference": null,
+    "usable": true,
+    "by_hand": true,
+    "accepted_by_hand": "Replaced the dilution clip: this one shows the conductivity cell with a measured volume, which is what the line describes and what the textbook draws.",
+    "mark": [
+      1118,
+      558,
+      84,
+      84
+    ]
+  }
+]

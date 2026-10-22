@@ -1,0 +1,20 @@
+[
+ {
+  "png": "tools/edu/renderer/out/chips/ovule/p1a-plain.png",
+  "start": 16.89,
+  "end": 28.68,
+  "top": 300
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/ovule/p1b-funicle.png",
+  "start": 34.9,
+  "end": 47.6,
+  "top": 300
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/ovule/p1c-integ.png",
+  "start": 56.14,
+  "end": 76.74,
+  "top": 300
+ }
+]

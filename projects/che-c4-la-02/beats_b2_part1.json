@@ -1,0 +1,45 @@
+[
+ {
+  "type": "table",
+  "at": 7,
+  "cols": [
+   "अम्लीय",
+   "क्षारीय",
+   "उदासीन"
+  ],
+  "rows": [
+   [
+    "$Mn^{2+}$",
+    "$MnO_4^{2-}$",
+    "$MnO_2$"
+   ]
+  ],
+  "reveal_at": [
+   14
+  ]
+ },
+ {
+  "type": "formula",
+  "at": 15,
+  "label": "अम्लीय माध्यम (तनु H₂SO₄)",
+  "tex": [
+   "2KMnO_4 + 3H_2SO_4 \\longrightarrow K_2SO_4 + 2MnSO_4 + 3H_2O + 5[O]"
+  ]
+ },
+ {
+  "type": "formula",
+  "at": 18,
+  "label": "उदाहरण — फेरस सल्फेट",
+  "tex": [
+   "2FeSO_4 + H_2SO_4 + [O] \\longrightarrow Fe_2(SO_4)_3 + H_2O",
+   "Fe^{2+} \\longrightarrow Fe^{3+}",
+   "KMnO_4 = \\text{oxidant},\\; FeSO_4 = \\text{reductant}"
+  ],
+  "build": "progressive",
+  "reveal_at": [
+   18,
+   19,
+   20
+  ]
+ }
+]

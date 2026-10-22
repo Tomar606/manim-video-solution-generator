@@ -1,0 +1,68 @@
+[
+  {
+    "at": 11,
+    "start": 30.44,
+    "end": 38.44,
+    "src": "veo/part1_at011.mp4",
+    "raw": "veo/part1_at011_clean.mp4",
+    "full": false,
+    "frame": "partial",
+    "layout": "panel",
+    "green": false,
+    "backdrop": "own",
+    "panel_ar": 1.7777777777777777,
+    "panel_top": 300,
+    "labels": [
+      {
+        "png": "veo/labels/part1_at011_label00.png",
+        "x": 444,
+        "y": 208,
+        "w": 192,
+        "h": 90,
+        "start": 30.44,
+        "end": 38.44,
+        "text": "लवण-सेतु"
+      },
+      {
+        "png": "veo/labels/part1_at011_label01.png",
+        "x": 20,
+        "y": 538,
+        "w": 263,
+        "h": 77,
+        "start": 30.44,
+        "end": 38.44,
+        "text": "जेली भरी नली"
+      },
+      {
+        "png": "veo/labels/part1_at011_label02.png",
+        "x": 772,
+        "y": 538,
+        "w": 293,
+        "h": 77,
+        "start": 30.44,
+        "end": 38.44,
+        "text": "दो अलग विलयन"
+      }
+    ],
+    "fit": {
+      "src": "/Users/indian/projects/manim-video-solution-generator/projects/che-c2-sa-01/veo/part1_at011_clean.mp4",
+      "dest": "/Users/indian/projects/manim-video-solution-generator/projects/che-c2-sa-01/veo/part1_at011.mp4",
+      "had": 8.0,
+      "usable": 8.0,
+      "need": 8.0,
+      "strategy": "one_way",
+      "trimmed": 0.0,
+      "filters": "trim=0:8.000,setpts=PTS-STARTPTS,fps=30,fps=30,tpad=stop_mode=clone:stop_duration=0.5"
+    },
+    "verdict": "fail",
+    "attempts": 1,
+    "sequence": null,
+    "continues_from": null,
+    "continuity": null,
+    "reference": null,
+    "usable": true,
+    "by_hand": true,
+    "accepted_by_hand": "Subject and framing correct, landscape 16:9; remaining objections are to the realistic background the user asked for, which the panel layout does not require to match the plate.",
+    "overrode_verdict": "fail"
+  }
+]

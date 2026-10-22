@@ -1,0 +1,12 @@
+[
+  {
+    "at": 40,
+    "src": "veo/part1_at040.mp4",
+    "verdict": "warn"
+  },
+  {
+    "at": 45,
+    "src": "veo/part1_at045_try3_clean.mp4",
+    "verdict": "fail"
+  }
+]

@@ -1,0 +1,149 @@
+{
+ "cues": [
+  {
+   "time": 0.35,
+   "name": "card-appears",
+   "gain": -9.0
+  },
+  {
+   "time": 9.045,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 15.194,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 21.994,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 29.394,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 37.627,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 37.847,
+   "name": "step-resolves",
+   "gain": -7.0
+  },
+  {
+   "time": 44.395,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 51.205,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 59.038,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 65.972,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 73.124,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 80.124,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 80.344,
+   "name": "step-resolves",
+   "gain": -7.0
+  },
+  {
+   "time": 86.99,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 93.924,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 95.444,
+   "name": "page-arrives",
+   "gain": -11.0
+  },
+  {
+   "time": 100.557,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 109.124,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 111.144,
+   "name": "click",
+   "gain": -12.0
+  },
+  {
+   "time": 117.424,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 117.644,
+   "name": "step-resolves",
+   "gain": -7.0
+  },
+  {
+   "time": 123.99,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 129.956,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 131.276,
+   "name": "page_swoosh",
+   "gain": -12.0
+  },
+  {
+   "time": 137.189,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 142.989,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 150.205,
+   "name": "whoosh",
+   "gain": -4.0
+  },
+  {
+   "time": 157.421,
+   "name": "whoosh",
+   "gain": -4.0
+  }
+ ]
+}

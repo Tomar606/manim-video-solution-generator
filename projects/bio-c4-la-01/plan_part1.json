@@ -1,0 +1,20 @@
+[
+ {
+  "png": "tools/edu/renderer/out/chips/bio4/p1-defn.png",
+  "start": 28.69,
+  "end": 48.1,
+  "top": 380
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio4/p1-antigen.png",
+  "start": 72.09,
+  "end": 104.0,
+  "top": 380
+ },
+ {
+  "png": "tools/edu/renderer/out/chips/bio4/p1-allele.png",
+  "start": 120.27,
+  "end": 144.58,
+  "top": 380
+ }
+]

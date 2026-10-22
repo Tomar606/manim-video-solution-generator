@@ -1,0 +1,54 @@
+[
+  {
+    "at": 10,
+    "start": 44.2,
+    "end": 52.2,
+    "src": "veo/part1_at010.mp4",
+    "raw": "veo/part1_at010_raw.mp4",
+    "full": false,
+    "frame": "partial",
+    "layout": "panel",
+    "green": false,
+    "backdrop": "own",
+    "panel_ar": 1.7777777777777777,
+    "panel_top": 300,
+    "labels": [
+      {
+        "png": "veo/labels/part1_at010_label00.png",
+        "x": 394,
+        "y": 215,
+        "w": 293,
+        "h": 77,
+        "start": 44.2,
+        "end": 52.2,
+        "text": "जल अंदर जाता है"
+      }
+    ],
+    "fit": {
+      "src": "/Users/indian/projects/manim-video-solution-generator/projects/che-c1-sa-02/veo/part1_at010_raw.mp4",
+      "dest": "/Users/indian/projects/manim-video-solution-generator/projects/che-c1-sa-02/veo/part1_at010.mp4",
+      "had": 8.0,
+      "usable": 7.5,
+      "need": 8.0,
+      "strategy": "one_way",
+      "trimmed": 0.5,
+      "filters": "trim=0:7.500,setpts=PTS-STARTPTS,setpts=1.06667*PTS,minterpolate=fps=30:mi_mode=blend,fps=30,tpad=stop_mode=clone:stop_duration=0.5"
+    },
+    "verdict": "fail",
+    "attempts": 1,
+    "sequence": null,
+    "continues_from": null,
+    "continuity": null,
+    "reference": null,
+    "usable": true,
+    "by_hand": true,
+    "accepted_by_hand": "Brief changed after grading: the user asked for a realistic background rather than the plain dark ground the prompt specified, and under the PANEL layout the clip's own ground never has to match the plate — its top dissolves in, its sides are faded and the paper tear closes it. The Veo wordmark the grader found is removed (delogo + crop, verified on the corner). The unfinished swell is handled by trimming the tail at 7.5s so the fitter settles on the final frame instead of cutting mid-action.",
+    "overrode_verdict": "fail",
+    "panel_crop": [
+      88,
+      285,
+      568,
+      995
+    ]
+  }
+]

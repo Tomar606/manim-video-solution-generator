@@ -42,6 +42,9 @@ from src.manim_helpers import (ThemedScene, fit_caption, keep_clear, mark_group,
                                norm_point, register_fonts, wrap_measured)
 
 INK, DIM, GOLD = "#FFFFFF", "#B9C6DC", "#FFC15C"
+E_CYAN, ION_GOLD, K_GREEN = "#5BC8F9", "#FFC15C", "#8FE3B0"
+ANSWER, REASON = "#7BE3A0", "#FFC15C"   # what the question asks for / why
+FONT_UI = "Poppins"      # chain/table bodies use the theme face; labels use Khand
 GREEN, VIOLET, CYAN = "#7CE0B0", "#C792EA", "#5BC8F9"
 
 FONT, FONT_W = "Khand", "BOLD"
@@ -53,6 +56,19 @@ CAPTION_SIZE, CAPTION_W, CAPTION_TOP = 55, 0.90, 0.090
 # is how "Mn: +7 -> +2" ended up behind his head. Keep this above 966/1920 with a
 # margin; if the compositor's placement changes, this has to change with it.
 STAGE_TOP, STAGE_BOT, STAGE_W = 0.290, 0.492, 0.86
+# How far down a CONSTRUCTED CELL may reach while the presenter is still on
+# screen. STAGE_BOT stops at 0.492 because it was drawn for a full-size
+# presenter; during a diagram the compositor shrinks him to SMALL, whose head
+# measures 0.765 at the shrunk size (tools/composite.py writes the geometry
+# beside every render, so this is read rather than guessed). 0.720 clears it —
+# which nearly doubles the band, and is why the cell does not have to choose
+# between being legible and letting him be seen.
+CELL_FLOOR = 0.720
+# And how far UP it may reach. STAGE_TOP=0.290 exists to clear the caption — but
+# a cell beat suppresses the caption (see the caption rule in construct), so that
+# strip is empty and reserving it just made the cell smaller. Starting at 0.15
+# adds a quarter of the frame's height back to the fit.
+CELL_TOP = 0.15
 CAPTION_GAP = 0.30
 
 PROJECT = _os.getenv("PYQ_PROJECT", "che-c2-la-05")
@@ -61,9 +77,18 @@ ROOT = _Path(ASSET_ROOT) / "projects" / PROJECT
 FIGURES = ROOT / "assets" / "figures"
 
 LINES = json.loads((ROOT / f"lines_part{PART}.json").read_text(encoding="utf-8"))
-BEATS = json.loads((ROOT / f"beats_part{PART}.json").read_text(encoding="utf-8"))
+# PYQ_BATCH=b2 renders the scene-director plan (`beats_b2_part<N>.json`) instead
+# of the original beats, so both batches can be built from one project without
+# either overwriting the other's plan.
+_BATCH = _os.environ.get("PYQ_BATCH", "")
+# PYQ_UNTIL=<seconds> stops the scene early. Rendering 132 seconds to use the
+# first 14 wasted nine minutes; the card is often all that is wanted when the
+# body of the video comes from somewhere else.
+_UNTIL = float(_os.environ.get("PYQ_UNTIL", "0") or 0)
+_bf = ROOT / (f"beats_b2_part{PART}.json" if _BATCH == "b2" else f"beats_part{PART}.json")
+BEATS = json.loads(_bf.read_text(encoding="utf-8"))
 META = json.loads((ROOT / "meta.json").read_text(encoding="utf-8"))
-CLIP_END = float(META["clip_end"][str(PART)])
+CLIP_END = float((META.get("clip_end") or {}).get(str(PART), float(LINES[-1]["start"]) + 3.0))
 
 HILITE = {k: GOLD for k in META.get("hilite", [])}
 
@@ -111,6 +136,21 @@ class PyqPart(ThemedScene):
         top, bot = norm_point(0.5, STAGE_TOP)[1], norm_point(0.5, STAGE_BOT)[1]
         if getattr(self, "caption_mob", None) is not None:
             top = min(top, self.caption_mob.get_bottom()[1] - CAPTION_GAP)
+        else:
+            # NO CAPTION, NO CAPTION STRIP. STAGE_TOP is where content starts so
+            # that it clears the caption — but a beat suppresses the caption, so
+            # while one is up that strip is empty and reserving it only shrank
+            # the beat. The overall cell reaction was wrapping every line at the
+            # arrow and setting them at half size against a band that was mostly
+            # unused space.
+            #
+            # The FLOOR moves with it, for the same reason: no caption means a
+            # beat is up, a beat on the stage means the compositor has shrunk
+            # the presenter, and STAGE_BOT was measured against a FULL-height
+            # one. Leaving the floor there rendered the ladder visibly smaller
+            # than the orbital screen beside it in the same video.
+            top = norm_point(0.5, CELL_TOP)[1]
+            bot = norm_point(0.5, CELL_FLOOR)[1]
         return (np.array([0., (top + bot) / 2, 0.]),
                 config.frame_width * STAGE_W, top - bot)
 
@@ -660,17 +700,291 @@ class PyqPart(ThemedScene):
             e.set_opacity(0.0)
         return rows, eqs
 
+    def _asides(self, spec, host):
+        """Photographs shown BESIDE a block instead of replacing it.
+
+        A beat replaces whatever is on stage, so a photo authored as its own
+        beat wipes the table or derivation underneath it. But a disease photo
+        belongs WITH the row that names the disease, and a rust photo belongs
+        with the definition it illustrates. An aside is placed clear of the host
+        block, appears on its own caption, and is swapped for the next one.
+        """
+        out = []
+        for a in spec.get("images", []):
+            img = ImageMobject(str(ROOT / a["src"]))
+            side = a.get("side", "right")
+            if side == "below":
+                # BELOW the block, centred, and large. Beside it, a photograph
+                # gets pushed to the frame edge and clipped — which is what the
+                # disease photos did. Directly under the table it can be big,
+                # and the presenter is hidden for this stretch so nothing has to
+                # share the space.
+                img.height = float(a.get("h", 4.2))
+                img.next_to(host, DOWN, buff=0.42)
+                img.set_x(host.get_x())
+                _, bw, _ = self.stage_box()
+                if img.width > bw * 0.86:
+                    img.scale(bw * 0.86 / img.width)
+                # Do NOT clamp this one back into the stage band. The band stops
+                # above the presenter, and clamping dragged the photo up onto the
+                # table it was meant to sit under. The presenter is hidden for
+                # this stretch, so the space below the band is free — the only
+                # limit is the bottom of the frame.
+                floor = -config.frame_height / 2 + 0.45
+                if img.get_bottom()[1] < floor:
+                    img.shift(UP * (floor - img.get_bottom()[1]))
+                if img.get_top()[1] > host.get_bottom()[1] - 0.25:
+                    img.next_to(host, DOWN, buff=0.30)
+                    img.set_x(host.get_x())
+                out.append((int(a["at"]), img))
+                continue
+            else:
+                img.height = float(a.get("h", 2.6))
+                img.next_to(host, RIGHT if side == "right" else LEFT, buff=0.45)
+            # keep it inside the stage band, never over the caption or presenter
+            self.clamp_to_band(img)
+            out.append((int(a["at"]), img))
+        return out
+
+
+    # ---- the galvanic cell, CONSTRUCTED ------------------------------------ #
+    # The book's Daniell figure is drawn freehand and traces to a wobbly line,
+    # where the dry cell's is ruled and traces clean. Rather than inherit one
+    # page's handwriting, this builds the apparatus from primitives — and
+    # because every part is placed HERE, the electron and ion routes quote the
+    # same constants the wire and the bridge are drawn from instead of being
+    # measured off a bitmap. A path measured off the trace's preview PNG was
+    # offset by the crop's whitespace margin and the electrons flew through
+    # open air; a path that IS the tube cannot.
+    CELL = dict(bk_w=1.42, bk_h=1.55, bk_r=0.18, bk_y=-1.55, lbx=-1.22, rbx=1.22,
+                rod_w=0.19, rod_top=0.78, wire_y=2.40, br_x=0.52, br_top=0.95,
+                g_x=0.92, r_x=-0.92)
+    CELL_INK = dict(zn="#C8D4E0", cu="#C87137", zn_sol="#8FA6BC", cu_sol="#2E86C1")
+
+    def _cell_geom(self):
+        C = self.CELL
+        g = dict(C)
+        g["liq"] = C["bk_y"] + 1.05
+        g["rod_bot"] = C["bk_y"] + 0.26
+        g["znx"] = C["lbx"] - 0.34
+        g["cux"] = C["rbx"] + 0.34
+        g["br_bot"] = g["liq"] - 0.42
+        return g
+
+    def _beaker(self, cx, G):
+        w, h, r, y0 = G["bk_w"], G["bk_h"], G["bk_r"], G["bk_y"]
+        x0, x1, y1 = cx - w / 2, cx + w / 2, y0 + h
+        parts = [Line([x0, y1, 0], [x0, y0 + r, 0]),
+                 ArcBetweenPoints([x0, y0 + r, 0], [x0 + r, y0, 0], angle=-PI / 2),
+                 Line([x0 + r, y0, 0], [x1 - r, y0, 0]),
+                 ArcBetweenPoints([x1 - r, y0, 0], [x1, y0 + r, 0], angle=-PI / 2),
+                 Line([x1, y0 + r, 0], [x1, y1, 0]),
+                 Line([x0 - 0.07, y1, 0], [x0, y1, 0]),
+                 Line([x1, y1, 0], [x1 + 0.07, y1, 0])]
+        return VGroup(*parts).set_stroke(INK, 3.2, 1).set_fill(opacity=0)
+
+    def _bridge_path(self, G, right_to_left=True):
+        """The route an ion actually takes: up one limb, ROUND THE BEND, down the
+        other. Built from the same primitives as the bridge, so a dot cannot
+        leave the tube — corner points alone gave a chord across the top and the
+        ions cut horizontally through open air above the arch."""
+        bx, bt, bb = G["br_x"], G["br_top"], G["br_bot"]
+        a, b = (bx, -bx) if right_to_left else (-bx, bx)
+        arc = ArcBetweenPoints([a, bt, 0], [b, bt, 0], angle=PI if right_to_left else -PI)
+        path = VMobject()
+        path.append_points(Line([a, bb, 0], [a, bt, 0]).get_points())
+        path.append_points(arc.get_points())
+        path.append_points(Line([b, bt, 0], [b, bb, 0]).get_points())
+        return path
+
+    def cell_rig(self):
+        G = self._cell_geom()
+        C = self.CELL_INK
+        beakers = VGroup(self._beaker(G["lbx"], G), self._beaker(G["rbx"], G))
+        liq = VGroup()
+        for cx, col in ((G["lbx"], C["zn_sol"]), (G["rbx"], C["cu_sol"])):
+            r = Rectangle(width=G["bk_w"] - 0.10, height=G["liq"] - (G["bk_y"] + 0.05))
+            r.set_fill(col, 0.5).set_stroke(width=0)
+            r.move_to([cx, (G["liq"] + G["bk_y"] + 0.05) / 2, 0])
+            liq.add(r)
+        rods = VGroup()
+        for x, col in ((G["znx"], C["zn"]), (G["cux"], C["cu"])):
+            r = Rectangle(width=G["rod_w"], height=G["rod_top"] - G["rod_bot"])
+            r.set_fill(col, 0.85).set_stroke(INK, 2.0, 1)
+            r.move_to([x, (G["rod_top"] + G["rod_bot"]) / 2, 0])
+            rods.add(r)
+        bx, bt, bb = G["br_x"], G["br_top"], G["br_bot"]
+        bridge = VGroup(Line([-bx, bb, 0], [-bx, bt, 0]),
+                        ArcBetweenPoints([-bx, bt, 0], [bx, bt, 0], angle=-PI),
+                        Line([bx, bt, 0], [bx, bb, 0])).set_stroke(INK, 11, 1)
+        wy, gx, rx = G["wire_y"], G["g_x"], G["r_x"]
+        zig = VMobject().set_points_as_corners(
+            [[rx - 0.42, wy, 0]] +
+            [[rx - 0.42 + i * 0.12, wy + (0.16 if i % 2 else -0.16), 0] for i in range(1, 8)] +
+            [[rx + 0.42, wy, 0]])
+        circ = Circle(radius=0.26).move_to([gx, wy, 0])
+        wire = VGroup(Line([G["znx"], G["rod_top"], 0], [G["znx"], wy, 0]),
+                      Line([G["znx"], wy, 0], [rx - 0.42, wy, 0]), zig,
+                      Line([rx + 0.42, wy, 0], [gx - 0.26, wy, 0]), circ,
+                      Line([gx + 0.26, wy, 0], [G["cux"], wy, 0]),
+                      Line([G["cux"], G["rod_top"], 0], [G["cux"], wy, 0]))
+        wire.set_stroke(INK, 3.2, 1).set_fill(opacity=0)
+        gl = Text("G", font=FONT, font_size=26, color=INK).move_to(circ.get_center())
+        return VGroup(beakers, liq, rods, bridge, wire, gl), G
+
+
+    def start_flow(self, kind):
+        """Dots travelling a route, as a LOOPING UPDATER rather than an
+        animation. `play()` would block, and at() can wait but never rewind — a
+        three-second electron run placed on a caption would eat the next one. As
+        an updater the motion simply continues underneath while the teacher goes
+        on talking, which is also what the mechanism actually does."""
+        from manim.animation.updaters.mobject_update_utils import turn_animation_into_updater
+        st = getattr(self, "_cell", None)
+        if not st:
+            return VGroup()
+        G, P, k = st["G"], st["P"], st["k"]
+
+        def route(pts):
+            v = VMobject().set_points_as_corners([P(x, y) for x, y in pts])
+            return v
+
+        specs = {
+            # up out of the zinc, along the wire through G, down into the copper
+            "electrons": (route([(G["znx"], 0.0), (G["znx"], G["wire_y"]),
+                                 (G["cux"], G["wire_y"]), (G["cux"], 0.0)]),
+                          E_CYAN, 7, 3.2, 0.085),
+            # Zn2+ leaving the rod INTO its solution
+            "zn_ions": (route([(G["znx"] + 0.10, G["liq"] - 0.55),
+                               (G["lbx"] + 0.55, G["liq"] - 0.80)]), ION_GOLD, 4, 2.4, 0.065),
+            # Cu2+ arriving AT the rod and plating out
+            "cu_ions": (route([(G["rbx"] - 0.55, G["liq"] - 0.80),
+                               (G["cux"] - 0.10, G["liq"] - 0.55)]), ION_GOLD, 4, 2.4, 0.065),
+            # NO3- toward the ANODE, K+ toward the CATHODE
+            "no3": (self._scaled_bridge(True), INK, 3, 3.4, 0.065),
+            "k": (self._scaled_bridge(False), K_GREEN, 3, 3.4, 0.065),
+        }
+        if kind not in specs:
+            return VGroup()
+        path, col, n, period, r = specs[kind]
+        ds = VGroup()
+        for j in range(n):
+            d = Dot(radius=r * k, color=col).set_stroke(col, 6, 0.30, background=True)
+            d.move_to(path.point_from_proportion(0))
+            anim = MoveAlongPath(d, path, run_time=period, rate_func=linear)
+            turn_animation_into_updater(anim, cycle=True, delay=j * period / n)
+            ds.add(d)
+        self.add(ds)
+        return ds
+
+    def _scaled_bridge(self, right_to_left):
+        st = self._cell
+        G, P = st["G"], st["P"]
+        bx, bt, bb = G["br_x"], G["br_top"], G["br_bot"]
+        a, b = (bx, -bx) if right_to_left else (-bx, bx)
+        arc = ArcBetweenPoints(P(a, bt), P(b, bt), angle=PI if right_to_left else -PI)
+        path = VMobject()
+        path.append_points(Line(P(a, bb), P(a, bt)).get_points())
+        path.append_points(arc.get_points())
+        path.append_points(Line(P(b, bt), P(b, bb)).get_points())
+        return path
+
+
+    # ---- orbital-box diagrams ---------------------------------------------- #
+    # Boxes and arrows are the one figure every textbook draws identically, so
+    # unlike an apparatus there is no book-specific shape to inherit. What must
+    # match is the layout the marker expects: 3d as five boxes, then 4s, then 4p
+    # as three, and a brace under EXACTLY the orbitals that hybridise.
+    OBW = 0.42                     # one orbital box; the diagram is the answer,
+                                   # so everything else is sized around it
+    def _electron(self, up=True):
+        """NOT manim's Arrow: Arrow.scale() holds its tip size constant, so
+        scale_to_fit_height() does not shrink it and the arrow hangs out of both
+        ends of its box. A Line with an explicit tip scales like anything else."""
+        h = self.OBW * 0.62
+        a, b = ([0,-h/2,0],[0,h/2,0]) if up else ([0,h/2,0],[0,-h/2,0])
+        ln = Line(a, b).set_stroke(E_CYAN if up else ION_GOLD, 2.4)
+        ln.add_tip(tip_length=h*0.30, tip_width=h*0.26)
+        if ln.height > h:
+            ln.scale(h / ln.height)
+        return ln
+
+    def _orow(self, spec, x0, tag, ring=()):
+        boxes, els, rings = VGroup(), VGroup(), VGroup()
+        for i, c in enumerate(spec):
+            b = Square(self.OBW).set_stroke(INK, 2.0).set_fill(opacity=0)
+            b.move_to([x0 + i*self.OBW, 0, 0]); boxes.add(b)
+            if c and c != ".":
+                g = (VGroup(self._electron(True)) if c == "u" else
+                     VGroup(self._electron(True).shift(LEFT*self.OBW*0.17),
+                            self._electron(False).shift(RIGHT*self.OBW*0.17)))
+                g.move_to(b.get_center()); els.add(g)
+            if i in ring:
+                rings.add(SurroundingRectangle(b, buff=0.012, color=ANSWER, stroke_width=2.0))
+        cap = MathTex(tag, color="#C9D8F0").scale(0.50).next_to(boxes, UP, buff=0.085)
+        return VGroup(boxes, els, rings, cap), boxes
+
+    def _shape(self, kind):
+        c = ANSWER
+        if kind == "octa":
+            t,bo,l,r,f_,bk = [0,.74,0],[0,-.74,0],[-.66,0,0],[.66,0,0],[-.22,-.15,0],[.26,.17,0]
+            e = ((t,l),(t,r),(t,f_),(t,bk),(bo,l),(bo,r),(bo,f_),(bo,bk),(l,f_),(f_,r),(r,bk),(bk,l))
+            pts = (t,bo,l,r,f_,bk)
+        else:
+            a,b,cc,d = [-.60,-.40,0],[.60,-.40,0],[.10,.13,0],[0,.70,0]
+            e = ((a,b),(a,d),(b,d),(a,cc),(b,cc),(cc,d)); pts = (a,b,cc,d)
+        g = VGroup(*[Line(x,y,stroke_width=2.4,color=c) for x,y in e])
+        g.add(*[Dot(q, radius=0.045, color=c) for q in pts])
+        return g
+
+    ORB_RUNGS = ["अवस्था · विन्यास", "लिगैंड", "युग्मन", "संकरण", "ज्यामिति"]
+    def _rail(self, lit=()):
+        chips = VGroup()
+        for i, t in enumerate(self.ORB_RUNGS):
+            on = i in lit
+            tt = Text(t, font=FONT_UI, font_size=14, color=INK if on else "#38507A")
+            b = SurroundingRectangle(tt, buff=0.075, color=ANSWER if on else "#38507A")
+            b.set_stroke(width=1.5).set_fill("#0E2438", 0.7 if on else 0.3)
+            chips.add(VGroup(b, tt))
+        chips.arrange(RIGHT, buff=0.085)
+        ar = VGroup(*[Line(a.get_right(), b.get_left(), stroke_width=1.2, color="#38507A")
+                      for a, b in zip(chips, chips[1:])])
+        g = VGroup(chips, ar)
+        return g.scale(min(1.0, (config.frame_width*0.94)/g.width))
+
     def build_beat(self, spec):
         t = spec["type"]
         if t == "points":
             return self.beat_points(spec["items"], spec.get("title"),
                                     hi=spec.get("hi"))
         if t == "formula":
-            return self.beat_formula(spec["tex"], spec.get("label"))
+            grp = self.beat_formula(spec["tex"], spec.get("label"))
+            self._pending_asides = self._asides(spec, grp)
+            return grp
         if t == "flow":
             return self.beat_flow(spec["items"])
         if t == "compare":
             return self.beat_compare(spec["left"], spec["right"])
+        if t == "table":
+            grp, rows = self.beat_table(spec["cols"], spec["rows"],
+                                        size=spec.get("size", 26))
+            self._pending_asides = self._asides(spec, grp)
+            # rows arrive on their own caption, exactly like a progressive list
+            self._pending_reveal = list(zip(spec.get("reveal_at", []), rows))
+            if spec.get("reveal_at"):
+                for r in rows:
+                    r.set_opacity(0.0)
+            return grp
+        if t == "chain":
+            grp, links = self.beat_chain(spec["items"],
+                                         direction=spec.get("direction", "down"),
+                                         size=spec.get("size", 28),
+                                         title=spec.get("title"))
+            self._pending_reveal = list(zip(spec.get("reveal_at", []), links))
+            if spec.get("reveal_at"):
+                for b in links:
+                    b.set_opacity(0.0)
+            return grp
         if t == "video":
             # Nothing is drawn, and that is the point. A Veo clip is laid over
             # these frames by tools/composite.py — the clip was generated on
@@ -679,6 +993,190 @@ class PyqPart(ThemedScene):
             # here would sit underneath it, invisible except at the two fades
             # where it would flicker into view.
             return VGroup()
+        if t == "orbitals":
+            rl = self._rail(tuple(spec.get("rail", ())))
+            rl.move_to([0, norm_point(0.5, CELL_TOP)[1], 0])
+            def _set(txt, size, colour, bold=False):
+                """`$...$` goes to LaTeX. Ion CHARGES must be set as maths: the
+                Unicode superscripts put the sign visibly ABOVE the digit because
+                U+207A and U+00B2 sit at different heights in Poppins and Khand,
+                which the faculty flagged. Without this branch the beat printed
+                the markup itself — the screen read `$[NiCl_4]^{2-}$`."""
+                t = str(txt)
+                if t.startswith("$") and t.endswith("$"):
+                    m = MathTex(t[1:-1], color=colour)
+                    ref = Text("H", font=FONT, font_size=size, weight=FONT_W)
+                    m.scale(ref.height / max(MathTex("H").height, 1e-6))
+                    if bold:
+                        m.set_stroke(colour, width=1.4, opacity=1.0, background=True)
+                    return m
+                return Text(t, font=(FONT if bold else FONT_UI), font_size=size,
+                            color=colour, weight=(FONT_W if bold else NORMAL))
+
+            head = VGroup(_set(spec["ion"], 36, INK, bold=True))
+            if spec.get("cfg"):
+                head.add(Text("·", font=FONT_UI, font_size=22, color="#38507A"))
+                for piece in spec["cfg"] if isinstance(spec["cfg"], list) else [spec["cfg"]]:
+                    head.add(_set(piece, 21, DIM))
+            head.arrange(RIGHT, buff=0.22)
+
+            # PIECES THAT ARRIVE ON THEIR OWN CAPTION are laid out with the rest
+            # so they hold their place, then LIFTED OUT of the returned group —
+            # exactly as scan_figure does with its labels. Leaving them in and
+            # zeroing their opacity does not work: the beat is revealed with
+            # FadeIn, and FadeIn restores a mobject to ITS OWN current opacity,
+            # so anything pre-zeroed stays invisible for the whole beat.
+            self._labels = []
+            pending = []
+            def timed(mob, at):
+                if at is not None:
+                    pending.append((int(at), mob))
+                return mob
+
+            stack, boxes = [], []
+            rev = spec.get("reveal", {})
+            for i, r in enumerate(spec["rows"]):
+                if i and r.get("cap"):
+                    stack.append(timed(Text(r["cap"], font=FONT, font_size=21,
+                                            color=REASON, weight=FONT_W), r.get("cap_at")))
+                g1, b1 = self._orow(r["d"], -1.95, "3d", tuple(r.get("ring_d", ())))
+                g2, b2 = self._orow(r["s"], 0.35, "4s", tuple(r.get("ring_s", ())))
+                g3, b3 = self._orow(r["p"], 1.05, "4p", tuple(r.get("ring_p", ())))
+                boxes.append((b1, b2, b3))
+                stack.append(timed(VGroup(g1, g2, g3), r.get("at")))
+            orb = VGroup(*stack).arrange(DOWN, buff=0.26)
+
+            bi = int(spec.get("brace_row", len(spec["rows"]) - 1))
+            b1, b2, b3 = boxes[bi]
+            keep = tuple(spec["rows"][bi].get("ring_d", ()))
+            span = VGroup(*([VGroup(*[b1[j] for j in keep])] if keep else []), b2, b3)
+            br = Brace(span, DOWN, buff=0.09).set_color(ANSWER)
+            hy = MathTex(spec["hyb"], color=ANSWER).scale(0.80)
+            line = VGroup(hy)
+            if spec.get("extra"):
+                line = VGroup(hy, Text("—", font=FONT_UI, font_size=22, color="#38507A"),
+                              Text(spec["extra"], font=FONT, font_size=24,
+                                   color=ANSWER, weight=FONT_W)).arrange(RIGHT, buff=0.20)
+            line.next_to(br, DOWN, buff=0.06)
+            hyb_grp = timed(VGroup(br, line), rev.get("hyb"))
+            # the brace is positioned against the REAL box coordinates, so it
+            # must not be re-arranged afterwards — grouping it with the rows
+            # means arrange() moves the pair as one and it stays attached.
+            orb_full = VGroup(orb, hyb_grp)
+
+            rsn = Text(spec["reason"], font=FONT, font_size=26, color=REASON, weight=FONT_W)
+            unp = Text(spec.get("unpaired", ""), font=FONT_UI, font_size=17, color=DIM)
+            txt = VGroup(rsn, unp).arrange(DOWN, buff=0.16)
+            geo = VGroup(self._shape(spec.get("geometry", "tetra")).scale(0.72),
+                         Text(spec["gname"], font=FONT, font_size=27, color=ANSWER, weight=FONT_W)
+                         ).arrange(DOWN, buff=0.12)
+            timed(txt, rev.get("reason")); timed(geo, rev.get("geometry"))
+            foot = VGroup(txt, geo).arrange(RIGHT, buff=0.60)
+
+            body = VGroup(head, orb_full, foot).arrange(DOWN, buff=0.34)
+            top = rl.get_bottom()[1] - 0.28
+            bot = norm_point(0.5, CELL_FLOOR)[1]
+            # Grow as well as shrink. Capping at 1.0 left the diagram sitting in
+            # the top half of a band it was free to fill — on a phone that is the
+            # difference between an orbital box you can read and one you cannot.
+            k = min((top - bot) / body.height, (config.frame_width * 0.98) / body.width)
+            body.scale(k).move_to([0, top - body.height/2, 0])
+            for at, mob in pending:
+                for parent in body.submobjects:
+                    if mob in parent.submobjects:
+                        parent.remove(mob)
+                        break
+                else:
+                    body.remove(mob)
+                self._labels.append((at, mob))
+            return VGroup(rl, body)
+        if t == "cell":
+            rig, G = self.cell_rig()
+            c, bw, bh = self.stage_box()
+            # A CONSTRUCTED CELL IS TALLER THAN IT IS WIDE — wire above, beakers
+            # below — so the 388px stage band scales it to about a third and the
+            # labels with it. This question is a सचित्र one: the apparatus IS the
+            # answer, so when the beat sends the presenter away it takes the
+            # frame instead of being capped at band height. tools/
+            # presenter_windows.py turns the same `presenter: hidden` into the
+            # compositor's fade, so the two agree.
+            top = norm_point(0.5, CELL_TOP)[1]
+            bot = (-config.frame_height / 2 + 0.45
+                   if spec.get("presenter") == "hidden"
+                   else norm_point(0.5, CELL_FLOOR)[1])
+            c = np.array([0.0, (top + bot) / 2, 0.0])
+            bh = top - bot
+            # The badge rows hang BELOW the rig's own bounding box, so fitting
+            # the rig alone pushed them off the bottom edge. Reserve their band
+            # in the fit and the rig rides correspondingly higher — which also
+            # fills the empty top the old centring left.
+            f = float(spec.get("fill", 0.94))
+            pad = 1.55 if any(l.get("part", "").endswith("2")
+                              for l in spec.get("labels", [])) else 0.85
+            k = min(bw * f / rig.width, bh * f / (rig.height + pad))
+            pre = rig.get_center()
+            rig.scale(k)
+            target = c + UP * (pad * k) / 2.0
+            rig.move_to(target)
+
+            def P(x, y):
+                return target + k * (np.array([x, y, 0.0]) - pre)
+
+            self._cell = dict(G=G, P=P, k=k)
+            # LABELS: each near its own part, joined by a leader, and revealed on
+            # the caption that names it — same contract as a scan_figure.
+            anchors = {
+                "zn_rod": ((-2.18, 0.62), (G["znx"] - 0.10, 0.30)),
+                "cu_rod": ((2.18, 0.62), (G["cux"] + 0.10, 0.30)),
+                "bridge": ((0.0, G["br_top"] + 0.86), (0.0, G["br_top"] + G["br_x"] - 0.06)),
+                "anode": ((G["lbx"], G["bk_y"] - 0.52), (G["lbx"], G["bk_y"] - 0.10)),
+                "cathode": ((G["rbx"], G["bk_y"] - 0.52), (G["rbx"], G["bk_y"] - 0.10)),
+                "anode2": ((G["lbx"], G["bk_y"] - 1.06), None),
+                "cathode2": ((G["rbx"], G["bk_y"] - 1.06), None),
+                "zn_sol": ((G["lbx"] + 0.02, G["liq"] - 0.92), None),
+                "cu_sol": ((G["rbx"] - 0.02, G["liq"] - 0.92), None)}
+            self._labels = []
+            for sl in spec.get("labels", []):
+                at_, to = anchors[sl["part"]]
+                txt, face = sl["text"], sl.get("plate")
+                if txt.startswith("$") and txt.endswith("$"):
+                    body = MathTex(txt[1:-1], color=INK).scale(0.55 * k)
+                else:
+                    body = Text(txt, font=FONT, font_size=max(14, int(24 * k)),
+                                color=GOLD if sl.get("hi") else INK,
+                                weight=BOLD if (sl.get("hi") or face) else NORMAL)
+                    if face:
+                        box = RoundedRectangle(width=body.width + 0.26 * k,
+                                               height=body.height + 0.20 * k,
+                                               corner_radius=0.08 * k)
+                        box.set_fill(face, 1).set_stroke(width=0).move_to(body.get_center())
+                        body = VGroup(box, body)
+                body.move_to(P(*at_))
+                lab = body
+                if to is not None:
+                    tgt = P(*to)
+                    d = tgt - body.get_center()
+                    edge = body.get_boundary_point(d / (np.linalg.norm(d) or 1.0))
+                    lab = VGroup(body, Line(edge, tgt, stroke_width=1.8,
+                                            color=INK).set_opacity(0.75))
+                # NEVER clamp a cell label. clamp_to_band() drags a mobject into
+                # STAGE_TOP..STAGE_BOT, and a cell computes its OWN box — taller,
+                # because it suppresses the caption above and only has to clear
+                # the shrunk presenter below. Clamping flattened all seven labels
+                # into one strip on top of each other, twice: once when the box
+                # was the full frame, and again the moment the `presenter` key
+                # that guarded it was removed. The cell keeps its own labels
+                # inside its own box by construction.
+                self._labels.append((int(sl["at"]), lab))
+            self._flows = [(int(f["at"]), f["kind"]) for f in spec.get("flows", [])]
+            return rig
+        if t == "clear":
+            # "No graphic" is a valid director decision, and until now there was
+            # no way to SAY it once a beat was up: the stage only ever changed
+            # from one graphic to another, so the last one sat there to the end
+            # of the part. A clear beat empties the stage, which also brings the
+            # captions back — see the caption rule in construct().
+            return VGroup()
         if t == "image":
             return self.beat_image(ROOT / spec["src"], spec.get("caption"))
         if t == "graph":
@@ -686,6 +1184,17 @@ class PyqPart(ThemedScene):
         if t in ("figure", "scan_figure"):
             fig = self.figure(spec["name"], draw=spec.get("draw", "scan"),
                               hide=spec.get("hide"))
+            # A सचित्र question's diagram IS the answer, so it takes the band
+            # rather than being capped by the generic MAX_GROW that suits a
+            # block of text. The dry cell shipped at about a sixth of the frame
+            # under a full-size presenter, twice.
+            c, bw, bh = self.stage_box()
+            want = float(spec.get("fill", 0.92))
+            if fig.height > 0 and fig.width > 0:
+                k = min((bw * want) / fig.width, (bh * want) / fig.height)
+                if k > 1.0:
+                    fig.scale(k)
+                    fig.move_to(c)
             # Same contract as `apparatus`: built now, revealed one label per
             # caption that names a part.
             self._labels = []
@@ -746,7 +1255,8 @@ class PyqPart(ThemedScene):
         if not no_card:
             self.question_card(META["question"], META.get("highlight", ""),
                                META.get("years", ""),
-                               sheet=ROOT / "assets" / "design" / "question_sheet.png")
+                               sheet=ROOT / "assets" / "design" / "question_sheet.png",
+                               marks=META.get("marks"))
         self.at(card_at)
 
         beats = {int(b["at"]): b for b in BEATS}
@@ -762,10 +1272,24 @@ class PyqPart(ThemedScene):
         for i, line in enumerate(LINES):
             self.at(max(0.0, float(line["start"]) - 0.35))
             if i == card_until or i in beats:
+                self._pending_asides = []
+                self._flows = []
                 self.clear_stage()          # the card goes here, and every beat
                                             # replaces the one before it
                 self.stage_mobs = []
             if i in beats:
+                # CAPTIONS ONLY WHEN THE STAGE IS EMPTY. A caption is a subtitle
+                # of the presenter, and it earns its place while there is nothing
+                # else to read — but once a diagram, table or equation is up,
+                # THAT is what the student should be reading, and a running
+                # subtitle over it is just a second thing competing for the same
+                # attention. So the caption stops when a beat takes the stage and
+                # returns when the stage is cleared. Losing it also gives the
+                # band back its top: stage_box() stops subtracting the caption,
+                # so the figure below is drawn larger.
+                if getattr(self, "caption_mob", None) is not None:
+                    self.remove(self.caption_mob)
+                    self.caption_mob = None
                 spec = beats[i]
                 if spec.get("reveal") == "progressive" and spec["type"] == "points":
                     rows, bodies = self.reveal_points(spec)
@@ -773,6 +1297,14 @@ class PyqPart(ThemedScene):
                     self.add(rows)
                     self._pending_reveal = list(zip(spec.get("reveal_at", []), bodies))
                     self._pending_steps = []
+                elif spec["type"] == "clear":
+                    # The stage was emptied above and stays empty. Nothing is
+                    # appended to stage_mobs, which is what lets the captions
+                    # start running again — an empty VGroup appended here would
+                    # read as "a graphic is up" and keep them suppressed.
+                    self._pending_reveal = []
+                    self._pending_steps = []
+                    self._labels = []
                 elif spec["type"] == "video":
                     # The stage was cleared above and stays cleared: a Veo clip
                     # covers these frames at composite time. There is nothing to
@@ -782,6 +1314,12 @@ class PyqPart(ThemedScene):
                     self._pending_reveal = []
                     self._pending_steps = []
                     self._labels = []
+                elif spec["type"] in ("table", "chain") and spec.get("reveal_at"):
+                    mob = self.build_beat(spec)
+                    self.stage_mobs.append(mob)
+                    self.add(mob)
+                    self._pending_steps = []
+                    self.audit_layout(spec.get("type", ""))
                 elif spec["type"] == "formula" and spec.get("build") == "progressive":
                     self._pending_reveal = []
                     self._labels = []
@@ -823,13 +1361,31 @@ class PyqPart(ThemedScene):
                         if other is body:
                             continue
                         other.set_opacity(0.55 if at2 <= i else 0.0)
-                    self.play(body.animate.set_opacity(1.0), run_time=0.30)
+                    if getattr(body, "arrow_first", False) and len(body.submobjects) == 2:
+                        # THE CONNECTOR LEADS ITS BOX. Arriving together, the
+                        # arrow reads as decoration; arriving a beat earlier it
+                        # reads as "and therefore", which is the whole point of
+                        # drawing a chain rather than a list.
+                        arr, box = body.submobjects
+                        self.play(arr.animate.set_opacity(1.0), run_time=0.16)
+                        self.play(box.animate.set_opacity(1.0), run_time=0.24)
+                    else:
+                        self.play(body.animate.set_opacity(1.0), run_time=0.30)
                     # every item revealed so far must still be on screen
                     gone = [j for j, (a2, o) in enumerate(self._pending_reveal, 1)
                             if a2 <= i and o.get_fill_opacity() < 0.2]
                     if gone:
                         self._layout_violations.append(
                             f"t={self.time:6.2f}s REVEALED ITEM VANISHED: {gone}")
+            # a photograph that belongs beside the block, not instead of it
+            for at, img in list(getattr(self, "_pending_asides", [])):
+                if at == i:
+                    for _, other in self._pending_asides:
+                        if other is not img and other in self.mobjects:
+                            self.remove(other)      # one aside at a time
+                    self.add(img)
+                    self.stage_mobs.append(img)
+                    self.play(FadeIn(img, shift=UP * 0.08), run_time=0.30)
             # a derivation advances one line at a time, and the line just
             # written is the one that is boxed
             for at, eq in list(getattr(self, "_pending_steps", [])):
@@ -851,12 +1407,21 @@ class PyqPart(ThemedScene):
                     self._focus_box = box
                     self.stage_mobs.append(box)
                     self.play(Create(box), run_time=0.30)
+            for at, kind in list(getattr(self, "_flows", [])):
+                if at == i:
+                    self.stage_mobs.append(self.start_flow(kind))
             for at, lab in list(getattr(self, "_labels", [])):
                 if at == i:
                     self.play(FadeIn(lab, shift=RIGHT * 0.10), run_time=0.30)
                     self.stage_mobs.append(lab)
+                    # audit HERE: a diagram label arrives long after its figure
+                    # was built, so auditing only at build time inspected the
+                    # figure alone and passed four labels lying across it.
+                    self.audit_layout("figure-label")
+            if _UNTIL and float(line["start"]) > _UNTIL:
+                break
             self.at(float(line["start"]))
-            if i >= card_until:
+            if i >= card_until and not self.stage_mobs:
                 self._line(line["text"], line.get("end"))
         self.at(CLIP_END)
         self.report_layout()

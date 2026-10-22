@@ -1,0 +1,123 @@
+{
+  "cues": [
+    {
+      "time": 15.63,
+      "name": "pop"
+    },
+    {
+      "time": 16.067,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 19.533,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 22.8,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 30.997,
+      "name": "pop"
+    },
+    {
+      "time": 31.433,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 39.9,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 42.667,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 44.333,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 61.333,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 66.933,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 85.73,
+      "name": "pop"
+    },
+    {
+      "time": 91.133,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 97.633,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 100.067,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 107.497,
+      "name": "pop"
+    },
+    {
+      "time": 109.5,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 112.767,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 115.7,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 117.4,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 129.197,
+      "name": "pop"
+    },
+    {
+      "time": 130.7,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 133.7,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 137.467,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 143.43,
+      "name": "pop"
+    }
+  ]
+}

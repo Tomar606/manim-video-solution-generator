@@ -1,0 +1,73 @@
+[
+ {
+  "type": "formula",
+  "at": 6,
+  "label": "कैथोड पर अपचयन",
+  "tex": [
+   "2NH_4^+ + 2MnO_2 + 2e^- \\longrightarrow Mn_2O_3 + H_2O + 2NH_3",
+   "Mn:\\; +4 \\longrightarrow +3"
+  ],
+  "build": "progressive",
+  "reveal_at": [
+   6,
+   12
+  ]
+ },
+ {
+  "type": "formula",
+  "at": 18,
+  "label": "सम्पूर्ण सेल अभिक्रिया",
+  "tex": [
+   "Zn \\longrightarrow Zn^{2+} + 2e^-",
+   "Zn + 2NH_4^+ + 2MnO_2 \\longrightarrow Zn^{2+} + Mn_2O_3 + H_2O + 2NH_3"
+  ],
+  "build": "progressive",
+  "reveal_at": [
+   18,
+   21
+  ]
+ },
+ {
+  "type": "formula",
+  "at": 29,
+  "label": "जटिल आयन का बनना",
+  "tex": [
+   "Zn^{2+} + 4NH_3 \\longrightarrow [Zn(NH_3)_4]^{2+}"
+  ]
+ },
+ {
+  "type": "formula",
+  "at": 43,
+  "label": "सेल का विभव",
+  "tex": [
+   "E_{\\text{cell}} \\approx 1.25 - 1.5\\ \\text{V}"
+  ]
+ },
+ {
+  "type": "table",
+  "at": 47,
+  "cols": [
+   "पुराना सेल",
+   "रिसाव-रोधी सेल"
+  ],
+  "rows": [
+   [
+    "NH₄Cl (अम्लीय)",
+    "KOH (क्षारीय)"
+   ],
+   [
+    "Zn का संक्षारण",
+    "संक्षारण नहीं"
+   ],
+   [
+    "छेद → रिसाव",
+    "रिसाव नहीं"
+   ]
+  ],
+  "reveal_at": [
+   48,
+   49,
+   55
+  ]
+ }
+]

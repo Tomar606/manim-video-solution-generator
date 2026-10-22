@@ -1,0 +1,554 @@
+{
+ "s01": [
+  {
+   "start": 2.69,
+   "end": 3.29,
+   "png": "work/captions/s01/000.png",
+   "text": "एम पी बोर्ड कक्षा बारहवीं"
+  },
+  {
+   "start": 3.29,
+   "end": 4.44,
+   "png": "work/captions/s01/001.png",
+   "text": "के बच्चों! ये सवाल दो"
+  },
+  {
+   "start": 4.44,
+   "end": 5.59,
+   "png": "work/captions/s01/002.png",
+   "text": "हज़ार पच्चीस में पूछा गया"
+  },
+  {
+   "start": 5.59,
+   "end": 8.04,
+   "png": "work/captions/s01/003.png",
+   "text": "है, इस बार भी आ सकता है।"
+  }
+ ],
+ "s02": [
+  {
+   "start": 1.23,
+   "end": 3.09,
+   "png": "work/captions/s02/000.png",
+   "text": "आज का सवाल है, नेपाल"
+  },
+  {
+   "start": 3.09,
+   "end": 4.71,
+   "png": "work/captions/s02/001.png",
+   "text": "में लोकतंत्र आखिर कैसे"
+  },
+  {
+   "start": 4.71,
+   "end": 7.13,
+   "png": "work/captions/s02/002.png",
+   "text": "स्थापित हुआ? चलो, कहानी"
+  },
+  {
+   "start": 7.13,
+   "end": 8.48,
+   "png": "work/captions/s02/003.png",
+   "text": "शुरू से देखते हैं।"
+  }
+ ],
+ "s03": [
+  {
+   "start": 0.0,
+   "end": 1.56,
+   "png": "work/captions/s03/000.png",
+   "text": "नेपाल की राजनीतिक"
+  },
+  {
+   "start": 1.56,
+   "end": 3.4,
+   "png": "work/captions/s03/001.png",
+   "text": "पार्टियाँ और आम जनता"
+  },
+  {
+   "start": 3.4,
+   "end": 4.8,
+   "png": "work/captions/s03/002.png",
+   "text": "खुले और उत्तरदायी शासन"
+  },
+  {
+   "start": 4.8,
+   "end": 6.43,
+   "png": "work/captions/s03/003.png",
+   "text": "की आवाज़ उठाती रहीं।"
+  }
+ ],
+ "s04": [
+  {
+   "start": 1.59,
+   "end": 2.39,
+   "png": "work/captions/s04/000.png",
+   "text": "लेकिन राजा ने सेना की"
+  },
+  {
+   "start": 2.39,
+   "end": 4.03,
+   "png": "work/captions/s04/001.png",
+   "text": "मदद से शासन पर पूरा"
+  },
+  {
+   "start": 4.03,
+   "end": 4.63,
+   "png": "work/captions/s04/002.png",
+   "text": "नियंत्रण कर लिया, और"
+  },
+  {
+   "start": 4.63,
+   "end": 6.82,
+   "png": "work/captions/s04/003.png",
+   "text": "लोकतंत्र की राह रुक गई।"
+  }
+ ],
+ "s05": [
+  {
+   "start": 0.55,
+   "end": 2.76,
+   "png": "work/captions/s05/000.png",
+   "text": "मगर लोकतंत्र की माँग"
+  },
+  {
+   "start": 2.76,
+   "end": 4.97,
+   "png": "work/captions/s05/001.png",
+   "text": "इतनी आसानी से खत्म"
+  },
+  {
+   "start": 4.97,
+   "end": 7.18,
+   "png": "work/captions/s05/002.png",
+   "text": "होने वाली नहीं थी,"
+  },
+  {
+   "start": 7.18,
+   "end": 9.42,
+   "png": "work/captions/s05/003.png",
+   "text": "आंदोलन और तेज़ होता गया।"
+  }
+ ],
+ "s06": [
+  {
+   "start": 1.28,
+   "end": 1.88,
+   "png": "work/captions/s06/000.png",
+   "text": "उन्नीस सौ नब्बे में"
+  },
+  {
+   "start": 1.88,
+   "end": 3.51,
+   "png": "work/captions/s06/001.png",
+   "text": "आंदोलन के आगे झुककर राजा"
+  },
+  {
+   "start": 3.51,
+   "end": 5.14,
+   "png": "work/captions/s06/002.png",
+   "text": "ने नए लोकतांत्रिक"
+  },
+  {
+   "start": 5.14,
+   "end": 6.49,
+   "png": "work/captions/s06/003.png",
+   "text": "संविधान की माँग मान ली।"
+  }
+ ],
+ "s07": [
+  {
+   "start": 0.55,
+   "end": 2.01,
+   "png": "work/captions/s07/000.png",
+   "text": "लेकिन इसके बाद भी"
+  },
+  {
+   "start": 2.01,
+   "end": 3.47,
+   "png": "work/captions/s07/001.png",
+   "text": "लोकतांत्रिक सरकारों"
+  },
+  {
+   "start": 3.47,
+   "end": 4.93,
+   "png": "work/captions/s07/002.png",
+   "text": "का कार्यकाल छोटा और"
+  },
+  {
+   "start": 4.93,
+   "end": 6.58,
+   "png": "work/captions/s07/003.png",
+   "text": "समस्याओं से भरा रहा।"
+  }
+ ],
+ "s08": [
+  {
+   "start": 0.0,
+   "end": 1.97,
+   "png": "work/captions/s08/000.png",
+   "text": "फिर आया अगला बड़ा"
+  },
+  {
+   "start": 1.97,
+   "end": 3.93,
+   "png": "work/captions/s08/001.png",
+   "text": "मोड़, दो हज़ार दो में"
+  },
+  {
+   "start": 3.93,
+   "end": 5.9,
+   "png": "work/captions/s08/002.png",
+   "text": "राजा ने संसद भंग कर"
+  },
+  {
+   "start": 5.9,
+   "end": 8.05,
+   "png": "work/captions/s08/003.png",
+   "text": "दी और सरकार गिरा दी।"
+  }
+ ],
+ "s09": [
+  {
+   "start": 1.82,
+   "end": 3.47,
+   "png": "work/captions/s09/000.png",
+   "text": "इस तरह नेपाल में जो"
+  },
+  {
+   "start": 3.47,
+   "end": 5.12,
+   "png": "work/captions/s09/001.png",
+   "text": "थोड़ा-बहुत लोकतंत्र बचा"
+  },
+  {
+   "start": 5.12,
+   "end": 7.58,
+   "png": "work/captions/s09/002.png",
+   "text": "था, उसे भी राजा ने"
+  },
+  {
+   "start": 7.58,
+   "end": 8.43,
+   "png": "work/captions/s09/003.png",
+   "text": "पूरी तरह खत्म कर दिया।"
+  }
+ ],
+ "s10": [
+  {
+   "start": 0.0,
+   "end": 2.6,
+   "png": "work/captions/s10/000.png",
+   "text": "अब आता है सबसे बड़ा"
+  },
+  {
+   "start": 2.6,
+   "end": 5.16,
+   "png": "work/captions/s10/001.png",
+   "text": "मोड़, अप्रैल दो हज़ार"
+  },
+  {
+   "start": 5.16,
+   "end": 5.76,
+   "png": "work/captions/s10/002.png",
+   "text": "छह, पूरे देश में"
+  },
+  {
+   "start": 5.76,
+   "end": 9.05,
+   "png": "work/captions/s10/003.png",
+   "text": "लोकतंत्र-समर्थक प्रदर्शन।"
+  }
+ ],
+ "s11": [
+  {
+   "start": 0.55,
+   "end": 2.69,
+   "png": "work/captions/s11/000.png",
+   "text": "और बच्चों, इस आंदोलन"
+  },
+  {
+   "start": 2.69,
+   "end": 4.23,
+   "png": "work/captions/s11/001.png",
+   "text": "की सबसे खास बात"
+  },
+  {
+   "start": 4.23,
+   "end": 5.77,
+   "png": "work/captions/s11/002.png",
+   "text": "यह थी कि यह काफ़ी"
+  },
+  {
+   "start": 5.77,
+   "end": 7.32,
+   "png": "work/captions/s11/003.png",
+   "text": "हद तक अहिंसक रहा।"
+  }
+ ],
+ "s12": [
+  {
+   "start": 4.96,
+   "end": 5.56,
+   "png": "work/captions/s12/000.png",
+   "text": "इसका नेतृत्व सात दलीय"
+  },
+  {
+   "start": 5.56,
+   "end": 6.16,
+   "png": "work/captions/s12/001.png",
+   "text": "गठबंधन, माओवादियों"
+  },
+  {
+   "start": 6.16,
+   "end": 7.58,
+   "png": "work/captions/s12/002.png",
+   "text": "और सामाजिक कार्यकर्ताओं"
+  },
+  {
+   "start": 7.58,
+   "end": 8.77,
+   "png": "work/captions/s12/003.png",
+   "text": "ने मिलकर किया।"
+  }
+ ],
+ "s13": [
+  {
+   "start": 0.55,
+   "end": 2.16,
+   "png": "work/captions/s13/000.png",
+   "text": "दबाव में आकर राजा"
+  },
+  {
+   "start": 2.16,
+   "end": 3.77,
+   "png": "work/captions/s13/001.png",
+   "text": "ज्ञानेन्द्र को संसद फिर"
+  },
+  {
+   "start": 3.77,
+   "end": 5.45,
+   "png": "work/captions/s13/002.png",
+   "text": "से शुरू करनी पड़ी,"
+  },
+  {
+   "start": 5.45,
+   "end": 7.02,
+   "png": "work/captions/s13/003.png",
+   "text": "यह पहली बड़ी जीत थी।"
+  }
+ ],
+ "s14": [
+  {
+   "start": 0.55,
+   "end": 2.57,
+   "png": "work/captions/s14/000.png",
+   "text": "इसके बाद नेपाल का"
+  },
+  {
+   "start": 2.57,
+   "end": 3.17,
+   "png": "work/captions/s14/001.png",
+   "text": "संविधान लिखने के"
+  },
+  {
+   "start": 3.17,
+   "end": 3.77,
+   "png": "work/captions/s14/002.png",
+   "text": "लिए संविधान-सभा"
+  },
+  {
+   "start": 3.77,
+   "end": 6.22,
+   "png": "work/captions/s14/003.png",
+   "text": "का गठन किया गया।"
+  }
+ ],
+ "s15": [
+  {
+   "start": 4.22,
+   "end": 5.3,
+   "png": "work/captions/s15/000.png",
+   "text": "और माओवादी समूहों ने"
+  },
+  {
+   "start": 5.3,
+   "end": 6.38,
+   "png": "work/captions/s15/001.png",
+   "text": "भी सशस्त्र संघर्ष छोड़"
+  },
+  {
+   "start": 6.38,
+   "end": 7.92,
+   "png": "work/captions/s15/002.png",
+   "text": "देने की बात मान ली,"
+  },
+  {
+   "start": 7.92,
+   "end": 9.35,
+   "png": "work/captions/s15/003.png",
+   "text": "यह बहुत बड़ा कदम था।"
+  }
+ ],
+ "s16": [
+  {
+   "start": 0.0,
+   "end": 2.5,
+   "png": "work/captions/s16/000.png",
+   "text": "दो हज़ार आठ में नेपाल"
+  },
+  {
+   "start": 2.5,
+   "end": 4.99,
+   "png": "work/captions/s16/001.png",
+   "text": "ने राजतंत्र खत्म करके"
+  },
+  {
+   "start": 4.99,
+   "end": 7.49,
+   "png": "work/captions/s16/002.png",
+   "text": "खुद को लोकतांत्रिक"
+  },
+  {
+   "start": 7.49,
+   "end": 10.01,
+   "png": "work/captions/s16/003.png",
+   "text": "गणराज्य घोषित कर दिया।"
+  }
+ ],
+ "s17": [
+  {
+   "start": 1.15,
+   "end": 1.75,
+   "png": "work/captions/s17/000.png",
+   "text": "और दो हज़ार पंद्रह"
+  },
+  {
+   "start": 1.75,
+   "end": 4.01,
+   "png": "work/captions/s17/001.png",
+   "text": "में नेपाल ने अपना नया"
+  },
+  {
+   "start": 4.01,
+   "end": 5.27,
+   "png": "work/captions/s17/002.png",
+   "text": "संविधान अपनाया, यानी"
+  },
+  {
+   "start": 5.27,
+   "end": 6.53,
+   "png": "work/captions/s17/003.png",
+   "text": "लोकतंत्र की"
+  },
+  {
+   "start": 6.53,
+   "end": 8.38,
+   "png": "work/captions/s17/004.png",
+   "text": "नींव पक्की हुई।"
+  }
+ ],
+ "s18": [
+  {
+   "start": 1.74,
+   "end": 2.34,
+   "png": "work/captions/s18/000.png",
+   "text": "इस पूरी प्रक्रिया"
+  },
+  {
+   "start": 2.34,
+   "end": 2.94,
+   "png": "work/captions/s18/001.png",
+   "text": "में भारत ने नैतिक,"
+  },
+  {
+   "start": 2.94,
+   "end": 3.54,
+   "png": "work/captions/s18/002.png",
+   "text": "राजनीतिक और कूटनीतिक"
+  },
+  {
+   "start": 3.54,
+   "end": 6.29,
+   "png": "work/captions/s18/003.png",
+   "text": "समर्थन दिया।"
+  }
+ ],
+ "s19": [
+  {
+   "start": 0.0,
+   "end": 2.68,
+   "png": "work/captions/s19/000.png",
+   "text": "तो याद रखो, माँग, फिर"
+  },
+  {
+   "start": 2.68,
+   "end": 4.56,
+   "png": "work/captions/s19/001.png",
+   "text": "आंदोलन, फिर संसद की"
+  },
+  {
+   "start": 4.56,
+   "end": 5.16,
+   "png": "work/captions/s19/002.png",
+   "text": "बहाली, संविधान-सभा, और"
+  },
+  {
+   "start": 5.16,
+   "end": 9.45,
+   "png": "work/captions/s19/003.png",
+   "text": "फिर लोकतांत्रिक गणराज्य।"
+  }
+ ],
+ "s20": [
+  {
+   "start": 0.0,
+   "end": 2.06,
+   "png": "work/captions/s20/000.png",
+   "text": "बस यही पूरा flow"
+  },
+  {
+   "start": 2.06,
+   "end": 3.44,
+   "png": "work/captions/s20/001.png",
+   "text": "दिमाग में बैठ गया, तो"
+  },
+  {
+   "start": 3.44,
+   "end": 4.04,
+   "png": "work/captions/s20/002.png",
+   "text": "इस सवाल के पूरे चार"
+  },
+  {
+   "start": 4.04,
+   "end": 6.77,
+   "png": "work/captions/s20/003.png",
+   "text": "नंबर पक्के समझो।"
+  }
+ ],
+ "s21": [
+  {
+   "start": 0.55,
+   "end": 2.19,
+   "png": "work/captions/s21/000.png",
+   "text": "अब इसका answer परीक्षा"
+  },
+  {
+   "start": 2.19,
+   "end": 4.15,
+   "png": "work/captions/s21/001.png",
+   "text": "में कैसे लिखना है, वो"
+  },
+  {
+   "start": 4.15,
+   "end": 4.87,
+   "png": "work/captions/s21/002.png",
+   "text": "तुम्हें नोट्स बटन पर"
+  },
+  {
+   "start": 4.87,
+   "end": 6.82,
+   "png": "work/captions/s21/003.png",
+   "text": "क्लिक करके मिल जाएगा।"
+  }
+ ]
+}

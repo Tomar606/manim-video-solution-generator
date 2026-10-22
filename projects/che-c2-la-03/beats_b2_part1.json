@@ -1,0 +1,93 @@
+[
+ {
+  "type": "chain",
+  "at": 11,
+  "direction": "right",
+  "title": "विद्युत्-रासायनिक सेल",
+  "items": [
+   "रासायनिक ऊर्जा",
+   "विद्युत् ऊर्जा"
+  ],
+  "reveal_at": [
+   11,
+   12
+  ]
+ },
+ {
+  "type": "points",
+  "at": 18,
+  "title": "एक ही चीज़ — तीन नाम",
+  "items": [
+   "विद्युत्-रासायनिक सेल",
+   "गैल्वेनिक सेल",
+   "वोल्टाइक सेल"
+  ]
+ },
+ {
+  "type": "cell",
+  "at": 21,
+  "fill": 0.94,
+  "labels": [
+   {
+    "at": 22,
+    "part": "zn_rod",
+    "text": "जिंक",
+    "hi": true
+   },
+   {
+    "at": 23,
+    "part": "zn_sol",
+    "text": "$ZnSO_4$"
+   },
+   {
+    "at": 24,
+    "part": "cu_rod",
+    "text": "कॉपर"
+   },
+   {
+    "at": 25,
+    "part": "cu_sol",
+    "text": "$CuSO_4$"
+   },
+   {
+    "at": 26,
+    "part": "bridge",
+    "text": "लवण सेतु"
+   },
+   {
+    "at": 32,
+    "part": "anode",
+    "text": "ऑक्सीकरण",
+    "plate": "#7E2F2F"
+   },
+   {
+    "at": 33,
+    "part": "anode2",
+    "text": "ऐनोड",
+    "plate": "#B8860B"
+   }
+  ],
+  "flows": [
+   {
+    "at": 30,
+    "kind": "electrons"
+   },
+   {
+    "at": 31,
+    "kind": "zn_ions"
+   },
+   {
+    "at": 37,
+    "kind": "no3"
+   },
+   {
+    "at": 37,
+    "kind": "k"
+   }
+  ]
+ },
+ {
+  "type": "clear",
+  "at": 39
+ }
+]

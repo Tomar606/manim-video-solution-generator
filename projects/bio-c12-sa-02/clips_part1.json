@@ -1,0 +1,44 @@
+[
+ {
+  "at": 23,
+  "start": 34.77,
+  "end": 42.77,
+  "src": "veo/part1_at014.mp4",
+  "raw": "veo/sunlight_leaves_raw.mp4",
+  "full": false,
+  "frame": "partial",
+  "layout": "panel",
+  "green": false,
+  "backdrop": "own",
+  "panel_ar": 1.7777777777777777,
+  "panel_top": 300,
+  "mark": [
+   1132,
+   572,
+   56,
+   56
+  ],
+  "labels": [
+   {
+    "png": "veo/labels/part1_at014_label00.png",
+    "x": 434,
+    "y": 517,
+    "w": 211,
+    "h": 79,
+    "start": 35.12,
+    "end": 42.77,
+    "text": "प्रकाश ऊर्जा"
+   },
+   {
+    "png": "veo/labels/part1_at014_label01.png",
+    "x": 467,
+    "y": 812,
+    "w": 146,
+    "h": 77,
+    "start": 37.72,
+    "end": 42.77,
+    "text": "हरे पौधे"
+   }
+  ]
+ }
+]

@@ -1,0 +1,23 @@
+[
+ {
+  "mov": "media/videos/helix_parts/1920p30/BIO-C5-LA-03_a04_base-pairing.mov",
+  "start": 12.9,
+  "end": 53.82,
+  "scale": 1.0,
+  "top": 0
+ },
+ {
+  "mov": "media/videos/helix_parts/1920p30/BIO-C5-LA-03_a05_diameter-and-pitch.mov",
+  "start": 63.66,
+  "end": 88.48,
+  "scale": 0.826,
+  "top": 0
+ },
+ {
+  "mov": "media/videos/helix_parts/1920p30/BIO-C5-LA-03_a05_diameter-and-pitch.mov",
+  "start": 97.3,
+  "end": 116.93,
+  "scale": 0.834,
+  "top": 0
+ }
+]

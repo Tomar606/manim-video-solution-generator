@@ -1,0 +1,34 @@
+{
+  "cues": [
+    {
+      "time": 14.851,
+      "name": "reveal"
+    },
+    {
+      "time": 30.27,
+      "name": "pop"
+    },
+    {
+      "time": 35.47,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 39.07,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 52.251,
+      "name": "reveal"
+    },
+    {
+      "time": 99.851,
+      "name": "reveal"
+    },
+    {
+      "time": 130.351,
+      "name": "reveal"
+    }
+  ]
+}

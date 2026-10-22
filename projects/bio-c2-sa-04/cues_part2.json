@@ -1,0 +1,46 @@
+{
+  "cues": [
+    {
+      "time": 4.77,
+      "name": "pop"
+    },
+    {
+      "time": 11.7,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 15.7,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 22.77,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 24.87,
+      "name": "pop",
+      "gain": 0.5
+    },
+    {
+      "time": 27.47,
+      "name": "pop"
+    },
+    {
+      "time": 50.0,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 64.4,
+      "name": "click",
+      "gain": 0.5
+    },
+    {
+      "time": 72.57,
+      "name": "pop"
+    }
+  ]
+}

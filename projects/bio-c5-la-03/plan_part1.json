@@ -1,0 +1,23 @@
+[
+ {
+  "mov": "media/videos/helix_parts/1920p30/BIO-C5-LA-03_a01_two-chains.mov",
+  "start": 15.42,
+  "end": 51.62,
+  "scale": 0.828,
+  "top": 0
+ },
+ {
+  "mov": "media/videos/helix_parts/1920p30/BIO-C5-LA-03_a02_antiparallel.mov",
+  "start": 57.78,
+  "end": 88.24,
+  "scale": 0.795,
+  "top": 0
+ },
+ {
+  "mov": "media/videos/helix_parts/1920p30/BIO-C5-LA-03_a03_coiling.mov",
+  "start": 92.58,
+  "end": 109.98,
+  "scale": 0.821,
+  "top": 0
+ }
+]

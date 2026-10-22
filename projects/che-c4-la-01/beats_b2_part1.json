@@ -1,0 +1,47 @@
+[
+ {
+  "type": "chain",
+  "at": 15,
+  "direction": "down",
+  "title": "तीन पद — इसी क्रम में",
+  "items": [
+   "क्रोमाइट अयस्क → Na₂CrO₄",
+   "Na₂CrO₄ → Na₂Cr₂O₇",
+   "Na₂Cr₂O₇ → K₂Cr₂O₇"
+  ],
+  "reveal_at": [
+   15,
+   16,
+   17
+  ]
+ },
+ {
+  "type": "formula",
+  "at": 22,
+  "label": "पद 1 — अयस्क से सोडियम क्रोमेट",
+  "tex": [
+   "4FeCr_2O_4 + 8Na_2CO_3 + 7O_2 \\longrightarrow 8Na_2CrO_4 + 2Fe_2O_3 + 8CO_2"
+  ],
+  "images": [
+   {
+    "at": 25,
+    "src": "images/b2_chromate.png",
+    "h": 2.4
+   }
+  ]
+ },
+ {
+  "type": "chain",
+  "at": 31,
+  "direction": "right",
+  "title": "जल के साथ",
+  "items": [
+   "Na₂CrO₄ विलयन में",
+   "Fe₂O₃ अवशेष — छानकर अलग"
+  ],
+  "reveal_at": [
+   31,
+   33
+  ]
+ }
+]

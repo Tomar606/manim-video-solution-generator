@@ -1,0 +1,23 @@
+[
+ {
+  "mov": "media/videos/helix_parts/1920p30/BIO-C5-LA-03_a06_rise-034.mov",
+  "start": 16.24,
+  "end": 48.53,
+  "scale": 0.815,
+  "top": 0
+ },
+ {
+  "mov": "media/videos/helix_parts/1920p30/BIO-C5-LA-03_a07_complementarity.mov",
+  "start": 50.5,
+  "end": 67.2,
+  "scale": 0.85,
+  "top": 0
+ },
+ {
+  "mov": "media/videos/helix_parts/1920p30/BIO-C5-LA-03_a08_stability.mov",
+  "start": 73.92,
+  "end": 89.12,
+  "scale": 0.794,
+  "top": 0
+ }
+]

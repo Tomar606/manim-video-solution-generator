@@ -1,0 +1,15 @@
+[
+ {"type":"gradient","at":2,"strong":"प्रबल","weak":"दुर्बल",
+  "rows":[
+   {"name":"प्रतिचुम्बकीय","tone":"dia","to_strong":false,"force":0.62,"verdict":"दुर्बल की ओर","at":7},
+   {"name":"अनुचुम्बकीय","tone":"para","to_strong":true,"force":0.62,"verdict":"प्रबल की ओर","at":10},
+   {"name":"लौह-चुम्बकीय","tone":"ferro","to_strong":true,"force":0.90,"verdict":"प्रबल की ओर","at":13}]},
+
+ {"type":"axis","at":18,"tick":{"x":-1.05,"label":"1"},
+  "readings":[
+   {"x":-1.85,"name":"प्रतिचुम्बकीय","tone":"dia","maths":"\\mu_r < 1","note":"एक से कम","at":22},
+   {"x":0.15,"name":"अनुचुम्बकीय","tone":"para","maths":"\\mu_r > 1","note":"एक से कुछ अधिक","at":24},
+   {"x":2.05,"name":"लौह-चुम्बकीय","tone":"ferro","maths":"\\mu_r \\gg 1","note":"बहुत अधिक","at":26}]},
+
+ {"type":"clear","at":33}
+]
