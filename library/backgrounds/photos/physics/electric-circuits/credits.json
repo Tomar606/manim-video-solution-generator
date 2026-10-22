@@ -1,0 +1,60 @@
+{
+ "electric-circuits": [
+  {
+   "title": "File:Jumper Wires with Crocodile Clips.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/Jumper_Wires_with_Crocodile_Clips.jpg/1920px-Jumper_Wires_with_Crocodile_Clips.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Jumper_Wires_with_Crocodile_Clips.jpg",
+   "licence": "CC BY-SA 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "author": "oomlout",
+   "credit_required": true,
+   "file": "electric-circuits-1.jpg",
+   "width": 1920,
+   "height": 1280,
+   "query": "electric circuit breadboard",
+   "desc": "Jumper Wires with Crocodile Clips."
+  },
+  {
+   "title": "File:3 Resistors.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/3_Resistors.jpg/1280px-3_Resistors.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:3_Resistors.jpg",
+   "licence": "CC BY-SA 2.5",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/2.5",
+   "author": "Afrank99",
+   "credit_required": true,
+   "file": "electric-circuits-2.jpg",
+   "width": 1280,
+   "height": 946,
+   "query": "resistors electronic components",
+   "desc": "3 Resistors."
+  },
+  {
+   "title": "File:Caviar 2340 Hard Drive Circuit Board Side 1.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Caviar_2340_Hard_Drive_Circuit_Board_Side_1.jpg/1920px-Caviar_2340_Hard_Drive_Circuit_Board_Side_1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Caviar_2340_Hard_Drive_Circuit_Board_Side_1.jpg",
+   "licence": "CC0",
+   "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "author": "ComputerUserUser",
+   "credit_required": false,
+   "file": "electric-circuits-3.jpg",
+   "width": 1920,
+   "height": 1440,
+   "query": "circuit board electronics",
+   "desc": "A circuit board that has been removed from a Western Digital Caviar 2340 hard drive. This is the bottom of the circuit board, usually what you see when you look at the bottom of the hard drive. This is a WD hard drive circuit board. On the right side of this photo, it has an IDE connector on it, as "
+  },
+  {
+   "title": "File:ElectricCircuit.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/ElectricCircuit.jpg/1920px-ElectricCircuit.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:ElectricCircuit.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "ReyungCho",
+   "credit_required": true,
+   "file": "electric-circuits-5.jpg",
+   "width": 1350,
+   "height": 2400,
+   "query": "electric circuit breadboard",
+   "desc": "I made this circuit on my lab, it´s a very simple one"
+  }
+ ]
+}

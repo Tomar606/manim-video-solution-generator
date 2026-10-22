@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="716.0 177.6 379.0 339.0" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path class="draw" pathLength="1" d="M724.0 282.0 L1087.0 281.0" style="stroke:var(--ink,#000000);fill:none;fill-opacity:0.25;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+  <path class="draw head" pathLength="1" d="M1074.7 287.7 L1087.0 281.0 L1074.7 274.3" style="stroke:var(--ink,#000000);fill:none;fill-opacity:0.25;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+  <path class="draw" pathLength="1" d="M724.0 387.0 L1087.0 386.0" style="stroke:var(--ink,#000000);fill:none;fill-opacity:0.25;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+  <path class="draw head" pathLength="1" d="M1074.7 392.7 L1087.0 386.0 L1074.7 379.3" style="stroke:var(--ink,#000000);fill:none;fill-opacity:0.25;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+  <path class="draw" pathLength="1" d="M811.8 508.5 L977.5 185.6" style="stroke:var(--ink,#000000);fill:none;fill-opacity:0.25;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+  <path class="draw head" pathLength="1" d="M977.8 199.5 L977.5 185.6 L965.9 193.4" style="stroke:var(--ink,#000000);fill:none;fill-opacity:0.25;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+</svg>

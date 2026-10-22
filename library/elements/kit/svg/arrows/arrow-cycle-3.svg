@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-arrow-cycle-3" viewBox="0 0 300 300" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="three-stage cycle arrows">
+  <!-- three-stage cycle arrows. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M180.9 42.3 A112 112 0 0 1 258.7 177.1" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);"/>
+  <path class="draw" pathLength="1" d="M249.6 154.9 L258.7 177.1 L273.3 158.1" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);--i:1;"/>
+  <path class="draw" pathLength="1" d="M227.8 230.6 A112 112 0 0 1 72.2 230.6" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);--i:2;"/>
+  <path class="draw" pathLength="1" d="M96 233.8 L72.2 230.6 L81.3 252.8" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);--i:3;"/>
+  <path class="draw" pathLength="1" d="M41.3 177.1 A112 112 0 0 1 119.1 42.3" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);--i:4;"/>
+  <path class="draw" pathLength="1" d="M104.5 61.3 L119.1 42.3 L95.3 39.1" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);--i:5;"/>
+</svg>

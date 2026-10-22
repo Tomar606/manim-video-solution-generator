@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="928.5 -122.2 420.2 269.3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <ellipse class="draw" pathLength="1" cx="1063.1" cy="12.4" rx="126.7" ry="126.7" style="stroke:var(--ink,#000);fill:var(--accent,#ffeaa7);fill-opacity:0.25;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 0.50)"/>
+  <ellipse class="draw" pathLength="1" cx="1214.0" cy="12.4" rx="126.7" ry="126.7" style="stroke:var(--ink,#000);fill:var(--accent,#a29bfe);fill-opacity:0.25;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 0.50)"/>
+</svg>

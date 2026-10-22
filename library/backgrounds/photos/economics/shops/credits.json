@@ -1,0 +1,88 @@
+{
+ "shops": [
+  {
+   "title": "File:Kirana shop.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Kirana_shop.jpg/1280px-Kirana_shop.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Kirana_shop.jpg",
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "author": "Renzilde",
+   "credit_required": true,
+   "file": "shops-1.jpg",
+   "width": 1280,
+   "height": 850,
+   "query": "kirana shop India",
+   "desc": "Kirana shop in india Vasai,Mumbai"
+  },
+  {
+   "title": "File:Grocery Shop in a small Town in South India (2).JPG",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Grocery_Shop_in_a_small_Town_in_South_India_%282%29.JPG/1920px-Grocery_Shop_in_a_small_Town_in_South_India_%282%29.JPG",
+   "page": "https://commons.wikimedia.org/wiki/File:Grocery_Shop_in_a_small_Town_in_South_India_(2).JPG",
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "author": "Ask27",
+   "credit_required": true,
+   "file": "shops-2.jpg",
+   "width": 1920,
+   "height": 1440,
+   "query": "small shop India street",
+   "desc": "A Rural Grocery Shop in South India"
+  },
+  {
+   "title": "File:Handicraft shops at Dastkar Nature Bazaar, Mehrauli.JPG",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Handicraft_shops_at_Dastkar_Nature_Bazaar%2C_Mehrauli.JPG/1920px-Handicraft_shops_at_Dastkar_Nature_Bazaar%2C_Mehrauli.JPG",
+   "page": "https://commons.wikimedia.org/wiki/File:Handicraft_shops_at_Dastkar_Nature_Bazaar,_Mehrauli.JPG",
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "author": "Ekabhishek",
+   "credit_required": true,
+   "file": "shops-3.jpg",
+   "width": 1920,
+   "height": 1387,
+   "query": "shops bazaar India",
+   "desc": "Handicraft shops at Dastkar Nature Bazaar, Mehrauli, Delhi."
+  },
+  {
+   "title": "File:Jaipur Street Vendors (1581573198).jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Jaipur_Street_Vendors_%281581573198%29.jpg/1280px-Jaipur_Street_Vendors_%281581573198%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Jaipur_Street_Vendors_(1581573198).jpg",
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Francisco Anzola",
+   "credit_required": true,
+   "file": "shops-4.jpg",
+   "width": 1280,
+   "height": 1707,
+   "query": "market street shops Jaipur",
+   "desc": "Jaipur Street Vendors"
+  },
+  {
+   "title": "File:ShivShankar Kirana Chinawal 1.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/ShivShankar_Kirana_Chinawal_1.jpg/1280px-ShivShankar_Kirana_Chinawal_1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:ShivShankar_Kirana_Chinawal_1.jpg",
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "author": "abhiriksh",
+   "credit_required": true,
+   "file": "shops-5.jpg",
+   "width": 1280,
+   "height": 1707,
+   "query": "kirana shop India",
+   "desc": "A retail shop in Wani Galli at Chinawal village, India"
+  },
+  {
+   "title": "File:Grocery Shop in a small Town in South India (1).JPG",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Grocery_Shop_in_a_small_Town_in_South_India_%281%29.JPG/1920px-Grocery_Shop_in_a_small_Town_in_South_India_%281%29.JPG",
+   "page": "https://commons.wikimedia.org/wiki/File:Grocery_Shop_in_a_small_Town_in_South_India_(1).JPG",
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "author": "Ask27",
+   "credit_required": true,
+   "file": "shops-6.jpg",
+   "width": 1920,
+   "height": 1440,
+   "query": "small shop India street",
+   "desc": "A Rural Grocery Shop in South India"
+  }
+ ]
+}

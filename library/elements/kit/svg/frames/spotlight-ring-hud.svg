@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-spotlight-ring-hud" viewBox="0 0 300 300" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="HUD spotlight ring with corner ticks">
+  <!-- HUD spotlight ring with corner ticks. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <circle class="draw" pathLength="1" cx="150" cy="150" r="96" style="stroke:var(--accent,#F5B82E);stroke-width:var(--stroke-w,5);"/>
+  <circle class="draw" pathLength="1" cx="150" cy="150" r="112" style="stroke:var(--accent-2,#4FD1E8);stroke-width:calc(var(--stroke-w,5) * 0.5);--i:1;opacity:.7"/>
+  <path class="draw" pathLength="1" d="M22 52 V22 H52" style="stroke:var(--accent,#F5B82E);stroke-width:var(--stroke-w,5);--i:2;"/>
+  <path class="draw" pathLength="1" d="M278 52 V22 H248" style="stroke:var(--accent,#F5B82E);stroke-width:var(--stroke-w,5);--i:2;"/>
+  <path class="draw" pathLength="1" d="M22 248 V278 H52" style="stroke:var(--accent,#F5B82E);stroke-width:var(--stroke-w,5);--i:2;"/>
+  <path class="draw" pathLength="1" d="M278 248 V278 H248" style="stroke:var(--accent,#F5B82E);stroke-width:var(--stroke-w,5);--i:2;"/>
+  <path class="draw" pathLength="1" d="M268 150 L284 150" style="stroke:var(--accent-2,#4FD1E8);stroke-width:var(--stroke-w,5);--i:3;"/>
+  <path class="draw" pathLength="1" d="M150 268 L150 284" style="stroke:var(--accent-2,#4FD1E8);stroke-width:var(--stroke-w,5);--i:3;"/>
+  <path class="draw" pathLength="1" d="M32 150 L16 150" style="stroke:var(--accent-2,#4FD1E8);stroke-width:var(--stroke-w,5);--i:3;"/>
+  <path class="draw" pathLength="1" d="M150 32 L150 16" style="stroke:var(--accent-2,#4FD1E8);stroke-width:var(--stroke-w,5);--i:3;"/>
+</svg>

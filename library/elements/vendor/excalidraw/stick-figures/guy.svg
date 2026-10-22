@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="364.7 165.3 98.4 179.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <ellipse class="draw" pathLength="1" cx="410.7" cy="206.0" rx="28.7" ry="26.4" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+  <path class="draw" pathLength="1" d="M407.5 232.4 L404.7 296.4" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+  <path class="draw" pathLength="1" d="M405.1 297.8 L430.4 336.8" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+  <path class="draw" pathLength="1" d="M405.0 296.1 L379.7 331.1" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+  <path class="draw" pathLength="1" d="M383.0 244.6 L404.6 266.9" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+  <path class="draw" pathLength="1" d="M406.5 267.1 L444.9 247.8" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+  <path class="draw" pathLength="1" d="M372.7 184.3 L455.1 201.0" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+  <rect class="draw" pathLength="1" x="391.1" y="173.3" width="49.3" height="17.0" rx="0.0" transform="rotate(10.7 415.8 181.8)" style="stroke:var(--ink,#000000);fill:var(--accent,#fff);fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+</svg>

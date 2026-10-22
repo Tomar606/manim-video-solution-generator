@@ -1,0 +1,55 @@
+/* chalk-slate (new): a classroom blackboard.  Dark green-grey slate, chalk
+   white ink, chalk yellow and chalk blue accents, coral for warnings,
+   everything set in Kalam so headings look written on the board.  Dashed
+   chalk card edges, no shadows.  Suits: derivations, physics and chemistry
+   steps, "teacher explains" moments where the board itself is the look. */
+.skin-chalk-slate {
+  --ink: #F1F0E6;
+  --accent: #F4D35E;          /* chalk yellow */
+  --accent-2: #8FD3F5;        /* chalk blue */
+  --paper: #1F2B27;
+  --muted: #9AA79F;
+  --stroke-w: 5;
+
+  --bg: radial-gradient(130% 80% at 40% 20%, #2A3934 0%, #1F2B27 55%, #18221F 100%);
+  --paper-2: #26342F;
+  --highlight: rgba(244, 211, 94, .28);
+  --warn: #F28C7D;            /* chalk coral */
+
+  --font-head: 'Khand Digits', 'Kalam', 'Noto Sans Devanagari', sans-serif;
+  --head-weight: 400;
+  --head-stretch: 100%;
+  --head-tracking: 0;
+  --font-body: 'Khand Digits', 'Kalam', 'Noto Sans Devanagari', sans-serif;  /* Kalam's 1 reads as a slash */
+  --body-weight: 400;
+  --font-hand: 'Kalam', sans-serif;
+  --font-num: 'Khand', sans-serif;
+
+  --card-bg: rgba(255, 255, 255, .035);
+  --card-ink: var(--ink);
+  --card-border: rgba(241, 240, 230, .80);
+  --card-border-w: 2px;
+  --card-border-style: dashed;
+  --radius: 12px;
+  --shadow: none;
+  --glow: none;
+  --on-accent: #1F2B27;      /* text set on an --accent fill */
+  --on-accent-2: #1F2B27;    /* text set on an --accent-2 fill */
+  --badge-bg: transparent;
+  --badge-ink: var(--accent);
+  --badge-border: var(--accent);
+  --badge-radius: 50%;
+  --pill-bg: transparent;
+  --pill-ink: var(--accent-2);
+  --pill-border: var(--accent-2);
+  --tape: rgba(241, 240, 230, .22);
+  --stamp: var(--warn);
+  --tilt: -2deg;
+  --tick: 24px;
+
+  /* photo treatment hint: mono, soft, a little green so it sits on the slate */
+  --photo-treatment: "mono";
+  --photo-filter: grayscale(1) contrast(.92) brightness(.9);
+  --photo-tint: #2E4A3F;
+  --photo-blend: soft-light;
+}

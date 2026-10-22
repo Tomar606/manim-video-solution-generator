@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-highlight-swipe" viewBox="0 0 400 60" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="highlighter swipe">
+  <!-- highlighter swipe. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M14 32.8 C24.3 32.3 55.3 30.3 76 29.9 C96.6 29.5 117.3 29.9 138 30.3 C158.7 30.6 179.4 32.3 200 32 C220.7 31.7 241.3 29.3 262 28.5 C282.7 27.8 303.3 27.5 324 27.6 C344.7 27.6 375.7 28.5 386 28.7" style="stroke:var(--highlight,rgba(255,214,0,.55));stroke-width:calc(var(--stroke-w,5) * 8);stroke-linecap:square;"/>
+</svg>

@@ -1,0 +1,1739 @@
+{
+ "_about": "Every element, card, skin and vendor set in library/elements. Paths relative to library/elements/.",
+ "elements": [
+  {
+   "id": "arrow-straight",
+   "file": "kit/svg/arrows/arrow-straight.svg",
+   "kind": "arrow",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "straight arrow. Native size 400x60; scale by width."
+  },
+  {
+   "id": "arrow-curved",
+   "file": "kit/svg/arrows/arrow-curved.svg",
+   "kind": "arrow",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "curved arrow, two bends."
+  },
+  {
+   "id": "arrow-elbow",
+   "file": "kit/svg/arrows/arrow-elbow.svg",
+   "kind": "arrow",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "elbow arrow."
+  },
+  {
+   "id": "arrow-double",
+   "file": "kit/svg/arrows/arrow-double.svg",
+   "kind": "arrow",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "double-headed arrow. Two-way relation, e.g. trade, exchange, equilibrium."
+  },
+  {
+   "id": "arrow-hand-wobbly",
+   "file": "kit/svg/arrows/arrow-hand-wobbly.svg",
+   "kind": "arrow",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "hand-drawn wobbly arrow."
+  },
+  {
+   "id": "arrow-hand-curved",
+   "file": "kit/svg/arrows/arrow-hand-curved.svg",
+   "kind": "arrow",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "hand-drawn curved arrow."
+  },
+  {
+   "id": "arrow-leader",
+   "file": "kit/svg/arrows/arrow-leader.svg",
+   "kind": "arrow",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "callout leader: dot + line. Dot pops first (animate .dot scale), then the line draws to the label shelf."
+  },
+  {
+   "id": "arrow-chain",
+   "file": "kit/svg/arrows/arrow-chain.svg",
+   "kind": "arrow",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "chain arrow between chips. Use between .k-pill chips: अशांति, पलायन, घनत्व कम."
+  },
+  {
+   "id": "arrow-big-bold",
+   "file": "kit/svg/arrows/arrow-big-bold.svg",
+   "kind": "arrow",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "big bold arrow. Thick stroke, not a filled outline, so it still draws on."
+  },
+  {
+   "id": "arrow-down",
+   "file": "kit/svg/arrows/arrow-down.svg",
+   "kind": "arrow",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "down arrow. Vertical steps: cause above, result below."
+  },
+  {
+   "id": "arrow-cycle",
+   "file": "kit/svg/arrows/arrow-cycle.svg",
+   "kind": "arrow",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "loop / cycle arrow. Single loop. Put the cycle's name in the middle as HTML."
+  },
+  {
+   "id": "arrow-cycle-3",
+   "file": "kit/svg/arrows/arrow-cycle-3.svg",
+   "kind": "arrow",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "three-stage cycle arrows. Biology/chemistry cycles: place three stage labels at 12, 4 and 8 o'clock as HTML."
+  },
+  {
+   "id": "underline-straight",
+   "file": "kit/svg/marks/underline-straight.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "straight underline."
+  },
+  {
+   "id": "underline-brush",
+   "file": "kit/svg/marks/underline-brush.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "brush underline. Two overlapping strokes give the dry-brush edge; both draw on."
+  },
+  {
+   "id": "underline-wavy",
+   "file": "kit/svg/marks/underline-wavy.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "wavy underline."
+  },
+  {
+   "id": "underline-double",
+   "file": "kit/svg/marks/underline-double.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "double underline."
+  },
+  {
+   "id": "underline-hand",
+   "file": "kit/svg/marks/underline-hand.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "hand-drawn underline with return flick."
+  },
+  {
+   "id": "circle-scribble",
+   "file": "kit/svg/marks/circle-scribble.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "loose oval scribble. Size the svg ~20% larger than the word it rings."
+  },
+  {
+   "id": "box-hand",
+   "file": "kit/svg/marks/box-hand.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "hand-drawn box. Corners overshoot like a pen box; four strokes draw on in order."
+  },
+  {
+   "id": "highlight-swipe",
+   "file": "kit/svg/marks/highlight-swipe.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--highlight",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "highlighter swipe. Goes BEHIND the words: wrap words in .k-mark-host, give the svg class k-under."
+  },
+  {
+   "id": "strike-through",
+   "file": "kit/svg/marks/strike-through.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "strike-through."
+  },
+  {
+   "id": "cross-out-x",
+   "file": "kit/svg/marks/cross-out-x.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "cross-out X."
+  },
+  {
+   "id": "check-clean",
+   "file": "kit/svg/marks/check-clean.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent-2",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "clean checkmark."
+  },
+  {
+   "id": "check-hand",
+   "file": "kit/svg/marks/check-hand.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "hand-drawn checkmark."
+  },
+  {
+   "id": "bracket-vertical",
+   "file": "kit/svg/marks/bracket-vertical.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "vertical square bracket. Mirror with transform: scaleX(-1) for the right side."
+  },
+  {
+   "id": "brace-vertical",
+   "file": "kit/svg/marks/brace-vertical.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "vertical curly brace. Groups list rows into one idea; point at the label on the left."
+  },
+  {
+   "id": "brace-horizontal",
+   "file": "kit/svg/marks/brace-horizontal.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "horizontal curly brace. Under a row of chips: 'these together = ...'."
+  },
+  {
+   "id": "bracket-horizontal",
+   "file": "kit/svg/marks/bracket-horizontal.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "horizontal square bracket."
+  },
+  {
+   "id": "attention-burst",
+   "file": "kit/svg/marks/attention-burst.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "attention lines. Plain radial strokes around a word or number. Not a sparkle: use it only where the eye must go."
+  },
+  {
+   "id": "dotted-connector",
+   "file": "kit/svg/marks/dotted-connector.svg",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--muted",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "dotted connector. Dotted, so it reveals with the .wipe clip animation, not dashoffset."
+  },
+  {
+   "id": "spotlight-ring-hud",
+   "file": "kit/svg/frames/spotlight-ring-hud.svg",
+   "kind": "frame",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--accent-2",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "HUD spotlight ring with corner ticks. Rings one place on a map or one part of a diagram. Corner ticks frame it like a viewfinder."
+  },
+  {
+   "id": "frame-corner-ticks-hud",
+   "file": "kit/svg/frames/frame-corner-ticks-hud.svg",
+   "kind": "frame",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py)",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "HUD corner-tick frame. Fixed aspect 3:2. For any other aspect use the .k-hud card, whose ticks never stretch."
+  },
+  {
+   "id": "pill",
+   "file": "kit/cards/pill.html",
+   "kind": "card",
+   "animatable": "pop",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "pill / chip."
+  },
+  {
+   "id": "section-tag",
+   "file": "kit/cards/section-tag.html",
+   "kind": "card",
+   "animatable": "slide",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "section tag. The number is a digit, never a bullet."
+  },
+  {
+   "id": "number-badge",
+   "file": "kit/cards/number-badge.html",
+   "kind": "card",
+   "animatable": "pop",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "number badge."
+  },
+  {
+   "id": "definition-chip",
+   "file": "kit/cards/definition-chip.html",
+   "kind": "card",
+   "animatable": "slide",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "definition chip (= text). The '=' is a Poppins glyph in its own box; no formula engine involved."
+  },
+  {
+   "id": "statement-card",
+   "file": "kit/cards/statement-card.html",
+   "kind": "card",
+   "animatable": "slide",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "statement card with pencil (Answer की पहली line)."
+  },
+  {
+   "id": "warning-card",
+   "file": "kit/cards/warning-card.html",
+   "kind": "card",
+   "animatable": "pop",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "warning card. The warning triangle is an SVG: none of the repo fonts has a ⚠ glyph."
+  },
+  {
+   "id": "sticker-tape",
+   "file": "kit/cards/sticker-tape.html",
+   "kind": "card",
+   "animatable": "pop",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "sticker with tape (tilted). Tilt comes from --tilt in the skin."
+  },
+  {
+   "id": "stamp",
+   "file": "kit/cards/stamp.html",
+   "kind": "card",
+   "animatable": "pop",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "stamp (rubber-stamp border, tilted). Animate with .is-stamping: lands from 1.8x."
+  },
+  {
+   "id": "quote-card",
+   "file": "kit/cards/quote-card.html",
+   "kind": "card",
+   "animatable": "slide",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "quote card."
+  },
+  {
+   "id": "checklist-row",
+   "file": "kit/cards/checklist-row.html",
+   "kind": "card",
+   "animatable": "slide",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "checklist row (number + text + check). Add .is-done to light the row and draw its tick (tick paths have class draw)."
+  },
+  {
+   "id": "list-row-thumb",
+   "file": "kit/cards/list-row-thumb.html",
+   "kind": "card",
+   "animatable": "slide",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan) + MIT (Tabler icons inside)",
+   "licence_url": "https://github.com/tabler/tabler-icons/blob/main/LICENSE",
+   "credit_required": false,
+   "notes": "numbered list row with thumbnail slot. Counted lists FILL IN: spoken row bright, the rest .is-quiet. Thumb takes an icon or a photo. Contains Tabler icons (tabler:droplet, tabler:mountain), MIT: keep vendor/tabler/LICENSE with any redistribution."
+  },
+  {
+   "id": "empty-slot",
+   "file": "kit/cards/empty-slot.html",
+   "kind": "card",
+   "animatable": "pop",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "empty slot (dotted) and filled. Toggle .is-filled when the item is spoken."
+  },
+  {
+   "id": "icon-tile",
+   "file": "kit/cards/icon-tile.html",
+   "kind": "card",
+   "animatable": "pop",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan) + MIT (Tabler icons inside)",
+   "licence_url": "https://github.com/tabler/tabler-icons/blob/main/LICENSE",
+   "credit_required": false,
+   "notes": "icon tile (empty + filled). Tile lights up (.is-filled) as each use is named. Contains Tabler icons (tabler:droplet, tabler:bath, tabler:chef-hat, tabler:plant-2), MIT: keep vendor/tabler/LICENSE with any redistribution."
+  },
+  {
+   "id": "quadrant-recap",
+   "file": "kit/cards/quadrant-recap.html",
+   "kind": "card",
+   "animatable": "pop",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan) + MIT (Tabler icons inside)",
+   "licence_url": "https://github.com/tabler/tabler-icons/blob/main/LICENSE",
+   "credit_required": false,
+   "notes": "quadrant recap panel.  Contains Tabler icons (tabler:mountain, tabler:building-factory-2, tabler:users-group, tabler:building-bank), MIT: keep vendor/tabler/LICENSE with any redistribution."
+  },
+  {
+   "id": "timeline",
+   "file": "kit/cards/timeline.html",
+   "kind": "card",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "timeline: axis + nodes + years + progress dots. Axis is a dotted border: reveal it with a clip wipe; nodes pop in order."
+  },
+  {
+   "id": "progress-dots",
+   "file": "kit/cards/progress-dots.html",
+   "kind": "card",
+   "animatable": "pop",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "progress dots row."
+  },
+  {
+   "id": "counter",
+   "file": "kit/cards/counter.html",
+   "kind": "card",
+   "animatable": "pop",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "counter 2/4. Animate the first digit only (count up), the total stays."
+  },
+  {
+   "id": "torn-strip",
+   "file": "kit/cards/torn-strip.html",
+   "kind": "card",
+   "animatable": "slide",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "torn-paper caption strip."
+  },
+  {
+   "id": "hud-panel",
+   "file": "kit/cards/hud-panel.html",
+   "kind": "card",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "HUD panel with corner ticks. Ticks are background gradients sized by --tick; they never stretch with the panel."
+  },
+  {
+   "id": "map-pin-label",
+   "file": "kit/cards/map-pin-label.html",
+   "kind": "card",
+   "animatable": "pop",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "map pin label."
+  },
+  {
+   "id": "arrow-chain",
+   "file": "kit/cards/arrow-chain.html",
+   "kind": "card",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "chain of chips with arrows. Chips pop, arrows draw between them. Text arrow glyphs (→) are NOT in any repo font: always use the SVG."
+  },
+  {
+   "id": "callout",
+   "file": "kit/cards/callout.html",
+   "kind": "card",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--card-bg",
+    "--card-border",
+    "--radius",
+    "--shadow",
+    "--font-head",
+    "--font-body"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit (tools/build_kit.py) + kit/cards/cards.css",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "labelled callout with leader line. Dot sits on the thing; label rides the shelf. Move by editing the path's middle point."
+  },
+  {
+   "id": "skin-night-hud",
+   "file": "kit/skins/night-hud.css",
+   "kind": "skin",
+   "animatable": "none",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud"
+   ],
+   "source": "Arivihan element kit",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "Scope class .skin-night-hud; defines colours, fonts, card radius, shadow and photo-treatment hint."
+  },
+  {
+   "id": "skin-paper-editorial",
+   "file": "kit/skins/paper-editorial.css",
+   "kind": "skin",
+   "animatable": "none",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "paper-editorial"
+   ],
+   "source": "Arivihan element kit",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "Scope class .skin-paper-editorial; defines colours, fonts, card radius, shadow and photo-treatment hint."
+  },
+  {
+   "id": "skin-chalk-slate",
+   "file": "kit/skins/chalk-slate.css",
+   "kind": "skin",
+   "animatable": "none",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "chalk-slate"
+   ],
+   "source": "Arivihan element kit",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "Scope class .skin-chalk-slate; defines colours, fonts, card radius, shadow and photo-treatment hint."
+  },
+  {
+   "id": "skin-pastel-notebook",
+   "file": "kit/skins/pastel-notebook.css",
+   "kind": "skin",
+   "animatable": "none",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--accent-2",
+    "--paper",
+    "--muted",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "pastel-notebook"
+   ],
+   "source": "Arivihan element kit",
+   "licence": "original (Arivihan)",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "Scope class .skin-pastel-notebook; defines colours, fonts, card radius, shadow and photo-treatment hint."
+  },
+  {
+   "id": "tabler-outline",
+   "file": "vendor/tabler/icons/outline/",
+   "count": 5184,
+   "kind": "icon-set",
+   "animatable": "draw-on",
+   "variables_used": [
+    "currentColor"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Tabler Icons 3.49.0",
+   "licence": "MIT",
+   "licence_url": "https://github.com/tabler/tabler-icons/blob/main/LICENSE",
+   "credit_required": false,
+   "notes": "Tabler Icons 3.49.0, stroke 2 on 24 grid, stroke=currentColor. MIT/ISC: no on-screen credit; keep the LICENSE file with the set."
+  },
+  {
+   "id": "tabler-filled",
+   "file": "vendor/tabler/icons/filled/",
+   "count": 1054,
+   "kind": "icon-set",
+   "animatable": "pop",
+   "variables_used": [
+    "currentColor"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Tabler Icons 3.49.0 filled variants.",
+   "licence": "MIT",
+   "licence_url": "https://github.com/tabler/tabler-icons/blob/main/LICENSE",
+   "credit_required": false,
+   "notes": "Tabler Icons 3.49.0 filled variants. MIT/ISC: no on-screen credit; keep the LICENSE file with the set."
+  },
+  {
+   "id": "lucide",
+   "file": "vendor/lucide/icons/",
+   "count": 2133,
+   "kind": "icon-set",
+   "animatable": "draw-on",
+   "variables_used": [
+    "currentColor"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "lucide-static 1.53.0",
+   "licence": "ISC",
+   "licence_url": "https://github.com/lucide-icons/lucide/blob/main/LICENSE",
+   "credit_required": false,
+   "notes": "lucide-static 1.53.0, stroked, currentColor. MIT/ISC: no on-screen credit; keep the LICENSE file with the set."
+  },
+  {
+   "id": "phosphor-regular",
+   "file": "vendor/phosphor/assets/regular/",
+   "count": 1512,
+   "kind": "icon-set",
+   "animatable": "pop",
+   "variables_used": [
+    "currentColor"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "@phosphor-icons/core 2.1.1",
+   "licence": "MIT",
+   "licence_url": "https://github.com/phosphor-icons/core/blob/main/LICENSE",
+   "credit_required": false,
+   "notes": "@phosphor-icons/core 2.1.1, regular weight; filled outlines (cannot draw on). thin/light weights dropped: too fine at 1080 wide. MIT/ISC: no on-screen credit; keep the LICENSE file with the set."
+  },
+  {
+   "id": "phosphor-bold",
+   "file": "vendor/phosphor/assets/bold/",
+   "count": 1512,
+   "kind": "icon-set",
+   "animatable": "pop",
+   "variables_used": [
+    "currentColor"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "@phosphor-icons/core 2.1.1",
+   "licence": "MIT",
+   "licence_url": "https://github.com/phosphor-icons/core/blob/main/LICENSE",
+   "credit_required": false,
+   "notes": "@phosphor-icons/core 2.1.1, bold weight; filled outlines (cannot draw on). thin/light weights dropped: too fine at 1080 wide. MIT/ISC: no on-screen credit; keep the LICENSE file with the set."
+  },
+  {
+   "id": "phosphor-fill",
+   "file": "vendor/phosphor/assets/fill/",
+   "count": 1512,
+   "kind": "icon-set",
+   "animatable": "pop",
+   "variables_used": [
+    "currentColor"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "@phosphor-icons/core 2.1.1",
+   "licence": "MIT",
+   "licence_url": "https://github.com/phosphor-icons/core/blob/main/LICENSE",
+   "credit_required": false,
+   "notes": "@phosphor-icons/core 2.1.1, fill weight; filled outlines (cannot draw on). thin/light weights dropped: too fine at 1080 wide. MIT/ISC: no on-screen credit; keep the LICENSE file with the set."
+  },
+  {
+   "id": "phosphor-duotone",
+   "file": "vendor/phosphor/assets/duotone/",
+   "count": 1512,
+   "kind": "icon-set",
+   "animatable": "pop",
+   "variables_used": [
+    "currentColor"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "@phosphor-icons/core 2.1.1",
+   "licence": "MIT",
+   "licence_url": "https://github.com/phosphor-icons/core/blob/main/LICENSE",
+   "credit_required": false,
+   "notes": "@phosphor-icons/core 2.1.1, duotone weight; filled outlines (cannot draw on). thin/light weights dropped: too fine at 1080 wide. MIT/ISC: no on-screen credit; keep the LICENSE file with the set."
+  },
+  {
+   "id": "excalidraw-handdrawn-signs",
+   "file": "vendor/excalidraw/handdrawn-signs/",
+   "count": 2,
+   "kind": "icon-set",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Converted from excalidraw-libraries (kwirke/some-handdrawn-signs) by tools/excalidraw_to_svg.py; text dropped",
+   "licence": "MIT",
+   "licence_url": "https://github.com/excalidraw/excalidraw-libraries/blob/main/LICENSE",
+   "credit_required": false,
+   "notes": "Converted from excalidraw-libraries (kwirke/some-handdrawn-signs) by tools/excalidraw_to_svg.py; text dropped, colours mapped to --ink/--accent. MIT/ISC: no on-screen credit; keep the LICENSE file with the set."
+  },
+  {
+   "id": "excalidraw-stick-people",
+   "file": "vendor/excalidraw/stick-people/",
+   "count": 7,
+   "kind": "icon-set",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Converted from excalidraw-libraries (dhtoran/stick-people) by tools/excalidraw_to_svg.py; text dropped",
+   "licence": "MIT",
+   "licence_url": "https://github.com/excalidraw/excalidraw-libraries/blob/main/LICENSE",
+   "credit_required": false,
+   "notes": "Converted from excalidraw-libraries (dhtoran/stick-people) by tools/excalidraw_to_svg.py; text dropped, colours mapped to --ink/--accent. MIT/ISC: no on-screen credit; keep the LICENSE file with the set."
+  },
+  {
+   "id": "excalidraw-stick-figures",
+   "file": "vendor/excalidraw/stick-figures/",
+   "count": 9,
+   "kind": "icon-set",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Converted from excalidraw-libraries (youritjang/stick-figures) by tools/excalidraw_to_svg.py; text dropped",
+   "licence": "MIT",
+   "licence_url": "https://github.com/excalidraw/excalidraw-libraries/blob/main/LICENSE",
+   "credit_required": false,
+   "notes": "Converted from excalidraw-libraries (youritjang/stick-figures) by tools/excalidraw_to_svg.py; text dropped, colours mapped to --ink/--accent. MIT/ISC: no on-screen credit; keep the LICENSE file with the set."
+  },
+  {
+   "id": "excalidraw-stick-figures-collaboration",
+   "file": "vendor/excalidraw/stick-figures-collaboration/",
+   "count": 6,
+   "kind": "icon-set",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Converted from excalidraw-libraries (gianpaima/stick-figures-collaboration) by tools/excalidraw_to_svg.py; text dropped",
+   "licence": "MIT",
+   "licence_url": "https://github.com/excalidraw/excalidraw-libraries/blob/main/LICENSE",
+   "credit_required": false,
+   "notes": "Converted from excalidraw-libraries (gianpaima/stick-figures-collaboration) by tools/excalidraw_to_svg.py; text dropped, colours mapped to --ink/--accent. MIT/ISC: no on-screen credit; keep the LICENSE file with the set."
+  },
+  {
+   "id": "excalidraw-math-teacher",
+   "file": "vendor/excalidraw/math-teacher/",
+   "count": 12,
+   "kind": "icon-set",
+   "animatable": "draw-on",
+   "variables_used": [
+    "--ink",
+    "--accent",
+    "--stroke-w"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "Converted from excalidraw-libraries (ytrkptl/math-teacher-library) by tools/excalidraw_to_svg.py; text dropped",
+   "licence": "MIT",
+   "licence_url": "https://github.com/excalidraw/excalidraw-libraries/blob/main/LICENSE",
+   "credit_required": false,
+   "notes": "Converted from excalidraw-libraries (ytrkptl/math-teacher-library) by tools/excalidraw_to_svg.py; text dropped, colours mapped to --ink/--accent. MIT/ISC: no on-screen credit; keep the LICENSE file with the set."
+  },
+  {
+   "id": "rough-notation",
+   "file": "vendor/rough-notation/lib/rough-notation.iife.js",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [],
+   "suits_skins": [
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "rough-notation 0.5.1",
+   "licence": "MIT",
+   "licence_url": "https://github.com/rough-stuff/rough-notation/blob/master/LICENSE",
+   "credit_required": false,
+   "notes": "rough-notation 0.5.1: runtime generator for sketchy underline/box/circle/highlight/strike/crossed-off/bracket annotations that animate on. Use in the renderer page when a mark must hug arbitrary text."
+  },
+  {
+   "id": "roughjs",
+   "file": "vendor/roughjs/bundled/rough.js",
+   "kind": "mark",
+   "animatable": "draw-on",
+   "variables_used": [],
+   "suits_skins": [
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "roughjs 4.6.6",
+   "licence": "MIT",
+   "licence_url": "https://github.com/rough-stuff/rough/blob/master/LICENSE",
+   "credit_required": false,
+   "notes": "roughjs 4.6.6: hand-drawn line/curve/ellipse generator to SVG paths."
+  },
+  {
+   "id": "icon-picks",
+   "file": "vendor/icon_picks.json",
+   "kind": "icon-set",
+   "animatable": "draw-on",
+   "variables_used": [
+    "currentColor"
+   ],
+   "suits_skins": [
+    "night-hud",
+    "paper-editorial",
+    "chalk-slate",
+    "pastel-notebook"
+   ],
+   "source": "curated index",
+   "licence": "index original; icons per their set",
+   "licence_url": null,
+   "credit_required": false,
+   "notes": "Concept -> icon (with Hindi gloss and alternates). Built by tools/build_icon_picks.py."
+  }
+ ]
+}

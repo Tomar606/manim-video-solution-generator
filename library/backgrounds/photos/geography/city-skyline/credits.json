@@ -1,0 +1,60 @@
+{
+ "city-skyline": [
+  {
+   "title": "File:Mumbai Skyline at Night.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Mumbai_Skyline_at_Night.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "page": "https://commons.wikimedia.org/wiki/File:Mumbai_Skyline_at_Night.jpg",
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "author": "Cididity Hat",
+   "credit_required": true,
+   "file": "city-skyline-1.jpg",
+   "width": 2400,
+   "height": 1183,
+   "query": "Mumbai skyline",
+   "desc": "Skyline of Mumbai from across Back Bay."
+  },
+  {
+   "title": "File:Kolkata skyline at night.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Kolkata_skyline_at_night.jpg/3840px-Kolkata_skyline_at_night.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Kolkata_skyline_at_night.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "DeepanjanGhosh",
+   "credit_required": true,
+   "file": "city-skyline-3.jpg",
+   "width": 2400,
+   "height": 1350,
+   "query": "Kolkata skyline Howrah",
+   "desc": "A view of the New Secretariat (left) and State Bank of India (right) buildings at night from across the Hooghly river"
+  },
+  {
+   "title": "File:Mumbai Skyline and Sail boats.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Mumbai_Skyline_and_Sail_boats.jpg/3840px-Mumbai_Skyline_and_Sail_boats.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Mumbai_Skyline_and_Sail_boats.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "iMahesh",
+   "credit_required": true,
+   "file": "city-skyline-4.jpg",
+   "width": 2400,
+   "height": 1600,
+   "query": "Mumbai skyline",
+   "desc": "Skyline of Mumbai overseeing Sail boats, captured from Bay of Bengal"
+  },
+  {
+   "title": "File:Gurgaon skyline.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Gurgaon_skyline.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "page": "https://commons.wikimedia.org/wiki/File:Gurgaon_skyline.jpg",
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "author": "Dealtroadd",
+   "credit_required": true,
+   "file": "city-skyline-5.jpg",
+   "width": 1600,
+   "height": 1200,
+   "query": "Gurgaon skyline",
+   "desc": "Gurgaon skyline"
+  }
+ ]
+}

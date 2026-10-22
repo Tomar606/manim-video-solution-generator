@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-arrow-curved" viewBox="0 0 400 200" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="curved arrow, two bends">
+  <!-- curved arrow, two bends. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M14 168 C170 168 210 34 384 34" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);"/>
+  <path class="draw" pathLength="1" d="M358.3 49.5 L384 34 L356.8 21.4" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);--i:1;"/>
+</svg>

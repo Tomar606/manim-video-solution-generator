@@ -119,7 +119,6 @@ id_rsa*
 # `video veo`, and a single part can hold half a dozen rejected attempts — but
 # clips_part<N>.json IS tracked, because it is the decision record: which clip
 # went in, where, how it was fitted, and whether it passed.
-projects/*/veo/
 
 # The edu-video renderer's dependencies and the ad-hoc backups a fix leaves
 # behind. `out/` above already covers its 131 MB of rendered frames and video.
@@ -153,3 +152,99 @@ map_engine/node_modules
 veo_kit/example/*/clips/
 assets/character/**/_sheet.png
 assets/character/**/_chest_*.png
+
+# --- Arts kit libraries (lab/kit_test) -----------------------------------------
+# The sound library and the music beds ARE committed: the compositor mixes them
+# and a render fails without them.  EXCEPT the files sourced from Mixkit: this repo
+# is public, and Mixkit's licence allows using them in videos but not
+# redistributing the files.  Run `.venv-tools/bin/python tools/fetch_mixkit.py`
+# after cloning; it downloads each one from Mixkit and cuts it exactly as the
+# manifest records (checked: all 75 rebuild identically).  Generated list; rerun
+# the snippet in tools/fetch_mixkit.py's docstring if the manifests change.
+!library/sfx/**/*.wav
+!library/music/**/*.mp3
+library/music/curious-underscore/little-bells.mp3
+library/music/curious-underscore/the-snail.mp3
+library/music/documentary-calm/forest-mist-whispers.mp3
+library/music/editorial-news-lite/percussions-04.mp3
+library/music/history-reflective/gold-virginia.mp3
+library/music/history-reflective/staring-at-the-night-sky.mp3
+library/music/light-tension/relax-spy.mp3
+library/music/tech-pulse/atoms-in-peace.mp3
+library/music/tech-pulse/sonnor.mp3
+library/music/uplifting-recap/classical-vibes-4.mp3
+library/music/uplifting-recap/crying-sea.mp3
+library/sfx/arrow-draw/arrow-whoosh.wav
+library/sfx/arrow-draw/fast-pen-stroke.wav
+library/sfx/arrow-draw/fast-swish.wav
+library/sfx/arrow-draw/pen-marker-line.wav
+library/sfx/arrow-draw/pencil-stroke.wav
+library/sfx/arrow-draw/short-sweep.wav
+library/sfx/button-press/double-click.wav
+library/sfx/button-press/light-button.wav
+library/sfx/card-slide/glass-plate-slide.wav
+library/sfx/circle-scribble/fast-signing.wav
+library/sfx/circle-scribble/pen-writing.wav
+library/sfx/circle-scribble/pencil-writing.wav
+library/sfx/circle-scribble/scribble-on-paper.wav
+library/sfx/circle-scribble/signing-on-paper.wav
+library/sfx/circle-scribble/writing-on-stone.wav
+library/sfx/clock/tick-tock.wav
+library/sfx/colour-flood/air-woosh.wav
+library/sfx/colour-flood/air-zoom-vacuum.wav
+library/sfx/counter-tick/gear-lock-tap.wav
+library/sfx/counter-tick/light-switch-tap.wav
+library/sfx/cross-strike/paper-slice.wav
+library/sfx/cross-strike/pen-strike-b.wav
+library/sfx/hud-blip/electric-glitch.wav
+library/sfx/hud-blip/scifi-glitch.wav
+library/sfx/hud-blip/static-glitch.wav
+library/sfx/map-pin/falling-hit.wav
+library/sfx/map-pin/plastic-drop.wav
+library/sfx/marker-stroke/pen-on-paper-stroke.wav
+library/sfx/marker-stroke/pencil-line.wav
+library/sfx/marker-stroke/pencil-long-stroke.wav
+library/sfx/marker-stroke/scribble-stroke.wav
+library/sfx/marker-stroke/signing-stroke.wav
+library/sfx/marker-stroke/stone-writing-stroke.wav
+library/sfx/page-turn/big-page-turn.wav
+library/sfx/page-turn/book-page-flip.wav
+library/sfx/page-turn/book-paging.wav
+library/sfx/page-turn/page-turn-single.wav
+library/sfx/paper/paper-scroll.wav
+library/sfx/paper/paper-slide.wav
+library/sfx/photo-in/digital-shutter.wav
+library/sfx/photo-in/hard-shutter.wav
+library/sfx/photo-in/lens-shutter.wav
+library/sfx/photo-in/nikon-shutter.wav
+library/sfx/photo-in/shutter-click.wav
+library/sfx/photo-in/vintage-shutter.wav
+library/sfx/stamp/metal-hit.wav
+library/sfx/stamp/wood-hard-hit.wav
+library/sfx/tape/duct-tape-pull-b.wav
+library/sfx/tape/duct-tape-pull.wav
+library/sfx/tick/box-check-click.wav
+library/sfx/tick/pen-tick.wav
+library/sfx/timeline-node/key-press.wav
+library/sfx/transition-whoosh/air-sweep.wav
+library/sfx/transition-whoosh/fast-swoosh.wav
+library/sfx/transition-whoosh/fast-whoosh.wav
+library/sfx/transition-whoosh/short-sweep.wav
+library/sfx/transition-whoosh/sweep-body.wav
+library/sfx/transition-whoosh/swipe-zoom.wav
+library/sfx/typewriter/fast-keyboard-loop.wav
+library/sfx/typewriter/keyboard-typing-loop.wav
+library/sfx/typewriter/laptop-keys-loop.wav
+library/sfx/typewriter/laptop-typing-loop.wav
+library/sfx/typewriter/typewriter-input-loop.wav
+library/sfx/typewriter/typewriter-key-soft.wav
+
+# Scratch and staging folders, not videos
+projects/_scratch/
+projects/_la_check/
+lab/kit_test/out/
+
+# A project's Veo prompts and shot list ARE worth keeping (the clips are not)
+projects/*/veo/*
+!projects/*/veo/prompts/
+!projects/*/veo/shots.json

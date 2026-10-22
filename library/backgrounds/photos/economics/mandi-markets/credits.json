@@ -1,0 +1,74 @@
+{
+ "mandi-markets": [
+  {
+   "title": "File:Market Hyderabad.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Market_Hyderabad.jpg/1280px-Market_Hyderabad.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Market_Hyderabad.jpg",
+   "licence": "Public domain",
+   "licence_url": "https://commons.wikimedia.org/wiki/File:Market_Hyderabad.jpg",
+   "author": "Iijjccoo at Dutch Wikipedia",
+   "credit_required": false,
+   "file": "mandi-markets-1.jpg",
+   "width": 1280,
+   "height": 960,
+   "query": "vegetable market India",
+   "desc": "Mir Alam Mandi (A vegetable market in Hyderabad)"
+  },
+  {
+   "title": "File:An Indian Farmer in Grain Markeet.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/An_Indian_Farmer_in_Grain_Markeet.jpg/1920px-An_Indian_Farmer_in_Grain_Markeet.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:An_Indian_Farmer_in_Grain_Markeet.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Geet Arts",
+   "credit_required": true,
+   "file": "mandi-markets-2.jpg",
+   "width": 1920,
+   "height": 1280,
+   "query": "grain mandi India",
+   "desc": "An Indian Farmer in Grain Markeet"
+  },
+  {
+   "title": "File:Eicher Truck at Azadpur Vegetable Market.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Eicher_Truck_at_Azadpur_Vegetable_Market.jpg/1280px-Eicher_Truck_at_Azadpur_Vegetable_Market.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Eicher_Truck_at_Azadpur_Vegetable_Market.jpg",
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Prateek Rungta from Delhi, India",
+   "credit_required": true,
+   "file": "mandi-markets-3.jpg",
+   "width": 1280,
+   "height": 1796,
+   "query": "Azadpur mandi",
+   "desc": "Azadpur Mandi, Delhi"
+  },
+  {
+   "title": "File:Onion Mandi.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Onion_Mandi.jpg/1920px-Onion_Mandi.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Onion_Mandi.jpg",
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "author": "Balablitz",
+   "credit_required": true,
+   "file": "mandi-markets-4.jpg",
+   "width": 1920,
+   "height": 1080,
+   "query": "wholesale market India sacks",
+   "desc": "Wholesale onion shop at Gandhi Market"
+  },
+  {
+   "title": "File:Fish market within the New Market, Kolkata 04.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Fish_market_within_the_New_Market%2C_Kolkata_04.jpg/1920px-Fish_market_within_the_New_Market%2C_Kolkata_04.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Fish_market_within_the_New_Market,_Kolkata_04.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Kritzolina",
+   "credit_required": true,
+   "file": "mandi-markets-5.jpg",
+   "width": 1920,
+   "height": 1280,
+   "query": "fish market India",
+   "desc": "Fish market within the New Market, Kolkata"
+  }
+ ]
+}

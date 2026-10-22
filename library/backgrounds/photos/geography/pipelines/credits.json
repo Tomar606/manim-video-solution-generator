@@ -1,0 +1,31 @@
+{
+ "alaska": [
+  {
+   "title": "File:Alaska Pipeline, 2016 (216).jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/Alaska_Pipeline%2C_2016_%28216%29.jpg/1920px-Alaska_Pipeline%2C_2016_%28216%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Alaska_Pipeline,_2016_(216).jpg",
+   "licence": "CC BY-SA 4.0",
+   "author": "Leonid Berger",
+   "credit_required": true,
+   "file": "alaska-1.jpg"
+  },
+  {
+   "title": "File:Alaska oil and natural gas pipelines.webp",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Alaska_oil_and_natural_gas_pipelines.webp/1920px-Alaska_oil_and_natural_gas_pipelines.webp?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Alaska_oil_and_natural_gas_pipelines.webp",
+   "licence": "CC0",
+   "author": "Wikideas1",
+   "credit_required": false,
+   "file": "alaska-2.jpg"
+  },
+  {
+   "title": "File:Dalton Highway and Trans-Alaska Pipeline.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Dalton_Highway_and_Trans-Alaska_Pipeline.jpg/1920px-Dalton_Highway_and_Trans-Alaska_Pipeline.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Dalton_Highway_and_Trans-Alaska_Pipeline.jpg",
+   "licence": "CC BY 2.0",
+   "author": "Arthur T. LaBar",
+   "credit_required": true,
+   "file": "alaska-4.jpg"
+  }
+ ]
+}

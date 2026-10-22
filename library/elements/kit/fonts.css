@@ -1,0 +1,19 @@
+/* Repo fonts (assets/fonts). Path is relative to library/elements/kit/.
+   A template living elsewhere should copy these rules and fix the url().
+   NONE of these fonts carries ✓ ⚠ → glyphs: draw those with the kit SVGs,
+   never type them, or Chromium falls back to a system face. */
+@font-face { font-family: 'Khand'; src: url('../../../assets/fonts/Khand-Regular.ttf') format('truetype'); font-weight: 400; }
+@font-face { font-family: 'Khand'; src: url('../../../assets/fonts/Khand-Medium.ttf') format('truetype'); font-weight: 500; }
+@font-face { font-family: 'Khand'; src: url('../../../assets/fonts/Khand-SemiBold.ttf') format('truetype'); font-weight: 600; }
+@font-face { font-family: 'Khand'; src: url('../../../assets/fonts/Khand-Bold.ttf') format('truetype'); font-weight: 700; }
+@font-face { font-family: 'Poppins'; src: url('../../../assets/fonts/Poppins-Regular.ttf') format('truetype'); font-weight: 400; }
+@font-face { font-family: 'Poppins'; src: url('../../../assets/fonts/Poppins-Medium.ttf') format('truetype'); font-weight: 500; }
+@font-face { font-family: 'Poppins'; src: url('../../../assets/fonts/Poppins-SemiBold.ttf') format('truetype'); font-weight: 600; }
+@font-face { font-family: 'Poppins'; src: url('../../../assets/fonts/Poppins-Bold.ttf') format('truetype'); font-weight: 700; }
+/* Variable: wght 100-900, wdth 62.5-100. font-stretch: 62.5% gives the
+   condensed black headline face paper-editorial uses. */
+@font-face { font-family: 'Noto Sans Devanagari'; src: url('../../../assets/fonts/NotoSansDevanagari.ttf') format('truetype'); font-weight: 100 900; font-stretch: 62.5% 100%; }
+@font-face { font-family: 'Kalam'; src: url('../../../assets/fonts/Kalam-Regular.ttf') format('truetype'); font-weight: 400; }
+/* Digits only (unicode-range), for skins whose text face has unclear numerals:
+   put 'Khand Digits' FIRST in the stack and only 0-9 come from Khand. */
+@font-face { font-family: 'Khand Digits'; src: url('../../../assets/fonts/Khand-SemiBold.ttf?digits-only') format('truetype'); unicode-range: U+0030-0039; }

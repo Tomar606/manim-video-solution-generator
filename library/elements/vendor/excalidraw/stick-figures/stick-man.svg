@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-140.3 158.5 80.9 168.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <ellipse class="draw" pathLength="1" cx="-95.2" cy="192.1" rx="27.8" ry="25.6" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+  <path class="draw" pathLength="1" d="M-98.4 217.4 L-101.1 279.5" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+  <path class="draw" pathLength="1" d="M-100.9 281.1 L-76.3 318.9" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+  <path class="draw" pathLength="1" d="M-102.2 279.8 L-125.4 313.8" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+  <path class="draw" pathLength="1" d="M-132.3 252.7 L-99.9 231.9" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+  <path class="draw" pathLength="1" d="M-98.0 232.5 L-77.4 258.4" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 1.00)"/>
+</svg>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-arrow-elbow" viewBox="0 0 400 200" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="elbow arrow">
+  <!-- elbow arrow. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M24 20 V150 Q24 172 46 172 H380" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);"/>
+  <path class="draw" pathLength="1" d="M357.5 186.1 L384 172 L357.5 157.9" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);--i:1;"/>
+</svg>

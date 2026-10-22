@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-underline-brush" viewBox="0 0 400 40" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="brush underline">
+  <!-- brush underline. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M8 23.5 C16 23.2 40 22.5 56 21.7 C72 20.9 88 19.6 104 18.8 C120 18.1 136 17.1 152 17.2 C168 17.2 184 18.8 200 18.9 C216 19.1 232 18.4 248 18.1 C264 17.9 280 18.2 296 17.4 C312 16.5 328 13.6 344 12.9 C359.9 12.2 384 13.2 392 13.2" style="stroke:var(--accent,#D7262E);stroke-width:calc(var(--stroke-w,5) * 2.4);"/>
+  <path class="draw" pathLength="1" d="M40 29.8 C47.6 29.3 70.5 27.7 85.7 27 C100.9 26.3 116.2 25.9 131.4 25.5 C146.6 25 161.9 24.1 177.1 24.2 C192.4 24.4 207.6 26.3 222.9 26.3 C238.1 26.3 253.3 24.7 268.6 24.1 C283.8 23.5 299 23.2 314.3 22.6 C329.5 21.9 352.4 20.6 360 20.2" style="stroke:var(--accent,#D7262E);stroke-width:calc(var(--stroke-w,5) * 1.4);opacity:.85;--i:1;"/>
+</svg>

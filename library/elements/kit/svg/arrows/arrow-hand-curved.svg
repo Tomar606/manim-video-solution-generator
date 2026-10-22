@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-arrow-hand-curved" viewBox="0 0 400 200" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="hand-drawn curved arrow">
+  <!-- hand-drawn curved arrow. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M22.9 172 C26.2 166.6 36.3 150.4 42.7 139.4 C49.1 128.5 54.6 116.9 61.4 106.1 C68.3 95.3 74.4 82.8 84 74.8 C93.5 66.8 107 63.1 118.7 58.1 C130.5 53.1 142.5 48.8 154.5 45 C166.6 41.1 178.8 36.9 191.1 34.9 C203.4 32.9 215.9 32.8 228.4 32.9 C240.9 33 253.4 34.4 266 35.5 C278.6 36.5 291.9 35.8 304.1 39.1 C316.2 42.3 329.2 47.1 339 54.8 C348.7 62.5 355 74.9 362.5 85.2 C370 95.5 380.4 111.4 383.9 116.6" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);"/>
+  <path class="draw" pathLength="1" d="M352 105 L383.9 116.6 L382.7 82.7" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);--i:1;"/>
+</svg>

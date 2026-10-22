@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-arrow-big-bold" viewBox="0 0 400 160" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="big bold arrow">
+  <!-- big bold arrow. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M28 80 H318" style="stroke:var(--accent,#D7262E);stroke-width:calc(var(--stroke-w,5) * 3.6);stroke-linecap:butt;"/>
+  <path class="draw" pathLength="1" d="M262 22 L352 80 L262 138" style="stroke:var(--accent,#D7262E);stroke-width:calc(var(--stroke-w,5) * 3.6);stroke-linejoin:miter;stroke-linecap:butt;--i:1;"/>
+</svg>

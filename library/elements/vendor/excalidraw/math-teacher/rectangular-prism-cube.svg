@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="742.7 1.0 144.6 145.0" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path class="draw" pathLength="1" d="M750.7 50.6 L791.6 9.6" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 0.50)"/>
+  <path class="draw" pathLength="1" d="M791.7 9.0 L879.0 9.0" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 0.50)"/>
+  <path class="draw" pathLength="1" d="M792.0 96.3 L879.3 96.3" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 0.50)" stroke-dasharray="0.02 0.015"/>
+  <path class="draw" pathLength="1" d="M792.0 9.0 L792.0 96.3" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 0.50)" stroke-dasharray="0.02 0.015"/>
+  <path class="draw" pathLength="1" d="M879.0 9.0 L879.0 96.3" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 0.50)"/>
+  <path class="draw" pathLength="1" d="M838.3 50.6 L877.7 11.6" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 0.50)"/>
+  <path class="draw" pathLength="1" d="M838.0 137.9 L879.3 96.9" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 0.50)"/>
+  <path class="draw" pathLength="1" d="M750.9 137.9 L792.7 95.9" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 0.50)" stroke-dasharray="0.02 0.015"/>
+  <path class="draw" pathLength="1" d="M750.7 50.6 L838.0 50.6" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 0.50)"/>
+  <path class="draw" pathLength="1" d="M751.1 137.9 L838.4 137.9" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 0.50)"/>
+  <path class="draw" pathLength="1" d="M751.1 50.6 L751.1 137.9" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 0.50)"/>
+  <path class="draw" pathLength="1" d="M838.0 50.6 L838.0 137.9" style="stroke:var(--ink,#000000);fill:none;fill-opacity:1.00;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 0.50)"/>
+</svg>

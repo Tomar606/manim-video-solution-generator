@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-attention-burst" viewBox="0 0 200 200" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="attention lines">
+  <!-- attention lines. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M100 48 L100 16" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);"/>
+  <path class="draw" pathLength="1" d="M136.8 63.2 L150.9 49.1" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);--i:1;"/>
+  <path class="draw" pathLength="1" d="M152 100 L184 100" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);"/>
+  <path class="draw" pathLength="1" d="M136.8 136.8 L150.9 150.9" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);--i:1;"/>
+  <path class="draw" pathLength="1" d="M100 152 L100 184" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);"/>
+  <path class="draw" pathLength="1" d="M63.2 136.8 L49.1 150.9" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);--i:1;"/>
+  <path class="draw" pathLength="1" d="M48 100 L16 100" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);"/>
+  <path class="draw" pathLength="1" d="M63.2 63.2 L49.1 49.1" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);--i:1;"/>
+</svg>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-arrow-straight" viewBox="0 0 400 60" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="straight arrow">
+  <!-- straight arrow. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M12 30 H384" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);"/>
+  <path class="draw" pathLength="1" d="M361.5 44.1 L388 30 L361.5 15.9" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);--i:1;"/>
+</svg>

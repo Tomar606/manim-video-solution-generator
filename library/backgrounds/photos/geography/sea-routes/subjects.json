@@ -1,0 +1,10 @@
+[{"slug":"suez","query":"Suez Canal ship aerial","limit":5},
+ {"slug":"suez-ship","query":"container ship Suez Canal desert","limit":4},
+ {"slug":"chart","query":"antique nautical chart Indian Ocean","limit":4},
+ {"slug":"portolan","query":"portolan chart Mediterranean","limit":3},
+ {"slug":"ship-sea","query":"container ship open sea aerial","limit":4},
+ {"slug":"cape","query":"Cape of Good Hope coast","limit":3},
+ {"slug":"singapore-port","query":"Port of Singapore container terminal","limit":3},
+ {"slug":"colombo","query":"Port of Colombo","limit":2},
+ {"slug":"aden","query":"Aden harbour","limit":2},
+ {"slug":"port-said","query":"Port Said","limit":2}]

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-cross-out-x" viewBox="0 0 200 200" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="cross-out X">
+  <!-- cross-out X. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M22.4 25.6 C27.3 30.9 41.6 47.2 52.1 57.1 C62.7 67 74.9 75.1 85.5 84.9 C96.1 94.7 105.7 105.4 115.7 115.9 C125.6 126.4 134.5 138 145.1 147.8 C155.7 157.5 173.8 170 179.5 174.4" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);"/>
+  <path class="draw" pathLength="1" d="M174.3 20.4 C169.8 26.1 156.7 43.7 147 54.5 C137.3 65.4 126.6 75.2 116.2 85.4 C105.9 95.6 94.8 105.1 85 115.8 C75.1 126.5 67 138.8 57.2 149.5 C47.3 160.2 31 174.7 25.8 179.8" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);--i:1;"/>
+</svg>

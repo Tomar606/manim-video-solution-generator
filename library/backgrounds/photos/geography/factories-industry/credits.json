@@ -1,0 +1,60 @@
+{
+ "factories-industry": [
+  {
+   "title": "File:Tata Steel Jamshedpur 3.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Tata_Steel_Jamshedpur_3.jpg/1920px-Tata_Steel_Jamshedpur_3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Tata_Steel_Jamshedpur_3.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Kharbaan Ghaltaan",
+   "credit_required": true,
+   "file": "factories-industry-2.jpg",
+   "width": 1920,
+   "height": 1440,
+   "query": "Jamshedpur Tata Steel",
+   "desc": "Tata Steel Jamshedpur 1"
+  },
+  {
+   "title": "File:Bokaro Steel Plant.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Bokaro_Steel_Plant.jpg/1920px-Bokaro_Steel_Plant.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Bokaro_Steel_Plant.jpg",
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "author": "SuLTan0203",
+   "credit_required": true,
+   "file": "factories-industry-3.jpg",
+   "width": 1920,
+   "height": 1440,
+   "query": "steel plant India",
+   "desc": "Bokaro Steel Plant"
+  },
+  {
+   "title": "File:Tata Steel Jamshedpur 4.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/Tata_Steel_Jamshedpur_4.jpg/1920px-Tata_Steel_Jamshedpur_4.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Tata_Steel_Jamshedpur_4.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Kharbaan Ghaltaan",
+   "credit_required": true,
+   "file": "factories-industry-4.jpg",
+   "width": 1920,
+   "height": 1440,
+   "query": "Jamshedpur Tata Steel",
+   "desc": "Tata Steel Jamshedpur 1"
+  },
+  {
+   "title": "File:Bokaro Steel Plant .jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Bokaro_Steel_Plant_.jpg/1920px-Bokaro_Steel_Plant_.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Bokaro_Steel_Plant_.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Asifiqbal92",
+   "credit_required": true,
+   "file": "factories-industry-5.jpg",
+   "width": 1920,
+   "height": 1280,
+   "query": "steel plant India",
+   "desc": "Bokaro Steel Plant"
+  }
+ ]
+}

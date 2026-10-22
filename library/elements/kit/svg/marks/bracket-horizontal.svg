@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-bracket-horizontal" viewBox="0 0 400 50" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="horizontal square bracket">
+  <!-- horizontal square bracket. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M8 8 V40 H392 V8" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);"/>
+</svg>

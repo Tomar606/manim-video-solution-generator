@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-brace-vertical" viewBox="0 0 70 400" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="vertical curly brace">
+  <!-- vertical curly brace. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M58 8 C26 8 34 30 34 60 V160 C34 186 26 200 10 200 C26 200 34 214 34 240 V340 C34 370 26 392 58 392" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);"/>
+</svg>

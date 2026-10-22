@@ -1,0 +1,53 @@
+/* paper-editorial: warm cream paper, red and navy ink, black heavy condensed
+   Hindi headings, tilted stickers with tape, hand-drawn red underlines,
+   square number badges, torn-paper caption strip.  Suits: history,
+   political science, sociology, anything argued like a newspaper column. */
+.skin-paper-editorial {
+  --ink: #141414;
+  --accent: #D7262E;          /* red ink */
+  --accent-2: #1F3A8A;        /* navy ink */
+  --paper: #F1E9D8;
+  --muted: #7A6F5E;
+  --stroke-w: 5;
+
+  --bg: #F1E9D8;
+  --paper-2: #E7DCC5;
+  --highlight: rgba(215, 38, 46, .20);
+  --warn: #D7262E;
+
+  /* Noto Sans Devanagari at 900 / 62.5% width: the black condensed headline */
+  --font-head: 'Noto Sans Devanagari', sans-serif;
+  --head-weight: 900;
+  --head-stretch: 62.5%;
+  --head-tracking: 0;
+  --font-body: 'Noto Sans Devanagari', sans-serif;
+  --body-weight: 500;
+  --font-hand: 'Kalam', sans-serif;
+  --font-num: 'Khand', sans-serif;
+
+  --card-bg: #FFFDF7;
+  --card-ink: var(--ink);
+  --card-border: #141414;
+  --card-border-w: 3px;
+  --radius: 2px;
+  --shadow: 6px 6px 0 rgba(20, 20, 20, .88);
+  --glow: none;
+  --on-accent: #FFFFFF;      /* text set on an --accent fill */
+  --on-accent-2: #FFFFFF;    /* text set on an --accent-2 fill */
+  --badge-bg: #141414;
+  --badge-ink: #FFFFFF;
+  --badge-radius: 0;
+  --pill-bg: var(--accent-2);
+  --pill-ink: #FFFFFF;
+  --pill-border: var(--accent-2);
+  --tape: rgba(236, 214, 150, .78);
+  --stamp: var(--accent);
+  --tilt: -3deg;
+  --tick: 22px;
+
+  /* photo treatment hint: duotone red (black shadows, red mids, cream lights) */
+  --photo-treatment: "duotone red";
+  --photo-filter: grayscale(1) contrast(1.2) brightness(1.05);
+  --photo-tint: #D7262E;
+  --photo-blend: multiply;      /* blacks stay ink, lights take the red */
+}

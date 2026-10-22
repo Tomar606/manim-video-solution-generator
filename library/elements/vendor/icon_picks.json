@@ -1,0 +1,1811 @@
+{
+ "_about": "concept -> icon file, paths relative to library/elements/. Tabler/Lucide are stroked (draw-on with stroke-dashoffset, colour via stroke=currentColor); Phosphor is filled. Built by tools/build_icon_picks.py.",
+ "_licences": {
+  "tabler": "MIT",
+  "lucide": "ISC",
+  "phosphor": "MIT"
+ },
+ "_missing": [],
+ "picks": {
+  "water": {
+   "hi": "जल",
+   "file": "vendor/tabler/icons/outline/droplet.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/droplets.svg",
+    "vendor/lucide/icons/droplet.svg",
+    "vendor/lucide/icons/droplets.svg"
+   ],
+   "drawable": true
+  },
+  "drinking-water": {
+   "hi": "पीने का पानी",
+   "file": "vendor/tabler/icons/outline/glass-full.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/bottle.svg",
+    "vendor/lucide/icons/glass-water.svg"
+   ],
+   "drawable": true
+  },
+  "bathing": {
+   "hi": "नहाना",
+   "file": "vendor/tabler/icons/outline/bath.svg",
+   "alternates": [
+    "vendor/lucide/icons/bath.svg",
+    "vendor/lucide/icons/shower-head.svg",
+    "vendor/phosphor/assets/regular/bathtub.svg"
+   ],
+   "drawable": true
+  },
+  "cooking": {
+   "hi": "खाना पकाना",
+   "file": "vendor/tabler/icons/outline/chef-hat.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/tools-kitchen-2.svg",
+    "vendor/tabler/icons/outline/flame.svg",
+    "vendor/lucide/icons/chef-hat.svg"
+   ],
+   "drawable": true
+  },
+  "food": {
+   "hi": "भोजन",
+   "file": "vendor/tabler/icons/outline/bowl.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/soup.svg",
+    "vendor/tabler/icons/outline/tools-kitchen-2.svg",
+    "vendor/lucide/icons/soup.svg"
+   ],
+   "drawable": true
+  },
+  "grain": {
+   "hi": "अनाज",
+   "file": "vendor/tabler/icons/outline/wheat.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/grain.svg",
+    "vendor/tabler/icons/outline/plant-2.svg",
+    "vendor/lucide/icons/wheat.svg"
+   ],
+   "drawable": true
+  },
+  "cattle": {
+   "hi": "पशुधन",
+   "file": "vendor/phosphor/assets/regular/cow.svg",
+   "alternates": [],
+   "drawable": false
+  },
+  "agriculture": {
+   "hi": "कृषि",
+   "file": "vendor/tabler/icons/outline/tractor.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/plant.svg",
+    "vendor/tabler/icons/outline/wheat.svg",
+    "vendor/lucide/icons/tractor.svg"
+   ],
+   "drawable": true
+  },
+  "irrigation": {
+   "hi": "सिंचाई",
+   "file": "vendor/tabler/icons/outline/droplet-half-2.svg",
+   "alternates": [
+    "vendor/lucide/icons/shower-head.svg"
+   ],
+   "drawable": true
+  },
+  "fishing": {
+   "hi": "मत्स्य",
+   "file": "vendor/tabler/icons/outline/fish.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/fish-hook.svg",
+    "vendor/lucide/icons/fish.svg",
+    "vendor/phosphor/assets/regular/fish.svg"
+   ],
+   "drawable": true
+  },
+  "forest": {
+   "hi": "वन",
+   "file": "vendor/tabler/icons/outline/trees.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/tree.svg",
+    "vendor/lucide/icons/trees.svg",
+    "vendor/lucide/icons/tree-pine.svg"
+   ],
+   "drawable": true
+  },
+  "tree": {
+   "hi": "पेड़",
+   "file": "vendor/tabler/icons/outline/tree.svg",
+   "alternates": [
+    "vendor/lucide/icons/tree-deciduous.svg",
+    "vendor/phosphor/assets/regular/tree.svg"
+   ],
+   "drawable": true
+  },
+  "leaf": {
+   "hi": "पत्ती",
+   "file": "vendor/tabler/icons/outline/leaf.svg",
+   "alternates": [
+    "vendor/lucide/icons/leaf.svg",
+    "vendor/phosphor/assets/regular/leaf.svg"
+   ],
+   "drawable": true
+  },
+  "plant": {
+   "hi": "पौधा",
+   "file": "vendor/tabler/icons/outline/plant.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/plant-2.svg",
+    "vendor/lucide/icons/sprout.svg",
+    "vendor/phosphor/assets/regular/plant.svg"
+   ],
+   "drawable": true
+  },
+  "seed": {
+   "hi": "बीज",
+   "file": "vendor/tabler/icons/outline/seedling.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/grain.svg",
+    "vendor/lucide/icons/sprout.svg"
+   ],
+   "drawable": true
+  },
+  "flower": {
+   "hi": "फूल",
+   "file": "vendor/tabler/icons/outline/flower.svg",
+   "alternates": [
+    "vendor/lucide/icons/flower.svg",
+    "vendor/phosphor/assets/regular/flower.svg",
+    "vendor/phosphor/assets/regular/flower-lotus.svg"
+   ],
+   "drawable": true
+  },
+  "factory": {
+   "hi": "कारखाना",
+   "file": "vendor/tabler/icons/outline/building-factory-2.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/building-factory.svg",
+    "vendor/lucide/icons/factory.svg",
+    "vendor/phosphor/assets/regular/factory.svg"
+   ],
+   "drawable": true
+  },
+  "industry": {
+   "hi": "उद्योग",
+   "file": "vendor/tabler/icons/outline/building-factory.svg",
+   "alternates": [
+    "vendor/lucide/icons/factory.svg",
+    "vendor/phosphor/assets/regular/factory.svg"
+   ],
+   "drawable": true
+  },
+  "mining": {
+   "hi": "खनन",
+   "file": "vendor/tabler/icons/outline/pick.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/shovel.svg",
+    "vendor/lucide/icons/pickaxe.svg",
+    "vendor/lucide/icons/shovel.svg"
+   ],
+   "drawable": true
+  },
+  "oil": {
+   "hi": "तेल",
+   "file": "vendor/tabler/icons/outline/gas-station.svg",
+   "alternates": [],
+   "drawable": true
+  },
+  "electricity": {
+   "hi": "बिजली",
+   "file": "vendor/tabler/icons/outline/bolt.svg",
+   "alternates": [
+    "vendor/lucide/icons/bolt.svg",
+    "vendor/lucide/icons/zap.svg",
+    "vendor/phosphor/assets/regular/lightning.svg"
+   ],
+   "drawable": true
+  },
+  "power-plant": {
+   "hi": "बिजलीघर",
+   "file": "vendor/tabler/icons/outline/building-factory.svg",
+   "alternates": [
+    "vendor/lucide/icons/factory.svg",
+    "vendor/phosphor/assets/regular/factory.svg"
+   ],
+   "drawable": true
+  },
+  "train": {
+   "hi": "रेल",
+   "file": "vendor/tabler/icons/outline/train.svg",
+   "alternates": [
+    "vendor/lucide/icons/train.svg",
+    "vendor/lucide/icons/train-front.svg",
+    "vendor/phosphor/assets/regular/train.svg"
+   ],
+   "drawable": true
+  },
+  "ship": {
+   "hi": "जहाज़",
+   "file": "vendor/tabler/icons/outline/ship.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/sailboat.svg",
+    "vendor/lucide/icons/ship.svg",
+    "vendor/lucide/icons/sailboat.svg"
+   ],
+   "drawable": true
+  },
+  "plane": {
+   "hi": "हवाई जहाज़",
+   "file": "vendor/tabler/icons/outline/plane.svg",
+   "alternates": [
+    "vendor/lucide/icons/plane.svg",
+    "vendor/phosphor/assets/regular/airplane.svg"
+   ],
+   "drawable": true
+  },
+  "car": {
+   "hi": "वाहन",
+   "file": "vendor/tabler/icons/outline/car.svg",
+   "alternates": [
+    "vendor/lucide/icons/car.svg",
+    "vendor/lucide/icons/car-front.svg",
+    "vendor/phosphor/assets/regular/car.svg"
+   ],
+   "drawable": true
+  },
+  "bus": {
+   "hi": "बस",
+   "file": "vendor/tabler/icons/outline/bus.svg",
+   "alternates": [
+    "vendor/lucide/icons/bus.svg",
+    "vendor/phosphor/assets/regular/bus.svg"
+   ],
+   "drawable": true
+  },
+  "truck": {
+   "hi": "ट्रक",
+   "file": "vendor/tabler/icons/outline/truck.svg",
+   "alternates": [
+    "vendor/lucide/icons/truck.svg",
+    "vendor/phosphor/assets/regular/truck.svg"
+   ],
+   "drawable": true
+  },
+  "bicycle": {
+   "hi": "साइकिल",
+   "file": "vendor/tabler/icons/outline/bike.svg",
+   "alternates": [
+    "vendor/lucide/icons/bike.svg",
+    "vendor/phosphor/assets/regular/bicycle.svg"
+   ],
+   "drawable": true
+  },
+  "road": {
+   "hi": "सड़क",
+   "file": "vendor/tabler/icons/outline/road.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/route.svg",
+    "vendor/lucide/icons/road.svg",
+    "vendor/lucide/icons/route.svg"
+   ],
+   "drawable": true
+  },
+  "bridge": {
+   "hi": "पुल",
+   "file": "vendor/tabler/icons/outline/building-bridge-2.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/building-bridge.svg",
+    "vendor/lucide/icons/bridge.svg",
+    "vendor/phosphor/assets/regular/bridge.svg"
+   ],
+   "drawable": true
+  },
+  "port": {
+   "hi": "बंदरगाह",
+   "file": "vendor/tabler/icons/outline/anchor.svg",
+   "alternates": [
+    "vendor/lucide/icons/anchor.svg",
+    "vendor/phosphor/assets/regular/anchor.svg"
+   ],
+   "drawable": true
+  },
+  "trade": {
+   "hi": "व्यापार",
+   "file": "vendor/tabler/icons/outline/arrows-exchange.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/arrow-left-right.svg",
+    "vendor/tabler/icons/outline/arrows-left-right.svg",
+    "vendor/lucide/icons/arrow-left-right.svg"
+   ],
+   "drawable": true
+  },
+  "export": {
+   "hi": "निर्यात",
+   "file": "vendor/tabler/icons/outline/package-export.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/package.svg",
+    "vendor/lucide/icons/package.svg",
+    "vendor/phosphor/assets/regular/package.svg"
+   ],
+   "drawable": true
+  },
+  "import": {
+   "hi": "आयात",
+   "file": "vendor/tabler/icons/outline/package-import.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/package.svg",
+    "vendor/lucide/icons/package.svg",
+    "vendor/phosphor/assets/regular/package.svg"
+   ],
+   "drawable": true
+  },
+  "market": {
+   "hi": "बाज़ार",
+   "file": "vendor/tabler/icons/outline/building-store.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/shopping-cart.svg",
+    "vendor/lucide/icons/store.svg",
+    "vendor/lucide/icons/shopping-cart.svg"
+   ],
+   "drawable": true
+  },
+  "shop": {
+   "hi": "दुकान",
+   "file": "vendor/tabler/icons/outline/shopping-cart.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/basket.svg",
+    "vendor/tabler/icons/outline/shopping-bag.svg",
+    "vendor/lucide/icons/shopping-cart.svg"
+   ],
+   "drawable": true
+  },
+  "mountain": {
+   "hi": "पर्वत",
+   "file": "vendor/tabler/icons/outline/mountain.svg",
+   "alternates": [
+    "vendor/lucide/icons/mountain.svg",
+    "vendor/lucide/icons/mountain-snow.svg",
+    "vendor/phosphor/assets/regular/mountains.svg"
+   ],
+   "drawable": true
+  },
+  "river": {
+   "hi": "नदी",
+   "file": "vendor/tabler/icons/outline/ripple.svg",
+   "alternates": [
+    "vendor/lucide/icons/waves.svg",
+    "vendor/phosphor/assets/regular/waves.svg"
+   ],
+   "drawable": true
+  },
+  "sea": {
+   "hi": "समुद्र",
+   "file": "vendor/tabler/icons/outline/ripple.svg",
+   "alternates": [
+    "vendor/lucide/icons/waves.svg",
+    "vendor/phosphor/assets/regular/waves.svg"
+   ],
+   "drawable": true
+  },
+  "desert": {
+   "hi": "मरुस्थल",
+   "file": "vendor/tabler/icons/outline/cactus.svg",
+   "alternates": [
+    "vendor/phosphor/assets/regular/cactus.svg"
+   ],
+   "drawable": true
+  },
+  "island": {
+   "hi": "द्वीप",
+   "file": "vendor/tabler/icons/outline/beach.svg",
+   "alternates": [
+    "vendor/phosphor/assets/regular/island.svg"
+   ],
+   "drawable": true
+  },
+  "sun": {
+   "hi": "सूर्य",
+   "file": "vendor/tabler/icons/outline/sun.svg",
+   "alternates": [
+    "vendor/lucide/icons/sun.svg",
+    "vendor/phosphor/assets/regular/sun.svg"
+   ],
+   "drawable": true
+  },
+  "moon": {
+   "hi": "चंद्रमा",
+   "file": "vendor/tabler/icons/outline/moon.svg",
+   "alternates": [
+    "vendor/lucide/icons/moon.svg",
+    "vendor/phosphor/assets/regular/moon.svg"
+   ],
+   "drawable": true
+  },
+  "rain": {
+   "hi": "वर्षा",
+   "file": "vendor/tabler/icons/outline/cloud-rain.svg",
+   "alternates": [
+    "vendor/lucide/icons/cloud-rain.svg",
+    "vendor/lucide/icons/cloud-drizzle.svg",
+    "vendor/phosphor/assets/regular/cloud-rain.svg"
+   ],
+   "drawable": true
+  },
+  "storm": {
+   "hi": "तूफ़ान",
+   "file": "vendor/tabler/icons/outline/cloud-storm.svg",
+   "alternates": [
+    "vendor/lucide/icons/cloud-lightning.svg",
+    "vendor/phosphor/assets/regular/cloud-lightning.svg"
+   ],
+   "drawable": true
+  },
+  "cloud": {
+   "hi": "बादल",
+   "file": "vendor/tabler/icons/outline/cloud.svg",
+   "alternates": [
+    "vendor/lucide/icons/cloud.svg",
+    "vendor/phosphor/assets/regular/cloud.svg"
+   ],
+   "drawable": true
+  },
+  "snow": {
+   "hi": "हिम",
+   "file": "vendor/tabler/icons/outline/snowflake.svg",
+   "alternates": [
+    "vendor/lucide/icons/snowflake.svg",
+    "vendor/phosphor/assets/regular/snowflake.svg"
+   ],
+   "drawable": true
+  },
+  "wind": {
+   "hi": "पवन",
+   "file": "vendor/tabler/icons/outline/wind.svg",
+   "alternates": [
+    "vendor/lucide/icons/wind.svg",
+    "vendor/phosphor/assets/regular/wind.svg"
+   ],
+   "drawable": true
+  },
+  "temperature": {
+   "hi": "तापमान",
+   "file": "vendor/tabler/icons/outline/temperature.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/thermometer.svg",
+    "vendor/lucide/icons/thermometer.svg",
+    "vendor/phosphor/assets/regular/thermometer.svg"
+   ],
+   "drawable": true
+  },
+  "hot": {
+   "hi": "गर्म",
+   "file": "vendor/tabler/icons/outline/temperature-plus.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/sun-high.svg",
+    "vendor/lucide/icons/thermometer-sun.svg"
+   ],
+   "drawable": true
+  },
+  "cold": {
+   "hi": "ठंडा",
+   "file": "vendor/tabler/icons/outline/temperature-minus.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/snowflake.svg",
+    "vendor/lucide/icons/thermometer-snowflake.svg",
+    "vendor/lucide/icons/snowflake.svg"
+   ],
+   "drawable": true
+  },
+  "drought": {
+   "hi": "सूखा",
+   "file": "vendor/tabler/icons/outline/sun-high.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/sun.svg",
+    "vendor/lucide/icons/sun.svg",
+    "vendor/phosphor/assets/regular/sun.svg"
+   ],
+   "drawable": true
+  },
+  "flood": {
+   "hi": "बाढ़",
+   "file": "vendor/tabler/icons/outline/ripple.svg",
+   "alternates": [
+    "vendor/lucide/icons/waves.svg",
+    "vendor/phosphor/assets/regular/waves.svg"
+   ],
+   "drawable": true
+  },
+  "earthquake": {
+   "hi": "भूकंप",
+   "file": "vendor/tabler/icons/outline/activity-heartbeat.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/activity.svg",
+    "vendor/lucide/icons/activity.svg"
+   ],
+   "drawable": true
+  },
+  "volcano": {
+   "hi": "ज्वालामुखी",
+   "file": "vendor/tabler/icons/outline/volcano.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/mountain.svg",
+    "vendor/lucide/icons/mountain.svg"
+   ],
+   "drawable": true
+  },
+  "globe": {
+   "hi": "विश्व",
+   "file": "vendor/tabler/icons/outline/world.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/globe.svg",
+    "vendor/lucide/icons/globe.svg",
+    "vendor/phosphor/assets/regular/globe.svg"
+   ],
+   "drawable": true
+  },
+  "map": {
+   "hi": "मानचित्र",
+   "file": "vendor/tabler/icons/outline/map.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/map-2.svg",
+    "vendor/lucide/icons/map.svg"
+   ],
+   "drawable": true
+  },
+  "map-pin": {
+   "hi": "स्थान",
+   "file": "vendor/tabler/icons/outline/map-pin.svg",
+   "alternates": [
+    "vendor/lucide/icons/map-pin.svg",
+    "vendor/phosphor/assets/regular/map-pin.svg"
+   ],
+   "drawable": true
+  },
+  "compass": {
+   "hi": "दिशा",
+   "file": "vendor/tabler/icons/outline/compass.svg",
+   "alternates": [
+    "vendor/lucide/icons/compass.svg",
+    "vendor/phosphor/assets/regular/compass.svg"
+   ],
+   "drawable": true
+  },
+  "city": {
+   "hi": "नगर",
+   "file": "vendor/tabler/icons/outline/building-skyscraper.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/buildings.svg",
+    "vendor/tabler/icons/outline/building.svg",
+    "vendor/lucide/icons/building.svg"
+   ],
+   "drawable": true
+  },
+  "village": {
+   "hi": "गाँव",
+   "file": "vendor/tabler/icons/outline/home.svg",
+   "alternates": [
+    "vendor/lucide/icons/home.svg",
+    "vendor/lucide/icons/house.svg",
+    "vendor/phosphor/assets/regular/house.svg"
+   ],
+   "drawable": true
+  },
+  "house": {
+   "hi": "घर",
+   "file": "vendor/tabler/icons/outline/home.svg",
+   "alternates": [
+    "vendor/lucide/icons/home.svg",
+    "vendor/lucide/icons/house.svg",
+    "vendor/phosphor/assets/regular/house.svg"
+   ],
+   "drawable": true
+  },
+  "population": {
+   "hi": "जनसंख्या",
+   "file": "vendor/tabler/icons/outline/users-group.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/users.svg",
+    "vendor/lucide/icons/users.svg",
+    "vendor/phosphor/assets/regular/users.svg"
+   ],
+   "drawable": true
+  },
+  "migration": {
+   "hi": "पलायन",
+   "file": "vendor/tabler/icons/outline/walk.svg",
+   "alternates": [
+    "vendor/lucide/icons/footprints.svg",
+    "vendor/phosphor/assets/regular/footprints.svg",
+    "vendor/phosphor/assets/regular/person-simple-walk.svg"
+   ],
+   "drawable": true
+  },
+  "crown": {
+   "hi": "राजा",
+   "file": "vendor/tabler/icons/outline/crown.svg",
+   "alternates": [
+    "vendor/lucide/icons/crown.svg",
+    "vendor/phosphor/assets/regular/crown.svg"
+   ],
+   "drawable": true
+  },
+  "king": {
+   "hi": "शासक",
+   "file": "vendor/tabler/icons/outline/crown.svg",
+   "alternates": [
+    "vendor/lucide/icons/crown.svg",
+    "vendor/phosphor/assets/regular/crown.svg"
+   ],
+   "drawable": true
+  },
+  "parliament": {
+   "hi": "संसद",
+   "file": "vendor/tabler/icons/outline/building-bank.svg",
+   "alternates": [
+    "vendor/lucide/icons/landmark.svg",
+    "vendor/phosphor/assets/regular/bank.svg"
+   ],
+   "drawable": true
+  },
+  "government": {
+   "hi": "सरकार",
+   "file": "vendor/tabler/icons/outline/building-community.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/building-bank.svg",
+    "vendor/lucide/icons/landmark.svg"
+   ],
+   "drawable": true
+  },
+  "court": {
+   "hi": "न्यायालय",
+   "file": "vendor/tabler/icons/outline/gavel.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/scale.svg",
+    "vendor/lucide/icons/gavel.svg",
+    "vendor/lucide/icons/scale.svg"
+   ],
+   "drawable": true
+  },
+  "justice": {
+   "hi": "न्याय",
+   "file": "vendor/tabler/icons/outline/scale.svg",
+   "alternates": [
+    "vendor/lucide/icons/scale.svg",
+    "vendor/phosphor/assets/regular/scales.svg"
+   ],
+   "drawable": true
+  },
+  "law": {
+   "hi": "क़ानून",
+   "file": "vendor/tabler/icons/outline/gavel.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/book.svg",
+    "vendor/lucide/icons/gavel.svg",
+    "vendor/lucide/icons/book.svg"
+   ],
+   "drawable": true
+  },
+  "constitution": {
+   "hi": "संविधान",
+   "file": "vendor/tabler/icons/outline/book-2.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/book.svg",
+    "vendor/tabler/icons/outline/notebook.svg",
+    "vendor/lucide/icons/book.svg"
+   ],
+   "drawable": true
+  },
+  "rights": {
+   "hi": "अधिकार",
+   "file": "vendor/tabler/icons/outline/shield-check.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/shield.svg",
+    "vendor/lucide/icons/shield-check.svg",
+    "vendor/lucide/icons/shield.svg"
+   ],
+   "drawable": true
+  },
+  "vote": {
+   "hi": "मतदान",
+   "file": "vendor/tabler/icons/outline/checkbox.svg",
+   "alternates": [
+    "vendor/lucide/icons/vote.svg"
+   ],
+   "drawable": true
+  },
+  "ballot": {
+   "hi": "मतपत्र",
+   "file": "vendor/tabler/icons/outline/checklist.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/file-check.svg",
+    "vendor/lucide/icons/file-check.svg",
+    "vendor/lucide/icons/list-checks.svg"
+   ],
+   "drawable": true
+  },
+  "election": {
+   "hi": "चुनाव",
+   "file": "vendor/tabler/icons/outline/speakerphone.svg",
+   "alternates": [
+    "vendor/lucide/icons/megaphone.svg",
+    "vendor/phosphor/assets/regular/megaphone.svg"
+   ],
+   "drawable": true
+  },
+  "people": {
+   "hi": "लोग",
+   "file": "vendor/tabler/icons/outline/users.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/users-group.svg",
+    "vendor/lucide/icons/users.svg",
+    "vendor/phosphor/assets/regular/users.svg"
+   ],
+   "drawable": true
+  },
+  "crowd": {
+   "hi": "भीड़",
+   "file": "vendor/tabler/icons/outline/users-group.svg",
+   "alternates": [
+    "vendor/phosphor/assets/regular/users-three.svg"
+   ],
+   "drawable": true
+  },
+  "person": {
+   "hi": "व्यक्ति",
+   "file": "vendor/tabler/icons/outline/user.svg",
+   "alternates": [
+    "vendor/lucide/icons/user.svg",
+    "vendor/phosphor/assets/regular/user.svg",
+    "vendor/phosphor/assets/regular/person.svg"
+   ],
+   "drawable": true
+  },
+  "woman": {
+   "hi": "महिला",
+   "file": "vendor/tabler/icons/outline/woman.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/gender-female.svg",
+    "vendor/phosphor/assets/regular/gender-female.svg"
+   ],
+   "drawable": true
+  },
+  "man": {
+   "hi": "पुरुष",
+   "file": "vendor/tabler/icons/outline/man.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/gender-male.svg",
+    "vendor/phosphor/assets/regular/gender-male.svg"
+   ],
+   "drawable": true
+  },
+  "child": {
+   "hi": "बच्चा",
+   "file": "vendor/tabler/icons/outline/mood-kid.svg",
+   "alternates": [
+    "vendor/lucide/icons/baby.svg",
+    "vendor/phosphor/assets/regular/baby.svg"
+   ],
+   "drawable": true
+  },
+  "family": {
+   "hi": "परिवार",
+   "file": "vendor/tabler/icons/outline/users-group.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/users.svg",
+    "vendor/lucide/icons/users.svg",
+    "vendor/phosphor/assets/regular/users.svg"
+   ],
+   "drawable": true
+  },
+  "protest": {
+   "hi": "विरोध",
+   "file": "vendor/tabler/icons/outline/speakerphone.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/flag.svg",
+    "vendor/lucide/icons/megaphone.svg",
+    "vendor/lucide/icons/flag.svg"
+   ],
+   "drawable": true
+  },
+  "handshake": {
+   "hi": "समझौता",
+   "file": "vendor/tabler/icons/outline/heart-handshake.svg",
+   "alternates": [
+    "vendor/lucide/icons/heart-handshake.svg",
+    "vendor/lucide/icons/handshake.svg",
+    "vendor/phosphor/assets/regular/handshake.svg"
+   ],
+   "drawable": true
+  },
+  "agreement": {
+   "hi": "संधि",
+   "file": "vendor/tabler/icons/outline/writing-sign.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/signature.svg",
+    "vendor/tabler/icons/outline/file-certificate.svg",
+    "vendor/lucide/icons/signature.svg"
+   ],
+   "drawable": true
+  },
+  "flag": {
+   "hi": "ध्वज",
+   "file": "vendor/tabler/icons/outline/flag.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/flag-2.svg",
+    "vendor/lucide/icons/flag.svg",
+    "vendor/phosphor/assets/regular/flag.svg"
+   ],
+   "drawable": true
+  },
+  "war": {
+   "hi": "युद्ध",
+   "file": "vendor/tabler/icons/outline/sword.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/swords.svg",
+    "vendor/lucide/icons/sword.svg",
+    "vendor/lucide/icons/swords.svg"
+   ],
+   "drawable": true
+  },
+  "peace": {
+   "hi": "शांति",
+   "file": "vendor/tabler/icons/outline/peace.svg",
+   "alternates": [
+    "vendor/lucide/icons/bird.svg",
+    "vendor/phosphor/assets/regular/bird.svg",
+    "vendor/phosphor/assets/regular/peace.svg"
+   ],
+   "drawable": true
+  },
+  "army": {
+   "hi": "सेना",
+   "file": "vendor/tabler/icons/outline/shield.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/military-rank.svg",
+    "vendor/lucide/icons/shield.svg",
+    "vendor/phosphor/assets/regular/shield.svg"
+   ],
+   "drawable": true
+  },
+  "police": {
+   "hi": "पुलिस",
+   "file": "vendor/tabler/icons/outline/shield-half.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/badge.svg",
+    "vendor/lucide/icons/shield-half.svg",
+    "vendor/lucide/icons/badge.svg"
+   ],
+   "drawable": true
+  },
+  "border": {
+   "hi": "सीमा",
+   "file": "vendor/tabler/icons/outline/border-outer.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/fence.svg",
+    "vendor/lucide/icons/fence.svg"
+   ],
+   "drawable": true
+  },
+  "united-nations": {
+   "hi": "संयुक्त राष्ट्र",
+   "file": "vendor/tabler/icons/outline/world.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/globe.svg",
+    "vendor/lucide/icons/globe.svg",
+    "vendor/phosphor/assets/regular/globe.svg"
+   ],
+   "drawable": true
+  },
+  "newspaper": {
+   "hi": "समाचार",
+   "file": "vendor/tabler/icons/outline/news.svg",
+   "alternates": [
+    "vendor/lucide/icons/newspaper.svg",
+    "vendor/phosphor/assets/regular/newspaper.svg"
+   ],
+   "drawable": true
+  },
+  "speech": {
+   "hi": "भाषण",
+   "file": "vendor/tabler/icons/outline/microphone-2.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/microphone.svg",
+    "vendor/lucide/icons/mic.svg",
+    "vendor/phosphor/assets/regular/microphone.svg"
+   ],
+   "drawable": true
+  },
+  "history-scroll": {
+   "hi": "इतिहास",
+   "file": "vendor/tabler/icons/outline/script.svg",
+   "alternates": [
+    "vendor/lucide/icons/scroll.svg",
+    "vendor/phosphor/assets/regular/scroll.svg"
+   ],
+   "drawable": true
+  },
+  "calendar": {
+   "hi": "वर्ष",
+   "file": "vendor/tabler/icons/outline/calendar.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/calendar-event.svg",
+    "vendor/lucide/icons/calendar.svg",
+    "vendor/phosphor/assets/regular/calendar.svg"
+   ],
+   "drawable": true
+  },
+  "clock": {
+   "hi": "समय",
+   "file": "vendor/tabler/icons/outline/clock.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/clock-hour-4.svg",
+    "vendor/lucide/icons/clock.svg",
+    "vendor/phosphor/assets/regular/clock.svg"
+   ],
+   "drawable": true
+  },
+  "hourglass": {
+   "hi": "अवधि",
+   "file": "vendor/tabler/icons/outline/hourglass.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/hourglass-high.svg",
+    "vendor/lucide/icons/hourglass.svg",
+    "vendor/phosphor/assets/regular/hourglass.svg"
+   ],
+   "drawable": true
+  },
+  "temple": {
+   "hi": "मंदिर",
+   "file": "vendor/tabler/icons/outline/building-arch.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/building-church.svg",
+    "vendor/lucide/icons/church.svg",
+    "vendor/phosphor/assets/regular/church.svg"
+   ],
+   "drawable": true
+  },
+  "monument": {
+   "hi": "स्मारक",
+   "file": "vendor/tabler/icons/outline/building-monument.svg",
+   "alternates": [
+    "vendor/lucide/icons/landmark.svg"
+   ],
+   "drawable": true
+  },
+  "school": {
+   "hi": "विद्यालय",
+   "file": "vendor/tabler/icons/outline/school.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/building-community.svg",
+    "vendor/lucide/icons/school.svg"
+   ],
+   "drawable": true
+  },
+  "hospital": {
+   "hi": "अस्पताल",
+   "file": "vendor/tabler/icons/outline/building-hospital.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/hospital.svg",
+    "vendor/lucide/icons/hospital.svg",
+    "vendor/phosphor/assets/regular/hospital.svg"
+   ],
+   "drawable": true
+  },
+  "health": {
+   "hi": "स्वास्थ्य",
+   "file": "vendor/tabler/icons/outline/heart-plus.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/heartbeat.svg",
+    "vendor/tabler/icons/outline/first-aid-kit.svg",
+    "vendor/lucide/icons/heart-plus.svg"
+   ],
+   "drawable": true
+  },
+  "medicine": {
+   "hi": "दवा",
+   "file": "vendor/tabler/icons/outline/pill.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/pills.svg",
+    "vendor/tabler/icons/outline/vaccine.svg",
+    "vendor/lucide/icons/pill.svg"
+   ],
+   "drawable": true
+  },
+  "money": {
+   "hi": "धन",
+   "file": "vendor/tabler/icons/outline/cash.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/currency-rupee.svg",
+    "vendor/lucide/icons/banknote.svg"
+   ],
+   "drawable": true
+  },
+  "rupee": {
+   "hi": "रुपया",
+   "file": "vendor/tabler/icons/outline/currency-rupee.svg",
+   "alternates": [
+    "vendor/lucide/icons/indian-rupee.svg"
+   ],
+   "drawable": true
+  },
+  "bank": {
+   "hi": "बैंक",
+   "file": "vendor/tabler/icons/outline/building-bank.svg",
+   "alternates": [
+    "vendor/lucide/icons/landmark.svg",
+    "vendor/phosphor/assets/regular/bank.svg"
+   ],
+   "drawable": true
+  },
+  "tax": {
+   "hi": "कर",
+   "file": "vendor/tabler/icons/outline/receipt-tax.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/receipt.svg",
+    "vendor/lucide/icons/receipt.svg",
+    "vendor/phosphor/assets/regular/receipt.svg"
+   ],
+   "drawable": true
+  },
+  "growth": {
+   "hi": "वृद्धि",
+   "file": "vendor/tabler/icons/outline/trending-up.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/chart-line.svg",
+    "vendor/lucide/icons/trending-up.svg",
+    "vendor/lucide/icons/chart-line.svg"
+   ],
+   "drawable": true
+  },
+  "decline": {
+   "hi": "कमी",
+   "file": "vendor/tabler/icons/outline/trending-down.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/chart-line.svg",
+    "vendor/lucide/icons/trending-down.svg",
+    "vendor/lucide/icons/chart-line.svg"
+   ],
+   "drawable": true
+  },
+  "chart-bar": {
+   "hi": "आँकड़े",
+   "file": "vendor/tabler/icons/outline/chart-bar.svg",
+   "alternates": [
+    "vendor/lucide/icons/chart-bar.svg",
+    "vendor/lucide/icons/bar-chart.svg",
+    "vendor/phosphor/assets/regular/chart-bar.svg"
+   ],
+   "drawable": true
+  },
+  "chart-pie": {
+   "hi": "हिस्सा",
+   "file": "vendor/tabler/icons/outline/chart-pie.svg",
+   "alternates": [
+    "vendor/lucide/icons/chart-pie.svg",
+    "vendor/lucide/icons/pie-chart.svg",
+    "vendor/phosphor/assets/regular/chart-pie.svg"
+   ],
+   "drawable": true
+  },
+  "poverty": {
+   "hi": "ग़रीबी",
+   "file": "vendor/tabler/icons/outline/coin-off.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/wallet-off.svg",
+    "vendor/tabler/icons/outline/wallet.svg",
+    "vendor/lucide/icons/wallet.svg"
+   ],
+   "drawable": true
+  },
+  "employment": {
+   "hi": "रोज़गार",
+   "file": "vendor/tabler/icons/outline/briefcase.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/tool.svg",
+    "vendor/lucide/icons/briefcase.svg",
+    "vendor/phosphor/assets/regular/briefcase.svg"
+   ],
+   "drawable": true
+  },
+  "worker": {
+   "hi": "श्रमिक",
+   "file": "vendor/tabler/icons/outline/tool.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/hammer.svg",
+    "vendor/tabler/icons/outline/helmet.svg",
+    "vendor/lucide/icons/hammer.svg"
+   ],
+   "drawable": true
+  },
+  "technology": {
+   "hi": "तकनीक",
+   "file": "vendor/tabler/icons/outline/cpu.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/device-desktop.svg",
+    "vendor/lucide/icons/cpu.svg",
+    "vendor/lucide/icons/laptop.svg"
+   ],
+   "drawable": true
+  },
+  "phone": {
+   "hi": "मोबाइल",
+   "file": "vendor/tabler/icons/outline/device-mobile.svg",
+   "alternates": [
+    "vendor/lucide/icons/smartphone.svg",
+    "vendor/phosphor/assets/regular/device-mobile.svg"
+   ],
+   "drawable": true
+  },
+  "internet": {
+   "hi": "इंटरनेट",
+   "file": "vendor/tabler/icons/outline/world-www.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/wifi.svg",
+    "vendor/lucide/icons/wifi.svg"
+   ],
+   "drawable": true
+  },
+  "lab-flask": {
+   "hi": "फ्लास्क",
+   "file": "vendor/tabler/icons/outline/flask.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/flask-2.svg",
+    "vendor/lucide/icons/flask-conical.svg",
+    "vendor/phosphor/assets/regular/flask.svg"
+   ],
+   "drawable": true
+  },
+  "test-tube": {
+   "hi": "परखनली",
+   "file": "vendor/tabler/icons/outline/test-pipe.svg",
+   "alternates": [
+    "vendor/lucide/icons/test-tube.svg",
+    "vendor/phosphor/assets/regular/test-tube.svg"
+   ],
+   "drawable": true
+  },
+  "beaker": {
+   "hi": "बीकर",
+   "file": "vendor/tabler/icons/outline/flask-2.svg",
+   "alternates": [
+    "vendor/lucide/icons/beaker.svg"
+   ],
+   "drawable": true
+  },
+  "microscope": {
+   "hi": "सूक्ष्मदर्शी",
+   "file": "vendor/tabler/icons/outline/microscope.svg",
+   "alternates": [
+    "vendor/lucide/icons/microscope.svg",
+    "vendor/phosphor/assets/regular/microscope.svg"
+   ],
+   "drawable": true
+  },
+  "atom": {
+   "hi": "परमाणु",
+   "file": "vendor/tabler/icons/outline/atom.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/atom-2.svg",
+    "vendor/lucide/icons/atom.svg",
+    "vendor/phosphor/assets/regular/atom.svg"
+   ],
+   "drawable": true
+  },
+  "prism": {
+   "hi": "प्रिज़्म",
+   "file": "vendor/tabler/icons/outline/prism-light.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/prism.svg"
+   ],
+   "drawable": true
+  },
+  "lens-concave": {
+   "hi": "अवतल लेंस",
+   "file": "vendor/tabler/icons/outline/lens-concave.svg",
+   "alternates": [
+    "vendor/lucide/icons/lens-concave.svg"
+   ],
+   "drawable": true
+  },
+  "mosque": {
+   "hi": "मस्जिद",
+   "file": "vendor/tabler/icons/outline/building-mosque.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/mosque.svg",
+    "vendor/lucide/icons/mosque.svg",
+    "vendor/phosphor/assets/regular/mosque.svg"
+   ],
+   "drawable": true
+  },
+  "molecule": {
+   "hi": "अणु",
+   "file": "vendor/tabler/icons/outline/hexagon.svg",
+   "alternates": [
+    "vendor/lucide/icons/hexagon.svg",
+    "vendor/phosphor/assets/regular/hexagon.svg"
+   ],
+   "drawable": true
+  },
+  "magnet": {
+   "hi": "चुंबक",
+   "file": "vendor/tabler/icons/outline/magnet.svg",
+   "alternates": [
+    "vendor/lucide/icons/magnet.svg",
+    "vendor/phosphor/assets/regular/magnet.svg"
+   ],
+   "drawable": true
+  },
+  "battery": {
+   "hi": "बैटरी",
+   "file": "vendor/tabler/icons/outline/battery-2.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/battery.svg",
+    "vendor/tabler/icons/outline/battery-charging.svg",
+    "vendor/lucide/icons/battery.svg"
+   ],
+   "drawable": true
+  },
+  "bulb": {
+   "hi": "बल्ब",
+   "file": "vendor/tabler/icons/outline/bulb.svg",
+   "alternates": [
+    "vendor/lucide/icons/lightbulb.svg",
+    "vendor/phosphor/assets/regular/lightbulb.svg"
+   ],
+   "drawable": true
+  },
+  "idea": {
+   "hi": "विचार",
+   "file": "vendor/tabler/icons/outline/bulb.svg",
+   "alternates": [
+    "vendor/lucide/icons/lightbulb.svg",
+    "vendor/phosphor/assets/regular/lightbulb.svg"
+   ],
+   "drawable": true
+  },
+  "lens": {
+   "hi": "लेंस",
+   "file": "vendor/tabler/icons/outline/lens-convex.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/lens-concave.svg",
+    "vendor/lucide/icons/lens-convex.svg",
+    "vendor/lucide/icons/lens-concave.svg"
+   ],
+   "drawable": true
+  },
+  "eye": {
+   "hi": "आँख",
+   "file": "vendor/tabler/icons/outline/eye.svg",
+   "alternates": [
+    "vendor/lucide/icons/eye.svg",
+    "vendor/phosphor/assets/regular/eye.svg"
+   ],
+   "drawable": true
+  },
+  "light-ray": {
+   "hi": "प्रकाश",
+   "file": "vendor/tabler/icons/outline/prism-light.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/sun.svg",
+    "vendor/lucide/icons/sun.svg",
+    "vendor/phosphor/assets/regular/sun.svg"
+   ],
+   "drawable": true
+  },
+  "wave": {
+   "hi": "तरंग",
+   "file": "vendor/tabler/icons/outline/wave-sine.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/wave-sine.svg",
+    "vendor/lucide/icons/audio-waveform.svg",
+    "vendor/phosphor/assets/regular/wave-sine.svg"
+   ],
+   "drawable": true
+  },
+  "sound": {
+   "hi": "ध्वनि",
+   "file": "vendor/tabler/icons/outline/volume.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/volume-2.svg",
+    "vendor/lucide/icons/volume.svg",
+    "vendor/lucide/icons/volume-2.svg"
+   ],
+   "drawable": true
+  },
+  "radioactive": {
+   "hi": "रेडियोधर्मी",
+   "file": "vendor/tabler/icons/outline/radioactive.svg",
+   "alternates": [
+    "vendor/phosphor/assets/regular/radioactive.svg"
+   ],
+   "drawable": true
+  },
+  "fire": {
+   "hi": "अग्नि",
+   "file": "vendor/tabler/icons/outline/flame.svg",
+   "alternates": [
+    "vendor/lucide/icons/flame.svg",
+    "vendor/phosphor/assets/regular/flame.svg",
+    "vendor/phosphor/assets/regular/fire.svg"
+   ],
+   "drawable": true
+  },
+  "gear": {
+   "hi": "यंत्र",
+   "file": "vendor/tabler/icons/outline/settings.svg",
+   "alternates": [
+    "vendor/lucide/icons/settings.svg",
+    "vendor/lucide/icons/cog.svg",
+    "vendor/phosphor/assets/regular/gear.svg"
+   ],
+   "drawable": true
+  },
+  "weight": {
+   "hi": "भार",
+   "file": "vendor/tabler/icons/outline/weight.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/barbell.svg",
+    "vendor/lucide/icons/weight.svg",
+    "vendor/phosphor/assets/regular/barbell.svg"
+   ],
+   "drawable": true
+  },
+  "ruler": {
+   "hi": "मापन",
+   "file": "vendor/tabler/icons/outline/ruler-2.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/ruler.svg",
+    "vendor/lucide/icons/ruler.svg",
+    "vendor/phosphor/assets/regular/ruler.svg"
+   ],
+   "drawable": true
+  },
+  "calculator": {
+   "hi": "गणना",
+   "file": "vendor/tabler/icons/outline/calculator.svg",
+   "alternates": [
+    "vendor/lucide/icons/calculator.svg",
+    "vendor/phosphor/assets/regular/calculator.svg"
+   ],
+   "drawable": true
+  },
+  "math": {
+   "hi": "गणित",
+   "file": "vendor/tabler/icons/outline/math.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/math-function.svg",
+    "vendor/lucide/icons/sigma.svg",
+    "vendor/phosphor/assets/regular/sigma.svg"
+   ],
+   "drawable": true
+  },
+  "dna": {
+   "hi": "डीएनए",
+   "file": "vendor/tabler/icons/outline/dna-2.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/dna.svg",
+    "vendor/lucide/icons/dna.svg",
+    "vendor/phosphor/assets/regular/dna.svg"
+   ],
+   "drawable": true
+  },
+  "cell": {
+   "hi": "कोशिका",
+   "file": "vendor/tabler/icons/outline/circle-dot.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/cell.svg",
+    "vendor/tabler/icons/outline/virus.svg",
+    "vendor/lucide/icons/circle-dot.svg"
+   ],
+   "drawable": true
+  },
+  "virus": {
+   "hi": "विषाणु",
+   "file": "vendor/tabler/icons/outline/virus.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/bug.svg",
+    "vendor/lucide/icons/virus.svg",
+    "vendor/lucide/icons/bug.svg"
+   ],
+   "drawable": true
+  },
+  "bacteria": {
+   "hi": "जीवाणु",
+   "file": "vendor/tabler/icons/outline/bug.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/virus.svg",
+    "vendor/lucide/icons/bug.svg",
+    "vendor/lucide/icons/virus.svg"
+   ],
+   "drawable": true
+  },
+  "heart": {
+   "hi": "हृदय",
+   "file": "vendor/tabler/icons/outline/heart.svg",
+   "alternates": [
+    "vendor/lucide/icons/heart.svg",
+    "vendor/phosphor/assets/regular/heart.svg"
+   ],
+   "drawable": true
+  },
+  "lungs": {
+   "hi": "फेफड़े",
+   "file": "vendor/tabler/icons/outline/lungs.svg",
+   "alternates": [],
+   "drawable": true
+  },
+  "brain": {
+   "hi": "मस्तिष्क",
+   "file": "vendor/tabler/icons/outline/brain.svg",
+   "alternates": [
+    "vendor/lucide/icons/brain.svg",
+    "vendor/phosphor/assets/regular/brain.svg"
+   ],
+   "drawable": true
+  },
+  "bone": {
+   "hi": "अस्थि",
+   "file": "vendor/tabler/icons/outline/bone.svg",
+   "alternates": [
+    "vendor/lucide/icons/bone.svg",
+    "vendor/phosphor/assets/regular/bone.svg"
+   ],
+   "drawable": true
+  },
+  "tooth": {
+   "hi": "दाँत",
+   "file": "vendor/tabler/icons/outline/dental.svg",
+   "alternates": [],
+   "drawable": true
+  },
+  "egg": {
+   "hi": "अंडा",
+   "file": "vendor/tabler/icons/outline/egg.svg",
+   "alternates": [
+    "vendor/lucide/icons/egg.svg",
+    "vendor/phosphor/assets/regular/egg.svg"
+   ],
+   "drawable": true
+  },
+  "bird": {
+   "hi": "पक्षी",
+   "file": "vendor/tabler/icons/outline/feather.svg",
+   "alternates": [
+    "vendor/lucide/icons/feather.svg",
+    "vendor/lucide/icons/bird.svg",
+    "vendor/phosphor/assets/regular/feather.svg"
+   ],
+   "drawable": true
+  },
+  "insect": {
+   "hi": "कीट",
+   "file": "vendor/tabler/icons/outline/bug.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/butterfly.svg",
+    "vendor/lucide/icons/bug.svg",
+    "vendor/phosphor/assets/regular/bug.svg"
+   ],
+   "drawable": true
+  },
+  "recycle": {
+   "hi": "पुनर्चक्रण",
+   "file": "vendor/tabler/icons/outline/recycle.svg",
+   "alternates": [
+    "vendor/lucide/icons/recycle.svg",
+    "vendor/phosphor/assets/regular/recycle.svg"
+   ],
+   "drawable": true
+  },
+  "pollution": {
+   "hi": "प्रदूषण",
+   "file": "vendor/tabler/icons/outline/smoking-no.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/cloud-fog.svg",
+    "vendor/tabler/icons/outline/building-factory.svg",
+    "vendor/lucide/icons/cloud-fog.svg"
+   ],
+   "drawable": true
+  },
+  "environment": {
+   "hi": "पर्यावरण",
+   "file": "vendor/tabler/icons/outline/leaf.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/plant.svg",
+    "vendor/lucide/icons/leaf.svg",
+    "vendor/phosphor/assets/regular/leaf.svg"
+   ],
+   "drawable": true
+  },
+  "book": {
+   "hi": "पुस्तक",
+   "file": "vendor/tabler/icons/outline/book.svg",
+   "alternates": [
+    "vendor/lucide/icons/book.svg",
+    "vendor/lucide/icons/book-open.svg",
+    "vendor/phosphor/assets/regular/book.svg"
+   ],
+   "drawable": true
+  },
+  "notebook": {
+   "hi": "कॉपी",
+   "file": "vendor/tabler/icons/outline/notebook.svg",
+   "alternates": [
+    "vendor/lucide/icons/notebook.svg",
+    "vendor/lucide/icons/notebook-pen.svg",
+    "vendor/phosphor/assets/regular/notebook.svg"
+   ],
+   "drawable": true
+  },
+  "pencil": {
+   "hi": "पेंसिल",
+   "file": "vendor/tabler/icons/outline/pencil.svg",
+   "alternates": [
+    "vendor/lucide/icons/pencil.svg",
+    "vendor/lucide/icons/pencil-line.svg",
+    "vendor/phosphor/assets/regular/pencil.svg"
+   ],
+   "drawable": true
+  },
+  "pen": {
+   "hi": "कलम",
+   "file": "vendor/tabler/icons/outline/writing.svg",
+   "alternates": [
+    "vendor/lucide/icons/pen-tool.svg",
+    "vendor/lucide/icons/pen.svg",
+    "vendor/phosphor/assets/regular/pen.svg"
+   ],
+   "drawable": true
+  },
+  "exam": {
+   "hi": "परीक्षा",
+   "file": "vendor/tabler/icons/outline/file-pencil.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/clipboard-list.svg",
+    "vendor/tabler/icons/outline/file-text.svg",
+    "vendor/lucide/icons/clipboard-list.svg"
+   ],
+   "drawable": true
+  },
+  "answer-sheet": {
+   "hi": "उत्तर पुस्तिका",
+   "file": "vendor/tabler/icons/outline/file-text.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/file-description.svg",
+    "vendor/lucide/icons/file-text.svg",
+    "vendor/phosphor/assets/regular/file-text.svg"
+   ],
+   "drawable": true
+  },
+  "certificate": {
+   "hi": "प्रमाणपत्र",
+   "file": "vendor/tabler/icons/outline/certificate.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/award.svg",
+    "vendor/lucide/icons/award.svg",
+    "vendor/phosphor/assets/regular/certificate.svg"
+   ],
+   "drawable": true
+  },
+  "graduation": {
+   "hi": "शिक्षा",
+   "file": "vendor/tabler/icons/outline/school.svg",
+   "alternates": [
+    "vendor/lucide/icons/school.svg",
+    "vendor/lucide/icons/graduation-cap.svg",
+    "vendor/phosphor/assets/regular/graduation-cap.svg"
+   ],
+   "drawable": true
+  },
+  "target": {
+   "hi": "लक्ष्य",
+   "file": "vendor/tabler/icons/outline/target.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/focus-2.svg",
+    "vendor/lucide/icons/target.svg",
+    "vendor/phosphor/assets/regular/target.svg"
+   ],
+   "drawable": true
+  },
+  "trophy": {
+   "hi": "उपलब्धि",
+   "file": "vendor/tabler/icons/outline/trophy.svg",
+   "alternates": [
+    "vendor/lucide/icons/trophy.svg",
+    "vendor/phosphor/assets/regular/trophy.svg"
+   ],
+   "drawable": true
+  },
+  "star-mark": {
+   "hi": "महत्वपूर्ण",
+   "file": "vendor/tabler/icons/outline/star.svg",
+   "alternates": [
+    "vendor/lucide/icons/star.svg",
+    "vendor/phosphor/assets/regular/star.svg"
+   ],
+   "drawable": true
+  },
+  "warning": {
+   "hi": "चेतावनी",
+   "file": "vendor/tabler/icons/outline/alert-triangle.svg",
+   "alternates": [
+    "vendor/lucide/icons/alert-triangle.svg",
+    "vendor/lucide/icons/triangle-alert.svg",
+    "vendor/phosphor/assets/regular/warning.svg"
+   ],
+   "drawable": true
+  },
+  "info": {
+   "hi": "जानकारी",
+   "file": "vendor/tabler/icons/outline/info-circle.svg",
+   "alternates": [
+    "vendor/lucide/icons/info.svg",
+    "vendor/phosphor/assets/regular/info.svg"
+   ],
+   "drawable": true
+  },
+  "check": {
+   "hi": "सही",
+   "file": "vendor/tabler/icons/outline/check.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/circle-check.svg",
+    "vendor/lucide/icons/check.svg",
+    "vendor/lucide/icons/circle-check.svg"
+   ],
+   "drawable": true
+  },
+  "cross": {
+   "hi": "ग़लत",
+   "file": "vendor/tabler/icons/outline/x.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/circle-x.svg",
+    "vendor/lucide/icons/x.svg",
+    "vendor/lucide/icons/circle-x.svg"
+   ],
+   "drawable": true
+  },
+  "question": {
+   "hi": "प्रश्न",
+   "file": "vendor/tabler/icons/outline/help-circle.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/question-mark.svg",
+    "vendor/lucide/icons/help-circle.svg",
+    "vendor/lucide/icons/circle-help.svg"
+   ],
+   "drawable": true
+  },
+  "lightning-fact": {
+   "hi": "तथ्य",
+   "file": "vendor/tabler/icons/outline/bolt.svg",
+   "alternates": [
+    "vendor/lucide/icons/bolt.svg"
+   ],
+   "drawable": true
+  },
+  "search": {
+   "hi": "खोज",
+   "file": "vendor/tabler/icons/outline/search.svg",
+   "alternates": [
+    "vendor/lucide/icons/search.svg"
+   ],
+   "drawable": true
+  },
+  "lock": {
+   "hi": "सुरक्षित",
+   "file": "vendor/tabler/icons/outline/lock.svg",
+   "alternates": [
+    "vendor/lucide/icons/lock.svg",
+    "vendor/phosphor/assets/regular/lock.svg"
+   ],
+   "drawable": true
+  },
+  "key": {
+   "hi": "कुंजी",
+   "file": "vendor/tabler/icons/outline/key.svg",
+   "alternates": [
+    "vendor/lucide/icons/key.svg",
+    "vendor/phosphor/assets/regular/key.svg"
+   ],
+   "drawable": true
+  },
+  "link": {
+   "hi": "संबंध",
+   "file": "vendor/tabler/icons/outline/link.svg",
+   "alternates": [
+    "vendor/lucide/icons/link.svg",
+    "vendor/phosphor/assets/regular/link.svg"
+   ],
+   "drawable": true
+  },
+  "chain-cause": {
+   "hi": "कारण से परिणाम",
+   "file": "vendor/tabler/icons/outline/arrow-right.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/arrow-narrow-right.svg",
+    "vendor/lucide/icons/arrow-right.svg",
+    "vendor/phosphor/assets/regular/arrow-right.svg"
+   ],
+   "drawable": true
+  },
+  "cycle": {
+   "hi": "चक्र",
+   "file": "vendor/tabler/icons/outline/refresh.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/rotate-clockwise.svg",
+    "vendor/tabler/icons/outline/recycle.svg",
+    "vendor/lucide/icons/recycle.svg"
+   ],
+   "drawable": true
+  },
+  "balance": {
+   "hi": "संतुलन",
+   "file": "vendor/tabler/icons/outline/scale.svg",
+   "alternates": [
+    "vendor/lucide/icons/scale.svg",
+    "vendor/phosphor/assets/regular/scales.svg"
+   ],
+   "drawable": true
+  },
+  "increase": {
+   "hi": "बढ़ना",
+   "file": "vendor/tabler/icons/outline/arrow-big-up.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/arrow-up.svg",
+    "vendor/lucide/icons/arrow-big-up.svg",
+    "vendor/lucide/icons/arrow-up.svg"
+   ],
+   "drawable": true
+  },
+  "decrease": {
+   "hi": "घटना",
+   "file": "vendor/tabler/icons/outline/arrow-big-down.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/arrow-down.svg",
+    "vendor/lucide/icons/arrow-big-down.svg",
+    "vendor/lucide/icons/arrow-down.svg"
+   ],
+   "drawable": true
+  },
+  "list": {
+   "hi": "सूची",
+   "file": "vendor/tabler/icons/outline/list-numbers.svg",
+   "alternates": [
+    "vendor/lucide/icons/list-ordered.svg",
+    "vendor/phosphor/assets/regular/list-numbers.svg"
+   ],
+   "drawable": true
+  },
+  "timeline": {
+   "hi": "कालक्रम",
+   "file": "vendor/tabler/icons/outline/timeline.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/git-commit.svg",
+    "vendor/lucide/icons/timeline.svg",
+    "vendor/lucide/icons/git-commit.svg"
+   ],
+   "drawable": true
+  },
+  "filter": {
+   "hi": "चयन",
+   "file": "vendor/tabler/icons/outline/filter.svg",
+   "alternates": [
+    "vendor/lucide/icons/filter.svg"
+   ],
+   "drawable": true
+  },
+  "layers": {
+   "hi": "परतें",
+   "file": "vendor/tabler/icons/outline/stack-2.svg",
+   "alternates": [
+    "vendor/lucide/icons/layers.svg"
+   ],
+   "drawable": true
+  },
+  "home-india": {
+   "hi": "भारत",
+   "file": "vendor/tabler/icons/outline/map-pin.svg",
+   "alternates": [
+    "vendor/tabler/icons/outline/map.svg",
+    "vendor/lucide/icons/map-pin.svg",
+    "vendor/lucide/icons/map.svg"
+   ],
+   "drawable": true
+  }
+ }
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-arrow-double" viewBox="0 0 400 60" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="double-headed arrow">
+  <!-- double-headed arrow. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M20 30 H380" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);"/>
+  <path class="draw" pathLength="1" d="M42.5 15.9 L16 30 L42.5 44.1" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);--i:1;"/>
+  <path class="draw" pathLength="1" d="M357.5 44.1 L384 30 L357.5 15.9" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);--i:1;"/>
+</svg>

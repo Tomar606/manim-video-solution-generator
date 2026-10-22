@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-arrow-hand-wobbly" viewBox="0 0 400 80" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="hand-drawn wobbly arrow">
+  <!-- hand-drawn wobbly arrow. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M14 44.7 C20.9 43.6 41.4 39.6 55.2 38.5 C68.9 37.3 82.8 38 96.5 37.8 C110.3 37.5 124.1 35.8 137.9 36.8 C151.7 37.9 165.8 43.6 179.6 43.9 C193.4 44.3 207 40.7 220.8 39.1 C234.5 37.5 248.2 35.9 262 34.3 C275.7 32.7 289.5 30.8 303.2 29.5 C316.9 28.2 330.6 25.5 344.5 26.2 C358.3 26.9 379.2 32.4 386.1 33.6" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);"/>
+  <path class="draw" pathLength="1" d="M356.4 50.2 L386.1 33.6 L358.2 14.2" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);--i:1;"/>
+</svg>

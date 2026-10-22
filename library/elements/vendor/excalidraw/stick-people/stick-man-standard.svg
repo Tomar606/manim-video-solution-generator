@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="840.9 -45.1 215.1 231.3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <ellipse class="draw" pathLength="1" cx="950.8" cy="-8.7" rx="36.9" ry="28.3" style="stroke:var(--ink,#1864ab);fill:var(--accent,#ced4da);fill-opacity:0.25;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 2.00)"/>
+  <path class="draw" pathLength="1" d="M926.9 -7.3 L949.1 0.8 L970.9 -7.0" style="stroke:var(--ink,#1864ab);fill:none;fill-opacity:0.25;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 2.00)"/>
+  <path class="draw" pathLength="1" d="M934.7 -15.8 L938.8 -18.8 L941.2 -15.6" style="stroke:var(--ink,#1864ab);fill:none;fill-opacity:0.25;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 2.00)"/>
+  <path class="draw" pathLength="1" d="M955.4 -15.7 L959.5 -18.7 L961.9 -15.5" style="stroke:var(--ink,#1864ab);fill:none;fill-opacity:0.25;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 2.00)"/>
+  <path class="draw" pathLength="1" d="M938.8 34.0 L891.8 45.0 L848.9 59.2" style="stroke:var(--ink,#1864ab);fill:none;fill-opacity:0.25;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 2.00)"/>
+  <path class="draw" pathLength="1" d="M955.1 31.8 L1002.5 40.7 L1048.0 55.9" style="stroke:var(--ink,#1864ab);fill:none;fill-opacity:0.25;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 2.00)"/>
+  <path class="draw" pathLength="1" d="M949.1 41.6 L947.3 96.3 L948.2 167.8" style="stroke:var(--ink,#1864ab);fill:none;fill-opacity:0.25;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 2.00)"/>
+  <path class="draw" pathLength="1" d="M937.9 178.2 L900.9 177.9" style="stroke:var(--ink,#1864ab);fill:none;fill-opacity:0.25;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 2.00)"/>
+  <path class="draw" pathLength="1" d="M953.9 177.8 L992.3 177.3" style="stroke:var(--ink,#1864ab);fill:none;fill-opacity:0.25;stroke-opacity:1.00;stroke-width:calc(var(--stroke-w,4) * 2.00)"/>
+</svg>

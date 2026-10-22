@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-frame-corner-ticks-hud" viewBox="0 0 600 400" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="HUD corner-tick frame">
+  <!-- HUD corner-tick frame. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M8 68 V8 H68" style="stroke:var(--accent,#F5B82E);stroke-width:var(--stroke-w,5);"/>
+  <path class="draw" pathLength="1" d="M592 68 V8 H532" style="stroke:var(--accent,#F5B82E);stroke-width:var(--stroke-w,5);--i:1;"/>
+  <path class="draw" pathLength="1" d="M8 332 V392 H68" style="stroke:var(--accent,#F5B82E);stroke-width:var(--stroke-w,5);--i:2;"/>
+  <path class="draw" pathLength="1" d="M592 332 V392 H532" style="stroke:var(--accent,#F5B82E);stroke-width:var(--stroke-w,5);--i:3;"/>
+</svg>

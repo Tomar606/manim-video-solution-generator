@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-underline-hand" viewBox="0 0 400 34" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="hand-drawn underline with return flick">
+  <!-- hand-drawn underline with return flick. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M8 21 C15.1 21 36.5 21.9 50.7 21.4 C65 20.9 79.2 19 93.4 17.9 C107.6 16.9 121.8 15.3 136 14.9 C150.2 14.6 164.5 15.7 178.7 15.8 C193 15.9 207.2 15.1 221.4 15.4 C235.7 15.7 250 17.7 264.2 17.5 C278.4 17.4 292.6 15.8 306.8 14.4 C321 13.1 335.1 10.8 349.3 9.5 C363.5 8.2 384.8 7.1 391.9 6.6" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);"/>
+  <path class="draw" pathLength="1" d="M392 8 C381.7 10.3 353.7 19 330 22 C306.3 25 263.3 25.3 250 26" style="stroke:var(--accent,#D7262E);stroke-width:calc(var(--stroke-w,5) * 0.8);--i:1;"/>
+</svg>

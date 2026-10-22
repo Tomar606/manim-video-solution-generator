@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-arrow-leader" viewBox="0 0 400 200" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="callout leader: dot + line">
+  <!-- callout leader: dot + line. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <circle class="dot" cx="24" cy="176" r="11" style="fill:var(--accent,#D7262E);stroke:none"/>
+  <path class="draw" pathLength="1" d="M24 176 L170 40 H388" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);"/>
+</svg>

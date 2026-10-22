@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-arrow-chain" viewBox="0 0 80 40" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="chain arrow between chips">
+  <!-- chain arrow between chips. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M8 20 H66" style="stroke:var(--accent,#D7262E);stroke-width:calc(var(--stroke-w,5) * 1.1);"/>
+  <path class="draw" pathLength="1" d="M56.7 28.9 L70 20 L56.7 11.1" style="stroke:var(--accent,#D7262E);stroke-width:calc(var(--stroke-w,5) * 1.1);--i:1;"/>
+</svg>

@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-check-clean" viewBox="0 0 120 100" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="clean checkmark">
+  <!-- clean checkmark. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M12 54 L44 86 L108 14" style="stroke:var(--accent-2,#1F3A8A);stroke-width:calc(var(--stroke-w,5) * 1.4);"/>
+</svg>

@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="kel kel-underline-straight" viewBox="0 0 400 20" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="straight underline">
+  <!-- straight underline. Arivihan element kit, original. Colours: CSS vars with fallbacks. -->
+  <path class="draw" pathLength="1" d="M6 10 H394" style="stroke:var(--accent,#D7262E);stroke-width:var(--stroke-w,5);"/>
+</svg>

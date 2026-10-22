@@ -1,0 +1,60 @@
+{
+ "deforestation": [
+  {
+   "title": "File:Log of wood being sold at the deforestation site.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Log_of_wood_being_sold_at_the_deforestation_site.jpg/1920px-Log_of_wood_being_sold_at_the_deforestation_site.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Log_of_wood_being_sold_at_the_deforestation_site.jpg",
+   "licence": "CC0",
+   "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "author": "Geospatial John",
+   "credit_required": false,
+   "file": "deforestation-1.jpg",
+   "width": 1920,
+   "height": 1440,
+   "query": "deforestation logging",
+   "desc": "Log of wood being sold at the deforestation site"
+  },
+  {
+   "title": "File:An example of slash and burn agriculture practice Thailand.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/An_example_of_slash_and_burn_agriculture_practice_Thailand.jpg/1920px-An_example_of_slash_and_burn_agriculture_practice_Thailand.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:An_example_of_slash_and_burn_agriculture_practice_Thailand.jpg",
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "mattmangum",
+   "credit_required": true,
+   "file": "deforestation-3.jpg",
+   "width": 1920,
+   "height": 1440,
+   "query": "slash and burn forest",
+   "desc": "shift cultivation in Thailand, cut tree trunks and burnt field inside forests"
+  },
+  {
+   "title": "File:Clear cut (apocalyptic) (7978619998).jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/Clear_cut_%28apocalyptic%29_%287978619998%29.jpg/1920px-Clear_cut_%28apocalyptic%29_%287978619998%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Clear_cut_(apocalyptic)_(7978619998).jpg",
+   "licence": "CC BY 2.0",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0",
+   "author": "Gerry Thomasen from Nanaimo, Canada",
+   "credit_required": true,
+   "file": "deforestation-4.jpg",
+   "width": 1920,
+   "height": 1440,
+   "query": "tree stumps clear cut",
+   "desc": "Clear cut (apocalyptic)"
+  },
+  {
+   "title": "File:Tree Logging Issue leading to deforestation.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/Tree_Logging_Issue_leading_to_deforestation.jpg/1920px-Tree_Logging_Issue_leading_to_deforestation.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Tree_Logging_Issue_leading_to_deforestation.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "SusuGeo",
+   "credit_required": true,
+   "file": "deforestation-5.jpg",
+   "width": 1800,
+   "height": 2400,
+   "query": "deforestation logging",
+   "desc": "Lumbering Activity, deforestation"
+  }
+ ]
+}

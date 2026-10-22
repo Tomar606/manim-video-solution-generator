@@ -1,0 +1,166 @@
+{
+ "night-hud-base-glow": {
+  "skin": "night-hud",
+  "tags": [
+   "navy",
+   "dark",
+   "gradient"
+  ],
+  "notes": "navy-to-black radial glow centred in the top third, fine grain to stop banding"
+ },
+ "night-hud-base-grid": {
+  "skin": "night-hud",
+  "tags": [
+   "navy",
+   "hud",
+   "grid"
+  ],
+  "notes": "dark navy with faint 60 px HUD grid and 300 px major lines"
+ },
+ "night-hud-base-starfield": {
+  "skin": "night-hud",
+  "tags": [
+   "stars",
+   "space",
+   "dark"
+  ],
+  "notes": "near-black sky with a sparse random starfield"
+ },
+ "paper-editorial-cream": {
+  "skin": "paper-editorial",
+  "tags": [
+   "cream",
+   "paper",
+   "warm"
+  ],
+  "notes": "warm cream with fibre grain and soft mottling"
+ },
+ "paper-editorial-cream-deep": {
+  "skin": "paper-editorial",
+  "tags": [
+   "cream",
+   "paper",
+   "aged"
+  ],
+  "notes": "deeper, slightly aged cream"
+ },
+ "paper-editorial-dotgrid": {
+  "skin": "paper-editorial",
+  "tags": [
+   "cream",
+   "dot grid"
+  ],
+  "notes": "light cream with a 36 px dot grid"
+ },
+ "chalk-slate-green": {
+  "skin": "chalk-slate",
+  "tags": [
+   "chalkboard",
+   "green",
+   "slate"
+  ],
+  "notes": "school green-board with chalk-dust mottling"
+ },
+ "chalk-slate-black": {
+  "skin": "chalk-slate",
+  "tags": [
+   "chalkboard",
+   "black",
+   "slate"
+  ],
+  "notes": "black slate with chalk-dust mottling"
+ },
+ "chalk-slate-green-smudged": {
+  "skin": "chalk-slate",
+  "tags": [
+   "chalkboard",
+   "green",
+   "eraser smudge"
+  ],
+  "notes": "green-board with faint eraser arcs"
+ },
+ "blueprint-grid": {
+  "skin": "blueprint",
+  "tags": [
+   "blue",
+   "grid",
+   "technical"
+  ],
+  "notes": "cyanotype blue, 30 px minor and 150 px major grid"
+ },
+ "blueprint-grid-dark": {
+  "skin": "blueprint",
+  "tags": [
+   "dark blue",
+   "grid"
+  ],
+  "notes": "dark navy blueprint, 40/200 px grid"
+ },
+ "blueprint-plain": {
+  "skin": "blueprint",
+  "tags": [
+   "blue",
+   "plain"
+  ],
+  "notes": "cyanotype blue without grid, mottled"
+ },
+ "newsprint-mono-light": {
+  "skin": "newsprint-mono",
+  "tags": [
+   "newsprint",
+   "grey",
+   "paper"
+  ],
+  "notes": "light newsprint grey with grain"
+ },
+ "newsprint-mono-halftone": {
+  "skin": "newsprint-mono",
+  "tags": [
+   "newsprint",
+   "halftone"
+  ],
+  "notes": "newsprint with a halftone dot ramp growing toward the bottom"
+ },
+ "newsprint-mono-dark": {
+  "skin": "newsprint-mono",
+  "tags": [
+   "black",
+   "ink",
+   "paper"
+  ],
+  "notes": "inky near-black with print grain"
+ },
+ "pastel-notebook-ruled": {
+  "skin": "pastel-notebook",
+  "tags": [
+   "ruled",
+   "notebook",
+   "cream"
+  ],
+  "notes": "cream ruled notebook, 64 px rule, pink margin"
+ },
+ "pastel-notebook-mint-dots": {
+  "skin": "pastel-notebook",
+  "tags": [
+   "mint",
+   "dot grid"
+  ],
+  "notes": "mint dot-grid page"
+ },
+ "pastel-notebook-lavender-graph": {
+  "skin": "pastel-notebook",
+  "tags": [
+   "lavender",
+   "graph paper"
+  ],
+  "notes": "lavender graph paper, 36/180 px"
+ },
+ "pastel-notebook-blush-gradient": {
+  "skin": "pastel-notebook",
+  "tags": [
+   "pastel",
+   "gradient"
+  ],
+  "notes": "blush-to-sky pastel gradient, no pattern"
+ }
+}

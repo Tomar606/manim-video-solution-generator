@@ -1,0 +1,60 @@
+{
+ "electrolysis-batteries": [
+  {
+   "title": "File:Wasserzersetzer (Firma LCEM).jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Wasserzersetzer_%28Firma_LCEM%29.jpg/1920px-Wasserzersetzer_%28Firma_LCEM%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Wasserzersetzer_(Firma_LCEM).jpg",
+   "licence": "CC0",
+   "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "author": "Rhetos",
+   "credit_required": false,
+   "file": "electrolysis-batteries-1.jpg",
+   "width": 1920,
+   "height": 1683,
+   "query": "electrolysis of water experiment",
+   "desc": "Die Firma LCEM aus Mainz stellt low cost experiments (lcem) her. Hier wird Natronlauge in Wasserstoff und Sauerstoff zerlegt. In kurzer Zeit war der Zylinder vollständig mit Wasserstoff gefüllt. Das Bild entstand in der Mathe-AC Lernwerkstatt Aachen. Die Originalseite ist https://www.rhetos.de/html/"
+  },
+  {
+   "title": "File:Photo-CarBattery.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Photo-CarBattery.jpg/1280px-Photo-CarBattery.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Photo-CarBattery.jpg",
+   "licence": "Public domain",
+   "licence_url": "https://commons.wikimedia.org/wiki/File:Photo-CarBattery.jpg",
+   "author": "No machine-readable author provided. Shaddack assumed (based on copyright claims).",
+   "credit_required": false,
+   "file": "electrolysis-batteries-4.jpg",
+   "width": 1280,
+   "height": 1223,
+   "query": "lead acid battery",
+   "desc": "Acumulador para automóvil."
+  },
+  {
+   "title": "File:Technology electroplating copper bubbles 021 (52279312683).jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Technology_electroplating_copper_bubbles_021_%2852279312683%29.jpg/1920px-Technology_electroplating_copper_bubbles_021_%2852279312683%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Technology_electroplating_copper_bubbles_021_(52279312683).jpg",
+   "licence": "CC0",
+   "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "author": "Jan Helebrant",
+   "credit_required": false,
+   "file": "electrolysis-batteries-6.jpg",
+   "width": 1920,
+   "height": 1440,
+   "query": "electroplating copper",
+   "desc": "metal \"bubbles\" as a by-product of electroplating - here apparently created intentionally as decoration author: Jan Helebrant &lt;a href=\"http://www.juhele.blogspot.com\" rel=\"noreferrer nofollow\"&gt;www.juhele.blogspot.com&lt;/a&gt; license CC0 Public Domain Dedication"
+  },
+  {
+   "title": "File:Hofmann'scher Wasserzersetzungsapparat - Deutsches Museum Verkehrszentrum.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Hofmann%27scher_Wasserzersetzungsapparat_-_Deutsches_Museum_Verkehrszentrum.jpg/1920px-Hofmann%27scher_Wasserzersetzungsapparat_-_Deutsches_Museum_Verkehrszentrum.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Hofmann%27scher_Wasserzersetzungsapparat_-_Deutsches_Museum_Verkehrszentrum.jpg",
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "author": "Mattes",
+   "credit_required": true,
+   "file": "electrolysis-batteries-7.jpg",
+   "width": 1800,
+   "height": 2400,
+   "query": "Hofmann voltameter",
+   "desc": "Hofmann voltameter for electrolysis of water into hydrogen and oxygen"
+  }
+ ]
+}
