@@ -1,0 +1,106 @@
+/* field-journal — a geographer's field notebook.  Survey paper with faint
+   contour lines, index cards held with masking tape, luggage-tag labels with an
+   eyelet, dashed route lines, pencil (Kalam) annotations, ink stamps.
+   Earth palette: terracotta, olive, ochre on tan.  For human/physical
+   geography questions about land, movement, people and livelihoods.
+   Fonts (OFL, library/elements/fonts): Yatra One = headings (hand-lettered
+   travel-poster Devanagari), Martel = captions/tags, Kalam = pencil notes.
+   Plate: plates/generated/field-journal-topo.jpg.
+   Music bucket: indian-light or documentary-calm.  SFX: paper, tape, marker-stroke,
+   arrow-draw, map-pin, stamp. */
+
+@font-face { font-family: 'Yatra One'; src: url('../../../library/elements/fonts/YatraOne-Regular.ttf'); }
+@font-face { font-family: 'Martel'; src: url('../../../library/elements/fonts/Martel-Bold.ttf'); font-weight: 700; }
+@font-face { font-family: 'Martel'; src: url('../../../library/elements/fonts/Martel-ExtraBold.ttf'); font-weight: 800; }
+
+#frame.theme-field-journal {
+  --ink: #2B2118;
+  --accent: #B5482A;          /* terracotta */
+  --accent-2: #56693A;        /* olive */
+  --ochre: #C98A2B;
+  --paper: #E9DABE;
+  --muted: #7A6750;
+  --card-bg: #FBF5E8;
+  --card-border: #2B2118;
+  --solid: #FBF5E8;
+  --font-head: 'Yatra One', 'Noto Sans Devanagari', serif;
+  --head-weight: 400;
+  --head-stretch: 100%;
+  --font-body: 'Martel', 'Noto Sans Devanagari', serif;
+  --font-num: 'Yatra One', serif;
+  --tape: rgba(222, 205, 160, .88);
+  --card-shadow: 0 2px 2px rgba(60, 40, 15, .16), 0 12px 20px rgba(60, 40, 15, .20);
+  color: var(--ink);
+}
+
+/* index cards: cream card, one red rule under the top margin, faint ruled lines, tape */
+.theme-field-journal .card, .theme-field-journal .imgcard, .theme-field-journal .qcard, .theme-field-journal .fcard,
+.theme-field-journal .k-card, .theme-field-journal .compare .k-card, .theme-field-journal .k-def, .theme-field-journal .yn .side {
+  position: relative; background:
+    linear-gradient(transparent 62px, rgba(181, 72, 42, .55) 62px, rgba(181, 72, 42, .55) 65px, transparent 65px),
+    repeating-linear-gradient(transparent 0 47px, rgba(70, 110, 160, .16) 47px 49px),
+    var(--card-bg) !important;
+  border: none !important; border-radius: 3px !important; box-shadow: var(--card-shadow) !important;
+}
+.theme-field-journal .taped::before {
+  content: ""; position: absolute; top: -22px; left: 50%; width: 170px; height: 46px; transform: translateX(-50%) rotate(-3deg);
+  background: var(--tape); box-shadow: 0 1px 2px rgba(0,0,0,.12); z-index: 3; }
+
+/* headings */
+.theme-field-journal .hl-m, .theme-field-journal .k-head { font-family: 'Yatra One'; font-weight: 400; font-stretch: 100%; }
+.theme-field-journal .hl-m { color: var(--ink); text-wrap: balance; }
+
+/* section head: a numbered ink stamp + Yatra heading underlined with a dashed route */
+.theme-field-journal .k-section-tag { background: transparent !important; border: none !important; box-shadow: none !important;
+  display: flex; align-items: center; gap: 18px; padding: 0 0 10px; border-bottom: 4px dashed var(--accent) !important; }
+.theme-field-journal .k-section-tag__num { width: 70px; height: 70px; border-radius: 50%; display: grid; place-items: center; padding: 0;
+  background: var(--accent); color: var(--card-bg); font-family: 'Yatra One'; font-size: 46px; line-height: 1; }
+.theme-field-journal .k-section-tag__text { font-family: 'Yatra One'; font-size: 58px; color: var(--ink); background: none; padding: 0; }
+
+/* labels are luggage tags: notched left end with an eyelet */
+.theme-field-journal .k-pill { position: relative; border-radius: 4px !important; font-family: 'Martel'; font-weight: 800; font-size: 40px;
+  background: var(--card-bg) !important; color: var(--ink) !important; border: 2px solid var(--ink) !important;
+  padding: 8px 26px 4px 52px; clip-path: polygon(22px 0, 100% 0, 100% 100%, 22px 100%, 0 50%); box-shadow: none; }
+.theme-field-journal .k-pill::before { content: ""; position: absolute; left: 22px; top: 50%; width: 14px; height: 14px; margin-top: -7px;
+  border-radius: 50%; border: 3px solid var(--ink); background: var(--paper); }
+.theme-field-journal .k-pill--accent { background: var(--accent) !important; color: var(--card-bg) !important; border-color: var(--accent) !important; }
+.theme-field-journal .k-pill--olive { background: var(--accent-2) !important; color: var(--card-bg) !important; border-color: var(--accent-2) !important; }
+
+/* stamps: round-cornered ink stamp, terracotta */
+.theme-field-journal .k-stamp { font-family: 'Yatra One'; font-weight: 400; color: var(--accent); border-color: var(--accent);
+  outline-color: var(--accent); background: transparent !important; -webkit-mask-image: url('stamp-grunge.png'); -webkit-mask-size: 100% 100%; }
+.theme-field-journal .k-stamp.on-photo { -webkit-mask-image: none; background: var(--card-bg) !important; }
+
+/* pencil notes */
+.theme-field-journal .note { font-family: 'Kalam'; font-size: 46px; color: #3A3A3A; line-height: 1.2; }
+
+/* masthead: compass + title on a strip of tape, progress as a dashed route between stops */
+.theme-field-journal #spine { left: 24px; right: 24px; top: 26px; height: 92px; }
+.theme-field-journal #spine .ttl { font-family: 'Yatra One'; font-weight: 400; font-stretch: 100%; font-size: 48px;
+  background: var(--tape); padding: 6px 26px 0; transform: rotate(-1.5deg); }
+.theme-field-journal #spine .k-dots { gap: 0; }
+.theme-field-journal #spine .k-dots i { width: 26px; height: 26px; border-radius: 50%; border: 4px solid var(--ink); background: var(--card-bg); margin-left: 34px; position: relative; }
+.theme-field-journal #spine .k-dots i + i::before { content: ""; position: absolute; right: 26px; top: 7px; width: 34px; border-top: 4px dashed var(--ink); }
+.theme-field-journal #spine .k-dots i.on { background: var(--accent); border-color: var(--accent); }
+.theme-field-journal #spine .cnt { font-family: 'Yatra One'; font-weight: 400; color: var(--accent); }
+
+/* caption: a kraft strip */
+.theme-field-journal #cap { font-family: 'Martel'; font-weight: 800; font-size: 44px; color: var(--ink); --torn-bg: #F3E6CB; }
+.theme-field-journal #cap .hl { text-decoration-color: var(--accent); }
+
+/* footage: natural colour, slightly warm, as a print with a deckled border */
+.theme-field-journal #broll { background: #000; }
+.theme-field-journal #broll img { filter: saturate(.9) sepia(.12) contrast(1.04) !important; mix-blend-mode: normal !important; }
+.theme-field-journal #broll::after { background-image: none; }
+.theme-field-journal #broll.print { left: 40px; width: 1000px; border: 16px solid #FBF5E8; box-sizing: border-box; overflow: visible;
+  box-shadow: var(--card-shadow); transform: rotate(.8deg); }
+.theme-field-journal #broll.print::before { content: ""; position: absolute; top: -24px; left: 50%; width: 180px; height: 48px;
+  transform: translateX(-50%) rotate(-3deg); background: var(--tape); z-index: 2; }
+
+/* the presenter hub: a circle with its own landscape behind him, ringed by a route */
+.theme-field-journal .hub-ring { border: 10px solid var(--card-bg); box-shadow: 0 0 0 5px var(--accent), var(--card-shadow); }
+.theme-field-journal .hub-route { border: 4px dashed var(--accent); }
+
+/* notes laid over a photo get a scrap of paper behind them, or they vanish */
+.theme-field-journal .note.on-photo { background: var(--card-bg); padding: 8px 22px 4px; box-shadow: var(--card-shadow); font-size: 52px; }
+.theme-field-journal .k-pill { font-size: 46px; }

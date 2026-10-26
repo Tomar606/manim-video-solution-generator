@@ -1,0 +1,589 @@
+{
+ "_about": "GEO-C14-LA-02 part 1 (नियोजन से हुए विकास: भरमौर). Survey-light look on the Himachal meadow plate. Clips: veo/clean b01-b11 new, b12-b13 reused from geo-c4-sa-02 (Gaddi valley flock, Gaddi shepherd). Captions start after the question card.",
+ "project": "geo-c14-la-02",
+ "part": 1,
+ "captions_from": 9,
+ "skin": "paper-editorial",
+ "theme": "survey-light",
+ "presenter_style": "card",
+ "plate": "pasture-hill-village",
+ "spine": {
+  "title": "भरमौर: नियोजन से विकास",
+  "items": [
+   "प्राथमिकता",
+   "आधारभूत संरचना",
+   "सामाजिक लाभ",
+   "महिला साक्षरता",
+   "आर्थिक परिवर्तन"
+  ],
+  "lit_at": [
+   27,
+   34
+  ],
+  "show_from": 25
+ },
+ "beats": [
+  {
+   "id": "before",
+   "in": 0,
+   "out": 4,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b01",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "पक्की सड़क नहीं",
+       [
+        2,
+        0.3
+       ]
+      ],
+      [
+       "स्कूल नहीं",
+       [
+        2,
+        1.4
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "बस खेती और पशुपालन",
+     "at": 3
+    }
+   ]
+  },
+  {
+   "id": "after",
+   "in": 4,
+   "out": 6,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b02",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "योजना से, कुछ ही दशकों में",
+     "at": 4
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": 6,
+   "out": 9,
+   "presenter": "small",
+   "broll": {
+    "clip": "b12",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "qcard",
+     "slot": "upper",
+     "question": "नियोजन से हुए विकास का वर्णन कीजिए।",
+     "year": "2023",
+     "marks": "4 अंक",
+     "t_marks": [
+      7,
+      1.0
+     ],
+     "at": 6
+    }
+   ]
+  },
+  {
+   "id": "define",
+   "in": 9,
+   "out": 13,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "def",
+     "slot": "head",
+     "term": "नियोजन",
+     "text": "पहले से बनाई गई योजना",
+     "at": 12
+    },
+    {
+     "type": "chain",
+     "slot": "upper",
+     "items": [
+      [
+       "किस जगह",
+       10
+      ],
+      [
+       "क्या विकास",
+       [
+        10,
+        1.0
+       ]
+      ],
+      [
+       "किस क्रम में",
+       11
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "bharmaur",
+   "in": 13,
+   "out": 17,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b03",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "भरमौर जनजातीय क्षेत्र",
+     "style": "accent",
+     "at": 14
+    },
+    {
+     "type": "note",
+     "slot": "over-broll",
+     "text": "चंबा ज़िला, हिमाचल प्रदेश",
+     "at": 15
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "गद्दी जनजाति",
+     "at": 16
+    }
+   ]
+  },
+  {
+   "id": "isolation",
+   "in": 17,
+   "out": 19,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b04",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "भौगोलिक अलगाव",
+       [
+        17,
+        0.8
+       ]
+      ],
+      [
+       "राजनीतिक अलगाव",
+       [
+        17,
+        1.8
+       ]
+      ],
+      [
+       "सामाजिक-आर्थिक वंचना",
+       18
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "scheme",
+   "in": 19,
+   "out": 22,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b13",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "chain",
+     "slot": "upper",
+     "items": [
+      [
+       "1974-75",
+       19
+      ],
+      [
+       "पाँचवीं पंचवर्षीय योजना",
+       [
+        20,
+        0.3
+       ]
+      ],
+      [
+       "जनजातीय उप-योजना",
+       [
+        20,
+        2.4
+       ]
+      ],
+      [
+       "ITDP: हिमाचल की पाँच में से एक",
+       21
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "aim",
+   "in": 22,
+   "out": 25,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "उद्देश्य",
+     "size": "m",
+     "at": 22
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "गद्दी लोगों का जीवन-स्तर सुधारना",
+       22
+      ],
+      [
+       "भरमौर और बाकी हिमाचल के बीच विकास का अंतर कम करना",
+       23
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "five",
+   "in": 25,
+   "out": 27,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 215,
+    "backdrop": "veo:b12@1"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "नियोजन के पाँच परिणाम",
+     "size": "m",
+     "at": 25
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 370,
+     "items": [
+      [
+       "tabler:target-arrow",
+       "प्राथमिकता",
+       [
+        25,
+        0.3
+       ]
+      ],
+      [
+       "tabler:building-community",
+       "आधारभूत संरचना",
+       [
+        25,
+        0.6
+       ]
+      ],
+      [
+       "tabler:users-group",
+       "सामाजिक लाभ",
+       [
+        25,
+        0.9
+       ]
+      ],
+      [
+       "tabler:book",
+       "महिला साक्षरता",
+       [
+        25,
+        1.2
+       ]
+      ],
+      [
+       "tabler:coin",
+       "आर्थिक परिवर्तन",
+       [
+        25,
+        1.5
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p1-priority",
+   "in": 27,
+   "out": 32,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b05",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "1",
+     "text": "प्राथमिकता",
+     "at": 27
+    },
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "परिवहन एवं संचार",
+       29
+      ],
+      [
+       "कृषि व सहायक गतिविधियाँ",
+       [
+        29,
+        1.6
+       ]
+      ],
+      [
+       "सामाजिक-सामुदायिक सेवाएँ",
+       30
+      ]
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "सर्वोच्च प्राथमिकता",
+     "at": 31
+    }
+   ]
+  },
+  {
+   "id": "p1-why",
+   "in": 32,
+   "out": 34,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b02",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "सड़क नहीं, तो कोई सुविधा नहीं पहुँचेगी",
+     "at": 32
+    }
+   ]
+  },
+  {
+   "id": "p2-intro",
+   "in": 34,
+   "out": 37,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b09",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "2",
+     "text": "आधारभूत संरचना",
+     "at": 34
+    }
+   ]
+  },
+  {
+   "id": "p2-tiles",
+   "in": 37,
+   "out": 39,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "section",
+     "slot": "head",
+     "num": "2",
+     "text": "आधारभूत संरचना",
+     "at": 37
+    },
+    {
+     "type": "tiles",
+     "slot": "upper",
+     "cols": 3,
+     "items": [
+      [
+       "tabler:school",
+       "स्कूल",
+       [
+        37,
+        0.9
+       ]
+      ],
+      [
+       "tabler:stethoscope",
+       "स्वास्थ्य",
+       [
+        37,
+        1.9
+       ]
+      ],
+      [
+       "tabler:droplet",
+       "पेयजल",
+       [
+        37,
+        3.0
+       ]
+      ],
+      [
+       "tabler:road",
+       "सड़कें",
+       [
+        38,
+        0.1
+       ]
+      ],
+      [
+       "tabler:antenna-bars-5",
+       "संचार",
+       [
+        38,
+        0.7
+       ]
+      ],
+      [
+       "tabler:bulb",
+       "बिजली",
+       [
+        38,
+        1.6
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2-basic",
+   "in": 39,
+   "out": 41,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b08",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "बुनियादी चीज़ें, जिनके बिना गाँव आगे नहीं बढ़ता",
+     "at": 39
+    }
+   ]
+  },
+  {
+   "id": "teaser",
+   "in": 41,
+   "out": "end",
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 215,
+    "backdrop": "veo:b06@3"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "दो हो गए, तीन बाकी",
+     "size": "m",
+     "at": 41
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 370,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:target-arrow",
+       "प्राथमिकता",
+       41
+      ],
+      [
+       "tabler:building-community",
+       "आधारभूत संरचना",
+       41
+      ],
+      [
+       "tabler:users-group",
+       "सामाजिक लाभ",
+       41
+      ],
+      [
+       "tabler:book",
+       "महिला साक्षरता",
+       41
+      ],
+      [
+       "tabler:coin",
+       "आर्थिक परिवर्तन",
+       41
+      ]
+     ],
+     "recount": [
+      [
+       41,
+       0.2
+      ],
+      [
+       41,
+       0.6
+      ]
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "center-low",
+     "text": "चौंकाने वाले आँकड़े: Part 2",
+     "style": "accent",
+     "at": 44
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+{
+ "city-crowd": [
+  {
+   "title": "File:Khandoba temple Pune.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Khandoba_temple_Pune.jpg/1920px-Khandoba_temple_Pune.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Khandoba_temple_Pune.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "PKharote",
+   "credit_required": true,
+   "file": "city-crowd-1.jpg",
+   "width": 1920,
+   "height": 1311,
+   "query": "incategory:\"Crowds in India\"",
+   "desc": "This is a photo of ASI monument number"
+  },
+  {
+   "title": "File:Crowded New Delhi street (Unsplash).jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Crowded_New_Delhi_street_%28Unsplash%29.jpg/1920px-Crowded_New_Delhi_street_%28Unsplash%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Crowded_New_Delhi_street_(Unsplash).jpg",
+   "licence": "CC0",
+   "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "author": "Igor Ovsyannykov igorovsyannykov",
+   "credit_required": false,
+   "file": "city-crowd-3.jpg",
+   "width": 1920,
+   "height": 1280,
+   "query": "crowded street Old Delhi rickshaw",
+   "desc": "New Delhi, India"
+  },
+  {
+   "title": "File:JANMASHTAMI CELEBRATION.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/JANMASHTAMI_CELEBRATION.jpg/1920px-JANMASHTAMI_CELEBRATION.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:JANMASHTAMI_CELEBRATION.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Amitt M Patell",
+   "credit_required": true,
+   "file": "city-crowd-6.jpg",
+   "width": 1920,
+   "height": 1276,
+   "query": "incategory:\"Crowds in India\"",
+   "desc": "This media has been taken in the country: India"
+  }
+ ]
+}

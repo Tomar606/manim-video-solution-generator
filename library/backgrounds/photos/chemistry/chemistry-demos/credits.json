@@ -1,0 +1,74 @@
+{
+ "chemistry-demos": [
+  {
+   "title": "File:Сopper sulfate crystals IMG 6330обр 02.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/%D0%A1opper_sulfate_crystals_IMG_6330%D0%BE%D0%B1%D1%80_02.jpg/1920px-%D0%A1opper_sulfate_crystals_IMG_6330%D0%BE%D0%B1%D1%80_02.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:%D0%A1opper_sulfate_crystals_IMG_6330%D0%BE%D0%B1%D1%80_02.jpg",
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Дарья Могилевцева",
+   "credit_required": true,
+   "file": "chemistry-demos-1.jpg",
+   "width": 1920,
+   "height": 1759,
+   "query": "copper sulfate crystals",
+   "desc": "Сopper sulfate crystals"
+  },
+  {
+   "title": "File:Test tube with cancer cells.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Test_tube_with_cancer_cells.jpg/1920px-Test_tube_with_cancer_cells.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Test_tube_with_cancer_cells.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Mateus Figueiredo",
+   "credit_required": true,
+   "file": "chemistry-demos-2.jpg",
+   "width": 1600,
+   "height": 2400,
+   "query": "precipitate test tube",
+   "desc": "Test tube filled with culture medium and skin cancer cells. After 10 minutes of centrifugation, the cancer cells have precipitated to the bottom of the tube, resembling a spot or mole."
+  },
+  {
+   "title": "File:Color experiment.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Color_experiment.jpg/1920px-Color_experiment.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Color_experiment.jpg",
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Stella T98",
+   "credit_required": true,
+   "file": "chemistry-demos-3.jpg",
+   "width": 1800,
+   "height": 2400,
+   "query": "chemistry experiment color change",
+   "desc": "Color change experiment in a chemistry laboratory"
+  },
+  {
+   "title": "File:Colour gradient with solutions.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/Colour_gradient_with_solutions.jpg/1920px-Colour_gradient_with_solutions.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Colour_gradient_with_solutions.jpg",
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Tom Hall",
+   "credit_required": true,
+   "file": "chemistry-demos-5.jpg",
+   "width": 1920,
+   "height": 1440,
+   "query": "precipitate test tube",
+   "desc": "Test tubes with colourful solutions."
+  },
+  {
+   "title": "File:Dry ice color show materials.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Dry_ice_color_show_materials.jpg/1280px-Dry_ice_color_show_materials.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Dry_ice_color_show_materials.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Jobjabramon",
+   "credit_required": true,
+   "file": "chemistry-demos-6.jpg",
+   "width": 1280,
+   "height": 960,
+   "query": "chemistry experiment color change",
+   "desc": "Dry ice color show experiment requires a flask containing water, universal indicator and dry ices."
+  }
+ ]
+}

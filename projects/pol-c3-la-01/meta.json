@@ -1,0 +1,28 @@
+{
+ "subject": "Political Science",
+ "years": "2025",
+ "marks": 4,
+ "question": "भारत-पाक सम्बन्धों की विवेचना कीजिए। अथवा, भारत व पाकिस्तान के बीच मतभेद के किन्हीं पाँच कारणों का उल्लेख कीजिए।",
+ "chapter": "समकालीन दक्षिण एशिया",
+ "sheet_id": "POL-C3-LA-01",
+ "category": "Long Answer",
+ "highlight": "पाँच कारण",
+ "hilite": [
+  "हैदराबाद", "जूनागढ़", "कश्मीर", "निजाम", "रजाकार", "जनमत-संग्रह",
+  "विलय-पत्र", "हरि सिंह", "शरणार्थी", "ऋण", "अदायगी", "विभाजन",
+  "संयुक्त राष्ट्र संघ", "अघोषित युद्ध", "माइकल ब्रेशर", "आतंकवाद"
+ ],
+ "route": "veo",
+ "look": "reference",
+ "parts": 3,
+ "close": "Notes — answer page pending",
+ "_note": [
+  "Presenter is a HeyGen green-screen plate, not a Veo take: src/part{1,2,3}.mp4,",
+  "1920x1080 at 25fps, keyed and stood on assets/background.png in a 1080x1920 frame.",
+  "Marks and year come from the narration — Part 3 says 'पूरे 4 नंबर पक्के' and",
+  "Part 1 says '2025 के board paper' (memory: card-year-follows-the-narration).",
+  "projects/pol-c2-la-01 is the SAME question: a September POC with a Veo-generated",
+  "presenter covering only 3 of the 5 causes. Its background, question card and 8",
+  "b-roll clips are reused here; nothing else is."
+ ]
+}

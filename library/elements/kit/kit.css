@@ -1,0 +1,44 @@
+/* Shared rules for the inline SVG elements in svg/.  Load after a skin.
+   Every SVG reads only the core six variables (--ink --accent --accent-2
+   --paper --muted --stroke-w) plus --highlight on the highlight swipe, each
+   with a fallback, so an element pasted with no skin still renders. */
+
+.kel { display: block; overflow: visible; filter: var(--glow, none); }
+/* Stroke widths are in viewBox units, so a scaled element scales its line.
+   Do NOT add vector-effect: non-scaling-stroke: Chromium then computes the
+   dash pattern in screen space while pathLength stays in user space, and a
+   scaled-up arrow draws on as a row of dashes. To keep a line weight while
+   scaling an element by k, set --stroke-w to (wanted px / k) on it. */
+
+/* Draw-on.  Every stroked path carries pathLength="1" and class "draw";
+   --i on a path orders it (shaft first, head after).  Add .is-drawing to the
+   <svg> (or any ancestor) to play it; the renderer can also drive
+   stroke-dashoffset from 1 to 0 itself, frame by frame. */
+.is-drawing .draw {
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 1;
+  animation: k-draw var(--dur, .7s) cubic-bezier(.45, .05, .25, 1) forwards;
+  animation-delay: calc(var(--delay, 0s) + var(--i, 0) * var(--stagger, .22s));
+}
+@keyframes k-draw { to { stroke-dashoffset: 0; } }
+
+/* Dotted strokes keep their pattern, so they cannot draw on by dashoffset.
+   They reveal with a clip wipe instead (left to right). */
+.is-drawing .wipe { animation: k-wipe var(--dur, .7s) ease-out forwards; clip-path: inset(0 100% 0 0); }
+@keyframes k-wipe { to { clip-path: inset(0 0 0 0); } }
+
+/* Pop: badges, stamps, stickers, tiles. */
+.is-popping { animation: k-pop .42s cubic-bezier(.2, 1.4, .4, 1) both; animation-delay: var(--delay, 0s); }
+@keyframes k-pop { from { transform: scale(.4) rotate(var(--tilt-from, 0deg)); opacity: 0; } }
+.is-stamping { animation: k-stamp .36s cubic-bezier(.3, 1.6, .5, 1) both; animation-delay: var(--delay, 0s); }
+@keyframes k-stamp { from { transform: scale(1.8) rotate(var(--stamp-tilt, -8deg)); opacity: 0; } }
+
+/* Slide: rows and strips. */
+.is-sliding { animation: k-slide .5s cubic-bezier(.2, .8, .2, 1) both; animation-delay: var(--delay, 0s); }
+@keyframes k-slide { from { transform: translateX(-60px); opacity: 0; } }
+
+/* A highlight swipe sits BEHIND its words: wrap the words in
+   .k-mark-host and put the svg in it with class .k-under. */
+.k-mark-host { position: relative; display: inline-block; isolation: isolate; }
+.k-mark-host > .k-under { position: absolute; left: -4%; width: 108%; z-index: -1; pointer-events: none; }
+.k-mark-host > .k-over  { position: absolute; pointer-events: none; }

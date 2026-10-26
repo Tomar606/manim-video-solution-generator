@@ -1,0 +1,239 @@
+/* pothi: HIS-C6-SA-04, four Bhakti saints and their teachings (26 Oct 2026).  Plate: the Ganga at Varanasi at
+   sunrise (Kabir's Kashi), lightly blurred.  Cards are pages of a devotional pothi: ivory hand-made paper inside
+   the red-ochre double margin rule of a manuscript, under a kesari band strung with indigo beads.  Indigo heads
+   (the weaver's indigo, Krishna's blue) in Yatra One brush lettering, kesari as the second key, Tiro Devanagari
+   body.  Portraits are real period paintings (Kabir at his loom, Amber c.1750; Guru Nanak; Mirabai) and the
+   Basava statue at Gadag.  (Structure derived from khadi; every colour and the band replaced below.) */
+@font-face { font-family: 'Yatra One'; src: url('../../../library/elements/fonts/YatraOne-Regular.ttf'); }
+@font-face { font-family: 'Martel'; src: url('../../../library/elements/fonts/Martel-ExtraBold.ttf'); font-weight: 800; }
+@font-face { font-family: 'Rozha One'; src: url('../../../library/elements/fonts/RozhaOne-Regular.ttf'); }
+@font-face { font-family: 'Tiro Devanagari Hindi'; src: url('../../../library/elements/fonts/TiroDevanagariHindi-Regular.ttf'); }
+#frame.theme-pothi {
+  --ink: #1D1A14;
+  --accent: #B4531A;          /* baked-brick terracotta */
+  --accent-2: #2F6B3B;        /* lapis lazuli */
+  --muted: #7A5E44;
+  --paper: #EADBC0;
+  --card-bg: rgba(246, 242, 232, .97);
+  --solid: rgba(246, 242, 232, .99);
+  --card-border: rgba(90, 58, 30, .35);
+  --font-head: 'Martel', serif;
+  --head-weight: 800;
+  --head-stretch: 100%;
+  --font-body: 'Tiro Devanagari Hindi', serif;
+  --font-num: 'Khand', sans-serif;
+  --halo: 0 0 6px rgba(0, 0, 0, .85), 0 2px 3px rgba(0, 0, 0, .9);
+  --glass-shadow: 0 12px 28px rgba(0, 0, 0, .45);
+  --sea: #0E2C47;
+  --land: #C9A877;
+  --coast: rgba(255, 240, 210, .55);
+  color: var(--ink);
+}
+
+.theme-pothi .card, .theme-pothi .qcard, .theme-pothi .k-card, .theme-pothi .compare .k-card,
+.theme-pothi .k-def, .theme-pothi .yn .side, .theme-pothi .imgcard, .theme-pothi .panel {
+  background: var(--card-bg) !important; border: 1.5px solid var(--card-border) !important; border-radius: 14px !important;
+  box-shadow: inset 0 0 0 6px rgba(246,242,232,.97), inset 0 0 0 8px rgba(90,58,30,.45), inset 2px 3px 10px rgba(90,58,30,.35), var(--glass-shadow) !important; border-top: none !important; border-radius: 6px !important; color: var(--ink);
+  }
+.theme-pothi .k-head { font-family: 'Martel'; font-weight: 800; }
+.theme-pothi .hl-m { font-family: 'Martel'; font-weight: 800; color: #fff; text-shadow: var(--halo); text-wrap: balance; font-size: 66px; line-height: 1.35; }
+.theme-pothi .qcard .k-head { color: var(--accent) !important; }
+
+.theme-pothi .k-section-tag { background: var(--card-bg) !important; border: 1.5px solid var(--card-border) !important; box-shadow: var(--glass-shadow) !important;
+  display: inline-flex; align-items: center; gap: 18px; padding: 8px 30px 8px 8px; border-radius: 44px; }
+.theme-pothi .k-section-tag__num { width: 70px; height: 70px; border-radius: 50%; display: grid; place-items: center; padding: 0;
+  background: var(--accent); color: #FFF8EC; font-family: 'Khand'; font-weight: 700; font-size: 52px; line-height: 1; }
+.theme-pothi .k-section-tag__text { font-family: 'Martel'; font-weight: 800; font-size: 54px; color: var(--ink); background: none; padding: 0; line-height: 1.5; }
+
+.theme-pothi .k-pill { border-radius: 40px !important; font-family: 'Tiro Devanagari Hindi'; font-weight: 400; font-size: 48px;
+  background: var(--card-bg) !important; color: var(--ink) !important; border: 1.5px solid var(--card-border) !important;
+  padding: 6px 30px 6px 20px; box-shadow: var(--glass-shadow); display: inline-flex; align-items: center; gap: 14px; }
+.theme-pothi .k-pill::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); flex: none; }
+.theme-pothi .k-pill--accent { background: var(--accent) !important; color: #FFF8EC !important; border-color: var(--accent) !important; }
+.theme-pothi .k-pill--accent::before { background: #FFF8EC; }
+
+.theme-pothi .k-stamp { font-family: 'Martel'; font-weight: 800; color: var(--accent); border-color: var(--accent);
+  outline-color: var(--accent); background: var(--solid) !important; -webkit-mask-image: none; mix-blend-mode: normal; border-radius: 12px; }
+
+.theme-pothi .note { font-family: 'Tiro Devanagari Hindi'; font-weight: 400; font-size: 52px; color: #FFF1D6; text-shadow: var(--halo); }
+.theme-pothi .note.on-photo { background: rgba(52, 32, 15, .82); padding: 8px 24px; border-radius: 12px; text-shadow: none; }
+
+.theme-pothi #spine { left: 24px; right: 24px; top: 24px; height: 92px; background: var(--card-bg); border-radius: 46px; border: 1.5px solid var(--card-border);
+  padding: 0 30px; box-sizing: border-box; box-shadow: var(--glass-shadow); }
+.theme-pothi #spine .ttl { font-family: 'Martel'; font-weight: 800; font-size: 40px; color: var(--ink); }
+.theme-pothi #spine .k-dots i { width: 26px; height: 26px; border-radius: 50%; background: transparent; border: 4px solid var(--accent); margin: 0 6px; }
+.theme-pothi #spine .k-dots i.on { background: var(--accent); }
+.theme-pothi #spine .cnt { font-family: 'Khand'; font-weight: 700; color: var(--accent-2); }
+
+.theme-pothi #cap { font-family: 'Noto Sans Devanagari'; font-weight: 700; font-size: 44px; color: var(--ink);
+  --torn-bg: rgba(240, 228, 204, .96); clip-path: none; border-radius: 14px; box-shadow: var(--glass-shadow); border: 1.5px solid var(--card-border); }
+.theme-pothi #cap .hl { color: var(--accent); }
+
+.theme-pothi .hub-ring { border: 8px solid #fff; box-shadow: 0 0 0 5px var(--accent), var(--glass-shadow); }
+.theme-pothi .hub-route { border: 3px dashed rgba(184, 134, 46, .85); }
+.theme-pothi .num { font-family: 'Khand'; font-weight: 700; color: var(--accent); }
+
+.theme-pothi #broll { background: #000; }
+.theme-pothi #broll img { filter: saturate(1.05) !important; mix-blend-mode: normal !important; }
+.theme-pothi #broll::after { background-image: none; background: linear-gradient(180deg, rgba(4,12,22,.45) 0%, transparent 20%, transparent 58%, rgba(4,12,22,.6) 100%); mix-blend-mode: normal; }
+.theme-pothi #broll.dim img { filter: brightness(.5) saturate(.85) !important; }
+
+.theme-pothi .p-card { border: 8px solid #fff; box-shadow: 0 0 0 4px var(--accent), var(--glass-shadow); }
+
+.theme-pothi .hl-m { font-size: 72px; line-height: 1.3; }
+.theme-pothi .yn .side div:last-child, .theme-pothi .card > span:last-child { font-size: 52px !important; }
+/* a source card: photo in a stone frame, its kind as a red seal, its one-line identity under it */
+.theme-pothi .src-card { background: var(--card-bg); border-radius: 8px; box-shadow: inset 0 0 0 8px rgba(246,242,232,.97), inset 0 0 0 10px rgba(90,58,30,.45), var(--glass-shadow); padding: 26px; box-sizing: border-box; }
+.theme-pothi .src-card img { display: block; border-radius: 4px; box-shadow: 0 0 0 3px rgba(90,58,30,.5); }
+
+/* Tiro sets a small x-height: lift every body text the stock templates fix inline */
+.theme-pothi .yn .side div:last-child { font-size: 56px !important; }
+.theme-pothi .card > span:last-child { font-size: 58px !important; }
+.theme-pothi .k-def__term { font-size: 62px !important; }
+.theme-pothi .k-def__text { font-size: 56px !important; }
+.theme-pothi .imgcard .k-pill { font-size: 42px !important; }
+.theme-pothi .note { font-size: 56px; }
+
+/* the map, as an old survey on cloth: pale water, parchment land, sepia coast, blue rivers */
+#frame.theme-pothi { --sea: #B9C8C4; --land: #EBDDBF; --coast: rgba(90, 58, 30, .75); --river: #4C7FA8; }
+.theme-pothi .seamap { padding: 0 !important; overflow: hidden; }
+.theme-pothi .port-dot { fill: var(--accent); stroke: #FFF8EC; stroke-width: 4; }
+.theme-pothi .port-tag { position: absolute; white-space: nowrap; font-family: 'Rozha One'; font-size: 40px; line-height: 1.2;
+  background: rgba(240, 228, 204, .97); color: var(--ink); border: 2px solid var(--accent); border-radius: 8px; padding: 2px 14px 4px; }
+.theme-pothi .port-tag small { display: block; font-family: 'Tiro Devanagari Hindi'; font-size: 28px; color: var(--muted); }
+.theme-pothi .port-tag.on { background: var(--accent); color: #FFF8EC; }
+.theme-pothi .port-tag.on small { color: #F3D9C8; }
+.theme-pothi .map-label { position: absolute; white-space: nowrap; font-family: 'Tiro Devanagari Hindi'; font-style: italic; font-size: 30px; color: rgba(52, 32, 15, .7); }
+.theme-pothi .map-label.sea { color: rgba(40, 70, 95, .75); }
+.theme-pothi .map-label.river { color: #2F6690; font-size: 28px; }
+.theme-pothi .seamap .port-tag.on { color: #FFF8EC !important; }
+
+/* the intersecting-circles band (Harappan pottery): a terracotta top border with the
+   circles painted into it, over a cream card */
+.theme-pothi .card, .theme-pothi .k-card, .theme-pothi .k-def, .theme-pothi .yn .side, .theme-pothi .panel, .theme-pothi .qcard {
+  border: 1.5px solid rgba(120,70,30,.35) !important; border-top: 20px solid #B4531A !important; border-radius: 8px !important;
+  background: radial-gradient(circle at 10px 10px, transparent 5px, #F2DDB0 6px 7.5px, transparent 8.5px) 0 0 / 20px 20px repeat-x border-box,
+              radial-gradient(circle at 0 10px, transparent 5px, #F2DDB0 6px 7.5px, transparent 8.5px) 0 0 / 20px 20px repeat-x border-box,
+              var(--card-bg) !important;
+  box-shadow: 0 14px 30px rgba(0,0,0,.4) !important; }
+#frame.theme-pothi { --sea: #B9C8C4; --land: #EBDDBF; --coast: rgba(90, 58, 30, .75); --river: #4C7FA8; }
+.theme-pothi .seamap { padding: 0 !important; overflow: hidden; }
+.theme-pothi .port-dot { fill: var(--accent); stroke: #FFF8EC; stroke-width: 4; }
+.theme-pothi .port-tag { position: absolute; white-space: nowrap; font-family: 'Rozha One'; font-size: 40px; line-height: 1.2;
+  background: rgba(240, 228, 204, .97); color: var(--ink); border: 2px solid var(--accent); border-radius: 8px; padding: 2px 14px 4px; }
+.theme-pothi .port-tag small { display: block; font-family: 'Tiro Devanagari Hindi'; font-size: 28px; color: var(--muted); }
+.theme-pothi .port-tag.on { background: var(--accent); color: #FFF8EC; }
+.theme-pothi .port-tag.on small { color: #F3D9C8; }
+.theme-pothi .map-label { position: absolute; white-space: nowrap; font-family: 'Tiro Devanagari Hindi'; font-style: italic; font-size: 30px; color: rgba(52, 32, 15, .7); }
+.theme-pothi .map-label.sea { color: rgba(40, 70, 95, .75); }
+.theme-pothi .map-label.river { color: #2F6690; font-size: 28px; }
+.theme-pothi .seamap .port-tag.on { color: #FFF8EC !important; }
+
+/* the intersecting-circles band (Harappan pottery) across the top of every card */
+.theme-pothi .card, .theme-pothi .k-card, .theme-pothi .k-def, .theme-pothi .yn .side, .theme-pothi .panel, .theme-pothi .qcard {
+  border-top: 18px solid transparent !important;
+  border-image: radial-gradient(circle at 50% 50%, transparent 5px, #B4531A 6px 8px, transparent 9px) 0 0 18 0 / 18px 0 0 0 round !important;
+  background-image: radial-gradient(circle at 9px 9px, transparent 6px, rgba(163,38,27,.95) 7px 9px, transparent 10px) !important;
+  background-size: 18px 18px !important; background-repeat: repeat-x !important; background-position: 0 -18px !important; background-color: var(--card-bg) !important;
+  box-shadow: inset 0 18px 0 0 rgba(163,38,27,.0), 0 14px 30px rgba(0,0,0,.4) !important; }
+.theme-pothi .card::before, .theme-pothi .panel::before, .theme-pothi .qcard::before, .theme-pothi .yn .side::before, .theme-pothi .k-def::before {
+  content: ""; position: absolute; left: 0; right: 0; top: -18px; height: 18px; border-radius: 6px 6px 0 0;
+  background: radial-gradient(circle at 9px 9px, transparent 5px, #F2DDB0 6px 7.5px, transparent 8.5px) 0 0 / 18px 18px repeat-x, #B4531A; }
+.theme-pothi .card, .theme-pothi .panel, .theme-pothi .qcard, .theme-pothi .yn .side, .theme-pothi .k-def { position: relative; overflow: visible !important; }
+#frame.theme-pothi { --sea: #2F6B3B; --land: #EAD9B8; --coast: rgba(120,70,30,.75); }
+.theme-pothi .k-pill--accent { background: var(--accent-2) !important; border-color: var(--accent-2) !important; color: #F2DDB0 !important; }
+.theme-pothi .p-card { border: 8px solid #F2DDB0; box-shadow: 0 0 0 5px var(--accent), 0 14px 30px rgba(0,0,0,.45); }
+.theme-pothi .k-check-row__text { font-size: 46px !important; }
+.theme-pothi .k-check-row { padding-top: 10px !important; padding-bottom: 10px !important; }
+
+/* hero text: the one thing to remember, set large */
+.theme-pothi .hero { background: linear-gradient(180deg, rgba(246,242,232,.97), rgba(240,226,200,.97)); border-top: 20px solid #B4531A;
+  border-radius: 10px; box-shadow: 0 18px 40px rgba(0,0,0,.45); position: relative; }
+.theme-pothi .hero::before { content: ""; position: absolute; left: 0; right: 0; top: -20px; height: 20px;
+  background: radial-gradient(circle at 10px 10px, transparent 5px, #F2DDB0 6px 7.5px, transparent 8.5px) 0 0 / 20px 20px repeat-x; }
+.theme-pothi .hero-kicker { font-family: 'Tiro Devanagari Hindi'; font-size: 44px; color: var(--muted); margin-bottom: 6px; }
+.theme-pothi .hero-text { font-family: 'Martel'; font-weight: 800; font-size: 104px; line-height: 1.32; color: var(--accent); }
+.theme-pothi .hero-rule { height: 9px; margin: 10px auto 0; background: var(--accent-2); border-radius: 5px; }
+.theme-pothi .hero-sub { font-family: 'Tiro Devanagari Hindi'; font-size: 52px; color: var(--ink); margin-top: 14px; }
+/* the question as an event */
+.theme-pothi .qh-year { position: absolute; top: 96px; width: 270px; text-align: center; font-family: 'Khand'; font-weight: 700; font-size: 104px; line-height: 1;
+  color: #B4531A; border: 7px solid #B4531A; outline: 3px solid #B4531A; outline-offset: 5px; border-radius: 10px; padding: 14px 0 6px;
+  background: rgba(246,242,232,.96); box-shadow: 0 10px 22px rgba(0,0,0,.35); }
+.theme-pothi .qh-next { position: absolute; left: 160px; top: 300px; font-size: 54px; padding: 12px 28px; }
+.theme-pothi .qh-card { position: absolute; left: 0; top: 440px; width: 960px; box-sizing: border-box; padding: 34px 44px 54px; }
+.theme-pothi .qh-ul { height: 9px; background: var(--accent-2); border-radius: 5px; margin-top: 6px; }
+.theme-pothi .qh-marks { position: absolute; right: -10px; top: 400px; width: 190px; height: 190px; border-radius: 50%; display: grid; place-items: center;
+  background: #2F6B3B; color: #F2DDB0; font-family: 'Martel'; font-weight: 800; font-size: 50px; box-shadow: 0 0 0 7px #F2DDB0, 0 0 0 11px #2F6B3B, 0 12px 26px rgba(0,0,0,.4); }
+.theme-pothi .qh-year { width: 270px; }
+.theme-pothi .hero-text { text-wrap: balance; }
+/* the answer sheet */
+.theme-pothi .ans { background: repeating-linear-gradient(180deg, transparent 0 59px, rgba(184,134,43,.22) 59px 61px), rgba(250,244,230,.98) !important; }
+.theme-pothi .ans-head { font-family: 'Martel'; font-weight: 800; font-size: 54px; color: var(--accent); margin-bottom: 8px; }
+.theme-pothi .ans-row { font-family: 'Tiro Devanagari Hindi'; font-size: 40px; line-height: 1.5; color: #1E2A44; margin: 4px 0 10px; }
+.theme-pothi .ans-row b { color: var(--accent); font-family: 'Martel'; }
+.theme-pothi .ans-todo { opacity: .45; }
+.theme-pothi .ans-blank { display: inline-block; width: 70%; height: 6px; border-bottom: 4px dotted rgba(184,134,43,.5); vertical-align: middle; }
+.theme-pothi .ans-new { background: linear-gradient(90deg, rgba(242,169,0,.22), transparent 85%); border-radius: 6px; }
+.theme-pothi .ans { padding: 20px 30px 22px !important; }
+.theme-pothi .ans-head { font-size: 48px; margin-bottom: 2px; }
+.theme-pothi .ans-row { font-size: 39px; line-height: 1.38; margin: 2px 0 6px; }
+
+/* khadi — "तीन ताले, एक चाबी".  The mnemonic is a chest with three brass padlocks and one key, so the
+   look is rosewood and brass: ivory cards under a rosewood band studded with brass nail-heads, sindoor
+   red for the restrictions, brass for the exception.  Plates: rosewood (ambientCG, CC0), an Ajanta
+   painting of women (Vakataka era, Prabhavati Gupta's dynasty), dark kraft.  (Derived from harappa.) */
+.theme-pothi .card::before, .theme-pothi .panel::before, .theme-pothi .qcard::before, .theme-pothi .yn .side::before, .theme-pothi .k-def::before {
+  background: radial-gradient(circle at 9px 9px, #E39A4C 3.5px, #24552F 4.5px, transparent 5.5px) 0 0 / 18px 18px repeat-x, linear-gradient(90deg, #4A2A1A, #6B3B22 50%, #4A2A1A); }
+.theme-pothi .hero::before { background: radial-gradient(circle at 10px 10px, #E39A4C 4px, #24552F 5px, transparent 6px) 0 0 / 20px 20px repeat-x, #5A311D; }
+.theme-pothi .hero { border-top-color: #5A311D; }
+.theme-pothi .hero-text { color: #B4531A; }
+.theme-pothi .hero-rule { background: #2F6B3B; }
+.theme-pothi .hl-m { background: rgba(246,242,232,.96); color: #1D1A14; text-shadow: none; width: fit-content; max-width: 960px;
+  padding: 6px 28px 10px; border-radius: 6px; border-left: 12px solid #2F6B3B; box-shadow: 0 10px 24px rgba(0,0,0,.45); font-size: 58px; }
+.theme-pothi .k-pill::before { background: #2F6B3B; }
+.theme-pothi .qh-marks { background: #B4531A; box-shadow: 0 0 0 7px #F2DDB0, 0 0 0 11px #2F6B3B, 0 12px 26px rgba(0,0,0,.4); }
+
+/* ---- pothi identity: everything above is khadi's structure, these rules replace its colours ---- */
+#frame.theme-pothi {
+  --ink: #1B1A2E; --accent: #2A3A86; --accent-2: #D9731A; --muted: #6A5A48; --paper: #F1E6CC;
+  --card-bg: rgba(248, 241, 224, .97); --solid: rgba(248, 241, 224, .99); --card-border: rgba(150, 52, 30, .45);
+  --font-head: 'Yatra One', serif; --head-weight: 400;
+}
+.theme-pothi .k-head, .theme-pothi .hl-m, .theme-pothi #spine .ttl, .theme-pothi .k-section-tag__text,
+.theme-pothi .k-stamp, .theme-pothi .ans-head, .theme-pothi .qh-marks, .theme-pothi .hero-text, .theme-pothi .pt-name { font-family: 'Yatra One' !important; font-weight: 400 !important; }
+/* the page: ivory paper inside a red-ochre double rule (the manuscript margin) */
+.theme-pothi .card, .theme-pothi .k-card, .theme-pothi .k-def, .theme-pothi .yn .side, .theme-pothi .panel, .theme-pothi .qcard, .theme-pothi .pt-cell {
+  background: var(--card-bg) !important; border-image: none !important; border: 1.5px solid rgba(150,52,30,.35) !important; border-top: 18px solid #D9731A !important;
+  box-shadow: inset 0 0 0 9px rgba(248,241,224,.97), inset 0 0 0 11px rgba(166,48,28,.75), inset 0 0 0 15px rgba(248,241,224,.97), inset 0 0 0 16.5px rgba(166,48,28,.6),
+              0 14px 30px rgba(0,0,0,.42) !important; border-radius: 6px !important; }
+.theme-pothi .card::before, .theme-pothi .panel::before, .theme-pothi .qcard::before, .theme-pothi .yn .side::before, .theme-pothi .k-def::before, .theme-pothi .pt-cell::before {
+  content: ""; position: absolute; left: 0; right: 0; top: -18px; height: 18px; border-radius: 6px 6px 0 0;
+  background: radial-gradient(circle at 9px 9px, #F8EBD0 2.5px, #2A3A86 3.5px 5px, transparent 6px) 0 0 / 18px 18px repeat-x, linear-gradient(90deg, #C9621A, #E58A2E 50%, #C9621A); }
+.theme-pothi .pt-cell { position: relative; overflow: visible !important; padding: 20px 20px 14px !important; }
+.theme-pothi .pt-img { filter: sepia(.12) contrast(1.04); box-shadow: 0 0 0 3px rgba(166,48,28,.55); }
+.theme-pothi .pt-name { color: var(--accent); font-size: 52px; }
+.theme-pothi .pt-sub { color: #9A3F12; font-size: 40px; }
+.theme-pothi .hero { background: linear-gradient(180deg, rgba(248,241,224,.98), rgba(241,229,203,.98)); border-top: 20px solid #D9731A;
+  box-shadow: inset 0 0 0 10px rgba(248,241,224,.97), inset 0 0 0 12px rgba(166,48,28,.7), 0 18px 40px rgba(0,0,0,.45); }
+.theme-pothi .hero::before { background: radial-gradient(circle at 10px 10px, #F8EBD0 3px, #2A3A86 4px 5.5px, transparent 6.5px) 0 0 / 20px 20px repeat-x, linear-gradient(90deg, #C9621A, #E58A2E 50%, #C9621A); }
+.theme-pothi .hero-text { color: #2A3A86; font-size: 100px; line-height: 1.38; }
+.theme-pothi .hero-rule { background: #D9731A; }
+.theme-pothi .hero-kicker { color: #8A3A12; }
+.theme-pothi .hl-m { background: rgba(248,241,224,.97); color: #1B1A2E; text-shadow: none; width: fit-content; max-width: 960px;
+  padding: 8px 30px 12px; border-radius: 6px; border-left: 12px solid #D9731A; box-shadow: 0 10px 24px rgba(0,0,0,.45); font-size: 60px; }
+.theme-pothi .k-section-tag__num { background: #2A3A86; color: #F8EBD0; }
+.theme-pothi .k-pill { background: var(--card-bg) !important; border-color: rgba(150,52,30,.45) !important; }
+.theme-pothi .k-pill::before { background: #D9731A; }
+.theme-pothi .k-pill--accent { background: #2A3A86 !important; border-color: #2A3A86 !important; color: #F8EBD0 !important; }
+.theme-pothi .k-pill--accent::before { background: #E58A2E; }
+.theme-pothi .k-stamp { color: #A6301C; border-color: #A6301C; outline-color: #A6301C; }
+.theme-pothi .note.on-photo { background: rgba(27, 26, 46, .84); }
+.theme-pothi #spine .k-dots i { border-color: #D9731A; }
+.theme-pothi #spine .k-dots i.on { background: #D9731A; }
+.theme-pothi #spine .cnt { color: #2A3A86; }
+.theme-pothi #cap { --torn-bg: rgba(248, 241, 224, .96); border-color: rgba(150,52,30,.45); }
+.theme-pothi #cap .hl { color: #B4500F; }
+.theme-pothi .p-card { border: 8px solid #F8EBD0; box-shadow: 0 0 0 5px #D9731A, 0 14px 30px rgba(0,0,0,.45); }
+.theme-pothi .qh-marks { background: #2A3A86; color: #F8EBD0; box-shadow: 0 0 0 7px #F8EBD0, 0 0 0 11px #D9731A, 0 12px 26px rgba(0,0,0,.4); }
+.theme-pothi .src-card { box-shadow: inset 0 0 0 8px rgba(248,241,224,.97), inset 0 0 0 10px rgba(166,48,28,.6), var(--glass-shadow); }
+.theme-pothi #broll::after { background: linear-gradient(180deg, rgba(20,14,30,.42) 0%, transparent 20%, transparent 58%, rgba(20,14,30,.58) 100%); }

@@ -1,0 +1,822 @@
+{
+ "_about": "POL-C4-LA-06 (UN के प्रमुख अंग व उद्देश्य): charter look, two parts.",
+ "project": "pol-c4-la-06",
+ "part": 1,
+ "captions_at": "bottom",
+ "skin": "paper-editorial",
+ "theme": "charter",
+ "presenter_style": "card",
+ "plate": "ch-council",
+ "spine": {
+  "title": "UN: अंग + उद्देश्य",
+  "items": [
+   "छह अंग",
+   "शान्ति",
+   "दोस्ती",
+   "सहयोग",
+   "तालमेल"
+  ],
+  "lit_at": [
+   12,
+   26
+  ],
+  "show_from": 12
+ },
+ "tracker": {
+  "from": 12
+ },
+ "beats": [
+  {
+   "id": "world",
+   "in": 0,
+   "out": 1,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h3",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "qmarks",
+     "at": [
+      0,
+      0.4
+     ],
+     "n": 8
+    }
+   ]
+  },
+  {
+   "id": "why",
+   "in": 1,
+   "out": 3,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h3",
+    "region": "full",
+    "offset": 3
+   },
+   "elements": [
+    {
+     "type": "ask",
+     "slot": "upper",
+     "text": "कोई भी संस्था बनी किसलिए?",
+     "at": [
+      2,
+      0.08
+     ]
+    }
+   ]
+  },
+  {
+   "id": "school",
+   "in": 3,
+   "out": 4,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "स्कूल → पढ़ाने के लिए",
+     "at": [
+      3,
+      1.3
+     ]
+    }
+   ]
+  },
+  {
+   "id": "hospital",
+   "in": 4,
+   "out": 5,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "अस्पताल → इलाज के लिए",
+     "at": [
+      4,
+      1.16
+     ]
+    }
+   ]
+  },
+  {
+   "id": "un-why",
+   "in": 5,
+   "out": 6,
+   "presenter": "standard",
+   "plate": "ch-charter",
+   "elements": [
+    {
+     "type": "ask",
+     "slot": "upper",
+     "text": "संयुक्त राष्ट्र संघ → किसलिए?",
+     "at": [
+      5,
+      0.46
+     ]
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": 6,
+   "out": 12,
+   "presenter": "standard",
+   "plate": "ch-council",
+   "elements": [
+    {
+     "type": "qhero",
+     "slot": "upper",
+     "ribbon": "Board Exam PYQ",
+     "at": 6,
+     "years": [
+      [
+       "2022",
+       [
+        6,
+        0.58
+       ]
+      ]
+     ],
+     "question": "संयुक्त राष्ट्र संघ के प्रमुख अंगों के नाम लिखिए व उसके उद्देश्य समझाइए।",
+     "hl": [
+      "अंगों",
+      "उद्देश्य"
+     ],
+     "t_card": [
+      9,
+      0.12
+     ],
+     "marks": "4 अंक",
+     "t_marks": [
+      7,
+      0.28
+     ]
+    }
+   ]
+  },
+  {
+   "id": "six",
+   "in": 12,
+   "out": 15,
+   "presenter": "standard",
+   "plate": "ch-council",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "पहले: कुल छह अंग",
+     "size": "m",
+     "at": 12,
+     "fx": "drop"
+    },
+    {
+     "type": "notify",
+     "slot": "upper",
+     "items": [
+      [
+       "1",
+       "महासभा",
+       "",
+       [
+        12,
+        2.26
+       ]
+      ],
+      [
+       "2",
+       "सुरक्षा परिषद",
+       "",
+       [
+        13,
+        0.0
+       ]
+      ],
+      [
+       "3",
+       "आर्थिक एवं सामाजिक परिषद",
+       "",
+       [
+        13,
+        1.4
+       ]
+      ],
+      [
+       "4",
+       "अन्तर्राष्ट्रीय न्यायालय",
+       "",
+       [
+        13,
+        3.4
+       ]
+      ],
+      [
+       "5",
+       "न्यास परिषद",
+       "",
+       [
+        13,
+        4.8
+       ]
+      ],
+      [
+       "6",
+       "सचिवालय",
+       "",
+       [
+        14,
+        0.94
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "trick",
+   "in": 15,
+   "out": 17,
+   "presenter": "standard",
+   "plate": "ch-mural",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "याद रखने का आसान तरीका",
+     "size": "m",
+     "at": 15,
+     "fx": "drop"
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "एक सभा",
+       [
+        15,
+        2.34
+       ]
+      ],
+      [
+       "तीन परिषद",
+       [
+        16,
+        0.04
+       ]
+      ],
+      [
+       "एक अदालत",
+       [
+        16,
+        1.14
+       ]
+      ],
+      [
+       "एक दफ़्तर",
+       [
+        16,
+        2.24
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sabha",
+   "in": 17,
+   "out": [
+    17,
+    2.36
+   ],
+   "presenter": "standard",
+   "broll": {
+    "clip": "o1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "एक सभा = महासभा",
+     "style": "accent",
+     "at": [
+      17,
+      1.06
+     ]
+    }
+   ]
+  },
+  {
+   "id": "parishad",
+   "in": [
+    17,
+    2.36
+   ],
+   "out": 18,
+   "presenter": "standard",
+   "plate": "ch-council",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "तीन परिषद",
+     "size": "m",
+     "at": [
+      17,
+      2.36
+     ]
+    },
+    {
+     "type": "pills",
+     "slot": "upper",
+     "items": [
+      [
+       "सुरक्षा परिषद",
+       [
+        17,
+        3.26
+       ]
+      ],
+      [
+       "आर्थिक-सामाजिक परिषद",
+       [
+        17,
+        4.56
+       ]
+      ],
+      [
+       "न्यास परिषद",
+       [
+        17,
+        5.36
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "adalat",
+   "in": 18,
+   "out": [
+    18,
+    2.44
+   ],
+   "presenter": "standard",
+   "broll": {
+    "clip": "o2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "एक अदालत = अन्तर्राष्ट्रीय न्यायालय",
+     "style": "accent",
+     "at": [
+      18,
+      0.74
+     ]
+    }
+   ]
+  },
+  {
+   "id": "daftar",
+   "in": [
+    18,
+    2.44
+   ],
+   "out": 19,
+   "presenter": "standard",
+   "broll": {
+    "clip": "o3",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "एक दफ़्तर = सचिवालय",
+     "style": "accent",
+     "at": [
+      18,
+      3.44
+     ]
+    }
+   ]
+  },
+  {
+   "id": "half-done",
+   "in": 19,
+   "out": 21,
+   "presenter": "standard",
+   "plate": "ch-peacepalace",
+   "elements": [
+    {
+     "type": "progress",
+     "slot": "upper",
+     "value": 50,
+     "text": "सवाल का पहला हिस्सा पूरा",
+     "at": [
+      19,
+      0.5
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans0",
+   "in": 21,
+   "out": 22,
+   "presenter": "standard",
+   "plate": "ch-mural",
+   "tracker": false,
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर बन रहा है…",
+     "points": [
+      "<b>प्रमुख अंग:</b> महासभा, सुरक्षा परिषद, आर्थिक एवं सामाजिक परिषद, अन्तर्राष्ट्रीय न्यायालय, न्यास परिषद और सचिवालय।",
+      "<b>युद्ध एवं विवादों का शान्तिपूर्ण समाधान:</b> शान्ति व सुरक्षा बनाए रखना, शान्ति विरोधी तत्वों को हटाना, आक्रामक कृत्यों का दमन।",
+      "<b>समानाधिकार एवं आत्मनिर्णय:</b> इन आधारों पर देशों में मैत्रीपूर्ण संबंधों का विकास।",
+      "<b>विभिन्न समस्याओं का समाधान:</b> अन्तर्राष्ट्रीय सहयोग, और मानवाधिकारों का सम्मान।",
+      "<b>समन्वय की स्थापना:</b> देशों में तालमेल के लिए एक केन्द्र की स्थापना।"
+     ],
+     "nums": [
+      "",
+      "1.",
+      "2.",
+      "3.",
+      "4."
+     ],
+     "show": 1,
+     "animate_from": 0,
+     "at": 21,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "charter",
+   "in": 22,
+   "out": 24,
+   "presenter": "standard",
+   "plate": "ch-charter",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "संयुक्त राष्ट्र संघ के",
+     "text": "घोषणा-पत्र के अनुसार",
+     "at": [
+      22,
+      0.28
+     ],
+     "hl": [
+      "घोषणा-पत्र"
+     ],
+     "fx": "rise",
+     "sub": "चार प्रमुख उद्देश्य"
+    }
+   ]
+  },
+  {
+   "id": "write-it",
+   "in": 24,
+   "out": 26,
+   "presenter": "standard",
+   "plate": "ch-charter",
+   "elements": [
+    {
+     "type": "paper",
+     "slot": "upper",
+     "text": "घोषणा-पत्र के अनुसार इसके चार प्रमुख उद्देश्य हैं…",
+     "texture": "crumpled",
+     "at": 24
+    },
+    {
+     "type": "lottie",
+     "src": "tick-spark",
+     "x": 760,
+     "y": 640,
+     "w": 560,
+     "at": [
+      25,
+      0.3
+     ]
+    }
+   ]
+  },
+  {
+   "id": "obj1",
+   "in": 26,
+   "out": 28,
+   "presenter": "standard",
+   "broll": {
+    "clip": "p1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "पहला और मुख्य उद्देश्य",
+     "text": "युद्ध एवं विवादों का शान्तिपूर्ण समाधान",
+     "at": [
+      26,
+      1.0
+     ],
+     "hl": [
+      "शान्तिपूर्ण"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "three-jobs",
+   "in": 28,
+   "out": 29,
+   "presenter": "standard",
+   "plate": "ch-peacepalace",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "इसमें तीन काम",
+     "size": "m",
+     "at": 28,
+     "fx": "drop"
+    }
+   ]
+  },
+  {
+   "id": "keep",
+   "in": 29,
+   "out": 30,
+   "presenter": "standard",
+   "broll": {
+    "clip": "p1",
+    "region": "full",
+    "offset": 3
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "1. शान्ति एवं सुरक्षा का अनुरक्षण",
+     "at": [
+      29,
+      0.4
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "अनुरक्षण = बनाए रखना",
+     "style": "accent",
+     "at": [
+      29,
+      3.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "remove",
+   "in": 30,
+   "out": 31,
+   "presenter": "standard",
+   "broll": {
+    "clip": "p2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "2. शान्ति विरोधी तत्वों का निराकरण",
+     "at": [
+      30,
+      0.4
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "निराकरण = हटाना",
+     "style": "accent",
+     "at": [
+      30,
+      3.6
+     ]
+    }
+   ]
+  },
+  {
+   "id": "suppress",
+   "in": 31,
+   "out": 32,
+   "presenter": "standard",
+   "broll": {
+    "clip": "p3",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "3. आक्रामक कृत्यों का दमन",
+     "at": [
+      31,
+      0.6
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "दमन = दबाना",
+     "style": "accent",
+     "at": [
+      31,
+      5.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "collective",
+   "in": 32,
+   "out": 34,
+   "presenter": "standard",
+   "broll": {
+    "clip": "p3",
+    "region": "full",
+    "offset": 3.5
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "सामूहिक = सारे देश मिलकर",
+     "at": [
+      33,
+      0.4
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "three-words",
+   "in": 34,
+   "out": 37,
+   "presenter": "standard",
+   "plate": "ch-mural",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "पहले उद्देश्य का सार",
+     "size": "m",
+     "at": 34,
+     "fx": "drop"
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "बनाए रखना",
+       [
+        34,
+        4.06
+       ]
+      ],
+      [
+       "हटाना",
+       [
+        35,
+        0.94
+       ]
+      ],
+      [
+       "दबाना",
+       [
+        35,
+        2.04
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "under-upper",
+     "text": "तीनों का मकसद: शान्ति",
+     "style": "accent",
+     "at": [
+      36,
+      1.6
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans1",
+   "in": 37,
+   "out": 39,
+   "presenter": "standard",
+   "plate": "ch-mural",
+   "tracker": false,
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर बन रहा है…",
+     "points": [
+      "<b>प्रमुख अंग:</b> महासभा, सुरक्षा परिषद, आर्थिक एवं सामाजिक परिषद, अन्तर्राष्ट्रीय न्यायालय, न्यास परिषद और सचिवालय।",
+      "<b>युद्ध एवं विवादों का शान्तिपूर्ण समाधान:</b> शान्ति व सुरक्षा बनाए रखना, शान्ति विरोधी तत्वों को हटाना, आक्रामक कृत्यों का दमन।",
+      "<b>समानाधिकार एवं आत्मनिर्णय:</b> इन आधारों पर देशों में मैत्रीपूर्ण संबंधों का विकास।",
+      "<b>विभिन्न समस्याओं का समाधान:</b> अन्तर्राष्ट्रीय सहयोग, और मानवाधिकारों का सम्मान।",
+      "<b>समन्वय की स्थापना:</b> देशों में तालमेल के लिए एक केन्द्र की स्थापना।"
+     ],
+     "nums": [
+      "",
+      "1.",
+      "2.",
+      "3.",
+      "4."
+     ],
+     "show": 2,
+     "animate_from": 1,
+     "at": 37,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "after-peace",
+   "in": 39,
+   "out": 41,
+   "presenter": "standard",
+   "broll": {
+    "clip": "f1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "ask",
+     "slot": "upper",
+     "text": "शान्ति के बाद UN क्या चाहेगा?",
+     "at": [
+      39,
+      0.4
+     ],
+     "answer": "देश आपस में दोस्त बनें",
+     "t_answer": [
+      40,
+      0.3
+     ]
+    }
+   ]
+  },
+  {
+   "id": "part2",
+   "in": 41,
+   "out": "end",
+   "presenter": "full",
+   "broll": {
+    "clip": "h3",
+    "region": "full",
+    "offset": 5,
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "बाकी 3 उद्देश्य: Part 2",
+     "at": [
+      42,
+      0.8
+     ],
+     "fx": "zoom"
+    }
+   ]
+  }
+ ]
+}

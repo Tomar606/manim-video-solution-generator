@@ -1,0 +1,60 @@
+{
+ "rivers": [
+  {
+   "title": "File:Gomukh ghat, Omkareshwar 02.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Gomukh_ghat%2C_Omkareshwar_02.jpg/3840px-Gomukh_ghat%2C_Omkareshwar_02.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Gomukh_ghat,_Omkareshwar_02.jpg",
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "author": "Bernard Gagnon",
+   "credit_required": true,
+   "file": "rivers-1.jpg",
+   "width": 2400,
+   "height": 1600,
+   "query": "Narmada river",
+   "desc": "The Gomukh ghat in Omkareshwar, India"
+  },
+  {
+   "title": "File:Narmada in Omkareshwar.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Narmada_in_Omkareshwar.jpg/3840px-Narmada_in_Omkareshwar.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Narmada_in_Omkareshwar.jpg",
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "author": "Bernard Gagnon",
+   "credit_required": true,
+   "file": "rivers-3.jpg",
+   "width": 2400,
+   "height": 1620,
+   "query": "Narmada river",
+   "desc": "Narmada River in Omkareshwar, India"
+  },
+  {
+   "title": "File:A serene scene with clouds and river Yamuna, India.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/A_serene_scene_with_clouds_and_river_Yamuna%2C_India.jpg/3840px-A_serene_scene_with_clouds_and_river_Yamuna%2C_India.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_serene_scene_with_clouds_and_river_Yamuna,_India.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Nivedita Verm",
+   "credit_required": true,
+   "file": "rivers-4.jpg",
+   "width": 2400,
+   "height": 1800,
+   "query": "Yamuna river India",
+   "desc": "A serene scene of the river Yamuna in India"
+  },
+  {
+   "title": "File:River Narmada from Maheshwar Fort.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/River_Narmada_from_Maheshwar_Fort.jpg/1920px-River_Narmada_from_Maheshwar_Fort.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:River_Narmada_from_Maheshwar_Fort.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Sumit Surai",
+   "credit_required": true,
+   "file": "rivers-7.jpg",
+   "width": 1920,
+   "height": 1163,
+   "query": "Narmada river",
+   "desc": "A view of the river Narmada from Maheshwar fort."
+  }
+ ]
+}

@@ -1,0 +1,1109 @@
+{
+ "_about": "PHY: व्हीटस्टोन सेतु / मीटर सेतु (2020, 22, 24, 25): labbook look.",
+ "project": "phy-wheatstone",
+ "part": 1,
+ "captions_at": "bottom",
+ "skin": "paper-editorial",
+ "theme": "labbook",
+ "presenter_style": "card",
+ "plate": "lb-blur-lab",
+ "card_style": {
+  "frame": "circuit",
+  "backdrop": "card-blueprint",
+  "hub_frame": "dial"
+ },
+ "framing": {
+  "crop": [
+   600,
+   150,
+   1340,
+   1000
+  ],
+  "full_w": 735
+ },
+ "scene_match": {
+  "tint": 0.07,
+  "wrap": 0.16,
+  "wrap_px": 6,
+  "bottom_fade": 0.08
+ },
+ "presenter_grade": {
+  "exposure": 1.0,
+  "contrast": 1.03,
+  "warm": 1.0,
+  "saturation": 1.02,
+  "shadow_lift": 0.5,
+  "lift_radius": 14,
+  "define": 0.24,
+  "matte_soft": 1.0,
+  "matte_choke": 0.05,
+  "sharpen": {
+   "radius": 1.0,
+   "percent": 50,
+   "threshold": 3
+  }
+ },
+ "hub": {
+  "cx": 540,
+  "cy": 1420,
+  "r": 230,
+  "scale": 0.7,
+  "backdrop": "cards/card-dial.jpg"
+ },
+ "card": {
+  "x": 314,
+  "y": 1130,
+  "w": 452,
+  "h": 560
+ },
+ "spine": {
+  "title": "व्हीटस्टोन + मीटर सेतु",
+  "items": [
+   "परिपथ",
+   "संतुलन शर्त",
+   "उपयोग",
+   "मीटर सेतु",
+   "सूत्र",
+   "सावधानियाँ"
+  ],
+  "lit_at": [
+   13,
+   20,
+   22,
+   24,
+   33,
+   35
+  ],
+  "show_from": 12
+ },
+ "beats": [
+  {
+   "id": "mp",
+   "in": 0,
+   "out": 1,
+   "presenter": "full",
+   "broll": {
+    "clip": "c3",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "statemap",
+     "slot": "upper",
+     "state": "Madhya Pradesh",
+     "text": "MP Board",
+     "sub": "कक्षा 12वीं",
+     "w": 880,
+     "top": 170,
+     "at": [
+      0,
+      0.05
+     ]
+    }
+   ]
+  },
+  {
+   "id": "lab",
+   "in": 1,
+   "out": 2,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "पिछली Reel: Hindi",
+     "at": [
+      1,
+      0.76
+     ]
+    }
+   ]
+  },
+  {
+   "id": "physics",
+   "in": 2,
+   "out": 3,
+   "presenter": "standard",
+   "plate": "lb-resistors",
+   "elements": [
+    {
+     "type": "search",
+     "slot": "over-broll-top",
+     "text": "Physics: Important Question",
+     "at": [
+      2,
+      1.44
+     ],
+     "cps": 18
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "आज: Physics",
+     "style": "accent",
+     "at": [
+      2,
+      2.04
+     ]
+    }
+   ]
+  },
+  {
+   "id": "years",
+   "in": 3,
+   "out": 6,
+   "presenter": "full",
+   "plate": "lb-blur-lab",
+   "elements": [
+    {
+     "type": "papers",
+     "style": "row",
+     "assets": "assets/papers",
+     "at": 3,
+     "top": 340,
+     "left0": 12,
+     "step": 236,
+     "sheet_w": 320,
+     "dy": 34,
+     "title": "यही question, board exam में",
+     "years": [
+      [
+       "2020",
+       [
+        3,
+        2.02
+       ]
+      ],
+      [
+       "2022",
+       [
+        3,
+        3.51
+       ]
+      ],
+      [
+       "2024",
+       [
+        3,
+        4.91
+       ]
+      ],
+      [
+       "2025",
+       [
+        3,
+        5.98
+       ]
+      ]
+     ],
+     "after": "चार बार पूछा गया",
+     "t_after": [
+      4,
+      0.0
+     ],
+     "after_dy": 470,
+     "next": "2027 में भी आ सकता है!",
+     "t_next": [
+      5,
+      0.0
+     ],
+     "next_dy": 470
+    }
+   ]
+  },
+  {
+   "id": "pakka",
+   "in": 6,
+   "out": 7,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h1",
+    "region": "full",
+    "span": [
+     3.0,
+     7.9
+    ]
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "इसे समझ लिया तो",
+     "text": "3 नंबर पक्के",
+     "at": [
+      6,
+      3.05
+     ],
+     "hl": [
+      "पक्के"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "pdf",
+   "in": 7,
+   "out": [
+    8,
+    2.02
+   ],
+   "presenter": "full",
+   "plate": "lb-navy",
+   "elements": [
+    {
+     "type": "pdfbadge",
+     "slot": "upper",
+     "text": "ज़रूरी PDF",
+     "sub": "Reel के end में",
+     "top": 140,
+     "at": [
+      7,
+      2.38
+     ]
+    },
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "Reel पूरी देखना",
+     "at": 8,
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": [
+    8,
+    2.02
+   ],
+   "out": 12,
+   "presenter": "full",
+   "plate": "lb-blur-lab",
+   "elements": [
+    {
+     "type": "qsheet",
+     "at": [
+      8,
+      2.02
+     ],
+     "src": "qsheet.png",
+     "src_path": "assets/papers/qsheet.png",
+     "w": 840,
+     "top": 64,
+     "hl_left": 0.262,
+     "line_h": 0.046,
+     "lines": [
+      [
+       0.686,
+       0.815,
+       [
+        9,
+        0.87
+       ]
+      ],
+      [
+       0.745,
+       0.805,
+       [
+        10,
+        0.0
+       ]
+      ],
+      [
+       0.792,
+       0.805,
+       [
+        11,
+        0.28
+       ]
+      ],
+      [
+       0.842,
+       0.595,
+       [
+        11,
+        2.69
+       ]
+      ]
+     ],
+     "marks": "3 अंक",
+     "t_marks": [
+      11,
+      2.69
+     ],
+     "marks_y": 0.8
+    }
+   ]
+  },
+  {
+   "id": "who",
+   "in": 12,
+   "out": 13,
+   "presenter": "full",
+   "plate": "lb-blur-lab",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "पहले: व्हीटस्टोन सेतु",
+     "size": "m",
+     "at": 12,
+     "fx": "drop"
+    },
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "physics/wheatstone/wheatstone-portrait-1.jpg",
+     "w": 420,
+     "label": "चार्ल्स व्हीटस्टोन (1802–1875)",
+     "at": [
+      12,
+      0.6
+     ]
+    }
+   ]
+  },
+  {
+   "id": "bridge",
+   "in": 13,
+   "out": 17,
+   "presenter": "standard",
+   "plate": "lb-blur-lab",
+   "elements": [
+    {
+     "type": "wheatstone",
+     "look": "real",
+     "slot": "upper",
+     "at": 13,
+     "sfx": [
+      [
+       0.0,
+       "transition-whoosh/short-sweep"
+      ]
+     ],
+     "t_P": [
+      13,
+      2.24
+     ],
+     "t_Q": [
+      13,
+      2.48
+     ],
+     "t_R": [
+      13,
+      2.76
+     ],
+     "t_S": [
+      13,
+      3.28
+     ],
+     "t_nodes": [
+      14,
+      0.92
+     ],
+     "t_cell": [
+      15,
+      1.82
+     ],
+     "t_galv": [
+      16,
+      1.38
+     ]
+    }
+   ]
+  },
+  {
+   "id": "galvo",
+   "in": 17,
+   "out": 18,
+   "presenter": "full",
+   "plate": "lb-blur-lab",
+   "elements": [
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "physics/wheatstone/galvanometer-1.jpg",
+     "w": 640,
+     "label": "धारामापी (G): सुई बीच में = धारा शून्य",
+     "at": 17
+    },
+    {
+     "type": "ring",
+     "x": 277,
+     "y": 395,
+     "w": 230,
+     "h": 230,
+     "at": [
+      17,
+      1.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "balance-flow",
+   "in": 18,
+   "out": 20,
+   "presenter": "standard",
+   "plate": "lb-blur-lab",
+   "elements": [
+    {
+     "type": "wheatstone",
+     "look": "real",
+     "slot": "upper",
+     "at": 18,
+     "t_P": -10.0,
+     "t_Q": -10.0,
+     "t_R": -10.0,
+     "t_S": -10.0,
+     "t_nodes": -10.0,
+     "t_cell": -10.0,
+     "t_galv": -10.0,
+     "t_flow": [
+      18,
+      0.16
+     ],
+     "t_null": [
+      19,
+      0.64
+     ]
+    }
+   ]
+  },
+  {
+   "id": "condition",
+   "in": 20,
+   "out": 22,
+   "presenter": "hub",
+   "plate": "lb-blur-lab",
+   "elements": [
+    {
+     "type": "wheatstone",
+     "look": "real",
+     "slot": "upper",
+     "at": 20,
+     "scale": 0.5,
+     "top": 150,
+     "t_P": -10.0,
+     "t_Q": -10.0,
+     "t_R": -10.0,
+     "t_S": -10.0,
+     "t_nodes": -10.0,
+     "t_cell": -10.0,
+     "t_galv": -10.0,
+     "t_flow": -10.0,
+     "t_null": -10.0
+    },
+    {
+     "type": "formula",
+     "slot": "upper",
+     "title": "संतुलन की शर्त",
+     "tex": "\\dfrac{P}{Q}=\\dfrac{R}{S}",
+     "at": 20,
+     "top": 560,
+     "compact": true,
+     "legend": [
+      [
+       "P, Q",
+       "भुजा AB और BC के प्रतिरोध",
+       [
+        20,
+        1.66
+       ]
+      ],
+      [
+       "R, S",
+       "भुजा AD और DC के प्रतिरोध",
+       [
+        20,
+        2.2
+       ]
+      ],
+      [
+       "I_g = 0",
+       "धारामापी में धारा शून्य: सेतु संतुलित",
+       [
+        21,
+        2.1
+       ]
+      ]
+     ],
+     "t_glow": [
+      21,
+      2.92
+     ]
+    }
+   ]
+  },
+  {
+   "id": "use",
+   "in": 22,
+   "out": [
+    22,
+    2.5
+   ],
+   "presenter": "full",
+   "broll": {
+    "clip": "u1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "उपयोग: अज्ञात प्रतिरोध का मान ज्ञात करना",
+     "style": "accent",
+     "at": [
+      22,
+      0.1
+     ]
+    },
+    {
+     "type": "inset",
+     "src": "physics/wheatstone/multimeter-2.jpg",
+     "w": 340,
+     "label": "आज: मल्टीमीटर",
+     "main_label": "मरम्मत की दुकान",
+     "at": [
+      22,
+      0.75
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans1",
+   "in": [
+    22,
+    2.5
+   ],
+   "out": 23,
+   "presenter": "standard",
+   "plate": "lb-blur-lab",
+   "tracker": false,
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर बन रहा है…",
+     "points": [
+      "<b>व्हीटस्टोन सेतु:</b> चार प्रतिरोध <i>P, Q, R, S</i> चतुर्भुज <i>ABCD</i> की भुजाओं में; <i>A–C</i> के बीच सेल व कुंजी, <i>B–D</i> के बीच धारामापी।",
+      "<b>सिद्धांत / संतुलन की शर्त:</b> धारामापी में धारा शून्य होने पर सेतु संतुलित होता है, तब $P/Q = R/S$।",
+      "<b>उपयोग:</b> अज्ञात प्रतिरोध का मान ज्ञात करना।",
+      "<b>मीटर सेतु:</b> 1 m एकसमान तार ताँबे की पट्टियों <i>A, C</i> के बीच; बाएँ <i>R</i>, दाएँ <i>S</i>; पट्टी <i>B</i> से धारामापी व जॉकी।",
+      "<b>सिद्धांत:</b> व्हीटस्टोन सेतु; शून्य विक्षेप बिंदु <i>A</i> से <i>l</i> cm पर हो तो $R/S = l/(100-l)$।",
+      "<b>सावधानियाँ:</b> (i) जॉकी को तार पर रगड़ें नहीं, हल्के से स्पर्श कराएँ; (ii) संतुलन बिंदु तार के मध्य के पास हो।"
+     ],
+     "show": 3,
+     "animate_from": 2,
+     "at": [
+      22,
+      2.5
+     ],
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "real",
+   "in": 23,
+   "out": 24,
+   "presenter": "full",
+   "plate": "lb-bridge",
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "upper",
+     "text": "असली मीटर सेतु: इसी सिद्धांत पर",
+     "style": "accent",
+     "at": [
+      23,
+      1.96
+     ],
+     "sfx": [
+      [
+       0.0,
+       "transition-whoosh/short-sweep"
+      ]
+     ]
+    },
+    {
+     "type": "pins",
+     "items": [
+      [
+       720,
+       640,
+       "मीटर स्केल (cm)",
+       [
+        23,
+        2.76
+       ]
+      ],
+      [
+       370,
+       820,
+       "धातु की पट्टियाँ",
+       [
+        23,
+        3.36
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "metre",
+   "in": 24,
+   "out": 33,
+   "presenter": "standard",
+   "plate": "lb-blur-lab",
+   "elements": [
+    {
+     "type": "metrebridge",
+     "look": "real",
+     "slot": "upper",
+     "at": 24,
+     "l": 40,
+     "t_wire": [
+      24,
+      1.72
+     ],
+     "t_strips": [
+      25,
+      0.65
+     ],
+     "t_R": [
+      26,
+      1.38
+     ],
+     "t_S": [
+      27,
+      1.38
+     ],
+     "t_galv": [
+      28,
+      1.32
+     ],
+     "t_jockey": [
+      29,
+      1.58
+     ],
+     "t_cell": [
+      30,
+      2.1
+     ],
+     "t_slide": [
+      31,
+      0.63
+     ],
+     "t_l": [
+      32,
+      0.56
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ratio",
+   "in": 33,
+   "out": 34,
+   "presenter": "hub",
+   "plate": "lb-blur-lab",
+   "elements": [
+    {
+     "type": "formula",
+     "slot": "upper",
+     "title": "मीटर सेतु का सूत्र",
+     "tex": "\\dfrac{R}{S}=\\dfrac{l}{100-l}",
+     "at": 33,
+     "legend": [
+      [
+       "R",
+       "प्रतिरोध बॉक्स का प्रतिरोध",
+       [
+        33,
+        0.2
+       ]
+      ],
+      [
+       "S",
+       "अज्ञात प्रतिरोध",
+       [
+        33,
+        0.86
+       ]
+      ],
+      [
+       "l",
+       "A से शून्य विक्षेप बिंदु की दूरी (cm)",
+       [
+        33,
+        1.81
+       ]
+      ],
+      [
+       "100-l",
+       "तार का शेष भाग (cm)",
+       [
+        33,
+        2.48
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans2",
+   "in": 34,
+   "out": [
+    34,
+    2.4
+   ],
+   "presenter": "standard",
+   "plate": "lb-blur-lab",
+   "tracker": false,
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर बन रहा है…",
+     "points": [
+      "<b>व्हीटस्टोन सेतु:</b> चार प्रतिरोध <i>P, Q, R, S</i> चतुर्भुज <i>ABCD</i> की भुजाओं में; <i>A–C</i> के बीच सेल व कुंजी, <i>B–D</i> के बीच धारामापी।",
+      "<b>सिद्धांत / संतुलन की शर्त:</b> धारामापी में धारा शून्य होने पर सेतु संतुलित होता है, तब $P/Q = R/S$।",
+      "<b>उपयोग:</b> अज्ञात प्रतिरोध का मान ज्ञात करना।",
+      "<b>मीटर सेतु:</b> 1 m एकसमान तार ताँबे की पट्टियों <i>A, C</i> के बीच; बाएँ <i>R</i>, दाएँ <i>S</i>; पट्टी <i>B</i> से धारामापी व जॉकी।",
+      "<b>सिद्धांत:</b> व्हीटस्टोन सेतु; शून्य विक्षेप बिंदु <i>A</i> से <i>l</i> cm पर हो तो $R/S = l/(100-l)$।",
+      "<b>सावधानियाँ:</b> (i) जॉकी को तार पर रगड़ें नहीं, हल्के से स्पर्श कराएँ; (ii) संतुलन बिंदु तार के मध्य के पास हो।"
+     ],
+     "show": 5,
+     "animate_from": 4,
+     "at": 34,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "rub",
+   "in": [
+    34,
+    2.4
+   ],
+   "out": 36,
+   "presenter": "full",
+   "broll": {
+    "clip": "c2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "सावधानी 1",
+     "size": "m",
+     "at": [
+      34,
+      2.5
+     ],
+     "fx": "drop",
+     "sfx": [
+      [
+       0.0,
+       "transition-whoosh/short-sweep"
+      ]
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "जॉकी को तार पर रगड़ना नहीं",
+     "at": [
+      35,
+      2.5
+     ]
+    },
+    {
+     "type": "verdict",
+     "kind": "cross",
+     "x": 760,
+     "y": 640,
+     "at": [
+      35,
+      2.94
+     ]
+    }
+   ]
+  },
+  {
+   "id": "touch",
+   "in": 36,
+   "out": 37,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "हल्के से स्पर्श कराना",
+     "style": "accent",
+     "at": [
+      36,
+      0.18
+     ]
+    },
+    {
+     "type": "verdict",
+     "kind": "tick",
+     "x": 760,
+     "y": 640,
+     "at": [
+      36,
+      1.05
+     ]
+    }
+   ]
+  },
+  {
+   "id": "middle",
+   "in": 37,
+   "out": 38,
+   "presenter": "hub",
+   "plate": "lb-blur-lab",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "सावधानी 2: संतुलन बिंदु बीच में",
+     "size": "m",
+     "at": [
+      37,
+      0.3
+     ],
+     "fx": "drop"
+    },
+    {
+     "type": "metrebridge",
+     "look": "real",
+     "slot": "upper",
+     "at": 37,
+     "l": 50,
+     "h": 700,
+     "t_wire": -10.0,
+     "t_strips": -10.0,
+     "t_R": -10.0,
+     "t_S": -10.0,
+     "t_galv": -10.0,
+     "t_jockey": -10.0,
+     "t_cell": -10.0,
+     "t_slide": -10.0,
+     "t_l": [
+      37,
+      2.14
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans3",
+   "in": 38,
+   "out": [
+    38,
+    2.6
+   ],
+   "presenter": "standard",
+   "plate": "lb-blur-lab",
+   "tracker": false,
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर बन रहा है…",
+     "points": [
+      "<b>व्हीटस्टोन सेतु:</b> चार प्रतिरोध <i>P, Q, R, S</i> चतुर्भुज <i>ABCD</i> की भुजाओं में; <i>A–C</i> के बीच सेल व कुंजी, <i>B–D</i> के बीच धारामापी।",
+      "<b>सिद्धांत / संतुलन की शर्त:</b> धारामापी में धारा शून्य होने पर सेतु संतुलित होता है, तब $P/Q = R/S$।",
+      "<b>उपयोग:</b> अज्ञात प्रतिरोध का मान ज्ञात करना।",
+      "<b>मीटर सेतु:</b> 1 m एकसमान तार ताँबे की पट्टियों <i>A, C</i> के बीच; बाएँ <i>R</i>, दाएँ <i>S</i>; पट्टी <i>B</i> से धारामापी व जॉकी।",
+      "<b>सिद्धांत:</b> व्हीटस्टोन सेतु; शून्य विक्षेप बिंदु <i>A</i> से <i>l</i> cm पर हो तो $R/S = l/(100-l)$।",
+      "<b>सावधानियाँ:</b> (i) जॉकी को तार पर रगड़ें नहीं, हल्के से स्पर्श कराएँ; (ii) संतुलन बिंदु तार के मध्य के पास हो।"
+     ],
+     "show": 6,
+     "animate_from": 5,
+     "at": 38,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "balance",
+   "in": [
+    38,
+    2.6
+   ],
+   "out": 39,
+   "presenter": "full",
+   "broll": {
+    "clip": "h3",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "दिमाग में बैठा लिया तो",
+     "text": "पूरे 3 नंबर पक्के",
+     "at": [
+      38,
+      3.54
+     ],
+     "hl": [
+      "पक्के"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "page1",
+   "in": 39,
+   "out": [
+    39,
+    3.0
+   ],
+   "presenter": "full",
+   "plate": "lb-blur-lab",
+   "tracker": false,
+   "spine": false,
+   "elements": [
+    {
+     "type": "page",
+     "src": "assets/answer/WB-1_page.png",
+     "at": 39
+    }
+   ]
+  },
+  {
+   "id": "page2",
+   "in": [
+    39,
+    3.0
+   ],
+   "out": [
+    40,
+    2.6
+   ],
+   "presenter": "full",
+   "plate": "lb-blur-lab",
+   "tracker": false,
+   "spine": false,
+   "elements": [
+    {
+     "type": "page",
+     "src": "assets/answer/WB-2_page.png",
+     "at": [
+      39,
+      3.0
+     ],
+     "fx": "slide",
+     "badge": "screenshot लो",
+     "t_badge": [
+      40,
+      0.37
+     ]
+    }
+   ]
+  },
+  {
+   "id": "asks",
+   "in": [
+    40,
+    2.6
+   ],
+   "out": 44,
+   "presenter": "hub",
+   "plate": "lb-blur-lab",
+   "tracker": false,
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "PDF चाहिए? बस 3 काम",
+     "size": "m",
+     "at": [
+      40,
+      2.6
+     ],
+     "fx": "drop"
+    },
+    {
+     "type": "notify",
+     "slot": "upper",
+     "items": [
+      [
+       "tabler:send",
+       "Reel share करो",
+       "दोस्तों के साथ",
+       [
+        41,
+        2.11
+       ]
+      ],
+      [
+       "tabler:user-plus",
+       "मुझे follow करो",
+       "",
+       [
+        41,
+        3.28
+       ]
+      ],
+      [
+       "tabler:message-circle",
+       "comment में PDF लिखो",
+       "PDF सीधे आपके DM पर",
+       [
+        42,
+        2.39
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "save",
+   "in": 44,
+   "out": "end",
+   "presenter": "full",
+   "broll": {
+    "clip": "o1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "igsave",
+     "slot": "over-broll-top",
+     "text": "Reel save करो",
+     "sub": "exam से पहले revision",
+     "at": [
+      44,
+      0.3
+     ],
+     "t_on": [
+      44,
+      0.87
+     ]
+    }
+   ]
+  }
+ ]
+}

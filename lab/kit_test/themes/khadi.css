@@ -1,0 +1,191 @@
+/* khadi: HIS-C11-SA-01, Gandhi as a mass leader (25 Oct 2026).  Plate: real 1930 photographs (Dandi, the
+   Salt March, a village charkha), sepia and lightly blurred.  Cards are unbleached khadi cotton; the accent is
+   the deep saffron and the second key the green of the 1931 charkha flag; Martel heads and Tiro Devanagari
+   body, the printed Hindi of the period.  (Derived from taala by colour swap.) */
+@font-face { font-family: 'Martel'; src: url('../../../library/elements/fonts/Martel-ExtraBold.ttf'); font-weight: 800; }
+@font-face { font-family: 'Rozha One'; src: url('../../../library/elements/fonts/RozhaOne-Regular.ttf'); }
+@font-face { font-family: 'Tiro Devanagari Hindi'; src: url('../../../library/elements/fonts/TiroDevanagariHindi-Regular.ttf'); }
+#frame.theme-khadi {
+  --ink: #1D1A14;
+  --accent: #B4531A;          /* baked-brick terracotta */
+  --accent-2: #2F6B3B;        /* lapis lazuli */
+  --muted: #7A5E44;
+  --paper: #EADBC0;
+  --card-bg: rgba(246, 242, 232, .97);
+  --solid: rgba(246, 242, 232, .99);
+  --card-border: rgba(90, 58, 30, .35);
+  --font-head: 'Martel', serif;
+  --head-weight: 800;
+  --head-stretch: 100%;
+  --font-body: 'Tiro Devanagari Hindi', serif;
+  --font-num: 'Khand', sans-serif;
+  --halo: 0 0 6px rgba(0, 0, 0, .85), 0 2px 3px rgba(0, 0, 0, .9);
+  --glass-shadow: 0 12px 28px rgba(0, 0, 0, .45);
+  --sea: #0E2C47;
+  --land: #C9A877;
+  --coast: rgba(255, 240, 210, .55);
+  color: var(--ink);
+}
+
+.theme-khadi .card, .theme-khadi .qcard, .theme-khadi .k-card, .theme-khadi .compare .k-card,
+.theme-khadi .k-def, .theme-khadi .yn .side, .theme-khadi .imgcard, .theme-khadi .panel {
+  background: var(--card-bg) !important; border: 1.5px solid var(--card-border) !important; border-radius: 14px !important;
+  box-shadow: inset 0 0 0 6px rgba(246,242,232,.97), inset 0 0 0 8px rgba(90,58,30,.45), inset 2px 3px 10px rgba(90,58,30,.35), var(--glass-shadow) !important; border-top: none !important; border-radius: 6px !important; color: var(--ink);
+  }
+.theme-khadi .k-head { font-family: 'Martel'; font-weight: 800; }
+.theme-khadi .hl-m { font-family: 'Martel'; font-weight: 800; color: #fff; text-shadow: var(--halo); text-wrap: balance; font-size: 66px; line-height: 1.35; }
+.theme-khadi .qcard .k-head { color: var(--accent) !important; }
+
+.theme-khadi .k-section-tag { background: var(--card-bg) !important; border: 1.5px solid var(--card-border) !important; box-shadow: var(--glass-shadow) !important;
+  display: inline-flex; align-items: center; gap: 18px; padding: 8px 30px 8px 8px; border-radius: 44px; }
+.theme-khadi .k-section-tag__num { width: 70px; height: 70px; border-radius: 50%; display: grid; place-items: center; padding: 0;
+  background: var(--accent); color: #FFF8EC; font-family: 'Khand'; font-weight: 700; font-size: 52px; line-height: 1; }
+.theme-khadi .k-section-tag__text { font-family: 'Martel'; font-weight: 800; font-size: 54px; color: var(--ink); background: none; padding: 0; line-height: 1.5; }
+
+.theme-khadi .k-pill { border-radius: 40px !important; font-family: 'Tiro Devanagari Hindi'; font-weight: 400; font-size: 48px;
+  background: var(--card-bg) !important; color: var(--ink) !important; border: 1.5px solid var(--card-border) !important;
+  padding: 6px 30px 6px 20px; box-shadow: var(--glass-shadow); display: inline-flex; align-items: center; gap: 14px; }
+.theme-khadi .k-pill::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); flex: none; }
+.theme-khadi .k-pill--accent { background: var(--accent) !important; color: #FFF8EC !important; border-color: var(--accent) !important; }
+.theme-khadi .k-pill--accent::before { background: #FFF8EC; }
+
+.theme-khadi .k-stamp { font-family: 'Martel'; font-weight: 800; color: var(--accent); border-color: var(--accent);
+  outline-color: var(--accent); background: var(--solid) !important; -webkit-mask-image: none; mix-blend-mode: normal; border-radius: 12px; }
+
+.theme-khadi .note { font-family: 'Tiro Devanagari Hindi'; font-weight: 400; font-size: 52px; color: #FFF1D6; text-shadow: var(--halo); }
+.theme-khadi .note.on-photo { background: rgba(52, 32, 15, .82); padding: 8px 24px; border-radius: 12px; text-shadow: none; }
+
+.theme-khadi #spine { left: 24px; right: 24px; top: 24px; height: 92px; background: var(--card-bg); border-radius: 46px; border: 1.5px solid var(--card-border);
+  padding: 0 30px; box-sizing: border-box; box-shadow: var(--glass-shadow); }
+.theme-khadi #spine .ttl { font-family: 'Martel'; font-weight: 800; font-size: 40px; color: var(--ink); }
+.theme-khadi #spine .k-dots i { width: 26px; height: 26px; border-radius: 50%; background: transparent; border: 4px solid var(--accent); margin: 0 6px; }
+.theme-khadi #spine .k-dots i.on { background: var(--accent); }
+.theme-khadi #spine .cnt { font-family: 'Khand'; font-weight: 700; color: var(--accent-2); }
+
+.theme-khadi #cap { font-family: 'Noto Sans Devanagari'; font-weight: 700; font-size: 44px; color: var(--ink);
+  --torn-bg: rgba(240, 228, 204, .96); clip-path: none; border-radius: 14px; box-shadow: var(--glass-shadow); border: 1.5px solid var(--card-border); }
+.theme-khadi #cap .hl { color: var(--accent); }
+
+.theme-khadi .hub-ring { border: 8px solid #fff; box-shadow: 0 0 0 5px var(--accent), var(--glass-shadow); }
+.theme-khadi .hub-route { border: 3px dashed rgba(184, 134, 46, .85); }
+.theme-khadi .num { font-family: 'Khand'; font-weight: 700; color: var(--accent); }
+
+.theme-khadi #broll { background: #000; }
+.theme-khadi #broll img { filter: saturate(1.05) !important; mix-blend-mode: normal !important; }
+.theme-khadi #broll::after { background-image: none; background: linear-gradient(180deg, rgba(4,12,22,.45) 0%, transparent 20%, transparent 58%, rgba(4,12,22,.6) 100%); mix-blend-mode: normal; }
+.theme-khadi #broll.dim img { filter: brightness(.5) saturate(.85) !important; }
+
+.theme-khadi .p-card { border: 8px solid #fff; box-shadow: 0 0 0 4px var(--accent), var(--glass-shadow); }
+
+.theme-khadi .hl-m { font-size: 72px; line-height: 1.3; }
+.theme-khadi .yn .side div:last-child, .theme-khadi .card > span:last-child { font-size: 52px !important; }
+/* a source card: photo in a stone frame, its kind as a red seal, its one-line identity under it */
+.theme-khadi .src-card { background: var(--card-bg); border-radius: 8px; box-shadow: inset 0 0 0 8px rgba(246,242,232,.97), inset 0 0 0 10px rgba(90,58,30,.45), var(--glass-shadow); padding: 26px; box-sizing: border-box; }
+.theme-khadi .src-card img { display: block; border-radius: 4px; box-shadow: 0 0 0 3px rgba(90,58,30,.5); }
+
+/* Tiro sets a small x-height: lift every body text the stock templates fix inline */
+.theme-khadi .yn .side div:last-child { font-size: 56px !important; }
+.theme-khadi .card > span:last-child { font-size: 58px !important; }
+.theme-khadi .k-def__term { font-size: 62px !important; }
+.theme-khadi .k-def__text { font-size: 56px !important; }
+.theme-khadi .imgcard .k-pill { font-size: 42px !important; }
+.theme-khadi .note { font-size: 56px; }
+
+/* the map, as an old survey on cloth: pale water, parchment land, sepia coast, blue rivers */
+#frame.theme-khadi { --sea: #B9C8C4; --land: #EBDDBF; --coast: rgba(90, 58, 30, .75); --river: #4C7FA8; }
+.theme-khadi .seamap { padding: 0 !important; overflow: hidden; }
+.theme-khadi .port-dot { fill: var(--accent); stroke: #FFF8EC; stroke-width: 4; }
+.theme-khadi .port-tag { position: absolute; white-space: nowrap; font-family: 'Rozha One'; font-size: 40px; line-height: 1.2;
+  background: rgba(240, 228, 204, .97); color: var(--ink); border: 2px solid var(--accent); border-radius: 8px; padding: 2px 14px 4px; }
+.theme-khadi .port-tag small { display: block; font-family: 'Tiro Devanagari Hindi'; font-size: 28px; color: var(--muted); }
+.theme-khadi .port-tag.on { background: var(--accent); color: #FFF8EC; }
+.theme-khadi .port-tag.on small { color: #F3D9C8; }
+.theme-khadi .map-label { position: absolute; white-space: nowrap; font-family: 'Tiro Devanagari Hindi'; font-style: italic; font-size: 30px; color: rgba(52, 32, 15, .7); }
+.theme-khadi .map-label.sea { color: rgba(40, 70, 95, .75); }
+.theme-khadi .map-label.river { color: #2F6690; font-size: 28px; }
+.theme-khadi .seamap .port-tag.on { color: #FFF8EC !important; }
+
+/* the intersecting-circles band (Harappan pottery): a terracotta top border with the
+   circles painted into it, over a cream card */
+.theme-khadi .card, .theme-khadi .k-card, .theme-khadi .k-def, .theme-khadi .yn .side, .theme-khadi .panel, .theme-khadi .qcard {
+  border: 1.5px solid rgba(120,70,30,.35) !important; border-top: 20px solid #B4531A !important; border-radius: 8px !important;
+  background: radial-gradient(circle at 10px 10px, transparent 5px, #F2DDB0 6px 7.5px, transparent 8.5px) 0 0 / 20px 20px repeat-x border-box,
+              radial-gradient(circle at 0 10px, transparent 5px, #F2DDB0 6px 7.5px, transparent 8.5px) 0 0 / 20px 20px repeat-x border-box,
+              var(--card-bg) !important;
+  box-shadow: 0 14px 30px rgba(0,0,0,.4) !important; }
+#frame.theme-khadi { --sea: #B9C8C4; --land: #EBDDBF; --coast: rgba(90, 58, 30, .75); --river: #4C7FA8; }
+.theme-khadi .seamap { padding: 0 !important; overflow: hidden; }
+.theme-khadi .port-dot { fill: var(--accent); stroke: #FFF8EC; stroke-width: 4; }
+.theme-khadi .port-tag { position: absolute; white-space: nowrap; font-family: 'Rozha One'; font-size: 40px; line-height: 1.2;
+  background: rgba(240, 228, 204, .97); color: var(--ink); border: 2px solid var(--accent); border-radius: 8px; padding: 2px 14px 4px; }
+.theme-khadi .port-tag small { display: block; font-family: 'Tiro Devanagari Hindi'; font-size: 28px; color: var(--muted); }
+.theme-khadi .port-tag.on { background: var(--accent); color: #FFF8EC; }
+.theme-khadi .port-tag.on small { color: #F3D9C8; }
+.theme-khadi .map-label { position: absolute; white-space: nowrap; font-family: 'Tiro Devanagari Hindi'; font-style: italic; font-size: 30px; color: rgba(52, 32, 15, .7); }
+.theme-khadi .map-label.sea { color: rgba(40, 70, 95, .75); }
+.theme-khadi .map-label.river { color: #2F6690; font-size: 28px; }
+.theme-khadi .seamap .port-tag.on { color: #FFF8EC !important; }
+
+/* the intersecting-circles band (Harappan pottery) across the top of every card */
+.theme-khadi .card, .theme-khadi .k-card, .theme-khadi .k-def, .theme-khadi .yn .side, .theme-khadi .panel, .theme-khadi .qcard {
+  border-top: 18px solid transparent !important;
+  border-image: radial-gradient(circle at 50% 50%, transparent 5px, #B4531A 6px 8px, transparent 9px) 0 0 18 0 / 18px 0 0 0 round !important;
+  background-image: radial-gradient(circle at 9px 9px, transparent 6px, rgba(163,38,27,.95) 7px 9px, transparent 10px) !important;
+  background-size: 18px 18px !important; background-repeat: repeat-x !important; background-position: 0 -18px !important; background-color: var(--card-bg) !important;
+  box-shadow: inset 0 18px 0 0 rgba(163,38,27,.0), 0 14px 30px rgba(0,0,0,.4) !important; }
+.theme-khadi .card::before, .theme-khadi .panel::before, .theme-khadi .qcard::before, .theme-khadi .yn .side::before, .theme-khadi .k-def::before {
+  content: ""; position: absolute; left: 0; right: 0; top: -18px; height: 18px; border-radius: 6px 6px 0 0;
+  background: radial-gradient(circle at 9px 9px, transparent 5px, #F2DDB0 6px 7.5px, transparent 8.5px) 0 0 / 18px 18px repeat-x, #B4531A; }
+.theme-khadi .card, .theme-khadi .panel, .theme-khadi .qcard, .theme-khadi .yn .side, .theme-khadi .k-def { position: relative; overflow: visible !important; }
+#frame.theme-khadi { --sea: #2F6B3B; --land: #EAD9B8; --coast: rgba(120,70,30,.75); }
+.theme-khadi .k-pill--accent { background: var(--accent-2) !important; border-color: var(--accent-2) !important; color: #F2DDB0 !important; }
+.theme-khadi .p-card { border: 8px solid #F2DDB0; box-shadow: 0 0 0 5px var(--accent), 0 14px 30px rgba(0,0,0,.45); }
+.theme-khadi .k-check-row__text { font-size: 46px !important; }
+.theme-khadi .k-check-row { padding-top: 10px !important; padding-bottom: 10px !important; }
+
+/* hero text: the one thing to remember, set large */
+.theme-khadi .hero { background: linear-gradient(180deg, rgba(246,242,232,.97), rgba(240,226,200,.97)); border-top: 20px solid #B4531A;
+  border-radius: 10px; box-shadow: 0 18px 40px rgba(0,0,0,.45); position: relative; }
+.theme-khadi .hero::before { content: ""; position: absolute; left: 0; right: 0; top: -20px; height: 20px;
+  background: radial-gradient(circle at 10px 10px, transparent 5px, #F2DDB0 6px 7.5px, transparent 8.5px) 0 0 / 20px 20px repeat-x; }
+.theme-khadi .hero-kicker { font-family: 'Tiro Devanagari Hindi'; font-size: 44px; color: var(--muted); margin-bottom: 6px; }
+.theme-khadi .hero-text { font-family: 'Martel'; font-weight: 800; font-size: 104px; line-height: 1.32; color: var(--accent); }
+.theme-khadi .hero-rule { height: 9px; margin: 10px auto 0; background: var(--accent-2); border-radius: 5px; }
+.theme-khadi .hero-sub { font-family: 'Tiro Devanagari Hindi'; font-size: 52px; color: var(--ink); margin-top: 14px; }
+/* the question as an event */
+.theme-khadi .qh-year { position: absolute; top: 96px; width: 270px; text-align: center; font-family: 'Khand'; font-weight: 700; font-size: 104px; line-height: 1;
+  color: #B4531A; border: 7px solid #B4531A; outline: 3px solid #B4531A; outline-offset: 5px; border-radius: 10px; padding: 14px 0 6px;
+  background: rgba(246,242,232,.96); box-shadow: 0 10px 22px rgba(0,0,0,.35); }
+.theme-khadi .qh-next { position: absolute; left: 160px; top: 300px; font-size: 54px; padding: 12px 28px; }
+.theme-khadi .qh-card { position: absolute; left: 0; top: 440px; width: 960px; box-sizing: border-box; padding: 34px 44px 54px; }
+.theme-khadi .qh-ul { height: 9px; background: var(--accent-2); border-radius: 5px; margin-top: 6px; }
+.theme-khadi .qh-marks { position: absolute; right: -10px; top: 400px; width: 190px; height: 190px; border-radius: 50%; display: grid; place-items: center;
+  background: #2F6B3B; color: #F2DDB0; font-family: 'Martel'; font-weight: 800; font-size: 50px; box-shadow: 0 0 0 7px #F2DDB0, 0 0 0 11px #2F6B3B, 0 12px 26px rgba(0,0,0,.4); }
+.theme-khadi .qh-year { width: 270px; }
+.theme-khadi .hero-text { text-wrap: balance; }
+/* the answer sheet */
+.theme-khadi .ans { background: repeating-linear-gradient(180deg, transparent 0 59px, rgba(184,134,43,.22) 59px 61px), rgba(250,244,230,.98) !important; }
+.theme-khadi .ans-head { font-family: 'Martel'; font-weight: 800; font-size: 54px; color: var(--accent); margin-bottom: 8px; }
+.theme-khadi .ans-row { font-family: 'Tiro Devanagari Hindi'; font-size: 40px; line-height: 1.5; color: #1E2A44; margin: 4px 0 10px; }
+.theme-khadi .ans-row b { color: var(--accent); font-family: 'Martel'; }
+.theme-khadi .ans-todo { opacity: .45; }
+.theme-khadi .ans-blank { display: inline-block; width: 70%; height: 6px; border-bottom: 4px dotted rgba(184,134,43,.5); vertical-align: middle; }
+.theme-khadi .ans-new { background: linear-gradient(90deg, rgba(242,169,0,.22), transparent 85%); border-radius: 6px; }
+.theme-khadi .ans { padding: 20px 30px 22px !important; }
+.theme-khadi .ans-head { font-size: 48px; margin-bottom: 2px; }
+.theme-khadi .ans-row { font-size: 39px; line-height: 1.38; margin: 2px 0 6px; }
+
+/* khadi — "तीन ताले, एक चाबी".  The mnemonic is a chest with three brass padlocks and one key, so the
+   look is rosewood and brass: ivory cards under a rosewood band studded with brass nail-heads, sindoor
+   red for the restrictions, brass for the exception.  Plates: rosewood (ambientCG, CC0), an Ajanta
+   painting of women (Vakataka era, Prabhavati Gupta's dynasty), dark kraft.  (Derived from harappa.) */
+.theme-khadi .card::before, .theme-khadi .panel::before, .theme-khadi .qcard::before, .theme-khadi .yn .side::before, .theme-khadi .k-def::before {
+  background: radial-gradient(circle at 9px 9px, #E39A4C 3.5px, #24552F 4.5px, transparent 5.5px) 0 0 / 18px 18px repeat-x, linear-gradient(90deg, #4A2A1A, #6B3B22 50%, #4A2A1A); }
+.theme-khadi .hero::before { background: radial-gradient(circle at 10px 10px, #E39A4C 4px, #24552F 5px, transparent 6px) 0 0 / 20px 20px repeat-x, #5A311D; }
+.theme-khadi .hero { border-top-color: #5A311D; }
+.theme-khadi .hero-text { color: #B4531A; }
+.theme-khadi .hero-rule { background: #2F6B3B; }
+.theme-khadi .hl-m { background: rgba(246,242,232,.96); color: #1D1A14; text-shadow: none; width: fit-content; max-width: 960px;
+  padding: 6px 28px 10px; border-radius: 6px; border-left: 12px solid #2F6B3B; box-shadow: 0 10px 24px rgba(0,0,0,.45); font-size: 58px; }
+.theme-khadi .k-pill::before { background: #2F6B3B; }
+.theme-khadi .qh-marks { background: #B4531A; box-shadow: 0 0 0 7px #F2DDB0, 0 0 0 11px #2F6B3B, 0 12px 26px rgba(0,0,0,.4); }

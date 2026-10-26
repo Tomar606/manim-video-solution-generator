@@ -1,0 +1,179 @@
+/* poster — the Soviet collapse in the language of its own posters: cream paper cards with
+   diagonal red-and-black bands, blocky condensed Khand heads, poster red and black.
+   Backgrounds: a weathered panel block, the Berlin Wall crowds, the Baltic Way, the
+   Brandenburg Gate in 1989 (real photos).  (Derived from harappa.) */
+@font-face { font-family: 'Khand'; font-weight: 700; src: url('../../../library/elements/fonts/Martel-ExtraBold.ttf'); font-weight: 800; }
+@font-face { font-family: 'Rozha One'; src: url('../../../library/elements/fonts/RozhaOne-Regular.ttf'); }
+@font-face { font-family: 'Tiro Devanagari Hindi'; src: url('../../../library/elements/fonts/TiroDevanagariHindi-Regular.ttf'); }
+#frame.theme-poster {
+  --ink: #1A1A1A;
+  --accent: #C8102E;          /* poster red */
+  --accent-2: #1A1A1A;        /* poster black */
+  --muted: #5A5148;
+  --paper: #EADBC0;
+  --card-bg: rgba(242, 235, 221, .97);
+  --solid: rgba(242, 235, 221, .99);
+  --card-border: rgba(90, 58, 30, .35);
+  --font-head: 'Khand', sans-serif;
+  --head-weight: 800;
+  --head-stretch: 100%;
+  --font-body: 'Tiro Devanagari Hindi', serif;
+  --font-num: 'Khand', sans-serif;
+  --halo: 0 0 6px rgba(0, 0, 0, .85), 0 2px 3px rgba(0, 0, 0, .9);
+  --glass-shadow: 0 12px 28px rgba(0, 0, 0, .45);
+  --sea: #0E2C47;
+  --land: #C9A877;
+  --coast: rgba(255, 240, 210, .55);
+  color: var(--ink);
+}
+
+.theme-poster .card, .theme-poster .qcard, .theme-poster .k-card, .theme-poster .compare .k-card,
+.theme-poster .k-def, .theme-poster .yn .side, .theme-poster .imgcard, .theme-poster .panel {
+  background: var(--card-bg) !important; border: 1.5px solid var(--card-border) !important; border-radius: 14px !important;
+  box-shadow: inset 0 0 0 6px rgba(242,235,221,.97), inset 0 0 0 8px rgba(90,58,30,.45), inset 2px 3px 10px rgba(90,58,30,.35), var(--glass-shadow) !important; border-top: none !important; border-radius: 6px !important; color: var(--ink);
+  }
+.theme-poster .k-head { font-family: 'Khand'; font-weight: 700; }
+.theme-poster .hl-m { font-family: 'Khand'; font-weight: 700; color: #fff; text-shadow: var(--halo); text-wrap: balance; font-size: 66px; line-height: 1.35; }
+.theme-poster .qcard .k-head { color: var(--accent) !important; }
+
+.theme-poster .k-section-tag { background: var(--card-bg) !important; border: 1.5px solid var(--card-border) !important; box-shadow: var(--glass-shadow) !important;
+  display: inline-flex; align-items: center; gap: 18px; padding: 8px 30px 8px 8px; border-radius: 44px; }
+.theme-poster .k-section-tag__num { width: 70px; height: 70px; border-radius: 50%; display: grid; place-items: center; padding: 0;
+  background: var(--accent); color: #FFF6E6; font-family: 'Khand'; font-weight: 700; font-size: 52px; line-height: 1; }
+.theme-poster .k-section-tag__text { font-family: 'Khand'; font-weight: 700; font-size: 54px; color: var(--ink); background: none; padding: 0; line-height: 1.5; }
+
+.theme-poster .k-pill { border-radius: 40px !important; font-family: 'Tiro Devanagari Hindi'; font-weight: 400; font-size: 48px;
+  background: var(--card-bg) !important; color: var(--ink) !important; border: 1.5px solid var(--card-border) !important;
+  padding: 6px 30px 6px 20px; box-shadow: var(--glass-shadow); display: inline-flex; align-items: center; gap: 14px; }
+.theme-poster .k-pill::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); flex: none; }
+.theme-poster .k-pill--accent { background: var(--accent) !important; color: #FFF6E6 !important; border-color: var(--accent) !important; }
+.theme-poster .k-pill--accent::before { background: #FFF6E6; }
+
+.theme-poster .k-stamp { font-family: 'Khand'; font-weight: 700; color: var(--accent); border-color: var(--accent);
+  outline-color: var(--accent); background: var(--solid) !important; -webkit-mask-image: none; mix-blend-mode: normal; border-radius: 12px; }
+
+.theme-poster .note { font-family: 'Tiro Devanagari Hindi'; font-weight: 400; font-size: 52px; color: #FFF1D6; text-shadow: var(--halo); }
+.theme-poster .note.on-photo { background: rgba(52, 32, 15, .82); padding: 8px 24px; border-radius: 12px; text-shadow: none; }
+
+.theme-poster #spine { left: 24px; right: 24px; top: 24px; height: 92px; background: var(--card-bg); border-radius: 46px; border: 1.5px solid var(--card-border);
+  padding: 0 30px; box-sizing: border-box; box-shadow: var(--glass-shadow); }
+.theme-poster #spine .ttl { font-family: 'Khand'; font-weight: 700; font-size: 40px; color: var(--ink); }
+.theme-poster #spine .k-dots i { width: 26px; height: 26px; border-radius: 50%; background: transparent; border: 4px solid var(--accent); margin: 0 6px; }
+.theme-poster #spine .k-dots i.on { background: var(--accent); }
+.theme-poster #spine .cnt { font-family: 'Khand'; font-weight: 700; color: var(--accent-2); }
+
+.theme-poster #cap { font-family: 'Noto Sans Devanagari'; font-weight: 700; font-size: 44px; color: var(--ink);
+  --torn-bg: rgba(240, 228, 204, .96); clip-path: none; border-radius: 14px; box-shadow: var(--glass-shadow); border: 1.5px solid var(--card-border); }
+.theme-poster #cap .hl { color: var(--accent); }
+
+.theme-poster .hub-ring { border: 8px solid #fff; box-shadow: 0 0 0 5px var(--accent), var(--glass-shadow); }
+.theme-poster .hub-route { border: 3px dashed rgba(184, 134, 46, .85); }
+.theme-poster .num { font-family: 'Khand'; font-weight: 700; color: var(--accent); }
+
+.theme-poster #broll { background: #000; }
+.theme-poster #broll img { filter: saturate(1.05) !important; mix-blend-mode: normal !important; }
+.theme-poster #broll::after { background-image: none; background: linear-gradient(180deg, rgba(4,12,22,.45) 0%, transparent 20%, transparent 58%, rgba(4,12,22,.6) 100%); mix-blend-mode: normal; }
+.theme-poster #broll.dim img { filter: brightness(.5) saturate(.85) !important; }
+
+.theme-poster .p-card { border: 8px solid #fff; box-shadow: 0 0 0 4px var(--accent), var(--glass-shadow); }
+
+.theme-poster .hl-m { font-size: 72px; line-height: 1.3; }
+.theme-poster .yn .side div:last-child, .theme-poster .card > span:last-child { font-size: 52px !important; }
+/* a source card: photo in a stone frame, its kind as a red seal, its one-line identity under it */
+.theme-poster .src-card { background: var(--card-bg); border-radius: 8px; box-shadow: inset 0 0 0 8px rgba(242,235,221,.97), inset 0 0 0 10px rgba(90,58,30,.45), var(--glass-shadow); padding: 26px; box-sizing: border-box; }
+.theme-poster .src-card img { display: block; border-radius: 4px; box-shadow: 0 0 0 3px rgba(90,58,30,.5); }
+
+/* Tiro sets a small x-height: lift every body text the stock templates fix inline */
+.theme-poster .yn .side div:last-child { font-size: 56px !important; }
+.theme-poster .card > span:last-child { font-size: 58px !important; }
+.theme-poster .k-def__term { font-size: 62px !important; }
+.theme-poster .k-def__text { font-size: 56px !important; }
+.theme-poster .imgcard .k-pill { font-size: 42px !important; }
+.theme-poster .note { font-size: 56px; }
+
+/* the map, as an old survey on cloth: pale water, parchment land, sepia coast, blue rivers */
+#frame.theme-poster { --sea: #B9C8C4; --land: #EBDDBF; --coast: rgba(90, 58, 30, .75); --river: #4C7FA8; }
+.theme-poster .seamap { padding: 0 !important; overflow: hidden; }
+.theme-poster .port-dot { fill: var(--accent); stroke: #FFF6E6; stroke-width: 4; }
+.theme-poster .port-tag { position: absolute; white-space: nowrap; font-family: 'Rozha One'; font-size: 40px; line-height: 1.2;
+  background: rgba(240, 228, 204, .97); color: var(--ink); border: 2px solid var(--accent); border-radius: 8px; padding: 2px 14px 4px; }
+.theme-poster .port-tag small { display: block; font-family: 'Tiro Devanagari Hindi'; font-size: 28px; color: var(--muted); }
+.theme-poster .port-tag.on { background: var(--accent); color: #FFF6E6; }
+.theme-poster .port-tag.on small { color: #F3D9C8; }
+.theme-poster .map-label { position: absolute; white-space: nowrap; font-family: 'Tiro Devanagari Hindi'; font-style: italic; font-size: 30px; color: rgba(52, 32, 15, .7); }
+.theme-poster .map-label.sea { color: rgba(40, 70, 95, .75); }
+.theme-poster .map-label.river { color: #2F6690; font-size: 28px; }
+.theme-poster .seamap .port-tag.on { color: #FFF6E6 !important; }
+
+/* the intersecting-circles band (Harappan pottery): a terracotta top border with the
+   circles painted into it, over a cream card */
+.theme-poster .card, .theme-poster .k-card, .theme-poster .k-def, .theme-poster .yn .side, .theme-poster .panel, .theme-poster .qcard {
+  border: 1.5px solid rgba(120,70,30,.35) !important; border-top: 20px solid #C8102E !important; border-radius: 8px !important;
+  background: repeating-linear-gradient(135deg, #C8102E 0 22px, #1A1A1A 22px 30px, #C8102E 30px 52px) 0 0 / 100% 20px no-repeat border-box,
+              var(--card-bg) !important;
+  box-shadow: 0 14px 30px rgba(0,0,0,.4) !important; }
+#frame.theme-poster { --sea: #B9C8C4; --land: #EBDDBF; --coast: rgba(90, 58, 30, .75); --river: #4C7FA8; }
+.theme-poster .seamap { padding: 0 !important; overflow: hidden; }
+.theme-poster .port-dot { fill: var(--accent); stroke: #FFF6E6; stroke-width: 4; }
+.theme-poster .port-tag { position: absolute; white-space: nowrap; font-family: 'Rozha One'; font-size: 40px; line-height: 1.2;
+  background: rgba(240, 228, 204, .97); color: var(--ink); border: 2px solid var(--accent); border-radius: 8px; padding: 2px 14px 4px; }
+.theme-poster .port-tag small { display: block; font-family: 'Tiro Devanagari Hindi'; font-size: 28px; color: var(--muted); }
+.theme-poster .port-tag.on { background: var(--accent); color: #FFF6E6; }
+.theme-poster .port-tag.on small { color: #F3D9C8; }
+.theme-poster .map-label { position: absolute; white-space: nowrap; font-family: 'Tiro Devanagari Hindi'; font-style: italic; font-size: 30px; color: rgba(52, 32, 15, .7); }
+.theme-poster .map-label.sea { color: rgba(40, 70, 95, .75); }
+.theme-poster .map-label.river { color: #2F6690; font-size: 28px; }
+.theme-poster .seamap .port-tag.on { color: #FFF6E6 !important; }
+
+/* the intersecting-circles band (Harappan pottery) across the top of every card */
+.theme-poster .card, .theme-poster .k-card, .theme-poster .k-def, .theme-poster .yn .side, .theme-poster .panel, .theme-poster .qcard {
+  border-top: 18px solid transparent !important;
+  border-image: radial-gradient(circle at 50% 50%, transparent 5px, #C8102E 6px 8px, transparent 9px) 0 0 18 0 / 18px 0 0 0 round !important;
+  background-image: radial-gradient(circle at 9px 9px, transparent 6px, rgba(200,16,46,.95) 7px 9px, transparent 10px) !important;
+  background-size: 18px 18px !important; background-repeat: repeat-x !important; background-position: 0 -18px !important; background-color: var(--card-bg) !important;
+  box-shadow: inset 0 18px 0 0 rgba(200,16,46,.0), 0 14px 30px rgba(0,0,0,.4) !important; }
+.theme-poster .card::before, .theme-poster .panel::before, .theme-poster .qcard::before, .theme-poster .yn .side::before, .theme-poster .k-def::before {
+  content: ""; position: absolute; left: 0; right: 0; top: -18px; height: 18px; border-radius: 6px 6px 0 0;
+  background: radial-gradient(circle at 9px 9px, transparent 5px, #F2EBDD 6px 7.5px, transparent 8.5px) 0 0 / 18px 18px repeat-x, #C8102E; }
+.theme-poster .card, .theme-poster .panel, .theme-poster .qcard, .theme-poster .yn .side, .theme-poster .k-def { position: relative; overflow: visible !important; }
+#frame.theme-poster { --sea: #1A1A1A; --land: #EAD9B8; --coast: rgba(120,70,30,.75); }
+.theme-poster .k-pill--accent { background: var(--accent-2) !important; border-color: var(--accent-2) !important; color: #F2EBDD !important; }
+.theme-poster .p-card { border: 8px solid #F2EBDD; box-shadow: 0 0 0 5px var(--accent), 0 14px 30px rgba(0,0,0,.45); }
+.theme-poster .k-check-row__text { font-size: 46px !important; }
+.theme-poster .k-check-row { padding-top: 10px !important; padding-bottom: 10px !important; }
+
+/* hero text: the one thing to remember, set large */
+.theme-poster .hero { background: linear-gradient(180deg, rgba(242,235,221,.97), rgba(240,226,200,.97)); border-top: 20px solid #C8102E;
+  border-radius: 10px; box-shadow: 0 18px 40px rgba(0,0,0,.45); position: relative; }
+.theme-poster .hero::before { content: ""; position: absolute; left: 0; right: 0; top: -20px; height: 20px;
+  background: repeating-linear-gradient(135deg, #C8102E 0 22px, #1A1A1A 22px 30px, #C8102E 30px 52px) 0 0 / 100% 20px no-repeat; }
+.theme-poster .hero-kicker { font-family: 'Tiro Devanagari Hindi'; font-size: 44px; color: var(--muted); margin-bottom: 6px; }
+.theme-poster .hero-text { font-family: 'Khand'; font-weight: 700; font-size: 104px; line-height: 1.32; color: var(--accent); }
+.theme-poster .hero-rule { height: 9px; margin: 10px auto 0; background: var(--accent-2); border-radius: 5px; }
+.theme-poster .hero-sub { font-family: 'Tiro Devanagari Hindi'; font-size: 52px; color: var(--ink); margin-top: 14px; }
+/* the question as an event */
+.theme-poster .qh-year { position: absolute; top: 96px; width: 270px; text-align: center; font-family: 'Khand'; font-weight: 700; font-size: 104px; line-height: 1;
+  color: #C8102E; border: 7px solid #C8102E; outline: 3px solid #C8102E; outline-offset: 5px; border-radius: 10px; padding: 14px 0 6px;
+  background: rgba(248,239,222,.96); box-shadow: 0 10px 22px rgba(0,0,0,.35); }
+.theme-poster .qh-next { position: absolute; left: 160px; top: 300px; font-size: 54px; padding: 12px 28px; }
+.theme-poster .qh-card { position: absolute; left: 0; top: 440px; width: 960px; box-sizing: border-box; padding: 34px 44px 54px; }
+.theme-poster .qh-ul { height: 9px; background: var(--accent-2); border-radius: 5px; margin-top: 6px; }
+.theme-poster .qh-marks { position: absolute; right: -10px; top: 400px; width: 190px; height: 190px; border-radius: 50%; display: grid; place-items: center;
+  background: #1A1A1A; color: #F2EBDD; font-family: 'Khand'; font-weight: 700; font-size: 50px; box-shadow: 0 0 0 7px #F2EBDD, 0 0 0 11px #1A1A1A, 0 12px 26px rgba(0,0,0,.4); }
+.theme-poster .qh-year { width: 270px; }
+.theme-poster .hero-text { text-wrap: balance; }
+/* the answer sheet */
+.theme-poster .ans { background: repeating-linear-gradient(180deg, transparent 0 59px, rgba(26,26,26,.22) 59px 61px), rgba(250,244,230,.98) !important; }
+.theme-poster .ans-head { font-family: 'Khand'; font-weight: 700; font-size: 54px; color: var(--accent); margin-bottom: 8px; }
+.theme-poster .ans-row { font-family: 'Tiro Devanagari Hindi'; font-size: 40px; line-height: 1.5; color: #1E2A44; margin: 4px 0 10px; }
+.theme-poster .ans-row b { color: var(--accent); font-family: 'Khand'; font-weight: 700; }
+.theme-poster .ans-todo { opacity: .45; }
+.theme-poster .ans-blank { display: inline-block; width: 70%; height: 6px; border-bottom: 4px dotted rgba(26,26,26,.5); vertical-align: middle; }
+.theme-poster .ans-new { background: linear-gradient(90deg, rgba(242,169,0,.22), transparent 85%); border-radius: 6px; }
+.theme-poster .ans { padding: 20px 30px 22px !important; }
+.theme-poster .ans-head { font-size: 48px; margin-bottom: 2px; }
+.theme-poster .ans-row { font-size: 39px; line-height: 1.38; margin: 2px 0 6px; }
+
+.theme-poster .hero-text { font-size: 116px; letter-spacing: .5px; }
+.theme-poster .qh-year { font-family: 'Khand'; }
+.theme-poster .ans-row b { font-family: 'Khand'; font-weight: 700; }

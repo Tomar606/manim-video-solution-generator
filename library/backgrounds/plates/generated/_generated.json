@@ -1,0 +1,283 @@
+{
+ "night-hud-base-glow": {
+  "skin": "night-hud",
+  "tags": [
+   "navy",
+   "dark",
+   "gradient"
+  ],
+  "notes": "navy-to-black radial glow centred in the top third, fine grain to stop banding"
+ },
+ "night-hud-base-grid": {
+  "skin": "night-hud",
+  "tags": [
+   "navy",
+   "hud",
+   "grid"
+  ],
+  "notes": "dark navy with faint 60 px HUD grid and 300 px major lines"
+ },
+ "night-hud-base-starfield": {
+  "skin": "night-hud",
+  "tags": [
+   "stars",
+   "space",
+   "dark"
+  ],
+  "notes": "near-black sky with a sparse random starfield"
+ },
+ "paper-editorial-cream": {
+  "skin": "paper-editorial",
+  "tags": [
+   "cream",
+   "paper",
+   "warm"
+  ],
+  "notes": "warm cream with fibre grain and soft mottling"
+ },
+ "paper-editorial-cream-deep": {
+  "skin": "paper-editorial",
+  "tags": [
+   "cream",
+   "paper",
+   "aged"
+  ],
+  "notes": "deeper, slightly aged cream"
+ },
+ "paper-editorial-dotgrid": {
+  "skin": "paper-editorial",
+  "tags": [
+   "cream",
+   "dot grid"
+  ],
+  "notes": "light cream with a 36 px dot grid"
+ },
+ "chalk-slate-green": {
+  "skin": "chalk-slate",
+  "tags": [
+   "chalkboard",
+   "green",
+   "slate"
+  ],
+  "notes": "school green-board with chalk-dust mottling"
+ },
+ "chalk-slate-black": {
+  "skin": "chalk-slate",
+  "tags": [
+   "chalkboard",
+   "black",
+   "slate"
+  ],
+  "notes": "black slate with chalk-dust mottling"
+ },
+ "chalk-slate-green-smudged": {
+  "skin": "chalk-slate",
+  "tags": [
+   "chalkboard",
+   "green",
+   "eraser smudge"
+  ],
+  "notes": "green-board with faint eraser arcs"
+ },
+ "blueprint-grid": {
+  "skin": "blueprint",
+  "tags": [
+   "blue",
+   "grid",
+   "technical"
+  ],
+  "notes": "cyanotype blue, 30 px minor and 150 px major grid"
+ },
+ "blueprint-grid-dark": {
+  "skin": "blueprint",
+  "tags": [
+   "dark blue",
+   "grid"
+  ],
+  "notes": "dark navy blueprint, 40/200 px grid"
+ },
+ "blueprint-plain": {
+  "skin": "blueprint",
+  "tags": [
+   "blue",
+   "plain"
+  ],
+  "notes": "cyanotype blue without grid, mottled"
+ },
+ "newsprint-mono-light": {
+  "skin": "newsprint-mono",
+  "tags": [
+   "newsprint",
+   "grey",
+   "paper"
+  ],
+  "notes": "light newsprint grey with grain"
+ },
+ "newsprint-mono-halftone": {
+  "skin": "newsprint-mono",
+  "tags": [
+   "newsprint",
+   "halftone"
+  ],
+  "notes": "newsprint with a halftone dot ramp growing toward the bottom"
+ },
+ "newsprint-mono-dark": {
+  "skin": "newsprint-mono",
+  "tags": [
+   "black",
+   "ink",
+   "paper"
+  ],
+  "notes": "inky near-black with print grain"
+ },
+ "pastel-notebook-ruled": {
+  "skin": "pastel-notebook",
+  "tags": [
+   "ruled",
+   "notebook",
+   "cream"
+  ],
+  "notes": "cream ruled notebook, 64 px rule, pink margin"
+ },
+ "pastel-notebook-mint-dots": {
+  "skin": "pastel-notebook",
+  "tags": [
+   "mint",
+   "dot grid"
+  ],
+  "notes": "mint dot-grid page"
+ },
+ "pastel-notebook-lavender-graph": {
+  "skin": "pastel-notebook",
+  "tags": [
+   "lavender",
+   "graph paper"
+  ],
+  "notes": "lavender graph paper, 36/180 px"
+ },
+ "pastel-notebook-blush-gradient": {
+  "skin": "pastel-notebook",
+  "tags": [
+   "pastel",
+   "gradient"
+  ],
+  "notes": "blush-to-sky pastel gradient, no pattern"
+ },
+ "card-chem-light": {
+  "skin": "chemlab",
+  "tags": [
+   "chemistry",
+   "presenter card",
+   "light"
+  ],
+  "notes": "lab wall with glass cylinders, blurred 14 px, 10% teal",
+  "source": "library/backgrounds/photos/chemistry/lab-glassware/lab-glassware-1.jpg (Wikimedia Commons, CC BY-SA 4.0; see credits.json)"
+ },
+ "cl-lab-wall": {
+  "skin": "chemlab",
+  "tags": [
+   "chemistry",
+   "lab wall",
+   "glass cylinders",
+   "light blur"
+  ],
+  "notes": "a lab wall with glass cylinders, Gaussian blur 6.5 px, brightness 0.78 (user chose it, 24 Oct 2026); a fallback only: Veo footage covers almost every beat",
+  "source": "library/backgrounds/photos/chemistry/lab-glassware/lab-glassware-1.jpg (Wikimedia Commons \"Laboratory Glasswares\", CC BY-SA 4.0; see credits.json)"
+ },
+ "kh-salt": {
+  "skin": "khadi",
+  "tags": [
+   "history",
+   "gandhi",
+   "freedom movement",
+   "sepia",
+   "light blur"
+  ],
+  "notes": "Gandhi picking up salt at Dandi, 5 April 1930, women beside him; sepia 0.85, Gaussian blur 6 px, brightness 0.62",
+  "source": "library/backgrounds/photos/history/gandhi/dandi-2.jpg (Wikimedia Commons, public domain; see credits.json)"
+ },
+ "kh-charkha": {
+  "skin": "khadi",
+  "tags": [
+   "history",
+   "gandhi",
+   "freedom movement",
+   "sepia",
+   "light blur"
+  ],
+  "notes": "village women at a charkha, Jammu c.1875-1940; sepia 0.85, Gaussian blur 6 px, brightness 0.62",
+  "source": "library/backgrounds/photos/history/gandhi/charkha-gandhi-1.jpg (Wikimedia Commons, public domain; see credits.json)"
+ },
+ "kh-march": {
+  "skin": "khadi",
+  "tags": [
+   "history",
+   "gandhi",
+   "freedom movement",
+   "sepia",
+   "light blur"
+  ],
+  "notes": "the Salt March column, 1930; sepia 0.85, Gaussian blur 6 px, brightness 0.62",
+  "source": "library/backgrounds/photos/history/gandhi/dandi-3.jpg (Wikimedia Commons, public domain; see credits.json)"
+ },
+ "kh-card": {
+  "skin": "khadi",
+  "tags": [
+   "history",
+   "gandhi",
+   "card backdrop"
+  ],
+  "notes": "students hand-spinning khadi, sepia, blur 12 px: the presenter card backdrop",
+  "source": "library/backgrounds/photos/history/gandhi/khadi-3.jpg (Wikimedia Commons, CC0)"
+ },
+ "bk-ghat": {
+  "skin": "pothi",
+  "tags": [
+   "history",
+   "bhakti",
+   "light blur"
+  ],
+  "notes": "Varanasi ghats at sunrise (Kabir's Kashi); Gaussian blur 6.5 px, brightness 0.7",
+  "source": "library/backgrounds/photos/history/bhakti/ghat-3.jpg (Wikimedia Commons, CC BY 3.0, Ilya Mauter; see credits.json)"
+ },
+ "bk-boats": {
+  "skin": "pothi",
+  "tags": [
+   "history",
+   "bhakti",
+   "light blur"
+  ],
+  "notes": "boats on the Ganga at Varanasi, sunrise; Gaussian blur 6.5 px, brightness 0.7",
+  "source": "library/backgrounds/photos/history/bhakti/ghat-2.jpg (Wikimedia Commons, CC BY 3.0, Ilya Mauter; see credits.json)"
+ },
+ "bk-loom": {
+  "skin": "pothi",
+  "tags": [
+   "history",
+   "bhakti",
+   "light blur"
+  ],
+  "notes": "a Varanasi handloom workshop (Kabir was a weaver); Gaussian blur 6.5 px, brightness 0.8",
+  "source": "library/backgrounds/photos/history/bhakti/loom-1.jpg (Wikimedia Commons, CC BY-SA 3.0, Jorge Royan; see credits.json)"
+ },
+ "bk-sangam": {
+  "skin": "pothi",
+  "tags": [
+   "history",
+   "bhakti",
+   "light blur"
+  ],
+  "notes": "the Sangameshwara temple at Kudalasangama (Basavanna); Gaussian blur 6.5 px, brightness 0.72",
+  "source": "library/backgrounds/photos/history/bhakti/kudalasangama-1.jpg (Wikimedia Commons, Public domain, Manjunath nikt at English Wikipedia; see credits.json)"
+ },
+ "bk-card": {
+  "skin": "pothi",
+  "tags": [
+   "history",
+   "bhakti",
+   "card backdrop"
+  ],
+  "notes": "Varanasi loom, blur 10 px: the presenter card backdrop",
+  "source": "library/backgrounds/photos/history/bhakti/loom-2.jpg (Wikimedia Commons, CC BY-SA 3.0; see credits.json)"
+ }
+}

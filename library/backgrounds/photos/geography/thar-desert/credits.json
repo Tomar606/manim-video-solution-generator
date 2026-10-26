@@ -1,0 +1,60 @@
+{
+ "thar-desert": [
+  {
+   "title": "File:Dunes, Désert du Thar.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Dunes%2C_D%C3%A9sert_du_Thar.jpg/3840px-Dunes%2C_D%C3%A9sert_du_Thar.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Dunes,_D%C3%A9sert_du_Thar.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Clément Bardot",
+   "credit_required": true,
+   "file": "thar-desert-1.jpg",
+   "width": 2400,
+   "height": 1548,
+   "query": "Thar desert dunes",
+   "desc": "Dunes in the Thar Desert (Great Indian Desert)"
+  },
+  {
+   "title": "File:Sunset Sand Dunes Jaisalmer Dec14 DSC 6540.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/Sunset_Sand_Dunes_Jaisalmer_Dec14_DSC_6540.jpg/3840px-Sunset_Sand_Dunes_Jaisalmer_Dec14_DSC_6540.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Sunset_Sand_Dunes_Jaisalmer_Dec14_DSC_6540.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Timothy A. Gonsalves",
+   "credit_required": true,
+   "file": "thar-desert-2.jpg",
+   "width": 2400,
+   "height": 1596,
+   "query": "Sam sand dunes Jaisalmer",
+   "desc": "Sam sand dunes near Jaisalmer at sunset, Rajasthan, India"
+  },
+  {
+   "title": "File:Dromedary in Thar desert.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Dromedary_in_Thar_desert.jpg/3840px-Dromedary_in_Thar_desert.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Dromedary_in_Thar_desert.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Clément Bardot",
+   "credit_required": true,
+   "file": "thar-desert-3.jpg",
+   "width": 2400,
+   "height": 1479,
+   "query": "Thar desert camel",
+   "desc": "Dromedary (Camelus dromedarius) in Desert Thar, India."
+  },
+  {
+   "title": "File:Sand dunes of thar desert.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/88/Sand_dunes_of_thar_desert.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "page": "https://commons.wikimedia.org/wiki/File:Sand_dunes_of_thar_desert.jpg",
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "author": "Last Emperor",
+   "credit_required": true,
+   "file": "thar-desert-4.jpg",
+   "width": 2400,
+   "height": 1800,
+   "query": "Thar desert dunes",
+   "desc": "A view of sand dunes of Thar desert in dist.-Bikaner,state-Rajasthan in India."
+  }
+ ]
+}

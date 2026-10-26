@@ -1,0 +1,266 @@
+/* Cards and containers.  Every value comes from skin variables, with a
+   neutral fallback, so a card renders in any skin.  Sizes are set for a
+   1080 x 1920 portrait frame.  Hindi goes in these HTML boxes, never inside
+   a KaTeX formula.  No em or en dashes in any card text. */
+
+.k-card, .k-pill, .k-section-tag, .k-badge, .k-def, .k-statement, .k-warn,
+.k-sticker, .k-stamp, .k-quote, .k-check-row, .k-list-row, .k-slot, .k-tile,
+.k-quad, .k-timeline, .k-counter, .k-torn, .k-hud, .k-pin, .k-dots, .k-chain,
+.k-callout {
+  box-sizing: border-box;
+  font-family: var(--font-body, 'Noto Sans Devanagari', sans-serif);
+  font-weight: var(--body-weight, 500);
+  color: var(--card-ink, var(--ink, #141414));
+}
+.k-head {
+  font-family: var(--font-head, 'Khand', sans-serif);
+  font-weight: var(--head-weight, 700);
+  font-stretch: var(--head-stretch, 100%);
+  letter-spacing: var(--head-tracking, 0);
+  line-height: 1.25;
+}
+.k-icon { width: 1em; height: 1em; display: inline-block; flex: none; }
+.k-icon svg, svg.k-icon { width: 100%; height: 100%; display: block; overflow: visible; }
+
+/* generic card surface */
+.k-card {
+  background: var(--card-bg, #fff);
+  border: var(--card-border-w, 2px) var(--card-border-style, solid) var(--card-border, #141414);
+  border-radius: var(--radius, 8px);
+  box-shadow: var(--shadow, none);
+  padding: 26px 30px;
+}
+
+/* 1. pill / chip */
+.k-pill {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 13px 26px 9px; border-radius: 999px; font-size: 38px; line-height: 1.3;
+  background: var(--pill-bg, #1F3A8A); color: var(--pill-ink, #fff);
+  border: 2px solid var(--pill-border, transparent);
+}
+.k-pill--accent { background: var(--accent, #D7262E); color: var(--on-accent, #fff); border-color: var(--accent, #D7262E); }
+.k-pill--outline { background: transparent; color: var(--ink, #141414); border-color: var(--ink, #141414); }
+.k-pill .k-icon { font-size: 36px; }
+
+/* 2. section tag "1. भौगोलिक कारक" */
+.k-section-tag { display: inline-flex; align-items: stretch; font-size: 46px; }
+.k-section-tag__num {
+  display: grid; place-items: center; min-width: 74px; padding: 0 14px;
+  background: var(--badge-bg, #141414); color: var(--badge-ink, #fff);
+  border: 2px solid var(--badge-border, var(--badge-bg, #141414));
+  font-family: var(--font-num, 'Khand', sans-serif); font-weight: 700; font-size: 50px;
+  border-radius: var(--radius, 0) 0 0 var(--radius, 0);
+}
+.k-section-tag__text {
+  padding: 8px 28px 12px; background: var(--card-bg, #fff);
+  border: var(--card-border-w, 2px) var(--card-border-style, solid) var(--card-border, #141414); border-left: 0;
+  border-radius: 0 var(--radius, 6px) var(--radius, 6px) 0;
+}
+
+/* 3. number badge */
+.k-badge {
+  display: inline-grid; place-items: center; width: 84px; height: 84px; flex: none;
+  background: var(--badge-bg, #141414); color: var(--badge-ink, #fff);
+  border: 3px solid var(--badge-border, var(--badge-bg, #141414));
+  border-radius: var(--badge-radius, 0);
+  font-family: var(--font-num, 'Khand', sans-serif); font-weight: 700; font-size: 56px; line-height: 1;
+}
+.k-badge--sm { width: 60px; height: 60px; font-size: 40px; }
+.k-badge--accent { background: var(--accent, #D7262E); border-color: var(--accent, #D7262E); color: var(--on-accent, #fff); }
+
+/* 4. definition chip  "घनत्व = ..." */
+.k-def { display: inline-flex; align-items: center; gap: 0; font-size: 40px; }
+.k-def__term {
+  padding: 14px 24px 10px; background: var(--accent-2, #1F3A8A); color: var(--on-accent-2, #fff);
+  border-radius: var(--radius, 6px) 0 0 var(--radius, 6px);
+}
+.k-def__eq {
+  display: grid; place-items: center; width: 64px; align-self: stretch;
+  background: var(--accent, #D7262E); color: var(--on-accent, #fff);
+  font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 44px;
+}
+.k-def__text {
+  padding: 14px 24px 10px; background: var(--card-bg, #fff);
+  border: var(--card-border-w, 2px) var(--card-border-style, solid) var(--card-border, #141414); border-left: 0;
+  border-radius: 0 var(--radius, 6px) var(--radius, 6px) 0;
+}
+
+/* 5. statement card ("Answer की पहली line") */
+.k-statement { position: relative; padding-top: 34px; }
+.k-statement__label {
+  position: absolute; top: -26px; left: 24px; display: inline-flex; align-items: center; gap: 10px;
+  padding: 6px 18px 8px; font-size: 30px; background: var(--accent, #D7262E); color: var(--on-accent, #fff);
+  border-radius: var(--badge-radius, 4px);
+}
+.k-statement__label .k-icon { font-size: 30px; }
+.k-statement__text { font-size: 42px; line-height: 1.5; text-wrap: pretty; }
+
+/* 6. warning card */
+.k-warn { display: flex; gap: 22px; align-items: center; border-color: var(--warn, var(--accent, #D7262E)); }
+.k-warn .k-icon { font-size: 76px; color: var(--warn, var(--accent, #D7262E)); }
+.k-warn__text { font-size: 42px; line-height: 1.4; text-wrap: pretty; }
+.k-warn__text b { color: var(--warn, var(--accent, #D7262E)); font-weight: inherit; }
+
+/* 7. sticker with tape (tilted) */
+.k-sticker {
+  position: relative; display: inline-block; padding: 30px 38px 30px;
+  background: var(--sticker-bg, var(--card-bg, #fff)); border: var(--sticker-border, none); border-radius: calc(var(--radius, 6px) * .5);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .22); transform: rotate(var(--tilt, -3deg));
+  font-size: 44px; text-align: center;
+}
+.k-sticker::before {
+  content: ""; position: absolute; top: -20px; left: 50%; width: 150px; height: 42px;
+  transform: translateX(-50%) rotate(-4deg); background: var(--tape, rgba(236, 214, 150, .8));
+}
+
+/* 8. stamp (rubber-stamp border, tilted) */
+.k-stamp {
+  display: inline-block; padding: 12px 30px 16px; transform: rotate(var(--stamp-tilt, -8deg));
+  color: var(--stamp, #D7262E); border: 6px solid var(--stamp, #D7262E); border-radius: 10px;
+  outline: 2px solid var(--stamp, #D7262E); outline-offset: 5px;
+  font-size: 58px; text-align: center; mix-blend-mode: var(--stamp-blend, normal);
+}
+
+/* 9. quote card */
+.k-quote { position: relative; padding: 40px 36px 30px 92px; }
+.k-quote__mark { position: absolute; left: 24px; top: 26px; width: 52px; height: 52px; color: var(--accent, #D7262E); }
+.k-quote__text { font-size: 42px; line-height: 1.5; }
+.k-quote__by { margin-top: 14px; font-size: 30px; color: var(--muted, #777); }
+
+/* 10. checklist row (number + text + check) */
+.k-check-row { display: flex; align-items: center; gap: 24px; padding: 16px 22px; }
+.k-check-row__text { flex: 1; font-size: 40px; line-height: 1.35; }
+.k-check-row__tick { width: 64px; height: 64px; color: var(--accent-2, #1F3A8A); opacity: 0; }
+.k-check-row.is-done .k-check-row__tick { opacity: 1; }
+.k-check-row:not(.is-done) .k-check-row__text { color: var(--muted, #888); }
+
+/* 11. numbered list row with thumbnail slot */
+.k-list-row { display: flex; align-items: center; gap: 22px; padding: 14px 20px; }
+.k-list-row__thumb {
+  width: 120px; height: 120px; flex: none; display: grid; place-items: center; overflow: hidden;
+  border-radius: var(--radius, 6px); background: var(--paper-2, #eee);
+  border: 2px solid var(--card-border, #141414); color: var(--accent, #D7262E); font-size: 64px;
+}
+.k-list-row__text { flex: 1; font-size: 40px; line-height: 1.35; }
+.k-list-row.is-quiet { opacity: .42; }
+
+/* 12. empty slot (dotted) that fills */
+.k-slot {
+  display: flex; align-items: center; gap: 20px; min-height: 104px; padding: 14px 22px;
+  border: 3px dashed var(--muted, #999); border-radius: var(--radius, 6px); color: var(--muted, #999); font-size: 38px;
+}
+.k-slot__num { font-family: var(--font-num, 'Khand', sans-serif); font-weight: 700; font-size: 48px; width: 48px; text-align: center; }
+.k-slot.is-filled {
+  border-style: var(--card-border-style, solid); border-color: var(--card-border, #141414);
+  background: var(--card-bg, #fff); color: var(--card-ink, var(--ink, #141414));
+}
+.k-slot.is-filled .k-slot__num { color: var(--accent, #D7262E); }
+
+/* 13. icon tile (empty / filled) */
+.k-tile {
+  display: inline-grid; place-items: center; width: 168px; height: 168px; font-size: 92px;
+  border-radius: calc(var(--radius, 6px) * 2 + 10px); border: 3px solid var(--muted, #999);
+  color: var(--muted, #999); background: transparent;
+}
+.k-tile.is-filled {
+  background: var(--accent, #D7262E); border-color: var(--accent, #D7262E); color: var(--on-accent, #fff);
+  box-shadow: var(--shadow, none);
+}
+.k-tile-cap { display: block; margin-top: 10px; text-align: center; font-size: 30px; }
+
+/* 14. quadrant recap panel */
+.k-quad { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.k-quad__cell { display: flex; flex-direction: column; gap: 10px; padding: 22px 24px; min-height: 210px; }
+.k-quad__top { display: flex; align-items: center; justify-content: space-between; }
+.k-quad__top .k-icon { font-size: 64px; color: var(--accent-2, #1F3A8A); }
+.k-quad__title { font-size: 40px; }
+.k-quad__note { font-size: 30px; color: var(--muted, #777); line-height: 1.35; }
+
+/* 15. timeline (axis + nodes + years + progress dots) */
+.k-timeline { position: relative; padding: 10px 10px 0; }
+.k-timeline__axis { position: relative; height: 210px; }
+.k-timeline__line {
+  position: absolute; left: 30px; right: 30px; top: 92px; height: 0;
+  border-top: 5px dotted var(--muted, #999);
+}
+.k-timeline__node { position: absolute; top: 0; width: 200px; margin-left: -100px; text-align: center; }
+.k-timeline__year { font-family: var(--font-num, 'Khand', sans-serif); font-weight: 700; font-size: 44px; line-height: 64px; }
+.k-timeline__dot {
+  width: 38px; height: 38px; margin: 6px auto 0; border-radius: 50%;
+  border: 5px solid var(--accent, #D7262E); background: var(--paper, #fff);
+}
+.k-timeline__node.is-done .k-timeline__dot { background: var(--accent, #D7262E); }
+.k-timeline__node.is-now .k-timeline__dot { box-shadow: 0 0 0 9px var(--highlight, rgba(215, 38, 46, .2)); }
+.k-timeline__label { margin-top: 12px; font-size: 32px; line-height: 1.3; }
+
+/* 16. progress dots */
+.k-dots { display: inline-flex; gap: 18px; align-items: center; }
+.k-dots i { width: 22px; height: 22px; border-radius: 50%; border: 3px solid var(--muted, #999); }
+.k-dots i.on { background: var(--accent, #D7262E); border-color: var(--accent, #D7262E); }
+.k-dots i.now { width: 54px; border-radius: 11px; background: var(--accent, #D7262E); border-color: var(--accent, #D7262E); }
+
+/* 17. counter "2/4" */
+.k-counter { display: inline-flex; flex-direction: column; align-items: center; }
+.k-counter__num { font-family: var(--font-num, 'Khand', sans-serif); font-weight: 700; font-size: 168px; line-height: 1.1; white-space: nowrap; }
+.k-counter__num .sep { font-size: .6em; vertical-align: .2em; margin: 0 .05em; }
+.k-counter__num b { color: var(--accent, #D7262E); font-weight: inherit; }
+.k-counter__num span { color: var(--muted, #888); }
+.k-counter__label { font-size: 34px; margin-top: 10px; }
+
+/* 18. torn-paper caption strip */
+.k-torn {
+  position: relative; padding: 34px 50px 38px; font-size: 44px; line-height: 1.4; text-align: center; text-wrap: balance;
+  background: var(--torn-bg, var(--card-bg, #fff)); color: var(--card-ink, var(--ink, #141414));
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, .18));
+  clip-path: polygon(0% 14%, 4% 6%, 9% 12%, 14% 4%, 20% 10%, 26% 3%, 32% 11%, 38% 5%, 44% 12%, 50% 4%, 56% 10%, 62% 3%, 68% 11%, 74% 5%, 80% 12%, 86% 4%, 92% 10%, 96% 5%, 100% 12%,
+                     100% 88%, 96% 95%, 91% 89%, 86% 97%, 80% 90%, 74% 96%, 68% 89%, 62% 97%, 56% 90%, 50% 96%, 44% 88%, 38% 95%, 32% 89%, 26% 97%, 20% 90%, 14% 96%, 9% 89%, 4% 95%, 0% 87%);
+}
+
+/* 19. HUD panel with corner ticks (ticks drawn with background gradients so
+   they scale with the panel and never stretch) */
+.k-hud {
+  --t: var(--tick, 26px); --c: var(--accent, #F5B82E); --w: 3px;
+  position: relative; padding: 34px 36px;
+  background:
+    linear-gradient(var(--c), var(--c)) top left / var(--t) var(--w) no-repeat,
+    linear-gradient(var(--c), var(--c)) top left / var(--w) var(--t) no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / var(--t) var(--w) no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / var(--w) var(--t) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / var(--t) var(--w) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / var(--w) var(--t) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / var(--t) var(--w) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / var(--w) var(--t) no-repeat,
+    var(--card-bg, rgba(0, 0, 0, .6));
+  outline: 1px solid color-mix(in srgb, var(--c) 35%, transparent); outline-offset: -10px;
+}
+.k-hud__kicker { font-size: 28px; color: var(--accent-2, #4FD1E8); letter-spacing: .04em; }
+.k-hud__title { font-size: 54px; margin: 4px 0 8px; }
+.k-hud__text { font-size: 36px; line-height: 1.45; }
+
+/* 20. map pin label */
+.k-pin { position: relative; display: inline-flex; align-items: flex-end; gap: 0; }
+.k-pin__mark { width: 70px; height: 92px; color: var(--accent, #D7262E); flex: none; }
+.k-pin__label {
+  margin: 0 0 54px -6px; padding: 8px 22px 10px; font-size: 36px;
+  background: var(--card-bg, #fff); border: 2px solid var(--accent, #D7262E); border-radius: var(--radius, 6px);
+  box-shadow: var(--shadow, none);
+}
+.k-pin__label small { display: block; font-size: 26px; color: var(--muted, #777); font-family: var(--font-body, sans-serif); font-weight: var(--body-weight, 500); font-stretch: 100%; }
+
+/* 21. chain:  chip -> chip -> chip */
+.k-chain { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 8px; }
+.k-chain .k-arrow { width: 66px; height: 34px; color: var(--accent, #D7262E); flex: none; }
+.k-chain .k-pill:last-child { background: var(--accent, #D7262E); border-color: var(--accent, #D7262E); color: var(--on-accent, #fff); }
+
+/* 22. labelled callout with leader line */
+.k-callout { position: relative; width: 600px; height: 260px; }
+.k-callout svg { position: absolute; left: 0; top: 0; width: 600px; height: 260px; color: var(--accent, #D7262E); }
+/* label sits ON the shelf (shelf is y=60 of 260), never across the line */
+.k-callout__label { position: absolute; left: 236px; bottom: 210px; font-size: 40px; line-height: 1.25; white-space: nowrap; }
+.k-callout__label small { display: block; font-size: 28px; color: var(--muted, #777); font-family: var(--font-body, sans-serif); font-weight: var(--body-weight, 500); font-stretch: 100%; }
+.k-callout { margin-top: 70px; }
+
+/* photo treatment (reads the skin's hint variables) */
+.k-photo { position: relative; overflow: hidden; border-radius: var(--radius, 6px); isolation: isolate; }
+.k-photo img { display: block; width: 100%; height: 100%; object-fit: cover; filter: var(--photo-filter, none); }
+.k-photo::after { content: ""; position: absolute; inset: 0; background: var(--photo-tint, transparent); mix-blend-mode: var(--photo-blend, normal); }

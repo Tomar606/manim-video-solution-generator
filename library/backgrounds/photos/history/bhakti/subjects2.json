@@ -1,0 +1,6 @@
+[
+ {"slug": "nanakc", "query": "Guru Nanak Dev painting colour", "limit": 4},
+ {"slug": "ghat", "query": "Varanasi ghats Ganges sunrise", "limit": 4},
+ {"slug": "loom", "query": "handloom weaving Varanasi", "limit": 3},
+ {"slug": "ektara", "query": "ektara", "limit": 2}
+]

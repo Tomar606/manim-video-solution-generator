@@ -1,0 +1,40 @@
+{
+ "_about": "Textures for kit elements. CC0: free for commercial use, no attribution required.",
+ "items": [
+  {
+   "file": "paper-crumpled.jpg",
+   "source": "ambientCG Paper003 (1K-JPG, Color map)",
+   "page": "https://ambientcg.com/view?id=Paper003",
+   "licence": "CC0 1.0",
+   "fetched": "2026-10-21"
+  },
+  {
+   "file": "paper-kraft.jpg",
+   "source": "ambientCG Paper004 (1K-JPG, Color map)",
+   "page": "https://ambientcg.com/view?id=Paper004",
+   "licence": "CC0 1.0",
+   "fetched": "2026-10-21"
+  },
+  {
+   "file": "paper-kraft-dark.jpg",
+   "source": "ambientCG Paper006 (1K-JPG, Color map)",
+   "page": "https://ambientcg.com/view?id=Paper006",
+   "licence": "CC0 1.0",
+   "fetched": "2026-10-21"
+  },
+  {
+   "file": "wood-rosewood.jpg",
+   "source": "ambientCG Wood067 (2K-JPG, Color map)",
+   "page": "https://ambientcg.com/view?id=Wood067",
+   "licence": "CC0 1.0",
+   "fetched": "2026-10-21"
+  },
+  {
+   "file": "board-cherry.jpg",
+   "source": "derived from wood-rosewood.jpg (ambientCG Wood067): regraded to a warm cherry tone with a varnish sheen, for the realistic apparatus boards",
+   "page": "https://ambientcg.com/view?id=Wood067",
+   "licence": "CC0 1.0",
+   "fetched": "2026-10-23"
+  }
+ ]
+}

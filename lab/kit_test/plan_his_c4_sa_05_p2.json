@@ -1,0 +1,903 @@
+{
+ "_about": "HIS-C4-SA-05 (वैष्णववाद का वर्णन कीजिए): mandir look, two parts.",
+ "project": "his-c4-sa-05",
+ "part": 2,
+ "captions_at": "bottom",
+ "skin": "paper-editorial",
+ "theme": "mandir",
+ "presenter_style": "card",
+ "plate": "vs-deogarh-temple",
+ "spine": {
+  "title": "वैष्णववाद",
+  "items": [
+   "परिभाषा",
+   "अवतारवाद",
+   "दशावतार",
+   "भक्ति मार्ग",
+   "मूर्ति-मंदिर"
+  ],
+  "lit_at": [
+   0,
+   0,
+   0,
+   5,
+   22
+  ],
+  "show_from": 0
+ },
+ "beats": [
+  {
+   "id": "recap-lamp",
+   "in": 0,
+   "out": 1,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h1",
+    "region": "full",
+    "offset": 5
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "Part 1 में…",
+     "at": [
+      0,
+      0.4
+     ],
+     "fx": "blur"
+    }
+   ]
+  },
+  {
+   "id": "recap",
+   "in": 1,
+   "out": 4,
+   "presenter": "standard",
+   "plate": "vs-varaha",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर बन रहा है…",
+     "points": [
+      "<b>वैष्णववाद</b> प्राचीन हिंदू (पौराणिक) धर्म की प्रमुख शाखा है, जिसमें भगवान विष्णु को ब्रह्मांड का <b>रक्षक</b> और <b>सर्वोच्च देवता</b> माना जाता है।",
+      "<b>अवतारवाद:</b> पृथ्वी पर अधर्म बढ़ने पर विष्णु धर्म की रक्षा के लिए अवतार लेते हैं।",
+      "<b>दशावतार:</b> विष्णु के दस प्रमुख अवतार (राम, कृष्ण, वराह, नरसिंह आदि) पूजे गए।",
+      "<b>भक्ति मार्ग:</b> खर्चीले यज्ञों और कठोर तप के बजाय सच्चे प्रेम और भक्ति पर ज़ोर।",
+      "<b>मूर्ति व मंदिर निर्माण:</b> गुप्त काल में विष्णु के अवतारों की मूर्तियाँ और मंदिर बने, जैसे देवगढ़ (उ.प्र.) का दशावतार मंदिर।"
+     ],
+     "nums": [
+      "",
+      "1.",
+      "2.",
+      "3.",
+      "4."
+     ],
+     "show": 3,
+     "animate_from": 3,
+     "at": 1,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "worship-how",
+   "in": 4,
+   "out": 5,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b4",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "अब: पूजा का तरीका",
+     "at": [
+      4,
+      0.4
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "p3",
+   "in": 5,
+   "out": 6,
+   "presenter": "standard",
+   "plate": "vs-vishnu-head",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "तीसरी बात",
+     "text": "भक्ति का मार्ग",
+     "at": [
+      5,
+      1.6
+     ],
+     "hl": [
+      "भक्ति"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "yajna",
+   "in": 6,
+   "out": [
+    7,
+    1.1
+   ],
+   "presenter": "standard",
+   "broll": {
+    "clip": "b1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "खर्चीले यज्ञ",
+     "at": [
+      7,
+      0.1
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tapas",
+   "in": [
+    7,
+    1.1
+   ],
+   "out": 8,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "कठोर तप",
+     "at": [
+      7,
+      1.3
+     ]
+    }
+   ]
+  },
+  {
+   "id": "bhakti",
+   "in": 8,
+   "out": 9,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b3",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "सच्चा प्रेम + भक्ति",
+     "style": "accent",
+     "at": [
+      8,
+      0.6
+     ]
+    }
+   ]
+  },
+  {
+   "id": "not-needed",
+   "in": 9,
+   "out": 12,
+   "presenter": "standard",
+   "plate": "vs-deogarh-door",
+   "elements": [
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "बड़े यज्ञ, शरीर को कष्ट",
+     "yes": "बस सच्चा प्रेम",
+     "at": [
+      9,
+      0.8
+     ],
+     "t_yes": 11
+    }
+   ]
+  },
+  {
+   "id": "people",
+   "in": 12,
+   "out": 15,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b4",
+    "region": "full",
+    "offset": 3
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "ध्यान से सुनो",
+     "at": 12,
+     "fx": "rise"
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "आम लोगों तक पहुँचा",
+     "at": [
+      14,
+      0.4
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "rich-all",
+   "in": 15,
+   "out": 17,
+   "presenter": "standard",
+   "plate": "vs-varaha",
+   "elements": [
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "खर्चीले यज्ञ: सिर्फ अमीर",
+     "yes": "भक्ति: कोई भी",
+     "at": 15,
+     "t_yes": 16
+    }
+   ]
+  },
+  {
+   "id": "anyone",
+   "in": 17,
+   "out": 18,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b3",
+    "region": "full",
+    "offset": 4
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "गरीब हो या अमीर",
+     "style": "accent",
+     "at": [
+      17,
+      0.3
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans3",
+   "in": 18,
+   "out": 20,
+   "presenter": "standard",
+   "plate": "vs-vishnu-head",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर बन रहा है…",
+     "points": [
+      "<b>वैष्णववाद</b> प्राचीन हिंदू (पौराणिक) धर्म की प्रमुख शाखा है, जिसमें भगवान विष्णु को ब्रह्मांड का <b>रक्षक</b> और <b>सर्वोच्च देवता</b> माना जाता है।",
+      "<b>अवतारवाद:</b> पृथ्वी पर अधर्म बढ़ने पर विष्णु धर्म की रक्षा के लिए अवतार लेते हैं।",
+      "<b>दशावतार:</b> विष्णु के दस प्रमुख अवतार (राम, कृष्ण, वराह, नरसिंह आदि) पूजे गए।",
+      "<b>भक्ति मार्ग:</b> खर्चीले यज्ञों और कठोर तप के बजाय सच्चे प्रेम और भक्ति पर ज़ोर।",
+      "<b>मूर्ति व मंदिर निर्माण:</b> गुप्त काल में विष्णु के अवतारों की मूर्तियाँ और मंदिर बने, जैसे देवगढ़ (उ.प्र.) का दशावतार मंदिर।"
+     ],
+     "nums": [
+      "",
+      "1.",
+      "2.",
+      "3.",
+      "4."
+     ],
+     "show": 4,
+     "animate_from": 3,
+     "at": 18,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "home",
+   "in": 20,
+   "out": 22,
+   "presenter": "standard",
+   "broll": {
+    "clip": "a2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "भगवान के लिए घर?",
+     "at": [
+      21,
+      0.6
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "p4",
+   "in": 22,
+   "out": 23,
+   "presenter": "standard",
+   "plate": "vs-deogarh-temple",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "आखिरी बात",
+     "text": "मूर्ति और मंदिर निर्माण",
+     "at": [
+      22,
+      2.0
+     ],
+     "hl": [
+      "मूर्ति",
+      "मंदिर"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "murti",
+   "in": 23,
+   "out": [
+    24,
+    1.5
+   ],
+   "presenter": "standard",
+   "broll": {
+    "clip": "m1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "भव्य मूर्तियाँ",
+     "at": [
+      24,
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mandir",
+   "in": [
+    24,
+    1.5
+   ],
+   "out": 25,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "शानदार मंदिर",
+     "at": [
+      24,
+      1.6
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gupta",
+   "in": 25,
+   "out": 26,
+   "presenter": "standard",
+   "plate": "vs-vishnu-head",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "खासकर",
+     "text": "गुप्त काल में",
+     "at": [
+      25,
+      0.6
+     ],
+     "hl": [
+      "गुप्त"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "why-murti",
+   "in": 26,
+   "out": 28,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d1",
+    "region": "full",
+    "offset": 3
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "मूर्ति: भगवान आँखों के सामने",
+     "at": [
+      26,
+      1.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "why-mandir",
+   "in": 28,
+   "out": 29,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b4",
+    "region": "full",
+    "offset": 5
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "मंदिर: सब मिलकर पूजा",
+     "at": [
+      28,
+      1.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "example",
+   "in": 29,
+   "out": [
+    30,
+    1.5
+   ],
+   "presenter": "standard",
+   "broll": {
+    "clip": "m3",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "उदाहरण →",
+     "at": [
+      29,
+      0.4
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "deogarh",
+   "in": [
+    30,
+    1.5
+   ],
+   "out": 31,
+   "presenter": "standard",
+   "plate": "vs-deogarh-door",
+   "elements": [
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/vaishnav/deogarh-4.jpg",
+     "w": 760,
+     "label": "दशावतार मंदिर, देवगढ़ (उत्तर प्रदेश)",
+     "at": [
+      30,
+      1.5
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "under-upper",
+     "text": "गुप्त काल",
+     "style": "accent",
+     "at": [
+      30,
+      3.6
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans4",
+   "in": 31,
+   "out": 32,
+   "presenter": "standard",
+   "plate": "vs-deogarh-temple",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर: वैष्णववाद का वर्णन",
+     "points": [
+      "<b>वैष्णववाद</b> प्राचीन हिंदू (पौराणिक) धर्म की प्रमुख शाखा है, जिसमें भगवान विष्णु को ब्रह्मांड का <b>रक्षक</b> और <b>सर्वोच्च देवता</b> माना जाता है।",
+      "<b>अवतारवाद:</b> पृथ्वी पर अधर्म बढ़ने पर विष्णु धर्म की रक्षा के लिए अवतार लेते हैं।",
+      "<b>दशावतार:</b> विष्णु के दस प्रमुख अवतार (राम, कृष्ण, वराह, नरसिंह आदि) पूजे गए।",
+      "<b>भक्ति मार्ग:</b> खर्चीले यज्ञों और कठोर तप के बजाय सच्चे प्रेम और भक्ति पर ज़ोर।",
+      "<b>मूर्ति व मंदिर निर्माण:</b> गुप्त काल में विष्णु के अवतारों की मूर्तियाँ और मंदिर बने, जैसे देवगढ़ (उ.प्र.) का दशावतार मंदिर।"
+     ],
+     "nums": [
+      "",
+      "1.",
+      "2.",
+      "3.",
+      "4."
+     ],
+     "show": 5,
+     "animate_from": 4,
+     "at": 31,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "four",
+   "in": 32,
+   "out": 33,
+   "presenter": "standard",
+   "broll": {
+    "clip": "o1",
+    "region": "full",
+    "offset": 1
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "तो अब पूरा answer",
+     "text": "4 सवालों से याद रखो",
+     "at": [
+      32,
+      0.6
+     ],
+     "hl": [
+      "4"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "q1",
+   "in": 33,
+   "out": 34,
+   "presenter": "standard",
+   "broll": {
+    "clip": "a1",
+    "region": "full",
+    "offset": 1
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "सवाल 1",
+     "at": 33
+    }
+   ]
+  },
+  {
+   "id": "r1",
+   "in": 34,
+   "out": 35,
+   "presenter": "standard",
+   "plate": "vs-varaha",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "चार सवाल = पूरा answer",
+     "size": "m",
+     "at": 32
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "अवतार क्यों? → अवतारवाद",
+       34
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "q2",
+   "in": 35,
+   "out": 36,
+   "presenter": "standard",
+   "broll": {
+    "clip": "da3",
+    "region": "full",
+    "offset": 5
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "सवाल 2",
+     "at": 35
+    }
+   ]
+  },
+  {
+   "id": "r2",
+   "in": 36,
+   "out": 37,
+   "presenter": "standard",
+   "plate": "vs-varaha",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "चार सवाल = पूरा answer",
+     "size": "m",
+     "at": 36
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "अवतार क्यों? → अवतारवाद",
+       0
+      ],
+      [
+       "कितने अवतार? → दशावतार",
+       36
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "q3",
+   "in": 37,
+   "out": 38,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b3",
+    "region": "full",
+    "offset": 2
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "सवाल 3",
+     "at": 37
+    }
+   ]
+  },
+  {
+   "id": "r3",
+   "in": 38,
+   "out": 39,
+   "presenter": "standard",
+   "plate": "vs-varaha",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "चार सवाल = पूरा answer",
+     "size": "m",
+     "at": 38
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "अवतार क्यों? → अवतारवाद",
+       0
+      ],
+      [
+       "कितने अवतार? → दशावतार",
+       0
+      ],
+      [
+       "किस भाव से पूजा? → भक्ति",
+       38
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "q4",
+   "in": 39,
+   "out": 40,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m2",
+    "region": "full",
+    "offset": 4
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "सवाल 4",
+     "at": 39
+    }
+   ]
+  },
+  {
+   "id": "r4",
+   "in": 40,
+   "out": 41,
+   "presenter": "standard",
+   "plate": "vs-varaha",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "चार सवाल = पूरा answer",
+     "size": "m",
+     "at": 40
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "अवतार क्यों? → अवतारवाद",
+       0
+      ],
+      [
+       "कितने अवतार? → दशावतार",
+       0
+      ],
+      [
+       "किस भाव से पूजा? → भक्ति",
+       0
+      ],
+      [
+       "मंदिर कब? → गुप्त काल",
+       40
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "marks",
+   "in": 41,
+   "out": 43,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m3",
+    "region": "full",
+    "offset": 4,
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "परिभाषा + चारों बातें",
+     "text": "पूरे 3 नंबर पक्के",
+     "at": [
+      42,
+      0.4
+     ],
+     "hl": [
+      "पक्के"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "answer",
+   "in": 43,
+   "out": 44,
+   "presenter": "hub",
+   "hub": {
+    "cx": 905,
+    "cy": 1450,
+    "r": 125,
+    "scale": 0.58,
+    "backdrop": "plate"
+   },
+   "plate": "vs-deogarh-temple",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर: वैष्णववाद का वर्णन",
+     "points": [
+      "<b>वैष्णववाद</b> प्राचीन हिंदू (पौराणिक) धर्म की प्रमुख शाखा है, जिसमें भगवान विष्णु को ब्रह्मांड का <b>रक्षक</b> और <b>सर्वोच्च देवता</b> माना जाता है।",
+      "<b>अवतारवाद:</b> पृथ्वी पर अधर्म बढ़ने पर विष्णु धर्म की रक्षा के लिए अवतार लेते हैं।",
+      "<b>दशावतार:</b> विष्णु के दस प्रमुख अवतार (राम, कृष्ण, वराह, नरसिंह आदि) पूजे गए।",
+      "<b>भक्ति मार्ग:</b> खर्चीले यज्ञों और कठोर तप के बजाय सच्चे प्रेम और भक्ति पर ज़ोर।",
+      "<b>मूर्ति व मंदिर निर्माण:</b> गुप्त काल में विष्णु के अवतारों की मूर्तियाँ और मंदिर बने, जैसे देवगढ़ (उ.प्र.) का दशावतार मंदिर।"
+     ],
+     "nums": [
+      "",
+      "1.",
+      "2.",
+      "3.",
+      "4."
+     ],
+     "show": 5,
+     "animate_from": 5,
+     "at": 43,
+     "top": 360
+    },
+    {
+     "type": "pill",
+     "slot": "head",
+     "text": "पूरा answer: Notes button",
+     "style": "accent",
+     "at": [
+      43,
+      1.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "in": 44,
+   "out": "end",
+   "presenter": "hero",
+   "broll": {
+    "clip": "o1",
+    "region": "full",
+    "offset": 3
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "हर topic, एक-एक reel",
+     "at": [
+      44,
+      0.6
+     ],
+     "fx": "rise"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,88 @@
+{
+ "slide-wire-bridge": [
+  {
+   "title": "File:Meter bridge 001.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Meter_bridge_001.jpg/1920px-Meter_bridge_001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Meter_bridge_001.jpg",
+   "licence": "CC BY-SA 4.0",
+   "author": "Jeremyida002",
+   "credit_required": true,
+   "file": "slide-wire-bridge-1.jpg"
+  }
+ ],
+ "wheatstone-portrait": [
+  {
+   "title": "File:Charles Wheatstone later years.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Charles_Wheatstone_later_years.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:Charles_Wheatstone_later_years.jpg",
+   "licence": "Public domain",
+   "author": "Unidentified photographer",
+   "credit_required": false,
+   "file": "wheatstone-portrait-1.jpg"
+  }
+ ],
+ "galvanometer": [
+  {
+   "title": "File:A Galvanometer.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/A_Galvanometer.jpg/1920px-A_Galvanometer.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:A_Galvanometer.jpg",
+   "licence": "CC BY-SA 4.0",
+   "author": "Jeremyida002",
+   "credit_required": true,
+   "file": "galvanometer-1.jpg"
+  },
+  {
+   "title": "File:A moving coil galvanometer. Wellcome M0016397.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/A_moving_coil_galvanometer._Wellcome_M0016397.jpg/1920px-A_moving_coil_galvanometer._Wellcome_M0016397.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:A_moving_coil_galvanometer._Wellcome_M0016397.jpg",
+   "licence": "CC BY 4.0",
+   "author": "unknown",
+   "credit_required": true,
+   "file": "galvanometer-3.jpg"
+  }
+ ],
+ "resistance-box": [
+  {
+   "title": "File:Cassetta di resistenze a 5 decadi - Museo scienza tecnologia Milano 04144.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/83/Cassetta_di_resistenze_a_5_decadi_-_Museo_scienza_tecnologia_Milano_04144.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:Cassetta_di_resistenze_a_5_decadi_-_Museo_scienza_tecnologia_Milano_04144.jpg",
+   "licence": "CC BY-SA 4.0",
+   "author": "Allocchio Bacchini &amp; C. Ing. Costruttori (costruttore)",
+   "credit_required": true,
+   "file": "resistance-box-1.jpg"
+  }
+ ],
+ "resistors": [
+  {
+   "title": "File:Ibanez TS9 Tube Screamer effect pedal, closeup of PCB (14292856879).jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Ibanez_TS9_Tube_Screamer_effect_pedal%2C_closeup_of_PCB_%2814292856879%29.jpg/1920px-Ibanez_TS9_Tube_Screamer_effect_pedal%2C_closeup_of_PCB_%2814292856879%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Ibanez_TS9_Tube_Screamer_effect_pedal,_closeup_of_PCB_(14292856879).jpg",
+   "licence": "CC BY 2.0",
+   "author": "Mercado Viagens from Brasil",
+   "credit_required": true,
+   "file": "resistors-1.jpg"
+  }
+ ],
+ "ammeter-lab": [
+  {
+   "title": "File:Physics Lab Silver Oaks Intl School Hyderabad.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/02/Physics_Lab_Silver_Oaks_Intl_School_Hyderabad.jpg/1920px-Physics_Lab_Silver_Oaks_Intl_School_Hyderabad.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Physics_Lab_Silver_Oaks_Intl_School_Hyderabad.jpg",
+   "licence": "CC BY-SA 4.0",
+   "author": "Kchava",
+   "credit_required": true,
+   "file": "ammeter-lab-3.jpg"
+  }
+ ],
+ "multimeter": [
+  {
+   "title": "File:Digital Multimeter (To measure Voltage, Current and Resistance).jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Digital_Multimeter_%28To_measure_Voltage%2C_Current_and_Resistance%29.jpg/1920px-Digital_Multimeter_%28To_measure_Voltage%2C_Current_and_Resistance%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Digital_Multimeter_(To_measure_Voltage,_Current_and_Resistance).jpg",
+   "licence": "CC0",
+   "author": "K.Venkataramana",
+   "credit_required": false,
+   "file": "multimeter-2.jpg"
+  }
+ ]
+}

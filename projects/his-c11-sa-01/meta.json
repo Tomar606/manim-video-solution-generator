@@ -1,0 +1,29 @@
+{
+ "subject": "History",
+ "sheet_id": "HIS-C11-SA-01",
+ "years": "2022, 2024 और 2025",
+ "marks": 3,
+ "question": "किस प्रकार गाँधी जी एक जननेता बन गये? अथवा, किसान महात्मा गाँधी को किस तरह देखते थे?",
+ "category": "Short Answer",
+ "chapter": "महात्मा गाँधी और राष्ट्रीय आंदोलन",
+ "parts": 1,
+ "hilite": [
+  "जननेता",
+  "मसीहा",
+  "धोती",
+  "भाषा",
+  "अथवा",
+  "गाँधी बाबा",
+  "महात्मा",
+  "लगान",
+  "ज़मींदारों",
+  "चरखा",
+  "श्रम",
+  "हरिजन",
+  "जन-आंदोलन",
+  "PDF"
+ ],
+ "_note": "Years from the narration ('2022, 2024 और 2025'); the answer page and sheet title say 2023, 24, 25 (open with the user). Marks from '3 नंबर पक्के'.",
+ "_timing": "lines_part1.json is on the HeyGen SRT clock: OpenAI Whisper credits are exhausted and the machine guard refused a local Whisper run (25 Oct 2026). Re-run the word clock before render.",
+ "title": "जननेता गाँधी"
+}

@@ -1,0 +1,119 @@
+{
+ "_comment": [
+  "One presenter, everything the kit needs to generate him and to check the result.",
+  "",
+  "PATHS ARE REPO-RELATIVE. The images are committed; rebuild them from any HeyGen",
+  "green-screen take with make_refset.py (the `source` block below is exactly how",
+  "the current set was made).",
+  "",
+  "FILENAMES MUST DIFFER between the two sets. Flow attaches an upload BY NAME,",
+  "so a landscape and a vertical file with the same name in one Flow project is a",
+  "coin flip between them.",
+  "",
+  "ORDER MATTERS in each refs list: the model weights earlier references more, so",
+  "the face comes first, the turned head second, the build last.",
+  "",
+  "`paint` rectangles are SOURCE-frame pixels covering the chest badge and",
+  "wordmark at that shot's time; read them off `make_refset.py --zoom`.",
+  "",
+  "`wardrobe` and `voice` are pasted verbatim into every prompt. Keep them",
+  "identical between clips; paraphrase is how a character drifts."
+ ],
+ "name": "ritesh",
+ "display": "Ritesh sir",
+ "language": "Hindi",
+ "face_reference": "assets/character/ritesh_reference.jpeg",
+ "refs": {
+  "landscape": [
+   "assets/character/refset/ritesh_ref_1_front_face.png",
+   "assets/character/refset/ritesh_ref_2_turned.png",
+   "assets/character/refset/ritesh_ref_3_waist_up.png"
+  ],
+  "vertical": [
+   "assets/character/refset_vertical/ritesh_vref_1_front_face.png",
+   "assets/character/refset_vertical/ritesh_vref_2_turned.png",
+   "assets/character/refset_vertical/ritesh_vref_3_waist_up.png"
+  ]
+ },
+ "wardrobe": "in his plain black short-sleeve polo shirt",
+ "voice": "in a warm, clear teacher's voice, speaking briskly and keeping going — he runs one sentence straight into the next and does not pause between them",
+ "face_min": 0.9,
+ "source": {
+  "clip": "inbox/che-c3-sa-10/heygen_full.mp4",
+  "grey": [
+   128,
+   128,
+   128
+  ],
+  "shots": [
+   {
+    "name": "1_front_face",
+    "t": 4.5,
+    "kind": "head",
+    "paint": [
+     [
+      952,
+      640,
+      993,
+      680
+     ],
+     [
+      1034,
+      647,
+      1134,
+      677
+     ]
+    ]
+   },
+   {
+    "name": "2_turned",
+    "t": 96.0,
+    "kind": "head",
+    "paint": [
+     [
+      929,
+      647,
+      969,
+      686
+     ],
+     [
+      1006,
+      650,
+      1054,
+      680
+     ]
+    ]
+   },
+   {
+    "name": "3_waist_up",
+    "t": 57.0,
+    "kind": "body",
+    "paint": [
+     [
+      954,
+      643,
+      995,
+      683
+     ],
+     [
+      1034,
+      648,
+      1137,
+      682
+     ]
+    ]
+   }
+  ]
+ },
+ "_voice_note": [
+  "WAS: in a warm, clear, unhurried teacher's voice",
+  "That one word put 'unhurried' into all 23 presenter prompts of POL-C2-LA-01,",
+  "and the build came back at 31.2 pauses/min against the house 23.6, with 30%",
+  "dead air against 16% — measured acoustically, not judged by ear. Veo did",
+  "exactly as the kit told it. On any route where the voice is later replaced in",
+  "ElevenLabs this is not a style preference: a slow take holds the mouth open",
+  "longer than the dub needs and the lip sync drifts across the whole clip.",
+  "Target, from the delivered science videos: ~175 wpm while speaking, 84% speech,",
+  "~24 pauses a minute, none longer than half a second."
+ ]
+}

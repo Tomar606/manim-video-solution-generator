@@ -1,0 +1,99 @@
+{
+ "_about": "Kit test: POL-C3-LA-01 part 1 as DATA over the library element kit. Beats are cued by caption-line index (lines_part1.json), never by seconds; slots are names, never coordinates. Spine = five causes as progress dots + counter, full checklist at intro and recap.",
+ "project": "pol-c3-la-01",
+ "part": 1,
+ "skin": "paper-editorial",
+ "theme": "paper-archival",
+ "question_sheet": "projects/pol-c2-la-01/assets/design/question_sheet.png",
+ "plate": "plate-cream",
+ "spine": {
+  "title": "भारत-पाक मतभेद",
+  "items": ["हैदराबाद विवाद", "जूनागढ़ समस्या", "ऋण अदायगी", "शरणार्थी समस्या", "कश्मीर समस्या"],
+  "lit_at": [28, 46],
+  "show_from": 12
+ },
+ "beats": [
+  {"id": "hook", "in": 0, "out": 5, "presenter": "standard", "flood": null,
+   "broll": {"clip": "v01", "treatment": "duotone-red", "region": "full"},
+   "elements": [
+    {"type": "headline", "slot": "over-broll", "text": "1947", "size": "xl", "at": 2},
+    {"type": "sticker", "slot": "over-broll-low", "title": "दोनों एक साथ आज़ाद", "body": "फिर भी दोस्ती क्यों नहीं?", "at": 3}
+   ]},
+  {"id": "question", "in": 5, "out": 12, "presenter": "small", "flood": null,
+   "elements": [
+    {"type": "image", "slot": "upper", "src": "sheet", "at": 5},
+    {"type": "stamp", "slot": "sheet-corner", "text": "बोर्ड परीक्षा 2025", "at": 5},
+    {"type": "stamp", "slot": "sheet-marks", "text": "4 अंक", "at": 6},
+    {"type": "pill", "slot": "under-upper", "text": "अथवा: पाँच कारण", "style": "accent", "at": 9}
+   ]},
+  {"id": "five", "in": 12, "out": 15, "presenter": "small", "flood": null,
+   "elements": [
+    {"type": "headline", "slot": "head", "text": "शब्द अलग, answer एक", "size": "m", "at": 12},
+    {"type": "checklist", "slot": "upper", "lit": [], "at": 13}
+   ]},
+  {"id": "neighbours", "in": 15, "out": 22, "presenter": "hero", "flood": null, "elements": []},
+  {"id": "partition", "in": 22, "out": 26, "presenter": "standard", "flood": null,
+   "broll": {"photo": "history/archival-1947/refugees-1.jpg", "treatment": "duotone-red", "region": "top"},
+   "elements": [
+    {"type": "torn", "slot": "over-broll-low", "text": "विभाजन: पहले दिन से कटुता", "at": 23}
+   ]},
+  {"id": "c1-title", "in": 26, "out": 30, "presenter": "standard", "flood": "accent",
+   "elements": [
+    {"type": "bignum", "slot": "head", "num": "1", "text": "हैदराबाद विवाद", "at": 28}
+   ]},
+  {"id": "c1-map", "in": 30, "out": 35, "presenter": "standard", "flood": null,
+   "elements": [
+    {"type": "section", "slot": "head", "num": "1", "text": "हैदराबाद विवाद", "at": 30},
+    {"type": "image", "slot": "upper", "src": "map-peninsula-1", "at": 30},
+    {"type": "pin", "slot": "map:hyderabad", "title": "हैदराबाद", "sub": "भारत के बीचों-बीच", "at": 30},
+    {"type": "def", "slot": "under-upper", "term": "निज़ाम", "text": "स्वतंत्र राज्य चाहता था", "at": 33}
+   ]},
+  {"id": "c1-razakar", "in": 35, "out": 40, "presenter": "standard", "flood": null,
+   "broll": {"clip": "v02", "treatment": "duotone-red", "region": "full"},
+   "elements": [
+    {"type": "section", "slot": "head", "num": "1", "text": "हैदराबाद विवाद", "at": 35},
+    {"type": "pills", "slot": "over-broll-low", "items": [["मारकाट", 37], ["लूटपाट", 38], ["हिंसा", 38]], "style": "accent"},
+    {"type": "pill", "slot": "over-broll-top", "text": "पाकिस्तान का सहयोग", "style": "navy", "at": 36}
+   ]},
+  {"id": "c1-army", "in": 40, "out": 43, "presenter": "standard", "flood": null,
+   "broll": {"photo": "history/archival-1947/polo-2.jpg", "treatment": "duotone-navy", "region": "top"},
+   "elements": [
+    {"type": "photo", "slot": "over-broll-right", "src": "history/archival-1947/patel-1.jpg", "w": 330, "tilt": 3, "label": "निज़ाम और सरदार पटेल", "at": 41},
+    {"type": "stamp", "slot": "over-broll-low", "text": "भारत में विलय", "at": 41}
+   ]},
+  {"id": "c1-un", "in": 43, "out": 46, "presenter": "standard", "flood": null,
+   "broll": {"clip": "v04", "treatment": "duotone-navy", "region": "top"},
+   "elements": [
+    {"type": "counter", "slot": "over-broll", "num": "3", "label": "बार संयुक्त राष्ट्र संघ में", "at": 44},
+    {"type": "crosses", "slot": "over-broll-low", "n": 3, "label": "हर बार असफल", "at": 45}
+   ]},
+  {"id": "c2-map", "in": 46, "out": 53, "presenter": "standard", "flood": null,
+   "elements": [
+    {"type": "section", "slot": "head", "num": "2", "text": "जूनागढ़ समस्या", "at": 46},
+    {"type": "image", "slot": "upper", "src": "map-peninsula-2", "at": 46},
+    {"type": "pin", "slot": "map:junagadh", "title": "जूनागढ़", "sub": "काठियावाड़ की छोटी रियासत", "at": 51}
+   ]},
+  {"id": "c2-split", "in": 53, "out": 56, "presenter": "standard", "flood": null,
+   "elements": [
+    {"type": "section", "slot": "head", "num": "2", "text": "जूनागढ़ समस्या", "at": 53},
+    {"type": "photo", "slot": "upper", "src": "history/archival-1947/nawab-1.jpg", "crop_bottom": 0.12, "w": 230, "tilt": -2, "label": "जूनागढ़ का नवाब", "at": 53},
+    {"type": "compare", "slot": "under-upper", "left": ["शासक", "मुस्लिम"], "right": ["जनता", "हिंदू"], "at": 53, "right_at": 54}
+   ]},
+  {"id": "c2-revolt", "in": 56, "out": 65, "presenter": "standard", "flood": null,
+   "broll": {"clip": "v05", "treatment": "duotone-red", "region": "full"},
+   "elements": [
+    {"type": "chain", "slot": "over-broll-low", "items": [["पाकिस्तान में विलय की घोषणा", 56], ["जनता का विद्रोह", 58], ["दीवान: भारत से हस्तक्षेप", 63]]}
+   ]},
+  {"id": "c2-vote", "in": 65, "out": 74, "presenter": "standard", "flood": null,
+   "broll": {"clip": "v06", "treatment": "duotone-navy", "region": "top"},
+   "elements": [
+    {"type": "torn", "slot": "over-broll-low", "text": "जनमत संग्रह: भारी बहुमत भारत के पक्ष में", "at": 66},
+    {"type": "stamp", "slot": "over-broll", "text": "कानूनी + लोकतांत्रिक", "at": 70}
+   ]},
+  {"id": "recap", "in": 74, "out": "end", "presenter": "small", "flood": null,
+   "elements": [
+    {"type": "headline", "slot": "head", "text": "दोनों रियासतें भारत में, पर खटास बढ़ी", "size": "m", "at": 74},
+    {"type": "checklist", "slot": "upper", "lit": [0, 1], "next_label": "Part 2 में", "at": 76}
+   ]}
+ ]
+}

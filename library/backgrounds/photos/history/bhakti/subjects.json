@@ -1,0 +1,18 @@
+[
+ {"slug": "kabir", "query": "Kabir painting weaving loom", "limit": 4},
+ {"slug": "kabir-mini", "query": "Kabir miniature painting saint", "limit": 4},
+ {"slug": "nanak", "query": "Guru Nanak painting", "limit": 4},
+ {"slug": "nanak-mardana", "query": "Guru Nanak Bhai Mardana Bala painting", "limit": 3},
+ {"slug": "mira", "query": "Mirabai painting", "limit": 4},
+ {"slug": "mira-krishna", "query": "Mira Bai Krishna miniature", "limit": 3},
+ {"slug": "basava", "query": "Basaveshwara statue", "limit": 4},
+ {"slug": "basava-painting", "query": "Basavanna painting", "limit": 3},
+ {"slug": "linga", "query": "ishtalinga Lingayat", "limit": 3},
+ {"slug": "kudalasangama", "query": "Kudalasangama", "limit": 3},
+ {"slug": "ghat", "query": "Varanasi ghat morning boats", "limit": 4},
+ {"slug": "kabir-chaura", "query": "Kabir Chaura Math Varanasi", "limit": 3},
+ {"slug": "manuscript", "query": "Bijak manuscript Kabir", "limit": 3},
+ {"slug": "loom", "query": "handloom weaver India", "limit": 3},
+ {"slug": "kirtan", "query": "kirtan devotees singing temple India", "limit": 3},
+ {"slug": "ektara", "query": "ektara instrument", "limit": 3}
+]

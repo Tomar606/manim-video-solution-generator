@@ -1,0 +1,75 @@
+{
+ "balance": [
+  {
+   "title": "File:Analytical balance & old weighing scales.JPG",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Analytical_balance_%26_old_weighing_scales.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:Analytical_balance_%26_old_weighing_scales.JPG",
+   "licence": "CC BY-SA 4.0",
+   "author": "Делфина",
+   "credit_required": true,
+   "file": "balance-1.jpg"
+  },
+  {
+   "title": "File:Analytical balance - Thomas Edison National Historical Park - West Orange, New Jersey.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/02/Analytical_balance_-_Thomas_Edison_National_Historical_Park_-_West_Orange%2C_New_Jersey.jpg/1920px-Analytical_balance_-_Thomas_Edison_National_Historical_Park_-_West_Orange%2C_New_Jersey.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Analytical_balance_-_Thomas_Edison_National_Historical_Park_-_West_Orange,_New_Jersey.jpg",
+   "licence": "CC BY-SA 2.0",
+   "author": "Jeff Keyzer from Austin, TX, USA",
+   "credit_required": true,
+   "file": "balance-2.jpg"
+  },
+  {
+   "title": "File:Analytical balance Zakłady Mechaniki Precyzyjnej Gdansk.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Analytical_balance_Zak%C5%82ady_Mechaniki_Precyzyjnej_Gdansk.jpg/1920px-Analytical_balance_Zak%C5%82ady_Mechaniki_Precyzyjnej_Gdansk.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Analytical_balance_Zak%C5%82ady_Mechaniki_Precyzyjnej_Gdansk.jpg",
+   "licence": "CC BY-SA 3.0",
+   "author": "LukaszKatlewa",
+   "credit_required": true,
+   "file": "balance-3.jpg"
+  },
+  {
+   "title": "File:Analytical balance mettler ae-260.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/59/Analytical_balance_mettler_ae-260.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "page": "https://commons.wikimedia.org/wiki/File:Analytical_balance_mettler_ae-260.jpg",
+   "licence": "Public domain",
+   "author": "US DEA",
+   "credit_required": false,
+   "file": "balance-4.jpg"
+  },
+  {
+   "file": "prev-reel.jpg",
+   "title": "Frame from our Wheatstone bridge reel (Arivihan)",
+   "licence": "own work",
+   "source": "Desktop/Final Physics delivery, 0:57"
+  }
+ ],
+ "cylinder": [
+  {
+   "title": "File:A graduated measuring cylinder.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/A_graduated_measuring_cylinder.jpg/1920px-A_graduated_measuring_cylinder.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:A_graduated_measuring_cylinder.jpg",
+   "licence": "CC BY-SA 4.0",
+   "author": "Stephanie cheks",
+   "credit_required": true,
+   "file": "cylinder-1.jpg"
+  },
+  {
+   "title": "File:A measuring cylinder 002.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/A_measuring_cylinder_002.jpg/1920px-A_measuring_cylinder_002.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:A_measuring_cylinder_002.jpg",
+   "licence": "CC BY-SA 4.0",
+   "author": "Jeremyida002",
+   "credit_required": true,
+   "file": "cylinder-2.jpg"
+  },
+  {
+   "title": "File:Glass graduated cylinder-250ml 1.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Glass_graduated_cylinder-250ml_1.jpg/1920px-Glass_graduated_cylinder-250ml_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "page": "https://commons.wikimedia.org/wiki/File:Glass_graduated_cylinder-250ml_1.jpg",
+   "licence": "CC BY-SA 3.0",
+   "author": "Lilly_M",
+   "credit_required": true,
+   "file": "cylinder-3.jpg"
+  }
+ ]
+}

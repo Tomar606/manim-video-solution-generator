@@ -1,0 +1,57 @@
+/* pastel-notebook (new): a topper's ruled notebook.  White ruled page with
+   a margin line, graphite ink, blue-pen and green-pen accents, yellow
+   highlighter, soft rounded white cards with a gentle lift.  Bright and
+   calm where night-hud is dramatic and paper-editorial is loud.  Suits:
+   biology, revision recaps, "write this in the answer" moments. */
+.skin-pastel-notebook {
+  --ink: #2A2D34;
+  --accent: #2F6FDE;          /* blue pen */
+  --accent-2: #20A464;        /* green pen */
+  --paper: #FBFAF5;
+  --muted: #8A90A0;
+  --stroke-w: 5;
+
+  /* ruled lines every 56px and a margin rule: the page itself */
+  --bg:
+    linear-gradient(90deg, transparent 118px, rgba(229, 72, 77, .45) 118px, rgba(229, 72, 77, .45) 121px, transparent 121px),
+    repeating-linear-gradient(180deg, transparent 0 55px, #DCE6F2 55px 57px),
+    #FBFAF5;
+  --paper-2: #F2F5FA;
+  --highlight: rgba(255, 226, 77, .70);
+  --warn: #E5484D;
+
+  --font-head: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+  --head-weight: 600;
+  --head-stretch: 100%;
+  --head-tracking: 0;
+  --font-body: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+  --body-weight: 500;
+  --font-hand: 'Kalam', sans-serif;
+  --font-num: 'Poppins', sans-serif;
+
+  --card-bg: #FFFFFF;
+  --card-ink: var(--ink);
+  --card-border: #E1E6EF;
+  --card-border-w: 2px;
+  --radius: 20px;
+  --shadow: 0 10px 26px rgba(40, 52, 84, .12);
+  --glow: none;
+  --on-accent: #FFFFFF;      /* text set on an --accent fill */
+  --on-accent-2: #FFFFFF;    /* text set on an --accent-2 fill */
+  --badge-bg: var(--accent);
+  --badge-ink: #FFFFFF;
+  --badge-radius: 12px;
+  --pill-bg: #E8F0FE;
+  --pill-ink: var(--accent);
+  --pill-border: transparent;
+  --tape: rgba(255, 226, 77, .62);
+  --stamp: var(--accent-2);
+  --tilt: 2deg;
+  --tick: 22px;
+
+  /* photo treatment hint: natural colour, rounded, white polaroid edge */
+  --photo-treatment: "colour";
+  --photo-filter: saturate(1.05);
+  --photo-tint: transparent;
+  --photo-blend: normal;
+}

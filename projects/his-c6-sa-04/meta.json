@@ -1,0 +1,30 @@
+{
+ "subject": "History",
+ "sheet_id": "HIS-C6-SA-04",
+ "years": "2022 और 2024",
+ "marks": 3,
+ "question": "मध्यकालीन भक्ति परंपरा के कोई चार प्रमुख संतों के उपदेशों का वर्णन कीजिए।",
+ "category": "Short Answer",
+ "chapter": "भक्ति-सूफी परंपराएँ",
+ "parts": 1,
+ "hilite": [
+  "उपदेश",
+  "कबीर",
+  "उलटबाँसी",
+  "नानक",
+  "स्मरण",
+  "मीराबाई",
+  "कृष्ण",
+  "बासवन्ना",
+  "लिंगायत",
+  "वीरशैव",
+  "जाति-पाति",
+  "अछूत",
+  "बराबर",
+  "पक्के"
+ ],
+ "_note": "Years and marks from the narration ('दो हज़ार बाईस और दो हज़ार चौबीस', 'पूरे 3 नंबर पक्के').",
+ "_splice": "src/part1.mp4 = main take 0-21.20 s + patch take (lines 5-6, 7.40 s) + main take from 28.16 s; everything after the patch is +0.44 s on the main take's clock.",
+ "_timing": "lines_part1.json is on the audio's own pauses (tools/pause_align.py): OpenAI Whisper credits are exhausted (26 Oct 2026) and the machine guard refused a local Whisper run.",
+ "title": "भक्ति संतों के उपदेश"
+}

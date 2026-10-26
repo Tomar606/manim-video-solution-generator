@@ -1,0 +1,993 @@
+{
+ "_about": "HIS-C2-SA-06, edict theme on a borderless map",
+ "project": "his-c2-sa-06",
+ "part": 1,
+ "captions_from": 7,
+ "skin": "paper-editorial",
+ "theme": "edict",
+ "presenter_style": "card",
+ "plate": "edict-sandstone-girnar",
+ "spine": {
+  "title": "मौर्य साम्राज्य: 5 राजनीतिक केंद्र",
+  "items": [
+   "पाटलिपुत्र",
+   "तक्षशिला",
+   "उज्जयिनी",
+   "तोसलि",
+   "सुवर्णगिरि"
+  ],
+  "lit_at": [
+   11,
+   17,
+   19,
+   27,
+   31
+  ],
+  "show_from": 7
+ },
+ "beats": [
+  {
+   "id": "ujjain",
+   "in": 0,
+   "out": 2,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k01",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "हमारा उज्जैन, मध्यप्रदेश",
+     "style": "accent",
+     "at": 1
+    }
+   ]
+  },
+  {
+   "id": "hook-map",
+   "in": 2,
+   "out": 5,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "seamap",
+     "slot": "head",
+     "map": "subcontinent",
+     "labels": [
+      [
+       "सिंधु",
+       [
+        68.9,
+        25.4
+       ],
+       "pre",
+       "river"
+      ],
+      [
+       "गंगा",
+       [
+        87.2,
+        26.9
+       ],
+       "pre",
+       "river"
+      ],
+      [
+       "अरब सागर",
+       [
+        68.6,
+        16.0
+       ],
+       "pre",
+       "sea"
+      ],
+      [
+       "बंगाल की खाड़ी",
+       [
+        88.6,
+        15.0
+       ],
+       "pre",
+       "sea"
+      ]
+     ],
+     "routes": [],
+     "ports": [
+      [
+       "?",
+       "",
+       [
+        85.14,
+        25.61
+       ],
+       [
+        4,
+        0.14
+       ],
+       "s"
+      ],
+      [
+       "?",
+       "",
+       [
+        72.83,
+        33.75
+       ],
+       [
+        4,
+        0.14
+       ],
+       "e"
+      ],
+      [
+       "उज्जयिनी",
+       "आज उज्जैन, म.प्र.",
+       [
+        75.78,
+        23.18
+       ],
+       2,
+       "s"
+      ],
+      [
+       "?",
+       "",
+       [
+        85.84,
+        20.19
+       ],
+       [
+        4,
+        0.54
+       ],
+       "s"
+      ],
+      [
+       "?",
+       "",
+       [
+        76.42,
+        15.82
+       ],
+       [
+        4,
+        0.84
+       ],
+       "s"
+      ]
+     ],
+     "calm": false
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": 5,
+   "out": 7,
+   "presenter": "small",
+   "broll": {
+    "clip": "k02",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "qcard",
+     "slot": "upper",
+     "question": "मौर्य साम्राज्य के कोई पाँच प्रमुख राजनीतिक केंद्रों के नाम लिखिए।",
+     "year": "2022",
+     "marks": "3 अंक",
+     "t_marks": [
+      6,
+      1.5
+     ],
+     "at": 5
+    }
+   ]
+  },
+  {
+   "id": "five",
+   "in": 7,
+   "out": 11,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "counter",
+     "slot": "upper",
+     "num": "5",
+     "label": "नाम, एक भी छूटा तो नंबर कटेगा",
+     "at": 7
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "जगह के साथ याद करें",
+     "at": 9
+    }
+   ]
+  },
+  {
+   "id": "pataliputra",
+   "in": 11,
+   "out": 13,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k02",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "1 · पाटलिपुत्र",
+     "style": "accent",
+     "at": [
+      11,
+      2.12
+     ]
+    },
+    {
+     "type": "note",
+     "slot": "over-broll-low",
+     "text": "मौर्य साम्राज्य की राजधानी",
+     "at": [
+      12,
+      1.54
+     ]
+    }
+   ]
+  },
+  {
+   "id": "patna",
+   "in": 13,
+   "out": 14,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k03",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "आज: पटना",
+     "at": [
+      13,
+      1.04
+     ]
+    }
+   ]
+  },
+  {
+   "id": "capital",
+   "in": 14,
+   "out": 16,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "def",
+     "slot": "head",
+     "term": "पाटलिपुत्र",
+     "text": "राजधानी",
+     "at": [
+      14,
+      1.84
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "upper",
+     "text": "आगे 'राजधानी' ज़रूर लिखें",
+     "at": 15
+    }
+   ]
+  },
+  {
+   "id": "provinces",
+   "in": 16,
+   "out": 17,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k08",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "बाकी चार: प्रांतीय केंद्र",
+     "style": "accent",
+     "at": [
+      16,
+      2.12
+     ]
+    }
+   ]
+  },
+  {
+   "id": "west-map",
+   "in": 17,
+   "out": 22,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "seamap",
+     "slot": "head",
+     "map": "subcontinent",
+     "labels": [
+      [
+       "सिंधु",
+       [
+        68.9,
+        25.4
+       ],
+       "pre",
+       "river"
+      ],
+      [
+       "गंगा",
+       [
+        87.2,
+        26.9
+       ],
+       "pre",
+       "river"
+      ],
+      [
+       "अरब सागर",
+       [
+        68.6,
+        16.0
+       ],
+       "pre",
+       "sea"
+      ],
+      [
+       "बंगाल की खाड़ी",
+       [
+        88.6,
+        15.0
+       ],
+       "pre",
+       "sea"
+      ]
+     ],
+     "routes": [
+      {
+       "pts": [
+        [
+         72.83,
+         33.75
+        ],
+        [
+         74.4,
+         31.6
+        ],
+        [
+         76.0,
+         30.3
+        ],
+        [
+         77.2,
+         28.6
+        ],
+        [
+         78.0,
+         27.3
+        ],
+        [
+         80.3,
+         26.5
+        ],
+        [
+         82.9,
+         25.4
+        ],
+        [
+         85.14,
+         25.61
+        ]
+       ],
+       "at": [
+        21,
+        0.72
+       ],
+       "dur": 1.6,
+       "tag": "लंबी दूरी के व्यापार मार्ग",
+       "tag_xy": [
+        82.6,
+        30.2
+       ],
+       "tag_at": [
+        21,
+        1.56
+       ]
+      },
+      {
+       "pts": [
+        [
+         75.78,
+         23.18
+        ],
+        [
+         76.6,
+         24.9
+        ],
+        [
+         77.4,
+         26.2
+        ],
+        [
+         78.0,
+         27.3
+        ]
+       ],
+       "at": [
+        21,
+        1.12
+       ],
+       "dur": 1.0
+      }
+     ],
+     "ports": [
+      [
+       "पाटलिपुत्र",
+       "राजधानी · आज पटना",
+       [
+        85.14,
+        25.61
+       ],
+       "pre",
+       "s"
+      ],
+      [
+       "तक्षशिला",
+       "आज पाकिस्तान में",
+       [
+        72.83,
+        33.75
+       ],
+       [
+        17,
+        1.62
+       ],
+       "e"
+      ],
+      [
+       "उज्जयिनी",
+       "आज उज्जैन, म.प्र.",
+       [
+        75.78,
+        23.18
+       ],
+       [
+        19,
+        1.0
+       ],
+       "s"
+      ]
+     ],
+     "calm": false
+    }
+   ]
+  },
+  {
+   "id": "caravan",
+   "in": 22,
+   "out": 26,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k05",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "इसीलिए इतने ज़रूरी",
+     "at": 22
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "व्यापार वाले: तक्षशिला, उज्जयिनी",
+     "at": 23
+    }
+   ]
+  },
+  {
+   "id": "east",
+   "in": 26,
+   "out": 28,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k07",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "पूरब की ओर →",
+     "at": 26
+    },
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "style": "accent",
+     "items": [
+      [
+       "4 · तोसलि",
+       [
+        27,
+        0.0
+       ]
+      ],
+      [
+       "(तोशाली)",
+       [
+        27,
+        1.1
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "dhauli",
+   "in": 28,
+   "out": 30,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/mauryan-centres/dhauli-3.jpg",
+     "w": 760,
+     "label": "धौली, ओडिशा: तोसलि के अधिकारियों को अशोक का आदेश",
+     "at": 28
+    },
+    {
+     "type": "pill",
+     "slot": "under-upper",
+     "text": "आज ओडिशा = कलिंग वाला इलाका",
+     "style": "accent",
+     "at": [
+      29,
+      0.52
+     ]
+    }
+   ]
+  },
+  {
+   "id": "golden-hill",
+   "in": 30,
+   "out": 32,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k11",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "नाम ही कहानी बताता है",
+     "at": [
+      31,
+      0.46
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "5 · सुवर्ण-गिरि",
+     "at": [
+      31,
+      2.24
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gold-meaning",
+   "in": 32,
+   "out": 33,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k10",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "def",
+     "slot": "over-broll-top",
+     "term": "सुवर्ण-गिरि",
+     "text": "सोने का पहाड़",
+     "at": 32
+    }
+   ]
+  },
+  {
+   "id": "gold-mine",
+   "in": 33,
+   "out": 35,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k09",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "कर्नाटक की सोने की खदानें",
+     "style": "accent",
+     "at": [
+      34,
+      1.3
+     ]
+    }
+   ]
+  },
+  {
+   "id": "full-map",
+   "in": 35,
+   "out": 37,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "seamap",
+     "slot": "head",
+     "map": "subcontinent",
+     "labels": [
+      [
+       "सिंधु",
+       [
+        68.9,
+        25.4
+       ],
+       "pre",
+       "river"
+      ],
+      [
+       "गंगा",
+       [
+        87.2,
+        26.9
+       ],
+       "pre",
+       "river"
+      ],
+      [
+       "अरब सागर",
+       [
+        68.6,
+        16.0
+       ],
+       "pre",
+       "sea"
+      ],
+      [
+       "बंगाल की खाड़ी",
+       [
+        88.6,
+        15.0
+       ],
+       "pre",
+       "sea"
+      ]
+     ],
+     "routes": [
+      {
+       "pts": [
+        [
+         72.83,
+         33.75
+        ],
+        [
+         74.4,
+         31.6
+        ],
+        [
+         76.0,
+         30.3
+        ],
+        [
+         77.2,
+         28.6
+        ],
+        [
+         78.0,
+         27.3
+        ],
+        [
+         80.3,
+         26.5
+        ],
+        [
+         82.9,
+         25.4
+        ],
+        [
+         85.14,
+         25.61
+        ]
+       ],
+       "at": "pre"
+      },
+      {
+       "pts": [
+        [
+         75.78,
+         23.18
+        ],
+        [
+         76.6,
+         24.9
+        ],
+        [
+         77.4,
+         26.2
+        ],
+        [
+         78.0,
+         27.3
+        ]
+       ],
+       "at": "pre"
+      }
+     ],
+     "ports": [
+      [
+       "पाटलिपुत्र",
+       "राजधानी · आज पटना",
+       [
+        85.14,
+        25.61
+       ],
+       "pre",
+       "s"
+      ],
+      [
+       "तक्षशिला",
+       "आज पाकिस्तान में",
+       [
+        72.83,
+        33.75
+       ],
+       "pre",
+       "e"
+      ],
+      [
+       "उज्जयिनी",
+       "आज उज्जैन, म.प्र.",
+       [
+        75.78,
+        23.18
+       ],
+       "pre",
+       "s"
+      ],
+      [
+       "तोसलि",
+       "ओडिशा · कलिंग",
+       [
+        85.84,
+        20.19
+       ],
+       [
+        35,
+        0.08
+       ],
+       "s"
+      ],
+      [
+       "सुवर्णगिरि",
+       "कर्नाटक · सोने की खदानें",
+       [
+        76.42,
+        15.82
+       ],
+       [
+        35,
+        0.68
+       ],
+       "s"
+      ]
+     ],
+     "calm": false
+    }
+   ]
+  },
+  {
+   "id": "chosen",
+   "in": 37,
+   "out": 41,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "प्रांतीय केंद्र: सोच-समझकर चुने गए",
+     "size": "m",
+     "at": 37
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "व्यापार मार्ग पर: तक्षशिला, उज्जयिनी",
+       [
+        39,
+        0.32
+       ]
+      ],
+      [
+       "सोने की खदानों के पास: सुवर्णगिरि",
+       [
+        40,
+        0.5
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "answer के आखिर में लिखें",
+     "at": [
+      37,
+      1.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "recall",
+   "in": 41,
+   "out": 44,
+   "presenter": "hub",
+   "hub": {
+    "cy": 1000,
+    "r": 200,
+    "backdrop": "veo:k06@3"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "पाँचों एक साथ",
+     "size": "m",
+     "at": 41
+    },
+    {
+     "type": "radial",
+     "slot": "around-hub",
+     "radius": 330,
+     "cumulative": true,
+     "items": [
+      [
+       "tabler:crown",
+       "पाटलिपुत्र (राजधानी)",
+       41
+      ],
+      [
+       "tabler:route",
+       "तक्षशिला",
+       41
+      ],
+      [
+       "tabler:route",
+       "उज्जयिनी",
+       41
+      ],
+      [
+       "tabler:building-castle",
+       "तोसलि",
+       41
+      ],
+      [
+       "tabler:coin",
+       "सुवर्णगिरि",
+       41
+      ]
+     ],
+     "recount": [
+      [
+       42,
+       0.02
+      ],
+      [
+       42,
+       2.6
+      ],
+      [
+       42,
+       3.72
+      ],
+      [
+       42,
+       4.68
+      ],
+      [
+       43,
+       0.88
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "marks",
+   "in": 44,
+   "out": 46,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k02",
+    "region": "full",
+    "dim": true,
+    "offset": 4
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "पाँचों नाम + पाटलिपुत्र के आगे 'राजधानी'",
+     "style": "accent",
+     "at": 44
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "पूरे 3 नंबर पक्के",
+     "at": 45
+    }
+   ]
+  },
+  {
+   "id": "notes",
+   "in": 46,
+   "out": 47,
+   "presenter": "hero",
+   "broll": {
+    "clip": "k05",
+    "region": "full",
+    "dim": true,
+    "offset": 4
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "head",
+     "text": "exam वाला answer: Notes button",
+     "style": "accent",
+     "at": 46
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "in": 47,
+   "out": "end",
+   "presenter": "hero",
+   "broll": {
+    "clip": "k13",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "रोज़ एक topic, सोच-समझकर",
+     "at": 48
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,60 @@
+{
+ "railways-freight": [
+  {
+   "title": "File:Indian Railways BCNHL freight wagon.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Indian_Railways_BCNHL_freight_wagon.jpg/1920px-Indian_Railways_BCNHL_freight_wagon.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Indian_Railways_BCNHL_freight_wagon.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Ravi Raj",
+   "credit_required": true,
+   "file": "railways-freight-1.jpg",
+   "width": 1920,
+   "height": 887,
+   "query": "Indian Railways freight train",
+   "desc": ""
+  },
+  {
+   "title": "File:Indian Railways Locomotive WDG-4G of Roza Diesel Loco Shed (ROZD) spotted in Alipurduar Dist., West Bengal, India 05.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Indian_Railways_Locomotive_WDG-4G_of_Roza_Diesel_Loco_Shed_%28ROZD%29_spotted_in_Alipurduar_Dist.%2C_West_Bengal%2C_India_05.jpg/1920px-Indian_Railways_Locomotive_WDG-4G_of_Roza_Diesel_Loco_Shed_%28ROZD%29_spotted_in_Alipurduar_Dist.%2C_West_Bengal%2C_India_05.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Indian_Railways_Locomotive_WDG-4G_of_Roza_Diesel_Loco_Shed_(ROZD)_spotted_in_Alipurduar_Dist.,_West_Bengal,_India_05.jpg",
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "author": "Kingshuk Mondal",
+   "credit_required": true,
+   "file": "railways-freight-3.jpg",
+   "width": 1920,
+   "height": 1280,
+   "query": "Indian Railways locomotive",
+   "desc": "Indian Railways Locomotive WDG-4G"
+  },
+  {
+   "title": "File:Srirangapatna Railway Station Platforms North Jan24 A7C 08959.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Srirangapatna_Railway_Station_Platforms_North_Jan24_A7C_08959.jpg/1920px-Srirangapatna_Railway_Station_Platforms_North_Jan24_A7C_08959.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Srirangapatna_Railway_Station_Platforms_North_Jan24_A7C_08959.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Timothy A. Gonsalves",
+   "credit_required": true,
+   "file": "railways-freight-4.jpg",
+   "width": 1920,
+   "height": 1080,
+   "query": "railway station India platform",
+   "desc": "Srirangapatna Railway Station, Platform 1 on right, 2 on left, view towards Bangalore (north), Mandya District, Karnataka, India"
+  },
+  {
+   "title": "File:Freight Train.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Freight_Train.jpg/1920px-Freight_Train.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Freight_Train.jpg",
+   "licence": "CC0",
+   "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "author": "Saankav",
+   "credit_required": false,
+   "file": "railways-freight-5.jpg",
+   "width": 1716,
+   "height": 2400,
+   "query": "Indian Railways freight train",
+   "desc": "Freight Train crossing Boisar railway station on Indian Railway's Western Dedicated Freight Corridor (WDFC)"
+  }
+ ]
+}

@@ -1,0 +1,1219 @@
+{
+ "_about": "HIS-C11-SA-01: किस प्रकार गाँधी जी एक जननेता बन गये? अथवा, किसान महात्मा गाँधी को किस तरह देखते थे? (2022, 2024, 2025): khadi look.",
+ "project": "his-c11-sa-01",
+ "part": 1,
+ "captions_at": "bottom",
+ "skin": "paper-editorial",
+ "theme": "khadi",
+ "presenter_style": "card",
+ "plate": "kh-salt",
+ "hilite": [
+  "जननेता",
+  "मसीहा",
+  "धोती",
+  "भाषा",
+  "अथवा",
+  "गाँधी बाबा",
+  "महात्मा",
+  "लगान",
+  "चरखा",
+  "श्रम",
+  "हरिजन",
+  "जन-आंदोलन",
+  "PDF"
+ ],
+ "card_style": {
+  "backdrop": "kh-card"
+ },
+ "framing": {
+  "crop": [
+   600,
+   150,
+   1340,
+   1000
+  ],
+  "full_w": 735
+ },
+ "scene_match": {
+  "tint": 0.05,
+  "wrap": 0.12,
+  "wrap_px": 6,
+  "bottom_fade": 0.08
+ },
+ "presenter_grade": {
+  "exposure": 1.0,
+  "contrast": 0.94,
+  "warm": 0.99,
+  "saturation": 0.96,
+  "shadow_lift": 0.4,
+  "lift_radius": 14,
+  "define": 0.04,
+  "matte_soft": 1.0,
+  "matte_choke": 0.05,
+  "soften": {
+   "amount": 0.55,
+   "radius": 1.8
+  }
+ },
+ "card": {
+  "x": 314,
+  "y": 1130,
+  "w": 452,
+  "h": 560
+ },
+ "spine": {
+  "title": "जननेता गाँधी",
+  "items": [
+   "धोती और आम भाषा",
+   "किसानों के गाँधी बाबा",
+   "चरखा और श्रम",
+   "सबको साथ"
+  ],
+  "lit_at": [
+   17,
+   24,
+   31,
+   36
+  ],
+  "show_from": 13
+ },
+ "beats": [
+  {
+   "id": "mp",
+   "in": 0,
+   "out": 1,
+   "presenter": "full",
+   "broll": {
+    "clip": "h1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "statemap",
+     "slot": "upper",
+     "state": "Madhya Pradesh",
+     "text": "MP Board",
+     "sub": "कक्षा 12वीं",
+     "w": 880,
+     "top": 170,
+     "at": [
+      0,
+      0.05
+     ]
+    }
+   ]
+  },
+  {
+   "id": "years",
+   "in": 1,
+   "out": 4,
+   "presenter": "full",
+   "broll": {
+    "clip": "e1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "papers",
+     "style": "row",
+     "assets": "assets/papers",
+     "at": 1,
+     "top": 330,
+     "left0": 22,
+     "step": 330,
+     "sheet_w": 360,
+     "dy": 34,
+     "title": "यही question, board exam में",
+     "years": [
+      [
+       "2022",
+       [
+        1,
+        2.13
+       ]
+      ],
+      [
+       "2024",
+       [
+        2,
+        0.0
+       ]
+      ],
+      [
+       "2025",
+       [
+        2,
+        0.85
+       ]
+      ]
+     ],
+     "after": "तीनों साल पूछा गया",
+     "t_after": [
+      2,
+      1.81
+     ],
+     "after_dy": 490,
+     "next": "2027 में भी आ सकता है!",
+     "t_next": [
+      3,
+      0.38
+     ],
+     "next_dy": 490
+    }
+   ]
+  },
+  {
+   "id": "marks",
+   "in": 4,
+   "out": 6,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "इसे अच्छे से समझ लिया तो",
+     "text": "3 नंबर पक्के",
+     "at": [
+      5,
+      0.54
+     ],
+     "hl": [
+      "पक्के"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": 6,
+   "out": 8,
+   "presenter": "full",
+   "broll": {
+    "clip": "e1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "qsheet",
+     "at": 6,
+     "src": "qsheet.png",
+     "src_path": "assets/papers/qsheet.png",
+     "w": 840,
+     "top": 64,
+     "hl_left": 0.264,
+     "line_h": 0.055,
+     "lines": [
+      [
+       0.662,
+       0.735,
+       [
+        6,
+        1.91
+       ]
+      ],
+      [
+       0.719,
+       0.742,
+       [
+        6,
+        2.8
+       ]
+      ],
+      [
+       0.776,
+       0.735,
+       [
+        7,
+        0.57
+       ]
+      ],
+      [
+       0.833,
+       0.645,
+       [
+        7,
+        1.0
+       ]
+      ]
+     ],
+     "marks": "3 अंक",
+     "t_marks": [
+      7,
+      0.57
+     ],
+     "marks_y": 0.8
+    }
+   ]
+  },
+  {
+   "id": "janneta",
+   "in": 8,
+   "out": 9,
+   "presenter": "standard",
+   "broll": {
+    "clip": "v0",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "def",
+     "slot": "upper",
+     "term": "जननेता",
+     "text": "वो नेता, जिसे आम जनता अपना माने",
+     "at": [
+      8,
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gandhi_jan",
+   "in": 9,
+   "out": 10,
+   "presenter": "standard",
+   "broll": {
+    "clip": "v0",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/gandhi/dandi-3.jpg",
+     "w": 880,
+     "label": "आम जनता के बीच महात्मा गाँधी (1930)",
+     "at": 9
+    }
+   ]
+  },
+  {
+   "id": "masiha",
+   "in": 10,
+   "out": 12,
+   "presenter": "standard",
+   "broll": {
+    "clip": "v0",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "सिर्फ राजनेता",
+     "yes": "चमत्कारी मसीहा",
+     "at": [
+      10,
+      0.23
+     ],
+     "t_yes": [
+      11,
+      0.68
+     ]
+    }
+   ]
+  },
+  {
+   "id": "four",
+   "in": 12,
+   "out": 13,
+   "presenter": "standard",
+   "broll": {
+    "clip": "v0",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "इसके पीछे",
+     "text": "4 वजहें",
+     "at": [
+      12,
+      1.16
+     ],
+     "hl": [
+      "4"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "p1",
+   "in": 13,
+   "out": 14,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s0",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "पहली वजह",
+     "text": "रहन-सहन",
+     "at": [
+      13,
+      1.52
+     ],
+     "hl": [
+      "रहन-सहन"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "suit",
+   "in": 14,
+   "out": 15,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "1. धोती और आम भाषा",
+     "size": "m",
+     "at": 14,
+     "fx": "drop"
+    },
+    {
+     "type": "compare",
+     "slot": "upper",
+     "left": [
+      "दूसरे नेता",
+      "पश्चिमी सूट"
+     ],
+     "right": [
+      "गाँधी जी",
+      "साधारण धोती"
+     ],
+     "at": [
+      14,
+      0.62
+     ],
+     "right_at": [
+      14,
+      1.33
+     ]
+    }
+   ]
+  },
+  {
+   "id": "dhoti",
+   "in": 15,
+   "out": 16,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s0",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "1. धोती और आम भाषा",
+     "size": "m",
+     "at": 15
+    },
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/gandhi/gandhi-khadi-dhoti-real.jpg",
+     "w": 800,
+     "label": "साधारण खादी धोती में महात्मा गाँधी",
+     "at": 15
+    }
+   ]
+  },
+  {
+   "id": "bhasha",
+   "in": 16,
+   "out": 17,
+   "presenter": "full",
+   "broll": {
+    "clip": "s2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "उन्हीं की भाषा में बात",
+     "style": "accent",
+     "at": [
+      16,
+      0.61
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans1",
+   "in": 17,
+   "out": 18,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s0",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/c11/ans-1.jpg",
+     "w": 932,
+     "label": "Answer में: बिंदु 1",
+     "at": 17
+    }
+   ]
+  },
+  {
+   "id": "athva",
+   "in": 18,
+   "out": 20,
+   "presenter": "standard",
+   "broll": {
+    "clip": "v1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "ask",
+     "slot": "upper",
+     "text": "अथवा: किसान गाँधी जी को कैसे देखते थे?",
+     "at": [
+      18,
+      0.92
+     ],
+     "answer": "जवाब यहीं से, ध्यान से सुनो",
+     "t_answer": [
+      19,
+      1.09
+     ]
+    }
+   ]
+  },
+  {
+   "id": "rumour",
+   "in": 20,
+   "out": [
+    22,
+    2.0
+   ],
+   "presenter": "full",
+   "broll": {
+    "clip": "v1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "2. किसानों के गाँधी बाबा",
+     "size": "m",
+     "at": 20,
+     "fx": "drop"
+    },
+    {
+     "type": "notify",
+     "slot": "upper",
+     "items": [
+      [
+       "tabler:message-circle",
+       "अफ़वाह फैली",
+       "किसानों के बीच",
+       [
+        20,
+        0.3
+       ]
+      ],
+      [
+       "tabler:crown",
+       "राजा ने भेजा है",
+       "",
+       [
+        21,
+        2.4
+       ]
+      ],
+      [
+       "tabler:sparkles",
+       "चमत्कारी शक्तियाँ",
+       "",
+       [
+        22,
+        0.0
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "baba",
+   "in": [
+    22,
+    2.0
+   ],
+   "out": 23,
+   "presenter": "standard",
+   "broll": {
+    "clip": "v1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "किसान उन्हें कहते थे",
+     "text": "गाँधी बाबा, महात्मा",
+     "at": [
+      22,
+      2.2
+     ],
+     "hl": [
+      "बाबा,",
+      "महात्मा"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "mukti",
+   "in": 23,
+   "out": [
+    24,
+    0.9
+   ],
+   "presenter": "standard",
+   "broll": {
+    "clip": "v2",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "भारी लगान, ज़मींदारों का अत्याचार",
+     "yes": "मुक्ति दिलाएँगे",
+     "at": [
+      23,
+      0.59
+     ],
+     "t_yes": [
+      24,
+      3.4
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans2",
+   "in": [
+    24,
+    0.9
+   ],
+   "out": [
+    25,
+    0.9
+   ],
+   "presenter": "standard",
+   "broll": {
+    "clip": "v1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/c11/ans-2.jpg",
+     "w": 932,
+     "label": "Answer में: बिंदु 2 (अथवा का जवाब)",
+     "at": [
+      24,
+      0.9
+     ]
+    }
+   ]
+  },
+  {
+   "id": "charkha",
+   "in": [
+    25,
+    0.9
+   ],
+   "out": 27,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "3. चरखा और श्रम",
+     "size": "m",
+     "at": [
+      25,
+      0.9
+     ],
+     "fx": "drop"
+    },
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/gandhi/gandhi-charkha-real-1.jpg",
+     "w": 800,
+     "label": "चरखा चलाते महात्मा गाँधी",
+     "at": [
+      25,
+      0.9
+     ]
+    }
+   ]
+  },
+  {
+   "id": "haath",
+   "in": 27,
+   "out": 29,
+   "presenter": "full",
+   "broll": {
+    "clip": "c2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "खुद हाथ से काम = शारीरिक श्रम",
+     "at": [
+      27,
+      1.08
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "judav",
+   "in": 29,
+   "out": 31,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "upper",
+     "items": [
+      [
+       "गरीब मज़दूर",
+       [
+        29,
+        2.89
+       ]
+      ],
+      [
+       "किसान",
+       [
+        29,
+        3.84
+       ]
+      ],
+      [
+       "दस्तकार",
+       [
+        30,
+        0.0
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "गहरा भावनात्मक जुड़ाव",
+     "at": [
+      30,
+      1.48
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "teacher",
+   "in": 31,
+   "out": [
+    32,
+    1.2
+   ],
+   "presenter": "full",
+   "broll": {
+    "clip": "t1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "जैसे: ज़मीन पर बैठकर पढ़ाने वाले teacher",
+     "at": [
+      31,
+      0.22
+     ],
+     "fx": "rise"
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "बच्चे उन्हें अपना मानते हैं",
+     "at": [
+      32,
+      2.98
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans3",
+   "in": [
+    32,
+    1.2
+   ],
+   "out": [
+    33,
+    1.6
+   ],
+   "presenter": "standard",
+   "broll": {
+    "clip": "c1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/c11/ans-3.jpg",
+     "w": 932,
+     "label": "Answer में: बिंदु 3",
+     "at": [
+      32,
+      1.2
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p4",
+   "in": [
+    33,
+    1.6
+   ],
+   "out": 34,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "4. सबको साथ",
+     "size": "m",
+     "at": [
+      33,
+      1.6
+     ],
+     "fx": "drop"
+    },
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "सिर्फ अमीर और पढ़े-लिखे",
+     "yes": "सबको शामिल किया",
+     "at": [
+      33,
+      2.7
+     ],
+     "t_yes": [
+      34,
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sab",
+   "in": 34,
+   "out": 36,
+   "presenter": "full",
+   "broll": {
+    "clip": "m1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "photo",
+     "slot": "over-broll-top",
+     "src": "history/gandhi/gandhi-dhoti-3.jpg",
+     "w": 680,
+     "label": "हरिजन यात्रा में गाँधी जी (मद्रास)",
+     "at": 34
+    },
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "महिलाएँ",
+       [
+        34,
+        0.39
+       ]
+      ],
+      [
+       "किसान",
+       [
+        34,
+        1.08
+       ]
+      ],
+      [
+       "मज़दूर",
+       [
+        34,
+        1.84
+       ]
+      ],
+      [
+       "अछूत (हरिजन)",
+       [
+        35,
+        0.14
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans4",
+   "in": 36,
+   "out": 37,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/c11/ans-4.jpg",
+     "w": 932,
+     "label": "Answer में: बिंदु 4",
+     "at": 36
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "सच्चा जन-आंदोलन",
+     "at": [
+      36,
+      2.05
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "recap",
+   "in": 37,
+   "out": 40,
+   "presenter": "standard",
+   "broll": {
+    "clip": "v0",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "चारों वजहें, एक लाइन में",
+     "size": "m",
+     "at": 37,
+     "fx": "drop"
+    },
+    {
+     "type": "checklist",
+     "slot": "upper",
+     "lit": [],
+     "at": 37,
+     "lit_t": [
+      [
+       37,
+       3.11
+      ],
+      [
+       38,
+       0.57
+      ],
+      [
+       38,
+       1.2
+      ],
+      [
+       39,
+       0.32
+      ]
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "चारों बिंदु याद!",
+     "at": [
+      38,
+      0.57
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "sure",
+   "in": 40,
+   "out": 42,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "दिमाग में बैठा लिया तो",
+     "text": "पूरे 3 नंबर पक्के",
+     "at": [
+      41,
+      0.8
+     ],
+     "hl": [
+      "पक्के"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "page1",
+   "in": 42,
+   "out": [
+    42,
+    2.2
+   ],
+   "presenter": "full",
+   "tracker": false,
+   "spine": false,
+   "elements": [
+    {
+     "type": "page",
+     "src": "assets/answer/HIS-C11-SA-01-1_page.png",
+     "at": 42
+    }
+   ]
+  },
+  {
+   "id": "page2",
+   "in": [
+    42,
+    2.2
+   ],
+   "out": [
+    43,
+    1.84
+   ],
+   "presenter": "full",
+   "tracker": false,
+   "spine": false,
+   "elements": [
+    {
+     "type": "page",
+     "src": "assets/answer/HIS-C11-SA-01-2_page.png",
+     "at": [
+      42,
+      2.2
+     ],
+     "fx": "slide",
+     "badge": "screenshot लो",
+     "t_badge": [
+      42,
+      2.6
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pdf",
+   "in": [
+    43,
+    1.84
+   ],
+   "out": 48,
+   "presenter": "standard",
+   "broll": {
+    "clip": "p1",
+    "region": "full",
+    "dim": true
+   },
+   "tracker": false,
+   "elements": [
+    {
+     "type": "pdfbadge",
+     "slot": "upper",
+     "text": "Answer की PDF",
+     "sub": "बस 3 काम करने होंगे",
+     "top": 110,
+     "at": [
+      43,
+      1.94
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "एक भी छूटा तो PDF नहीं",
+     "at": [
+      45,
+      1.66
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "asks",
+   "in": 48,
+   "out": 52,
+   "presenter": "standard",
+   "broll": {
+    "clip": "p1",
+    "region": "full",
+    "dim": true
+   },
+   "tracker": false,
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "PDF के लिए बस 3 काम",
+     "size": "m",
+     "at": 48,
+     "fx": "drop"
+    },
+    {
+     "type": "notify",
+     "slot": "upper",
+     "items": [
+      [
+       "tabler:send",
+       "Reel share करो",
+       "दोस्तों के साथ",
+       [
+        48,
+        2.8
+       ]
+      ],
+      [
+       "tabler:user-plus",
+       "मुझे follow करो",
+       "",
+       [
+        49,
+        0.61
+       ]
+      ],
+      [
+       "tabler:message-circle",
+       "comment में PDF लिखो",
+       "PDF सीधे आपके DM पर",
+       [
+        49,
+        2.86
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "save",
+   "in": 52,
+   "out": "end",
+   "presenter": "full",
+   "broll": {
+    "clip": "r1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "igsave",
+     "slot": "over-broll-top",
+     "text": "Reel save करो",
+     "sub": "exam से पहले revision",
+     "at": [
+      52,
+      0.3
+     ],
+     "t_on": [
+      52,
+      1.33
+     ]
+    }
+   ]
+  }
+ ]
+}

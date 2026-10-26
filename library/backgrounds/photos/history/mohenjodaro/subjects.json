@@ -1,0 +1,5 @@
+[{"slug":"street","query":"Mohenjo-daro street brick houses","limit":5},
+ {"slug":"citadel","query":"Mohenjo-daro stupa citadel","limit":3},
+ {"slug":"seal","query":"Indus Valley seal unicorn","limit":3},
+ {"slug":"well","query":"Mohenjo-daro well drain","limit":3},
+ {"slug":"jaisalmer","query":"Jaisalmer haveli","limit":3}]

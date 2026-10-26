@@ -1,0 +1,1208 @@
+{
+ "_about": "HIS-C6-SA-04: मध्यकालीन भक्ति परंपरा के कोई चार प्रमुख संतों के उपदेशों का वर्णन कीजिए। (2022, 2024): pothi look.",
+ "project": "his-c6-sa-04",
+ "part": 1,
+ "captions_at": "bottom",
+ "skin": "paper-editorial",
+ "theme": "pothi",
+ "presenter_style": "card",
+ "plate": "bk-boats",
+ "hilite": [
+  "उपदेश",
+  "कबीर",
+  "उलटबाँसी",
+  "नानक",
+  "स्मरण",
+  "मीराबाई",
+  "कृष्ण",
+  "बासवन्ना",
+  "लिंगायत",
+  "वीरशैव",
+  "जाति-पाति",
+  "अछूत",
+  "बराबर",
+  "पक्के"
+ ],
+ "card_style": {
+  "backdrop": "bk-card"
+ },
+ "framing": {
+  "crop": [
+   600,
+   150,
+   1340,
+   1000
+  ],
+  "full_w": 735
+ },
+ "scene_match": {
+  "tint": 0.05,
+  "wrap": 0.12,
+  "wrap_px": 6
+ },
+ "presenter_grade": {
+  "exposure": 1.0,
+  "contrast": 0.94,
+  "warm": 0.99,
+  "saturation": 0.96,
+  "shadow_lift": 0.4,
+  "lift_radius": 14,
+  "define": 0.04,
+  "matte_soft": 1.0,
+  "matte_choke": 0.05,
+  "soften": {
+   "amount": 0.55,
+   "radius": 1.8
+  }
+ },
+ "card": {
+  "x": 314,
+  "y": 1130,
+  "w": 452,
+  "h": 560
+ },
+ "spine": {
+  "title": "भक्ति के चार संत",
+  "items": [
+   "कबीर: उलटबाँसी",
+   "नानक: नाम स्मरण",
+   "मीरा: कृष्ण भक्ति",
+   "बासवन्ना: लिंगायत"
+  ],
+  "lit_at": [
+   19,
+   25,
+   29,
+   34
+  ],
+  "show_from": 10
+ },
+ "beats": [
+  {
+   "id": "mp",
+   "in": 0,
+   "out": 1,
+   "presenter": "full",
+   "broll": {
+    "clip": "h1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "statemap",
+     "slot": "upper",
+     "state": "Madhya Pradesh",
+     "text": "MP Board",
+     "sub": "कक्षा 12वीं",
+     "w": 880,
+     "top": 170,
+     "at": [
+      0,
+      0.05
+     ]
+    }
+   ]
+  },
+  {
+   "id": "four",
+   "in": 1,
+   "out": 3,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "portraits",
+     "slot": "upper",
+     "top": 150,
+     "img_h": 250,
+     "pos": [
+      "center 52%",
+      "center 35%",
+      "center 22%",
+      "center 12%"
+     ],
+     "items": [
+      [
+       "history/bhakti/kabir-2.jpg",
+       "कबीर",
+       "काशी",
+       [
+        1,
+        0.37
+       ]
+      ],
+      [
+       "history/bhakti/nanakc-4.jpg",
+       "गुरु नानक",
+       "पंजाब",
+       [
+        1,
+        0.72
+       ]
+      ],
+      [
+       "history/bhakti/mira-3.jpg",
+       "मीराबाई",
+       "राजस्थान",
+       [
+        1,
+        1.07
+       ]
+      ],
+      [
+       "history/bhakti/basava-2.jpg",
+       "बासवन्ना",
+       "कर्नाटक",
+       [
+        1,
+        1.42
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ek",
+   "in": 3,
+   "out": 4,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "चारों की बात एक",
+     "text": "कोई ऊँचा-नीचा नहीं",
+     "at": 3,
+     "hl": [
+      "ऊँचा-नीचा"
+     ],
+     "fx": "rise",
+     "sub": "भगवान के सामने"
+    }
+   ]
+  },
+  {
+   "id": "years",
+   "in": 4,
+   "out": 6,
+   "presenter": "full",
+   "broll": {
+    "clip": "e1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "papers",
+     "style": "row",
+     "assets": "assets/papers",
+     "at": 4,
+     "top": 330,
+     "left0": 150,
+     "step": 420,
+     "sheet_w": 380,
+     "dy": 34,
+     "title": "यही question, board exam में",
+     "years": [
+      [
+       "2022",
+       [
+        4,
+        1.55
+       ]
+      ],
+      [
+       "2024",
+       [
+        4,
+        2.58
+       ]
+      ]
+     ],
+     "after": "दोनों साल पूछा गया",
+     "t_after": [
+      5,
+      0.0
+     ],
+     "after_dy": 510
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": 6,
+   "out": 7,
+   "presenter": "full",
+   "broll": {
+    "clip": "e1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "qsheet",
+     "at": 6,
+     "src": "qsheet.png",
+     "src_path": "assets/papers/qsheet.png",
+     "w": 840,
+     "top": 64,
+     "hl_left": 0.262,
+     "line_h": 0.058,
+     "lines": [
+      [
+       0.662,
+       0.81,
+       [
+        6,
+        0.0
+       ]
+      ],
+      [
+       0.739,
+       0.82,
+       [
+        6,
+        2.03
+       ]
+      ],
+      [
+       0.81,
+       0.816,
+       [
+        6,
+        4.42
+       ]
+      ]
+     ],
+     "marks": "3 अंक",
+     "t_marks": [
+      6,
+      5.39
+     ],
+     "marks_y": 0.8
+    }
+   ]
+  },
+  {
+   "id": "updesh",
+   "in": 7,
+   "out": 8,
+   "presenter": "standard",
+   "broll": {
+    "clip": "u1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "ध्यान देने वाला शब्द",
+     "text": "उपदेश",
+     "at": [
+      7,
+      2.82
+     ],
+     "hl": [
+      "उपदेश"
+     ],
+     "fx": "rise",
+     "sub": "यानी उनकी सीख"
+    }
+   ]
+  },
+  {
+   "id": "format",
+   "in": 8,
+   "out": 10,
+   "presenter": "standard",
+   "broll": {
+    "clip": "u1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "हर संत के लिए लिखो",
+     "size": "m",
+     "at": 8,
+     "fx": "drop"
+    },
+    {
+     "type": "compare",
+     "slot": "upper",
+     "left": [
+      "परिचय",
+      "वो कौन थे"
+     ],
+     "right": [
+      "उपदेश",
+      "उनकी सीख"
+     ],
+     "at": [
+      8,
+      1.12
+     ],
+     "right_at": [
+      9,
+      0.35
+     ]
+    }
+   ]
+  },
+  {
+   "id": "kabir",
+   "in": 10,
+   "out": 11,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "1. कबीर",
+     "size": "m",
+     "at": 10,
+     "fx": "drop"
+    },
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/bhakti/kabir-loom.jpg",
+     "w": 600,
+     "label": "करघे पर कबीर",
+     "at": [
+      10,
+      1.36
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "under-upper",
+     "text": "14वीं-15वीं शताब्दी",
+     "style": "accent",
+     "at": [
+      10,
+      2.38
+     ]
+    }
+   ]
+  },
+  {
+   "id": "naam",
+   "in": 11,
+   "out": 12,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "1. कबीर",
+     "size": "m",
+     "at": 11
+    },
+    {
+     "type": "def",
+     "slot": "upper",
+     "term": "कबीर",
+     "text": "अरबी में अर्थ: महान",
+     "at": [
+      11,
+      2.06
+     ]
+    }
+   ]
+  },
+  {
+   "id": "janm",
+   "in": 12,
+   "out": 13,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k2",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "1. कबीर",
+     "size": "m",
+     "at": 12
+    },
+    {
+     "type": "ask",
+     "slot": "upper",
+     "text": "कबीर हिंदू थे या मुसलमान?",
+     "at": [
+      12,
+      0.58
+     ],
+     "answer": "इस पर मतभेद है",
+     "t_answer": [
+      12,
+      2.62
+     ]
+    }
+   ]
+  },
+  {
+   "id": "satya",
+   "in": 13,
+   "out": 15,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k3",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "कबीर का उपदेश",
+     "text": "परम सत्य एक है",
+     "at": [
+      13,
+      2.02
+     ],
+     "hl": [
+      "एक"
+     ],
+     "fx": "rise"
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "अल्लाह कहो या राम",
+     "at": [
+      14,
+      0.39
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "dikhava",
+   "in": 15,
+   "out": 16,
+   "presenter": "full",
+   "broll": {
+    "clip": "k2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "दोनों धर्मों के बाहरी दिखावे का विरोध",
+     "at": [
+      15,
+      1.24
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "ulat",
+   "in": 16,
+   "out": 19,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k4",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "कबीर की उलटबाँसी",
+     "size": "m",
+     "at": [
+      16,
+      2.13
+     ],
+     "fx": "drop"
+    },
+    {
+     "type": "compare",
+     "slot": "upper",
+     "left": [
+      "ऊपर से",
+      "अर्थ कुछ और"
+     ],
+     "right": [
+      "अंदर",
+      "गहरा सत्य"
+     ],
+     "at": [
+      17,
+      0.55
+     ],
+     "right_at": [
+      18,
+      0.27
+     ]
+    }
+   ]
+  },
+  {
+   "id": "nanak",
+   "in": 19,
+   "out": 21,
+   "presenter": "standard",
+   "broll": {
+    "clip": "n1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "2. गुरु नानक",
+     "size": "m",
+     "at": 19,
+     "fx": "drop"
+    },
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/bhakti/nanakc-4.jpg",
+     "w": 700,
+     "label": "गुरु नानक, भाई मरदाना और भाई बाला के साथ",
+     "at": [
+      19,
+      2.28
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "under-upper",
+     "text": "1469 – 1539",
+     "style": "accent",
+     "at": [
+      20,
+      0.87
+     ]
+    }
+   ]
+  },
+  {
+   "id": "guru",
+   "in": 21,
+   "out": 23,
+   "presenter": "standard",
+   "broll": {
+    "clip": "n1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "2. गुरु नानक",
+     "size": "m",
+     "at": 21
+    },
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/bhakti/nanakc-2.jpg",
+     "w": 860,
+     "label": "दस सिख गुरु, बीच में गुरु नानक",
+     "at": 21
+    },
+    {
+     "type": "pills",
+     "slot": "under-upper",
+     "items": [
+      [
+       "हिंदू व्यापारी परिवार में जन्म",
+       [
+        21,
+        0.98
+       ]
+      ],
+      [
+       "सिखों के पहले गुरु",
+       [
+        22,
+        0.98
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "nirakar",
+   "in": 23,
+   "out": [
+    23,
+    2.94
+   ],
+   "presenter": "standard",
+   "broll": {
+    "clip": "n2",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "नानक का उपदेश",
+     "text": "निराकार ईश्वर की भक्ति",
+     "at": [
+      23,
+      1.16
+     ],
+     "hl": [
+      "निराकार"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "smaran",
+   "in": [
+    23,
+    2.94
+   ],
+   "out": 25,
+   "presenter": "standard",
+   "broll": {
+    "clip": "n2",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "नानक का उपदेश",
+     "size": "m",
+     "at": [
+      23,
+      2.94
+     ]
+    },
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "कर्मकांड",
+     "yes": "ईश्वर के नाम का स्मरण",
+     "at": [
+      23,
+      3.24
+     ],
+     "t_yes": [
+      24,
+      0.73
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mira",
+   "in": 25,
+   "out": 27,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "3. मीराबाई",
+     "size": "m",
+     "at": 25,
+     "fx": "drop"
+    },
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/bhakti/mira-3.jpg",
+     "w": 480,
+     "label": "मीराबाई",
+     "at": [
+      25,
+      1.5
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "under-upper",
+     "text": "उत्तर भारत की प्रमुख कृष्ण भक्त",
+     "style": "accent",
+     "at": [
+      26,
+      1.94
+     ]
+    }
+   ]
+  },
+  {
+   "id": "samarpan",
+   "in": 27,
+   "out": 29,
+   "presenter": "standard",
+   "broll": {
+    "clip": "m2",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "मीरा का उपदेश",
+     "text": "कृष्ण के प्रति पूरा समर्पण",
+     "at": [
+      27,
+      1.27
+     ],
+     "hl": [
+      "समर्पण"
+     ],
+     "fx": "rise"
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "समाज की हर रोक-टोक से ऊपर",
+     "at": [
+      28,
+      0.0
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "basava",
+   "in": 29,
+   "out": 31,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "4. बासवन्ना",
+     "size": "m",
+     "at": 29,
+     "fx": "drop"
+    },
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/bhakti/basava-2.jpg",
+     "w": 520,
+     "label": "बासवन्ना की प्रतिमा, गदग (कर्नाटक)",
+     "at": [
+      29,
+      2.03
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "under-upper",
+     "text": "1106 – 1168",
+     "style": "accent",
+     "at": [
+      30,
+      0.55
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mantri",
+   "in": 31,
+   "out": 32,
+   "presenter": "full",
+   "broll": {
+    "clip": "b2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "कलचुरि राजा के दरबार में मंत्री",
+     "at": [
+      31,
+      0.35
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "lingayat",
+   "in": 32,
+   "out": 34,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b3",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "बासवन्ना का उपदेश",
+     "size": "m",
+     "at": 32,
+     "fx": "drop"
+    },
+    {
+     "type": "def",
+     "slot": "upper",
+     "term": "वीरशैव",
+     "text": "यानी लिंगायत परंपरा",
+     "at": [
+      32,
+      0.95
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "शिव की पूजा, लिंग के रूप में",
+     "at": [
+      33,
+      0.42
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "jod",
+   "in": 34,
+   "out": 36,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "चारों संतों को जोड़ने वाली लाइन",
+     "size": "m",
+     "at": [
+      35,
+      1.88
+     ],
+     "fx": "drop"
+    },
+    {
+     "type": "portraits",
+     "slot": "upper",
+     "top": 250,
+     "img_h": 230,
+     "pos": [
+      "center 52%",
+      "center 35%",
+      "center 22%",
+      "center 12%"
+     ],
+     "at": 34,
+     "items": [
+      [
+       "history/bhakti/kabir-2.jpg",
+       "कबीर",
+       "",
+       34
+      ],
+      [
+       "history/bhakti/nanakc-4.jpg",
+       "गुरु नानक",
+       "",
+       [
+        34,
+        0.15
+       ]
+      ],
+      [
+       "history/bhakti/mira-3.jpg",
+       "मीराबाई",
+       "",
+       [
+        34,
+        0.3
+       ]
+      ],
+      [
+       "history/bhakti/basava-2.jpg",
+       "बासवन्ना",
+       "",
+       [
+        34,
+        0.45
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "virodh",
+   "in": 36,
+   "out": 39,
+   "presenter": "standard",
+   "broll": {
+    "clip": "c1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "सभी संतों ने कड़ा विरोध किया",
+     "size": "m",
+     "at": 36,
+     "fx": "drop"
+    },
+    {
+     "type": "notify",
+     "slot": "upper",
+     "items": [
+      [
+       "tabler:ban",
+       "जाति-पाति",
+       "",
+       [
+        37,
+        0.0
+       ]
+      ],
+      [
+       "tabler:ban",
+       "किसी को अछूत या दूषित मानना",
+       "",
+       [
+        37,
+        1.39
+       ]
+      ],
+      [
+       "tabler:ban",
+       "ब्राह्मणवादी परंपरा",
+       "",
+       [
+        38,
+        0.0
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "कड़ा विरोध",
+     "at": [
+      38,
+      1.97
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "teacher",
+   "in": 39,
+   "out": 42,
+   "presenter": "full",
+   "broll": {
+    "clip": "t1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "जैसे: अच्छा टीचर, हर बच्चा बराबर",
+     "at": [
+      39,
+      1.27
+     ],
+     "fx": "rise"
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "ये संत: सब बराबर",
+     "at": [
+      41,
+      0.67
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "recap",
+   "in": 42,
+   "out": 45,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "एक-एक पहचान से याद रखो",
+     "size": "m",
+     "at": 42,
+     "fx": "drop"
+    },
+    {
+     "type": "portraits",
+     "slot": "upper",
+     "img_h": 196,
+     "pos": [
+      "center 52%",
+      "center 35%",
+      "center 22%",
+      "center 12%"
+     ],
+     "ghost": true,
+     "focus": true,
+     "at": 42,
+     "items": [
+      [
+       "history/bhakti/kabir-2.jpg",
+       "कबीर",
+       "उलटबाँसी",
+       [
+        43,
+        0.0
+       ]
+      ],
+      [
+       "history/bhakti/nanakc-4.jpg",
+       "गुरु नानक",
+       "नाम स्मरण",
+       [
+        43,
+        1.63
+       ]
+      ],
+      [
+       "history/bhakti/mira-3.jpg",
+       "मीराबाई",
+       "कृष्ण भक्ति",
+       [
+        44,
+        0.0
+       ]
+      ],
+      [
+       "history/bhakti/basava-2.jpg",
+       "बासवन्ना",
+       "लिंगायत",
+       [
+        44,
+        1.95
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sure",
+   "in": 45,
+   "out": 48,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "पूरा answer दिमाग में बैठा लिया, इतना लिखा तो",
+     "text": "पूरे 3 नंबर पक्के",
+     "at": [
+      47,
+      1.17
+     ],
+     "hl": [
+      "पक्के"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "page",
+   "in": 48,
+   "out": "end",
+   "presenter": "full",
+   "tracker": false,
+   "spine": false,
+   "elements": [
+    {
+     "type": "page",
+     "src": "assets/answer/HIS-C6-SA-04-1_page.png",
+     "at": 48,
+     "badge": "Notes button में",
+     "t_badge": [
+      48,
+      1.59
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+{
+ "constitution": [
+  {
+   "title": "File:Constitution of India.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Constitution_of_India.jpg/1920px-Constitution_of_India.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Constitution_of_India.jpg",
+   "licence": "Public domain",
+   "licence_url": "https://commons.wikimedia.org/wiki/File:Constitution_of_India.jpg",
+   "author": "Illumination/ornamentation by Beohar Rammanohar Sinha, calligraphy by Prem Behari Narain Raizada.",
+   "credit_required": false,
+   "file": "constitution-1.jpg",
+   "width": 1791,
+   "height": 2400,
+   "query": "Constitution of India manuscript",
+   "desc": "The en:Indian Constitution en:preamble"
+  },
+  {
+   "title": "File:Constituent assembly.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Constituent_assembly.jpg/1920px-Constituent_assembly.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Constituent_assembly.jpg",
+   "licence": "CC BY-SA 3.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "author": "Kritikasni",
+   "credit_required": true,
+   "file": "constitution-3.jpg",
+   "width": 1920,
+   "height": 1405,
+   "query": "Constituent Assembly of India",
+   "desc": "Constituent Assembly of India"
+  },
+  {
+   "title": "File:Preamble of constitution of India.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Preamble_of_constitution_of_India.jpg/1920px-Preamble_of_constitution_of_India.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Preamble_of_constitution_of_India.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Dr. Prafull Gadpal",
+   "credit_required": true,
+   "file": "constitution-5.jpg",
+   "width": 1859,
+   "height": 2400,
+   "query": "Constitution of India preamble original",
+   "desc": "Preamble of constitution of India translated by Prafull Gadpal in Pali"
+  }
+ ]
+}

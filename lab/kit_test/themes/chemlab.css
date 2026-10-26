@@ -1,0 +1,280 @@
+/* chemlab: the Molarity reel (24 Oct 2026).  Derived from labbook by colour swap: the lapis second key becomes
+   laboratory teal (glassware, copper-sulphate blue), the copper accent stays; same Mukta card language.  Plate:
+   a lab wall with glass cylinders, lightly blurred (cl-lab-wall). */
+@font-face { font-family: 'Martel'; src: url('../../../library/elements/fonts/Martel-ExtraBold.ttf'); font-weight: 800; }
+@font-face { font-family: 'Rozha One'; src: url('../../../library/elements/fonts/RozhaOne-Regular.ttf'); }
+@font-face { font-family: 'Tiro Devanagari Hindi'; src: url('../../../library/elements/fonts/TiroDevanagariHindi-Regular.ttf'); }
+#frame.theme-chemlab {
+  --ink: #12292B;
+  --accent: #B8692F;          /* baked-brick terracotta */
+  --accent-2: #0E7C86;        /* lapis lazuli */
+  --muted: #5A6478;
+  --paper: #EADBC0;
+  --card-bg: rgba(252, 251, 246, .97);
+  --solid: rgba(252, 251, 246, .99);
+  --card-border: rgba(90, 58, 30, .35);
+  --font-head: 'Martel', serif;
+  --head-weight: 800;
+  --head-stretch: 100%;
+  --font-body: 'Tiro Devanagari Hindi', serif;
+  --font-num: 'Khand', sans-serif;
+  --halo: 0 0 6px rgba(0, 0, 0, .85), 0 2px 3px rgba(0, 0, 0, .9);
+  --glass-shadow: 0 12px 28px rgba(0, 0, 0, .45);
+  --sea: #0E2C47;
+  --land: #C9A877;
+  --coast: rgba(255, 240, 210, .55);
+  color: var(--ink);
+}
+
+.theme-chemlab .card, .theme-chemlab .qcard, .theme-chemlab .k-card, .theme-chemlab .compare .k-card,
+.theme-chemlab .k-def, .theme-chemlab .yn .side, .theme-chemlab .imgcard, .theme-chemlab .panel {
+  background: var(--card-bg) !important; border: 1.5px solid var(--card-border) !important; border-radius: 14px !important;
+  box-shadow: inset 0 0 0 6px rgba(252,251,246,.97), inset 0 0 0 8px rgba(90,58,30,.45), inset 2px 3px 10px rgba(90,58,30,.35), var(--glass-shadow) !important; border-top: none !important; border-radius: 6px !important; color: var(--ink);
+  }
+.theme-chemlab .k-head { font-family: 'Martel'; font-weight: 800; }
+.theme-chemlab .hl-m { font-family: 'Martel'; font-weight: 800; color: #fff; text-shadow: var(--halo); text-wrap: balance; font-size: 66px; line-height: 1.35; }
+.theme-chemlab .qcard .k-head { color: var(--accent) !important; }
+
+.theme-chemlab .k-section-tag { background: var(--card-bg) !important; border: 1.5px solid var(--card-border) !important; box-shadow: var(--glass-shadow) !important;
+  display: inline-flex; align-items: center; gap: 18px; padding: 8px 30px 8px 8px; border-radius: 44px; }
+.theme-chemlab .k-section-tag__num { width: 70px; height: 70px; border-radius: 50%; display: grid; place-items: center; padding: 0;
+  background: var(--accent); color: #FFF6E6; font-family: 'Khand'; font-weight: 700; font-size: 52px; line-height: 1; }
+.theme-chemlab .k-section-tag__text { font-family: 'Martel'; font-weight: 800; font-size: 54px; color: var(--ink); background: none; padding: 0; line-height: 1.5; }
+
+.theme-chemlab .k-pill { border-radius: 40px !important; font-family: 'Tiro Devanagari Hindi'; font-weight: 400; font-size: 48px;
+  background: var(--card-bg) !important; color: var(--ink) !important; border: 1.5px solid var(--card-border) !important;
+  padding: 6px 30px 6px 20px; box-shadow: var(--glass-shadow); display: inline-flex; align-items: center; gap: 14px; }
+.theme-chemlab .k-pill::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); flex: none; }
+.theme-chemlab .k-pill--accent { background: var(--accent) !important; color: #FFF6E6 !important; border-color: var(--accent) !important; }
+.theme-chemlab .k-pill--accent::before { background: #FFF6E6; }
+
+.theme-chemlab .k-stamp { font-family: 'Martel'; font-weight: 800; color: var(--accent); border-color: var(--accent);
+  outline-color: var(--accent); background: var(--solid) !important; -webkit-mask-image: none; mix-blend-mode: normal; border-radius: 12px; }
+
+.theme-chemlab .note { font-family: 'Tiro Devanagari Hindi'; font-weight: 400; font-size: 52px; color: #FFF1D6; text-shadow: var(--halo); }
+.theme-chemlab .note.on-photo { background: rgba(52, 32, 15, .82); padding: 8px 24px; border-radius: 12px; text-shadow: none; }
+
+.theme-chemlab #spine { left: 24px; right: 24px; top: 24px; height: 92px; background: var(--card-bg); border-radius: 46px; border: 1.5px solid var(--card-border);
+  padding: 0 30px; box-sizing: border-box; box-shadow: var(--glass-shadow); }
+.theme-chemlab #spine .ttl { font-family: 'Martel'; font-weight: 800; font-size: 40px; color: var(--ink); }
+.theme-chemlab #spine .k-dots i { width: 26px; height: 26px; border-radius: 50%; background: transparent; border: 4px solid var(--accent); margin: 0 6px; }
+.theme-chemlab #spine .k-dots i.on { background: var(--accent); }
+.theme-chemlab #spine .cnt { font-family: 'Khand'; font-weight: 700; color: var(--accent-2); }
+
+.theme-chemlab #cap { font-family: 'Noto Sans Devanagari'; font-weight: 700; font-size: 44px; color: var(--ink);
+  --torn-bg: rgba(240, 228, 204, .96); clip-path: none; border-radius: 14px; box-shadow: var(--glass-shadow); border: 1.5px solid var(--card-border); }
+.theme-chemlab #cap .hl { color: var(--accent); }
+
+.theme-chemlab .hub-ring { border: 8px solid #fff; box-shadow: 0 0 0 5px var(--accent), var(--glass-shadow); }
+.theme-chemlab .hub-route { border: 3px dashed rgba(184, 134, 46, .85); }
+.theme-chemlab .num { font-family: 'Khand'; font-weight: 700; color: var(--accent); }
+
+.theme-chemlab #broll { background: #000; }
+.theme-chemlab #broll img { filter: saturate(1.05) !important; mix-blend-mode: normal !important; }
+.theme-chemlab #broll::after { background-image: none; background: linear-gradient(180deg, rgba(4,12,22,.45) 0%, transparent 20%, transparent 58%, rgba(4,12,22,.6) 100%); mix-blend-mode: normal; }
+.theme-chemlab #broll.dim img { filter: brightness(.5) saturate(.85) !important; }
+
+.theme-chemlab .p-card { border: 8px solid #fff; box-shadow: 0 0 0 4px var(--accent), var(--glass-shadow); }
+
+.theme-chemlab .hl-m { font-size: 72px; line-height: 1.3; }
+.theme-chemlab .yn .side div:last-child, .theme-chemlab .card > span:last-child { font-size: 52px !important; }
+/* a source card: photo in a stone frame, its kind as a red seal, its one-line identity under it */
+.theme-chemlab .src-card { background: var(--card-bg); border-radius: 8px; box-shadow: inset 0 0 0 8px rgba(252,251,246,.97), inset 0 0 0 10px rgba(90,58,30,.45), var(--glass-shadow); padding: 26px; box-sizing: border-box; }
+.theme-chemlab .src-card img { display: block; border-radius: 4px; box-shadow: 0 0 0 3px rgba(90,58,30,.5); }
+
+/* Tiro sets a small x-height: lift every body text the stock templates fix inline */
+.theme-chemlab .yn .side div:last-child { font-size: 56px !important; }
+.theme-chemlab .card > span:last-child { font-size: 58px !important; }
+.theme-chemlab .k-def__term { font-size: 62px !important; }
+.theme-chemlab .k-def__text { font-size: 56px !important; }
+.theme-chemlab .imgcard .k-pill { font-size: 42px !important; }
+.theme-chemlab .note { font-size: 56px; }
+
+/* the map, as an old survey on cloth: pale water, parchment land, sepia coast, blue rivers */
+#frame.theme-chemlab { --sea: #B9C8C4; --land: #EBDDBF; --coast: rgba(90, 58, 30, .75); --river: #3D9BA3; }
+.theme-chemlab .seamap { padding: 0 !important; overflow: hidden; }
+.theme-chemlab .port-dot { fill: var(--accent); stroke: #FFF6E6; stroke-width: 4; }
+.theme-chemlab .port-tag { position: absolute; white-space: nowrap; font-family: 'Rozha One'; font-size: 40px; line-height: 1.2;
+  background: rgba(240, 228, 204, .97); color: var(--ink); border: 2px solid var(--accent); border-radius: 8px; padding: 2px 14px 4px; }
+.theme-chemlab .port-tag small { display: block; font-family: 'Tiro Devanagari Hindi'; font-size: 28px; color: var(--muted); }
+.theme-chemlab .port-tag.on { background: var(--accent); color: #FFF6E6; }
+.theme-chemlab .port-tag.on small { color: #F3D9C8; }
+.theme-chemlab .map-label { position: absolute; white-space: nowrap; font-family: 'Tiro Devanagari Hindi'; font-style: italic; font-size: 30px; color: rgba(52, 32, 15, .7); }
+.theme-chemlab .map-label.sea { color: rgba(40, 70, 95, .75); }
+.theme-chemlab .map-label.river { color: #13737C; font-size: 28px; }
+.theme-chemlab .seamap .port-tag.on { color: #FFF6E6 !important; }
+
+/* the intersecting-circles band (Harappan pottery): a terracotta top border with the
+   circles painted into it, over a cream card */
+.theme-chemlab .card, .theme-chemlab .k-card, .theme-chemlab .k-def, .theme-chemlab .yn .side, .theme-chemlab .panel, .theme-chemlab .qcard {
+  border: 1.5px solid rgba(120,70,30,.35) !important; border-top: 20px solid #B8692F !important; border-radius: 8px !important;
+  background: radial-gradient(circle at 10px 10px, transparent 5px, #E2F3F3 6px 7.5px, transparent 8.5px) 0 0 / 20px 20px repeat-x border-box,
+              radial-gradient(circle at 0 10px, transparent 5px, #E2F3F3 6px 7.5px, transparent 8.5px) 0 0 / 20px 20px repeat-x border-box,
+              var(--card-bg) !important;
+  box-shadow: 0 14px 30px rgba(0,0,0,.4) !important; }
+#frame.theme-chemlab { --sea: #B9C8C4; --land: #EBDDBF; --coast: rgba(90, 58, 30, .75); --river: #3D9BA3; }
+.theme-chemlab .seamap { padding: 0 !important; overflow: hidden; }
+.theme-chemlab .port-dot { fill: var(--accent); stroke: #FFF6E6; stroke-width: 4; }
+.theme-chemlab .port-tag { position: absolute; white-space: nowrap; font-family: 'Rozha One'; font-size: 40px; line-height: 1.2;
+  background: rgba(240, 228, 204, .97); color: var(--ink); border: 2px solid var(--accent); border-radius: 8px; padding: 2px 14px 4px; }
+.theme-chemlab .port-tag small { display: block; font-family: 'Tiro Devanagari Hindi'; font-size: 28px; color: var(--muted); }
+.theme-chemlab .port-tag.on { background: var(--accent); color: #FFF6E6; }
+.theme-chemlab .port-tag.on small { color: #F3D9C8; }
+.theme-chemlab .map-label { position: absolute; white-space: nowrap; font-family: 'Tiro Devanagari Hindi'; font-style: italic; font-size: 30px; color: rgba(52, 32, 15, .7); }
+.theme-chemlab .map-label.sea { color: rgba(40, 70, 95, .75); }
+.theme-chemlab .map-label.river { color: #13737C; font-size: 28px; }
+.theme-chemlab .seamap .port-tag.on { color: #FFF6E6 !important; }
+
+/* the intersecting-circles band (Harappan pottery) across the top of every card */
+.theme-chemlab .card, .theme-chemlab .k-card, .theme-chemlab .k-def, .theme-chemlab .yn .side, .theme-chemlab .panel, .theme-chemlab .qcard {
+  border-top: 18px solid transparent !important;
+  border-image: radial-gradient(circle at 50% 50%, transparent 5px, #B8692F 6px 8px, transparent 9px) 0 0 18 0 / 18px 0 0 0 round !important;
+  background-image: radial-gradient(circle at 9px 9px, transparent 6px, rgba(184,105,47,.95) 7px 9px, transparent 10px) !important;
+  background-size: 18px 18px !important; background-repeat: repeat-x !important; background-position: 0 -18px !important; background-color: var(--card-bg) !important;
+  box-shadow: inset 0 18px 0 0 rgba(184,105,47,.0), 0 14px 30px rgba(0,0,0,.4) !important; }
+.theme-chemlab .card::before, .theme-chemlab .panel::before, .theme-chemlab .qcard::before, .theme-chemlab .yn .side::before, .theme-chemlab .k-def::before {
+  content: ""; position: absolute; left: 0; right: 0; top: -18px; height: 18px; border-radius: 6px 6px 0 0;
+  background: radial-gradient(circle at 9px 9px, transparent 5px, #E2F3F3 6px 7.5px, transparent 8.5px) 0 0 / 18px 18px repeat-x, #B8692F; }
+.theme-chemlab .card, .theme-chemlab .panel, .theme-chemlab .qcard, .theme-chemlab .yn .side, .theme-chemlab .k-def { position: relative; overflow: visible !important; }
+#frame.theme-chemlab { --sea: #0E7C86; --land: #EAD9B8; --coast: rgba(120,70,30,.75); }
+.theme-chemlab .k-pill--accent { background: var(--accent-2) !important; border-color: var(--accent-2) !important; color: #E2F3F3 !important; }
+.theme-chemlab .p-card { border: 8px solid #E2F3F3; box-shadow: 0 0 0 5px var(--accent), 0 14px 30px rgba(0,0,0,.45); }
+.theme-chemlab .k-check-row__text { font-size: 46px !important; }
+.theme-chemlab .k-check-row { padding-top: 10px !important; padding-bottom: 10px !important; }
+
+/* hero text: the one thing to remember, set large */
+.theme-chemlab .hero { background: linear-gradient(180deg, rgba(252,251,246,.97), rgba(240,226,200,.97)); border-top: 20px solid #B8692F;
+  border-radius: 10px; box-shadow: 0 18px 40px rgba(0,0,0,.45); position: relative; }
+.theme-chemlab .hero::before { content: ""; position: absolute; left: 0; right: 0; top: -20px; height: 20px;
+  background: radial-gradient(circle at 10px 10px, transparent 5px, #E2F3F3 6px 7.5px, transparent 8.5px) 0 0 / 20px 20px repeat-x; }
+.theme-chemlab .hero-kicker { font-family: 'Tiro Devanagari Hindi'; font-size: 44px; color: var(--muted); margin-bottom: 6px; }
+.theme-chemlab .hero-text { font-family: 'Martel'; font-weight: 800; font-size: 104px; line-height: 1.32; color: var(--accent); }
+.theme-chemlab .hero-rule { height: 9px; margin: 10px auto 0; background: var(--accent-2); border-radius: 5px; }
+.theme-chemlab .hero-sub { font-family: 'Tiro Devanagari Hindi'; font-size: 52px; color: var(--ink); margin-top: 14px; }
+/* the question as an event */
+.theme-chemlab .qh-year { position: absolute; top: 96px; width: 270px; text-align: center; font-family: 'Khand'; font-weight: 700; font-size: 104px; line-height: 1;
+  color: #B8692F; border: 7px solid #B8692F; outline: 3px solid #B8692F; outline-offset: 5px; border-radius: 10px; padding: 14px 0 6px;
+  background: rgba(252,251,246,.96); box-shadow: 0 10px 22px rgba(0,0,0,.35); }
+.theme-chemlab .qh-next { position: absolute; left: 160px; top: 300px; font-size: 54px; padding: 12px 28px; }
+.theme-chemlab .qh-card { position: absolute; left: 0; top: 440px; width: 960px; box-sizing: border-box; padding: 34px 44px 54px; }
+.theme-chemlab .qh-ul { height: 9px; background: var(--accent-2); border-radius: 5px; margin-top: 6px; }
+.theme-chemlab .qh-marks { position: absolute; right: -10px; top: 400px; width: 190px; height: 190px; border-radius: 50%; display: grid; place-items: center;
+  background: #0E7C86; color: #E2F3F3; font-family: 'Martel'; font-weight: 800; font-size: 50px; box-shadow: 0 0 0 7px #E2F3F3, 0 0 0 11px #0E7C86, 0 12px 26px rgba(0,0,0,.4); }
+.theme-chemlab .qh-year { width: 270px; }
+.theme-chemlab .hero-text { text-wrap: balance; }
+/* the answer sheet */
+.theme-chemlab .ans { background: repeating-linear-gradient(180deg, transparent 0 59px, rgba(14,124,134,.22) 59px 61px), rgba(250,244,230,.98) !important; }
+.theme-chemlab .ans-head { font-family: 'Martel'; font-weight: 800; font-size: 54px; color: var(--accent); margin-bottom: 8px; }
+.theme-chemlab .ans-row { font-family: 'Tiro Devanagari Hindi'; font-size: 40px; line-height: 1.5; color: #173235; margin: 4px 0 10px; }
+.theme-chemlab .ans-row b { color: var(--accent); font-family: 'Martel'; }
+.theme-chemlab .ans-todo { opacity: .45; }
+.theme-chemlab .ans-blank { display: inline-block; width: 70%; height: 6px; border-bottom: 4px dotted rgba(14,124,134,.5); vertical-align: middle; }
+.theme-chemlab .ans-new { background: linear-gradient(90deg, rgba(242,169,0,.22), transparent 85%); border-radius: 6px; }
+.theme-chemlab .ans { padding: 20px 30px 22px !important; }
+.theme-chemlab .ans-head { font-size: 48px; margin-bottom: 2px; }
+.theme-chemlab .ans-row { font-size: 39px; line-height: 1.38; margin: 2px 0 6px; }
+
+/* chemlab — "प्रायोगिक फ़ाइल".  A Class 12 practical file: white cards on blue-ruled graph paper, copper
+   for wires and accents (the metre bridge's own strips), ink navy for symbols, KaTeX for every equation.
+   The card band is a strip of graph paper with a copper rule.  Plates: graph paper, the real slide-wire
+   bridge photo (Commons), a dark bench.  (Derived from harappa.) */
+.theme-chemlab .card::before, .theme-chemlab .panel::before, .theme-chemlab .qcard::before, .theme-chemlab .yn .side::before, .theme-chemlab .k-def::before {
+  background: linear-gradient(90deg, rgba(14,124,134,.25) 1px, transparent 1px) 0 0 / 18px 18px, linear-gradient(rgba(14,124,134,.25) 1px, transparent 1px) 0 0 / 18px 18px, #F1F9F9;
+  border-bottom: 5px solid #B8692F; height: 13px; }
+.theme-chemlab .hero::before { background: linear-gradient(90deg, rgba(14,124,134,.25) 1px, transparent 1px) 0 0 / 20px 20px, linear-gradient(rgba(14,124,134,.25) 1px, transparent 1px) 0 0 / 20px 20px, #F1F9F9; border-bottom: 5px solid #B8692F; height: 15px; }
+.theme-chemlab .hero { border-top-color: #F1F9F9; }
+.theme-chemlab .hero-text { color: #0E7C86; }
+.theme-chemlab .hero-rule { background: #B8692F; }
+.theme-chemlab .hl-m { background: rgba(252,251,246,.97); color: #12292B; text-shadow: none; width: fit-content; max-width: 960px;
+  padding: 6px 28px 10px; border-radius: 6px; border-left: 12px solid #B8692F; box-shadow: 0 10px 24px rgba(0,0,0,.3); font-size: 58px; }
+.theme-chemlab .k-pill::before { background: #B8692F; }
+.theme-chemlab .qh-marks { background: #0E7C86; box-shadow: 0 0 0 7px #E2F3F3, 0 0 0 11px #B8692F, 0 12px 26px rgba(0,0,0,.35); }
+.theme-chemlab .circ, .theme-chemlab .formula { background: linear-gradient(90deg, rgba(14,124,134,.08) 1px, transparent 1px) 0 0 / 30px 30px, linear-gradient(rgba(14,124,134,.08) 1px, transparent 1px) 0 0 / 30px 30px, #FFFFFF; }
+
+/* ===================================================================================================
+   chemlab v2 (23 Oct 2026): readable type and clean cards.  The user asked for "better font which is
+   easily readable and better cards".  Mukta (OFL; library/elements/fonts/mukta) is a sans built for
+   Devanagari at screen sizes: open counters, a clear शिरोरेखा, no serif noise at phone size.  Cards are
+   plain white with a soft shadow and one copper accent, so the words carry the card, not its border.
+   =================================================================================================== */
+@font-face { font-family: 'Mukta'; font-weight: 500; src: url('../../../library/elements/fonts/mukta/mukta-devanagari-500-normal.woff2'); unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF; }
+@font-face { font-family: 'Mukta'; font-weight: 600; src: url('../../../library/elements/fonts/mukta/mukta-devanagari-600-normal.woff2'); unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF; }
+@font-face { font-family: 'Mukta'; font-weight: 700; src: url('../../../library/elements/fonts/mukta/mukta-devanagari-700-normal.woff2'); unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF; }
+@font-face { font-family: 'Mukta'; font-weight: 800; src: url('../../../library/elements/fonts/mukta/mukta-devanagari-800-normal.woff2'); unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF; }
+@font-face { font-family: 'Mukta'; font-weight: 500; src: url('../../../library/elements/fonts/mukta/mukta-latin-500-normal.woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2212; }
+@font-face { font-family: 'Mukta'; font-weight: 600; src: url('../../../library/elements/fonts/mukta/mukta-latin-600-normal.woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2212; }
+@font-face { font-family: 'Mukta'; font-weight: 700; src: url('../../../library/elements/fonts/mukta/mukta-latin-700-normal.woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2212; }
+@font-face { font-family: 'Mukta'; font-weight: 800; src: url('../../../library/elements/fonts/mukta/mukta-latin-800-normal.woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2212; }
+#frame.theme-chemlab { --font-head: 'Mukta', sans-serif; --head-weight: 800; --font-body: 'Mukta', sans-serif;
+  --navy: #12292B; --cu: #B8692F; --card-line: #D9ECEC; --lift: 0 20px 44px rgba(18,41,43,.20), 0 2px 6px rgba(18,41,43,.08); }
+.theme-chemlab, .theme-chemlab .k-head, .theme-chemlab .hl-m, .theme-chemlab .hero-text, .theme-chemlab .k-stamp, .theme-chemlab .ans-head,
+.theme-chemlab .ans-row, .theme-chemlab .note, .theme-chemlab .k-pill, .theme-chemlab #spine .ttl, .theme-chemlab .hero-kicker, .theme-chemlab .hero-sub,
+.theme-chemlab .ask-text, .theme-chemlab .ncard .t, .theme-chemlab .ncard .b, .theme-chemlab .k-def__term, .theme-chemlab .k-def__text,
+.theme-chemlab .card span, .theme-chemlab .yn .side, .theme-chemlab .lab, .theme-chemlab .main-lab, .theme-chemlab #tracker .tx, .theme-chemlab .formula .leg .m,
+.theme-chemlab .qh-card, .theme-chemlab .qcard, .theme-chemlab .circ .hint, .theme-chemlab .prog .lab, .theme-chemlab .tgl .lab { font-family: 'Mukta', sans-serif !important; }
+
+/* one card language: white, rounded, a soft lift, no decorative band */
+.theme-chemlab .card, .theme-chemlab .k-card, .theme-chemlab .k-def, .theme-chemlab .yn .side, .theme-chemlab .panel, .theme-chemlab .qcard,
+.theme-chemlab .hero, .theme-chemlab .imgcard, .theme-chemlab .formula, .theme-chemlab .circ, .theme-chemlab .ask, .theme-chemlab .ncard, .theme-chemlab .prog, .theme-chemlab .tgl {
+  background: #FFFFFF !important; border: 2px solid var(--card-line) !important; border-radius: 26px !important; box-shadow: var(--lift) !important; border-image: none !important; }
+.theme-chemlab .card::before, .theme-chemlab .panel::before, .theme-chemlab .qcard::before, .theme-chemlab .yn .side::before, .theme-chemlab .k-def::before,
+.theme-chemlab .hero::before { display: none !important; }
+.theme-chemlab .circ, .theme-chemlab .formula { background: linear-gradient(90deg, rgba(14,124,134,.06) 1px, transparent 1px) 0 0 / 30px 30px, linear-gradient(rgba(14,124,134,.06) 1px, transparent 1px) 0 0 / 30px 30px, #FFFFFF !important; }
+
+/* the big words: navy on white, a copper rule, the key word in copper */
+.theme-chemlab .hero { padding: 30px 40px 36px !important; border-top: 10px solid var(--cu) !important; }
+.theme-chemlab .hero-kicker { display: inline-block; font-weight: 700; font-size: 40px; color: #fff; background: var(--navy); padding: 2px 22px 6px; border-radius: 30px; margin-bottom: 14px; }
+.theme-chemlab .hero-text { font-weight: 800 !important; font-size: 100px !important; line-height: 1.22 !important; color: var(--navy) !important; }
+.theme-chemlab .hero-text span[style*="accent-2"] { color: var(--cu) !important; }
+.theme-chemlab .hero-rule { background: var(--cu) !important; height: 8px; }
+.theme-chemlab .hero-sub { font-weight: 600; font-size: 48px; color: #48526B; }
+
+/* headlines: a white chip with a copper bar */
+.theme-chemlab .hl-m { background: #fff !important; color: var(--navy) !important; font-weight: 800 !important; font-size: 56px !important; line-height: 1.25 !important;
+  border-left: 12px solid var(--cu) !important; border-radius: 14px !important; padding: 8px 28px 12px !important; box-shadow: var(--lift) !important; }
+
+/* pills */
+.theme-chemlab .k-pill { font-weight: 700 !important; font-size: 44px !important; background: #fff !important; color: var(--navy) !important;
+  border: 2px solid var(--card-line) !important; border-radius: 40px !important; box-shadow: 0 10px 22px rgba(18,41,43,.18) !important; padding: 6px 30px 10px 22px !important; }
+.theme-chemlab .k-pill::before { background: var(--cu) !important; box-shadow: none !important; }
+.theme-chemlab .k-pill--accent { background: var(--navy) !important; color: #fff !important; border-color: var(--navy) !important; }
+.theme-chemlab .k-pill--accent::before { background: #F2A516 !important; }
+
+/* notes laid over footage: dark glass, white words */
+.theme-chemlab .note { font-weight: 700 !important; font-size: 52px !important; color: #fff !important; text-shadow: none !important;
+  background: rgba(14,25,48,.84); padding: 10px 28px 14px; border-radius: 18px; border-left: 8px solid #F2A516; box-shadow: 0 12px 26px rgba(0,0,0,.35); }
+
+/* stamps */
+.theme-chemlab .k-stamp { font-weight: 800 !important; color: var(--navy) !important; background: #fff !important; border: 6px solid var(--cu) !important;
+  outline: none !important; border-radius: 18px !important; box-shadow: var(--lift) !important; }
+
+/* numbered rows (cards3), notification cards, the ✗/✓ pair */
+.theme-chemlab .card > span:last-child { font-weight: 700 !important; font-size: 52px !important; color: var(--navy); }
+.theme-chemlab .k-section-tag__num { background: var(--cu) !important; font-family: 'Mukta' !important; font-weight: 800 !important; }
+.theme-chemlab .ncard .t { font-weight: 800; font-size: 46px; color: var(--navy); }
+.theme-chemlab .ncard .b { font-weight: 600; font-size: 38px; }
+.theme-chemlab .ntf .ic { background: var(--cu); font-family: 'Mukta'; font-weight: 800; }
+.theme-chemlab .yn .side div:last-child { font-weight: 700 !important; font-size: 50px !important; }
+
+/* question card */
+.theme-chemlab .qh-card { font-weight: 700; }
+.theme-chemlab .qh-card, .theme-chemlab .qcard { border-top: 10px solid var(--cu) !important; }
+
+/* the answer sheet: ruled paper stays (it is a sheet), set in Mukta for reading */
+.theme-chemlab .ans { border-radius: 22px !important; }
+.theme-chemlab .ans-head { font-weight: 800 !important; font-size: 50px !important; color: var(--cu) !important; }
+.theme-chemlab .ans-row { font-weight: 600 !important; font-size: 38px !important; line-height: 1.42 !important; color: #173235 !important; }
+.theme-chemlab .ans-row b { font-family: 'Mukta' !important; font-weight: 800 !important; color: var(--navy) !important; }
+
+/* spine, tracker, captions */
+.theme-chemlab #spine { background: #fff !important; border: 2px solid var(--card-line) !important; box-shadow: var(--lift) !important; }
+.theme-chemlab #spine .ttl { font-weight: 800 !important; font-size: 40px !important; color: var(--navy) !important; }
+.theme-chemlab #tracker .tx { font-weight: 700; }
+.theme-chemlab #tracker .n { background: var(--cu); font-family: 'Mukta'; }
+.theme-chemlab #cap { font-family: 'Mukta', sans-serif !important; font-weight: 700 !important; font-size: 46px !important; color: var(--navy) !important;
+  background: #fff !important; border-radius: 20px !important; border: 2px solid var(--card-line) !important; box-shadow: var(--lift) !important; }
+.theme-chemlab #cap .hl { color: var(--cu) !important; text-decoration-color: var(--cu) !important; }
+/* captions: compact enough that two lines stay clear of the presenter card's bottom edge */
+.theme-chemlab #cap { font-size: 42px !important; line-height: 1.3 !important; padding: 14px 34px 18px !important; }
+/* the point being written now: a real highlighter, not a faint amber wash (user, 23 Oct 2026) */
+.theme-chemlab .ans-new { background: rgba(255, 221, 0, .78) !important; border-radius: 8px; box-shadow: -10px 0 0 rgba(255, 221, 0, .78), 10px 0 0 rgba(255, 221, 0, .78); }

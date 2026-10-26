@@ -1,0 +1,58 @@
+/* night-hud: near-black navy, earth-at-night photos, thin glowing gold and
+   cyan frames with corner ticks, gold-bordered panels, icon tiles that
+   light up gold when filled.  Suits: geography, economics, political
+   science, modern history, anything with a map or a statistic. */
+.skin-night-hud {
+  /* core six (every SVG element reads only these) */
+  --ink: #EAF0FF;
+  --accent: #F5B82E;          /* gold */
+  --accent-2: #4FD1E8;        /* cyan */
+  --paper: #070B16;
+  --muted: #7D8AA8;
+  --stroke-w: 4;
+
+  /* surface */
+  --bg: radial-gradient(120% 70% at 50% 0%, #13213F 0%, #0A1124 45%, #05080F 100%);
+  --paper-2: #0E1630;
+  --highlight: rgba(245, 184, 46, .32);
+  --warn: #FF6B5A;
+
+  /* type */
+  --font-head: 'Khand', 'Noto Sans Devanagari', sans-serif;
+  --head-weight: 600;
+  --head-stretch: 100%;
+  --head-tracking: .01em;
+  --font-body: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+  --body-weight: 500;
+  --font-hand: 'Kalam', sans-serif;
+  --font-num: 'Khand', sans-serif;
+
+  /* cards */
+  --card-bg: rgba(9, 16, 36, .86);
+  --card-ink: var(--ink);
+  --card-border: var(--accent);
+  --card-border-w: 2px;
+  --radius: 6px;
+  --shadow: 0 0 22px rgba(245, 184, 46, .22), inset 0 0 18px rgba(245, 184, 46, .06);
+  --glow: drop-shadow(0 0 6px rgba(245, 184, 46, .55));
+  --on-accent: #0A0F1E;      /* text set on an --accent fill */
+  --on-accent-2: #06101F;    /* text set on an --accent-2 fill */
+  --badge-bg: var(--accent);
+  --badge-ink: #0A0F1E;
+  --badge-radius: 4px;
+  --pill-bg: rgba(79, 209, 232, .10);
+  --pill-ink: var(--accent-2);
+  --pill-border: var(--accent-2);
+  --tape: rgba(79, 209, 232, .30);
+  --stamp: var(--accent);
+  --sticker-bg: #0F1A38;
+  --sticker-border: 2px solid var(--accent);
+  --tilt: -2deg;
+  --tick: 26px;               /* HUD corner tick length */
+
+  /* photo treatment hint: colour, graded dark and cool */
+  --photo-treatment: "colour, night grade";
+  --photo-filter: saturate(.85) brightness(.72) contrast(1.08);
+  --photo-tint: #0B1C44;
+  --photo-blend: soft-light;
+}

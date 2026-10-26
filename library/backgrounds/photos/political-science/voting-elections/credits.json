@@ -1,0 +1,74 @@
+{
+ "voting-elections": [
+  {
+   "title": "File:Election mark on index finger.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Election_mark_on_index_finger.jpg/1920px-Election_mark_on_index_finger.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Election_mark_on_index_finger.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Fotokannan",
+   "credit_required": true,
+   "file": "voting-elections-1.jpg",
+   "width": 1920,
+   "height": 2019,
+   "query": "indelible ink finger election India",
+   "desc": "In Indian elections, Casting of the vote is marked on the index finger with indelible ink"
+  },
+  {
+   "title": "File:Contr Unit of Electronic Voting Machine 2.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Contr_Unit_of_Electronic_Voting_Machine_2.jpg/1920px-Contr_Unit_of_Electronic_Voting_Machine_2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Contr_Unit_of_Electronic_Voting_Machine_2.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Shagil Kannur",
+   "credit_required": true,
+   "file": "voting-elections-2.jpg",
+   "width": 1920,
+   "height": 1080,
+   "query": "electronic voting machine India",
+   "desc": "Electronic voting machine"
+  },
+  {
+   "title": "File:Paper insertion in VVPAT.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Paper_insertion_in_VVPAT.jpg/1280px-Paper_insertion_in_VVPAT.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Paper_insertion_in_VVPAT.jpg",
+   "licence": "CC0",
+   "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "author": "Sridhar G",
+   "credit_required": false,
+   "file": "voting-elections-4.jpg",
+   "width": 1082,
+   "height": 2400,
+   "query": "VVPAT",
+   "desc": "Paper insertion in VVPAT"
+  },
+  {
+   "title": "File:Contr Unit of Electronic Voting Machine.jpg",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Contr_Unit_of_Electronic_Voting_Machine.jpg/1920px-Contr_Unit_of_Electronic_Voting_Machine.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Contr_Unit_of_Electronic_Voting_Machine.jpg",
+   "licence": "CC BY-SA 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "author": "Shagil Kannur",
+   "credit_required": true,
+   "file": "voting-elections-5.jpg",
+   "width": 1351,
+   "height": 2400,
+   "query": "electronic voting machine India",
+   "desc": "Electronic voting machine"
+  },
+  {
+   "title": "File:VVPAT MACHINE.jpg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/VVPAT_MACHINE.jpg/1280px-VVPAT_MACHINE.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:VVPAT_MACHINE.jpg",
+   "licence": "CC0",
+   "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "author": "Sridhar G",
+   "credit_required": false,
+   "file": "voting-elections-6.jpg",
+   "width": 1082,
+   "height": 2400,
+   "query": "VVPAT",
+   "desc": "VVPAT MACHINE"
+  }
+ ]
+}

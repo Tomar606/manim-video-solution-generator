@@ -1,0 +1,672 @@
+{
+ "_about": "HIS-C2-SA-05, edict look",
+ "project": "his-c2-sa-05",
+ "part": 1,
+ "captions_from": 7,
+ "skin": "paper-editorial",
+ "theme": "edict",
+ "presenter_style": "card",
+ "plate": "edict-sandstone-girnar",
+ "spine": {
+  "title": "मौर्य साम्राज्य: 4 स्रोत",
+  "items": [
+   "पुरातात्विक स्रोत",
+   "समकालीन रचनाएँ",
+   "धार्मिक ग्रंथ",
+   "अशोक के शिलालेख"
+  ],
+  "lit_at": [
+   11,
+   19,
+   27,
+   33
+  ],
+  "show_from": 7
+ },
+ "beats": [
+  {
+   "id": "phone",
+   "in": 0,
+   "out": 3,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h01",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "आज: बस search कर लो",
+     "style": "accent",
+     "at": 2
+    }
+   ]
+  },
+  {
+   "id": "court",
+   "in": 3,
+   "out": 4,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h02",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "मौर्य साम्राज्य",
+     "at": 3
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "करीब 2300 साल पुराना",
+     "at": [
+      3,
+      1.84
+     ]
+    }
+   ]
+  },
+  {
+   "id": "how",
+   "in": 4,
+   "out": 5,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h04",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "over-broll-top",
+     "text": "इतिहासकारों को पता कैसे चला?",
+     "size": "m",
+     "at": 4
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": 5,
+   "out": 7,
+   "presenter": "small",
+   "broll": {
+    "clip": "h02",
+    "region": "full",
+    "dim": true,
+    "offset": 3
+   },
+   "elements": [
+    {
+     "type": "qcard",
+     "slot": "upper",
+     "question": "मौर्य साम्राज्य के कोई चार प्रमुख ऐतिहासिक स्रोतों के नाम लिखिए।",
+     "year": "2022",
+     "marks": "3 अंक",
+     "t_marks": [
+      6,
+      1.5
+     ],
+     "at": 5
+    }
+   ]
+  },
+  {
+   "id": "names-plus",
+   "in": 7,
+   "out": 11,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "सिर्फ नाम",
+     "yes": "नाम + एक लाइन का परिचय",
+     "at": 7,
+     "t_yes": 8
+    },
+    {
+     "type": "pill",
+     "slot": "under-upper",
+     "text": "तब answer दमदार",
+     "style": "accent",
+     "at": [
+      9,
+      1.84
+     ]
+    }
+   ]
+  },
+  {
+   "id": "dig",
+   "in": 11,
+   "out": 13,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h03",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "1",
+     "text": "पुरातात्विक स्रोत",
+     "at": [
+      11,
+      1.36
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "ज़मीन की खुदाई से मिली चीज़ें",
+     "at": [
+      12,
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sculpture",
+   "in": 13,
+   "out": 15,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/mauryan/yakshi-3.jpg",
+     "w": 430,
+     "tilt": -2,
+     "label": "दीदारगंज यक्षी",
+     "at": [
+      13,
+      2.14
+     ]
+    },
+    {
+     "type": "photo",
+     "slot": "over-broll-right",
+     "src": "history/mauryan/lion-3.jpg",
+     "w": 430,
+     "tilt": 2,
+     "label": "सारनाथ सिंह-शीर्ष",
+     "at": [
+      13,
+      3.42
+     ]
+    },
+    {
+     "type": "note",
+     "slot": "under-upper",
+     "text": "मूर्तिकला पर विशेष बल: कला और सोच",
+     "at": 14
+    }
+   ]
+  },
+  {
+   "id": "half-done",
+   "in": 15,
+   "out": 18,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h05",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "मूर्तिकला लिखा = आधा काम",
+     "at": 15
+    },
+    {
+     "type": "note",
+     "slot": "over-broll-low",
+     "text": "पहला स्रोत: ज़मीन से",
+     "at": 17
+    }
+   ]
+  },
+  {
+   "id": "writings",
+   "in": 18,
+   "out": 20,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h07",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "2",
+     "text": "समकालीन रचनाएँ",
+     "at": [
+      19,
+      0.0
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "उसी समय लिखी गई किताबें",
+     "at": [
+      19,
+      2.06
+     ]
+    }
+   ]
+  },
+  {
+   "id": "megasthenes",
+   "in": 20,
+   "out": 23,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h06",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "style": "accent",
+     "items": [
+      [
+       "मेगस्थनीज",
+       [
+        20,
+        1.42
+       ]
+      ],
+      [
+       "यूनानी राजदूत",
+       [
+        21,
+        0.76
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "चंद्रगुप्त मौर्य के दरबार में",
+     "at": [
+      22,
+      0.3
+     ]
+    }
+   ]
+  },
+  {
+   "id": "indica",
+   "in": 23,
+   "out": 26,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "def",
+     "slot": "head",
+     "term": "मेगस्थनीज",
+     "text": "इंडिका",
+     "at": [
+      23,
+      1.42
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "upper",
+     "text": "ये जोड़ी याद रखें",
+     "at": 24
+    },
+    {
+     "type": "note",
+     "slot": "under-upper",
+     "text": "एक विदेशी की नज़र",
+     "at": 25
+    }
+   ]
+  },
+  {
+   "id": "religious",
+   "in": 26,
+   "out": 28,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h08",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "section",
+     "slot": "over-broll-top",
+     "num": "3",
+     "text": "धार्मिक ग्रंथ",
+     "at": [
+      27,
+      0.84
+     ]
+    }
+   ]
+  },
+  {
+   "id": "three-texts",
+   "in": 28,
+   "out": 30,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "किन ग्रंथों में?",
+     "size": "m",
+     "at": 28
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "जैन ग्रंथ",
+       [
+        28,
+        1.48
+       ]
+      ],
+      [
+       "बौद्ध ग्रंथ",
+       [
+        28,
+        2.18
+       ]
+      ],
+      [
+       "पौराणिक ग्रंथ",
+       [
+        28,
+        2.54
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "under-upper",
+     "text": "मौर्य शासकों का उल्लेख",
+     "style": "accent",
+     "at": [
+      28,
+      4.12
+     ]
+    }
+   ]
+  },
+  {
+   "id": "all-three",
+   "in": 30,
+   "out": 32,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h10",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "तीनों नाम लिखें",
+     "at": 30
+    },
+    {
+     "type": "note",
+     "slot": "over-broll-low",
+     "text": "एक भी छूटा, बिन्दु कमज़ोर",
+     "at": 31
+    }
+   ]
+  },
+  {
+   "id": "special",
+   "in": 32,
+   "out": 33,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h12",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "सबसे खास",
+     "at": [
+      32,
+      2.42
+     ]
+    }
+   ]
+  },
+  {
+   "id": "edict",
+   "in": 33,
+   "out": 34,
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "section",
+     "slot": "head",
+     "num": "4",
+     "text": "अशोक के शिलालेख",
+     "at": 33
+    },
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "history/mauryan/kalsi-3.jpg",
+     "w": 760,
+     "label": "कालसी का शिलालेख (उत्तराखंड)",
+     "at": [
+      33,
+      0.58
+     ]
+    },
+    {
+     "type": "pill",
+     "slot": "under-upper",
+     "text": "= राज्यादेश",
+     "style": "accent",
+     "at": [
+      33,
+      1.36
+     ]
+    }
+   ]
+  },
+  {
+   "id": "carved",
+   "in": 34,
+   "out": 35,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h11",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "पत्थरों पर लिखवाए गए राजा के आदेश",
+     "style": "accent",
+     "at": 34
+    }
+   ]
+  },
+  {
+   "id": "herald",
+   "in": 35,
+   "out": 37,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h13",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "लिखित इतिहास में अनोखे",
+     "at": 35
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "राजा खुद अपनी बात कह रहा है",
+     "at": 36
+    }
+   ]
+  },
+  {
+   "id": "four-things",
+   "in": 37,
+   "out": 42,
+   "presenter": "hub",
+   "hub": {
+    "cy": 980,
+    "r": 200,
+    "backdrop": "veo:h12@3"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "चार चीज़ें, चार स्रोत",
+     "size": "m",
+     "at": 37
+    },
+    {
+     "type": "quad",
+     "slot": "full",
+     "icons": [
+      "tabler:shovel",
+      "tabler:feather",
+      "tabler:book",
+      "tabler:crown"
+     ],
+     "items": [
+      [
+       "पत्थर की मूर्ति",
+       "पुरातात्विक स्रोत",
+       [
+        38,
+        0.0
+       ]
+      ],
+      [
+       "विदेशी की कलम",
+       "समकालीन रचनाएँ",
+       [
+        38,
+        0.76
+       ]
+      ],
+      [
+       "धर्म की किताब",
+       "धार्मिक ग्रंथ",
+       [
+        38,
+        1.64
+       ]
+      ],
+      [
+       "राजा का आदेश",
+       "अशोक के शिलालेख",
+       [
+        39,
+        0.22
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "marks",
+   "in": 42,
+   "out": 44,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h12",
+    "region": "full",
+    "dim": true,
+    "offset": 4
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-top",
+     "text": "चारों नाम + एक-एक लाइन परिचय",
+     "style": "accent",
+     "at": 42
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "पूरे 3 नंबर आपके",
+     "at": 43
+    }
+   ]
+  },
+  {
+   "id": "notes",
+   "in": 44,
+   "out": 46,
+   "presenter": "hero",
+   "broll": {
+    "clip": "h02",
+    "region": "full",
+    "dim": true,
+    "offset": 5
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "head",
+     "text": "लिखने का तरीका: Notes button",
+     "style": "accent",
+     "at": 44
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "in": 46,
+   "out": "end",
+   "presenter": "hero",
+   "broll": {
+    "clip": "h01",
+    "region": "full",
+    "dim": true,
+    "offset": 3
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "एक-एक topic, 90% की ओर",
+     "at": 46
+    }
+   ]
+  }
+ ]
+}

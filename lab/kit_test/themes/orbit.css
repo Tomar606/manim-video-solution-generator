@@ -1,0 +1,95 @@
+/* orbit — trade routes seen from space.  Plate: the Suez Canal photographed
+   from the ISS (NASA, public domain), dimmed.  Dark navy glass panels like a
+   ship's chart-plotter screen, a teal key (the sea lane) and an amber second key
+   (every number, every port being named), Martel set heavy for heads.
+   The sea map draws ocean as deep navy and land as warm sand, so it reads as
+   the same world as the satellite plate behind it.
+   Music: documentary / pulse.  SFX: element-pop, whoosh on routes, tick on ports, stamp. */
+
+@font-face { font-family: 'Martel'; src: url('../../../library/elements/fonts/Martel-Bold.ttf'); font-weight: 700; }
+@font-face { font-family: 'Martel'; src: url('../../../library/elements/fonts/Martel-ExtraBold.ttf'); font-weight: 800; }
+
+#frame.theme-orbit {
+  --ink: #EEF4F7;
+  --accent: #2CC9C9;          /* teal: the sea lane, the key */
+  --accent-2: #F2B63C;        /* amber: numbers and the port being named */
+  --muted: #9FB3BF;
+  --paper: #0B1A2A;
+  --card-bg: rgba(9, 24, 40, .86);
+  --solid: rgba(9, 24, 40, .92);
+  --card-border: rgba(44, 201, 201, .45);
+  --font-head: 'Martel', 'Noto Sans Devanagari', serif;
+  --head-weight: 800;
+  --head-stretch: 100%;
+  --font-body: 'Noto Sans Devanagari', sans-serif;
+  --font-num: 'Khand', sans-serif;
+  --halo: 0 0 6px rgba(0, 0, 0, .85), 0 2px 3px rgba(0, 0, 0, .9);
+  --glass-shadow: 0 12px 28px rgba(0, 0, 0, .45);
+  --sea: #0E2C47;
+  --land: #C9A877;
+  --coast: rgba(255, 240, 210, .55);
+  color: var(--ink);
+}
+
+.theme-orbit .card, .theme-orbit .qcard, .theme-orbit .k-card, .theme-orbit .compare .k-card,
+.theme-orbit .k-def, .theme-orbit .yn .side, .theme-orbit .imgcard, .theme-orbit .panel {
+  background: var(--card-bg) !important; border: 1.5px solid var(--card-border) !important; border-radius: 14px !important;
+  box-shadow: var(--glass-shadow) !important; border-top: 7px solid var(--accent) !important; color: var(--ink);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.theme-orbit .k-head { font-family: 'Martel'; font-weight: 800; }
+.theme-orbit .hl-m { font-family: 'Martel'; font-weight: 800; color: #fff; text-shadow: var(--halo); text-wrap: balance; font-size: 66px; line-height: 1.35; }
+.theme-orbit .qcard .k-head { color: var(--accent) !important; }
+
+.theme-orbit .k-section-tag { background: var(--card-bg) !important; border: 1.5px solid var(--card-border) !important; box-shadow: var(--glass-shadow) !important;
+  display: inline-flex; align-items: center; gap: 18px; padding: 8px 30px 8px 8px; border-radius: 44px; }
+.theme-orbit .k-section-tag__num { width: 70px; height: 70px; border-radius: 50%; display: grid; place-items: center; padding: 0;
+  background: var(--accent); color: #06202B; font-family: 'Khand'; font-weight: 700; font-size: 52px; line-height: 1; }
+.theme-orbit .k-section-tag__text { font-family: 'Martel'; font-weight: 800; font-size: 54px; color: var(--ink); background: none; padding: 0; line-height: 1.5; }
+
+.theme-orbit .k-pill { border-radius: 40px !important; font-family: 'Noto Sans Devanagari'; font-weight: 700; font-size: 46px;
+  background: var(--card-bg) !important; color: var(--ink) !important; border: 1.5px solid var(--card-border) !important;
+  padding: 6px 30px 6px 20px; box-shadow: var(--glass-shadow); display: inline-flex; align-items: center; gap: 14px; }
+.theme-orbit .k-pill::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); flex: none; }
+.theme-orbit .k-pill--accent { background: var(--accent) !important; color: #06202B !important; border-color: var(--accent) !important; }
+.theme-orbit .k-pill--accent::before { background: #06202B; }
+
+.theme-orbit .k-stamp { font-family: 'Martel'; font-weight: 800; color: var(--accent-2); border-color: var(--accent-2);
+  outline-color: var(--accent-2); background: var(--solid) !important; -webkit-mask-image: none; mix-blend-mode: normal; border-radius: 12px; }
+
+.theme-orbit .note { font-family: 'Noto Sans Devanagari'; font-weight: 700; font-size: 48px; color: var(--accent-2); text-shadow: var(--halo); }
+.theme-orbit .note.on-photo { background: var(--card-bg); padding: 8px 24px; border-radius: 12px; text-shadow: none; }
+
+.theme-orbit #spine { left: 24px; right: 24px; top: 24px; height: 92px; background: var(--card-bg); border-radius: 46px; border: 1.5px solid var(--card-border);
+  padding: 0 30px; box-sizing: border-box; box-shadow: var(--glass-shadow); }
+.theme-orbit #spine .ttl { font-family: 'Martel'; font-weight: 800; font-size: 40px; color: var(--ink); }
+.theme-orbit #spine .k-dots i { width: 26px; height: 26px; border-radius: 50%; background: transparent; border: 4px solid var(--accent); margin: 0 6px; }
+.theme-orbit #spine .k-dots i.on { background: var(--accent); }
+.theme-orbit #spine .cnt { font-family: 'Khand'; font-weight: 700; color: var(--accent-2); }
+
+.theme-orbit #cap { font-family: 'Noto Sans Devanagari'; font-weight: 700; font-size: 44px; color: var(--ink);
+  --torn-bg: rgba(9, 24, 40, .9); clip-path: none; border-radius: 14px; box-shadow: var(--glass-shadow); border: 1.5px solid var(--card-border); }
+.theme-orbit #cap .hl { color: var(--accent-2); }
+
+.theme-orbit .hub-ring { border: 8px solid #fff; box-shadow: 0 0 0 5px var(--accent), var(--glass-shadow); }
+.theme-orbit .hub-route { border: 3px dashed rgba(44, 201, 201, .8); }
+.theme-orbit .num { font-family: 'Khand'; font-weight: 700; color: var(--accent-2); }
+
+.theme-orbit #broll { background: #000; }
+.theme-orbit #broll img { filter: saturate(1.05) !important; mix-blend-mode: normal !important; }
+.theme-orbit #broll::after { background-image: none; background: linear-gradient(180deg, rgba(4,12,22,.45) 0%, transparent 20%, transparent 58%, rgba(4,12,22,.6) 100%); mix-blend-mode: normal; }
+.theme-orbit #broll.dim img { filter: brightness(.5) saturate(.85) !important; }
+
+.theme-orbit .p-card { border: 8px solid #fff; box-shadow: 0 0 0 4px var(--accent), var(--glass-shadow); }
+
+/* the sea map: ports are amber dots with a teal ring; the one being named glows */
+.theme-orbit .seamap { padding: 0 !important; overflow: hidden; }
+.theme-orbit .port-dot { fill: var(--accent-2); stroke: #06202B; stroke-width: 4; }
+.theme-orbit .port-tag { position: absolute; white-space: nowrap; font-family: 'Noto Sans Devanagari'; font-weight: 800; font-size: 38px; line-height: 1.25;
+  background: rgba(6, 20, 34, .9); color: var(--ink); border: 2px solid var(--accent); border-radius: 12px; padding: 2px 16px 4px; }
+.theme-orbit .port-tag small { display: block; font-size: 28px; font-weight: 600; color: var(--muted); }
+.theme-orbit .port-tag.on { background: var(--accent-2); color: #1B1406; border-color: var(--accent-2); }
+.theme-orbit .port-tag.on small { color: #3A2C0C; }
+.theme-orbit .map-label { position: absolute; white-space: nowrap; font-family: 'Martel'; font-weight: 800; font-size: 34px; color: rgba(255, 244, 222, .85);
+  text-shadow: 0 0 6px rgba(0,0,0,.9); letter-spacing: 1px; }
+.theme-orbit .map-label.sea { font-family: 'Noto Sans Devanagari'; font-weight: 600; font-style: italic; color: rgba(160, 220, 235, .8); font-size: 30px; }

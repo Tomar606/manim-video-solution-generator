@@ -1,0 +1,6 @@
+[{"slug":"kremlin","query":"Moscow Kremlin Red Square winter","limit":4},
+ {"slug":"imf","query":"International Monetary Fund headquarters Washington","limit":3},
+ {"slug":"worldbank","query":"World Bank headquarters building","limit":2},
+ {"slug":"plant","query":"abandoned Soviet factory","limit":4},
+ {"slug":"rouble","query":"Russian ruble banknotes 1990s","limit":3},
+ {"slug":"queue","query":"Moscow 1991 queue shop","limit":3}]

@@ -1,0 +1,946 @@
+{
+ "_about": "CHE: मोलरता (Molarity) क्या है? इसका गणितीय सूत्र और मात्रक लिखिए। (2022, 23 और 2025): chemlab look.",
+ "project": "che-molarity",
+ "part": 1,
+ "captions_at": "bottom",
+ "skin": "paper-editorial",
+ "theme": "chemlab",
+ "presenter_style": "card",
+ "plate": "cl-lab-wall",
+ "hook": "exempt",
+ "hilite": [
+  "मोलरता",
+  "Molarity",
+  "विलयन",
+  "विलेय",
+  "मोलों",
+  "लीटर",
+  "Capital",
+  "ग्राम",
+  "मिलीलीटर",
+  "Unit",
+  "Special",
+  "PDF"
+ ],
+ "card_style": {
+  "frame": "glass",
+  "backdrop": "card-chem-light"
+ },
+ "framing": {
+  "crop": [
+   600,
+   150,
+   1340,
+   1000
+  ],
+  "full_w": 735
+ },
+ "scene_match": {
+  "tint": 0.05,
+  "wrap": 0.12,
+  "wrap_px": 6,
+  "bottom_fade": 0.08
+ },
+ "presenter_grade": {
+  "exposure": 1.0,
+  "contrast": 0.94,
+  "warm": 0.99,
+  "saturation": 0.96,
+  "shadow_lift": 0.4,
+  "lift_radius": 14,
+  "define": 0.04,
+  "matte_soft": 1.0,
+  "matte_choke": 0.05,
+  "soften": {
+   "amount": 0.55,
+   "radius": 1.8
+  }
+ },
+ "card": {
+  "x": 314,
+  "y": 1130,
+  "w": 452,
+  "h": 560
+ },
+ "spine": {
+  "title": "मोलरता",
+  "items": [
+   "परिभाषा",
+   "सूत्र",
+   "मात्रक"
+  ],
+  "lit_at": [
+   17,
+   20,
+   27
+  ],
+  "show_from": 16
+ },
+ "beats": [
+  {
+   "id": "mp",
+   "in": 0,
+   "out": [
+    1,
+    0.0
+   ],
+   "presenter": "full",
+   "broll": {
+    "photo": "chemistry/chemistry-demos/chemistry-demos-1.jpg",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "statemap",
+     "slot": "upper",
+     "state": "Madhya Pradesh",
+     "text": "MP Board",
+     "sub": "कक्षा 12वीं",
+     "w": 880,
+     "top": 170,
+     "at": [
+      0,
+      0.05
+     ]
+    }
+   ]
+  },
+  {
+   "id": "prev",
+   "in": [
+    1,
+    0.0
+   ],
+   "out": [
+    3,
+    0.0
+   ],
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "photo",
+     "slot": "upper",
+     "src": "chemistry/molarity/prev-reel.jpg",
+     "w": 430,
+     "label": "पिछली Reel: Physics (व्हीटस्टोन सेतु)",
+     "at": [
+      1,
+      0.76
+     ]
+    }
+   ]
+  },
+  {
+   "id": "today",
+   "in": [
+    3,
+    0.0
+   ],
+   "out": [
+    5,
+    0.0
+   ],
+   "presenter": "standard",
+   "broll": {
+    "photo": "chemistry/chemistry-demos/chemistry-demos-3.jpg",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "आज: Chemistry",
+     "style": "accent",
+     "at": [
+      3,
+      0.62
+     ]
+    }
+   ]
+  },
+  {
+   "id": "years",
+   "in": [
+    5,
+    0.0
+   ],
+   "out": [
+    9,
+    0.0
+   ],
+   "presenter": "full",
+   "elements": [
+    {
+     "type": "papers",
+     "style": "row",
+     "assets": "assets/papers",
+     "at": [
+      5,
+      0.0
+     ],
+     "top": 330,
+     "left0": 22,
+     "step": 330,
+     "sheet_w": 360,
+     "dy": 34,
+     "title": "यही question, board exam में",
+     "years": [
+      [
+       "2022",
+       [
+        5,
+        1.66
+       ]
+      ],
+      [
+       "2023",
+       [
+        6,
+        0.0
+       ]
+      ],
+      [
+       "2025",
+       [
+        6,
+        1.1
+       ]
+      ]
+     ],
+     "after": "तीनों साल पूछा गया",
+     "t_after": [
+      7,
+      0.0
+     ],
+     "after_dy": 490,
+     "next": "2027 में भी आ सकता है!",
+     "t_next": [
+      8,
+      0.6
+     ],
+     "next_dy": 490
+    }
+   ]
+  },
+  {
+   "id": "marks",
+   "in": [
+    9,
+    0.0
+   ],
+   "out": [
+    11,
+    0.0
+   ],
+   "presenter": "standard",
+   "broll": {
+    "photo": "chemistry/lab-glassware/lab-glassware-7.jpg",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "इसे अच्छे से समझ लिया तो",
+     "text": "पूरे नंबर पक्के",
+     "at": [
+      9,
+      0.76
+     ],
+     "hl": [
+      "पक्के"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "gift",
+   "in": [
+    11,
+    0.0
+   ],
+   "out": [
+    14,
+    0.0
+   ],
+   "presenter": "full",
+   "elements": [
+    {
+     "type": "gift",
+     "slot": "upper",
+     "at": [
+      11,
+      1.96
+     ],
+     "text": "Special Gift",
+     "sub": "Reel के end में",
+     "cta": "Reel पूरी देखना!",
+     "t_cta": [
+      13,
+      0.58
+     ],
+     "top": 100
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": [
+    14,
+    0.0
+   ],
+   "out": [
+    16,
+    0.0
+   ],
+   "presenter": "full",
+   "elements": [
+    {
+     "type": "qsheet",
+     "at": [
+      14,
+      0.0
+     ],
+     "src": "qsheet.png",
+     "src_path": "assets/papers/qsheet.png",
+     "w": 840,
+     "top": 64,
+     "hl_left": 0.258,
+     "line_h": 0.056,
+     "lines": [
+      [
+       0.666,
+       0.735,
+       [
+        14,
+        0.56
+       ]
+      ],
+      [
+       0.755,
+       0.775,
+       [
+        14,
+        1.08
+       ]
+      ],
+      [
+       0.83,
+       0.785,
+       [
+        15,
+        0.74
+       ]
+      ]
+     ],
+     "marks": "3 अंक",
+     "t_marks": [
+      15,
+      1.66
+     ],
+     "marks_y": 0.8
+    }
+   ]
+  },
+  {
+   "id": "flaskreal",
+   "in": [
+    16,
+    0.0
+   ],
+   "out": [
+    17,
+    0.0
+   ],
+   "presenter": "full",
+   "broll": {
+    "photo": "chemistry/lab-glassware/lab-glassware-1.jpg",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "1. मोलरता क्या है?",
+     "size": "m",
+     "at": [
+      16,
+      0.7
+     ],
+     "fx": "drop"
+    }
+   ]
+  },
+  {
+   "id": "define",
+   "in": [
+    17,
+    0.0
+   ],
+   "out": [
+    21,
+    0.0
+   ],
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "1. मोलरता क्या है?",
+     "size": "m",
+     "at": [
+      17,
+      0.0
+     ]
+    },
+    {
+     "type": "flask",
+     "slot": "upper",
+     "top": 190,
+     "h": 910,
+     "at": [
+      17,
+      0.0
+     ],
+     "t_fill": [
+      17,
+      0.1
+     ],
+     "t_mark": [
+      17,
+      1.12
+     ],
+     "t_solute": [
+      17,
+      1.66
+     ],
+     "t_count": [
+      18,
+      0.0
+     ],
+     "t_def": [
+      18,
+      2.44
+     ],
+     "t_M": [
+      19,
+      0.26
+     ],
+     "t_m": [
+      19,
+      1.2
+     ],
+     "t_eq": [
+      20,
+      0.5
+     ]
+    }
+   ]
+  },
+  {
+   "id": "formula",
+   "in": [
+    21,
+    0.0
+   ],
+   "out": [
+    21,
+    2.28
+   ],
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "2. गणितीय सूत्र",
+     "size": "m",
+     "at": [
+      21,
+      0.0
+     ],
+     "fx": "drop"
+    },
+    {
+     "type": "formula",
+     "slot": "upper",
+     "title": "मोलरता का सूत्र",
+     "tex": "M=\\dfrac{\\textcolor{#B8692F}{n}}{\\textcolor{#0E7C86}{V}}",
+     "at": [
+      21,
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gram",
+   "in": [
+    21,
+    2.28
+   ],
+   "out": [
+    22,
+    0.86
+   ],
+   "presenter": "full",
+   "broll": {
+    "photo": "chemistry/molarity/balance-2.jpg",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "formula",
+     "slot": "upper",
+     "top": 140,
+     "compact": true,
+     "title": "विलेय का द्रव्यमान ग्राम में",
+     "tex": "\\textcolor{#B8692F}{n}=\\dfrac{W_B}{M_B}",
+     "at": [
+      21,
+      2.28
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ml",
+   "in": [
+    22,
+    0.86
+   ],
+   "out": [
+    23,
+    0.0
+   ],
+   "presenter": "full",
+   "broll": {
+    "photo": "chemistry/molarity/cylinder-3.jpg",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "formula",
+     "slot": "upper",
+     "top": 140,
+     "compact": true,
+     "title": "विलयन का आयतन मिलीलीटर में",
+     "tex": "\\textcolor{#0E7C86}{V}(\\text{L})=\\dfrac{V(\\text{mL})}{1000}",
+     "at": [
+      22,
+      0.86
+     ]
+    }
+   ]
+  },
+  {
+   "id": "derive",
+   "in": [
+    23,
+    0.0
+   ],
+   "out": [
+    25,
+    0.0
+   ],
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "2. गणितीय सूत्र",
+     "size": "m",
+     "at": [
+      23,
+      0.0
+     ]
+    },
+    {
+     "type": "rewrite",
+     "slot": "upper",
+     "at": [
+      23,
+      0.0
+     ],
+     "title": "जब द्रव्यमान ग्राम में, आयतन मिलीलीटर में",
+     "box_last": true,
+     "steps": [
+      [
+       "M=\\dfrac{\\textcolor{#B8692F}{n}}{\\textcolor{#0E7C86}{V}}",
+       [
+        23,
+        0.0
+       ]
+      ],
+      [
+       "M=\\dfrac{W_B\\,/\\,M_B}{V\\,/\\,1000}",
+       [
+        23,
+        0.2
+       ]
+      ],
+      [
+       "\\boxed{M=\\dfrac{W_B\\times\\textcolor{#B8692F}{1000}}{M_B\\times V}}",
+       [
+        24,
+        1.26
+       ]
+      ]
+     ],
+     "subs": [
+      [
+       "chemistry/molarity/balance-2.jpg",
+       "\\textcolor{#B8692F}{n}=\\dfrac{W_B}{M_B}",
+       "विलेय का द्रव्यमान ग्राम में",
+       [
+        23,
+        0.0
+       ]
+      ],
+      [
+       "chemistry/molarity/cylinder-3.jpg",
+       "\\textcolor{#0E7C86}{V}(\\text{L})=\\dfrac{V(\\text{mL})}{1000}",
+       "विलयन का आयतन मिलीलीटर में",
+       [
+        23,
+        0.0
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "symbols",
+   "in": [
+    25,
+    0.0
+   ],
+   "out": [
+    27,
+    0.0
+   ],
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "2. गणितीय सूत्र",
+     "size": "m",
+     "at": [
+      25,
+      0.0
+     ]
+    },
+    {
+     "type": "formula",
+     "slot": "upper",
+     "title": "मोलरता का सूत्र",
+     "tex": "M=\\dfrac{W_B\\times 1000}{M_B\\times V}",
+     "at": [
+      25,
+      0.0
+     ],
+     "legend": [
+      [
+       "W_B",
+       "विलेय का द्रव्यमान (g)",
+       [
+        25,
+        0.08
+       ]
+      ],
+      [
+       "M_B",
+       "विलेय का मोलर द्रव्यमान (g/mol)",
+       [
+        26,
+        0.0
+       ]
+      ],
+      [
+       "V",
+       "विलयन का आयतन (mL)",
+       [
+        26,
+        1.92
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "unit",
+   "in": [
+    27,
+    0.0
+   ],
+   "out": [
+    29,
+    0.0
+   ],
+   "presenter": "full",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "3. मात्रक (Unit)",
+     "size": "m",
+     "at": [
+      27,
+      0.36
+     ],
+     "fx": "drop"
+    },
+    {
+     "type": "formula",
+     "slot": "upper",
+     "title": "मोलरता का मात्रक",
+     "tex": "\\text{mol/L}\\;=\\;\\text{mol L}^{-1}",
+     "at": [
+      28,
+      1.02
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cube",
+   "in": [
+    29,
+    0.0
+   ],
+   "out": [
+    31,
+    0.0
+   ],
+   "presenter": "standard",
+   "elements": [
+    {
+     "type": "cube",
+     "slot": "upper",
+     "top": 220,
+     "at": [
+      29,
+      0.0
+     ],
+     "t_cube": [
+      29,
+      0.7
+     ],
+     "t_pour": [
+      29,
+      1.06
+     ],
+     "t_eq": [
+      30,
+      0.9
+     ],
+     "t_units": [
+      30,
+      1.46
+     ]
+    }
+   ]
+  },
+  {
+   "id": "recap",
+   "in": [
+    31,
+    0.0
+   ],
+   "out": [
+    32,
+    0.0
+   ],
+   "presenter": "full",
+   "elements": [
+    {
+     "type": "checklist",
+     "slot": "upper",
+     "lit": [
+      0,
+      1,
+      2
+     ],
+     "at": [
+      31,
+      2.2
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sure",
+   "in": [
+    32,
+    0.0
+   ],
+   "out": [
+    33,
+    0.0
+   ],
+   "presenter": "standard",
+   "broll": {
+    "photo": "chemistry/lab-glassware/lab-glassware-7.jpg",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "दिमाग में बैठा लिया तो",
+     "text": "पूरे 3 नंबर पक्के",
+     "at": [
+      32,
+      0.96
+     ],
+     "hl": [
+      "पक्के"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "page",
+   "in": [
+    33,
+    0.0
+   ],
+   "out": [
+    34,
+    0.0
+   ],
+   "presenter": "full",
+   "tracker": false,
+   "spine": false,
+   "elements": [
+    {
+     "type": "page",
+     "src": "assets/answer/MOL-1.png",
+     "at": [
+      33,
+      0.0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "giftopen",
+   "in": [
+    34,
+    0.0
+   ],
+   "out": [
+    36,
+    0.0
+   ],
+   "presenter": "full",
+   "elements": [
+    {
+     "type": "gift",
+     "slot": "upper",
+     "at": [
+      34,
+      1.96
+     ],
+     "text": "Special Gift",
+     "sub": "शुरुआत में जिसका वादा था",
+     "text_open": "Answer की PDF",
+     "sub_open": "यही है आपका Special Gift",
+     "t_open": [
+      35,
+      0.66
+     ],
+     "top": 150
+    }
+   ]
+  },
+  {
+   "id": "asks",
+   "in": [
+    36,
+    0.0
+   ],
+   "out": [
+    41,
+    0.0
+   ],
+   "presenter": "standard",
+   "tracker": false,
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "PDF के लिए बस 3 काम",
+     "size": "m",
+     "at": [
+      36,
+      0.58
+     ],
+     "fx": "drop"
+    },
+    {
+     "type": "notify",
+     "slot": "upper",
+     "items": [
+      [
+       "tabler:send",
+       "Reel share करो",
+       "दोस्तों के साथ",
+       [
+        37,
+        1.8
+       ]
+      ],
+      [
+       "tabler:user-plus",
+       "मुझे follow करो",
+       "",
+       [
+        38,
+        0.26
+       ]
+      ],
+      [
+       "tabler:message-circle",
+       "comment में PDF लिखो",
+       "PDF सीधे आपके DM पर",
+       [
+        38,
+        2.14
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "save",
+   "in": [
+    41,
+    0.0
+   ],
+   "out": "end",
+   "presenter": "full",
+   "elements": [
+    {
+     "type": "igsave",
+     "slot": "over-broll-top",
+     "text": "Reel save करो",
+     "sub": "exam से पहले revision",
+     "at": [
+      41,
+      0.3
+     ],
+     "t_on": [
+      41,
+      0.84
+     ]
+    }
+   ]
+  }
+ ]
+}

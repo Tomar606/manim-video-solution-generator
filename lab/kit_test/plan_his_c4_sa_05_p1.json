@@ -1,0 +1,814 @@
+{
+ "_about": "HIS-C4-SA-05 (वैष्णववाद का वर्णन कीजिए): mandir look, two parts.",
+ "project": "his-c4-sa-05",
+ "part": 1,
+ "captions_at": "bottom",
+ "skin": "paper-editorial",
+ "theme": "mandir",
+ "presenter_style": "card",
+ "plate": "vs-deogarh-temple",
+ "spine": {
+  "title": "वैष्णववाद",
+  "items": [
+   "परिभाषा",
+   "अवतारवाद",
+   "दशावतार",
+   "भक्ति मार्ग",
+   "मूर्ति-मंदिर"
+  ],
+  "lit_at": [
+   11,
+   22,
+   30
+  ],
+  "show_from": 10
+ },
+ "beats": [
+  {
+   "id": "storm",
+   "in": 0,
+   "out": 1,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "गीता की सबसे प्रसिद्ध बात…",
+     "at": [
+      0,
+      0.6
+     ],
+     "fx": "blur"
+    }
+   ]
+  },
+  {
+   "id": "gita",
+   "in": 1,
+   "out": 2,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h2",
+    "region": "full"
+   },
+   "elements": []
+  },
+  {
+   "id": "adharma",
+   "in": 2,
+   "out": [
+    2,
+    2.7
+   ],
+   "presenter": "standard",
+   "broll": {
+    "clip": "a1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "जब-जब अधर्म बढ़ा…",
+     "at": [
+      2,
+      0.4
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "flame",
+   "in": [
+    2,
+    2.7
+   ],
+   "out": 4,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h1",
+    "region": "full",
+    "offset": 4
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "तब-तब भगवान",
+     "text": "अवतार लेते हैं",
+     "at": [
+      3,
+      1.4
+     ],
+     "hl": [
+      "अवतार"
+     ],
+     "sub": "धर्म की रक्षा के लिए",
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "sanctum",
+   "in": 4,
+   "out": 5,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "यही विचार बना एक पूरी परंपरा की नींव",
+     "at": [
+      4,
+      0.5
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "name",
+   "in": 5,
+   "out": [
+    6,
+    0.7
+   ],
+   "presenter": "standard",
+   "plate": "vs-vishnu-head",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "जिसे कहते हैं",
+     "text": "वैष्णववाद",
+     "at": [
+      5,
+      1.4
+     ],
+     "hl": [
+      "वैष्णववाद"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": [
+    6,
+    0.7
+   ],
+   "out": 10,
+   "presenter": "standard",
+   "plate": "vs-deogarh-door",
+   "elements": [
+    {
+     "type": "qhero",
+     "slot": "upper",
+     "ribbon": "Board Exam PYQ",
+     "at": [
+      6,
+      0.7
+     ],
+     "years": [
+      [
+       "2023",
+       [
+        6,
+        0.9
+       ]
+      ],
+      [
+       "2025",
+       [
+        6,
+        2.2
+       ]
+      ]
+     ],
+     "question": "वैष्णववाद का वर्णन कीजिए।",
+     "hl": [
+      "वैष्णववाद"
+     ],
+     "t_card": [
+      8,
+      0.0
+     ],
+     "marks": "3 अंक",
+     "t_marks": [
+      8,
+      0.9
+     ]
+    }
+   ]
+  },
+  {
+   "id": "first-line",
+   "in": 10,
+   "out": 11,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "पहली लाइन: परिभाषा",
+     "at": 10,
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "def",
+   "in": 11,
+   "out": 13,
+   "presenter": "standard",
+   "plate": "vs-varaha",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "परिभाषा",
+     "size": "m",
+     "at": 11,
+     "fx": "drop"
+    },
+    {
+     "type": "def",
+     "slot": "upper",
+     "term": "वैष्णववाद",
+     "text": "पौराणिक धर्म की प्रमुख शाखा",
+     "at": [
+      12,
+      0.4
+     ]
+    }
+   ]
+  },
+  {
+   "id": "preserver",
+   "in": 13,
+   "out": 15,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d2",
+    "region": "full",
+    "offset": 3
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "भगवान विष्णु",
+     "text": "ब्रह्मांड के रक्षक",
+     "at": [
+      14,
+      1.2
+     ],
+     "hl": [
+      "रक्षक"
+     ],
+     "sub": "और सर्वोच्च देवता"
+    }
+   ]
+  },
+  {
+   "id": "vaishnav",
+   "in": 15,
+   "out": 17,
+   "presenter": "standard",
+   "plate": "vs-vishnu-head",
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "upper",
+     "items": [
+      [
+       "विष्णु → वैष्णव",
+       [
+        15,
+        0.8
+       ]
+      ],
+      [
+       "= विष्णु को मानने वाले",
+       16
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "two-words",
+   "in": 17,
+   "out": 20,
+   "presenter": "standard",
+   "plate": "vs-deogarh-temple",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "परिभाषा में ये 2 शब्द ज़रूर",
+     "size": "m",
+     "at": 17,
+     "fx": "drop"
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "रक्षक",
+       [
+        18,
+        0.0
+       ]
+      ],
+      [
+       "सर्वोच्च देवता",
+       [
+        18,
+        1.0
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans0",
+   "in": 20,
+   "out": 21,
+   "presenter": "standard",
+   "plate": "vs-deogarh-temple",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर बन रहा है…",
+     "points": [
+      "<b>वैष्णववाद</b> प्राचीन हिंदू (पौराणिक) धर्म की प्रमुख शाखा है, जिसमें भगवान विष्णु को ब्रह्मांड का <b>रक्षक</b> और <b>सर्वोच्च देवता</b> माना जाता है।",
+      "<b>अवतारवाद:</b> पृथ्वी पर अधर्म बढ़ने पर विष्णु धर्म की रक्षा के लिए अवतार लेते हैं।",
+      "<b>दशावतार:</b> विष्णु के दस प्रमुख अवतार (राम, कृष्ण, वराह, नरसिंह आदि) पूजे गए।",
+      "<b>भक्ति मार्ग:</b> खर्चीले यज्ञों और कठोर तप के बजाय सच्चे प्रेम और भक्ति पर ज़ोर।",
+      "<b>मूर्ति व मंदिर निर्माण:</b> गुप्त काल में विष्णु के अवतारों की मूर्तियाँ और मंदिर बने, जैसे देवगढ़ (उ.प्र.) का दशावतार मंदिर।"
+     ],
+     "nums": [
+      "",
+      "1.",
+      "2.",
+      "3.",
+      "4."
+     ],
+     "show": 1,
+     "animate_from": 0,
+     "at": 20,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "p1",
+   "in": 21,
+   "out": 23,
+   "presenter": "standard",
+   "plate": "vs-varaha",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "पहली बात",
+     "text": "अवतारवाद",
+     "at": [
+      22,
+      0.6
+     ],
+     "hl": [
+      "अवतारवाद"
+     ],
+     "sub": "का सिद्धांत",
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "gita2",
+   "in": 23,
+   "out": 24,
+   "presenter": "standard",
+   "broll": {
+    "clip": "h2",
+    "region": "full",
+    "offset": 3
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "वही गीता वाली बात",
+     "at": 23,
+     "fx": "blur"
+    }
+   ]
+  },
+  {
+   "id": "flood",
+   "in": 24,
+   "out": 25,
+   "presenter": "standard",
+   "broll": {
+    "clip": "a1",
+    "region": "full",
+    "offset": 3.5
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "पाप और अधर्म बढ़ा",
+     "at": [
+      24,
+      0.6
+     ]
+    }
+   ]
+  },
+  {
+   "id": "dawn",
+   "in": 25,
+   "out": 28,
+   "presenter": "standard",
+   "broll": {
+    "clip": "a2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "धर्म की रक्षा",
+       [
+        25,
+        1.0
+       ]
+      ],
+      [
+       "अलग-अलग रूप",
+       26
+      ]
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "= अवतार",
+     "at": [
+      27,
+      0.9
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "ans1",
+   "in": 28,
+   "out": 29,
+   "presenter": "standard",
+   "plate": "vs-varaha",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर बन रहा है…",
+     "points": [
+      "<b>वैष्णववाद</b> प्राचीन हिंदू (पौराणिक) धर्म की प्रमुख शाखा है, जिसमें भगवान विष्णु को ब्रह्मांड का <b>रक्षक</b> और <b>सर्वोच्च देवता</b> माना जाता है।",
+      "<b>अवतारवाद:</b> पृथ्वी पर अधर्म बढ़ने पर विष्णु धर्म की रक्षा के लिए अवतार लेते हैं।",
+      "<b>दशावतार:</b> विष्णु के दस प्रमुख अवतार (राम, कृष्ण, वराह, नरसिंह आदि) पूजे गए।",
+      "<b>भक्ति मार्ग:</b> खर्चीले यज्ञों और कठोर तप के बजाय सच्चे प्रेम और भक्ति पर ज़ोर।",
+      "<b>मूर्ति व मंदिर निर्माण:</b> गुप्त काल में विष्णु के अवतारों की मूर्तियाँ और मंदिर बने, जैसे देवगढ़ (उ.प्र.) का दशावतार मंदिर।"
+     ],
+     "nums": [
+      "",
+      "1.",
+      "2.",
+      "3.",
+      "4."
+     ],
+     "show": 2,
+     "animate_from": 1,
+     "at": 28,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "how-many",
+   "in": 29,
+   "out": 30,
+   "presenter": "standard",
+   "broll": {
+    "clip": "da3",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "विष्णु के अवतार कितने?",
+     "at": [
+      29,
+      0.8
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "p2",
+   "in": 30,
+   "out": 31,
+   "presenter": "standard",
+   "plate": "vs-deogarh-temple",
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "दूसरी बात",
+     "text": "दशावतार",
+     "at": [
+      30,
+      2.2
+     ],
+     "hl": [
+      "दशावतार"
+     ],
+     "sub": "की मान्यता",
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "ten",
+   "in": 31,
+   "out": 32,
+   "presenter": "standard",
+   "broll": {
+    "clip": "da3",
+    "region": "full",
+    "offset": 3
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "विष्णु के",
+     "text": "दस प्रमुख अवतार",
+     "at": [
+      31,
+      1.6
+     ],
+     "hl": [
+      "दस"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "names",
+   "in": 32,
+   "out": 33,
+   "presenter": "standard",
+   "broll": {
+    "clip": "da1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "style": "accent",
+     "items": [
+      [
+       "राम",
+       [
+        32,
+        0.6
+       ]
+      ],
+      [
+       "श्रीकृष्ण",
+       [
+        32,
+        1.6
+       ]
+      ],
+      [
+       "वराह",
+       [
+        32,
+        2.6
+       ]
+      ],
+      [
+       "नरसिंह",
+       [
+        32,
+        3.6
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "worship",
+   "in": 33,
+   "out": 34,
+   "presenter": "standard",
+   "broll": {
+    "clip": "da2",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pill",
+     "slot": "over-broll-low",
+     "text": "आज भी इनकी पूजा",
+     "at": [
+      33,
+      0.4
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mistake",
+   "in": 34,
+   "out": 37,
+   "presenter": "standard",
+   "plate": "vs-deogarh-door",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "ध्यान दें: यहीं गलती होती है",
+     "size": "m",
+     "at": 34,
+     "fx": "drop",
+     "sfx": [
+      [
+       0.05,
+       "hud-blip/back-blip"
+      ]
+     ]
+    },
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "अवतारवाद + दशावतार = एक point",
+     "yes": "दोनों अलग-अलग points",
+     "at": 35,
+     "t_yes": 36
+    }
+   ]
+  },
+  {
+   "id": "diff",
+   "in": 37,
+   "out": 39,
+   "presenter": "standard",
+   "plate": "vs-varaha",
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "फ़र्क याद रखो",
+     "size": "m",
+     "at": 37
+    },
+    {
+     "type": "cards3",
+     "slot": "upper",
+     "items": [
+      [
+       "अवतारवाद: अवतार क्यों होते हैं",
+       [
+        37,
+        0.6
+       ]
+      ],
+      [
+       "दशावतार: अवतार कौन-कौन से हैं",
+       [
+        38,
+        0.6
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ans2",
+   "in": 39,
+   "out": 41,
+   "presenter": "standard",
+   "plate": "vs-deogarh-temple",
+   "elements": [
+    {
+     "type": "answer",
+     "slot": "upper",
+     "title": "उत्तर बन रहा है…",
+     "points": [
+      "<b>वैष्णववाद</b> प्राचीन हिंदू (पौराणिक) धर्म की प्रमुख शाखा है, जिसमें भगवान विष्णु को ब्रह्मांड का <b>रक्षक</b> और <b>सर्वोच्च देवता</b> माना जाता है।",
+      "<b>अवतारवाद:</b> पृथ्वी पर अधर्म बढ़ने पर विष्णु धर्म की रक्षा के लिए अवतार लेते हैं।",
+      "<b>दशावतार:</b> विष्णु के दस प्रमुख अवतार (राम, कृष्ण, वराह, नरसिंह आदि) पूजे गए।",
+      "<b>भक्ति मार्ग:</b> खर्चीले यज्ञों और कठोर तप के बजाय सच्चे प्रेम और भक्ति पर ज़ोर।",
+      "<b>मूर्ति व मंदिर निर्माण:</b> गुप्त काल में विष्णु के अवतारों की मूर्तियाँ और मंदिर बने, जैसे देवगढ़ (उ.प्र.) का दशावतार मंदिर।"
+     ],
+     "nums": [
+      "",
+      "1.",
+      "2.",
+      "3.",
+      "4."
+     ],
+     "show": 3,
+     "animate_from": 2,
+     "at": 39,
+     "gap": 0.45
+    }
+   ]
+  },
+  {
+   "id": "how-where",
+   "in": 41,
+   "out": 42,
+   "presenter": "standard",
+   "broll": {
+    "clip": "b4",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "pills",
+     "slot": "over-broll-low",
+     "items": [
+      [
+       "पूजा कैसे?",
+       [
+        41,
+        1.4
+       ]
+      ],
+      [
+       "और कहाँ?",
+       [
+        41,
+        3.4
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "next",
+   "in": 42,
+   "out": "end",
+   "presenter": "hero",
+   "broll": {
+    "clip": "m3",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "stamp",
+     "slot": "over-broll",
+     "text": "बाकी 2 बातें: Part 2",
+     "at": [
+      42,
+      0.6
+     ],
+     "fx": "zoom"
+    }
+   ]
+  }
+ ]
+}

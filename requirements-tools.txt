@@ -1,0 +1,13 @@
+# The kit's Python dependencies (tools/, lab/kit_test/, veo_kit/). Python 3.11-3.12.
+#   macOS:   python3 -m venv .venv-tools && .venv-tools/bin/pip install -r requirements-tools.txt
+#   Windows: py -3.12 -m venv .venv-tools; .venv-tools\Scripts\pip install -r requirements-tools.txt
+numpy                    # frame maths: keying, grading, compositing
+pillow                   # Devanagari typesetting (needs raqm: tools/doctor.py checks it)
+python-dotenv>=1.0.1     # .env
+requests                 # Whisper API word timings (tools/kit_captions.py)
+openpyxl                 # the question sheets' xlsx export (tools/sheet_fetch.py)
+facenet-pytorch          # face_gate and avatar_shape_gate (brings torch)
+psutil>=5.9              # memory and swap on Windows/Linux (tools/machine_guard.py)
+# optional LLM backends for src/llm.py; the default uses the Claude Code CLI and needs neither
+# anthropic
+# openai
