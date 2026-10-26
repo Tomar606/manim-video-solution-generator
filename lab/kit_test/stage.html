@@ -68,6 +68,15 @@
   .pt-img { background-size: cover; background-repeat: no-repeat; border-radius: 3px; filter: sepia(.25) contrast(1.05); }
   .pt-name { font-family: var(--font-head); font-weight: var(--head-weight, 800); font-size: 50px; line-height: 1.3; color: var(--accent); margin-top: 8px; }
   .pt-sub { font-family: var(--font-body); font-size: 38px; line-height: 1.25; color: var(--ink); }
+  .ld-step { position: relative; display: flex; align-items: center; gap: 26px; padding: 18px 28px 18px 20px; box-sizing: border-box;
+             background: var(--card-bg); border: var(--card-border-w, 1.5px) solid var(--card-border); box-shadow: var(--shadow, 0 12px 28px rgba(0,0,0,.4)); }
+  .ld-ic { flex: none; width: 104px; height: 104px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; }
+  .ld-name { font-family: var(--font-head); font-weight: var(--head-weight, 800); font-size: 62px; line-height: 1.2; color: var(--accent); }
+  .ld-sub { font-family: var(--font-body); font-size: 40px; line-height: 1.3; color: var(--ink); }
+  .ld-down { position: absolute; left: 66px; bottom: -30px; width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent;
+             border-top: 22px solid var(--accent-2, var(--accent)); z-index: 2; }
+  .ld-step.ghost { opacity: .3; filter: grayscale(.9); }
+  .ld-step.quiet { opacity: .62; }
   .pt-cell.ghost { opacity: .32; filter: grayscale(.9); }
   .pt-cell.quiet { opacity: .62; }
   .bare img { display: block; width: 100%; }
@@ -852,6 +861,24 @@ function draw(THEME, tOverride) {
              <div class="pt-name">${name}</div>` + (on && sub ? `<div class="pt-sub">${sub}</div>` : ''));
           n.appendChild(c);
           if (on) { const k = (t - ti) / 0.45; enter(c, e.ghost ? 'pop' : 'rise', k); const s = c.querySelector('.pt-sub'); if (s) s.style.opacity = clamp((t - ti - 0.25) / 0.3).toFixed(2); }
+        });
+        place(n, e.slot); n.style.left = '60px'; if (e.top != null) n.style.top = e.top + 'px'; break; }
+      case 'ladder': {
+        // a hierarchy as a staircase from the top down, filling in as each rank is named: [icon, name, sub, cue].
+        // ghost: every step there from the start, faded, lighting on its cue (a recap); focus: the newest bright
+        const ind = e.indent ?? 64, W = 960, last = e.items.filter(it => t >= it[3]).length - 1;
+        n = el('div', ''); Object.assign(n.style, { width: W + 'px', display: 'flex', flexDirection: 'column', gap: (e.gap ?? 30) + 'px' });
+        e.items.forEach(([icon, name, sub, ti], i) => {
+          const on = t >= ti;
+          if (!on && !e.ghost) return;
+          const quiet = on && e.focus && i !== last;
+          const c = el('div', 'ld-step' + (on ? '' : ' ghost') + (quiet ? ' quiet' : ''),
+            `<div class="ld-ic">${TL.icons[icon] || ''}</div><div class="ld-tx"><div class="ld-name">${name}</div>` +
+            (sub && on ? `<div class="ld-sub">${sub}</div>` : '') + `</div>` + (i < e.items.length - 1 ? `<div class="ld-down"></div>` : ''));
+          Object.assign(c.style, { marginLeft: (i * ind) + 'px', width: (W - (e.items.length - 1) * ind) + 'px' });
+          c.querySelectorAll('.ld-ic svg').forEach(v => { v.setAttribute('width', '62'); v.setAttribute('height', '62'); v.style.stroke = 'currentColor'; });
+          n.appendChild(c);
+          if (on) { enter(c, 'slide', (t - ti) / 0.45); const s = c.querySelector('.ld-sub'); if (s) s.style.opacity = clamp((t - ti - 0.3) / 0.3).toFixed(2); }
         });
         place(n, e.slot); n.style.left = '60px'; if (e.top != null) n.style.top = e.top + 'px'; break; }
       case 'qcard': {

@@ -1,0 +1,11 @@
+[
+ {"slug": "boulders", "query": "Hampi boulders landscape sunrise", "limit": 4},
+ {"slug": "chariot", "query": "Vittala temple stone chariot Hampi", "limit": 3},
+ {"slug": "tank", "query": "Hampi stepped tank pushkarani", "limit": 3},
+ {"slug": "virupaksha", "query": "Virupaksha temple Hampi gopuram", "limit": 3},
+ {"slug": "frieze", "query": "Hazara Rama temple Hampi relief soldiers", "limit": 4},
+ {"slug": "dibba", "query": "Mahanavami Dibba Hampi carvings", "limit": 3},
+ {"slug": "krishnadevaraya", "query": "Krishnadevaraya statue", "limit": 3},
+ {"slug": "fort", "query": "Hampi fortification wall gateway", "limit": 3},
+ {"slug": "coin", "query": "Vijayanagara gold coin pagoda", "limit": 3}
+]

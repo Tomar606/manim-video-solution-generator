@@ -80,7 +80,7 @@ Spot-check the risky joins against a loudness envelope.
 
 ## 4. Exam sheets
 
-`tools/paper_header.py --subject <subject> --design projects/bio-c4-la-01/assets/design/question_sheet.png
+`tools/paper_header.py --subject <subject>
 --question "<question>" --year <YYYY> --out projects/<slug>/assets/papers --name sheet-<YYYY>`, once per year.
 
 - Copy the latest year to `qsheet.png`.

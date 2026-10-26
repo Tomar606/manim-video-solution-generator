@@ -279,5 +279,45 @@
   ],
   "notes": "Varanasi loom, blur 10 px: the presenter card backdrop",
   "source": "library/backgrounds/photos/history/bhakti/loom-2.jpg (Wikimedia Commons, CC BY-SA 3.0; see credits.json)"
+ },
+ "hp-chariot": {
+  "skin": "hampi",
+  "tags": [
+   "history",
+   "vijayanagara",
+   "light blur"
+  ],
+  "notes": "the stone chariot of the Vittala temple, Hampi; Gaussian blur 6.5 px, brightness 0.74",
+  "source": "library/backgrounds/photos/history/vijayanagara/chariot-2.jpg (Wikimedia Commons, CC BY-SA 4.0, Ram Nagesh Thota; see credits.json)"
+ },
+ "hp-tank": {
+  "skin": "hampi",
+  "tags": [
+   "history",
+   "vijayanagara",
+   "light blur"
+  ],
+  "notes": "the stepped tank of the royal centre, Hampi; Gaussian blur 6.5 px, brightness 0.74",
+  "source": "library/backgrounds/photos/history/vijayanagara/tank-2.jpg (Wikimedia Commons, CC BY-SA 4.0, Venkygrams; see credits.json)"
+ },
+ "hp-gopuram": {
+  "skin": "hampi",
+  "tags": [
+   "history",
+   "vijayanagara",
+   "light blur"
+  ],
+  "notes": "the gopuram of the Virupaksha temple, Hampi; Gaussian blur 6.5 px, brightness 0.72",
+  "source": "library/backgrounds/photos/history/vijayanagara/virupaksha-1.jpg (Wikimedia Commons, CC BY-SA 4.0, Ingo Mehling; see credits.json)"
+ },
+ "hp-card": {
+  "skin": "hampi",
+  "tags": [
+   "history",
+   "vijayanagara",
+   "card backdrop"
+  ],
+  "notes": "Hampi stone chariot, blur 10 px: the presenter card backdrop",
+  "source": "library/backgrounds/photos/history/vijayanagara/chariot-3.jpg (Wikimedia Commons, CC BY-SA 4.0; see credits.json)"
  }
 }

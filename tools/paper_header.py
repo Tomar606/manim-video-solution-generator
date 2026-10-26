@@ -52,7 +52,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
-DESIGN = ROOT / "inbox" / "sticky_note_design.png"
+DESIGN = ROOT / "library" / "elements" / "papers" / "question_sheet.png"   # the approved torn exam sheet, every subject
 OUT = ROOT / "inbox" / "preview"
 
 DEV_FONT = "/System/Library/Fonts/Supplemental/Shree714.ttc"
@@ -534,7 +534,9 @@ def build(subject: str, dest: Path, question: str | None = None,
     # "प्रश्न –" and "(1)" are fixed furniture and stay; only the sentence to
     # the right of them is replaced, so each sample carries its own subject's
     # question instead of borrowing chemistry's.
-    sheet = inpaint_band(sheet, Q_BAND_FULL if design else Q_BAND)
+    # the full band always: the default design is now the finished exam sheet, whose own question reaches
+    # left of Q_BAND (its '(b)' line). The narrow band left that line showing under a new question (26 Oct 2026).
+    sheet = inpaint_band(sheet, Q_BAND_FULL)
     rows, pitch, baseline = question_block(question or QUESTIONS[subject],
                                            Q_INK_H, Q_BAND[2] - Q_LEFT - 10,
                                            avail_h=Q_BOTTOM - Q_TOP)

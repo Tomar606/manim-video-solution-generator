@@ -298,7 +298,7 @@ def resolve(plan, lines, duration):
             if "recount" in e:
                 e["recount"] = [ref(v) for v in e["recount"]]
             for key in ("items", "stops", "states"):
-                if key in e and e["type"] in ("pills", "chain", "radial", "cards3", "seasons", "quad", "tiles", "bars", "dots100", "timeline", "notify", "pins", "portraits"):
+                if key in e and e["type"] in ("pills", "chain", "radial", "cards3", "seasons", "quad", "tiles", "bars", "dots100", "timeline", "notify", "pins", "portraits", "ladder"):
                     e[key] = [list(it[:-1]) + [ref(it[-1], tin)] for it in e[key]]
                     e.setdefault("t", e[key][0][-1])
             if e["type"] == "rewrite":                   # steps: [tex, cue]; subs: [photo, tex, label, cue]
