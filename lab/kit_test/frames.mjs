@@ -40,7 +40,8 @@ for (let i = ra; i < Math.min(rb, n); i++) {
   const t = i / fps;
   const sig = await page.evaluate(t => { window.renderAt(t); return document.getElementById('frame').innerHTML; }, t);
   const file = path.join(frameDir, `g_${String(i).padStart(5, '0')}.png`);
-  if (sig === prev) { fs.linkSync(prevFile, file); continue; }
+  // a re-run over a range that partly exists (a chunk that died mid-way) must replace, not fail on EEXIST
+  if (sig === prev) { fs.rmSync(file, { force: true }); fs.linkSync(prevFile, file); continue; }
   await page.waitForFunction(() => [...document.images].every(im => im.complete));
   const rep = await page.evaluate(() => window.REPORT);
   if (rep.violations.length) { violations++; if (violations < 6) console.log(`  ${t.toFixed(2)}s ${rep.beat}: ${rep.violations.join('; ')}`); }

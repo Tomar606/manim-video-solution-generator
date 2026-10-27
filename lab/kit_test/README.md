@@ -65,7 +65,10 @@ reports Hindi shaping missing, put FriBiDi's `fribidi-0.dll` on PATH.
 1. In Chrome, open `chrome://extensions`, turn on Developer mode, choose Load unpacked, and pick `flow/extension`
    ("PYQ Flow Bridge"). Only one bridge extension may be on; another project ships one on the same port.
 2. Sign in at flow.google.com and open a project.
-3. Run `tools/kit_veo.py setup`. It sets Video, Veo 3.1 Fast, 9:16 and 1 output.
+3. Run `tools/kit_veo.py setup`. It sets Video, Veo 3.1 Fast, 9:16 and 1 output. (`tools/kit_veo.py go <slug>`
+   runs it for you, then queues the reel's prompts and watches the clips in.)
+4. If clips stop downloading after the Flow tab was reloaded, nothing needs doing: Flow then serves them only
+   with its sign-in cookies, and the fetch downloads them through the browser instead.
 
 **Using the machine's power.** `render_reel.py` sizes itself to the PC it runs on:
 - it renders in parallel **lanes**, one per ~1.2 GB of free memory and 4 cores, up to 4. An 8 GB laptop gets
@@ -92,8 +95,8 @@ reports Hindi shaping missing, put FriBiDi's `fribidi-0.dll` on PATH.
 | 3 | `tools/kit_captions.py <slug>`, or `tools/lines_from_srt.py` + `tools/pause_align.py` | Claude |
 | 4 | exam sheets: `tools/paper_header.py ... --year <Y>` | Claude |
 | 5 | theme pack, plates (`tools/fetch_photos.py`), exact diagrams | Claude |
-| 6 | `lab/kit_test/make_<id>_plans.py` from the closest reference | Claude |
-| 7 | `tools/kit_veo.py setup / submit / fetch / clean <slug>` | Claude |
+| 6 | Veo prompts, then `tools/kit_veo.py go <slug>` in the background: queues, fetches, cleans and checks every clip (split screen, text, shape) and regenerates the rejects | Claude |
+| 7 | `lab/kit_test/make_<id>_plans.py` from the closest reference, while the clips generate | Claude |
 | 8 | `compile.py --stills auto`, `stills.mjs ... review`, `review_page.py <slug>` | Claude |
 | 9 | **review the frames** in `projects/<slug>/review/index.html`, then "Copy my review" | the person |
 | 10 | `lab/kit_test/render_reel.py <slug> --wait` (renders, then delivers) | Claude |

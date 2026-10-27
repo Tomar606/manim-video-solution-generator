@@ -33,7 +33,9 @@ matching `make_*_plans.py`. A new video starts from the closest one.
 ## The video, in order
 
 1. **Hook on moving footage.** The first frame is a Veo clip, never a title over a talking head,
-   with "MP Board / कक्षा 12वीं" on the state outline. *gate: `hook_visual`. A plan may set `"hook": "exempt"`
+   with the board's seal over it: the MPBSE seal large, and a seal-blue pill under it reading
+   "MP Board | कक्षा 12" (`{"type": "boardtag", "slot": "upper", "at": [0, 0.05]}`; the team's chosen opener,
+   27 Oct 2026, replacing the state outline). *gate: `hook_visual`. A plan may set `"hook": "exempt"`
    only while its Veo clips are still being generated; it must be off for the render.*
 2. **The years on real exam sheets**, one sheet per year, each year landing as it is spoken.
 3. **The question on the torn exam sheet**, each printed line highlighting as he reads it, with

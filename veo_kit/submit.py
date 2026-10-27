@@ -136,6 +136,7 @@ def main() -> int:
 
     sel = fk.selectors()
     b, project = fk.connect()
+    print(f"flow project: {project.rstrip('/').rsplit('/', 1)[-1]}", flush=True)   # tools/kit_veo.py records it
     try:
         fk.back_to_grid(b, project)
         seen = fk.ev(b, ASPECT_JS)

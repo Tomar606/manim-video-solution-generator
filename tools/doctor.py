@@ -54,6 +54,15 @@ def main() -> int:
     rc, out = run(str(PY), "-c", "from PIL import features; print(features.check('raqm'))", env=env)
     check(rc == 0 and out.endswith("True"), "Hindi text shaping in Pillow (raqm)",
           "brew install libraqm fribidi; run tools with DYLD_LIBRARY_PATH=/opt/homebrew/lib (CLAUDE.md, Pillow)")
+    # the plans, captions and meta are Hindi in UTF-8; Windows Python reads files in the system code page unless
+    # told otherwise, and Devanagari bytes then fail to decode (or turn to garbage) far from the cause
+    rc, out = run(str(PY), "-c", "import sys, locale; print(bool(sys.flags.utf8_mode) or "
+                  "locale.getpreferredencoding(False).lower().replace('-', '') == 'utf8')")
+    check(rc == 0 and out.endswith("True"), "Python reads the kit's Hindi files as UTF-8",
+          "Windows: run  setx PYTHONUTF8 1  once in a terminal, then open a new one")
+    rc, out = run(str(PY), "-c", "import numpy, facenet_pytorch; from rapidocr_onnxruntime import RapidOCR; print(numpy.__version__)")
+    check(rc == 0, "Veo text check (RapidOCR) installed beside the face gates",
+          "pip install -r requirements-tools.txt (numpy must stay below 2 for facenet-pytorch)")
     # headless renders use the separate headless shell of the same revision as the full browser's path names
     rc, out = run("node", "-e", "const {chromium}=require('playwright');const fs=require('fs'),path=require('path');"
                   "const p=chromium.executablePath(),rev=p.match(/chromium-(\\d+)/)[1];"
@@ -79,7 +88,7 @@ def main() -> int:
           "add it to .env; without credits, captions fall back to tools/pause_align.py")
     if "--flow" in sys.argv:
         rc, out = run(str(PY), "-c", "import sys; sys.path.insert(0, '.'); from src.flow_bridge import FlowBridge\n"
-                      "b = FlowBridge(); b.start(); print(b.wait_for_extension(timeout=15))")
+                      "b = FlowBridge().start(); print(b.wait_for_worker(timeout=60)); b.stop()")
         check(rc == 0, "Flow bridge: this repo's extension answering on port 8765",
               "Chrome: chrome://extensions -> Developer mode -> Load unpacked -> flow/extension; open a Flow project "
               "tab; set Portrait 9:16 and 1 output per prompt")

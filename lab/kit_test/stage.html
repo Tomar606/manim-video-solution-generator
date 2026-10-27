@@ -75,6 +75,8 @@
   .ld-sub { font-family: var(--font-body); font-size: 40px; line-height: 1.3; color: var(--ink); }
   .ld-down { position: absolute; left: 66px; bottom: -30px; width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent;
              border-top: 22px solid var(--accent-2, var(--accent)); z-index: 2; }
+  .mem-key { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; font-family: var(--font-body); font-size: 40px; color: var(--ink); }
+  .mem-key i { display: inline-block; width: 22px; height: 22px; border-radius: 50%; margin-right: 12px; vertical-align: middle; }
   .ld-step.ghost { opacity: .3; filter: grayscale(.9); }
   .ld-step.quiet { opacity: .62; }
   .pt-cell.ghost { opacity: .32; filter: grayscale(.9); }
@@ -170,6 +172,15 @@
   .smap .smt { position: absolute; left: 0; right: 0; top: 42%; text-align: center; font-family: var(--font-head); font-weight: 800; font-size: 88px; line-height: 1.1;
                color: #fff; text-shadow: 0 4px 18px rgba(0,0,0,.45), 0 0 2px rgba(0,0,0,.6); }
   .smap .sms { font-size: 64px; font-weight: 700; margin-top: 6px; }
+  .btag { display: flex; flex-direction: column; align-items: center; gap: 34px; }
+  .btag .bt-seal { display: block; filter: drop-shadow(0 14px 26px rgba(0,0,0,.45)); }
+  .btag .bt-pill { display: flex; align-items: center; gap: 26px; padding: 0 58px; height: 128px; border-radius: 64px; background: #22379A;
+    box-shadow: 0 0 0 3px rgba(255,255,255,.18) inset, 0 16px 32px rgba(0,0,0,.42); font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif; font-weight: 700; font-size: 56px; }
+  .btag .bt-pill span { color: #FFFFFF; } .btag .bt-pill b { color: #F6C445; font-weight: 700; }
+  .btag .bt-pill i { width: 3px; height: 62px; background: #F6C445; opacity: .85; }
+  .smap .sm-map { position: relative; }
+  .smap .sm-logo { margin: 0 auto 10px; filter: drop-shadow(0 14px 26px rgba(0,0,0,.45)); }
+  .smap .sm-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
   .pdfb { display: flex; flex-direction: column; align-items: center; position: absolute; }
   .pdfb .halo { position: absolute; top: -10px; left: 50%; width: 760px; height: 760px; margin-left: -380px; border-radius: 50%;
                 background: radial-gradient(circle, rgba(255,236,170,1) 0%, rgba(255,200,70,.85) 22%, rgba(255,170,30,.45) 45%, rgba(255,160,20,0) 70%); }
@@ -244,6 +255,12 @@
   .circ .node { font-size: 44px; fill: var(--accent-2); }
   .circ .hint { font-family: var(--font-body); font-style: normal; font-size: 34px; fill: var(--muted); }
   .circ.real, [class*="theme-"] .circ.real { background: none !important; border: none !important; box-shadow: none !important; filter: drop-shadow(0 22px 30px rgba(0,0,0,.5)); }   /* the board is the card */
+  /* ...on a solid rounded panel, so a drawn concept never competes with the plate or the footage behind it (user,
+     27 Oct 2026: "it looks very crowded due to the background"). The panel's colour is the theme's --panel; it sits
+     16 px outside the drawing, so nothing inside moves. "panel": false on an element removes it. */
+  .circ.real::before { content: ""; position: absolute; inset: -16px; border-radius: 28px; z-index: -1; background: var(--panel, #1B222D);
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,.10); }
+  .circ.real.no-panel::before { display: none; }
   .circ.real .lab, .circ.real .node { font-family: 'Mukta', sans-serif; font-style: normal; font-weight: 800; fill: #FFC24A; stroke: #3B1E06; stroke-width: 7px; paint-order: stroke; stroke-linejoin: round; }
   .circ.real .hint { fill: #FFF4E0; stroke: #3B1E06; stroke-width: 6px; paint-order: stroke; stroke-linejoin: round; font-weight: 700; }
   .rewrite .eqbox { position: relative; height: 226px; }
@@ -483,8 +500,8 @@ function callout(x, y, w, head, sub, col, tx, ty, o) {
     <path d="${path}" stroke="#FFFFFF" stroke-width="3.5" fill="none" stroke-linejoin="round"/>
     <circle cx="${tx}" cy="${ty}" r="8" fill="#FFFFFF" stroke="${col}" stroke-width="4"/>
     <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="18" fill="rgba(255,255,255,.97)" stroke="${col}" stroke-width="4"/>
-    <text x="${x + 22}" y="${y + 50}" style="font-family:Mukta;font-weight:800;font-size:44px;fill:${col}">${head}</text>
-    ${sub ? `<text x="${x + 22}" y="${y + 94}" style="font-family:Mukta;font-weight:700;font-size:31px;fill:#22383A">${sub}</text>` : ''}</g>`;
+    <text x="${x + 22}" y="${y + 50}" style="font-family:Mukta;font-style:normal;font-weight:800;font-size:44px;fill:${col}">${head}</text>
+    ${sub ? `<text x="${x + 22}" y="${y + 94}" style="font-family:Mukta;font-style:normal;font-weight:700;font-size:31px;fill:#22383A">${sub}</text>` : ''}</g>`;
 }
 // the lab bench the glassware stands on: the same varnished cherry wood as yesterday's Wheatstone board
 function bench(W, y, h, id) {
@@ -503,6 +520,86 @@ function glass(d, cx, cy, extra = '') {
 }
 const LIQDEFS = `<radialGradient id="fdeep" cx="48%" cy="58%" r="62%"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".22"/><stop offset=".65" stop-color="#0A3F7A" stop-opacity="0"/><stop offset="1" stop-color="#062A55" stop-opacity=".5"/></radialGradient>
   <radialGradient id="fcaus" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#5CC8FF" stop-opacity=".75"/><stop offset="1" stop-color="#2E86DE" stop-opacity="0"/></radialGradient>`;
+// an azeotrope boiling, drawn exactly: a round-bottom flask on a hot plate boils at ONE temperature (the
+// thermometer climbs once, then holds), and the vapour leaving by the side arm carries exactly the liquid's
+// composition, shown as two identical bars. So distilling it separates nothing: t_cross stamps that.
+// Cues: t_liq (liquid bar; t_b fills the second component later when given), t_boil, t_temp, t_vap, t_same, t_cross.
+// split = fraction of the first component; a_label / b_label name them; temp / temp_sub label the thermometer.
+function realAzeo(e, t, W, H) {
+  const on = k => e[k] != null && t >= e[k], fade = k => on(k) ? ease((t - e[k]) / 0.45) : 0;
+  const BY = H - 80, PT = BY - 64, cx = 250, R = 150, cy = PT - R, NW = 28, NT = 150, LV = cy - 20;
+  const hw = y => Math.sqrt(Math.max(0, R * R - (y - cy) * (y - cy)));
+  const jy = cy - Math.sqrt(R * R - NW * NW);            // where the neck meets the bulb
+  const OUT = `M${cx - NW} ${NT} L${cx - NW} ${jy.toFixed(1)} A${R} ${R} 0 1 0 ${cx + NW} ${jy.toFixed(1)} L${cx + NW} ${NT}`;
+  const boil = on('t_boil') ? clamp((t - e.t_boil) / 1.2) : 0, tb = t - (e.t_boil ?? t);
+  const TX = 'font-family:Mukta;font-style:normal;font-weight:800;stroke:#1C2330;paint-order:stroke;stroke-linejoin:round';
+  let svg = FDEFS.replace('</defs>', LIQDEFS + '</defs>') + `<clipPath id="zcl"><path d="${OUT} Z"/></clipPath>`;
+  svg += bench(W, BY, H - BY, 'z');
+  // the hot plate: its element glows once it is on
+  svg += `<ellipse cx="${cx}" cy="${BY + 4}" rx="190" ry="14" fill="rgba(0,0,0,.55)" filter="url(#fsh)"/>
+    <rect x="${cx - 170}" y="${PT}" width="340" height="${BY - PT}" rx="12" fill="#3A3F47" stroke="#1E2228" stroke-width="3"/>
+    <rect x="${cx - 160}" y="${PT}" width="320" height="12" rx="5" fill="#C9CED6"/>
+    <rect x="${cx - 140}" y="${PT - 3}" width="280" height="7" rx="3" fill="#FF5A1F" opacity="${(0.12 + 0.88 * boil).toFixed(2)}" filter="url(#fglow)"/>
+    <circle cx="${cx + 122}" cy="${PT + 38}" r="13" fill="#20242A" stroke="#9AA2AD" stroke-width="3"/>
+    <circle cx="${cx - 122}" cy="${PT + 38}" r="7" fill="${boil > 0 ? '#FF4A2A' : '#5A2020'}"/>`;
+  // the liquid, and its bubbles once it boils (rising from the floor of the flask, always inside the glass)
+  const sw = boil ? 3 * Math.sin(t * 7) : 0, hl = hw(LV);
+  svg += `<g clip-path="url(#zcl)"><rect x="${cx - R - 10}" y="${LV}" width="${2 * R + 20}" height="${cy + R - LV + 6}" fill="url(#fliq)"/>
+    <rect x="${cx - R - 10}" y="${LV}" width="${2 * R + 20}" height="${cy + R - LV + 6}" fill="url(#fdeep)"/>
+    <path d="M${(cx - hl).toFixed(1)} ${LV} Q${cx} ${(LV + 6 + sw).toFixed(1)} ${(cx + hl).toFixed(1)} ${LV}" stroke="rgba(255,255,255,.8)" stroke-width="3" fill="none"/>`;
+  if (boil > 0) for (let i = 0; i < 22; i++) {
+    const ph = (tb * (0.5 + 0.5 * prand(i + 7)) + prand(i)) % 1, y = cy + R - 16 - ph * (cy + R - 16 - LV);
+    const x = cx + (prand(i + 20) * 2 - 1) * hw(y) * 0.82 + 3 * Math.sin(t * 6 + i), r = 3 + 9 * ph;
+    svg += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="rgba(255,255,255,.16)" stroke="rgba(255,255,255,.85)" stroke-width="2" opacity="${(boil * Math.min(1, (1 - ph) * 8)).toFixed(2)}"/>`; }
+  svg += `</g>`;
+  // the side arm the vapour leaves by
+  const ax = cx + NW, ay = NT + 62, bx = cx + 236, by = NT + 126, aL = Math.hypot(bx - ax, by - ay), nx = -(by - ay) / aL * 12, ny = (bx - ax) / aL * 12;
+  svg += `<line x1="${ax}" y1="${ay}" x2="${bx}" y2="${by}" stroke="rgba(255,255,255,.07)" stroke-width="24"/>`;
+  [1, -1].forEach(s => { svg += `<line x1="${ax + s * nx}" y1="${ay + s * ny}" x2="${bx + s * nx}" y2="${by + s * ny}" stroke="rgba(190,232,245,.3)" stroke-width="9"/>
+    <line x1="${ax + s * nx}" y1="${ay + s * ny}" x2="${bx + s * nx}" y2="${by + s * ny}" stroke="rgba(242,252,255,.95)" stroke-width="4"/>`; });
+  // vapour: from the surface, up the neck, out along the arm
+  if (boil > 0) { const l1 = LV - 8 - ay, l2 = aL;
+    for (let i = 0; i < 18; i++) { const s = (tb * 0.32 + prand(i + 60)) % 1, d = s * (l1 + l2), u = prand(i + 80) * 2 - 1;
+      let x, y; if (d < l1) { y = LV - 8 - d; x = cx + u * (y > jy ? hw(y) * 0.7 : NW - 9); } else { const f = (d - l1) / l2; x = ax + (bx - ax) * f; y = ay + (by - ay) * f + u * 6; }
+      svg += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(9 + 4 * prand(i + 90)).toFixed(1)}" fill="#FFFFFF" opacity="${(boil * 0.42 * Math.sin(Math.PI * s)).toFixed(2)}"/>`; } }
+  svg += glass(OUT, cx, cy, `<path d="M${cx - 100} ${cy + 20} C${cx - 108} ${cy + 74} ${cx - 86} ${cy + 116} ${cx - 54} ${cy + 132}" stroke="rgba(255,255,255,.55)" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <path d="M${cx - NW + 10} ${NT + 18} L${cx - NW + 10} ${jy - 8}" stroke="rgba(255,255,255,.5)" stroke-width="5" stroke-linecap="round"/>`);
+  // the cork and the thermometer: the column climbs once the liquid boils, then HOLDS (one boiling temperature)
+  const rise = on('t_boil') ? ease(clamp((t - e.t_boil) / 1.8)) : 0, top0 = ay - 6, topT = 70, lvl = top0 + (topT - top0) * rise;
+  svg += `<rect x="${cx - 36}" y="${NT - 34}" width="72" height="40" rx="8" fill="#A86B3C" stroke="#5E3818" stroke-width="3"/>
+    <rect x="${cx - 8}" y="34" width="16" height="${ay + 6 - 34}" rx="8" fill="rgba(255,255,255,.22)" stroke="rgba(242,252,255,.95)" stroke-width="3"/>`;
+  for (let y = 56; y < ay - 20; y += 22) svg += `<line x1="${cx + 8}" y1="${y}" x2="${cx + (y % 44 ? 16 : 22)}" y2="${y}" stroke="rgba(242,252,255,.8)" stroke-width="2.5"/>`;
+  svg += `<rect x="${cx - 3.5}" y="${lvl.toFixed(1)}" width="7" height="${(ay + 10 - lvl).toFixed(1)}" fill="#D8323A"/><circle cx="${cx}" cy="${ay + 14}" r="12" fill="#D8323A" stroke="rgba(242,252,255,.95)" stroke-width="3"/>`;
+  svg += callout(cx + 70, 22, 300, e.temp || 'स्थिर ताप', e.temp_sub || '', 'var(--accent)', cx + 10, topT + 4, fade('t_temp'));
+  // the two compositions: the liquid's, then the vapour's, identical. Each bar: its name above, its two parts named
+  // below on two rows (the first left, the second right, under its own end of the bar)
+  const X0 = 520, BW = 420, BH = 76, sp = e.split ?? 0.6, A = e.a_label || 'A', Bn = e.b_label || 'B';
+  const LB = `${TX};font-size:36px;fill:#FFFFFF;stroke-width:7px`;   // on each <text>: .circ svg text would beat an inherited style
+  const bar = (k, y, title, ka, kb, o) => { if (o <= 0) return '';
+    return `<g opacity="${o.toFixed(2)}" transform="translate(${(20 * (1 - o)).toFixed(1)} 0)"><clipPath id="zb${k}"><rect x="${X0}" y="${y}" width="${BW}" height="${BH}" rx="14"/></clipPath>
+      <text x="${X0}" y="${y - 14}" style="${TX};font-size:46px;fill:#FFFFFF;stroke-width:8px">${title}</text>
+      <g clip-path="url(#zb${k})"><rect x="${X0}" y="${y}" width="${BW}" height="${BH}" fill="rgba(255,255,255,.9)"/>
+        <rect x="${X0}" y="${y}" width="${(BW * sp * ka).toFixed(1)}" height="${BH}" fill="#C2700E"/>
+        <rect x="${(X0 + BW * sp).toFixed(1)}" y="${y}" width="${(BW * (1 - sp) * kb).toFixed(1)}" height="${BH}" fill="#2E6A9E"/></g>
+      <rect x="${X0}" y="${y}" width="${BW}" height="${BH}" rx="14" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+      <rect x="${X0}" y="${y + BH + 14}" width="28" height="28" rx="6" fill="#C2700E" stroke="#fff" stroke-width="2.5" opacity="${ka.toFixed(2)}"/><text x="${X0 + 40}" y="${y + BH + 40}" opacity="${ka.toFixed(2)}" style="${LB}">${A}</text>
+      <rect x="${X0 + BW - 28}" y="${y + BH + 56}" width="28" height="28" rx="6" fill="#2E6A9E" stroke="#fff" stroke-width="2.5" opacity="${kb.toFixed(2)}"/><text x="${X0 + BW - 40}" y="${y + BH + 82}" text-anchor="end" opacity="${kb.toFixed(2)}" style="${LB}">${Bn}</text></g>`; };
+  const ka = on('t_liq') ? ease((t - e.t_liq) / 0.7) : 0, kb = e.t_b != null ? (on('t_b') ? ease((t - e.t_b) / 0.6) : 0) : ka;
+  const LY = cy - 38, VY = by - 38, kv = fade('t_vap');
+  if (ka > 0) svg += `<line x1="${cx + 126}" y1="${cy + 10}" x2="${X0 - 10}" y2="${LY + BH / 2}" stroke="#FFFFFF" stroke-width="3" stroke-dasharray="7 7" opacity="${ka.toFixed(2)}"/>`;
+  svg += bar('l', LY, 'द्रव', ka, kb, ka);
+  if (kv > 0) svg += `<line x1="${bx + 14}" y1="${by}" x2="${X0 - 10}" y2="${VY + BH / 2}" stroke="#FFFFFF" stroke-width="3" stroke-dasharray="7 7" opacity="${kv.toFixed(2)}"/>`;
+  svg += bar('v', VY, 'वाष्प', kv, kv, kv);
+  // "same composition", pulsing on t_focus (when the narration leans on it)
+  const ks = on('t_same') ? back((t - e.t_same) / 0.45) : 0, MY = (VY + BH + 92 + LY - 54) / 2;
+  const pu = on('t_focus') ? Math.exp(-(t - e.t_focus) * 1.6) * Math.abs(Math.sin((t - e.t_focus) * 7)) : 0;
+  if (ks > 0) svg += `<g transform="translate(${X0 + BW / 2} ${MY}) scale(${(ks * (1 + 0.12 * pu)).toFixed(3)})"><rect x="-206" y="-36" width="412" height="72" rx="36" fill="#FFFFFF" stroke="#2E6A9E" stroke-width="${(4 + 4 * pu).toFixed(1)}"/>
+    <text x="0" y="14" text-anchor="middle" style="${TX};stroke:none;font-size:40px;fill:#1C2330">= ${e.same || 'संघटन एक-सा'} =</text></g>`;
+  const kc = on('t_cross') ? back((t - e.t_cross) / 0.45) : 0;
+  if (kc > 0) svg += `<g transform="translate(${X0 + BW / 2} ${BY - 40}) rotate(-4) scale(${kc.toFixed(3)})"><rect x="-${BW / 2 + 8}" y="-38" width="${BW + 16}" height="76" rx="12" fill="#B3261E" stroke="#FFFFFF" stroke-width="4"/>
+    <text x="0" y="13" text-anchor="middle" style="${TX};stroke:none;font-size:38px;fill:#FFFFFF">${e.cross || 'प्रभाजी आसवन से पृथक् नहीं'}</text></g>`;
+  return svg;
+}
 // the 1 L volumetric flask on the bench: blue solution to the mark, dissolved particles that gather into mole packets
 function realFlask(e, t, W, H) {
   const on = k => e[k] != null && t >= e[k], fade = k => on(k) ? ease((t - e[k]) / 0.45) : 0;
@@ -863,6 +960,62 @@ function draw(THEME, tOverride) {
           if (on) { const k = (t - ti) / 0.45; enter(c, e.ghost ? 'pop' : 'rise', k); const s = c.querySelector('.pt-sub'); if (s) s.style.opacity = clamp((t - ti - 0.25) / 0.3).toFixed(2); }
         });
         place(n, e.slot); n.style.left = '60px'; if (e.top != null) n.style.top = e.top + 'px'; break; }
+      case 'bpgraph': {
+        // boiling point vs composition of an azeotrope, drawn exactly: kind 'min' (positive deviation, the curves dip) or
+        // 'max' (negative deviation, they peak). Both curves meet at the azeotrope; the vapour curve lies above the
+        // liquid curve everywhere else. The curves draw in from t_curve, the azeotrope point lands at t_point.
+        const W = 900, H = 640, mx = e.kind === 'max';
+        // the minimum-boiling curves; a maximum-boiling diagram is their mirror, with vapour and liquid swapped so the
+        // vapour curve still lies above the liquid curve
+        const LIQ = 'M110,250 C200,380 400,430 556,430 C700,430 790,360 830,300', VAP = 'M110,250 C300,250 480,430 556,430 C640,430 780,300 830,300';
+        const flip = d => d.replace(/(\d+),(\d+)/g, (_, x, y) => `${x},${680 - +y}`);
+        const liq = mx ? flip(VAP) : LIQ, vap = mx ? flip(LIQ) : VAP, P = mx ? [556, 250] : [556, 430];
+        const k = clamp((t - (e.t_curve ?? t0)) / 1.4), kp = t >= (e.t_point ?? 1e9) ? back((t - e.t_point) / 0.45) : 0;
+        const lab = (x, y, s, c, a = 'start') => `<text x="${x}" y="${y}" text-anchor="${a}" font-family="var(--font-body)" font-size="34" fill="${c}">${s}</text>`;
+        n = el('div', 'card bpg', `<div class="k-head" style="font-size:46px;color:var(--accent);margin:0 0 4px 10px">${e.title || ''}</div>
+          <svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+            <line x1="110" y1="560" x2="830" y2="560" stroke="var(--ink)" stroke-width="4"/><line x1="110" y1="560" x2="110" y2="70" stroke="var(--ink)" stroke-width="4"/>
+            <line x1="830" y1="560" x2="830" y2="70" stroke="var(--ink)" stroke-width="2" stroke-dasharray="6 8" opacity=".5"/>
+            <path d="M110,62 l-12,22 h24z" fill="var(--ink)"/>
+            ${lab(98, 600, e.a || 'A', 'var(--ink)', 'middle')}${lab(830, 600, e.b || 'B', 'var(--ink)', 'middle')}
+            ${lab(470, 630, 'संघटन (मोल अंश)', 'var(--muted)', 'middle')}
+            <text x="62" y="320" transform="rotate(-90 62 320)" text-anchor="middle" font-family="var(--font-body)" font-size="34" fill="var(--muted)">क्वथनांक (ताप)</text>
+            <path d="${vap}" fill="none" stroke="var(--accent-2)" stroke-width="8" stroke-dasharray="1 0" pathLength="1" style="stroke-dasharray:${k} 1"/>
+            <path d="${liq}" fill="none" stroke="var(--accent)" stroke-width="8" pathLength="1" style="stroke-dasharray:${k} 1"/>
+            <g opacity="${clamp((t - (e.t_curve ?? t0) - 1.2) / 0.4)}">${lab(mx ? 230 : 250, mx ? 228 : 236, 'वाष्प', 'var(--accent-2)')}${lab(mx ? 330 : 290, mx ? 392 : 418, 'द्रव', 'var(--accent)')}</g>
+            ${kp ? `<g transform="translate(${P[0]} ${P[1]}) scale(${kp})"><circle r="17" fill="#fff" stroke="var(--ink)" stroke-width="6"/></g>
+              <g opacity="${clamp((t - e.t_point) / 0.35)}"><line x1="${P[0]}" y1="${P[1]}" x2="${P[0]}" y2="560" stroke="var(--ink)" stroke-width="3" stroke-dasharray="8 8"/>
+              <rect x="${P[0] - 190}" y="${mx ? P[1] - 96 : P[1] + 30}" width="380" height="60" rx="10" fill="var(--ink)"/>
+              ${lab(P[0], mx ? P[1] - 54 : P[1] + 72, e.point_label || 'स्थिरक्वाथी बिंदु', '#fff', 'middle')}</g>` : ''}
+          </svg>`);
+        Object.assign(n.style, { width: '960px', boxSizing: 'border-box', padding: '20px 30px 10px' });
+        place(n, e.slot); n.style.left = '60px'; if (e.top != null) n.style.top = e.top + 'px'; enter(n, 'pop', p); break; }
+      case 'membrane': {
+        // a semipermeable membrane, exactly: small solvent molecules (blue) move through its pores both ways; large
+        // solute particles (orange) stay on their side, bouncing off it. Positions are a pure function of t, so every
+        // render matches. Labels land on their cues: t_solvent (passes) and t_solute (stopped).
+        const W = 900, H = 560, MX = 450, k = t - t0;
+        const rnd = s => { const x = Math.sin(s * 127.1) * 43758.5453; return x - Math.floor(x); };
+        const bounce = (p0, v, lo, hi) => { const span = hi - lo, q = ((p0 - lo + v * k) % (2 * span) + 2 * span) % (2 * span); return lo + (q <= span ? q : 2 * span - q); };
+        let dots = '';
+        for (let i = 0; i < 26; i++) {            // solvent: the whole box, through the pores
+          const x = bounce(40 + rnd(i) * 820, (rnd(i + 50) - 0.5) * 260, 30, W - 30), y = bounce(60 + rnd(i + 100) * 420, (rnd(i + 150) - 0.5) * 200, 50, H - 40);
+          dots += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="11" fill="#2F7FD8"/>`; }
+        for (let i = 0; i < 9; i++) {             // solute: the left chamber only, bouncing off the membrane
+          const x = bounce(60 + rnd(i + 300) * 340, (rnd(i + 350) - 0.5) * 200, 40, MX - 34), y = bounce(80 + rnd(i + 400) * 380, (rnd(i + 450) - 0.5) * 160, 60, H - 50);
+          dots += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="27" fill="#E07B24" stroke="#9A4A0C" stroke-width="4"/>`; }
+        let wall = '';
+        for (let y = 40; y < H - 20; y += 44) wall += `<rect x="${MX - 7}" y="${y}" width="14" height="28" rx="5" fill="var(--ink)"/>`;
+        const on = (ti) => t >= (ti ?? 1e9) ? clamp((t - ti) / 0.4) : 0;
+        n = el('div', 'card mem', `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+            <rect x="20" y="30" width="${W - 40}" height="${H - 50}" rx="16" fill="rgba(140,190,240,.16)" stroke="var(--card-border)" stroke-width="3"/>
+            ${dots}${wall}
+            <text x="${MX}" y="24" text-anchor="middle" font-family="var(--font-body)" font-size="32" fill="var(--ink)">अर्द्धपारगम्य झिल्ली</text>
+          </svg>
+          <div class="mem-key"><span style="opacity:${on(e.t_solvent)}"><i style="background:#2F7FD8"></i> ${e.solvent || 'विलायक के अणु: आर-पार'}</span>
+          <span style="opacity:${on(e.t_solute)}"><i style="background:#E07B24;width:30px;height:30px"></i> ${e.solute || 'विलेय के अणु / आयन: रुक जाते हैं'}</span></div>`);
+        Object.assign(n.style, { width: '960px', boxSizing: 'border-box', padding: '22px 30px 18px' });
+        place(n, e.slot); n.style.left = '60px'; if (e.top != null) n.style.top = e.top + 'px'; enter(n, 'pop', p); break; }
       case 'ladder': {
         // a hierarchy as a staircase from the top down, filling in as each rank is named: [icon, name, sub, cue].
         // ghost: every step there from the start, faded, lighting on its cue (a recap); focus: the newest bright
@@ -1192,17 +1345,29 @@ function draw(THEME, tOverride) {
         n = el('div', 'igs', `<div class="bm" style="transform:scale(${(on ? 0.7 + 0.3 * k : 1).toFixed(3)})">${icon}</div>
              <div><div class="t">${e.text}</div>${e.sub ? `<div class="b">${e.sub}</div>` : ''}</div>`);
         place(n, e.slot); n.style.left = '90px'; enter(n, 'pop', p); break; }
+      case 'boardtag': {
+        // the opener, from the team's mock (27 Oct 2026, option 5): the MPBSE seal large, a seal-blue pill under it
+        // reading "MP Board | कक्षा 12". The seal pops, the pill rises under it.
+        const SW = e.seal_w || 400, ks = back((t - t0) / 0.5), kp = ease((t - t0 - 0.25) / 0.4);
+        n = el('div', 'btag', `<img class="bt-seal" src="${e.seal || '../../library/elements/brand/mpbse-seal.png'}" style="width:${SW}px;opacity:${clamp((t - t0) / 0.2).toFixed(2)};transform:scale(${(0.5 + 0.5 * ks).toFixed(3)})">
+          <div class="bt-pill" style="opacity:${kp.toFixed(2)};transform:translateY(${(30 * (1 - kp)).toFixed(1)}px)"><span>${e.text || 'MP Board'}</span><i></i><b>${e.sub || 'कक्षा 12'}</b></div>`);
+        n.classList.add('abs'); Object.assign(n.style, { left: '60px', width: '960px', top: (e.top ?? 190) + 'px' });
+        content.appendChild(n); boxes.push({ type: 'boardtag', slot: 'upper', el: n }); n = null; break; }
       case 'statemap': {
         // one state's outline drawing itself, then filling, with the words set inside it
         const sh = TL.shapes[e.state], W = e.w || 900, Hh = Math.round(W * sh.aspect), pad = 30;
         const d = 'M' + sh.pts.map(([x, y]) => `${(pad + x * (W - 2 * pad)).toFixed(1)} ${(pad + y * (W - 2 * pad)).toFixed(1)}`).join(' L') + 'Z';
-        const k = ease((t - t0) / 1.1), f = ease((t - t0 - 0.9) / 0.6), tx = ease((t - t0 - 1.1) / 0.5);
-        n = el('div', 'smap', `<svg width="${W}" height="${Hh + 2 * pad}" viewBox="0 0 ${W} ${Hh + 2 * pad}" style="overflow:visible">
+        // speed > 1 plays it faster: the hook line is often two seconds, and the finished map must be on screen in it
+        const dt = (t - t0) * (e.speed || 1), k = ease(dt / 1.1), f = ease((dt - 0.9) / 0.6), tx = ease((dt - 1.1) / 0.5);
+        // optional: the board's seal above the map ("logo": true for the MPBSE seal; the MP opener is boardtag now)
+        const logo = e.logo === true ? '../../library/elements/brand/mpbse-seal.png' : (e.logo || null), LW = e.logo_w || 270, kl = back(dt / 0.5);
+        n = el('div', 'smap', (logo ? `<div class="sm-logo" style="width:${LW}px;height:${LW}px;opacity:${clamp(dt / 0.25).toFixed(2)};transform:scale(${(0.4 + 0.6 * kl).toFixed(3)})"><img src="${logo}"></div>` : '') +
+          `<div class="sm-map"><svg width="${W}" height="${Hh + 2 * pad}" viewBox="0 0 ${W} ${Hh + 2 * pad}" style="overflow:visible">
             <defs><linearGradient id="smf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${e.fill1 || '#F2A516'}"/><stop offset="1" stop-color="${e.fill2 || '#B8692F'}"/></linearGradient>
             <filter id="smg" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="10"/></filter></defs>
             <path d="${d}" fill="none" stroke="#FFD27A" stroke-width="22" opacity="${(0.55 * f).toFixed(2)}" filter="url(#smg)"/>
             <path d="${d}" fill="url(#smf)" fill-opacity="${(0.92 * f).toFixed(2)}" stroke="#fff" stroke-width="7" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="${(1 - k).toFixed(3)}"/></svg>
-            <div class="smt" style="opacity:${tx.toFixed(2)};transform:translateY(${(20 * (1 - tx)).toFixed(1)}px)">${e.text}${e.sub ? `<div class="sms">${e.sub}</div>` : ''}</div>`);
+            <div class="smt" style="opacity:${tx.toFixed(2)};transform:translateY(${(20 * (1 - tx)).toFixed(1)}px)${e.text_size ? `;font-size:${e.text_size}px` : ''}">${e.text}${e.sub ? `<div class="sms"${e.text_size ? ` style="font-size:${Math.round(e.text_size * 0.73)}px"` : ''}>${e.sub}</div>` : ''}</div></div>`);
         n.style.width = W + 'px'; place(n, e.slot); n.style.left = Math.round((1080 - W) / 2) + 'px'; if (e.top != null) n.style.top = e.top + 'px'; break; }
       case 'pdfbadge': {
         // the promised PDF made to feel like a prize: a document with a crown, a pulsing glow and a light sweep
@@ -1341,9 +1506,16 @@ function draw(THEME, tOverride) {
         break; }
       case 'flask': {
         const W = 960, H = e.h || 900;
-        n = el('div', 'circ real chem', `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="overflow:visible">${realFlask(e, t, W, H)}</svg>`);
+        n = el('div', 'circ real chem' + (e.panel === false ? ' no-panel' : ''), `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="overflow:visible">${realFlask(e, t, W, H)}</svg>`);
         n.style.width = W + 'px'; n.style.height = H + 'px'; place(n, e.slot); n.style.left = '60px';
         if (e.scale) { n.style.transformOrigin = '0 0'; n.style.transform = `scale(${e.scale})`; n.style.left = (e.left ?? Math.round((1080 - W * e.scale) / 2)) + 'px'; }
+        if (e.top != null) n.style.top = e.top + 'px';
+        enter(n, 'fade', p); break; }
+      case 'azeo': {
+        // scale: drawn smaller, centred, so its panel clears the heading above and the presenter below
+        const W = 960, H = e.h || 880, sc = e.scale || 1;
+        n = el('div', 'circ real chem' + (e.panel === false ? ' no-panel' : ''), `<svg width="${W * sc}" height="${H * sc}" viewBox="0 0 ${W} ${H}" style="overflow:visible">${realAzeo(e, t, W, H)}</svg>`);
+        n.style.width = W * sc + 'px'; n.style.height = H * sc + 'px'; place(n, e.slot); n.style.left = Math.round((1080 - W * sc) / 2) + 'px';
         if (e.top != null) n.style.top = e.top + 'px';
         enter(n, 'fade', p); break; }
       case 'rewrite': {
@@ -1368,7 +1540,7 @@ function draw(THEME, tOverride) {
         place(n, e.slot); n.style.left = '60px'; if (e.top != null) n.style.top = e.top + 'px'; enter(n, 'pop', p); break; }
       case 'cube': {
         const W = 960, H = e.h || 600;
-        n = el('div', 'circ real chem cubeq', `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="overflow:visible">${realCube(e, t, W, H)}</svg>`);
+        n = el('div', 'circ real chem cubeq' + (e.panel === false ? ' no-panel' : ''), `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="overflow:visible">${realCube(e, t, W, H)}</svg>`);
         if (e.t_eq != null && t >= e.t_eq) { const q = el('div', 'cq', '1 dm³ = 1 L'); n.appendChild(q); enter(q, 'pop', (t - e.t_eq) / 0.45); }
         if (e.t_units != null && t >= e.t_units) { const q = el('div', 'cq units'); q.innerHTML = katex.renderToString(e.units_tex || '\\text{mol L}^{-1} = \\text{mol dm}^{-3} = \\text{M}', { throwOnError: false });
           n.appendChild(q); enter(q, 'slide', (t - e.t_units) / 0.45); }
@@ -1404,7 +1576,7 @@ function draw(THEME, tOverride) {
         break; }
       case 'wheatstone': {
         if (e.look === 'real') { const W = 960, H = e.h || 780;
-          n = el('div', 'circ real', `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${realWheatstone(e, t, W, H)}</svg>`);
+          n = el('div', 'circ real' + (e.panel === false ? ' no-panel' : ''), `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${realWheatstone(e, t, W, H)}</svg>`);
           n.style.width = W + 'px'; n.style.height = H + 'px'; place(n, e.slot); n.style.left = '60px';
           if (e.scale) { n.style.transformOrigin = '0 0'; n.style.transform = `scale(${e.scale})`; n.style.left = Math.round((1080 - W * e.scale) / 2) + 'px'; }
           if (e.top != null) n.style.top = e.top + 'px';
@@ -1455,7 +1627,7 @@ function draw(THEME, tOverride) {
         enter(n, 'fade', p); break; }
       case 'metrebridge': {
         if (e.look === 'real') { const W = 960, H = e.h || 770;
-          n = el('div', 'circ real', `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${realMetre(e, t, W, H)}</svg>`);
+          n = el('div', 'circ real' + (e.panel === false ? ' no-panel' : ''), `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${realMetre(e, t, W, H)}</svg>`);
           n.style.width = W + 'px'; n.style.height = H + 'px'; place(n, e.slot); n.style.left = '60px';
           if (e.top != null) n.style.top = e.top + 'px';
           enter(n, 'fade', p); break; }
@@ -1828,8 +2000,9 @@ function draw(THEME, tOverride) {
         n = el('div', 'compare');
         const show_r = t >= (e.t_right ?? t0);
         n.innerHTML = `<div class="k-card l"><div class="lab">${e.left[0]}</div><div class="val k-head">${e.left[1]}</div></div>
-                       <div class="vs k-head">लेकिन</div>
+                       <div class="vs k-head">${e.vs ?? 'लेकिन'}</div>
                        <div class="k-card r" style="visibility:${show_r ? 'visible' : 'hidden'}"><div class="lab">${e.right[0]}</div><div class="val k-head">${e.right[1]}</div></div>`;
+        if (e.val_size) n.querySelectorAll('.val').forEach(v => { v.style.fontSize = e.val_size + 'px'; });   // two-word names
         n.style.width = '960px'; place(n, e.slot); if (e.slot !== 'under-upper') n.style.top = '420px'; enter(n, 'slide', p);
         if (show_r) enter(n.querySelector('.r'), 'pop', (t - e.t_right) / 0.45);
         break; }

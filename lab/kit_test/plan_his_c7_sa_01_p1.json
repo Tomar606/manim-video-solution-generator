@@ -1,0 +1,863 @@
+{
+ "_about": "HIS-C7-SA-01: विजयनगर साम्राज्य की शासन व्यवस्था का वर्णन कीजिए। अथवा, अमर नायक प्रणाली को समझाइए। (2024): hampi look.",
+ "project": "his-c7-sa-01",
+ "part": 1,
+ "captions_at": "bottom",
+ "skin": "paper-editorial",
+ "theme": "hampi",
+ "presenter_style": "card",
+ "plate": "hp-chariot",
+ "hilite": [
+  "राय",
+  "नायक",
+  "किलों",
+  "भ्रमणशील",
+  "तेलुगु",
+  "कन्नड़",
+  "प्रभुसत्ता",
+  "विद्रोह",
+  "अथवा",
+  "अमर नायक",
+  "वेतन",
+  "इलाका",
+  "राजस्व",
+  "पक्के"
+ ],
+ "card_style": {
+  "backdrop": "hp-card"
+ },
+ "framing": {
+  "crop": [
+   600,
+   150,
+   1340,
+   1000
+  ],
+  "full_w": 735
+ },
+ "scene_match": {
+  "tint": 0.05,
+  "wrap": 0.12,
+  "wrap_px": 6
+ },
+ "presenter_grade": {
+  "exposure": 1.0,
+  "contrast": 0.94,
+  "warm": 0.99,
+  "saturation": 0.96,
+  "shadow_lift": 0.4,
+  "lift_radius": 14,
+  "define": 0.04,
+  "matte_soft": 1.0,
+  "matte_choke": 0.05,
+  "soften": {
+   "amount": 0.55,
+   "radius": 1.8
+  }
+ },
+ "card": {
+  "x": 314,
+  "y": 1130,
+  "w": 452,
+  "h": 560
+ },
+ "spine": {
+  "title": "विजयनगर की शासन व्यवस्था",
+  "items": [
+   "नायक: सेना प्रमुख",
+   "भ्रमणशील नायक",
+   "प्रभुसत्ता, फिर भी विद्रोह",
+   "अमर नायक: इलाका"
+  ],
+  "lit_at": [
+   12,
+   18,
+   23,
+   32
+  ],
+  "show_from": 8
+ },
+ "beats": [
+  {
+   "id": "mp",
+   "in": 0,
+   "out": 1,
+   "presenter": "full",
+   "broll": {
+    "clip": "h1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "statemap",
+     "slot": "upper",
+     "state": "Madhya Pradesh",
+     "text": "MP Board",
+     "sub": "कक्षा 12वीं",
+     "w": 880,
+     "top": 170,
+     "at": [
+      0,
+      0.05
+     ]
+    }
+   ]
+  },
+  {
+   "id": "years",
+   "in": 1,
+   "out": [
+    1,
+    1.54
+   ],
+   "presenter": "full",
+   "broll": {
+    "clip": "e1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "papers",
+     "style": "row",
+     "assets": "assets/papers",
+     "at": 1,
+     "top": 330,
+     "left0": 350,
+     "step": 420,
+     "sheet_w": 380,
+     "dy": 34,
+     "title": "यही question, board exam में",
+     "years": [
+      [
+       "2024",
+       [
+        1,
+        0.0
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": [
+    1,
+    1.54
+   ],
+   "out": 3,
+   "presenter": "full",
+   "broll": {
+    "clip": "e1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "qsheet",
+     "at": [
+      1,
+      1.54
+     ],
+     "src": "qsheet.png",
+     "src_path": "assets/papers/qsheet.png",
+     "w": 840,
+     "top": 64,
+     "hl_left": 0.262,
+     "line_h": 0.062,
+     "lines": [
+      [
+       0.66,
+       0.792,
+       [
+        1,
+        1.74
+       ]
+      ],
+      [
+       0.736,
+       0.79,
+       [
+        1,
+        3.33
+       ]
+      ],
+      [
+       0.81,
+       0.75,
+       [
+        1,
+        3.71
+       ]
+      ]
+     ],
+     "marks": "3 अंक",
+     "t_marks": [
+      2,
+      0.2
+     ],
+     "marks_y": 0.8
+    }
+   ]
+  },
+  {
+   "id": "hookq",
+   "in": 3,
+   "out": 5,
+   "presenter": "standard",
+   "broll": {
+    "clip": "v1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "ask",
+     "slot": "upper",
+     "text": "तनख्वाह की जगह पूरा इलाका?",
+     "at": [
+      3,
+      1.5
+     ],
+     "answer": "तो शासन कैसे चलेगा?",
+     "t_answer": [
+      4,
+      0.25
+     ]
+    }
+   ]
+  },
+  {
+   "id": "amara0",
+   "in": 5,
+   "out": 6,
+   "presenter": "standard",
+   "broll": {
+    "clip": "v1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "विजयनगर में",
+     "text": "अमर नायक प्रणाली",
+     "at": [
+      5,
+      0.98
+     ],
+     "hl": [
+      "अमर"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "raya",
+   "in": 6,
+   "out": 8,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "शासन की सीढ़ी",
+     "size": "m",
+     "at": 6,
+     "fx": "drop"
+    },
+    {
+     "type": "ladder",
+     "slot": "upper",
+     "items": [
+      [
+       "tabler:crown",
+       "राय",
+       "विजयनगर के शासक",
+       [
+        6,
+        3.29
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "photo",
+     "slot": "under-upper",
+     "src": "history/vijayanagara/krishnadevaraya-2.jpg",
+     "w": 380,
+     "label": "जैसे: कृष्णदेवराय",
+     "at": [
+      7,
+      1.46
+     ]
+    }
+   ]
+  },
+  {
+   "id": "nayak",
+   "in": 8,
+   "out": 12,
+   "presenter": "standard",
+   "broll": {
+    "clip": "n1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "1. नायक",
+     "size": "m",
+     "at": 8,
+     "fx": "drop"
+    },
+    {
+     "type": "ladder",
+     "slot": "upper",
+     "focus": true,
+     "items": [
+      [
+       "tabler:crown",
+       "राय",
+       "विजयनगर के शासक",
+       8
+      ],
+      [
+       "tabler:building-castle",
+       "नायक",
+       "सेना प्रमुख, किलों के मालिक",
+       [
+        8,
+        1.56
+       ]
+      ]
+     ]
+    },
+    {
+     "type": "pills",
+     "slot": "under-upper",
+     "items": [
+      [
+       "किलों पर नियंत्रण",
+       [
+        10,
+        1.04
+       ]
+      ],
+      [
+       "हथियारबंद समर्थक",
+       [
+        11,
+        0.63
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "roam",
+   "in": 12,
+   "out": 17,
+   "presenter": "standard",
+   "broll": {
+    "clip": "n2",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "2. भ्रमणशील नायक",
+     "size": "m",
+     "at": 12,
+     "fx": "drop"
+    },
+    {
+     "type": "def",
+     "slot": "upper",
+     "term": "भ्रमणशील",
+     "text": "जगह-जगह घूमने वाले",
+     "at": [
+      13,
+      0.71
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "उपजाऊ ज़मीन की तलाश में किसान भी साथ",
+     "at": [
+      15,
+      0.76
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "lang",
+   "in": 17,
+   "out": 18,
+   "presenter": "standard",
+   "broll": {
+    "clip": "n2",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "2. भ्रमणशील नायक",
+     "size": "m",
+     "at": 17
+    },
+    {
+     "type": "def",
+     "slot": "upper",
+     "term": "भाषा",
+     "text": "तेलुगु या कन्नड़",
+     "at": [
+      17,
+      1.7
+     ]
+    }
+   ]
+  },
+  {
+   "id": "obey",
+   "in": 18,
+   "out": 19,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r2",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "ask",
+     "slot": "upper",
+     "text": "क्या नायक हमेशा राय की बात मानते थे?",
+     "at": [
+      18,
+      1.11
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sov",
+   "in": 19,
+   "out": 21,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r2",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "3. प्रभुसत्ता, फिर भी विद्रोह",
+     "size": "m",
+     "at": 19,
+     "fx": "drop"
+    },
+    {
+     "type": "compare",
+     "slot": "upper",
+     "left": [
+      "स्वीकार की",
+      "राय की प्रभुसत्ता"
+     ],
+     "right": [
+      "फिर भी",
+      "अक्सर विद्रोह"
+     ],
+     "at": [
+      19,
+      2.31
+     ],
+     "right_at": [
+      21,
+      0.58
+     ]
+    }
+   ]
+  },
+  {
+   "id": "revolt",
+   "in": 21,
+   "out": 23,
+   "presenter": "standard",
+   "broll": {
+    "clip": "w1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "3. प्रभुसत्ता, फिर भी विद्रोह",
+     "size": "m",
+     "at": 21
+    },
+    {
+     "type": "compare",
+     "slot": "upper",
+     "left": [
+      "स्वीकार की",
+      "राय की प्रभुसत्ता"
+     ],
+     "right": [
+      "फिर भी",
+      "अक्सर विद्रोह"
+     ],
+     "at": 21,
+     "right_at": [
+      21,
+      0.58
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "सैन्य कार्रवाई से काबू",
+     "at": [
+      22,
+      1.31
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "athva",
+   "in": 23,
+   "out": 25,
+   "presenter": "standard",
+   "broll": {
+    "clip": "a1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "ask",
+     "slot": "upper",
+     "text": "अथवा: अमर नायक प्रणाली को समझाइए",
+     "at": [
+      24,
+      0.48
+     ],
+     "answer": "पूरा जवाब यहीं से",
+     "t_answer": [
+      24,
+      1.55
+     ]
+    }
+   ]
+  },
+  {
+   "id": "amara",
+   "in": 25,
+   "out": 27,
+   "presenter": "standard",
+   "broll": {
+    "clip": "a1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "4. अमर नायक प्रणाली",
+     "size": "m",
+     "at": 25,
+     "fx": "drop"
+    },
+    {
+     "type": "def",
+     "slot": "upper",
+     "term": "अमर नायक",
+     "text": "सैनिक कमांडर",
+     "at": [
+      25,
+      0.55
+     ]
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "राय से मिला राज्य-क्षेत्र",
+     "at": [
+      26,
+      3.37
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "revenue",
+   "in": 27,
+   "out": 29,
+   "presenter": "standard",
+   "broll": {
+    "clip": "a2",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "इलाके से राजस्व और कर",
+     "size": "m",
+     "at": 27,
+     "fx": "drop"
+    },
+    {
+     "type": "notify",
+     "slot": "upper",
+     "items": [
+      [
+       "tabler:plant-2",
+       "किसान",
+       "",
+       [
+        27,
+        1.55
+       ]
+      ],
+      [
+       "tabler:hammer",
+       "शिल्पकर्मी",
+       "",
+       [
+        28,
+        0.0
+       ]
+      ],
+      [
+       "tabler:coins",
+       "व्यापारी",
+       "",
+       [
+        28,
+        1.42
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "salary",
+   "in": 29,
+   "out": 32,
+   "presenter": "standard",
+   "broll": {
+    "clip": "a3",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "4. अमर नायक प्रणाली",
+     "size": "m",
+     "at": 29
+    },
+    {
+     "type": "yn",
+     "slot": "upper",
+     "no": "वेतन",
+     "yes": "पूरा इलाका",
+     "at": [
+      29,
+      1.68
+     ],
+     "t_yes": [
+      29,
+      2.82
+     ]
+    },
+    {
+     "type": "pills",
+     "slot": "under-upper",
+     "items": [
+      [
+       "खुद कमाई",
+       [
+        31,
+        1.15
+       ]
+      ],
+      [
+       "खुद अपनी सेना पालना",
+       [
+        31,
+        2.94
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "analogy",
+   "in": 32,
+   "out": 34,
+   "presenter": "full",
+   "broll": {
+    "clip": "m1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "note",
+     "slot": "over-broll-top",
+     "text": "जैसे: कंपनी अपने manager को एक शाखा सौंप दे",
+     "at": [
+      32,
+      0.79
+     ],
+     "fx": "rise"
+    },
+    {
+     "type": "stamp",
+     "slot": "under-upper",
+     "text": "खुद चलाओ, खुद कमाओ",
+     "at": [
+      33,
+      0.82
+     ],
+     "fx": "zoom"
+    }
+   ]
+  },
+  {
+   "id": "recap",
+   "in": 34,
+   "out": 38,
+   "presenter": "standard",
+   "broll": {
+    "clip": "s1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "ऊपर से नीचे की सीढ़ी",
+     "size": "m",
+     "at": 34,
+     "fx": "drop"
+    },
+    {
+     "type": "ladder",
+     "slot": "upper",
+     "ghost": true,
+     "focus": true,
+     "at": 34,
+     "items": [
+      [
+       "tabler:crown",
+       "राय",
+       "सबसे ऊपर",
+       [
+        35,
+        1.89
+       ]
+      ],
+      [
+       "tabler:building-castle",
+       "नायक",
+       "किलों वाले, घूमते",
+       [
+        36,
+        1.42
+       ]
+      ],
+      [
+       "tabler:map-2",
+       "अमर नायक",
+       "वेतन नहीं, इलाका",
+       [
+        36,
+        2.29
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sure",
+   "in": 38,
+   "out": 40,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "exam में अच्छे से लिख दिया, तो",
+     "text": "पूरे 3 नंबर पक्के",
+     "at": [
+      39,
+      0.17
+     ],
+     "hl": [
+      "पक्के"
+     ],
+     "fx": "rise"
+    }
+   ]
+  },
+  {
+   "id": "page",
+   "in": 40,
+   "out": "end",
+   "presenter": "full",
+   "tracker": false,
+   "spine": false,
+   "elements": [
+    {
+     "type": "page",
+     "src": "assets/answer/HIS-C7-SA-01-1_page.png",
+     "at": 40,
+     "badge": "Notes बटन में",
+     "t_badge": [
+      41,
+      1.57
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,6 @@
+[
+ {"slug": "onion", "query": "onion epidermis cells microscope", "limit": 3},
+ {"slug": "rbc", "query": "red blood cells microscope", "limit": 3},
+ {"slug": "plasmolysis", "query": "plasmolysis plant cells", "limit": 3},
+ {"slug": "microscope", "query": "laboratory microscope student", "limit": 3}
+]

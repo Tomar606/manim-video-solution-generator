@@ -89,3 +89,20 @@ used. For an animated, stock-like look instead:
 - **Further free sources, if more are needed:** LottieFiles (search API
   `graphql.lottiefiles.com`), ambientCG and Poly Haven (CC0 textures), Kenney
   (CC0 UI), Mixkit (free SFX and video). Pixabay and Pexels need an API key.
+
+### Exact drawings and options added for the chemistry redos (27 Oct 2026)
+
+| Element | Plan syntax | What it is for |
+|---|---|---|
+| `azeo` | `{"type":"azeo","slot":"upper","top":274,"h":860,"scale":0.94,"split":0.956,"a_label":"एल्कोहॉल 95.6%","b_label":"जल 4.4%","t_liq":cue,"t_b":cue,"t_boil":cue,"temp":"78.13 °C","t_temp":cue,"t_vap":cue,"same":"संघटन वही","t_same":cue,"t_focus":cue,"t_cross":cue}` | An azeotrope boiling, drawn as real glassware: the thermometer climbs once and holds, and the vapour bar matches the liquid bar. `t_cross` stamps "प्रभाजी आसवन से पृथक् नहीं". |
+| `bpgraph` | `{"type":"bpgraph","slot":"upper","kind":"min"\|"max","title":"…","t_curve":cue,"t_point":cue,"point_label":"…"}` | A boiling point against composition diagram. The vapour curve stays above the liquid curve everywhere, and they meet at the azeotrope. |
+| `membrane` | `{"type":"membrane","slot":"upper","at":cue,"t_solvent":cue,"t_solute":cue}` | A semipermeable membrane: solvent passes both ways, and solute bounces off. |
+| `compare` options | `"vs": ""` (the middle word, default लेकिन), `"val_size": 72`; `<br>` inside a value | Two cards that are not a contrast, such as two types or two definitions. |
+| `boardtag` | `{"type":"boardtag","slot":"upper","at":[0,0.05]}`; `text`, `sub`, `seal_w` (400), `top` (190) | **The opener of every MP Board reel.** The MPBSE seal (`library/elements/brand/mpbse-seal.png`, a clean cutout) pops in, and a seal-blue pill reading "MP Board \| कक्षा 12" rises under it. Option 5 of the team's mock, 27 Oct 2026. |
+| `statemap` options | `"speed": 1.4`; `"text_size": 76`; `"logo": true`, `"logo_w": 270` | `logo: true` puts the seal above the map. `speed` finishes the drawing inside a two-second hook line. The MP opener is `boardtag` now. |
+
+**Every drawn apparatus sits on a panel.** Each `.circ.real` element is drawn on a solid, rounded panel in
+the theme's `--panel` colour (deep, so white glass reads on it), 16 px outside the drawing. The affected
+elements are `azeo`, the realistic `flask` and `cube`, and `wheatstone` / `metrebridge` with `"look": "real"`.
+User, 27 Oct 2026: over the plate alone "it looks very crowded due to the background". Use `"panel": false` to
+remove it.

@@ -319,5 +319,75 @@
   ],
   "notes": "Hampi stone chariot, blur 10 px: the presenter card backdrop",
   "source": "library/backgrounds/photos/history/vijayanagara/chariot-3.jpg (Wikimedia Commons, CC BY-SA 4.0; see credits.json)"
+ },
+ "st-rig": {
+  "skin": "still",
+  "tags": [
+   "chemistry",
+   "azeotropes",
+   "light blur"
+  ],
+  "notes": "a laboratory fractional distillation rig; Gaussian blur 6.5 px, brightness 0.74",
+  "source": "library/backgrounds/photos/chemistry/azeotropes/distillation-3.jpg (Wikimedia Commons, CC BY-SA 3.0, Durfo; see credits.json)"
+ },
+ "st-column": {
+  "skin": "still",
+  "tags": [
+   "chemistry",
+   "azeotropes",
+   "light blur"
+  ],
+  "notes": "industrial distillation columns; Gaussian blur 6.5 px, brightness 0.72",
+  "source": "library/backgrounds/photos/chemistry/azeotropes/column-3.jpg (Wikimedia Commons, CC BY 3.0, Luigi Chiesa; see credits.json)"
+ },
+ "st-card": {
+  "skin": "still",
+  "tags": [
+   "chemistry",
+   "azeotropes",
+   "card backdrop"
+  ],
+  "notes": "distillation rig, the presenter card backdrop; Gaussian blur 10 px, brightness 0.8",
+  "source": "library/backgrounds/photos/chemistry/azeotropes/distillation-3.jpg (Wikimedia Commons, CC BY-SA 3.0, Durfo; see credits.json)"
+ },
+ "os-onion": {
+  "skin": "osmos",
+  "tags": [
+   "chemistry",
+   "osmosis",
+   "light blur"
+  ],
+  "notes": "onion epidermis cells under the microscope; Gaussian blur 6.5 px, brightness 0.76",
+  "source": "library/backgrounds/photos/chemistry/osmosis/onion-1.jpg (Wikimedia Commons, CC BY 2.0, loganrickert; see credits.json)"
+ },
+ "os-plasmo": {
+  "skin": "osmos",
+  "tags": [
+   "chemistry",
+   "osmosis",
+   "light blur"
+  ],
+  "notes": "plasmolysed Rhoeo leaf cells; Gaussian blur 6.5 px, brightness 0.74",
+  "source": "library/backgrounds/photos/chemistry/osmosis/plasmolysis-2.jpg (Wikimedia Commons, CC BY-SA 4.0, Krishna satya 333; see credits.json)"
+ },
+ "os-rbc": {
+  "skin": "osmos",
+  "tags": [
+   "chemistry",
+   "osmosis",
+   "light blur"
+  ],
+  "notes": "red blood cells under the microscope; Gaussian blur 6.5 px, brightness 0.76",
+  "source": "library/backgrounds/photos/chemistry/osmosis/rbc-3.jpg (public domain, U.S. Air Force photo; see credits.json)"
+ },
+ "os-card": {
+  "skin": "osmos",
+  "tags": [
+   "chemistry",
+   "osmosis",
+   "card backdrop"
+  ],
+  "notes": "onion epidermis, the presenter card backdrop; Gaussian blur 10 px, brightness 0.8",
+  "source": "library/backgrounds/photos/chemistry/osmosis/onion-3.jpg (Wikimedia Commons, CC BY 2.0, loganrickert; see credits.json)"
  }
 }

@@ -97,8 +97,13 @@ def lane(stem: str, plan: Path, out: Path, a: int, b: int, seg_out: Path, k: int
             while c0 - progress(log, a) >= AHEAD and not done.is_set():
                 time.sleep(2)
             env = {**os.environ, "RANGES": f"{c0}:{min(c0 + CHUNK, b)}"}
-            with open(out / f"render_frames_{k}.log", "a") as f:
-                subprocess.run(["node", str(HERE / "frames.mjs"), f"out/{stem}"], env=env, stdout=f, stderr=f, cwd=ROOT)
+            # a chunk can die mid-way (a screenshot timed out while a laptop struggled on low battery, 27 Oct
+            # 2026); its missing frames would leave the compositor waiting forever, so retry it
+            for attempt in range(4):
+                with open(out / f"render_frames_{k}.log", "a") as f:
+                    if subprocess.run(["node", str(HERE / "frames.mjs"), f"out/{stem}"], env=env, stdout=f, stderr=f, cwd=ROOT).returncode == 0:
+                        break
+                time.sleep(5)
 
     def reap():                                   # only this lane's frames: other lanes are still reading theirs
         while not done.is_set():

@@ -1,6 +1,6 @@
 ---
 name: reel
-description: Make and deliver an MP Board PYQ reel with the kit pipeline (lab/kit_test) from a dropped HeyGen clip + SRT (and any patch clip) and the question ID — splice, captions, sheet lookup, look, plan, Veo b-roll, frames review, render, gates, delivery. Use whenever someone says they dropped files for a question ID, or asks to create, build, render, fix or deliver a PYQ reel/video in any subject (PHY, CHE, BIO, HIS, GEO, POL).
+description: Make and deliver an MP Board PYQ reel with the kit pipeline (lab/kit_test) from a dropped HeyGen clip + SRT (and any patch clip) and the question ID — splice, captions, sheet lookup, look, Veo b-roll (queued first, watched in the background), plan, frames review, render, gates, delivery. Use whenever someone says they dropped files for a question ID, or asks to create, build, render, fix or deliver a PYQ reel/video in any subject (PHY, CHE, BIO, HIS, GEO, POL).
 ---
 
 # Making a PYQ reel
@@ -107,44 +107,52 @@ Spot-check the risky joins against a loudness envelope.
 - Veo is for atmosphere only: places, eras, people at work, the feeling of a moment.
 - Political science: Indian iconography whatever the question's country.
 
-## 6. The plan
+## 6. Veo b-roll: write the prompts and start them FIRST
 
-Copy the closest `make_*_plans.py` to `lab/kit_test/make_<slug_>_plans.py`.
-- Follow STANDARD.md's order:
-  hook → years → question → each point (who/what, then the one thing) → recap → marks → answer page.
-- Cue every element to the spoken word with `W(line, word)`.
-- Give every beat footage with `BR(clip, photo)`: the Veo clip once it exists, a licensed photo until then.
-- Screen text organises; it never repeats the caption.
-- "No graphic" is a valid beat: presenter full, footage behind.
-- New element types go in `stage.html` (and compile's asset copy and cue resolution), never as a one-off.
-  `portraits` is the latest example.
+The clips take 15-30 minutes to generate. Queue them as soon as the prompts exist and let them generate
+while you build the plan; never build the plan first and then wait for Veo.
 
-## 7. Veo b-roll
-
-1. Write one prompt per shot in `projects/<slug>/veo/prompts/broll/<id>.txt`, plus a one-line description in
-   `veo/shots.json`. Copy the format of `projects/his-c6-sa-04/veo/prompts/broll/`:
-   - live action, subject in the upper half, slow camera, "A tall vertical frame. Silent, no voiceover.";
+1. Decide the beats in outline (which beat needs which footage), then write one prompt per shot in
+   `projects/<slug>/veo/prompts/broll/<id>.txt`, plus a one-line description in `veo/shots.json`. Copy the
+   format of `projects/che-c1-sa-01/veo/prompts/broll/`:
+   - live action, ONE subject in the upper half, slow camera, "One single continuous shot ... A tall vertical
+     frame. Silent, no voiceover.";
    - then the NEGATIVE list.
+   - Describe one scene, not two: "a hand writing, rows of desks beyond" came back as two stacked shots.
 2. Never put in a prompt:
    - digits or percentages;
    - the words logo, watermark, badge or wordmark;
    - generated people depicting the Sikh Gurus or other figures who must not be portrayed (show objects and
      places; their faces come from period paintings);
    - anything the answer contradicts.
-3. Generate:
+3. Start them, in the background, and go straight on to the plan:
 
 ```
-.venv-tools/bin/python tools/kit_veo.py setup            # Video, Veo 3.1 Fast, 9:16, x1
-.venv-tools/bin/python tools/kit_veo.py submit <slug> h1 k1   # two first; fetch and look at them
-.venv-tools/bin/python tools/kit_veo.py fetch <slug>
-.venv-tools/bin/python tools/kit_veo.py submit <slug>         # then the rest
-.venv-tools/bin/python tools/kit_veo.py fetch <slug>          # until all are filed
-.venv-tools/bin/python tools/kit_veo.py clean <slug>          # removes Flow's sparkle
+.venv-tools/bin/python tools/kit_veo.py go <slug>      # setup + queue every prompt + watch them in
 ```
 
-4. Check `veo/contact.jpg`: every clip should sit under its own label. Throw out and resubmit any clip with
-   text, a wrong subject or a reversed process.
+   `go` sets Flow up, queues everything, then every ~75 s fetches what has finished, cleans it (Flow's sparkle,
+   letterbox bars) and runs `tools/veo_check.py`: a split screen, text on screen, a landscape or cut-short clip
+   is rejected and generated again (at most twice), with one frame kept in `veo/rejected/` and the reason in
+   `veo/qc.json`. It stops when every prompt has a clip that passed. Several reels: `go <slug1> <slug2>`, in ONE
+   watcher (two would fight over the bridge's port). If it is stopped, `kit_veo.py watch <slug>` carries on.
+4. When it finishes, check `veo/contact.jpg` yourself: the machine cannot judge meaning. Every clip must sit
+   under its own label, show the right subject, run the right way, and contradict nothing in the answer. Throw
+   such a clip out (delete it from `veo/clips` and `veo/clean`) and `kit_veo.py submit <slug> <id>` again.
 5. Regenerate the plan so `BR()` picks the clips up, and drop `"hook": "exempt"`.
+
+## 7. The plan
+
+Copy the closest `make_*_plans.py` to `lab/kit_test/make_<slug_>_plans.py`.
+- Follow STANDARD.md's order:
+  hook → years → question → each point (who/what, then the one thing) → recap → marks → answer page.
+- Cue every element to the spoken word with `W(line, word)`.
+- Give every beat footage with `BR(clip, photo)`: the Veo clip once it exists, a licensed photo until then
+  (the clips are still generating while you write it).
+- Screen text organises; it never repeats the caption.
+- "No graphic" is a valid beat: presenter full, footage behind.
+- New element types go in `stage.html` (and compile's asset copy and cue resolution), never as a one-off.
+  `portraits` is the latest example.
 
 ## 8. Checkpoint 1: the frames review (nothing renders before this)
 

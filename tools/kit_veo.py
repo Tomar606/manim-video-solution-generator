@@ -1,9 +1,19 @@
-"""A kit reel's Veo clips, from prompt to cleaned file, in three steps.
+"""A kit reel's Veo clips, from prompt to cleaned, checked file.
 
+    python tools/kit_veo.py go     <slug> [slug ...]   # setup + submit + watch: the usual way, started as soon
+                                                       # as the prompts exist, left running while the plan is built
+    python tools/kit_veo.py watch  <slug> [slug ...]   # fetch, clean and check until every clip is in
     python tools/kit_veo.py setup                      # set Flow to Video, Veo 3.1 Fast, 9:16, 1 output
     python tools/kit_veo.py submit <slug> [clip ...]   # queue the prompts that have no clip yet
     python tools/kit_veo.py fetch  <slug>              # download what was queued, file it by clip id
     python tools/kit_veo.py clean  <slug>              # remove Flow's sparkle into veo/clean/
+
+WATCH. Every ~75 s: fetch whatever has finished, clean it, and run tools/veo_check.py on it. A clip that
+fails a mechanical check (split screen, text on screen, landscape, cut short) is set aside (one frame kept
+in veo/rejected/ as the record) and queued again, at most twice; then it is left for a person and the
+reason printed. Everything is logged in veo/qc.json. What a clip MEANS is still judged by eye on
+veo/contact.jpg: the watcher only removes what a machine can measure. Several reels can be watched by one
+watcher (never run two: they would share the bridge's port).
 
 The prompts are projects/<slug>/veo/prompts/broll/<clip>.txt, written by the pipeline (never by hand),
 one 8-second vertical clip each. Needs Chrome open on a Flow project with this repo's extension
@@ -12,14 +22,18 @@ found on Nano Banana (an IMAGE model) at 16:9 with two outputs, which would have
 pictures. Veo 3.1 Fast is the model: real Veo at a moderate cost per clip.
 
 WHICH TILE IS WHICH CLIP. Flow's new grid hides the prompt text, so a downloaded tile cannot be matched
-to its prompt by reading it. `submit` records the order it queued in veo/submitted.json; Flow lists
-newest first, so `fetch` takes the newest N tiles and files them in reverse submission order. That only
-holds if nobody else queued in the same project in between, so `fetch` also writes veo/contact.jpg, a
-labelled frame from every filed clip, for the frames review to confirm before the clips are used.
+to its prompt by reading it. `submit` records what it queued, when, and in which Flow project, in
+veo/submitted.json. Flow's grid is newest first and holds every generation in that Flow project, from
+EVERY reel queued there (two reels generated side by side share one grid), so `fetch` rebuilds the grid
+order from all reels' records, merged by time, and files only this reel's tiles. 27 Oct 2026: counting one
+reel's records alone filed CHE-C1-SA-02's saline drip as CHE-C1-SA-01's distillery. `fetch` also writes
+veo/contact.jpg, a labelled frame from every filed clip, for the frames review to confirm before use.
 """
 from __future__ import annotations
 
 import json
+import os
+import shutil
 import subprocess
 import sys
 import time
@@ -31,6 +45,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parents[1]
 PY = sys.executable
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tools"))
 MARK = (570, 1132, 62, 60)      # Flow's sparkle on a 720x1280 clip (src/veo_delogo finds nothing at this size)
 
 
@@ -45,6 +60,18 @@ def probe(f: Path) -> tuple[int, int, float]:
     return d["streams"][0]["width"], d["streams"][0]["height"], float(d["format"]["duration"])
 
 
+def grid_order(flow: str) -> list[tuple[str, str, bool]]:
+    """Every (reel, clip, rejected) ever queued in this Flow project, newest first: the order of Flow's grid.
+    `rejected` marks a generation the watcher threw out, so it is never downloaded again. Records from before
+    the Flow project was recorded count as this one; with no project known, every record counts."""
+    rows = []
+    for log in (ROOT / "projects").glob("*/veo/submitted.json"):
+        for r in json.loads(log.read_text(encoding="utf-8")):
+            if not flow or r.get("flow") in (flow, None, ""):
+                rows += [(r["at"], k, log.parents[1].name, c, c in r.get("rejected", [])) for k, c in enumerate(r["clips"])]
+    return [(slug, c, rj) for _, _, slug, c, rj in sorted(rows, reverse=True)]
+
+
 def submit(slug: str, only: list[str]) -> int:
     V = veo(slug)
     prompts = sorted((V / "prompts/broll").glob("*.txt"))
@@ -53,56 +80,93 @@ def submit(slug: str, only: list[str]) -> int:
         print("every prompt already has a clip")
         return 0
     print(f"queueing {len(todo)}: {' '.join(p.stem for p in todo)}")
-    r = subprocess.run([PY, str(ROOT / "veo_kit/submit.py"), *map(str, todo), "--aspect", "vertical", "--no-refs"], cwd=ROOT)
-    if r.returncode != 0:
-        return r.returncode
+    proc = subprocess.Popen([PY, "-u", str(ROOT / "veo_kit/submit.py"), *map(str, todo), "--aspect", "vertical", "--no-refs"],
+                            cwd=ROOT, stdout=subprocess.PIPE, text=True, encoding="utf-8", errors="replace",
+                            env={**os.environ, "PYTHONIOENCODING": "utf-8"})
+    flow = ""
+    for line in proc.stdout:                           # echo it, and keep the Flow project it queued in
+        print(line, end="")
+        if line.startswith("flow project: "):
+            flow = line.split(": ", 1)[1].strip()
+    if proc.wait() != 0:
+        return proc.returncode
     log = V / "submitted.json"
-    rec = json.loads(log.read_text()) if log.exists() else []
-    rec.append({"at": time.strftime("%Y-%m-%d %H:%M:%S"), "clips": [p.stem for p in todo], "fetched": False})
-    log.write_text(json.dumps(rec, indent=1))
+    rec = json.loads(log.read_text(encoding="utf-8")) if log.exists() else []
+    rec.append({"at": time.strftime("%Y-%m-%d %H:%M:%S"), "flow": flow, "clips": [p.stem for p in todo], "fetched": False})
+    log.write_text(json.dumps(rec, indent=1), encoding="utf-8")
     print(f"queued; Flow takes a few minutes per clip. Then: python tools/kit_veo.py fetch {slug}")
     return 0
 
 
 def fetch(slug: str) -> int:
+    filed, waiting, bad = _fetch(slug)
+    return 1 if bad or waiting else 0
+
+
+def _fetch(slug: str) -> tuple[list[str], list[str], list[str]]:
+    """Download this reel's finished tiles: (filed, still generating, problems)."""
     V = veo(slug)
     log = V / "submitted.json"
-    rec = json.loads(log.read_text()) if log.exists() else []
-    pending = [c for r in rec if not r["fetched"] for c in r["clips"] if not (V / "clips" / f"{c}.mp4").exists()]
-    if not pending:
+    rec = json.loads(log.read_text(encoding="utf-8")) if log.exists() else []
+    # Flow's grid is newest first and holds EVERY generation in the Flow project, filed or not and from every
+    # reel, so tile i is the i-th newest submission of all of them. A clip queued twice (resubmitted after it
+    # stuck or was rejected) is taken from its LAST submission, the newer generation; a generation the watcher
+    # rejected is never taken again.
+    flow = next((r["flow"] for r in reversed(rec) if r.get("flow")), "")
+    want, seen = {}, set()                             # grid position -> clip, for this reel's clips not filed yet
+    for i, (s_, clip, rejected) in enumerate(grid_order(flow)):
+        if s_ != slug or clip in seen:
+            continue
+        seen.add(clip)
+        if not rejected and not (V / "clips" / f"{clip}.mp4").exists():
+            want[i] = clip
+    if not want:
         print("nothing waiting to be fetched")
-        return 0
+        return [], [], []
     tmp = V / "_tiles"
     tmp.mkdir(parents=True, exist_ok=True)
     for f in tmp.glob("*.mp4"):
         f.unlink()
-    r = subprocess.run([PY, str(ROOT / "veo_kit/grab_tiles.py"), str(tmp), "--n", str(len(pending))], cwd=ROOT)
-    tiles = sorted(tmp.glob("t*.mp4"))
-    if r.returncode != 0 or len(tiles) < len(pending):
-        print(f"got {len(tiles)} of {len(pending)} tiles: some are still generating; run fetch again in a few minutes")
-        return 1
+    # grab_tiles names each file by its GRID POSITION (a missing t03 = tile 3 not ready), so a stuck tile
+    # never shifts the clips after it onto the wrong prompt; and only the positions still needed are fetched
+    for i in sorted(want):
+        subprocess.run([PY, str(ROOT / "veo_kit/grab_tiles.py"), str(tmp), "--skip", str(i), "--n", "1"], cwd=ROOT,
+                       stdout=subprocess.DEVNULL)
     (V / "clips").mkdir(exist_ok=True)
-    bad = []
-    for tile, clip in zip(tiles, reversed(pending)):           # newest tile = last submitted
+    bad, filed, waiting = [], [], []
+    for i, clip in sorted(want.items()):
+        tile = tmp / f"t{i:02d}.mp4"
+        if not tile.exists():
+            waiting.append(clip)
+            continue
+        if tile.read_bytes()[:64].lstrip().lower().startswith((b"<!doctype html", b"<html")):
+            tile.unlink()                              # Flow answered with a page, not a video: the session lapsed
+            print(f"  {clip}: Flow sent a Google sign-in page instead of the video. Sign in to Flow in the browser "
+                  "(the account that owns the project), then fetch again.")
+            waiting.append(clip)
+            continue
         w, h, d = probe(tile)
         if w >= h:
             bad.append(f"{clip}: {w}x{h} is landscape (set Flow to Portrait 9:16 and resubmit it)")
-        tile.rename(V / "clips" / f"{clip}.mp4")
-        print(f"  {clip}: {w}x{h}, {d:.1f} s")
+        shutil.move(str(tile), str(V / "clips" / f"{clip}.mp4"))
+        filed.append(clip)
+        print(f"  {clip}: {w}x{h}, {d:.1f} s (tile {i})")
     for r_ in rec:
-        r_["fetched"] = r_["fetched"] or all((V / "clips" / f"{c}.mp4").exists() for c in r_["clips"])
-    log.write_text(json.dumps(rec, indent=1))
-    contact(slug)
-    for b in bad:
-        print("  !", b)
-    print(f"filed {len(pending)} clip(s); check veo/contact.jpg shows each clip under its own label, then: clean")
-    return 1 if bad else 0
+        r_["fetched"] = all((V / "clips" / f"{c}.mp4").exists() or c in r_.get("rejected", []) for c in r_["clips"])
+    log.write_text(json.dumps(rec, indent=1), encoding="utf-8")
+    if filed:
+        contact(slug)
+    for b_ in bad:
+        print("  !", b_)
+    print(f"filed {len(filed)} clip(s)" + (f"; still generating: {' '.join(waiting)}" if waiting else "")
+          + ("; check veo/contact.jpg, then: clean" if filed else ""))
+    return filed, waiting, bad
 
 
 def contact(slug: str) -> Path:
     V = veo(slug)
     clips = sorted((V / "clips").glob("*.mp4"))
-    shots = json.loads((V / "shots.json").read_text()) if (V / "shots.json").exists() else {}
+    shots = json.loads((V / "shots.json").read_text(encoding="utf-8")) if (V / "shots.json").exists() else {}
     cw, ch, cols = 240, 427, 6
     rows = (len(clips) + cols - 1) // cols
     sheet = Image.new("RGB", (cols * cw, rows * (ch + 70)), (20, 20, 20))
@@ -168,6 +232,91 @@ def clean(slug: str) -> int:
     return 0
 
 
+def reject(slug: str, clip: str, why: list[str]) -> int:
+    """Set a failed clip aside: one frame kept as the record, the files removed, the generation marked so it
+    is never fetched again. Returns how many times this clip has now been rejected."""
+    V = veo(slug)
+    qc = json.loads((V / "qc.json").read_text(encoding="utf-8")) if (V / "qc.json").exists() else {}
+    n = 1 + sum(1 for e in qc.get(clip, []) if e["verdict"] == "rejected")
+    (V / "rejected").mkdir(exist_ok=True)
+    src = V / "clean" / f"{clip}.mp4"
+    if not src.exists():
+        src = V / "clips" / f"{clip}.mp4"
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", "4", "-i", str(src), "-frames:v", "1", "-vf", "scale=360:-2",
+                    str(V / "rejected" / f"{clip}-{n}.jpg")])
+    for d in ("clips", "clean"):
+        (V / d / f"{clip}.mp4").unlink(missing_ok=True)
+    log = V / "submitted.json"
+    rec = json.loads(log.read_text(encoding="utf-8"))
+    last = next(r for r in reversed(rec) if clip in r["clips"])
+    last.setdefault("rejected", []).append(clip)
+    log.write_text(json.dumps(rec, indent=1), encoding="utf-8")
+    note(slug, clip, "rejected", why)
+    return n
+
+
+def note(slug: str, clip: str, verdict: str, why: list[str]) -> None:
+    f = veo(slug) / "qc.json"
+    qc = json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
+    qc.setdefault(clip, []).append({"at": time.strftime("%Y-%m-%d %H:%M:%S"), "verdict": verdict, "why": why})
+    f.write_text(json.dumps(qc, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+def watch(slugs: list[str], every: float = 75.0, limit_min: float = 60.0, retries: int = 2) -> int:
+    """Fetch, clean and check every reel's clips until each prompt has an accepted clip (or a person must look)."""
+    import veo_check
+    if not veo_check.text_check_available():
+        print("  (text check off: RapidOCR not installed; pip install -r requirements-tools.txt)")
+    t_end, gave_up = time.time() + limit_min * 60, set()
+    while True:
+        waiting = []
+        for slug in slugs:
+            V = veo(slug)
+            filed, _, _ = _fetch(slug)
+            if filed:
+                clean(slug)
+            for clip in filed:
+                why = veo_check.check(V / "clean" / f"{clip}.mp4")
+                if not why:
+                    note(slug, clip, "ok", [])
+                    print(f"  {slug} {clip}: passed the checks")
+                    continue
+                n = reject(slug, clip, why)
+                print(f"  {slug} {clip}: REJECTED ({'; '.join(why)})")
+                if n <= retries:
+                    print(f"  {slug} {clip}: generating it again ({n} of {retries})")
+                    submit(slug, [clip])
+                else:
+                    gave_up.add((slug, clip))
+                    print(f"  {slug} {clip}: rejected {n} times; left for a person (rewrite its prompt)")
+            for p in sorted((V / "prompts/broll").glob("*.txt")):
+                if not (V / "clean" / f"{p.stem}.mp4").exists() and (slug, p.stem) not in gave_up:
+                    waiting.append(f"{slug}/{p.stem}")
+        if not waiting:
+            for slug in slugs:
+                if any((veo(slug) / "clips").glob("*.mp4")):
+                    contact(slug)
+            print("every clip is in" + (f"; {len(gave_up)} left for a person: "
+                                         + " ".join(f"{s}/{c}" for s, c in sorted(gave_up)) if gave_up else "")
+                  + ". Check veo/contact.jpg for what the machine cannot judge.")
+            return 1 if gave_up else 0
+        if time.time() > t_end:
+            print(f"stopped after {limit_min:.0f} min; still generating: {' '.join(waiting)} (run watch again)")
+            return 1
+        print(time.strftime("%H:%M:%S"), f"waiting for {len(waiting)}: {' '.join(waiting)}", flush=True)
+        time.sleep(every)
+
+
+def go(slugs: list[str]) -> int:
+    """The usual way: set Flow up, queue every reel's prompts, then watch them all in."""
+    if setup() != 0:
+        return 1
+    for slug in slugs:
+        if submit(slug, []) != 0:
+            return 1
+    return watch(slugs)
+
+
 SETUP_MODE = ["videocam Video", "crop_9_16 9:16", "x1"]
 SETUP_MODEL = "Veo 3.1 - Fast"
 
@@ -212,9 +361,15 @@ def setup() -> int:
 def main() -> int:
     if len(sys.argv) >= 2 and sys.argv[1] == "setup":
         return setup()
-    if len(sys.argv) < 3 or sys.argv[1] not in ("submit", "fetch", "clean"):
+    if len(sys.argv) < 3 or sys.argv[1] not in ("go", "watch", "submit", "fetch", "clean"):
         sys.exit(__doc__)
     cmd, slug, rest = sys.argv[1], sys.argv[2], sys.argv[3:]
+    if cmd in ("go", "watch"):
+        try:
+            return (go if cmd == "go" else watch)(sys.argv[2:])
+        except KeyboardInterrupt:
+            print("\nstopped; run watch again to carry on")
+            return 1
     return {"submit": lambda: submit(slug, rest), "fetch": lambda: fetch(slug), "clean": lambda: clean(slug)}[cmd]()
 
 

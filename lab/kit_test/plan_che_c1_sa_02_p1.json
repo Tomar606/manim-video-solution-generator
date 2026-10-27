@@ -1,0 +1,561 @@
+{
+ "_about": "CHE-C1-SA-02: निम्न को परिभाषित कीजिए। 1. समपरासरी विलयन, 2. अर्द्धपारगम्य झिल्ली। (2018): osmos look.",
+ "project": "che-c1-sa-02",
+ "part": 1,
+ "captions_at": "bottom",
+ "skin": "paper-editorial",
+ "theme": "osmos",
+ "presenter_style": "card",
+ "plate": "os-onion",
+ "hilite": [
+  "समपरासरी",
+  "परासरण दाब",
+  "मोलर सान्द्रताएँ",
+  "M₁ = M₂",
+  "अर्द्धपारगम्य",
+  "विलायक",
+  "विलेय",
+  "आयन",
+  "जंतु",
+  "पादप"
+ ],
+ "card_style": {
+  "backdrop": "os-card"
+ },
+ "framing": {
+  "crop": [
+   600,
+   150,
+   1340,
+   1000
+  ],
+  "full_w": 735
+ },
+ "scene_match": {
+  "tint": 0.05,
+  "wrap": 0.12,
+  "wrap_px": 6
+ },
+ "presenter_grade": {
+  "exposure": 1.0,
+  "contrast": 0.94,
+  "warm": 0.99,
+  "saturation": 0.96,
+  "shadow_lift": 0.4,
+  "lift_radius": 14,
+  "define": 0.04,
+  "matte_soft": 1.0,
+  "matte_choke": 0.05,
+  "soften": {
+   "amount": 0.55,
+   "radius": 1.8
+  }
+ },
+ "card": {
+  "x": 314,
+  "y": 1130,
+  "w": 452,
+  "h": 560
+ },
+ "spine": {
+  "title": "दो परिभाषाएँ",
+  "items": [
+   "समपरासरी विलयन",
+   "अर्द्धपारगम्य झिल्ली"
+  ],
+  "lit_at": [
+   5,
+   11
+  ],
+  "show_from": 5
+ },
+ "beats": [
+  {
+   "id": "mp",
+   "in": 0,
+   "out": 1,
+   "presenter": "full",
+   "broll": {
+    "clip": "h1",
+    "region": "full"
+   },
+   "elements": [
+    {
+     "type": "boardtag",
+     "slot": "upper",
+     "text": "MP Board",
+     "sub": "कक्षा 12",
+     "at": [
+      0,
+      0.05
+     ]
+    }
+   ]
+  },
+  {
+   "id": "years",
+   "in": 1,
+   "out": 2,
+   "presenter": "full",
+   "broll": {
+    "clip": "e1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "papers",
+     "style": "row",
+     "assets": "assets/papers",
+     "at": 1,
+     "top": 330,
+     "left0": 350,
+     "step": 420,
+     "sheet_w": 380,
+     "dy": 34,
+     "title": "यही question, board exam में",
+     "years": [
+      [
+       "2018",
+       [
+        1,
+        0.46
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "question",
+   "in": 2,
+   "out": 3,
+   "presenter": "full",
+   "broll": {
+    "clip": "e1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "qsheet",
+     "at": 2,
+     "src": "qsheet.png",
+     "src_path": "assets/papers/qsheet.png",
+     "w": 840,
+     "top": 64,
+     "hl_left": 0.262,
+     "line_h": 0.062,
+     "lines": [
+      [
+       0.66,
+       0.815,
+       [
+        2,
+        0.49
+       ]
+      ],
+      [
+       0.736,
+       0.72,
+       [
+        2,
+        1.47
+       ]
+      ],
+      [
+       0.81,
+       0.675,
+       [
+        2,
+        2.87
+       ]
+      ]
+     ],
+     "marks": "3 अंक",
+     "t_marks": [
+      2,
+      3.47
+     ],
+     "marks_y": 0.8
+    }
+   ]
+  },
+  {
+   "id": "two",
+   "in": 3,
+   "out": 5,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "compare",
+     "slot": "upper",
+     "left": [
+      "परिभाषा 1",
+      "समपरासरी<br>विलयन"
+     ],
+     "right": [
+      "परिभाषा 2",
+      "अर्द्धपारगम्य<br>झिल्ली"
+     ],
+     "vs": "",
+     "val_size": 66,
+     "at": [
+      3,
+      1.26
+     ],
+     "t_right": [
+      3,
+      1.76
+     ]
+    }
+   ]
+  },
+  {
+   "id": "iso",
+   "in": 5,
+   "out": 7,
+   "presenter": "standard",
+   "broll": {
+    "clip": "i1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "hero",
+     "slot": "upper",
+     "kicker": "परिभाषा 1",
+     "text": "समपरासरी विलयन",
+     "at": [
+      5,
+      1.81
+     ],
+     "hl": [
+      "समपरासरी"
+     ],
+     "fx": "rise",
+     "sub": "Isotonic solutions"
+    }
+   ]
+  },
+  {
+   "id": "iso_pi",
+   "in": 7,
+   "out": 9,
+   "presenter": "standard",
+   "broll": {
+    "clip": "i1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "1. समपरासरी विलयन",
+     "size": "m",
+     "at": 7,
+     "fx": "drop"
+    },
+    {
+     "type": "formula",
+     "slot": "upper",
+     "title": "परासरण दाब समान",
+     "tex": "\\pi_1 = \\pi_2",
+     "at": [
+      7,
+      1.03
+     ],
+     "t_glow": [
+      8,
+      0.6
+     ],
+     "legend": [
+      [
+       "\\pi_1",
+       "पहले विलयन का परासरण दाब",
+       [
+        7,
+        1.33
+       ]
+      ],
+      [
+       "\\pi_2",
+       "दूसरे विलयन का परासरण दाब",
+       [
+        7,
+        1.79
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "iso_m",
+   "in": 9,
+   "out": 11,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "1. समपरासरी विलयन",
+     "size": "m",
+     "at": 9
+    },
+    {
+     "type": "formula",
+     "slot": "upper",
+     "title": "मोलर सान्द्रता भी समान",
+     "tex": "M_1 = M_2",
+     "at": [
+      9,
+      1.54
+     ],
+     "t_glow": [
+      10,
+      0.84
+     ],
+     "legend": [
+      [
+       "M_1",
+       "पहले विलयन की मोलर सान्द्रता",
+       [
+        9,
+        1.84
+       ]
+      ],
+      [
+       "M_2",
+       "दूसरे विलयन की मोलर सान्द्रता",
+       [
+        9,
+        2.92
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "two2",
+   "in": 11,
+   "out": 12,
+   "presenter": "standard",
+   "broll": {
+    "clip": "d1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "compare",
+     "slot": "upper",
+     "left": [
+      "परिभाषा 1",
+      "समपरासरी<br>विलयन"
+     ],
+     "right": [
+      "परिभाषा 2",
+      "अर्द्धपारगम्य<br>झिल्ली"
+     ],
+     "vs": "",
+     "val_size": 66,
+     "at": 11,
+     "t_right": [
+      11,
+      2.67
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mem_name",
+   "in": 12,
+   "out": 14,
+   "presenter": "standard",
+   "broll": {
+    "clip": "o1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "2. अर्द्धपारगम्य झिल्ली",
+     "size": "m",
+     "at": 12,
+     "fx": "drop"
+    },
+    {
+     "type": "pills",
+     "slot": "upper",
+     "items": [
+      [
+       "अर्द्ध = आधा",
+       [
+        12,
+        1.15
+       ]
+      ],
+      [
+       "पारगम्य = आर-पार जाने देने वाली",
+       [
+        13,
+        1.9
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mem",
+   "in": 14,
+   "out": 18,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "2. अर्द्धपारगम्य झिल्ली",
+     "size": "m",
+     "at": 14
+    },
+    {
+     "type": "membrane",
+     "slot": "upper",
+     "at": [
+      14,
+      0.0
+     ],
+     "t_solvent": [
+      15,
+      2.22
+     ],
+     "t_solute": [
+      16,
+      0.55
+     ]
+    }
+   ]
+  },
+  {
+   "id": "examples",
+   "in": 18,
+   "out": 19,
+   "presenter": "standard",
+   "broll": {
+    "clip": "k1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "headline",
+     "slot": "head",
+     "text": "उदाहरण",
+     "size": "m",
+     "at": 18,
+     "fx": "drop"
+    },
+    {
+     "type": "portraits",
+     "slot": "upper",
+     "top": 230,
+     "img_h": 330,
+     "items": [
+      [
+       "chemistry/osmosis/rbc-3.jpg",
+       "जंतु झिल्ली",
+       "जैसे: लाल रक्त कोशिका",
+       [
+        18,
+        1.02
+       ]
+      ],
+      [
+       "chemistry/osmosis/onion-3.jpg",
+       "पादप झिल्ली",
+       "जैसे: प्याज़ की कोशिका",
+       [
+        18,
+        1.41
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "recap",
+   "in": 19,
+   "out": 21,
+   "presenter": "standard",
+   "broll": {
+    "clip": "r1",
+    "region": "full",
+    "dim": true
+   },
+   "elements": [
+    {
+     "type": "compare",
+     "slot": "upper",
+     "left": [
+      "समपरासरी विलयन",
+      "परासरण दाब<br>समान"
+     ],
+     "right": [
+      "अर्द्धपारगम्य झिल्ली",
+      "केवल विलायक<br>आर-पार"
+     ],
+     "vs": "",
+     "val_size": 58,
+     "at": 19,
+     "t_right": [
+      19,
+      0.49
+     ]
+    }
+   ]
+  },
+  {
+   "id": "page",
+   "in": 21,
+   "out": "end",
+   "presenter": "full",
+   "tracker": false,
+   "spine": false,
+   "elements": [
+    {
+     "type": "page",
+     "src": "assets/answer/CHE-C1-SA-02-1_page.png",
+     "at": 21,
+     "badge": "Notes बटन में",
+     "t_badge": [
+      21,
+      1.9
+     ]
+    }
+   ]
+  }
+ ]
+}

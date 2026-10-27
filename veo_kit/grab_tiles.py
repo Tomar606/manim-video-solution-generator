@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import time
 import sys
 import urllib.request
@@ -53,9 +54,32 @@ def main() -> int:
     b, _ = fk.connect()
     try:
         srcs = json.loads(b.call("eval", expr=JS % (a.skip + a.n), timeout=120)["value"])
+        print(len(srcs), "tiles in the project")
+        grab(b, srcs, a)
     finally:
         b.stop()
-    print(len(srcs), "tiles in the project")
+    return 0
+
+
+def via_browser(b, src: str, dest: Path) -> bool:
+    """Download through the browser, with its Flow sign-in. After a page reload Flow's tiles point at
+    flow.google.com/asb/... (cookie-authenticated) instead of a signed URL, and a direct download of
+    that returns Google's sign-in page (27 Oct 2026). The file lands in the browser's Downloads and is
+    moved straight out of it."""
+    try:
+        res = b.call("download", url=src, filename=f"pyq_flow_tiles/{dest.name}", timeout=900)
+    except Exception as e:                        # noqa: BLE001
+        print(f"  {dest.stem}: browser download failed: {e}"[:140])
+        return False
+    got = Path(res.get("path") or "")
+    if not got.is_file():
+        print(f"  {dest.stem}: the browser reported {got} but nothing is there")
+        return False
+    shutil.move(str(got), str(dest))           # Downloads may be on another drive (Windows): not rename
+    return True
+
+
+def grab(b, srcs: list, a) -> None:
     for i in range(a.skip, min(len(srcs), a.skip + a.n)):
         if not srcs[i]:
             print(f"  t{i:02d}: no source yet (still rendering?)")
@@ -71,13 +95,15 @@ def main() -> int:
                     data = r.read()
                 if want and len(data) != want:
                     raise IOError(f"short read {len(data)}/{want}")
+                if data[:64].lstrip().lower().startswith((b"<!doctype html", b"<html")):
+                    via_browser(b, srcs[i], dest)     # a sign-in page, not the clip: fetch it as the browser
+                    break
                 dest.write_bytes(data)
                 break
             except Exception as e:                # noqa: BLE001
                 print(f"  t{i:02d}: retry after {type(e).__name__}: {e}"[:110])
                 time.sleep(3)
         print(f"  t{i:02d} -> {dest}")
-    return 0
 
 
 if __name__ == "__main__":
